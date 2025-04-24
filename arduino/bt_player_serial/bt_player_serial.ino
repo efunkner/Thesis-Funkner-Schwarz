@@ -25,13 +25,12 @@ const double a_2 = 0;
 const double b_coefficients[] = { b_0, b_1, b_2};
 const double a_coefficients[] = { a_0, a_1, a_2};
 
-void read_data_stream(const uint8_t *data, uint32_t length)
-{
+void read_data_stream(const uint8_t *data, uint32_t length) {
     int16_t *samples = (int16_t*) data;
     uint32_t sample_count = length/2;
 
-    // assuming stereo: left and right alternately
-    for (uint32_t i = 0; i < sample_count; i += 2) {
+    for (uint32_t i = 0; i < sample_count; i += 16) {
+    //for (uint32_t i = 0; i < sample_count; i += 2) {
         int16_t left = samples[i];
         int16_t right = samples[i + 1];
 
