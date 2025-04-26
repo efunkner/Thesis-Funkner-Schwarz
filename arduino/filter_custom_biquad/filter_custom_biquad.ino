@@ -2,14 +2,16 @@
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
 //Board Setup
-AudioInfo info(48000, 2, 16);
+AudioInfo info(44100, 2, 16);
 AudioBoardStream lyrat(LyratV43);
 
 //Filtered Stream
 FilteredStream<int16_t, double> filtered(lyrat, info.channels);
 StreamCopy filter(filtered, lyrat);
 
-
+//CsvOutput
+CsvOutput<int16_t> out(Serial);
+StreamCopy csv(out, filtered);
 
 //Filter Coefficients
 const double b_0 = 10;
@@ -23,7 +25,6 @@ const double a_2 = 0;
 const double b_coefficients[] = { b_0, b_1, b_2};
 const double a_coefficients[] = { a_0, a_1, a_2};
 
-
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
@@ -36,11 +37,14 @@ void setup() {
     config.copyFrom(info);
     //config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
     lyrat.begin(config);
+    out.begin(info);
 
 
     //setup Filters for both Channels
     filtered.setFilter(0, new BiQuadDF1<double>(b_coefficients, a_coefficients));
     filtered.setFilter(1, new BiQuadDF1<double>(b_coefficients, a_coefficients));
+
+    Serial.println("READY");
 }
 
 void loop() {
