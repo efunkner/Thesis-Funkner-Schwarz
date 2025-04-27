@@ -8,22 +8,22 @@ AudioInfo info(44100, 2, 16);
 AudioBoardStream lyrat(LyratV43);
 
 //Filtered Stream
-FilteredStream<int16_t, double> filtered(lyrat, info.channels);
+FilteredStream<int16_t, float> filtered(lyrat, info.channels);
 
 //Bluetooth Stream
 BluetoothA2DPSinkQueued a2dp_sink(filtered);
 
 //Filter Coefficients
-const double b_0 = 1;
-const double b_1 = 0;
-const double b_2 = 0;
+const float b_0 = 1;
+const float b_1 = 0;
+const float b_2 = 0;
 
-const double a_0 = 1;
-const double a_1 = 0;
-const double a_2 = 0;
+const float a_0 = 1;
+const float a_1 = 0;
+const float a_2 = 0;
 
-const double b_coefficients[] = { b_0, b_1, b_2};
-const double a_coefficients[] = { a_0, a_1, a_2};
+const float b_coefficients[] = { b_0, b_1, b_2};
+const float a_coefficients[] = { a_0, a_1, a_2};
 
 
 //Arduino Setup
@@ -38,8 +38,8 @@ void setup() {
     lyrat.begin(config);
     
     //setup Filters for both Channels
-    filtered.setFilter(0, new BiQuadDF2<double>(b_coefficients, a_coefficients));
-    filtered.setFilter(1, new BiQuadDF2<double>(b_coefficients, a_coefficients));
+    filtered.setFilter(0, new BiQuadDF2<float>(b_coefficients, a_coefficients));
+    filtered.setFilter(1, new BiQuadDF2<float>(b_coefficients, a_coefficients));
 
     a2dp_sink.start("LyratV43");
 }
