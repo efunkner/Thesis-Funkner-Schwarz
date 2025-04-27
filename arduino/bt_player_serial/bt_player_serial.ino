@@ -29,13 +29,15 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
     int16_t *samples = (int16_t*) data;
     uint32_t sample_count = length/2;
 
-    for (uint32_t i = 0; i < sample_count; i += 22) {
+
+// Runtergesampled auf jedes 89 Sample. Keine Ahnung warum, alles darunter Clipped die Audio ausgabe
+    for (uint32_t i = 0; i < sample_count; i += 88) {
         int16_t left = samples[i];
         int16_t right = samples[i + 1];
 
-    // Ausgabe für Serial Plotter: zwei Werte durch Tab getrennt
+    // Ausgabe für Serial Plotter
         Serial.print(left);
-        Serial.print('\t');
+        Serial.print(',');
         Serial.println(right);
     }
 }
@@ -43,7 +45,7 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
-    Serial.begin(500000);
+    Serial.begin(115200);
     //AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
 
     //Start I2S
@@ -61,5 +63,4 @@ void setup() {
 }
 
 void loop() {
-
 }

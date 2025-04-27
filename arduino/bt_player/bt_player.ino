@@ -33,7 +33,7 @@ void setup() {
     AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
 
     //Start I2S
-    auto config = lyrat.defaultConfig(RXTX_MODE);
+    auto config = lyrat.defaultConfig(X_MODE);
     config.copyFrom(info);
     lyrat.begin(config);
     

@@ -9,12 +9,13 @@ AudioBoardStream lyrat(LyratV43);
 FilteredStream<int16_t, float> filtered(lyrat, info.channels);
 StreamCopy filter(filtered, lyrat);
 
-//CsvOutput
-CsvOutput<int16_t> out(Serial);
-StreamCopy csv(out, filtered);
+CsvOutput<int16_t> csvOutput(Serial);
+StreamCopy csv(csvOutput, filtered);
+
+//int16_t samples[512];
 
 //Filter Coefficients
-const float b_0 = 10;
+const float b_0 = 1;
 const float b_1 = 0;
 const float b_2 = 0;
 
@@ -28,25 +29,24 @@ const float a_coefficients[] = { a_0, a_1, a_2};
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
-    Serial.begin(115200);
+    Serial.begin(1000000);
     AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
 
 
     //Start I2S
     auto config = lyrat.defaultConfig(RXTX_MODE);
     config.copyFrom(info);
-    //config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
+    config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
     lyrat.begin(config);
-    out.begin(info);
 
 
     //setup Filters for both Channels
     filtered.setFilter(0, new BiQuadDF1<float>(b_coefficients, a_coefficients));
     filtered.setFilter(1, new BiQuadDF1<float>(b_coefficients, a_coefficients));
-
-    Serial.println("READY");
 }
 
+
 void loop() {
-    filter.copy();
+//    filter.copy();
+   csv.copy();
 }
