@@ -12,10 +12,9 @@ StreamCopy filter(filtered, lyrat);
 CsvOutput<int16_t> csvOutput(Serial);
 StreamCopy csv(csvOutput, filtered);
 
-//int16_t samples[512];
 
 //Filter Coefficients
-const float b_0 = 1;
+const float b_0 = 10;
 const float b_1 = 0;
 const float b_2 = 0;
 
@@ -36,7 +35,7 @@ void setup() {
     //Start I2S
     auto config = lyrat.defaultConfig(RXTX_MODE);
     config.copyFrom(info);
-    config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
+ //   config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
     lyrat.begin(config);
 
 

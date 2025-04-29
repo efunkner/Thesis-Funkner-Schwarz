@@ -13,6 +13,17 @@ FilteredStream<int16_t, float> filtered(lyrat, info.channels);
 //Bluetooth Stream
 BluetoothA2DPSinkQueued a2dp_sink(filtered);
 
+void read_data_stream(const uint8_t *data, uint32_t length) {
+    // process all data
+    int16_t *values = (int16_t*) data;
+    for (int j=0; j<length/2; j+=2){
+      // print the 2 channel values
+      Serial.print(values[j]);
+      Serial.print(",");
+      Serial.println(values[j+1]);
+    }
+}
+
 //Filter Coefficients
 const float b_0 = 1;
 const float b_1 = 0;
@@ -25,27 +36,11 @@ const float a_2 = 0;
 const float b_coefficients[] = { b_0, b_1, b_2};
 const float a_coefficients[] = { a_0, a_1, a_2};
 
-void read_data_stream(const uint8_t *data, uint32_t length) {
-    int16_t *samples = (int16_t*) data;
-    uint32_t sample_count = length/2;
-
-
-// Runtergesampled auf jedes 89 Sample. Keine Ahnung warum, alles darunter Clipped die Audio ausgabe
-    for (uint32_t i = 0; i < sample_count; i += 88) {
-        int16_t left = samples[i];
-        int16_t right = samples[i + 1];
-
-    // Ausgabe für Serial Plotter
-        Serial.print(left);
-        Serial.print(',');
-        Serial.println(right);
-    }
-}
 
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
-    Serial.begin(115200);
+    Serial.begin(500000);
     //AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
 
     //Start I2S
@@ -56,8 +51,9 @@ void setup() {
     //setup Filters for both Channels
     filtered.setFilter(0, new BiQuadDF2<float>(b_coefficients, a_coefficients));
     filtered.setFilter(1, new BiQuadDF2<float>(b_coefficients, a_coefficients));
-    
-    a2dp_sink.set_stream_reader(read_data_stream);
+
+    a2dp_sink.set_stream_reader(read_data_stream, false);
+
     a2dp_sink.start("LyratV43");
 
 }
