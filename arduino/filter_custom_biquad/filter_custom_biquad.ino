@@ -28,14 +28,13 @@ const float a_coefficients[] = { a_0, a_1, a_2};
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
-    Serial.begin(1000000);
+    Serial.begin(500000);
     AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
-
 
     //Start I2S
     auto config = lyrat.defaultConfig(RXTX_MODE);
     config.copyFrom(info);
- //   config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
+//    config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
     lyrat.begin(config);
 
 
@@ -44,8 +43,7 @@ void setup() {
     filtered.setFilter(1, new BiQuadDF1<float>(b_coefficients, a_coefficients));
 }
 
-
 void loop() {
 //    filter.copy();
-   csv.copy();
+    csv.copy();
 }

@@ -13,6 +13,7 @@ FilteredStream<int16_t, float> filtered(lyrat, info.channels);
 //Bluetooth Stream
 BluetoothA2DPSinkQueued a2dp_sink(filtered);
 
+//Stream to csv
 void read_data_stream(const uint8_t *data, uint32_t length) {
     // process all data
     int16_t *values = (int16_t*) data;
@@ -52,9 +53,8 @@ void setup() {
     filtered.setFilter(0, new BiQuadDF2<float>(b_coefficients, a_coefficients));
     filtered.setFilter(1, new BiQuadDF2<float>(b_coefficients, a_coefficients));
 
-    a2dp_sink.set_stream_reader(read_data_stream, false);
-
     a2dp_sink.start("LyratV43");
+    a2dp_sink.set_stream_reader(read_data_stream, false);
 
 }
 
