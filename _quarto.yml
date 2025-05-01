@@ -1,21 +1,33 @@
 project:
   type: manuscript
-  output-dir: docs
+
+lang: de
+
 manuscript:
   article: index.qmd
 
+execute:
+  freeze: auto
+
 format:
   html:
-    comments:
-      hypothesis: true
-  docx: default
-  jats: default
-
-  # (other formats)
-  # pdf: default
-
-execute:
-  freeze: true
-
-
-
+    theme: flatly
+  pdf:
+    documentclass: scrreprt
+#    lof: true
+#    lot: true
+    toc: true    
+    geometry:
+      - top=30mm
+      - left=20mm
+      - heightrounded
+    hyperrefoptions:
+      - linktoc=all
+    colorlinks: true
+    linkcolor: "blue"
+    biblio-style: ieee
+    #    keep-tex: true
+    output-file: thesis_fs
+  # epub:
+  #   theme: flatly
+  #   output-file: thesis_fs
