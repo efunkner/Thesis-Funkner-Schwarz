@@ -14,7 +14,7 @@ StreamCopy csv(csvOutput, filtered);
 
 
 //Filter Coefficients
-const float b_0 = 10;
+const float b_0 = 1;
 const float b_1 = 0;
 const float b_2 = 0;
 
@@ -28,7 +28,7 @@ const float a_coefficients[] = { a_0, a_1, a_2};
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
-    Serial.begin(500000);
+    Serial.begin(115200);
     AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
 
     //Start I2S

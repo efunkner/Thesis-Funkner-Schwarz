@@ -26,13 +26,26 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
 }
 
 //Filter Coefficients
-const float b_0 = 1;
-const float b_1 = 0;
-const float b_2 = 0;
+
+//Bassboost
+const float b_0 = 1.0526;
+const float b_1 = -1.8882;
+const float b_2 = 0.8784;
 
 const float a_0 = 1;
-const float a_1 = 0;
-const float a_2 = 0;
+const float a_1 = -1.8882;
+const float a_2 = 0.9310;
+
+
+//Normal
+//const float b_0 = 1;
+//const float b_1 = 0;
+//const float b_2 = 0;
+
+//const float a_0 = 1;
+//const float a_1 = 0;
+//const float a_2 = 0;
+
 
 const float b_coefficients[] = { b_0, b_1, b_2};
 const float a_coefficients[] = { a_0, a_1, a_2};
@@ -41,7 +54,7 @@ const float a_coefficients[] = { a_0, a_1, a_2};
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
-    Serial.begin(500000);
+    Serial.begin(115200);
     //AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
 
     //Start I2S
@@ -50,11 +63,11 @@ void setup() {
     lyrat.begin(config);
     
     //setup Filters for both Channels
-    filtered.setFilter(0, new BiQuadDF2<float>(b_coefficients, a_coefficients));
-    filtered.setFilter(1, new BiQuadDF2<float>(b_coefficients, a_coefficients));
+    filtered.setFilter(0, new BiQuadDF1<float>(b_coefficients, a_coefficients));
+    filtered.setFilter(1, new BiQuadDF1<float>(b_coefficients, a_coefficients));
 
     a2dp_sink.start("LyratV43");
-    a2dp_sink.set_stream_reader(read_data_stream, false);
+    //a2dp_sink.set_stream_reader(read_data_stream, false);
 
 }
 
