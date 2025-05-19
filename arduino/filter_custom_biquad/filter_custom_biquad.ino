@@ -25,6 +25,8 @@ const float a_2 = 0;
 const float b_coefficients[] = { b_0, b_1, b_2};
 const float a_coefficients[] = { a_0, a_1, a_2};
 
+TaskHandle_t Task1;
+
 //Arduino Setup
 void setup() {
     //Beginn Serial and Board info
@@ -37,13 +39,11 @@ void setup() {
 //    config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
     lyrat.begin(config);
 
-
     //setup Filters for both Channels
     filtered.setFilter(0, new BiQuadDF1<float>(b_coefficients, a_coefficients));
     filtered.setFilter(1, new BiQuadDF1<float>(b_coefficients, a_coefficients));
 }
 
 void loop() {
-//    filter.copy();
-    csv.copy();
+
 }
