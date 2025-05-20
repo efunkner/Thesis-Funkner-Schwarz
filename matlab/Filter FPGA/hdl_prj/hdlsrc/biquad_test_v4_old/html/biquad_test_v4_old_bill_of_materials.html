@@ -5,7 +5,7 @@ High-level Resource Utilization Report for biquad_test_v4_old
 </title>
 
 </head>
-<body bgcolor="#ffffff" link="0033CC" vlink="#666666" onload="try {if (top) {if (top.rtwPageOnLoad) top.rtwPageOnLoad('rtwIdBillOfMaterials'); else local_onload();}} catch(err) {};hdlTableShrink(this, 'Multiplier_1_1');hdlTableShrink(this, 'Adder_1_1');hdlTableShrink(this, 'Register_1_2');hdlTableShrink(this, 'Multiplexer_1_2');hdlTableShrink(this, 'Multiplexer_1_3');hdlTableShrink(this, 'Input_Port');hdlTableShrink(this, 'Output_Port');">
+<body bgcolor="#ffffff" link="0033CC" vlink="#666666" onload="try {if (top) {if (top.rtwPageOnLoad) top.rtwPageOnLoad('rtwIdBillOfMaterials'); else local_onload();}} catch(err) {};hdlTableShrink(this, 'Multiplier_1_1');hdlTableShrink(this, 'Adder_1_2');hdlTableShrink(this, 'Register_1_3');hdlTableShrink(this, 'Multiplexer_1_3');hdlTableShrink(this, 'Multiplexer_1_4');hdlTableShrink(this, 'Input_Port');hdlTableShrink(this, 'Output_Port');">
 <script>
 <!--
 function hdlTableShrink(o,tagNameStr)
@@ -161,7 +161,7 @@ Multipliers
 Adders/Subtractors
 </td>
 <td align="center" valign="top" style="border-style: none">
-4
+5
 </td>
 
 </tr>
@@ -170,7 +170,7 @@ Adders/Subtractors
 Registers
 </td>
 <td align="center" valign="top" style="border-style: none">
-22
+21
 </td>
 
 </tr>
@@ -179,7 +179,7 @@ Registers
 Total 1-Bit Registers
 </td>
 <td align="center" valign="top" style="border-style: none">
-611
+560
 </td>
 
 </tr>
@@ -197,7 +197,7 @@ RAMs
 Multiplexers
 </td>
 <td align="center" valign="top" style="border-style: none">
-8
+9
 </td>
 
 </tr>
@@ -291,15 +291,18 @@ b2
 
 </span>
 <br /><h5>
-Adders/Subtractors (4)
+Adders/Subtractors (5)
 </h5>
-<span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Adder_1_1')" onmouseover="this.style.cursor = 'pointer'">
+<span style="font-family:monospace">
+7x7-bit Adder 							: 1
+</span>
+<br /><span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Adder_1_2')" onmouseover="this.style.cursor = 'pointer'">
 [+]
 </span>
 <span style="font-family:monospace">
 33x33-bit Adder 							: 4
 </span>
-<span name="Adder_1_1" id="Adder_1_1">
+<span name="Adder_1_2" id="Adder_1_2">
 <ul>
 <li>
 <a href="matlab:coder.internal.code2model('biquad_test_v4_old:7')" name="code2model" class="code2model">
@@ -330,19 +333,22 @@ Sum2
 
 </span>
 <br /><h5>
-Registers (22)
+Registers (21)
 </h5>
 <span style="font-family:monospace">
-1-bit Register 							: 3
+7-bit Register 							: 2
 </span>
-<br /><span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Register_1_2')" onmouseover="this.style.cursor = 'pointer'">
+<br /><span style="font-family:monospace">
+1-bit Register 							: 2
+</span>
+<br /><span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Register_1_3')" onmouseover="this.style.cursor = 'pointer'">
 [+]
 </span>
 <span style="font-family:monospace">
-32-bit Register 							: 19
+32-bit Register 							: 17
 </span>
-<span name="Register_1_2" id="Register_1_2">
-<ul class="SystemdefinedCollapse" id="0ba4a742-8dc3-4e3a-9549-041196663d6e" dataCollapse="off">
+<span name="Register_1_3" id="Register_1_3">
+<ul class="SystemdefinedCollapse" id="c1282f62-1383-4f9a-8cb8-5c719a7913a1" dataCollapse="off">
 <li>
 <a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:34')" name="code2model" class="code2model">
 HwModeRegister4
@@ -392,18 +398,6 @@ PipelineRegister3
 
 </li>
 <li>
-<a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:35')" name="code2model" class="code2model">
-HwModeRegister5
-</a>
-
-</li>
-<li>
-<a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:33')" name="code2model" class="code2model">
-PipelineRegister2
-</a>
-
-</li>
-<li>
 <a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:28')" name="code2model" class="code2model">
 HwModeRegister
 </a>
@@ -422,14 +416,14 @@ HwModeRegister2
 
 </li>
 <li>
-<a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:30')" name="code2model" class="code2model">
-PipelineRegister1
+<a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:33')" name="code2model" class="code2model">
+PipelineRegister2
 </a>
 
 </li>
 <li>
-<a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:24')" name="code2model" class="code2model">
-delayMatch1
+<a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:30')" name="code2model" class="code2model">
+PipelineRegister1
 </a>
 
 </li>
@@ -441,24 +435,27 @@ t_bypass
 </li>
 
 </ul>
-<span class="SDCollapseControl" onclick="collapseSD(this, '0ba4a742-8dc3-4e3a-9549-041196663d6e')" onmouseover="this.style.cursor = 'pointer'">
+<span class="SDCollapseControl" onclick="collapseSD(this, 'c1282f62-1383-4f9a-8cb8-5c719a7913a1')" onmouseover="this.style.cursor = 'pointer'">
 &#8743; Less
 </span>
 <br />
 </span>
 <br /><h5>
-Multiplexers (8)
+Multiplexers (9)
 </h5>
 <span style="font-family:monospace">
+7-bit 2-to-1 Multiplexer 							: 1
+</span>
+<br /><span style="font-family:monospace">
 1-bit 2-to-1 Multiplexer 							: 2
 </span>
-<br /><span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Multiplexer_1_2')" onmouseover="this.style.cursor = 'pointer'">
+<br /><span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Multiplexer_1_3')" onmouseover="this.style.cursor = 'pointer'">
 [+]
 </span>
 <span style="font-family:monospace">
 32-bit 2-to-1 Multiplexer 							: 2
 </span>
-<span name="Multiplexer_1_2" id="Multiplexer_1_2">
+<span name="Multiplexer_1_3" id="Multiplexer_1_3">
 <ul>
 <li>
 <a href="matlab:coder.internal.code2model('gm_biquad_test_v4_old:25')" name="code2model" class="code2model">
@@ -476,13 +473,13 @@ t_bypass
 </ul>
 
 </span>
-<br /><span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Multiplexer_1_3')" onmouseover="this.style.cursor = 'pointer'">
+<br /><span name="collapsible" id="collapsible" style="font-family:monospace" onclick="hdlTableShrink(this, 'Multiplexer_1_4')" onmouseover="this.style.cursor = 'pointer'">
 [+]
 </span>
 <span style="font-family:monospace">
 32-bit 3-to-1 Multiplexer 							: 4
 </span>
-<span name="Multiplexer_1_3" id="Multiplexer_1_3">
+<span name="Multiplexer_1_4" id="Multiplexer_1_4">
 <ul>
 <li>
 <a href="matlab:coder.internal.code2model('biquad_test_v4_old:7')" name="code2model" class="code2model">

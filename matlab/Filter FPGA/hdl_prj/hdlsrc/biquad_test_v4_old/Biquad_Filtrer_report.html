@@ -48,15 +48,21 @@
  <div class="page_container"><div class="content_frame">
 <h1>HDL Code Generation Check Report for 'biquad_test_v4_old/Biquad Filtrer'
 <a href="matlab:open_system('biquad_test_v4_old/Biquad Filtrer');">open model 'biquad_test_v4_old/Biquad Filtrer'</a><BR>
-Generated on 2025-05-19 11:38:26</h1>
-<H2>HDL check for 'biquad_test_v4_old' complete with 0 errors, 0 warnings, and 1 messages.</H2><BR>
+Generated on 2025-05-20 16:31:26</h1>
+<H2>HDL check for 'biquad_test_v4_old' complete with 0 errors, 0 warnings, and 2 messages.</H2><BR>
 <H3>The following table describes blocks for which errors, warnings or messages were reported.</H3><BR>
 <TABLE style="border: 2px solid; border-collapse: collapse;">
 <TR><TD style="border: 2px solid; border-collapse: collapse;"> <B>Simulink Blocks and resources</B> </TD><TD style="border: 2px solid; border-collapse: collapse;"> <B>Level</B> </TD><TD style="border: 2px solid; border-collapse: collapse;"> <B>Description</B> </TD></TR><TR><TD style="border: 2px solid; border-collapse: collapse;">
+<a alt="hdlcoder:optimization:CRPInFeedbackUnderbudget" href="matlab:hilite(get_param(char([98 105 113 117 97 100 95 116 101 115 116 95 118 52 95 111 108 100]),'object'),'none');hilite_system(char([98 105 113 117 97 100 95 116 101 115 116 95 118 52 95 111 108 100 47 66 105 113 117 97 100 32 70 105 108 116 114 101 114]))">biquad_test_v4_old/Biquad Filtrer</a>
+</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Message</TD>
+<TD style="border: 2px solid; border-collapse: collapse">Clock-rate pipelining identified at least one feedback loop which does not utilize the full latency budget. Oversampling factor is set to '65', but the minimum oversampling factor needed for the design is '2'. To reduce unnecessary clock cycles, either <a href="matlab:configset.internal.open('biquad_test_v4_old/Biquad Filtrer','Oversampling')">lower the oversampling factor</a> to reduce the latency budget or add optimizations that increase latency like pipelining and serialization in your design to use the full latency budget.</TD>
+</TR>
+<TR><TD style="border: 2px solid; border-collapse: collapse;">
 <a alt="hdlcoder:hdldisp:OversampleMessage" href="matlab:hilite(get_param(char([98 105 113 117 97 100 95 116 101 115 116 95 118 52 95 111 108 100]),'object'),'none');open_system(char([98 105 113 117 97 100 95 116 101 115 116 95 118 52 95 111 108 100]))">biquad_test_v4_old</a>
 </TD>
 <TD style="border: 2px solid; border-collapse: collapse">Message</TD>
-<TD style="border: 2px solid; border-collapse: collapse">MESSAGE: The design requires 2 times faster clock with respect to the base rate = 2.26757e-05.</TD>
+<TD style="border: 2px solid; border-collapse: collapse">MESSAGE: The design requires 65 times faster clock with respect to the base rate = 2.26757e-05.</TD>
 </TR>
 </TABLE>
 <BR><BR> </div></div></div></div>

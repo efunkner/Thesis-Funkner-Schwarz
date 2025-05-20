@@ -200,13 +200,22 @@ Original Model Base Rate
 <a href="matlab:configset.internal.open('biquad_test_v4_old','Oversampling')">Oversampling Factor</a>
 </td>
 <td align="center" valign="top" style="border-style: none">
+65
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td align="left" valign="top" style="border-style: none">
+Minimum Required Oversampling
+</td>
+<td align="center" valign="top" style="border-style: none">
 2
 </td>
 
 </tr>
 
 </table>
-<br /><br /><br /><a name="Output Latency">
+<br /><br />Clock-rate pipelining identified at least one feedback loop which does not utilize the full latency budget. Oversampling factor is set to '65', but the minimum oversampling factor needed for the design is '2'. To reduce unnecessary clock cycles, either <a href="matlab:configset.internal.open('biquad_test_v4_old/Biquad Filtrer','Oversampling')">lower the oversampling factor</a> to reduce the latency budget or add optimizations that increase latency like pipelining and serialization in your design to use the full latency budget.<br /><br /><br /><a name="Output Latency">
 <font size="+1" color="#000066">
 <b class="midprod">
 Output Latency
