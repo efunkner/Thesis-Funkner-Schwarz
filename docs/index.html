@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Eduard Funkner">
+<meta name="author" content="Martin Schwarz">
+
+<title>Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-58d60837e5c3cc41aed2b21062153a0f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<meta name="citation_title" content="Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen">
+<meta name="citation_author" content="Eduard Funkner">
+<meta name="citation_author" content="Martin Schwarz">
+<meta name="citation_publication_date" content="NaN-NaN-NaN">
+<meta name="citation_cover_date" content="NaN-NaN-NaN">
+<meta name="citation_year" content="NaN">
+<meta name="citation_online_date" content="NaN-NaN-NaN">
+<meta name="citation_language" content="de">
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</h1>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+            <div class="quarto-title-meta-author">
+          <div class="quarto-title-meta-heading">Autor:innen</div>
+          <div class="quarto-title-meta-heading">Zugehörigkeit</div>
+          
+                <div class="quarto-title-meta-contents">
+            <p class="author">Eduard Funkner <a href="mailto:efunkner@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        <a href="https://www.hs-bremen.de">
+                        Hochschule Bremen - City University of Applied Sciences (HSB)
+                        </a>
+                      </p>
+                  </div>
+                      <div class="quarto-title-meta-contents">
+            <p class="author">Martin Schwarz <a href="mailto:mschwarz@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+                    </div>
+        
+        <div class="quarto-title-meta">
+
+                      
+                <div>
+            <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+            <div class="quarto-title-meta-contents">
+              <p class="date">19. Mai 2025</p>
+            </div>
+          </div>
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Andere Formate</div><div class="quarto-title-meta-contents"><p><a href="thesis_fs.pdf"><i class="bi bi-file-pdf"></i>PDF</a></p></div></div></div>
+    </div>
+
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
+  <li><a href="#zielsetzung-und-vorgehen" id="toc-zielsetzung-und-vorgehen" class="nav-link" data-scroll-target="#zielsetzung-und-vorgehen">Zielsetzung und Vorgehen</a></li>
+  <li><a href="#signalverarbeitung-auf-microcontroller-esp32" id="toc-signalverarbeitung-auf-microcontroller-esp32" class="nav-link" data-scroll-target="#signalverarbeitung-auf-microcontroller-esp32">Signalverarbeitung auf Microcontroller (ESP32)</a></li>
+  <li><a href="#signalverabreitung-auf-fpga-pynq" id="toc-signalverabreitung-auf-fpga-pynq" class="nav-link" data-scroll-target="#signalverabreitung-auf-fpga-pynq">Signalverabreitung auf FPGA (PYNQ)</a>
+  <ul class="collapse">
+  <li><a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a></li>
+  <li><a href="#vhdl" id="toc-vhdl" class="nav-link" data-scroll-target="#vhdl">VHDL</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="jupyter/Bilinear-preview.html"><i class="bi bi-journal-code"></i>Bilinear.ipynb</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+  
+
+
+<section id="einführung" class="level1">
+<h1>Einführung</h1>
+<p>In der Welt der Elektrotechnik werden Signale verschiedener Arten gesendet und empfangen. Es wird zwischen kontinuierlichen analogen Signalen und diskretisierten digitalen Signalen differenziert. Ein analoges Signal könnte eine Tonspur, welche von einem Mikrofon aufgenommen wurde sein. Bei digitalen Signalen werden Bitfolgen gesendet die Information enthalten. Diese Bitfolge könnte eine E-Mail sein.</p>
+<p>Um diese Signale nutzen zu können müssen diese zuvor gefiltert und verarbeitet werden. Die Filterung dieser Signale erfolgt durch digitale oder analoge Filter. Abhängig von der Anwendung werden spezifischen Filter implementiert. Die Frequenzbereiche der Signale können Mittels dieser Filter verstärkt oder gedämpft werden damit diese dann weiterverarbeitet werden können.</p>
+</section>
+<section id="zielsetzung-und-vorgehen" class="level1">
+<h1>Zielsetzung und Vorgehen</h1>
+<pre><code> Implementierung digitaler Filter auf DSP
+ Lerndemonstration von der digitalen Signalverarbeitung auf DSP</code></pre>
+</section>
+<section id="signalverarbeitung-auf-microcontroller-esp32" class="level1">
+<h1>Signalverarbeitung auf Microcontroller (ESP32)</h1>
+<p>Zur Implementierung der digitalen Filter, auf Mikrocontrollern, wird ein ESP32 verwendet.</p>
+<p>Spezifisch für Audioanwendungen werden Audioboards, wie das ESP Lyrat Mini oder ESP Lyrat 4.3 genutzt. Diese Boards verfügen über Audiocodecs, welche analoge Signale in ein digitales Format konvertieren können. Die Datenübertragung zwischen den Codecs und dem ESP32 geschiet über I2S. Dieser I2S Datenstrom kann auf dem ESP32 verarbeitet und auf der SD Karte der Board gespeichert werden. Über diese Audioboards soll eine analoges Signal in Form von Sprache aufgenommen werden, von dem ESP32 mit den digitalen Filtern gefiltert werden und anschließend abgespielt, oder auf einer SD Karte gespeichert werden. Außerdem sollen Audio Dateien von einer SD ausgelesen, gefiltert und abgespielt werden.</p>
+<p>Der Audiofilter (Biquad) wird aus dem Skript Digital Signal Processing Lecuture von S. Spors entnommen und in Arduino, sowie Micropython auf dem ESP32 implementiert.</p>
+<p>Zur Hilfe werden von P.Schatzmann die GitHub Repositorien für die Audio Tools sowie Audio Driver genutzt, um die Implementierung in Arduino durchzuführen.</p>
+</section>
+<section id="signalverabreitung-auf-fpga-pynq" class="level1">
+<h1>Signalverabreitung auf FPGA (PYNQ)</h1>
+<p>Bevor ein Filter in Hardware implementiert werden kann, muss er zunächst entworfen werden. Dabei ist zu entscheiden, welche Art digitaler Filter zum Einsatz kommen soll. Für Audioanwendungen eignen sich insbesondere linearphasige Filter. Besonders FIR-Filter werden häufig verwendet, da sie eine konstante Gruppenlaufzeit aufweisen.</p>
+<p>IIR-Filter bieten zwar eine kürzere Gruppenverzögerung, sind jedoch aufgrund ihrer nicht konstanten Gruppenlaufzeit anfälliger für Verzerrungen. Zudem sind FIR-Filter in der Regel einfacher zu realisieren. Ein FIR-Filter kann entweder mit Tools wie dem fdatool in MATLAB entworfen oder aus einem Prototypenfilter abgeleitet werden, häufig aus einem IIR-Filter mit den gewünschten Eigenschaften.</p>
+<p>Im nächsten Schritt wird das PYNQ-Z2 vorbereitet. Dazu muss die erforderliche Software auf einem PC installiert werden, einschließlich aller notwendigen Bibliotheken und Module für die Programmierung sowohl mit VHDL.</p>
+<p>Anschließend wird das Board in Betrieb genommen, um sich mit seiner Funktionsweise vertraut zu machen. Dazu wird erster Testcode aufgespielt. Dieser Schritt dient dazu, ein grundlegendes Verständnis der Hardware zu erlangen und eine bessere Vorstellung der Umsetzungsmöglichkeiten zu bekommen.</p>
+<p>Danach wird zunächst ein Audiosignal in das Board eingespeist und ohne Filterung wieder ausgegeben. Dies dient dazu, sich mit dem Board vertraut zu machen und sicherzustellen, dass die Einspeisung und Ausgabe von Audio grundlegend beherrscht wird.</p>
+<p>Anschließend werden die Filter entworfen. (Mit dem fdatool in MATLAB lassen sich die Filter auswahl des Typens und den Koeffizeinten direkt für andere Anwendungen wie VHDL umsetzten)</p>
+<section id="jupyter-notebooks" class="level2">
+<h2 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h2>
+<p>Das PYNQ-Z2 verfügt über ein eigenes Betriebssystem, das zunächst eingerichtet werden muss. Dieses enthält eine Jupyter-Notebook-Umgebung, über die das Board konfiguriert und dokumentiert werden kann. Zudem sind Beispielprojekte verfügbar. Der Zugriff auf das Board erfolgt remote über die IP-Adresse. Das Dateisystem ist über denselben Weg im Datei-Explorer erreichbar. Zusätzlich steht ein Jupyter-Terminal zur Verfügung. Um mit dem Laptop arbeiten zu können, sollte das Board entsprechend eingerichtet werden. Es empfiehlt sich, den Setup-Guide vollständig durchzugehen.</p>
+</section>
+<section id="vhdl" class="level2">
+<h2 class="anchored" data-anchor-id="vhdl">VHDL</h2>
+<p>In VHDL müssen alle erforderlichen Top-Module für das Board entweder geschrieben oder bestehende Module eingebunden werden. Dabei wird unter anderem die Portzuweisung vorgenommen. Anschließend wird der Filter selbst in VHDL implementiert und mithilfe von VIVADO synthetisiert. Nach der Synthese wird der Bitstream für das Board generiert.</p>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

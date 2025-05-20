@@ -1,14 +1,15 @@
 % Options for packages loaded elsewhere
 % Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{unicode,linktoc=all}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
   ngerman,
   letterpaper,
-  DIV=11]{scrartcl}
+  DIV=11]{scrreprt}
 \usepackage{xcolor}
+\usepackage[top=30mm,left=20mm,heightrounded]{geometry}
 \usepackage{amsmath,amssymb}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
@@ -163,8 +164,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Exposé},
-  pdfauthor={Eduard Funkner - Martin Schwarz},
+  pdftitle={Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen},
+  pdfauthor={Eduard Funkner; Martin Schwarz},
   pdflang={de},
   colorlinks=true,
   linkcolor={blue},
@@ -174,53 +175,44 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Exposé}
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-\subtitle{Bachelorarbeit}
-\author{Eduard Funkner - Martin Schwarz}
-\date{2025-01-05}
+\title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
+Systemen}
+\author{Eduard Funkner \and Martin Schwarz}
+\date{2025-05-19}
 \begin{document}
 \maketitle
 
-
-\begin{figure}[H]
-
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/HSB_Logo.png}}
-
+\renewcommand*\contentsname{Inhaltsverzeichnis}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
 }
 
-\caption{HSB Logo}
-
-\end{figure}%
-
-\section{Einführung}\label{einfuxfchrung}
+\chapter{Einführung}\label{einfuxfchrung}
 
 In der Welt der Elektrotechnik werden Signale verschiedener Arten
 gesendet und empfangen. Es wird zwischen kontinuierlichen analogen
 Signalen und diskretisierten digitalen Signalen differenziert. Ein
 analoges Signal könnte eine Tonspur, welche von einem Mikrofon
 aufgenommen wurde sein. Bei digitalen Signalen werden Bitfolgen gesendet
-die Information enthalten. Diese Bitfolge könnte eine E-Mail
-sein.\textbackslash{} Um diese Signale nutzen zu können müssen diese
-zuvor gefiltert und verarbeitet werden. Die Filterung dieser Signale
-erfolgt durch digitale oder analoge Filter. Abhängig von der Anwendung
-werden spezifischen Filter implementiert. Die Frequenzbereiche der
-Signale können Mittels dieser Filter verstärkt oder gedämpft werden
-damit diese dann weiterverarbeitet werden können.\textbackslash{}
+die Information enthalten. Diese Bitfolge könnte eine E-Mail sein.
 
-\section{Zielsetzung und Vorgehen}\label{zielsetzung-und-vorgehen}
+Um diese Signale nutzen zu können müssen diese zuvor gefiltert und
+verarbeitet werden. Die Filterung dieser Signale erfolgt durch digitale
+oder analoge Filter. Abhängig von der Anwendung werden spezifischen
+Filter implementiert. Die Frequenzbereiche der Signale können Mittels
+dieser Filter verstärkt oder gedämpft werden damit diese dann
+weiterverarbeitet werden können.
+
+\chapter{Zielsetzung und Vorgehen}\label{zielsetzung-und-vorgehen}
 
 \begin{verbatim}
  Implementierung digitaler Filter auf DSP
  Lerndemonstration von der digitalen Signalverarbeitung auf DSP
 \end{verbatim}
 
-\section{Signalverarbeitung auf Microcontroller
+\chapter{Signalverarbeitung auf Microcontroller
 (ESP32)}\label{signalverarbeitung-auf-microcontroller-esp32}
 
 Zur Implementierung der digitalen Filter, auf Mikrocontrollern, wird ein
@@ -243,9 +235,9 @@ dem ESP32 implementiert.
 
 Zur Hilfe werden von P.Schatzmann die GitHub Repositorien für die Audio
 Tools sowie Audio Driver genutzt, um die Implementierung in Arduino
-durchzuführen.\textbackslash{}
+durchzuführen.
 
-\section{Signalverabreitung auf FPGA
+\chapter{Signalverabreitung auf FPGA
 (PYNQ)}\label{signalverabreitung-auf-fpga-pynq}
 
 Bevor ein Filter in Hardware implementiert werden kann, muss er zunächst
@@ -281,7 +273,7 @@ Anschließend werden die Filter entworfen. (Mit dem fdatool in MATLAB
 lassen sich die Filter auswahl des Typens und den Koeffizeinten direkt
 für andere Anwendungen wie VHDL umsetzten)
 
-\subsection{Jupyter Notebooks}\label{jupyter-notebooks}
+\section{Jupyter Notebooks}\label{jupyter-notebooks}
 
 Das PYNQ-Z2 verfügt über ein eigenes Betriebssystem, das zunächst
 eingerichtet werden muss. Dieses enthält eine Jupyter-Notebook-Umgebung,
@@ -293,7 +285,7 @@ Verfügung. Um mit dem Laptop arbeiten zu können, sollte das Board
 entsprechend eingerichtet werden. Es empfiehlt sich, den Setup-Guide
 vollständig durchzugehen.
 
-\subsection{VHDL}\label{vhdl}
+\section{VHDL}\label{vhdl}
 
 In VHDL müssen alle erforderlichen Top-Module für das Board entweder
 geschrieben oder bestehende Module eingebunden werden. Dabei wird unter
