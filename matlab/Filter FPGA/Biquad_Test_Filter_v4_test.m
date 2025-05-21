@@ -57,3 +57,5 @@ plot(t_sim,y_sim);
 title('Matlab Filter vs. Similink Filter')
 grid on;
 legend('Matlab Filter', 'Similink Filter');
+%% Vivado einfügen
+hdlsetuptoolpath('ToolName','Xilinx Vivado','ToolPath','C:\Xilinx\Vivado\2022.1\bin')
