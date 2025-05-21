@@ -91,3 +91,16 @@ fprintf('\nKOEFFIZIENTEN DIGITALER-BS: \n');
 fprintf('Zaehlerkoeffizienten = \n'); disp(BS_numz);
 fprintf('Nennerkoeffizienten = \n'); disp(BS_denz);
 %
+%% Testsignal + Signalfilterung (Matlab-Filter)
+t_r = linspace(0,3*pi)';
+x_r = square(t_r);
+[sos,g] = tf2sos(HP_numz, HP_denz);
+
+% Filter anwenden
+y_m = sosfilt(sos, x_r) * g;
+% Matlab Filter (Reference)
+figure();
+plot(t_r,y_m,t_r,x_r);
+title('Filtered Signal vs. OG Signal')
+grid on;
+legend('Filtered Signal', 'OG Signal');
