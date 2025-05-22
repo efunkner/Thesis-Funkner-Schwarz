@@ -29,7 +29,7 @@ zplane(b,a)
 T = 0.1;
 t = 0:1/Fs:T-1/Fs;
 x = sin(2*pi*1000*t)+sin(2*pi*50*t); % Mid + Bass
-
+xs = timeseries(x,t);
 % Filter anwenden
 y_m = sosfilt(sos, x) * g;
 % Matlab Filter (Reference)
@@ -44,7 +44,8 @@ wl = 32;                            % Wortlänge in Bits
 fl = 16;                            % Anz. Bits für "Nachkommerstelle"
 DI_input = fixdt(1, wl, fl);
 
-model = 'biquad_test_v4_old_IP_test';       %-> Für vhdl-Code in IP-Core, Gain entfernt
+%model = 'biquad_test_v4_old_IP_test';       %-> Für vhdl-Code in IP-Core, Gain entfernt
+model = 'biquad_test_v5_old_IP_test';       %-> Für vhdl-Code in IP-Core, Gain entfernt
 load_system(model);
 out = sim(model);
 y_sim = out.y_sim;
