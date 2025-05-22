@@ -57,7 +57,7 @@ a2 = sos_fix(1,6);
 
 % Test new Modell
 % model = 'biquad_test_v4_old';     %-> Für vhdl-Code
-model = 'biquad_test_v5_old';       %-> Für vhdl-Code in IP-Core, Gain entfernt
+model = 'biquad_test_v4_old_IP';       %-> Für vhdl-Code in IP-Core, Gain entfernt
 load_system(model);
 out = sim(model);
 y_sim = out.y_sim;
