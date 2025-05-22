@@ -140,7 +140,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>32be77ea</spirit:value>
+            <spirit:value>35c4ff51</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -156,7 +156,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>32be77ea</spirit:value>
+            <spirit:value>35c4ff51</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -337,10 +337,6 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/BiquadFil_ip_src_Biquad_Filtrer_tc.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-      </spirit:file>
-      <spirit:file>
         <spirit:name>hdl/BiquadFil_ip_src_BiquadDF2Section1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
@@ -375,7 +371,7 @@
       <spirit:file>
         <spirit:name>hdl/BiquadFil_ip.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_6dffd042</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_8e705ca2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -397,11 +393,6 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/BiquadFil_ip_axi4_stream_slave.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>hdl/BiquadFil_ip_src_Biquad_Filtrer_tc.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -501,12 +492,12 @@
       <xilinx:displayName>BiquadFil_ip</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1000000</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2025-05-21T15:28:04Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2025-05-22T09:14:07Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2022.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="2d421d82"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="707adfc3"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="0a1c813d"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="c2a2a7fc"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="33864cd0"/>
     </xilinx:packagingInfo>

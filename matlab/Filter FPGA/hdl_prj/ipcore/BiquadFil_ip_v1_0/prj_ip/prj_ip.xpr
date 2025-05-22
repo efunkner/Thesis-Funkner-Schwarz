@@ -6,7 +6,7 @@
 <Project Version="7" Minor="60" Path="F:/MyGit_Folder/Thesis-Funkner-Schwarz/matlab/Filter FPGA/hdl_prj/ipcore/BiquadFil_ip_v1_0/prj_ip/prj_ip.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="77b2961a03a44baf98363c0df0e36b1e"/>
+    <Option Name="Id" Val="61ad0d7727dd4082861022a8e587dc7f"/>
     <Option Name="Part" Val="xc7z020clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
@@ -107,12 +107,6 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../hdl/BiquadFil_ip_axi4_stream_slave.vhd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PPRDIR/../hdl/BiquadFil_ip_src_Biquad_Filtrer_tc.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
