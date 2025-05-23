@@ -1,5 +1,4 @@
-
-class Filter // Notwendig für Implementierung von DF1 und DF2
+class Filter
   {
   public:
     virtual ~Filter() {}
