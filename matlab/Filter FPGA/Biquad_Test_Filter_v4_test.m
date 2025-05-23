@@ -60,3 +60,6 @@ grid on;
 legend('Matlab Filter', 'Similink Filter');
 %% Vivado einfügen
 hdlsetuptoolpath('ToolName','Xilinx Vivado','ToolPath','C:\Xilinx\Vivado\2022.1\bin')
+%%
+% detektor für ende eines Signals
+tlast = [false(1, length(x)-1), true];
