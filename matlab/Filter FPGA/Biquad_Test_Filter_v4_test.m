@@ -52,7 +52,7 @@ y_sim = out.y_sim;
 t_sim = out.tout;
 
 figure();
-plot(t,y_m);
+%plot(t,y_m);
 hold on;
 plot(t_sim,y_sim);
 title('Matlab Filter vs. Similink Filter')
