@@ -15,6 +15,7 @@ Q = 4.7;
 fs = 44100;
 
 
+
 %Tiefpass Zähler
 TP_nums = [0, 0, w0^2];
 %Hochpass Zähler
@@ -97,7 +98,8 @@ x_r = square(t_r);
 [sos,g] = tf2sos(HP_numz, HP_denz);
 
 % Filter anwenden
-y_m = sosfilt(sos, x_r) * g;
+y_m = sosfilt(sos*g, x_r);
+
 % Matlab Filter (Reference)
 figure();
 plot(t_r,y_m,t_r,x_r);
