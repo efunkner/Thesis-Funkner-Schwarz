@@ -14,7 +14,7 @@ w0 = 1 / (R*C);
 Q = 4.7;
 fs = 44100;
 
-
+[y,fs] = audioread()
 
 %Tiefpass Zähler
 TP_nums = [0, 0, w0^2];
