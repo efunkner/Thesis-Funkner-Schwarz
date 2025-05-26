@@ -4,7 +4,7 @@ clc
 %% Filter: HP, Elliptic
 % Parameter
 Fs = 44100;         % Samplingrate (z. B. für Musik), Abtastrate: 44100 Hz -> Musik, 48000 -> Profi Hifi
-Fc = 250;           % Grenzfrequenz für Hochpass
+Fc = 1000;           % Grenzfrequenz für Hochpass
 Rp = 1;             % Passband-Ripple in dB
 Rs = 40;            % Stopband-Dämpfung in dB
 n  = 4;             % Filterordnung 2. -> 1. Biquad, 4. -> 2 Biquad etc. => Am Ende mehr Biuquads kaskadieren für bessere Ergebnisse!!
