@@ -1,5 +1,12 @@
 #include "SD_MMC.h" // SD-Karten-Support für ESP32 mit SD_MMC-Anschluss
 
+// --- Lyrat Mini SD Init
+const int PIN_SD_CARD_POWER = 13;  
+const int PIN_SD_CARD_DET = 34;
+
+// --- Indikator LED ---
+const int LED = 22; // V43 = 22, Mini = 27
+
 // --- Filter-Basis-Klasse ---
 class Filter {
 public:
@@ -128,7 +135,7 @@ void writeWavHeader(File &file, uint32_t dataSize, uint16_t channels, uint32_t s
   file.write((uint8_t*)&dataSize, 4);
 }
 
-// --- Globale Variablen ---
+// --- Variablen für die Ein- und Ausgangsdatei --
 File wavFile;       // Originale Eingangsdatei
 File filteredFile;  // Gefiltere Ausgangsdatei
 
@@ -149,12 +156,19 @@ const float a_coefficients[] = { a_0, a_1, a_2};
 BiquadFilterDF1 filterL(b_coefficients, a_coefficients, gain);
 BiquadFilterDF1 filterR(b_coefficients, a_coefficients, gain);
 
-// --- SETUP (Einlesen der Daten, filtern und erstellung der neuen WAV) ---
+// --- SETUP ---
 void setup() {
   Serial.begin(115200);
 
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
+
+  // NOTWENDIG für Lyrat Mini: POWER_PIN auf LOW setzen
+  pinMode(PIN_SD_CARD_POWER, OUTPUT);
+  digitalWrite(PIN_SD_CARD_POWER, LOW);
+
   // SD-Karte im 4-Wire Modus initialisieren
-  if (!SD_MMC.begin("/sdcard", false)) {
+  if (!SD_MMC.begin("/sdcard", false)) {  //false = 4-Wire, true - 1-Wire
     Serial.println("Fehler beim Initialisieren der SD-Karte.");
     return;
   }
@@ -252,8 +266,8 @@ bool readWavHeader() {
     return false;
   }
 
-  if (bitsPerSample != 16) {
-    Serial.println("Nur 16-Bit PCM wird unterstützt.");
+  if (bitsPerSample != 8 && bitsPerSample != 16 && bitsPerSample != 24 && bitsPerSample != 32) {
+    Serial.printf("Nicht unterstütztes Bit-Format: %d\n", bitsPerSample);
     return false;
   }
 
@@ -326,7 +340,10 @@ void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample
   }
 }
 
-// --- Ungenutzer Loop ---
+// --- Indikator LED ---
 void loop() {
-  // Leerlauf
+  digitalWrite(LED, HIGH);
+  delay(1000);
+  digitalWrite(LED, LOW);
+  delay(1000);
 }
