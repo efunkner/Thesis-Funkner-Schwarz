@@ -266,8 +266,8 @@ bool readWavHeader() {
     return false;
   }
 
-  if (bitsPerSample != 8 && bitsPerSample != 16 && bitsPerSample != 24 && bitsPerSample != 32) {
-    Serial.printf("Nicht unterstütztes Bit-Format: %d\n", bitsPerSample);
+  if (bitsPerSample != 16) {
+    Serial.println("Nur 16-Bit PCM wird unterstützt.");
     return false;
   }
 
