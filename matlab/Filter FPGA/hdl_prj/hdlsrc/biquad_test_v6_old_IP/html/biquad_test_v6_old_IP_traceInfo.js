@@ -1,9 +1,9 @@
 function RTW_Sid2UrlHash() {
 	this.urlHashMap = new Array();
 	/* <S1>/Biquad Filter */
-	this.urlHashMap["biquad_test_v6_old_IP:71"] = "BiquadFilter_HP_Butter_ip_2_4_src_Biquad_Filtrer.vhd:95,96,97,98,99,100,101,102,103";
+	this.urlHashMap["biquad_test_v6_old_IP:71"] = "msg=&block=biquad_test_v6_old_IP:71";
 	/* <S1>/Biquad Filter1 */
-	this.urlHashMap["biquad_test_v6_old_IP:83"] = "BiquadFilter_HP_Butter_ip_2_4_src_Biquad_Filtrer.vhd:105,106,107,108,109,110,111,112,113";
+	this.urlHashMap["biquad_test_v6_old_IP:83"] = "msg=&block=biquad_test_v6_old_IP:83";
 	this.getUrlHash = function(sid) { return this.urlHashMap[sid];}
 }
 RTW_Sid2UrlHash.instance = new RTW_Sid2UrlHash();

@@ -3,7 +3,7 @@ clear
 clc
 %% Filter: HP, Elliptic
 % Parameter
-Fs = 44100;         % Samplingrate (z. B. für Musik), Abtastrate: 44100 Hz -> Musik, 48000 -> Profi Hifi
+Fs = 48000;         % Samplingrate (z. B. für Musik), Abtastrate: 44100 Hz -> Musik, 48000 -> Profi Hifi
 Fc = 1000;           % Grenzfrequenz für Hochpass
 Rp = 1;             % Passband-Ripple in dB
 Rs = 40;            % Stopband-Dämpfung in dB

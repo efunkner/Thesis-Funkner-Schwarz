@@ -3,7 +3,7 @@ clear
 clc
 %% Filter: HP, butter
 % Parameter
-Fs = 44100;         % Samplingrate (z. B. für Musik), Abtastrate: 44100 Hz -> Musik, 48000 -> Profi Hifi
+Fs = 48000;         % Samplingrate (z. B. für Musik), Abtastrate: 44100 Hz -> Musik, 48000 -> Profi Hifi
 Fc = 1000;          % Grenzfrequenz für Hochpass
 n  = 4;             % Filterordnung 2. -> 1. Biquad, 4. -> 2 Biquad etc. => Am Ende mehr Biuquads kaskadieren für bessere Ergebnisse!!
 
