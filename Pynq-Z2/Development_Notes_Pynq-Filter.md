@@ -55,11 +55,11 @@ Es gibt eine Möglichkeit die I2S Receiver/Transmitter von *Master* in *Slave* u
 Wenn Receiver und Transmitter beide Slave sind, verwenden sie bclk und lrclk vom codec_ctrl_0 <br>
 **Das Problem ist:** Der i2s_receiver_0 wandelt das serielle Signal sdata_i in AXI-Wörter (z.B. 24 Bit).
 Diese passieren eine Verarbeitung, z.B. dein Filter. Danach gibt i2s_transmitter_0 sie zurück, synchron zu **alten** Taktsignalen (bclk, lrclk) <br>
-- Die Daten sind nun verzögert, und stimmen nicht mehr zur aktuellen lrclk/bclk-Phase.<br>
+- Die Daten sind nun potenziell verzögert, und stimmen nicht mehr zur aktuellen lrclk/bclk-Phase.<br>
 
 ##### Master-Transmitter bricht den Systemtakt
 Wenn ich den Transmitter als Master einstelle, erzeugt er eigene bclk und lrclk.
-Damit erzeugt er ein I²S-Signal mit eigenem Timing, und der audio_codec_ctrl_0 (und damit der Codec) muss nun als Slave arbeiten. <br>
+Damit erzeugt er ein I²S-Signal mit eigenem Timing, und der audio_codec_ctrl_0 (und damit der Codec) müssten nun als Slave arbeiten. <br>
 - *Der Controller ist als Takt-Master hart konfiguriert*, also: **Kann bclk/lrclk nicht extern empfangen, sondern erzeugt sie.**
 
 
