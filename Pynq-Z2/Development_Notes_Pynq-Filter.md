@@ -81,7 +81,7 @@ Hier eine Liste von Projekten die bereits ausprobiert wurden: <br>
 - ❌ Finales Design mit Echtzeit-Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
 - ❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*) 
-- ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board
+- ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board
 - ❌ JupiterNotebooks für Demonstration
 - ❌ Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
 - ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
