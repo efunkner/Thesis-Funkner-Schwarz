@@ -2,12 +2,12 @@
 Dies sind die Notizen zum aktuellen Stand der Umsetzung von IIR-Biquad-Filtern auf dem PYNQ-Z2. <br>
 Die Jupyter-Notebooks befinden sich im Verzeichnis *jupyter*.
 
-## Stand : 09.06.2025
+# Stand : 09.06.2025
 ### Filter:
 Der derzeit implementierte Filter dient als funktionsfähiger Platzhalter. Es handelt sich um ein Butterworth-Hochpassfilter mit einer Grenzfrequenz von 1 kHz und einer Abtastrate von 48 kHz, abgestimmt auf den im PYNQ-Z2 integrierten Audiocodec [ADAU1761](https://www.analog.com/en/products/adau1761.html). <br>
 Der Filter wurde mithilfe des HDL-Coders aus einem MATLAB/Simulink-Modell generiert und als IP-Core umgesetzt, um eine nahtlose Integration in Vivado zu ermöglichen. <br>
 
-### JupiterNotebooks
+### JupiterNotebooks:
 #### Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2|v5
 Diese beiden Notebooks dokumentieren die ersten erfolgreichen Versuche, zunächst simulierte Signale und anschließend beide Kanäle einer .wav-Datei zu filtern. Die Signale wurden dabei als np.array per DMA (Direct Memory Access) an den Filter übertragen, verarbeitet und anschließend wieder ausgegeben. <br>
 Vor der Übertragung werden die Arrays in Pakete von jeweils 262144 Elementen aufgeteilt. Diese Paketgröße entspricht der Größe des Output-Buffers der Filter-IP. Durch die automatische Paketaufteilung lassen sich auch Daten beliebiger Länge problemlos übertragen. <br>
@@ -32,3 +32,63 @@ Hinzugefügt wurde der im Vorheriegen Notebook erstellte Filter und DMA, um vom 
 
 Die angewanden Funktionen stammen aus dem [pynq.lib.audio Module](https://pynq.readthedocs.io/en/v2.6.1/pynq_package/pynq.lib/pynq.lib.audio.html#pynq-lib-audio).
 
+### Bekannte Probleme:
+- Die Auswahl des Audio-Eingangs ist nicht immer zuverlässig und muss teilweise mehrfach durchgeführt werden.
+- Der Python-Kernel stürzt bei größeren Datensätzen regelmäßig ab, wodurch die Verbindung zum Board verloren geht. → Die Abstürze treten scheinbar zufällig auf und folgen keinem erkennbaren Muster. Ein Hardreset ist anschließend erforderlich.
+- Beim Laden eines neuen Overlays wird dieses nicht immer korrekt übernommen: das vorherige Overlay wird manchmal nicht überschrieben. → Auch hier ist ein Hardreset notwendig.
+- Aufnahmen bei höherer Lautstärke können Störgeräusche oder Rückkopplungen verursachen.
+- Aufgenommene Audiodateien sind im Vergleich zur Ausgabe über das Board deutlich leiser.
+
+## Echtzeitfiltrierung
+### Probleme mit Echtzeit
+#### Ausgangslage
+Um das I2S Signal Echtzeitfiltern zu können, muss der Filter zwischen dieses Signal gesetzt werden. In Vivado gibt es I2S Receiver/Transmitter Ip-Cores welche ein I2S Signal annehmen können und als AXI4-Stream ausgeben können und andersrum mit dem Transmitter. Der Filter kann als AXI4-Stream fähiger IP-Core in Matlab erstellt werden und wurde so auch bisher verwendet. Daher könnte der Filter über die I2S Receiver/Transmitter Blöcke an den I2S-Stream angebunden werden.
+
+#### Problem mit I2S Receiver/Transmitter
+Der Audio_Codec_Contrtoller Block ist ein vorgefertigter IP-Core aus dem [Pynq Github Repo](https://github.com/Xilinx/PYNQ/tree/master) welcher bei der I2S Übertragung als Master funktioniert und damit *bclk*, *lrclk* und *codec_addr* vorgibt.<br>
+Das Problem mit den I2S Receiver/Transmitter Ip-Cores ist, dass diese in dieser Konfiguration als *Slave* arbeiten müssten. Die Funktion wird aber nicht unterstützt. Bedeutet das die IP-Cores nur als *Master* Arbeiten können. [I2S Transmitter and I2S Receiver LogiCORE IP Product Guide](https://docs.amd.com/r/en-US/pg308-i2s/Navigating-Content-by-Design-Process) <br>
+Also muss entweder eine andere IP mit Unterstützung als *Slave* her oder dies muss eigens entwickelt werden. <br>
+Alternativ könnte auch der Filter IP-Core so umgestaltet werden, dass dieser ein Eingangs I2S-Streams akzeptiert. Dadurch würde sie aber die voraussichtlich die Unterstützung von AXI4-Stream verlieren, wodurch diese auch nicht länger für Digitale Audioquellen wie *.wav* verwendet werden könnten, weshalb derselbe Filter zweimal erstellt werden mussen. <br>
+Es gibt eine Möglichkeit die I2S Receiver/Transmitter von *Master* in *Slave* umzuändern laut dieser Quelle: [Audio Processing with the Snickerdoodle](https://www.hackster.io/adam-taylor/audio-processing-with-the-snickerdoodle-727c40). Anderes Board aber änhliche SoC. Leider gelang es mir bisher nicht diese erfolgreich anzuwenden.
+
+##### Takt-Daten-Desynchronisation bei Slave-Slave-Betrieb
+Wenn Receiver und Transmitter beide Slave sind, verwenden sie bclk und lrclk vom codec_ctrl_0 <br>
+**Das Problem ist:** Der i2s_receiver_0 wandelt das serielle Signal sdata_i in AXI-Wörter (z.B. 24 Bit).
+Diese passieren eine Verarbeitung, z.B. dein Filter. Danach gibt i2s_transmitter_0 sie zurück, synchron zu **alten** Taktsignalen (bclk, lrclk) <br>
+- Die Daten sind nun verzögert, und stimmen nicht mehr zur aktuellen lrclk/bclk-Phase.<br>
+
+##### Master-Transmitter bricht den Systemtakt
+Wenn ich den Transmitter als Master einstelle, erzeugt er eigene bclk und lrclk.
+Damit erzeugt er ein I²S-Signal mit eigenem Timing, und der audio_codec_ctrl_0 (und damit der Codec) muss nun als Slave arbeiten. <br>
+- *Der Controller ist als Takt-Master hart konfiguriert*, also: **Kann bclk/lrclk nicht extern empfangen, sondern erzeugt sie.**
+
+
+##### Gleichzeitige Audio-Wiedergabe und -Ausgabe
+In dem [Pynq-Z2](https://www.mouser.com/pdfDocs/pynqz2_user_manual_v1_0.pdf) ist ein [ADAU1761 Audio-Codec](https://www.analog.com/en/products/adau1761.html) verbaut. In dem Datenblatt wird nicht expleziet erwähnt ob eine gelcihzeitige Aufnahme und Wiedergabe möglich ist, technisch währe es aber. Wenn die Funktionen aus dem [pynq.lib.audio Module](https://pynq.readthedocs.io/en/v2.6.1/pynq_package/pynq.lib/pynq.lib.audio.html#pynq-lib-audio) verwendet werden wird, ist es nicht möglich. Sobald eine Aufnahme *.record(Time)* gestart wird, wird die Ausgabe *.play()* blockiert bis die Aufnahme vollendet ist. <br>
+Mit dem Base-Design, sowie auch diesem hier, ist so direckt die gleichzeitige aufnahme und wiedergabe nicht möglich.
+
+#### Alternative Design Möglichkeiten
+Es gibt andere Projekte welche es ermöglichen gelichzeitig Audio Aufzunehmen und Widerzugeben. Inwieweit diese hier verwendet werden können muss noch weiter unteruscht werden. <br>
+Hier eine Liste von Projekten die bereits ausprobiert wurden: <br>
+
+[Pynq_Z2-Audio](https://github.com/wady101/PYNQ_Z2-Audio/tree/master) <br>
+[Audio Processing with the Snickerdoodle](https://www.hackster.io/adam-taylor/audio-processing-with-the-snickerdoodle-727c40)<br>
+[pynq-audio](https://github.com/reed-foster/pynq-audio/tree/master)<br>
+[Pynq-Z2-Audio-Video-Pipelines](https://github.com/tmaringer/Pynq-Z2-Audio-Video-Pipelines) <br>
+
+## Noch offene Punkte:
+- ❔Zweites Design für die Echtzeit-Audiofilterung mit Audiocodec über I2S
+- ❌ Finales Design mit Echtzeit-Audiofilterung und Einlesen digitaler Audiodateien
+(.wav)
+- ❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*) 
+- ❌ Dokumentation zu: DSP,, IIR-Filter, Biquad-Strukturen Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board
+- ❌ JupiterNotebooks für Demonstration
+- ❌ Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
+- ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
+
+## Bereits erledigt:
+- ✅/❌ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
+zienten für den FPGA.
+- ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
+- ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
+- ✅/❌ Skript zur Steuerung des Filters auf PYNQ.
