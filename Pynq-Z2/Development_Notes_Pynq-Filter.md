@@ -1,6 +1,7 @@
 # Notiezen und Information zu dem Entwiklungsstatus 
 Dies sind die Notizen zum aktuellen Stand der Umsetzung von IIR-Biquad-Filtern auf dem PYNQ-Z2. <br>
-Die Jupyter-Notebooks befinden sich im Verzeichnis *jupyter*.
+Die Jupyter-Notebooks befinden sich im Verzeichnis *jupyter*. <br>
+**Wichtig**: Es kann sein, dass die Notebooks nicht vollständig in git angezeigt werden! Beim Öffnen mit einem externen Programm (z.B. VSCode) wird das gesammte Notebook angezeigt.
 
 # Stand : 09.06.2025
 ### Filter:
