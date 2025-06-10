@@ -39,6 +39,7 @@ Die angewanden Funktionen stammen aus dem [pynq.lib.audio Module](https://pynq.r
 - Beim Laden eines neuen Overlays wird dieses nicht immer korrekt übernommen: das vorherige Overlay wird manchmal nicht überschrieben. → Auch hier ist ein Hardreset notwendig.
 - Aufnahmen bei höherer Lautstärke können Störgeräusche oder Rückkopplungen verursachen.
 - Aufgenommene Audiodateien sind im Vergleich zur Ausgabe über das Board deutlich leiser.
+- Ausgabe rauscht, potenzielle Folge vom Filtertyp oder der Umrechnung vor dem Filtern
 
 ## Echtzeitfiltrierung
 ### Probleme mit Echtzeit
@@ -78,13 +79,11 @@ Hier eine Liste von Projekten die bereits ausprobiert wurden: <br>
 [Pynq-Z2-Audio-Video-Pipelines](https://github.com/tmaringer/Pynq-Z2-Audio-Video-Pipelines) <br>
 
 ## Noch offene Punkte:
-- ❔Zweites Design für die Echtzeit-Audiofilterung mit Audiocodec über I2S
-- ❌ Finales Design mit Echtzeit-Audiofilterung und Einlesen digitaler Audiodateien
+- ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
 - ❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*) 
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board
 - ❌ JupiterNotebooks für Demonstration
-- ❌ Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
 - ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
 
 ## Bereits erledigt:
@@ -93,3 +92,7 @@ zienten für den FPGA.
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
 - ✅/❌ Skript zur Steuerung des Filters auf PYNQ.
+
+## Zusatz:
+- ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
+- ❔Design für die **Echtzeit-Audiofilterung** mit Audiocodec über I2S
