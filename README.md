@@ -9,6 +9,7 @@ Die digitale Signalverarbeitung ist ein zentraler Bestandteil moderner Anwendung
 Mit diesen Lehrdemonstrationen möchten wir zwei Ansätze zur Hardware-Implementierung näher erläutern. Dabei zeigen wir, wie ein digitaler IIR-Biquad-Filter auf beiden Plattformen umgesetzt wird und wie die jeweiligen Implementierungen funktionieren. <br>
 
 # Verzeichnisstruktur
+Alle Jupyter Notebooks befinden sich im *jupiter*-Verzeichnis. Zur besseren Übersicht wurden alle Vorherigen Notebooks ebenfalls in dieses Verzeichznis übertragen.
 
 # Theoretischer Hintergrund
 

@@ -1,0 +1,6 @@
+vlib work
+vcom  BiquadFilter_HP_Butter_ip_2_6_src_BiquadDF2Section1.vhd
+vcom  BiquadFilter_HP_Butter_ip_2_6_src_Biquad_Filter.vhd
+vcom  BiquadFilter_HP_Butter_ip_2_6_src_BiquadDF2Section1_block.vhd
+vcom  BiquadFilter_HP_Butter_ip_2_6_src_Biquad_Filter1.vhd
+vcom  BiquadFilter_HP_Butter_ip_2_6_src_Biquad_Filtrer.vhd
