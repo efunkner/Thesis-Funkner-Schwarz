@@ -316,10 +316,12 @@ Error:  False Idle:  False Running:  True</code></pre>
 [0 0 0 ... 0 0 0] 262144 &lt;class 'numpy.ndarray'&gt;</code></pre>
 </div>
 </div></div>
+<div id="67253c02" class="cell markdown">
 <p>Beim Erstellen der DMA-Buffer in Python werden diese mit undefinierten Werten befüllt, die intern als NaN (Not a Number) oder nicht-initialisierte Daten erscheinen können. Beim Anzeigen per print() wirken sie zwar wie Nullen, enthalten aber tatsächlich keine gültigen, interpretierten Werte.<br></p>
 <p>Wenn der Buffer größer ist als die tatsächlich zu übertragenden Daten und nicht vollständig mit gültigen Werten überschrieben wird, bleiben diese ungültigen Inhalte im Speicher. Werden diese vom DMA übertragen, kann dies zu internen Fehlerzuständen führen, wodurch der DMA blockiert wird und weitere Übertragungen nicht mehr möglich sind.<br></p>
 <p>Um dennoch mit großen DMA-Frames arbeiten zu können, müssen die Buffer vollständig mit gültigen Daten gefüllt werden.<br></p>
 <p><strong>Lösung:</strong> Vor der Übertragung wird der gesamte Buffer initial mit Nullen befüllt (Padding). Anschließend werden die tatsächlichen Nutzdaten am Anfang des Buffers überschrieben. Dadurch enthält der komplette Buffer gültige, wohldefinierte Werte, was dem DMA eine fehlerfreie Übertragung ermöglicht.</p>
+</div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="e1f80deb" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Leere Buffer</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>input_buffer <span class="op">=</span> allocate(shape<span class="op">=</span>(buffer_size,), dtype<span class="op">=</span>np.uint32)</span>
