@@ -1,7 +1,7 @@
 """
 TDF2 Biquad-Implementierung in Micropython zum Filtern von WAV
 Dieser Code ist eine Konvertierung der Arduino Variante
-Sehr langsam und unoptimiert :(
+Sehr langsam :(
 """
 import os
 import struct
@@ -9,7 +9,7 @@ import gc
 from machine import SDCard
 from micropython import const
 
-BUFFER_FRAMES = const(4096)  # Großer Buffer für weniger I/O
+BUFFER_FRAMES = const(4096)  # Buffergröße
 PROGRESS_STEP = const(1)    # Fortschritt alle %
 GC_INTERVAL = const(1)
 
@@ -19,28 +19,76 @@ try:
     os.mount(sd, "/sd")
 except:
     print("SD-Karte nicht verfügbar")
+    
+
+# --- Biquad Filter (DF1) Klasse ---
+class BiquadFilterDF1:
+    __slots__ = ('b0', 'b1', 'b2', 'a0', 'a1', 'a2', 'x1', 'x2', 'y1', 'y2')
+
+    def __init__(self, b_coeffs, a_coeffs, gain):
+        self.b0 = gain * (b_coeffs[0] / a_coeffs[0])
+        self.b1 = gain * (b_coeffs[1] / a_coeffs[0])
+        self.b2 = gain * (b_coeffs[2] / a_coeffs[0])
+        self.a1 = a_coeffs[1] / a_coeffs[0]
+        self.a2 = a_coeffs[2] / a_coeffs[0]
+        self.x1 = 0.0
+        self.x2 = 0.0
+        self.y1 = 0.0
+        self.y2 = 0.0
+        
+    @micropython.native
+    def filter(self, x0):
+        y0 = (self.b0 * x0 + self.b1 * self.x1 + self.b2 * self.x2 - self.a1 * self.y1 - self.a2 * self.y2)
+        
+        self.x2 = self.x1
+        self.x1 = x0
+        self.y2 = self.y1
+        self.y1 = y0
+        
+        return y0    
+
+# --- Biquad-Filter (Direct Form II) ---
+class BiquadFilterDF2:
+    __slots__ = ('b0', 'b1', 'b2', 'a0', 'a1', 'a2', 'w0', 'w1', 'w2')
+
+    def __init__(self, b_coeffs, a_coeffs, gain):
+        # Koeffizienten normieren
+        self.b0 = gain * (b_coeffs[0] / a_coeffs[0])
+        self.b1 = gain * (b_coeffs[1] / a_coeffs[0])
+        self.b2 = gain * (b_coeffs[2] / a_coeffs[0])
+        self.a1 = a_coeffs[1] / a_coeffs[0]
+        self.a2 = a_coeffs[2] / a_coeffs[0]
+        self.w0 = 0.0
+        self.w1 = 0.0
+        self.w2 = 0.0
+        
+    @micropython.native
+    def filter(self, x0):
+        # DF2 Berechnung
+        y0 = self.b0 * self.w0 + self.b1 * self.w1 + self.b2 * self.w2
+        self.w0 = x0 - self.a1 * self.w1 - self.a2 * self.w2
+        return y0
 
 # --- Biquad-Filter (Transposed Direct Form II) ---
 class BiquadFilterTDF2:
-    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'z1', 'z2')
+    __slots__ = ('b0', 'b1', 'b2', 'a0', 'a1', 'a2', 's1', 's2')
 
     def __init__(self, b_coeffs, a_coeffs, gain):
-        # Koeffizienten vorberechnen
-        a0_inv = 1.0 / a_coeffs[0]
-        self.b0 = gain * b_coeffs[0] * a0_inv
-        self.b1 = gain * b_coeffs[1] * a0_inv
-        self.b2 = gain * b_coeffs[2] * a0_inv
-        self.a1 = a_coeffs[1] * a0_inv
-        self.a2 = a_coeffs[2] * a0_inv
-        self.z1 = 0.0
-        self.z2 = 0.0
+        # Koeffizienten normieren
+        self.b0 = gain * (b_coeffs[0] / a_coeffs[0])
+        self.b1 = gain * (b_coeffs[1] / a_coeffs[0])
+        self.b2 = gain * (b_coeffs[2] / a_coeffs[0])
+        self.a1 = a_coeffs[1] / a_coeffs[0]
+        self.a2 = a_coeffs[2] / a_coeffs[0]
+        self.s1 = 0.0
+        self.s2 = 0.0
 
     @micropython.native
-    def filter_fast(self, x0):
+    def filter(self, x0):
         # Transposed DF2 Berechnung
-        y0 = self.b0 * x0 + self.z1
-        self.z1 = self.b1 * x0 - self.a1 * y0 + self.z2
-        self.z2 = self.b2 * x0 - self.a2 * y0
+        y0 = self.b0 * x0 + self.s1
+        self.s1 = self.s2 + self.b1 * x0 - self.a1 * y0
+        self.s2 = self.b2 * x0 - self.a2 * y0
         return y0
 
 
@@ -177,43 +225,44 @@ class WAVFilter:
     def __init__(self, input_file, output_file):
         self.input_file = input_file
         self.output_file = output_file
-        
-        # Vorberechnete Filter-Koeffizienten
-        b_coeffs = [0.07033, -0.138, 0.07033]
-        a_coeffs = [1.0, -0.138, -0.8593]
+
+# ==============================================================================================================
+
+# ==============================================================================================================
+ 
+        # Filter-Koeffizienten
+        b_coeffs = [0.07033, -0.1380, 0.07033]
+        a_coeffs = [1.00000, -0.1380, -0.8593]
         gain = 1.0
         
         # Filter-Instanzen
         self.filter_l = BiquadFilterTDF2(b_coeffs, a_coeffs, gain)
         self.filter_r = BiquadFilterTDF2(b_coeffs, a_coeffs, gain)
-        
-        # Buffer für maximale Performance
+
+# ==============================================================================================================
+
+# ==============================================================================================================
+
+        # Buffer
         self.buffer_frames = BUFFER_FRAMES
     
     def process(self):
         print("WAV-Filterung startet...")
         
-        # Schnelle Existenz-Prüfung
+        # Existenz-Prüfung
         try:
             f = open(self.input_file, 'rb')
             f.close()
         except:
             print("Eingabedatei nicht gefunden")
             return False
-        
-        # Output löschen falls existent
-        if self.input_file != self.output_file:
-            try:
-                os.remove(self.output_file)
-            except:
-                pass
-        
+                
         return self._process_flexible()
     
     def _process_flexible(self):
         try:
             with open(self.input_file, 'rb') as wav_in:
-                # Flexibles WAV-Header-Parsing
+                # WAV-Header-Parsing
                 wav_info = FlexibleWAVParser.parse_wav_header(wav_in)
                 
                 if not wav_info:
@@ -248,8 +297,8 @@ class WAVFilter:
     @micropython.native
     def _filter_mono(self, wav_in, wav_out, data_size):
         """Mono-Filterung"""
-        total_samples = data_size >> 1  # / 2 für 16-bit
-        buffer_size = self.buffer_frames << 1  # * 2 für bytes
+        total_samples = data_size >> 1
+        buffer_size = self.buffer_frames << 1
         samples_left = total_samples
         samples_processed = 0
         gc_counter = 0
@@ -277,7 +326,7 @@ class WAVFilter:
                     sample -= 65536  # Signed conversion
                 
                 # Filter anwenden
-                filtered = filter_l.filter_fast(float(sample))
+                filtered = filter_l.filter(float(sample))
                 clamped = fast_constrain(filtered)
                 
                 # 16-bit Sample schreiben
@@ -289,7 +338,7 @@ class WAVFilter:
             samples_left -= samples_to_read
             samples_processed += samples_to_read
             
-            # Seltener GC und Progress
+            # GC und Progress
             gc_counter += 1
             if gc_counter >= GC_INTERVAL:
                 percent = (samples_processed * 100) // total_samples
@@ -303,8 +352,8 @@ class WAVFilter:
     @micropython.native  
     def _filter_stereo(self, wav_in, wav_out, data_size):
         """Stereo-Filterung"""
-        total_samples = data_size >> 2  # / 4 für 16-bit stereo frames
-        buffer_size = self.buffer_frames << 2  # * 4 für stereo bytes
+        total_samples = data_size >> 2  # 16-bit stereo frames
+        buffer_size = self.buffer_frames << 2  # stereo bytes
         samples_left = total_samples
         samples_processed = 0
         gc_counter = 0
@@ -336,8 +385,8 @@ class WAVFilter:
                     right -= 65536
                 
                 # Filter beide Kanäle
-                filtered_l = filter_l.filter_fast(float(left))
-                filtered_r = filter_r.filter_fast(float(right))
+                filtered_l = filter_l.filter(float(left))
+                filtered_r = filter_r.filter(float(right))
                 
                 clamped_l = fast_constrain(filtered_l)
                 clamped_r = fast_constrain(filtered_r)
@@ -353,7 +402,7 @@ class WAVFilter:
             samples_left -= samples_to_read
             samples_processed += samples_to_read
             
-            # Performance-optimierte GC
+            # GC
             gc_counter += 1
             if gc_counter >= GC_INTERVAL:
                 percent = (samples_processed * 100) // total_samples
@@ -424,7 +473,7 @@ def main():
     wav_filter = WAVFilter(input_file, output_file)
     success = wav_filter.process()
     
-    # Performance-Messung
+    # Zeit-Messung
     if start_ticks and success:
         try:
             elapsed_ms = (time.ticks_diff(time.ticks_ms(), start_ticks))/1000
