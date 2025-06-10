@@ -7,32 +7,31 @@ const int PIN_SD_CARD_DET = 34;
 // --- Indikator LED ---
 const int LED = 22; // V43 = 22, Mini = 27
 
-// --- Filter-Basis-Klasse ---
-class Filter {
-public:
-  virtual ~Filter() {}
-  virtual float filter(float) = 0;
-};
+// -----------------------------------------------------------------------------------
+// --- Hilfsklasse für Filter
+class Filter
+  {
+  public:
+    virtual ~Filter() {}
+    virtual float filter(float) = 0;
+  };
 
 // --- Biquad-Filter in Direct Form 1 ---
 class BiquadFilterDF1 : public Filter
   {
   private:
-    // Filterkoeffizienten
     const float b_0; 
     const float b_1;
     const float b_2;
     const float a_1;
     const float a_2;
 
-    // Eingangswerte (x) und Ausgangswerte (y) - vergangene Samples
     float x_0 = 0;
     float x_1 = 0;
     float y_1 = 0;
     float y_2 = 0;
 
   public:
-    // Konstruktor mit Koeffizienten und Verstärkung (Gain)
     BiquadFilterDF1(const float (&b)[3], const float (&a)[3], float gain)  
         : b_0(gain * b[0] / a[0]),
           b_1(gain * b[1] / a[0]),
@@ -42,14 +41,11 @@ class BiquadFilterDF1 : public Filter
     {
     }
 
-  // Filterfunktion: berechnet aktuellen Ausgangswert y_0
-  float filter(float value)
+  float filter(float x_0)
   {
     float x_2 = x_1;
     x_1 = x_0;
-    x_0 = value;
 
-    // Normalizierte Differenzengleichung der Direct form 1
     float y_0 = b_0 * x_0 + b_1 * x_1 + b_2 * x_2 - a_1 * y_1 - a_2 * y_2;
     
     y_2 = y_1;
@@ -84,9 +80,8 @@ class BiquadFilterDF2 : public Filter
     {
     }
 
-  float filter(float value)
+  float filter(float x_0)
   {
-    float x_0 = value;
     float w_2 = w_1;
     w_1 = w_0;
     w_0 = x_0 - a_1 * w_1 - a_2 * w_2;
@@ -97,6 +92,41 @@ class BiquadFilterDF2 : public Filter
     return y_0;
   }  
 };
+
+// --- Transponierter Biquad-Filter in Direct Form 2 ---
+class BiquadFilterTDF2 : public Filter
+  {
+  private:
+    const float b_0; 
+    const float b_1;
+    const float b_2;
+    const float a_1;
+    const float a_2;
+
+    float s_1 = 0;
+    float s_2 = 0;
+
+  public:
+    BiquadFilterTDF2(const float (&b)[3], const float (&a)[3], float gain)  
+        : b_0(gain * b[0] / a[0]),
+          b_1(gain * b[1] / a[0]),
+          b_2(gain * b[2] / a[0]),
+          a_1(a[1] / a[0]),
+          a_2(a[2] / a[0]) 
+    {
+    }
+
+  float filter(float x_0)
+  {
+    float y_0 = s_1 + b_0 * x_0;
+
+    s_1 = s_2 + b_1 * x_0 - a_1 * y_0; 
+    s_2 = b_2 * x_0 - a_2 * y_0;
+    
+    return y_0;
+  }  
+};
+// -----------------------------------------------------------------------------------
 
 // --- WAV Hilfsfunktionen ---
 uint32_t readLEUint32(uint8_t* buf) {
@@ -139,6 +169,8 @@ void writeWavHeader(File &file, uint32_t dataSize, uint16_t channels, uint32_t s
 File wavFile;       // Originale Eingangsdatei
 File filteredFile;  // Gefiltere Ausgangsdatei
 
+
+// -----------------------------------------------------------------------------------
 // --- Filter-Koeffizienten und Gain ---
 const float b_0 = 0.07033f;
 const float b_1 = -0.138;
@@ -155,6 +187,7 @@ const float a_coefficients[] = { a_0, a_1, a_2};
 // Filter-Objekte für linken und rechten Kanal
 BiquadFilterDF1 filterL(b_coefficients, a_coefficients, gain);
 BiquadFilterDF1 filterR(b_coefficients, a_coefficients, gain);
+// -----------------------------------------------------------------------------------
 
 // --- SETUP ---
 void setup() {
@@ -321,6 +354,7 @@ void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample
 
     int samplesInBuffer = bytesRead / 2; // 2 Bytes = 16 Bit pro Sample
 
+// -----------------------------------------------------------------------------------
     // Samples einzeln filtern
     for (int i = 0; i < samplesInBuffer; i += numChannels) {
       if (numChannels == 1) {
@@ -337,6 +371,7 @@ void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample
     // Gefilterte Daten in neue Datei schreiben
     filteredFile.write((uint8_t*)buffer, bytesRead);
     framesLeft -= framesToRead;
+// -----------------------------------------------------------------------------------
   }
 }
 
@@ -347,3 +382,42 @@ void loop() {
   digitalWrite(LED, LOW);
   delay(1000);
 }
+
+/*
+Transponierte Direct Form 2
+01:15:30.430 -> Kanäle: 2
+01:15:30.430 -> SampleRate: 44100
+01:15:30.430 -> Bits pro Sample: 16
+01:15:30.430 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
+01:15:30.430 -> Starte Filterung...
+01:21:48.271 -> Filterung abgeschlossen.
+Dauer -> 01:21:48.271 - 01:15:30.430 = 00:06:17.841
+
+Direct Form 1
+01:25:33.598 -> Kanäle: 2
+01:25:33.598 -> SampleRate: 44100
+01:25:33.598 -> Bits pro Sample: 16
+01:25:33.598 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
+01:25:33.598 -> Starte Filterung...
+01:31:50.674 -> Filterung abgeschlossen.
+Dauer -> 01:31:50.674 - 01:25:33.598 =  00:06:17.076
+
+Direct Form 2
+01:37:07.007 -> AudioFormat: 1
+01:37:07.007 -> Kanäle: 2
+01:37:07.007 -> SampleRate: 44100
+01:37:07.007 -> Bits pro Sample: 16
+01:37:07.039 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
+01:37:07.039 -> Starte Filterung...
+01:43:24.077 -> Filterung abgeschlossen.
+Dauer -> 01:43:24.077 - 01:37:07.039 = 00:06:17.038
+
+Transponierte Direct Form 2
+01:59:10.099 -> Kanäle: 2
+01:59:10.099 -> SampleRate: 44100
+01:59:10.099 -> Bits pro Sample: 16
+01:59:10.099 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
+01:59:10.099 -> Starte Filterung...
+02:05:28.771 -> Filterung abgeschlossen.
+Dauer -> 02:05:28.771 - 01:59:10.099 = 00:06:18.672
+*/

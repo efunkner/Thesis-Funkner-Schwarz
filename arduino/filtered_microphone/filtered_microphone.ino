@@ -1,3 +1,10 @@
+/*  
+Echtzeitfilterung eines Mikrofonstreams über das Lyrat V43
+Biquad Filter kann in DF1 und DF2 implemeniert
+Zur Implementierung werden Koeffizienten benötigt
+Koeffizienten können als float oder double angeben werden
+*/
+
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
 
@@ -31,7 +38,7 @@ void setup() {
     //Start I2S
     auto config = lyrat.defaultConfig(RXTX_MODE);
     config.copyFrom(info);
-    //config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
+    config.input_device = ADC_INPUT_LINE2; // USED FOR INLINE MIC
     lyrat.begin(config);
 
     //setup Filters for both Channels
