@@ -78,10 +78,37 @@ Hier eine Liste von Projekten die bereits ausprobiert wurden: <br>
 [pynq-audio](https://github.com/reed-foster/pynq-audio/tree/master)<br>
 [Pynq-Z2-Audio-Video-Pipelines](https://github.com/tmaringer/Pynq-Z2-Audio-Video-Pipelines) <br>
 
+# Stand : 11.06.2025
+### Filter:
+Zwei neue Filter wurden entworfen und jeweils in Kombination mit einer eigenen AXI-DMA implementiert. Die Filterdesigns basieren auf dem MATLAB Filter Designer, wobei die entsprechenden Koeffizienten ins Workspace exportiert wurden:
+- Hochpass: Butterworth, 4. Ordnung, FC: 2500 Hz
+- Tiefpass: Butterworth, 4. Ordnung, FC: 1000 Hz
+
+Das Simulink-Modell *(biquad_Filter_v7_IP)* wurde entsprechend angepasst: Die Gain-Faktoren *(g)* werden nun direkt in die Numerator-Koeffizienten integriert. Da der MATLAB Filter Designer für jeden Biquad-Block einen eigenen Gain-Wert erzeugt, liegen nun entsprechend mehr Gain-Faktoren vor.
+
+Diese Änderung wurde vorgenommen, da beim Tiefpassfilter die nachträgliche Anwendung des Gains dazu führte, dass die Werte zu klein wurden. Aufgrund des 32_16 Fixed-Point-Formats im Simulink-Modell kam es dadurch zu Rundungsfehlern bzw. zum Wegfallen relevanter Werte. Durch das Vorab-Einrechnen der Gains in die Numerator-Koeffizienten wird dieses Problem vermieden, ohne dass sich das Filterverhalten ändert.
+
+### Vivado Design:
+Im Zuge der neuen Filter wurde auch das Design in Vivado angepasst. Als Grundlage diente das überarbeitete Referenzdesign v2, das eine angepasste Takterzeugung für den Audio-Codec beinhaltet. Jeder der beiden Filter erhält eine eigene AXI-DMA-Schnittstelle, wobei beide Schnittstellen identisch konfiguriert wurden. <br>
+
+![audio_duo_Filter_v1](Design/audio_duo_Filter_v1_bunt.png)
+
+Beim ersten Versuch der Bitstream-Generierung trat ein Synthese-Fehler auf. Nach erneutem Ausführen des Generierungsprozesses konnte der Bitstream jedoch erfolgreich erstellt werden. Ein solches Verhalten wurde bereits in der Vergangenheit bei größeren Designs beobachtet und hatte bislang keine Auswirkungen auf die Funktionalität des erzeugten Bitstreams. <br>
+
+Die Timings im Design wurden erfolgreiuch eingehalten.
+![audio_duo_Filter_v1:Timing](Design/audio_duo_Filter_v1_Vivado1.png)
+
+### JupiterNotebooks:
+#### Audio_duo_Filter_v1
+Das Notebook basiert auf einer früheren Version und unterscheidet sich hauptsächlich in der Anzahl der implementierten Filter. Es wurde dahingehend erweitert, dass einer der beiden Filter zur Laufzeit ausgewählt werden kann.
+Das Notebook diente zur Überprüfung der Funktionalität des Designs – der Test verlief erfolgreich, die korrekte Funktion konnte bestätigt werden.
+
+
+
+
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
-- ❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*) 
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board
 - ❌ JupiterNotebooks für Demonstration
 - ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
@@ -92,6 +119,7 @@ zienten für den FPGA.
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
 - ✅/❌ Skript zur Steuerung des Filters auf PYNQ.
+- **✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)** 
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
