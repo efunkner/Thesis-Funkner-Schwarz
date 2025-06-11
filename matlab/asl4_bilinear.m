@@ -9,41 +9,50 @@ format compact
 
 % Spezifikation
 R = 1000;
-C = 100 * 10^-9;
+C = 100e-9;
 w0 = 1 / (R*C);
 Q = 4.7;
-fs = 44100;
+fs = 96000;
 
-[y,fs] = audioread()
-
-%Tiefpass Zähler
-TP_nums = [0, 0, w0^2];
-%Hochpass Zähler
-HP_nums = [1, 0, 0];
-%Bandpass Zähler
-BP_nums = [0, -w0, 0];
-%Bandstop Zähler
-BS_nums = [1, 0, w0^2];
-%Nenner
+% Nenner
 dens = [1, w0/Q, w0^2];
-
-% Plot des analogen Frequenzgangs
-
+% Tiefpass Zähler
+TP_nums = [0, 0, w0^2];
 [Hs_TP, ws_TP] = freqs(TP_nums,dens);
+% Hochpass Zähler
+HP_nums = [1, 0, 0];
 [Hs_HP, ws_HP] = freqs(HP_nums,dens);
+% Bandpass Zähler
+BP_nums = [0, -w0, 0];
 [Hs_BP, ws_BP] = freqs(BP_nums,dens);
+% Bandstop Zähler
+BS_nums = [1, 0, w0^2];
 [Hs_BS, ws_BS] = freqs(BS_nums,dens);
 
+% Plots der analogen Filter
 figure(1);
+
+% Plot des analogen Frequenzgangs
+subplot(2,1,1);
 plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), mag2db(abs([Hs_TP Hs_HP Hs_BP Hs_BS])));
 grid on
-title("Analoge Biquad");
+title("Analoge Biquad Frequenzgang");
 xlabel("Frequenz");
 ylabel("Amplitude in dB");
-xlim([0 w0]);
+xlim([0 4000]);
 ylim([-30 15]);
 legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
-%
+
+% Plot der analogen Phase
+subplot(2,1,2);
+plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), unwrap(angle([Hs_TP Hs_HP Hs_BP Hs_BS]))*(180/pi));
+grid on
+title("Analoge Biquad Phase");
+xlabel("Frequenz");
+ylabel("Phase in Grad");
+xlim([0 4000]);
+ylim([-300 200]);
+legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
 
 %% Bilineartransformation
 
@@ -53,29 +62,72 @@ legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
 %Hochpass
 [HP_numz, HP_denz] = bilinear(HP_nums,dens,fs);
 [Hz_HP, wz_HP] = freqz(HP_numz,HP_denz);
-%Bandpass
+% Bandpass
 [BP_numz, BP_denz] = bilinear(BP_nums,dens,fs);
-%Bandstop
-[BS_numz, BS_denz] = bilinear(BS_nums,dens,fs);
-
-
-
 [Hz_BP, wz_BP] = freqz(BP_numz,BP_denz);
+% Bandstop
+[BS_numz, BS_denz] = bilinear(BS_nums,dens,fs);
 [Hz_BS, wz_BS] = freqz(BS_numz,BS_denz);
 
+% 15 Nachkommastellen der Koffizienten
+format long
+
+% Plots der digitalen Filter
 figure(2);
+
+% Plot des digitalen Frequenzgangs
+subplot(2,1,1);
+plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi), mag2db(abs([Hz_TP Hz_HP Hz_BP Hz_BS])));
+grid on
+title("Digitaler Biquad Frequenzgang");
+xlabel("Frequenz");
+ylabel("Amplitude in dB");
+xlim([0 4000]);
+ylim([-30 15]);
+legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
+
+% Plot der digitalen Phase
+subplot(2,1,2);
+plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi), unwrap(angle([Hz_TP Hz_HP Hz_BP Hz_BS]))*(180/pi));
+grid on
+title("Digitale Biquad Phase");
+xlabel("Frequenz");
+ylabel("Phase in Grad");
+xlim([0 4000]);
+ylim([-300 200]);
+legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
+
+%Plots zum Vergleich
+figure(3);
+
+% Plot vom Vergleich von analogen und digitalen Frequenzgang
+subplot(2,1,1);
 plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi),mag2db(abs([Hz_TP Hz_HP Hz_BP Hz_BS])));
 hold on;
 plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), mag2db(abs([Hs_TP Hs_HP Hs_BP Hs_BS])));
 grid on
-title("Digitale Biquad");
+title("Digitale Biquad vs Analoger Biquad Frequenz");
 xlabel("Frequenz");
 ylabel("Amplitude in dB");
-xlim([0 w0]);
+xlim([0 4000]);
 ylim([-30 15]);
 legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
 
+% Plot vom Vergleich von analogen und digitalen Frequenzgang
+subplot(2,1,2);
+plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi),unwrap(angle([Hz_TP Hz_HP Hz_BP Hz_BS]))*(180/pi));
+hold on;
+plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), unwrap(angle([Hs_TP Hs_HP Hs_BP Hs_BS]))*(180/pi));
+grid on
+title("Digitale Biquad vs Analoger Biquad Phase");
+xlabel("Frequenz");
+ylabel("Amplitude in dB");
+xlim([0 4000]);
+ylim([-300 200]);
+legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
+
 %% Koeffizeinten des digitalen Biquads
+
 fprintf('\nKOEFFIZIENTEN DIGITALER-TP: \n');
 fprintf('Zaehlerkoeffizienten = \n'); disp(TP_numz);
 fprintf('Nennerkoeffizienten = \n'); disp(TP_denz);
@@ -91,18 +143,3 @@ fprintf('Nennerkoeffizienten = \n'); disp(BP_denz);
 fprintf('\nKOEFFIZIENTEN DIGITALER-BS: \n');
 fprintf('Zaehlerkoeffizienten = \n'); disp(BS_numz);
 fprintf('Nennerkoeffizienten = \n'); disp(BS_denz);
-%
-%% Testsignal + Signalfilterung (Matlab-Filter)
-t_r = linspace(0,3*pi)';
-x_r = square(t_r);
-[sos,g] = tf2sos(HP_numz, HP_denz);
-
-% Filter anwenden
-y_m = sosfilt(sos*g, x_r);
-
-% Matlab Filter (Reference)
-figure();
-plot(t_r,y_m,t_r,x_r);
-title('Filtered Signal vs. OG Signal')
-grid on;
-legend('Filtered Signal', 'OG Signal');
