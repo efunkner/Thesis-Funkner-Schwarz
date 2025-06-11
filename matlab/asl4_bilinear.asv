@@ -13,7 +13,7 @@ C = 100e-9;
 w0 = 1 / (R*C);
 Q = 4.7;
 % Prewarping
-fs = w0 / 2*pi; 
+fp = w0 / 2*pi; 
 
 %fs = 24900;
 
@@ -60,16 +60,16 @@ legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
 %% Bilineartransformation
 
 %Tiefpass
-[TP_numz, TP_denz] = bilinear(TP_nums,dens,fs);
+[TP_numz, TP_denz] = bilinear(TP_nums,dens,fp);
 [Hz_TP, wz_TP] = freqz(TP_numz,TP_denz);
 %Hochpass
-[HP_numz, HP_denz] = bilinear(HP_nums,dens,fs);
+[HP_numz, HP_denz] = bilinear(HP_nums,dens,fp);
 [Hz_HP, wz_HP] = freqz(HP_numz,HP_denz);
 % Bandpass
-[BP_numz, BP_denz] = bilinear(BP_nums,dens,fs);
+[BP_numz, BP_denz] = bilinear(BP_nums,dens,fp);
 [Hz_BP, wz_BP] = freqz(BP_numz,BP_denz);
 % Bandstop
-[BS_numz, BS_denz] = bilinear(BS_nums,dens,fs);
+[BS_numz, BS_denz] = bilinear(BS_nums,dens,fp);
 [Hz_BS, wz_BS] = freqz(BS_numz,BS_denz);
 
 % 15 Nachkommastellen der Koffizienten
@@ -80,7 +80,7 @@ figure(2);
 
 % Plot des digitalen Frequenzgangs
 subplot(2,1,1);
-plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi), mag2db(abs([Hz_TP Hz_HP Hz_BP Hz_BS])));
+plot([wz_TP wz_HP wz_BP wz_BS]*fp/(2*pi), mag2db(abs([Hz_TP Hz_HP Hz_BP Hz_BS])));
 grid on
 title("Digitaler Biquad Frequenzgang");
 xlabel("Frequenz");
@@ -91,7 +91,7 @@ legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
 
 % Plot der digitalen Phase
 subplot(2,1,2);
-plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi), unwrap(angle([Hz_TP Hz_HP Hz_BP Hz_BS]))*(180/pi));
+plot([wz_TP wz_HP wz_BP wz_BS]*fp/(2*pi), unwrap(angle([Hz_TP Hz_HP Hz_BP Hz_BS]))*(180/pi));
 grid on
 title("Digitale Biquad Phase");
 xlabel("Frequenz");
@@ -105,7 +105,7 @@ figure(3);
 
 % Plot vom Vergleich von analogen und digitalen Frequenzgang
 subplot(2,1,1);
-plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi),mag2db(abs([Hz_TP Hz_HP Hz_BP Hz_BS])));
+plot([wz_TP wz_HP wz_BP wz_BS]*fp/(2*pi),mag2db(abs([Hz_TP Hz_HP Hz_BP Hz_BS])));
 hold on;
 plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), mag2db(abs([Hs_TP Hs_HP Hs_BP Hs_BS])));
 grid on
@@ -118,7 +118,7 @@ legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
 
 % Plot vom Vergleich von analogen und digitalen Frequenzgang
 subplot(2,1,2);
-plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi),unwrap(angle([Hz_TP Hz_HP Hz_BP Hz_BS]))*(180/pi));
+plot([wz_TP wz_HP wz_BP wz_BS]*fp/(2*pi),unwrap(angle([Hz_TP Hz_HP Hz_BP Hz_BS]))*(180/pi));
 hold on;
 plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), unwrap(angle([Hs_TP Hs_HP Hs_BP Hs_BS]))*(180/pi));
 grid on
