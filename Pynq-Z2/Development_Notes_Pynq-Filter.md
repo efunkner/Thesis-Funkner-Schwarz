@@ -148,7 +148,7 @@ zienten für den FPGA.
 - ✅✅/❌ **JupiterNotebooks für Demonstration**
 - ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
 - ✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
-- ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
+- ✅ **Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.**
  
 
 ## Zusatz:
