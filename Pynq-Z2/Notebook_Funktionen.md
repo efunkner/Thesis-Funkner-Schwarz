@@ -1,0 +1,92 @@
+# Funktionen im Notebook:
+Diese Funktionen sind Bestandteil von *my_Overlay_v2.py* und dienen der Vereinfachung von Datenübertragung und Signalverarbeitung.
+
+#### FormatChange(np.array)
+Diese Funktion bereitet ein np.array so auf, dass es über den *AXI-DMA* an den Filter übertragen werden kann. <br>
+- Die Werte werden in 24-Bit-Integer konvertiert, entsprechend dem Format der Audiodatei.
+- Anschließend erfolgt eine Umwandlung in 32-Bit-Integer, da der *AXI-DMA* auf diese Datenbreite ausgelegt ist.
+- Die Daten werden in das Format *uint32* angepasst, wie es für die Ein- und Ausgabepuffer erforderlich ist.
+- Als Ergebnis gibt die Funktion ein Array mit den konvertierten Werten zurück.
+
+Diese Funktion wird innerhalb der **Transmission** verwendet.
+
+#### Normierung(np.array)
+Eine einfache Funktion welche Werte eines Arrays auf [-1.0, +1.0] normiert. <br>
+Diese Funktion wird innerhalb der **Transmission** verwendet. <br>
+
+#### Transmission(np.array, ip_buffer)
+Diese Funktion übernimmt das Senden und Empfangen von Arrays über den *AXI-DMA*. <br>
+- Die Eingangsdaten werden zunächst mithilfe der Funktionen **Normierung** und **Transmission** in ein für den *AXI-DMA* geeignetes Format konvertiert.
+- Anschließend werden Input- und Outputbuffer über Pynq-Funktionen zugewiesen. Der Inputbuffer wird zusätzlich per Zero-Padding aufgefüllt.
+- Die vorbereiteten Eingangsdaten werden in den Inputbuffer geladen.
+- Der Sende- und Empfangskanal wird gestartet. Die Funktion wartet, bis alle Datenübertragungen abgeschlossen sind.
+- Es erfolgt eine Fehlerprüfung für beide Kanäle.
+- Die empfangenen Ausgangsdaten werden zurückgerechnet – Formatänderungen werden rückgängig gemacht und erneut normiert.
+- Abschließend werden Input- und Outputbuffer freigegeben
+- Die verarbeiteten Ausgangsdaten werden zurückgegeben.
+
+*Diese Funktion kann erst verwendet werden, nachdem der entsprechende AXI-DMA ausgewählt und initialisiert wurde.*
+
+
+#### Split2Packets(np.array, packet_size)
+Diese Funktion unterteilt ein Array in kleinere Abschnitte mit definierter Größe. <br>
+Damit können Datensätze, die größer als der Puffer des Filters sind, in mehreren Schritten verarbeitet und gefiltert werden.
+
+#### send2receive(Data_In)
+Führt die Übertragungen für alle Teil-Arrays nacheinander aus. <br>
+*Diese Funktion kann erst verwendet werden, nachdem der entsprechende AXI-DMA ausgewählt und initialisiert wurde.*
+
+#### read_wav(wav_path)
+***Hinweis:*** *Diese Funktion wurde aus den Beispielen zu Audio aus den Pynq-Beispielen auf dem Board übernommen.*
+Diese Funktion liest eine WAV-Datei ein und wandelt die Audiodaten in ein Format um, das weiterverarbeitet werden kann. <br>
+- Die Datei wird geöffnet, und es werden wichtige Informationen wie Anzahl der Frames, Kanäle, Abtastrate und Sample-Breite ausgelesen.
+- Die Audiodaten werden als Byte-Array geladen und in einen temporären Buffer einsortiert, der jedem Sample 4 Byte zuweist.
+- Die eigentlichen Audiodaten (z. B. 24-Bit = 3 Byte) werden an den Anfang jedes 4-Byte-Blocks kopiert.
+- Das Vorzeichen wird korrekt erweitert, sodass aus z. B. 24-Bit-Werten gültige 32-Bit-Werte entstehen.
+- Anschließend wird der Buffer als 32-Bit-Integer interpretiert und als mehrdimensionales Array zurückgegeben.
+
+Die Funktion gibt zudem die Anzahl der Kanäle, die Abtastrate und die ursprüngliche Sample-Breite zurück.
+
+#### save_to_24bit_wav(chan_l, chan_r, sample_rate, path)
+Diese Funktion basiert auf **read_wav**. <br>
+Diese Funktion speichert zwei Audiokanäle (links und rechts) als 24-Bit-WAV-Datei. <br>
+- Die beiden Kanäle *chan_l* und *chan_r* werden zu einem Stereo-Array zusammengefügt. Erwartet wird, dass die Daten im Bereich [-1.0, 1.0] liegen (normalisierte Gleitkommazahlen).
+- Die Werte werden auf den gültigen Bereich begrenzt und anschließend in 24-Bit-Integer (als 32-Bit gespeichert) umgerechnet.
+- Die umgerechneten Integer-Werte werden in Bytes konvertiert, wobei nur die unteren 3 Byte (24 Bit) verwendet werden.
+- Anschließend wird die WAV-Datei im 24-Bit-Format erstellt: *Stereo*, *24 Bit*, *48000 kHz*
+- Die Rohdaten werden in die Datei geschrieben und die Datei gespeichert.
+
+Diese Funktion ist besonders nützlich, um Audiodaten aus numpy-Arrays im professionellen 24-Bit-Format zu exportieren.
+
+#### plot_simple_spectrum(frames, Fs, fft_size=2048, start=0)
+Diese Funktion erstellt ein einfaches Frequenzspektrum für die beiden Audiokanäle eines Signals, um die Auswirkung der Filter veranschaulichen zu können.
+- Es wird ein Signalabschnitt mit der Länge fft_size ab der angegebenen Startposition aus den Audiodaten (frames) ausgewählt.
+- Die Funktion betrachtet maximal zwei Kanäle (links und rechts) und entfernt jeweils den Gleichanteil (DC-Offset) vom Signal.
+- Es wird eine schnelle Fouriertransformation (FFT) durchgeführt, um das Frequenzspektrum zu berechnen.
+- Die Amplituden werden logarithmisch in dB dargestellt und normalisiert auf den Maximalwert im betrachteten Abschnitt.
+- Das Spektrum beider Kanäle wird in einem Diagramm logarithmisch auf der Frequenzachse dargestellt (x-Achse: 20 Hz bis Fs/2, y-Achse: −80 dB bis 0 dB).
+- Die Darstellung erfolgt farbig und halbtransparent zur besseren Unterscheidung der Kanäle.
+- Die Funktion zeigt das fertige Spektrum direkt an, inklusive Achsenbeschriftungen, Gitterlinien und Legende.
+
+#### plot_audio(frames, num_frames, channels, Fs)
+***Hinweis:*** *Diese Funktion wurde aus den Beispielen zu Audio aus den Pynq-Beispielen auf dem Board übernommen.* <br>
+Diese Funktion stellt die Audiodaten im Zeitbereich dar, getrennt für jeden Kanal.
+- Für jeden vorhandenen Kanal (z. B. links und rechts) wird eine eigene Grafik erzeugt.
+- Auf der x-Achse wird die Zeit in Sekunden dargestellt, basierend auf der Anzahl der Frames und der Abtastrate Fs.
+- Auf der y-Achse wird die Amplitude des Signals dargestellt.
+- Die Funktion erzeugt ein Liniendiagramm für den kompletten Signalverlauf pro Kanal.
+- Die Darstellung enthält eine Gitterlinie zur besseren Lesbarkeit und wird direkt angezeigt.
+
+
+
+# Audio Aufnahme und Ausgabe über Pynq-Z2
+### Lautstärke und Input
+Alle Funktionen zu den Audio Codec auf dem Pynq-Z2 lassen sich auf [Docs » pynq Package » pynq.lib Package » pynq.lib.audio Module](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html#pynq.lib.audio.AudioADAU1761.volume) finden. <br>
+
+- Mit *set_volume()* wird die Ausgangslautstärke eingestellt. Der Wertebereich reicht von 0 (−57 dB) bis 63 (+6 dB). Die Eingangslautstärke kann nicht geregelt werden und ist von der jeweiligen Signalquelle abhängig.
+- *select_line_in()* wählt den LINE_IN-Port auf dem Board als Audioeingang. Die Ausgabe erfolgt über den kombinierten Kopfhörer-/Mikrofonanschluss (HP+MIC).
+- *select_microphone()* wählt den MIC-Anschluss des Boards als Eingangsquelle. Dabei handelt es sich um einen Kombianschluss: Wird ein Headset angeschlossen, kann dessen Mikrofon als Eingang und die Kopfhörer als Ausgang verwendet werden. Sollten Ein- und Ausgang getrennt verwendet werden, ist ein entsprechender Splitter erforderlich.
+- *play()* gibt die aktuell im Puffer befindliche Audiodatei über den HP+MIC-Kombianschluss wieder.
+- *load(file)* lädt eine Audiodatei im .wav-Format in den internen Puffer. Die Datei sollte in 24-Bit bei 48 kHz Samplingrate vorliegen.
+- *record(sec)* zeichnet Audio über den Audiocontroller in den internen Puffer auf. Die Aufnahme erfolgt in 24-Bit bei einer Abtastrate von 48 kHz.
+- *save(file)* speichert den aktuellen Inhalt des Puffers als .wav-Datei.

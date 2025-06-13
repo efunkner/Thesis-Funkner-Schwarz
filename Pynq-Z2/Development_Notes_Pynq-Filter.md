@@ -122,6 +122,17 @@ Alle bisherigen Funktionen bleiben unverändert und funktionieren weiterhin wie 
 - Die Filterwirkung des Hochpassfilters bei einer Grenzfrequenz von 2500 Hz ist unbefriedigend, es werden zu viele Frequenzanteile abgeschnitten, was zu einem unsauberen Klang führen kann.
 - Beim Einsatz von Python-Bibliotheken wie matplotlib kommt es bei längeren Aufnahmen zu Instabilitäten im Python-Kernel. Eine Auslagerung der Auswertungen in ein separates Notebook ist daher geplant.
 
+# Stand : 13.06.2025
+### JupiterNotebooks:
+#### Lerndemo_v1_Audio
+Neues Notebook sowie eine aktualisierte Version von *my_Overlay_v2.py* mit erweiterten Funktionen für grafische Darstellung der Ergebnisse.
+- Enthält eine Funktion zur Darstellung eines einfachen Frequenzspektrums beider Audiokanäle auf Basis einer FFT.
+- Zusätzlich wurde eine Funktion integriert, die die Audiodaten im Zeitbereich visualisiert.
+
+### Bemerkungen:
+- Die maximale Aufnahmezeit beträgt 60 Sekunden und ist durch den Audio-Codec-Treiber begrenzt.
+- Die Ursache für Instabilitäten liegt vermutlich in einer Speicherüberlastung, bedingt durch die maximale Aufnahmezeit in Kombination mit zahlreichen geladenen Bibliotheken und Plot-Ausgaben, die gemeinsam den RAM überfüllen.
+- Eine empfohlene Aufnahmezeit von 30 Sekunden hat die Stabilität deutlich verbessert und auch die allgemeine Verarbeitungszeit des Notebooks reduziert.
 
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
@@ -134,9 +145,10 @@ Alle bisherigen Funktionen bleiben unverändert und funktionieren weiterhin wie 
 zienten für den FPGA.
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
-- ✅/❌ **JupiterNotebooks für Demonstration**
-- ✅✅/❌ **Skript zur Steuerung des Filters auf PYNQ.**
+- ✅✅/❌ **JupiterNotebooks für Demonstration**
+- ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
 - ✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
+- ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
  
 
 ## Zusatz:
