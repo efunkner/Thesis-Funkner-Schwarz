@@ -160,6 +160,16 @@
   <li><a href="#filter-1" id="toc-filter-1" class="nav-link" data-scroll-target="#filter-1">Filter:</a></li>
   <li><a href="#vivado-design" id="toc-vivado-design" class="nav-link" data-scroll-target="#vivado-design">Vivado Design:</a></li>
   <li><a href="#jupiternotebooks-1" id="toc-jupiternotebooks-1" class="nav-link" data-scroll-target="#jupiternotebooks-1">JupiterNotebooks:</a></li>
+  </ul></li>
+  <li><a href="#stand-12.06.2025" id="toc-stand-12.06.2025" class="nav-link" data-scroll-target="#stand-12.06.2025">Stand : 12.06.2025</a>
+  <ul class="collapse">
+  <li><a href="#jupiternotebooks-2" id="toc-jupiternotebooks-2" class="nav-link" data-scroll-target="#jupiternotebooks-2">JupiterNotebooks:</a></li>
+  <li><a href="#bemerkungen" id="toc-bemerkungen" class="nav-link" data-scroll-target="#bemerkungen">Bemerkungen:</a></li>
+  </ul></li>
+  <li><a href="#stand-13.06.2025" id="toc-stand-13.06.2025" class="nav-link" data-scroll-target="#stand-13.06.2025">Stand : 13.06.2025</a>
+  <ul class="collapse">
+  <li><a href="#jupiternotebooks-3" id="toc-jupiternotebooks-3" class="nav-link" data-scroll-target="#jupiternotebooks-3">JupiterNotebooks:</a></li>
+  <li><a href="#bemerkungen-1" id="toc-bemerkungen-1" class="nav-link" data-scroll-target="#bemerkungen-1">Bemerkungen:</a></li>
   <li><a href="#noch-offene-punkte" id="toc-noch-offene-punkte" class="nav-link" data-scroll-target="#noch-offene-punkte">Noch offene Punkte:</a></li>
   <li><a href="#bereits-erledigt" id="toc-bereits-erledigt" class="nav-link" data-scroll-target="#bereits-erledigt">Bereits erledigt:</a></li>
   <li><a href="#zusatz" id="toc-zusatz" class="nav-link" data-scroll-target="#zusatz">Zusatz:</a></li>
@@ -276,12 +286,52 @@
 <p>Das Notebook basiert auf einer früheren Version und unterscheidet sich hauptsächlich in der Anzahl der implementierten Filter. Es wurde dahingehend erweitert, dass einer der beiden Filter zur Laufzeit ausgewählt werden kann. Das Notebook diente zur Überprüfung der Funktionalität des Designs – der Test verlief erfolgreich, die korrekte Funktion konnte bestätigt werden.</p>
 </section>
 </section>
+</section>
+<section id="stand-12.06.2025" class="level1">
+<h1>Stand : 12.06.2025</h1>
+<section id="jupiternotebooks-2" class="level3">
+<h3 class="anchored" data-anchor-id="jupiternotebooks-2">JupiterNotebooks:</h3>
+<section id="audio_duo_filter_v2" class="level4">
+<h4 class="anchored" data-anchor-id="audio_duo_filter_v2">Audio_duo_Filter_v2</h4>
+<p>Aktualisierte Version von <em>Audio_duo_Filter_v1</em>. <br> Erweitert wurde das Projekt um eine Dokumentation der verwendeten Funktionen, sowohl der Pynq-eigenen als auch der selbst entwickelten. <br> Zudem wurde die Filterverarbeitung von 16-Bit auf vollständige 24-Bit erweitert. <br> Zur Überprüfung wurden die Phasenantworten des Hochpass- (HP) und Tiefpassfilters (TP) analysiert.</p>
+</section>
+<section id="audio_duo_filter_v3" class="level4">
+<h4 class="anchored" data-anchor-id="audio_duo_filter_v3">Audio_duo_Filter_v3</h4>
+<p>Die Funktionen wurden in eine separate Python-Datei (<em>my_Overlay.py</em>) ausgelagert, um die Übersichtlichkeit des Notebooks zu verbessern. Zusätzlich wurde eine neue Funktion integriert, die den gesamten Filterprozess, einschließlich Übertragung, Einlesen, Speichern sowie Filterauswahl, in einem einzigen Aufruf zusammenfasst. <br> Alle bisherigen Funktionen bleiben unverändert und funktionieren weiterhin wie zuvor.</p>
+</section>
+</section>
+<section id="bemerkungen" class="level3">
+<h3 class="anchored" data-anchor-id="bemerkungen">Bemerkungen:</h3>
+<ul>
+<li>Die Audioaufnahme über das Board ist nicht immer fehlerfrei.</li>
+<li>In seltenen Fällen tritt bei der Filterung ein Problem auf, bei dem starke Frequenzspitzen im Bereich von 10–20 kHz entstehen. Die Ursache dafür ist bislang unbekannt: beobachtet wurde dieses Verhalten bisher nur einmal beim Tiefpassfilter.</li>
+<li>Die Filterwirkung des Hochpassfilters bei einer Grenzfrequenz von 2500 Hz ist unbefriedigend, es werden zu viele Frequenzanteile abgeschnitten, was zu einem unsauberen Klang führen kann.</li>
+<li>Beim Einsatz von Python-Bibliotheken wie matplotlib kommt es bei längeren Aufnahmen zu Instabilitäten im Python-Kernel. Eine Auslagerung der Auswertungen in ein separates Notebook ist daher geplant.</li>
+</ul>
+</section>
+</section>
+<section id="stand-13.06.2025" class="level1">
+<h1>Stand : 13.06.2025</h1>
+<section id="jupiternotebooks-3" class="level3">
+<h3 class="anchored" data-anchor-id="jupiternotebooks-3">JupiterNotebooks:</h3>
+<section id="lerndemo_v1_audio" class="level4">
+<h4 class="anchored" data-anchor-id="lerndemo_v1_audio">Lerndemo_v1_Audio</h4>
+<p>Neues Notebook sowie eine aktualisierte Version von <em>my_Overlay_v2.py</em> mit erweiterten Funktionen für grafische Darstellung der Ergebnisse. - Enthält eine Funktion zur Darstellung eines einfachen Frequenzspektrums beider Audiokanäle auf Basis einer FFT. - Zusätzlich wurde eine Funktion integriert, die die Audiodaten im Zeitbereich visualisiert.</p>
+</section>
+</section>
+<section id="bemerkungen-1" class="level3">
+<h3 class="anchored" data-anchor-id="bemerkungen-1">Bemerkungen:</h3>
+<ul>
+<li>Die maximale Aufnahmezeit beträgt 60 Sekunden und ist durch den Audio-Codec-Treiber begrenzt.</li>
+<li>Die Ursache für Instabilitäten liegt vermutlich in einer Speicherüberlastung, bedingt durch die maximale Aufnahmezeit in Kombination mit zahlreichen geladenen Bibliotheken und Plot-Ausgaben, die gemeinsam den RAM überfüllen.</li>
+<li>Eine empfohlene Aufnahmezeit von 30 Sekunden hat die Stabilität deutlich verbessert und auch die allgemeine Verarbeitungszeit des Notebooks reduziert.</li>
+</ul>
+</section>
 <section id="noch-offene-punkte" class="level2">
 <h2 class="anchored" data-anchor-id="noch-offene-punkte">Noch offene Punkte:</h2>
 <ul>
 <li>❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien (.wav)</li>
 <li>❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board</li>
-<li>❌ JupiterNotebooks für Demonstration</li>
 <li>❌ Umrechnung der Samplerate für externe <em>.wav</em>-Datein (44.1 -&gt; 48kHz)</li>
 </ul>
 </section>
@@ -291,8 +341,10 @@
 <li>✅/❌ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi- zienten für den FPGA.</li>
 <li>✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1</li>
 <li>✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.</li>
-<li>✅/❌ Skript zur Steuerung des Filters auf PYNQ.</li>
-<li><strong>✅✅/❌❌ Realesierung der 4 Basisfilter (<em>HP, TP, BS, BP</em>)</strong></li>
+<li>✅✅/❌ <strong>JupiterNotebooks für Demonstration</strong></li>
+<li>✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.</li>
+<li>✅✅/❌❌ Realesierung der 4 Basisfilter (<em>HP, TP, BS, BP</em>)</li>
+<li>✅ <strong>Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.</strong></li>
 </ul>
 </section>
 <section id="zusatz" class="level2">
