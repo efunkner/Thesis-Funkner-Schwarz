@@ -103,14 +103,41 @@ Die Timings im Design wurden erfolgreiuch eingehalten.
 Das Notebook basiert auf einer früheren Version und unterscheidet sich hauptsächlich in der Anzahl der implementierten Filter. Es wurde dahingehend erweitert, dass einer der beiden Filter zur Laufzeit ausgewählt werden kann.
 Das Notebook diente zur Überprüfung der Funktionalität des Designs – der Test verlief erfolgreich, die korrekte Funktion konnte bestätigt werden.
 
+# Stand : 12.06.2025
+### JupiterNotebooks:
+#### Audio_duo_Filter_v2
+Aktualisierte Version von *Audio_duo_Filter_v1*. <br>
+Erweitert wurde das Projekt um eine Dokumentation der verwendeten Funktionen, sowohl der Pynq-eigenen als auch der selbst entwickelten. <br>
+Zudem wurde die Filterverarbeitung von 16-Bit auf vollständige 24-Bit erweitert. <br>
+Zur Überprüfung wurden die Phasenantworten des Hochpass- (HP) und Tiefpassfilters (TP) analysiert.
 
+#### Audio_duo_Filter_v3
+Die Funktionen wurden in eine separate Python-Datei (*my_Overlay.py*) ausgelagert, um die Übersichtlichkeit des Notebooks zu verbessern.
+Zusätzlich wurde eine neue Funktion integriert, die den gesamten Filterprozess, einschließlich Übertragung, Einlesen, Speichern sowie Filterauswahl, in einem einzigen Aufruf zusammenfasst. <br>
+Alle bisherigen Funktionen bleiben unverändert und funktionieren weiterhin wie zuvor.
 
+### Bemerkungen:
+- Die Audioaufnahme über das Board ist nicht immer fehlerfrei.
+- In seltenen Fällen tritt bei der Filterung ein Problem auf, bei dem starke Frequenzspitzen im Bereich von 10–20 kHz entstehen. Die Ursache dafür ist bislang unbekannt: beobachtet wurde dieses Verhalten bisher nur einmal beim Tiefpassfilter.
+- Die Filterwirkung des Hochpassfilters bei einer Grenzfrequenz von 2500 Hz ist unbefriedigend, es werden zu viele Frequenzanteile abgeschnitten, was zu einem unsauberen Klang führen kann.
+- Beim Einsatz von Python-Bibliotheken wie matplotlib kommt es bei längeren Aufnahmen zu Instabilitäten im Python-Kernel. Eine Auslagerung der Auswertungen in ein separates Notebook ist daher geplant.
+
+# Stand : 13.06.2025
+### JupiterNotebooks:
+#### Lerndemo_v1_Audio
+Neues Notebook sowie eine aktualisierte Version von *my_Overlay_v2.py* mit erweiterten Funktionen für grafische Darstellung der Ergebnisse.
+- Enthält eine Funktion zur Darstellung eines einfachen Frequenzspektrums beider Audiokanäle auf Basis einer FFT.
+- Zusätzlich wurde eine Funktion integriert, die die Audiodaten im Zeitbereich visualisiert.
+
+### Bemerkungen:
+- Die maximale Aufnahmezeit beträgt 60 Sekunden und ist durch den Audio-Codec-Treiber begrenzt.
+- Die Ursache für Instabilitäten liegt vermutlich in einer Speicherüberlastung, bedingt durch die maximale Aufnahmezeit in Kombination mit zahlreichen geladenen Bibliotheken und Plot-Ausgaben, die gemeinsam den RAM überfüllen.
+- Eine empfohlene Aufnahmezeit von 30 Sekunden hat die Stabilität deutlich verbessert und auch die allgemeine Verarbeitungszeit des Notebooks reduziert.
 
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board
-- ❌ JupiterNotebooks für Demonstration
 - ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
 
 ## Bereits erledigt:
@@ -118,8 +145,11 @@ Das Notebook diente zur Überprüfung der Funktionalität des Designs – der Te
 zienten für den FPGA.
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
-- ✅/❌ Skript zur Steuerung des Filters auf PYNQ.
-- **✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)** 
+- ✅✅/❌ **JupiterNotebooks für Demonstration**
+- ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
+- ✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
+- ✅ **Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.**
+ 
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
