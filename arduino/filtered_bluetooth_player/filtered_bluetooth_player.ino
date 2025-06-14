@@ -7,20 +7,19 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLibs/AudioBoardStream.h"
-#include "AudioTools/AudioLibs/AudioRealFFT.h"
 #include "BluetoothA2DPSinkQueued.h"
 
-//Board Setup
+// --- Board Setup ---
 AudioInfo info(44100, 2, 16);
 AudioBoardStream lyrat(LyratV43);
 
-//Filtered Stream
+// --- Filtered Stream ---
 FilteredStream<int16_t, float> filtered(lyrat, info.channels);
 
-//Bluetooth Stream
-BluetoothA2DPSink a2dp_sink(filtered);
+// --- Bluetooth Stream ---
+BluetoothA2DPSinkQueued a2dp_sink(filtered);
 
-//Filter Coefficients
+// --- Filter Koeffizienten ---
 const float b_0 = 0.07033f;
 const float b_1 = -0.138;
 const float b_2 = 0.07033f;
@@ -33,26 +32,27 @@ const float gain = 1.00f;
 const float b_coefficients[] = { b_0, b_1, b_2};
 const float a_coefficients[] = { a_0, a_1, a_2};
 
-//Arduino Setup
+// --- Setup ---
 void setup() {
-    //Beginn Serial and Board info
+    // --- Serial und Board starten ---
     Serial.begin(115200);
     AudioDriverLogger.begin(Serial, AudioDriverLogLevel::Info);
 
-    //Start I2S
+    // --- I2S beginnen ---
     auto config = lyrat.defaultConfig(TX_MODE);
     config.copyFrom(info);
     lyrat.begin(config);
 
 
-    //setup Filters for both Channels
+    // --- Filters für beide Kanäle aufsetzen ---
     filtered.setFilter(0, new BiQuadDF1<float>(b_coefficients, a_coefficients, gain));
     filtered.setFilter(1, new BiQuadDF1<float>(b_coefficients, a_coefficients, gain));
 
-    //Start Bluetooth
+    // --- Starte Bluetooth ---
     a2dp_sink.set_auto_reconnect(true);
     a2dp_sink.start("LyratV43");
 }
 
 void loop() {
+
 }
