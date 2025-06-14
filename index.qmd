@@ -1,0 +1,57 @@
+---
+title: "Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen"
+author:
+  - name: Eduard Funkner
+    orcid: 
+    email: efunkner@stud.hs-bremen.de
+    corresponding: true
+    roles: "Lead author"
+    affiliation:
+      - name: Hochschule Bremen - City University of Applied Sciences (HSB)
+        city: Bremen
+        state: Germany
+        url: https://www.hs-bremen.de  
+  - name: Martin Schwarz
+    orcid: 
+    email: mschwarz@stud.hs-bremen.de
+    corresponding: true
+    roles: "Lead author"
+
+date: last-modified
+license: "Apache-2.0 license"
+bibliography: refs.bib
+reader-mode: true
+
+page-footer:
+left: |
+    Bachelor Thesis (B.Eng.) Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen.
+right: |
+    This report was built with <a href="https://quarto.org/">Quarto</a>.
+---
+
+# Einführung
+Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen Filtern auf Mikrocontrollern sowie FPGAs.
+
+# IIR - Filter zweiter Ordnung (Biquadratische Filter)
+
+
+
+$$
+H(z) = \frac{Y(z)}{X(z)} = \frac{\sum_{k=0}^{M} b_k z^{-k}}{1 + \sum_{k=1}^{N} a_k z^{-k}}
+$$
+
+---
+
+### 💡 Gleichung 4: Zustandsform / Direktform II (transponiert)
+
+```markdown
+```{=tex}
+\begin{aligned}
+w[n] &= x[n] - a_1 w[n-1] - a_2 w[n-2] \\
+y[n] &= b_0 w[n] + b_1 w[n-1] + b_2 w[n-2]
+\end{aligned}
+
+# Bilineartransformation
+Mittels der Bilineartransformation ist es möglich einen bestehenden analogen Filter, anhand seiner Übertragungsfunktion zu digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.
+
+

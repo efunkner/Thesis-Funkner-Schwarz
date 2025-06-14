@@ -37,14 +37,43 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-58d60837e5c3cc41aed2b21062153a0f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta name="citation_title" content="Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen">
 <meta name="citation_author" content="Eduard Funkner">
 <meta name="citation_author" content="Martin Schwarz">
-<meta name="citation_publication_date" content="2025-06-10">
-<meta name="citation_cover_date" content="2025-06-10">
+<meta name="citation_publication_date" content="2025-06-14">
+<meta name="citation_cover_date" content="2025-06-14">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-06-10">
+<meta name="citation_online_date" content="2025-06-14">
 <meta name="citation_language" content="de">
 </head>
 
@@ -84,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
                 <div>
             <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">10. Juni 2025</p>
+              <p class="date">14. Juni 2025</p>
             </div>
           </div>
           
@@ -105,16 +134,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
-  <li><a href="#zielsetzung-und-vorgehen" id="toc-zielsetzung-und-vorgehen" class="nav-link" data-scroll-target="#zielsetzung-und-vorgehen">Zielsetzung und Vorgehen</a></li>
-  <li><a href="#signalverarbeitung-auf-microcontroller-esp32" id="toc-signalverarbeitung-auf-microcontroller-esp32" class="nav-link" data-scroll-target="#signalverarbeitung-auf-microcontroller-esp32">Signalverarbeitung auf Microcontroller (ESP32)</a></li>
-  <li><a href="#signalverabreitung-auf-fpga-pynq" id="toc-signalverabreitung-auf-fpga-pynq" class="nav-link" data-scroll-target="#signalverabreitung-auf-fpga-pynq">Signalverabreitung auf FPGA (PYNQ)</a>
+  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a>
   <ul class="collapse">
-  <li><a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a></li>
-  <li><a href="#vhdl" id="toc-vhdl" class="nav-link" data-scroll-target="#vhdl">VHDL</a></li>
+  <li><a href="#iir-filter-zweiter-ordnung" id="toc-iir-filter-zweiter-ordnung" class="nav-link" data-scroll-target="#iir-filter-zweiter-ordnung">IIR-Filter zweiter Ordnung</a></li>
   </ul></li>
+  <li><a href="#differenzengleichung" id="toc-differenzengleichung" class="nav-link" data-scroll-target="#differenzengleichung">Differenzengleichung</a></li>
+  <li><a href="#übertragungsfunktion" id="toc-übertragungsfunktion" class="nav-link" data-scroll-target="#übertragungsfunktion">Übertragungsfunktion</a></li>
+  <li><a href="#directform-1-2-und-transponiert" id="toc-directform-1-2-und-transponiert" class="nav-link" data-scroll-target="#directform-1-2-und-transponiert">Directform 1, 2 und transponiert</a></li>
+  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation">Bilineartransformation</a></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="Pynq-Z2/Audio_Reference_Design-preview.html"><i class="bi bi-journal-code"></i>Audio Reference Design</a></li><li><a href="jupyter/Pynq/Audio_Filter_Test_v2/Codec_Test_v6-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/bilinear-preview.html"><i class="bi bi-journal-code"></i>bilinear.ipynb</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v5-preview.html"><i class="bi bi-journal-code"></i>Matlab_Filter_Test_TransmissionTest_v5.ipynb</a></li><li><a href="Pynq-Z2/Development_Notes_Pynq-Filter-preview.html"><i class="bi bi-journal-code"></i>Notiezen und Information zu dem Entwiklungsstatus</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2-preview.html"><i class="bi bi-journal-code"></i>Warum Padding wichtig ist</a></li></ul></div></nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="Pynq-Z2/Audio_Reference_Design-preview.html"><i class="bi bi-journal-code"></i>Audio Reference Design</a></li><li><a href="jupyter/Pynq/Lerndemo_v1/Lerndemo_v1_Audio-preview.html"><i class="bi bi-journal-code"></i>Aufnahme und Wiedergabe</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v1-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/Pynq/Audio_Filter_Test_v2/Codec_Test_v6-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/bilinear-preview.html"><i class="bi bi-journal-code"></i>bilinear.ipynb</a></li><li><a href="Pynq-Z2/Notebook_Funktionen-preview.html"><i class="bi bi-journal-code"></i>Funktionen im Notebook:</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v5-preview.html"><i class="bi bi-journal-code"></i>Matlab_Filter_Test_TransmissionTest_v5.ipynb</a></li><li><a href="Pynq-Z2/Development_Notes_Pynq-Filter-preview.html"><i class="bi bi-journal-code"></i>Notiezen und Information zu dem Entwiklungsstatus</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v2-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v3-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2-preview.html"><i class="bi bi-journal-code"></i>Warum Padding wichtig ist</a></li></ul></div></nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
@@ -127,37 +156,39 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="einführung" class="level1">
 <h1>Einführung</h1>
-<p>In der Welt der Elektrotechnik werden Signale verschiedener Arten gesendet und empfangen. Es wird zwischen kontinuierlichen analogen Signalen und diskretisierten digitalen Signalen differenziert. Ein analoges Signal könnte eine Tonspur, welche von einem Mikrofon aufgenommen wurde sein. Bei digitalen Signalen werden Bitfolgen gesendet die Information enthalten. Diese Bitfolge könnte eine E-Mail sein.</p>
-<p>Um diese Signale nutzen zu können müssen diese zuvor gefiltert und verarbeitet werden. Die Filterung dieser Signale erfolgt durch digitale oder analoge Filter. Abhängig von der Anwendung werden spezifischen Filter implementiert. Die Frequenzbereiche der Signale können Mittels dieser Filter verstärkt oder gedämpft werden damit diese dann weiterverarbeitet werden können.</p>
+<p>Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Demonstration werden digitale Biquad-Filter entworfen und auf einem ESP Lyrat V4.3 sowie einem PYNQZ2 implementiert. Die Filter werden mittels Matlab- sowie Pythontools entworfen.</p>
+<section id="iir-filter-zweiter-ordnung" class="level2">
+<h2 class="anchored" data-anchor-id="iir-filter-zweiter-ordnung">IIR-Filter zweiter Ordnung</h2>
+<p>Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. Grundlegend zeichnen sich IIR-Filter durch ihre characteristik aus, bei der Berechnung des aktuellen Ausgangssingals durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.</p>
+<p>Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfter Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.</p>
+<p>Biquadratische Filter, kurz als “Biquad” bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die möglichkeit komplexe IIR-Filter höhrer Ordnung auf einfache Weise zu realsieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.</p>
 </section>
-<section id="zielsetzung-und-vorgehen" class="level1">
-<h1>Zielsetzung und Vorgehen</h1>
-<pre><code> Implementierung digitaler Filter auf DSP
- Lerndemonstration von der digitalen Signalverarbeitung auf DSP</code></pre>
 </section>
-<section id="signalverarbeitung-auf-microcontroller-esp32" class="level1">
-<h1>Signalverarbeitung auf Microcontroller (ESP32)</h1>
-<p>Zur Implementierung der digitalen Filter, auf Mikrocontrollern, wird ein ESP32 verwendet.</p>
-<p>Spezifisch für Audioanwendungen werden Audioboards, wie das ESP Lyrat Mini oder ESP Lyrat 4.3 genutzt. Diese Boards verfügen über Audiocodecs, welche analoge Signale in ein digitales Format konvertieren können. Die Datenübertragung zwischen den Codecs und dem ESP32 geschiet über I2S. Dieser I2S Datenstrom kann auf dem ESP32 verarbeitet und auf der SD Karte der Board gespeichert werden. Über diese Audioboards soll eine analoges Signal in Form von Sprache aufgenommen werden, von dem ESP32 mit den digitalen Filtern gefiltert werden und anschließend abgespielt, oder auf einer SD Karte gespeichert werden. Außerdem sollen Audio Dateien von einer SD ausgelesen, gefiltert und abgespielt werden.</p>
-<p>Der Audiofilter (Biquad) wird aus dem Skript Digital Signal Processing Lecuture von S. Spors entnommen und in Arduino, sowie Micropython auf dem ESP32 implementiert.</p>
-<p>Zur Hilfe werden von P.Schatzmann die GitHub Repositorien für die Audio Tools sowie Audio Driver genutzt, um die Implementierung in Arduino durchzuführen.</p>
+<section id="differenzengleichung" class="level1">
+<h1>Differenzengleichung</h1>
+<p>Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Differenzengleichung des Biquad-Filters:</p>
+<p><span class="math display">\[
+y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
+\]</span></p>
+<p>Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zur Zeit <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert: <span class="math display">\[
+y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
+\]</span></p>
 </section>
-<section id="signalverabreitung-auf-fpga-pynq" class="level1">
-<h1>Signalverabreitung auf FPGA (PYNQ)</h1>
-<p>Bevor ein Filter in Hardware implementiert werden kann, muss er zunächst entworfen werden. Dabei ist zu entscheiden, welche Art digitaler Filter zum Einsatz kommen soll. Für Audioanwendungen eignen sich insbesondere linearphasige Filter. Besonders FIR-Filter werden häufig verwendet, da sie eine konstante Gruppenlaufzeit aufweisen.</p>
-<p>IIR-Filter bieten zwar eine kürzere Gruppenverzögerung, sind jedoch aufgrund ihrer nicht konstanten Gruppenlaufzeit anfälliger für Verzerrungen. Zudem sind FIR-Filter in der Regel einfacher zu realisieren. Ein FIR-Filter kann entweder mit Tools wie dem fdatool in MATLAB entworfen oder aus einem Prototypenfilter abgeleitet werden, häufig aus einem IIR-Filter mit den gewünschten Eigenschaften.</p>
-<p>Im nächsten Schritt wird das PYNQ-Z2 vorbereitet. Dazu muss die erforderliche Software auf einem PC installiert werden, einschließlich aller notwendigen Bibliotheken und Module für die Programmierung sowohl mit VHDL.</p>
-<p>Anschließend wird das Board in Betrieb genommen, um sich mit seiner Funktionsweise vertraut zu machen. Dazu wird erster Testcode aufgespielt. Dieser Schritt dient dazu, ein grundlegendes Verständnis der Hardware zu erlangen und eine bessere Vorstellung der Umsetzungsmöglichkeiten zu bekommen.</p>
-<p>Danach wird zunächst ein Audiosignal in das Board eingespeist und ohne Filterung wieder ausgegeben. Dies dient dazu, sich mit dem Board vertraut zu machen und sicherzustellen, dass die Einspeisung und Ausgabe von Audio grundlegend beherrscht wird.</p>
-<p>Anschließend werden die Filter entworfen. (Mit dem fdatool in MATLAB lassen sich die Filter auswahl des Typens und den Koeffizeinten direkt für andere Anwendungen wie VHDL umsetzten)</p>
-<section id="jupyter-notebooks" class="level2">
-<h2 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h2>
-<p>Das PYNQ-Z2 verfügt über ein eigenes Betriebssystem, das zunächst eingerichtet werden muss. Dieses enthält eine Jupyter-Notebook-Umgebung, über die das Board konfiguriert und dokumentiert werden kann. Zudem sind Beispielprojekte verfügbar. Der Zugriff auf das Board erfolgt remote über die IP-Adresse. Das Dateisystem ist über denselben Weg im Datei-Explorer erreichbar. Zusätzlich steht ein Jupyter-Terminal zur Verfügung. Um mit dem Laptop arbeiten zu können, sollte das Board entsprechend eingerichtet werden. Es empfiehlt sich, den Setup-Guide vollständig durchzugehen.</p>
+<section id="übertragungsfunktion" class="level1">
+<h1>Übertragungsfunktion</h1>
+<p>Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert: <span class="math display">\[
+H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
+\]</span> Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang im Frequenzbereich beschrieben. Um die Stabilität des Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen.</p>
 </section>
-<section id="vhdl" class="level2">
-<h2 class="anchored" data-anchor-id="vhdl">VHDL</h2>
-<p>In VHDL müssen alle erforderlichen Top-Module für das Board entweder geschrieben oder bestehende Module eingebunden werden. Dabei wird unter anderem die Portzuweisung vorgenommen. Anschließend wird der Filter selbst in VHDL implementiert und mithilfe von VIVADO synthetisiert. Nach der Synthese wird der Bitstream für das Board generiert.</p>
+<section id="directform-1-2-und-transponiert" class="level1">
+<h1>Directform 1, 2 und transponiert</h1>
+<p>Differenzengleichung der Direktform 1: <span class="math inline">\(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)</span> <span class="math inline">\(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2\)</span></p>
+<p>Differenzengleichung der Direktform 2: <span class="math inline">\(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)</span> <span class="math inline">\(w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]\)</span></p>
+<p>Differenzengleichung der transponierten Direktform 2: <span class="math inline">\(y[n] = b_0 x[n] + s_1[n-1]\)</span> <span class="math inline">\(s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]\)</span> <span class="math inline">\(s_2[n] = b_2 x[n] - a_2 y[n]\)</span></p>
 </section>
+<section id="bilineartransformation" class="level1">
+<h1>Bilineartransformation</h1>
+<p>Mittels der Bilineartransformation ist es möglich einen bestehenden analogen Filter, anhand seiner Übertragungsfunktion zu digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.</p>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main>
