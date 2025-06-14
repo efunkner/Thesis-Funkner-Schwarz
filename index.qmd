@@ -42,43 +42,40 @@ Biquadratische Filter, kurz als "Biquad" bezeichnet, sind eine spezielle Unterkl
 # Differenzengleichung
 Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Differenzengleichung des Biquad-Filters:
 
-\begin{aligned}
-y[n] &=  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
-\end{aligned}
+$$
+y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
+$$
 
 Der Wert $y[n]$ bezeichnet den Ausgabewert zur Zeit $n$, während $x[n]$ den Eingangswert darstellt. Der aktuelle Ausgabewert $y[n]$ ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten $b_0$, $b_1$ und $b_2$ bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während $a_1$ und $a_2$ den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf $a_0$ auf 1 normiert:
-\begin{aligned}
-y[n] &= b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\end{aligned}
+$$
+y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
+$$
 
 
 # Übertragungsfunktion
 Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert:
-\begin{aligned}
+$$
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
-\end{aligned}
+$$
 Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang im Frequenzbereich beschrieben. Um die Stabilität des Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen.
 
 # Directform 1, 2 und transponiert
 
 Differenzengleichung der Direktform 1:
-\begin{aligned}
-y[n] &= w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2] \\
-w[n] &= b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 
-\end{aligned}
+$y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]$
+$w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2$
+
 
 Differenzengleichung der Direktform 2:
-\begin{aligned}
-y[n] &= b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\\
-w[n] &= x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]
-\end{aligned}
+$y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]$
+$w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]$
+
 
 Differenzengleichung der transponierten Direktform 2:
-\begin{aligned}
-y[n] &= b_0 x[n] + s_1[n-1]\\
-s_1[n] &= s_2[n - 1] + b_1 x[n] - a_1 y[n]\\
-s_2[n] &= b_2 x[n] - a_2 y[n]
-\end{aligned}
+$y[n] = b_0 x[n] + s_1[n-1]$
+$s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]$
+$s_2[n] = b_2 x[n] - a_2 y[n]$
+
 
 
 

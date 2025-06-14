@@ -167,40 +167,24 @@ window.Quarto = {
 <section id="differenzengleichung" class="level1">
 <h1>Differenzengleichung</h1>
 <p>Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Differenzengleichung des Biquad-Filters:</p>
-<span class="math display">\[\begin{aligned}
-y[n] &amp;=  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
-\end{aligned}\]</span>
-Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zur Zeit <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert:
-<span class="math display">\[\begin{aligned}
-y[n] &amp;= b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\end{aligned}\]</span>
+<p><span class="math display">\[
+y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
+\]</span></p>
+<p>Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zur Zeit <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert: <span class="math display">\[
+y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
+\]</span></p>
 </section>
 <section id="übertragungsfunktion" class="level1">
 <h1>Übertragungsfunktion</h1>
-Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert:
-<span class="math display">\[\begin{aligned}
+<p>Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert: <span class="math display">\[
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
-\end{aligned}\]</span>
-<p>Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang im Frequenzbereich beschrieben. Um die Stabilität des Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen.</p>
+\]</span> Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang im Frequenzbereich beschrieben. Um die Stabilität des Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen.</p>
 </section>
 <section id="directform-1-2-und-transponiert" class="level1">
 <h1>Directform 1, 2 und transponiert</h1>
-Differenzengleichung der Direktform 1:
-<span class="math display">\[\begin{aligned}
-y[n] &amp;= w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2] \\
-w[n] &amp;= b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2
-\end{aligned}\]</span>
-Differenzengleichung der Direktform 2:
-<span class="math display">\[\begin{aligned}
-y[n] &amp;= b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\\
-w[n] &amp;= x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]
-\end{aligned}\]</span>
-Differenzengleichung der transponierten Direktform 2:
-<span class="math display">\[\begin{aligned}
-y[n] &amp;= b_0 x[n] + s_1[n-1]\\
-s_1[n] &amp;= s_2[n - 1] + b_1 x[n] - a_1 y[n]\\
-s_2[n] &amp;= b_2 x[n] - a_2 y[n]
-\end{aligned}\]</span>
+<p>Differenzengleichung der Direktform 1: <span class="math inline">\(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)</span> <span class="math inline">\(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2\)</span></p>
+<p>Differenzengleichung der Direktform 2: <span class="math inline">\(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)</span> <span class="math inline">\(w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]\)</span></p>
+<p>Differenzengleichung der transponierten Direktform 2: <span class="math inline">\(y[n] = b_0 x[n] + s_1[n-1]\)</span> <span class="math inline">\(s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]\)</span> <span class="math inline">\(s_2[n] = b_2 x[n] - a_2 y[n]\)</span></p>
 </section>
 <section id="bilineartransformation" class="level1">
 <h1>Bilineartransformation</h1>
