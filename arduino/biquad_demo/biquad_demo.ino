@@ -35,7 +35,7 @@ class BiquadFilterDF1 : public Filter
   {
     float x_2 = x_1;
     x_1 = x_0;
-
+    
     float y_0 = b_0 * x_0 + b_1 * x_1 + b_2 * x_2 - a_1 * y_1 - a_2 * y_2;
     
     y_2 = y_1;
@@ -152,7 +152,7 @@ const float gain = 1;
 
 BiquadFilterTDF2 biquad(b_coefficients, a_coefficients, gain);
 
-//--------------------------------------------------------------------------------------
+//==================================================================================================================================================================================
 // Parameter für das Rechtecksignal
 const float amplitudeHigh = 0.2;
 const float amplitudeLow = -0.2;
@@ -161,7 +161,7 @@ const unsigned long halfPeriod = period / 2;
 
 unsigned long lastToggleTime = 0;
 float signalValue = amplitudeHigh;
-//--------------------------------------------------------------------------------------
+//==================================================================================================================================================================================
 
 void setup() {
   Serial.begin(1200);
