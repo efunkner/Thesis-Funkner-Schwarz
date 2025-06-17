@@ -1,0 +1,6 @@
+vlib work
+vcom  Butter_HP_4_2500_v1_2_src_BiquadDF2Section1.vhd
+vcom  Butter_HP_4_2500_v1_2_src_Biquad_Filter.vhd
+vcom  Butter_HP_4_2500_v1_2_src_BiquadDF2Section1_block.vhd
+vcom  Butter_HP_4_2500_v1_2_src_Biquad_Filter1.vhd
+vcom  Butter_HP_4_2500_v1_2_src_Biquad_Filtrer.vhd
