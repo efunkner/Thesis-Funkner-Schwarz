@@ -134,6 +134,35 @@ Neues Notebook sowie eine aktualisierte Version von *my_Overlay_v2.py* mit erwei
 - Die Ursache für Instabilitäten liegt vermutlich in einer Speicherüberlastung, bedingt durch die maximale Aufnahmezeit in Kombination mit zahlreichen geladenen Bibliotheken und Plot-Ausgaben, die gemeinsam den RAM überfüllen.
 - Eine empfohlene Aufnahmezeit von 30 Sekunden hat die Stabilität deutlich verbessert und auch die allgemeine Verarbeitungszeit des Notebooks reduziert.
 
+# Stand : 17.06.2025
+### Echtzeitfiltrierung 2
+#### Analyse zur Anbindung des I2S RX/TX
+Es ist gelungen, die LogiCORE I2S Transmitter (TX) und Receiver (RX) IPs gemäß dem [Product Guide PG308](https://docs.amd.com/r/en-US/pg308-i2s) korrekt in den I2S-Audiostream des Audio-Codecs einzubinden.<br>
+Entgegen der offiziellen Dokumentation, die den Slave-Modus nicht unterstützt, konnten sowohl RX als auch TX im Slave-Modus betrieben werden, indem innerhalb von Vivado entsprechende Block-Property-Einstellungen vorgenommen wurden. Der Audio-Codec-Controller agiert dabei als Master für *bclk* und *lrclk*.<br>
+Die Initialisierung der RX/TX-IPs erfolgte aus einem Jupyter Notebook, indem spezifische Registeradressen gemäß dem Datenblatt gesetzt wurden. Der RX erhielt dabei Samplerate und Enable, beim TX reichte das Setzen des Enable-Registers.<br>
+
+#### Funktionstest & Filtereinbindung
+Zunächst wurde eine direkte Verbindung zwischen RX und TX über AXI-Stream hergestellt, was zu korrekter Audioausgabe führte, unabhängig davon, ob RX/TX vor oder nach dem Codec-Controller eingebunden wurden.<br>
+Als nächstes wurde der eigene Biquad-Filter-IP zwischen RX und TX eingefügt. Ab diesem Punkt war die Audioausgabe zwar noch vorhanden, jedoch kaum hörbar und scheinbar ungefiltert. Die eigene Biquad-Filter-IP nutzt dabei den fertigen [Biquad Filter](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html) aus DSP HDL Toolbox / Filtering in Matlab. <br>
+Um den Fehler einzugrenzen, wurde eine neue, vereinfachte IP mit HDL Coder in Simulink erstellt, ein reiner Bypass ohne jegliche Filterlogik. Dennoch blieb die Ausgabe gleich leise. Dies deutet darauf hin, dass der Filter selbst nicht Ursache des Problems ist.
+
+#### Weitere Tests
+- Verschiedene Datenformate wurden getestet: int32, uint32, ufix inkl. Shifts und Gains – ohne nennenswerte Wirkung.
+- Ein Gain-Block in der IP änderte die Lautstärke nicht.
+- Ein [AXI4-Stream Data FIFO](https://docs.amd.com/r/en-US/pg085-axi4stream-infrastructure/AXI4-Stream-Data-FIFO?tocId=gyNUSa81sSudIrD3MNZ6aw) zwischen RX und TX hingegen führte zu normaler Lautstärke – auch ohne Verarbeitung.
+- Eine eigene IP als Bypass und gleicher Puffergröße wie der FIFO führte nicht zum selben Ergebnis: Der Fehler liegt nicht nur an der Puffergröße.
+
+####  Vermutete Ursache
+- Die durch HDL Coder erzeugte AXI-Stream-Implementierung scheint in ihrer minimalen Version *(TVALID, TDATA, generiertes TREADY)* nicht alle Timing- oder Handshakebedingungen zu erfüllen, wie sie vom TX erwartet werden.
+- Das optionale Signal TID[2:0], das bei RX und TX zur Unterscheidung der Kanäle dient, wird von der eigenen IP nicht verarbeitet. Auch das externe Durchreichen von TID brachte keine Verbesserung.
+- Da die Filter-IP in Kombination mit AXI-DMA korrekt funktioniert, liegt das Problem wahrscheinlich in der AXI-Kommunikation, nicht im Filter selbst.
+
+#### Fazit der Echtzeitfiltrierung
+Die Umsetzung der Audio-Echtzeitverarbeitung , zeigte deutliche Einschränkungen. Zwar funktionierten der I2S Receiver und Transmitter einwandfrei in einer Direktverbindung, doch beim Einschleifen der eigenen IP kam es unabhängig von Datentyp oder Filterlogik zu einem stark gedämpften Ausgangssignal. Auch bei Verwendung eines einfachen Bypasses ohne jegliche Verarbeitung blieb das Signal zu leise, ein Hinweis darauf, dass nicht die Filterimplementierung, sondern die AXI-Stream-Schnittstelle der IP selbst das Problem darstellt.<br>
+Um das Verhalten korrekt umzusetzen, wäre eine vollwertige, AXI-konforme Implementierung nötig,  inklusive Pufferung, Signalweiterleitung und detaillierter Kontrolle über die Handshake-Logik. <br>
+Die Erstellung einer solchen IP erfordert jedoch fortgeschrittene Kenntnisse im AXI-Protokoll sowie zusätzliche manuelle Anpassungen, die über die Möglichkeiten der automatisierten HDL-Generierung hinausgehen.<br>
+Da der Schwerpunkt auf der Implementierung des Filters liegt und nicht auf der Low-Level-AXI-Implementierung, wurde entschieden, für weitere Tests und Anwendungen den bewährten Weg über AXI DMA zu nutzen.
+
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
@@ -145,10 +174,10 @@ Neues Notebook sowie eine aktualisierte Version von *my_Overlay_v2.py* mit erwei
 zienten für den FPGA.
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
-- ✅✅/❌ **JupiterNotebooks für Demonstration**
+- ✅✅/❌ JupiterNotebooks für Demonstration
 - ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
 - ✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
-- ✅ **Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.**
+- ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
  
 
 ## Zusatz:
