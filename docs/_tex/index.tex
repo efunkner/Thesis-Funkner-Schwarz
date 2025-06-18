@@ -178,7 +178,7 @@
 \title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
 Systemen}
 \author{Eduard Funkner \and Martin Schwarz}
-\date{2025-06-14}
+\date{2025-06-17}
 \begin{document}
 \maketitle
 
@@ -233,7 +233,7 @@ beschrieben werden. Differenzengleichung des Biquad-Filters:
 y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
 \]
 
-Der Wert \(y[n]\) bezeichnet den Ausgabewert zur Zeit \(n\), während
+Der Wert \(y[n]\) bezeichnet den Ausgabewert zum Sample \(n\), während
 \(x[n]\) den Eingangswert darstellt. Der aktuelle Ausgabewert \(y[n]\)
 ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen
 Eingabewerte, subtrahiert mit den zwei gewichteten vergangen
@@ -260,14 +260,17 @@ innerhalb des Einheitskreises der z-Ebene liegen.
 transponiert}\label{directform-1-2-und-transponiert}
 
 Differenzengleichung der Direktform 1:
+
 \(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)
 \(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2\)
 
 Differenzengleichung der Direktform 2:
+
 \(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)
 \(w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]\)
 
 Differenzengleichung der transponierten Direktform 2:
+
 \(y[n] = b_0 x[n] + s_1[n-1]\)
 \(s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]\)
 \(s_2[n] = b_2 x[n] - a_2 y[n]\)

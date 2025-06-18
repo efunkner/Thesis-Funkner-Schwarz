@@ -70,10 +70,10 @@ window.Quarto = {
 <meta name="citation_title" content="Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen">
 <meta name="citation_author" content="Eduard Funkner">
 <meta name="citation_author" content="Martin Schwarz">
-<meta name="citation_publication_date" content="2025-06-14">
-<meta name="citation_cover_date" content="2025-06-14">
+<meta name="citation_publication_date" content="2025-06-17">
+<meta name="citation_cover_date" content="2025-06-17">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-06-14">
+<meta name="citation_online_date" content="2025-06-17">
 <meta name="citation_language" content="de">
 </head>
 
@@ -113,7 +113,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">14. Juni 2025</p>
+              <p class="date">17. Juni 2025</p>
             </div>
           </div>
           
@@ -138,12 +138,15 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#iir-filter-zweiter-ordnung" id="toc-iir-filter-zweiter-ordnung" class="nav-link" data-scroll-target="#iir-filter-zweiter-ordnung">IIR-Filter zweiter Ordnung</a></li>
   </ul></li>
-  <li><a href="#differenzengleichung" id="toc-differenzengleichung" class="nav-link" data-scroll-target="#differenzengleichung">Differenzengleichung</a></li>
-  <li><a href="#übertragungsfunktion" id="toc-übertragungsfunktion" class="nav-link" data-scroll-target="#übertragungsfunktion">Übertragungsfunktion</a></li>
-  <li><a href="#directform-1-2-und-transponiert" id="toc-directform-1-2-und-transponiert" class="nav-link" data-scroll-target="#directform-1-2-und-transponiert">Directform 1, 2 und transponiert</a></li>
+  <li><a href="#differenzengleichung-eines-iir-filters-zweiter-ordnung" id="toc-differenzengleichung-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#differenzengleichung-eines-iir-filters-zweiter-ordnung">Differenzengleichung eines IIR Filters zweiter Ordnung</a></li>
+  <li><a href="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung" id="toc-übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung">Übertragungsfunktion eines IIR-Filters zweiter Ordnung</a>
+  <ul class="collapse">
+  <li><a href="#implementierungsstrukturen-biquadratischer-filter" id="toc-implementierungsstrukturen-biquadratischer-filter" class="nav-link" data-scroll-target="#implementierungsstrukturen-biquadratischer-filter">Implementierungsstrukturen biquadratischer Filter</a></li>
+  </ul></li>
+  <li><a href="#differenzengleichung-der-direktform-1" id="toc-differenzengleichung-der-direktform-1" class="nav-link" data-scroll-target="#differenzengleichung-der-direktform-1">Differenzengleichung der Direktform 1:</a></li>
   <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation">Bilineartransformation</a></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="Pynq-Z2/Audio_Reference_Design-preview.html"><i class="bi bi-journal-code"></i>Audio Reference Design</a></li><li><a href="jupyter/Pynq/Lerndemo_v1/Lerndemo_v1_Audio-preview.html"><i class="bi bi-journal-code"></i>Aufnahme und Wiedergabe</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v1-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/Pynq/Audio_Filter_Test_v2/Codec_Test_v6-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/bilinear-preview.html"><i class="bi bi-journal-code"></i>bilinear.ipynb</a></li><li><a href="Pynq-Z2/Notebook_Funktionen-preview.html"><i class="bi bi-journal-code"></i>Funktionen im Notebook:</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v5-preview.html"><i class="bi bi-journal-code"></i>Matlab_Filter_Test_TransmissionTest_v5.ipynb</a></li><li><a href="Pynq-Z2/Development_Notes_Pynq-Filter-preview.html"><i class="bi bi-journal-code"></i>Notiezen und Information zu dem Entwiklungsstatus</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v2-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v3-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2-preview.html"><i class="bi bi-journal-code"></i>Warum Padding wichtig ist</a></li></ul></div></nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="Pynq-Z2/Audio_Reference_Design-preview.html"><i class="bi bi-journal-code"></i>Audio Reference Design</a></li><li><a href="jupyter/Pynq/Lerndemo_v1/Lerndemo_v1_Audio-preview.html"><i class="bi bi-journal-code"></i>Aufnahme und Wiedergabe</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v1-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/Pynq/Audio_Filter_Test_v2/Codec_Test_v6-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/bilinear-preview.html"><i class="bi bi-journal-code"></i>bilinear.ipynb</a></li><li><a href="Pynq-Z2/Notebook_Funktionen-preview.html"><i class="bi bi-journal-code"></i>Funktionen im Notebook:</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v5-preview.html"><i class="bi bi-journal-code"></i>Matlab_Filter_Test_TransmissionTest_v5.ipynb</a></li><li><a href="Pynq-Z2/Development_Notes_Pynq-Filter-preview.html"><i class="bi bi-journal-code"></i>Notiezen und Information zu dem Entwiklungsstatus</a></li><li><a href="jupyter/plotting_audio-preview.html"><i class="bi bi-journal-code"></i>plotting_audio.ipynb</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v2-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v3-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2-preview.html"><i class="bi bi-journal-code"></i>Warum Padding wichtig ist</a></li></ul></div></nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
@@ -164,25 +167,27 @@ window.Quarto = {
 <p>Biquadratische Filter, kurz als “Biquad” bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die möglichkeit komplexe IIR-Filter höhrer Ordnung auf einfache Weise zu realsieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.</p>
 </section>
 </section>
-<section id="differenzengleichung" class="level1">
-<h1>Differenzengleichung</h1>
+<section id="differenzengleichung-eines-iir-filters-zweiter-ordnung" class="level1">
+<h1>Differenzengleichung eines IIR Filters zweiter Ordnung</h1>
 <p>Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Differenzengleichung des Biquad-Filters:</p>
 <p><span class="math display">\[
 y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
 \]</span></p>
-<p>Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zur Zeit <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert: <span class="math display">\[
+<p>Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zum Sample <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert: <span class="math display">\[
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]</span></p>
+\]</span> Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert und daraus folgt die folgende Übertragunsfunktion.</p>
 </section>
-<section id="übertragungsfunktion" class="level1">
-<h1>Übertragungsfunktion</h1>
-<p>Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert: <span class="math display">\[
+<section id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="level1">
+<h1>Übertragungsfunktion eines IIR-Filters zweiter Ordnung</h1>
+<p><span class="math display">\[
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
 \]</span> Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang im Frequenzbereich beschrieben. Um die Stabilität des Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen.</p>
+<section id="implementierungsstrukturen-biquadratischer-filter" class="level2">
+<h2 class="anchored" data-anchor-id="implementierungsstrukturen-biquadratischer-filter">Implementierungsstrukturen biquadratischer Filter</h2>
 </section>
-<section id="directform-1-2-und-transponiert" class="level1">
-<h1>Directform 1, 2 und transponiert</h1>
-<p>Differenzengleichung der Direktform 1:</p>
+</section>
+<section id="differenzengleichung-der-direktform-1" class="level1">
+<h1>Differenzengleichung der Direktform 1:</h1>
 <p><span class="math inline">\(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)</span> <span class="math inline">\(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2\)</span></p>
 <p>Differenzengleichung der Direktform 2:</p>
 <p><span class="math inline">\(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)</span> <span class="math inline">\(w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]\)</span></p>
