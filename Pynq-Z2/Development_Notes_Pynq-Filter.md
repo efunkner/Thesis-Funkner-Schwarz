@@ -168,6 +168,7 @@ Da der Schwerpunkt auf der Implementierung des Filters liegt und nicht auf der L
 (.wav)
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, (I2C), Pynq und Pynq-Z2 Board
 - ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
+- ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
 
 ## Bereits erledigt:
 - ✅/❌ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
