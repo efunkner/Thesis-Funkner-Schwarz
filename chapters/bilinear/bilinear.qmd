@@ -1,0 +1,2 @@
+## Bilineartransformation
+Mittels der Bilineartransformation ist es möglich einen bestehenden analogen Filter, anhand seiner Übertragungsfunktion zu digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.
