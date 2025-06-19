@@ -1,5 +1,8 @@
 # Dokuemtation
-Hier werden Informationen zu DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board gesammelt und dokumentiert.
+Hier werden Informationen zu DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board gesammelt und dokumentiert. <br>
+Passende Bilder werden zu einem späteren Zeitpunkt aus den Quellen eingesetzt.
+
+**Wandele die *md* in eine *qmd* für Quarto um!**
 
 ## AXI-Protokoll
 Quelle 1: [AMD: AMBA® AXI4 Interface Protocol](https://www.amd.com/de/products/adaptive-socs-and-fpgas/intellectual-property/axi.html#tabs-ceeab8b2b8-item-766c793914-tab)<br>
@@ -83,3 +86,154 @@ Die Daten werden typischerweise eine Taktperiode nach dem Wechsel von WS bereitg
 ### Aufbau von Sender und Empfänger (Beispeil)
 - Transmitter (z. B. ein A/D-Wandler) enthält ein Schieberegister, das bei jedem Taktbit das nächste Datenbit über SD ausgibt. WS steuert, ob es sich um den linken oder rechten Kanal handelt.
 - Receiver (z. B. ein DAC) nutzt ebenfalls Schieberegister oder synchronisierte Latches, um die empfangenen Bits bei jedem Takt einzulesen. Nach jedem kompletten Wort wird das Register zurückgesetzt und ein neues Wort beginnt.
+
+
+## Matlab: HDL-Coder
+Quelle 1: [Matlab: HDL Coder](https://de.mathworks.com/products/hdl-coder.html)<br>
+Quelle 2: [Matlab: HDL Coder Dokumentation](https://de.mathworks.com/help/hdlcoder/index.html)<br>
+
+Der HDL Coder von MathWorks ist ein Werkzeug zur automatisierten Codegenerierung, das die Entwicklung digitaler Schaltungen für FPGAs, SoCs und ASICs aus hochabstrakten Modellen ermöglicht. Dabei wird aus MATLAB-Funktionen, Simulink-Modellen oder Stateflow-Charts automatisch synthesefähiger VHDL- oder Verilog-Code erzeugt. Dies erleichtert die Implementierung hardwareoptimierter Algorithmen erheblich.<br>
+
+Der HDL Coder eignet sich insbesondere für modellbasiertes Design und ermöglicht die Generierung von Hardware Description Language (HDL)-Code, der auf eine Vielzahl von Zielplattformen – darunter Xilinx Vivado – ausgerichtet ist. Für die zielgerichtete Entwicklung stellt das Tool den sogenannten HDL Workflow Advisor bereit, der den Nutzer schrittweise durch den gesamten Generierungsprozess führt.<br>
+
+Typischerweise umfasst dieser Prozess die folgenden Schritte:
+- **Modellierung:** Zunächst wird ein digitales System, beispielsweise ein Filter oder Steueralgorithmus, in MATLAB oder Simulink modelliert.
+- **Workflow-Setup:** Der HDL Workflow Advisor wird gestartet, wobei das Zielsystem (z. B. Vivado), die Zielsprache (VHDL oder Verilog) und zusätzliche Einstellungen wie die Erzeugung einer AXI4-Schnittstelle konfiguriert werden können.
+- **Codegenerierung:** Der HDL Coder erzeugt daraufhin den HDL-Quellcode, inklusive zugehöriger Testbenches und optionaler Fixed-Point-Konvertierungen.
+- **IP-Export:** Für FPGA-Designs besteht die Möglichkeit, direkt einen Vivado-kompatiblen IP-Core mit AXI4- oder AXI4-Lite-Schnittstelle zu erzeugen. Dieser kann in ein bestehendes Vivado Block Design integriert werden.
+- **Verifikation:** Die generierte Logik kann innerhalb von Simulink getestet oder in einer HDL-Co-Simulation mit externen Tools überprüft werden.
+
+Zusätzlich bietet der HDL Coder Funktionen zur Flächen- und Timing-Schätzung, was eine frühe Bewertung der Ressourcennutzung ermöglicht. Die Integration fester und gleitender Punktarithmetik, die Einhaltung von Codierungsrichtlinien sowie die Möglichkeit zur Erstellung von HDL-Testbenches machen den HDL Coder zu einem leistungsfähigen Werkzeug in der digitalen Hardwareentwicklung.
+
+### Verwendung des HDL Coder zur Generierung von Vivado-IP-Cores
+Der HDL Coder ermöglicht es, aus einem in Simulink modellierten digitalen System automatisch einen Vivado-kompatiblen IP-Core zu erzeugen. Dieser kann anschließend direkt in einem Xilinx-FPGA-Projekt verwendet werden, z. B. im Vivado Block Design. Der Prozess ist modellbasiert und unterstützt die automatisierte Codegenerierung, Testbench-Erstellung sowie die Verpackung als IP-Core. <br>
+
+**Systemmodellierung in Simulink**<br>
+Zunächst wird das gewünschte System (z. B. ein Signalverarbeitungssystem wie ein Filter oder Regler) mithilfe von Simulink-Blöcken modelliert. Dabei werden bevorzugt HDL-kompatible Blöcke verwendet, also solche, die für die HDL-Codegenerierung geeignet sind. Auch Stateflow-Diagramme und MATLAB-Funktionen können eingebunden werden.
+
+**HDL Workflow Advisor** <br>
+Über den HDL Workflow Advisor wird der Hardware-Zielworkflow eingerichtet. In einem geführten Ablauf kann der Benutzer:
+- das Zielsystem (Target) auswählen (z. B. Xilinx Vivado),
+- die gewünschte Schnittstelle definieren (z. B. AXI4 oder AXI4-Lite),
+- und die IP-Core-Generierung aktivieren.
+
+**Definition der Schnittstellen** <br>
+Die Ein- und Ausgänge des Simulink-Modells werden mit HDL-I/O-Ports oder AXI-Schnittstellen verknüpft. Für eine Integration in Vivado ist besonders die Auswahl von AXI4-Lite oder AXI4-Stream relevant, da sie die Standard-IP-Kommunikation mit dem Zynq-SoC ermöglichen.
+
+**Codegenerierung**<br>
+Der HDL Coder erzeugt aus dem Modell automatisch:
+- synthesefähigen HDL-Code (VHDL oder Verilog),
+- die zugehörigen Constraints,
+- und eine IP-Core-Struktur, die in Vivado eingebunden werden kann.
+
+**Export als Vivado-kompatibler IP-Core**<br>
+Der generierte IP-Core wird in einem IP-Repository gespeichert. In Vivado kann dieses Repository eingebunden und der Core per Drag-and-Drop in das Block Design eingefügt werden. Die AXI4-Anbindung ermöglicht dabei eine direkte Kommunikation mit dem Zynq-Processing-System.
+
+**Das Ergebnis**<br>
+Am Ende des Workflows erhält der Entwickler einen vollständig paketierten IP-Core, der direkt mit Vivado kompatibel ist, über AXI-Schnittstellen steuerbar ist und in einem FPGA-System (z. B. auf dem Pynq-Z2 Board) eingesetzt werden kann, ohne manuell HDL schreiben zu müssen.<br>
+Diese Funktionalität ist besonders nützlich für die schnelle Prototypenentwicklung, das automatische Design Space Exploration und die Implementierung modellbasierter Steuer- oder Signalverarbeitungssysteme auf FPGAs.<br>
+
+### Simulink: Biquad Filter
+Quelle: [Biquadratic IIR (SOS) filter](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html)<br>
+
+Der Block Biquad Filter aus der DSP HDL Toolbox von MathWorks stellt einen HDL-optimierten digitalen IIR-Filter (Infinite Impulse Response) dar. Der Filter basiert auf sogenannten Second-Order Sections (SOS), also biquadratischen Filterabschnitten, die in der digitalen Signalverarbeitung häufig verwendet werden, um gezielt Frequenzanteile eines Eingangssignals zu verstärken oder zu dämpfen.
+
+**Funktionalität**<br>
+Der HDL-BiquadFilter ist für die Implementierung auf Hardwareplattformen wie FPGAs und ASICs optimiert. Er unterstützt die kontinuierliche Verarbeitung eingehender Datenströme mithilfe eines oder mehrerer kaskadierter Filterabschnitte. Die Berechnungsgrundlage des Filters bilden dabei vom Benutzer definierte Koeffizienten, die als Matrizen übergeben werden. Die Numerator-Koeffizienten (b) und Denominator-Koeffizienten (a) bestimmen dabei das Frequenzverhalten der jeweiligen Filterstufe.<br>
+Typische Anwendungsbereiche dieses Filters liegen in der Echtzeit-Audiosignalverarbeitung, Kommunikationssystemen oder Regelungstechnik – insbesondere dort, wo ressourcenschonende, aber leistungsfähige Filterlösungen erforderlich sind.<br>
+
+**Filterarchitekturen**<br>
+Der Block unterstützt verschiedene interne Filterstrukturen, die unterschiedliche Optimierungsschwerpunkte aufweisen:
+- **Direct Form II:** kompakte Darstellung mit geringem Ressourcenbedarf
+- **Direct Form II Transposed:** numerisch stabilere Variante für bestimmte Koeffizientenverteilungen
+- **Pipelined Feedback Form:** für höhere Taktfrequenzen optimiert
+- **Direct Form I Fully Serial:** besonders resourcenschonend; arbeitet mit serieller Datenverarbeitung und zusätzlichem Steuersignal ready
+
+Diese Varianten ermöglichen es dem Entwickler, gezielt zwischen Flächenbedarf, Durchsatz und Latenz zu optimieren, abhängig von den Anforderungen der Zielhardware.
+
+**Anwendung**<br>
+Die Verwendung des BiquadFilter-Blocks erfolgt typischerweise in folgenden Schritten:
+- Einbindung in eine Simulink-Modellierungsumgebung oder als MATLAB-Systemobjekt.
+Festlegung der Filterstruktur und Definition der Fixpunkt-Datentypen für Eingabe, Koeffizienten und Recheneinheiten.
+- Übergabe der Koeffizienten als Matrizen, bei Mehrfachsektionen erfolgt die Kaskadierung automatisch durch die Struktur des Blocks.
+- **Datenverarbeitung:** Eingangsdaten (dataIn) werden zusammen mit einem Gültigkeitssignal (validIn) dem Filter zugeführt. Die gefilterten Ausgabedaten erscheinen verzögert am Ausgang (dataOut) mit entsprechendem Ausgabesignal (validOut). Bei seriellen Architekturen ist zudem das Signal ready relevant, das angibt, wann neue Eingangsdaten entgegengenommen werden können.
+- **Latenzanalyse:** Zur Einschätzung der Systemverzögerung kann das Systemobjekt getLatency verwendet werden, um die Anzahl an Taktzyklen zwischen Eingabe und Ausgabe zu ermitteln.
+
+Der BiquadFilter bietet eine effiziente Möglichkeit, digitale IIR-Filter für Hardwareanwendungen in MATLAB und Simulink zu entwickeln und zu testen. Durch die direkte Unterstützung für HDL-Codegenerierung und die Wahl zwischen verschiedenen optimierten Filterarchitekturen stellt dieser Block ein vielseitiges Werkzeug zur Verfügung, das sich für den Einsatz in Echtzeitsystemen mit begrenzten Ressourcen besonders gut eignet.
+
+## Vivado
+Quelle 1: [AMD Vivado™ Design Suite](https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html?utm_source=chatgpt.com)<br>
+Quelle 2: [Vivado Design Suite User Guide: Getting Started](https://docs.amd.com/r/2022.1-English/ug910-vivado-getting-started)<br>
+
+Die Vivado Design Suite ist die offizielle Entwicklungsplattform von AMD für die Erstellung digitaler Logiksysteme auf FPGAs, adaptive SoCs und 3D ICs der aktuellen AMD/Xilinx-Produktlinien. Sie wurde entwickelt, um moderne, hochintegrierte Schaltungen effizient zu entwerfen, zu analysieren und zu implementieren, unter anderem für die Baureihen Zynq-7000, Zynq UltraScale+, Versal Adaptive SoCs und Virtex UltraScale+. <br>
+
+Vivado bietet einen umfassenden, speicherbasierten Design-Workflow mit einem Fokus auf Produktivität, hohe Designqualität (QoR) und beschleunigter Implementierung. Der integrierte Ansatz ersetzt klassische toolbasierte Entwicklungsumgebungen wie Xilinx ISE vollständig. <br>
+
+Die Vivado Design Suite kombiniert eine Vielzahl leistungsfähiger Funktionen:
+- **Design Entry:** Unterstützung von HDL-Quelltexten (VHDL, Verilog), grafischem Schaltungsentwurf sowie High-Level-Modellierung über IP-Blöcke.
+- **IP-Integration:** Der Vivado IP Integrator ermöglicht die einfache Verwendung vorgefertigter und benutzerdefinierter IPs in einem grafischen Block-Design-Editor.
+- **Synthese und Implementierung:** Werkzeuge zur automatisierten Erzeugung der FPGA-Netzlisten und deren physikalischer Platzierung und Verdrahtung.
+- **Bitstream-Generierung:** Erstellung der Konfigurationsdateien zur Programmierung des Zielgeräts.
+- **Hardware-Debugging:** Analysefunktionen zur Laufzeit, einschließlich integrierter Logic Analyzer- und ILA-Cores.
+- **Automatisierung und Scripting:** Vollständige Unterstützung von Tcl-Skripten zur Steuerung des Design-Flows.
+
+**Anwendungsbereiche**<br>
+Vivado richtet sich an Entwickler, die digitale Systeme für adaptive Plattformen realisieren darunter Signalverarbeitung, Kommunikation, Embedded Systeme, Steuerungen oder KI-Anwendungen. Es unterstützt sowohl klassische RTL-Entwicklung als auch IP-basierte und modellbasierte Methoden.<br>
+
+Die Suite erlaubt sowohl manuelle als auch automatisierte Abläufe, um FPGA-Designs mit hoher Taktrate und geringer Leistungsaufnahme umzusetzen. Darüber hinaus kann Vivado mit externen Tools wie MATLAB/Simulink (z. B. über HDL Coder) kombiniert werden, um IP-Cores automatisch zu generieren und nahtlos in das Vivado-Projekt zu integrieren.<br>
+
+### IP-Cores
+Quelle 1: [Vivado Design Suite User Guide: System-Level Design Entry](https://docs.amd.com/r/2022.1-English/ug895-vivado-system-level-design-entry?tocId=Qo7sDmUYKQJ8QDtPFnnfzA)<br>
+Quelle 2: [Vivado Design Suite User Guide : Designing with IP](https://docs.amd.com/r/2022.1-English/ug896-vivado-ip)<br>
+
+In der Vivado Design Suite von AMD/Xilinx nehmen sogenannte IP-Cores (Intellectual Property Cores) eine zentrale Rolle bei der Entwicklung komplexer digitaler Systeme ein. Dabei handelt es sich um wiederverwendbare, vorkonfigurierte Hardwaremodule, die in strukturierter Form in FPGA- und SoC-Designs integriert werden können. IP-Cores ermöglichen es, standardisierte Funktionen, wie Speicherzugriffe, Kommunikation, Signalverarbeitung oder Steuerlogik – modular und effizient zu realisieren, ohne dass diese Komponenten jedes Mal neu entworfen werden müssen. <br>
+
+Ein IP-Core in Vivado umfasst mehrere strukturierte Bestandteile, dazu gehören insbesondere:
+- Eine XCI-Datei (.xci), welche die spezifische Konfiguration und Parametrierung des IP-Cores speichert.
+- HDL-Quelltextdateien, die die funktionale Implementierung des Cores in VHDL oder Verilog enthalten.
+- optional auch Synthese- und Implementierungsdaten (.dcp), Constraint-Dateien (.xdc) und Simulationsmodelle und Instanziierungsvorlagen (.veo, .vho)
+
+Diese Dateien werden nach der Konfiguration automatisch vom Vivado-Tool erzeugt und im Projekt verwaltet.<br>
+
+**Verwendung und Integration**<br>
+IP-Cores in Vivado lassen sich auf zwei Hauptwege in ein Design integrieren:
+- Über den **IP Integrator (Blockdesign-Umgebung)**, können IP-Cores per Drag-and-Drop in ein Blockdesign eingefügt, miteinander verbunden und angepasst werden. Vivado übernimmt dabei die automatische Zuordnung von Schnittstellen (z. B. AXI), Takten und Resets.
+- Alternativ ist es möglich, manuell IP-Cores direkt über HDL-Quellcode in ein Design einzubinden. Die dazu erforderlichen Templates werden bei der IP-Erzeugung automatisch bereitgestellt.
+
+Die Verwaltung erfolgt zentral über den **IP Sources View**, der einen Überblick über alle im Projekt enthaltenen IP-Module und deren Abhängigkeiten bietet.
+
+**Anpassung und Wiederverwendung**<br>
+Ein wesentlicher Vorteil des IP-basierten Entwicklungsansatzes ist die Parametrierbarkeit und Wiederverwendbarkeit. IP-Cores lassen sich über Benutzeroberflächen oder Tcl-Skripte individuell konfigurieren, beispielsweise hinsichtlich Datenbreite, Pipelining, Speichergröße oder unterstützter Protokolle. Änderungen an IP-Cores führen automatisch zur Regenerierung aller zugehörigen Dateien. Darüber hinaus können eigene Designbestandteile mithilfe des Vivado IP Packagers in benutzerdefinierte IP-Cores umgewandelt und erneut verwendet werden.
+
+## Pynq
+Quelle 1: [Tul: Product - FPGA](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)<br>
+Quelle 2: [AMD: AUP PYNQ-Z2](https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources)<br>
+Quelle 3: [AMD: Pynq](https://www.pynq.io/)<br>
+Quelle 4: [PYNQ: Python productivity for Adaptive Computing platforms latest](https://pynq.readthedocs.io/en/latest/)<br>
+
+PYNQ (Python Productivity for Zynq) ist ein Open-Source-Projekt von AMD/Xilinx mit dem Ziel, die Entwicklung auf programmierbarer Logik, insbesondere dem Zynq-7000 SoC, zu vereinfachen. Es erlaubt es, die programmierbare Logik (PL) eines FPGAs direkt aus Python zu steuern, ohne dass herkömmliche Hardwarebeschreibungssprachen wie VHDL oder Verilog verwendet werden müssen.<br>
+
+Das zugrundeliegende Prinzip basiert auf der Verwendung von Overlays, das sind vorimplementierte FPGA-Designs, die sich wie Softwarebibliotheken aus Python heraus verwenden lassen. Entwickler können so auf die programmierbare Hardware zugreifen, sie konfigurieren und einsetzen, ohne tief in HDL-Design einsteigen zu müssen. <br>
+
+**Architektur und Komponenten**<br>
+PYNQ nutzt das Zynq-7000 SoC, das einen ARM Cortex-A9 Prozessor (Processing System, PS) mit einem FPGA-Fabric (Programmable Logic, PL) kombiniert. Auf dem PS läuft ein angepasstes Linux-System, das u. a. einen Jupyter Notebook Server bereitstellt. Darüber werden Benutzerinteraktionen realisiert, direkt über den Webbrowser.<br>
+Die Kommunikation mit der PL erfolgt über vorgefertigte AXI-Schnittstellen, wodurch sich Hardwarebeschleunigung und -steuerung über einfache Python-Skripte realisieren lassen.<br>
+
+### PYNQ-Z2 Board
+Das PYNQ-Z2 Board wurde von TUL speziell für das PYNQ-Projekt entwickelt und basiert auf dem Xilinx Zynq XC7Z020-1CLG400C SoC. Es verfügt über:
+- 512 MB DDR3 RAM
+- HDMI-Eingang und -Ausgang
+- Audio-I/O
+- USB-UART, Ethernet, MicroSD
+- 2 Pmod-Ports, Arduino-kompatiblen Header, Raspberry Pi-GPIO-Header
+- Taster, LEDs und DIP-Schalter zur Benutzerinteraktion
+
+Das Board ist vollständig PYNQ-kompatibel und wird mit einem vorkonfigurierten SD-Karten-Image betrieben, das die PYNQ-Linux-Distribution und alle erforderlichen Tools enthält.<br>
+
+**Einsatzmöglichkeiten**<br>
+PYNQ eignet sich besonders für:
+- Lehre und Ausbildung im Bereich eingebetteter Systeme, digitale Signalverarbeitung und FPGA-Design
+- Schnelles Prototyping von Hardware-beschleunigten Anwendungen
+- Forschungs- und Entwicklungsarbeiten mit Python-zugänglicher FPGA-Hardware
+
+Die intuitive Python-Umgebung und die Unterstützung durch Overlays machen PYNQ zu einem leistungsstarken Werkzeug für Anwender, die ohne tiefgreifende Hardwarekenntnisse dennoch programmierbare Logik nutzen möchten

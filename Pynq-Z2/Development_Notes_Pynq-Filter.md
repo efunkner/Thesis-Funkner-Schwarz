@@ -166,7 +166,7 @@ Da der Schwerpunkt auf der Implementierung des Filters liegt und nicht auf der L
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
-- ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, (I2C), Pynq und Pynq-Z2 Board
+- ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, ~~Matlab HDL-Coder~~ + Simulink, ~~Vivado~~, ~~IP-Cores~~, ~~I2S~~, (I2C), ~~Pynq und Pynq-Z2 Board~~, finales Notebook + Funktionen
 - ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
 - ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
 
@@ -179,7 +179,7 @@ zienten für den FPGA.
 - ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
 - ✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
 - ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
-- ✅ Dokumentation zu: **AXI**, **I2S,**, 
+- ✅ Dokumentation zu: AXI, I2S, **Matlab HDL-Coder**, **Vivado**, **IP-Cores**, **Pynq und Pynq-Z2 Board**
  
 
 ## Zusatz:
