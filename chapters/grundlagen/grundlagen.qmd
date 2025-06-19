@@ -27,19 +27,24 @@ Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang i
 
 ## Implementierungsstrukturen biquadratischer Filter
 
+
 # Differenzengleichung der Direktform 1:
+
+Signalflussdiagramm von DF1 hier
 
 $y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]$
 $w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2$
 
-
 Differenzengleichung der Direktform 2:
+
+Signalflussdiagramm von DF2
 
 $y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]$
 $w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]$
 
-
 Differenzengleichung der transponierten Direktform 2:
+
+Signalflussdiagramm von TDF2
 
 $y[n] = b_0 x[n] + s_1[n-1]$
 $s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]$

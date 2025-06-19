@@ -172,27 +172,27 @@ File filteredFile;  // Gefiltere Ausgangsdatei
 // ===================================================================================================================================================================================================
 #define NUM_STAGES 2 // Anzahl der Filterstufen
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s1 = 0.978553f;
-const float b_1_s1 = -1.894556f;
-const float b_2_s1 = 0.978553f;
-const float a_0_s1 = 1.000000f;
-const float a_1_s1 = -1.894556f;
-const float a_2_s1 = 0.957106f;
+const float b_0_s1 = 1.0f;
+const float b_1_s1 = -2.0;
+const float b_2_s1 = 1.0f;
+const float a_0_s1 = 1.0f;
+const float a_1_s1 = -1.6864f;
+const float a_2_s1 = 0.7809f;
 
-const float gain_s1 = 1.0f;
+const float gain_s1 = 0.8668f;
 
 const float b_coefficients_s1[] = { b_0_s1, b_1_s1, b_2_s1};
 const float a_coefficients_s1[] = { a_0_s1, a_1_s1, a_2_s1};
 
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s2 = 0.000533f;
-const float b_1_s2 = 0.0f;
-const float b_2_s2 = -0.000533f;
-const float a_0_s2 = 1.00f;
-const float a_1_s2 = -1.592055f;
-const float a_2_s2 = 0.998934f;
+const float b_0_s2 = 1.0f;
+const float b_1_s2 = -2.0f;
+const float b_2_s2 = 1.0f;
+const float a_0_s2 = 1.0f;
+const float a_1_s2 = -1.4602f;
+const float a_2_s2 = 0.5421f;
 
-const float gain_s2 = 50.0f;
+const float gain_s2 = 0.7506f;
 
 const float b_coefficients_s2[] = { b_0_s2, b_1_s2, b_2_s2};
 const float a_coefficients_s2[] = { a_0_s2, a_1_s2, a_2_s2};

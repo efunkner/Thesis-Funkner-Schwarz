@@ -31,6 +31,6 @@ right: |
 
 {{< include chapters/einleitung/einleitung.qmd >}}
 
-{{< include chapters/theorie/theorie.qmd >}}
+{{< include chapters/grundlagen/grundlagen.qmd >}}
 
 {{< include chapters/bilinear/bilinear.qmd >}}
