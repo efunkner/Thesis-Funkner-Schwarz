@@ -61,7 +61,6 @@ Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang i
 
 ## Implementierungsstrukturen biquadratischer Filter
 
-
 # Differenzengleichung der Direktform 1:
 
 $y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]$
