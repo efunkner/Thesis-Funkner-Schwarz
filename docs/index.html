@@ -145,6 +145,24 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation">Bilineartransformation</a></li>
   </ul></li>
+  <li><a href="#dokuemtation" id="toc-dokuemtation" class="nav-link" data-scroll-target="#dokuemtation">Dokuemtation</a>
+  <ul class="collapse">
+  <li><a href="#axi-protokoll" id="toc-axi-protokoll" class="nav-link" data-scroll-target="#axi-protokoll">AXI-Protokoll</a>
+  <ul class="collapse">
+  <li><a href="#axi4" id="toc-axi4" class="nav-link" data-scroll-target="#axi4">AXI4</a></li>
+  <li><a href="#axi-lite" id="toc-axi-lite" class="nav-link" data-scroll-target="#axi-lite">AXI-Lite</a></li>
+  <li><a href="#axi4stream" id="toc-axi4stream" class="nav-link" data-scroll-target="#axi4stream">AXI4‑Stream</a></li>
+  <li><a href="#axi-handshake-mechanismus" id="toc-axi-handshake-mechanismus" class="nav-link" data-scroll-target="#axi-handshake-mechanismus">AXI Handshake-Mechanismus</a></li>
+  <li><a href="#handshake-bei-axi4-stream" id="toc-handshake-bei-axi4-stream" class="nav-link" data-scroll-target="#handshake-bei-axi4-stream">Handshake bei AXI4-Stream</a></li>
+  <li><a href="#axi-stream-spezifische-signale" id="toc-axi-stream-spezifische-signale" class="nav-link" data-scroll-target="#axi-stream-spezifische-signale">AXI-Stream-spezifische Signale</a></li>
+  </ul></li>
+  <li><a href="#i²s-busprotokoll-inter-ic-sound" id="toc-i²s-busprotokoll-inter-ic-sound" class="nav-link" data-scroll-target="#i²s-busprotokoll-inter-ic-sound">I²S-Busprotokoll (Inter-IC Sound)</a>
+  <ul class="collapse">
+  <li><a href="#funktionsweise-des-i²s-busses" id="toc-funktionsweise-des-i²s-busses" class="nav-link" data-scroll-target="#funktionsweise-des-i²s-busses">Funktionsweise des I²S-Busses</a></li>
+  <li><a href="#timing-und-synchronisation" id="toc-timing-und-synchronisation" class="nav-link" data-scroll-target="#timing-und-synchronisation">Timing und Synchronisation</a></li>
+  <li><a href="#aufbau-von-sender-und-empfänger-beispeil" id="toc-aufbau-von-sender-und-empfänger-beispeil" class="nav-link" data-scroll-target="#aufbau-von-sender-und-empfänger-beispeil">Aufbau von Sender und Empfänger (Beispeil)</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="Pynq-Z2/Audio_Reference_Design-preview.html"><i class="bi bi-journal-code"></i>Audio Reference Design</a></li><li><a href="jupyter/Pynq/Lerndemo_v1/Lerndemo_v1_Audio-preview.html"><i class="bi bi-journal-code"></i>Aufnahme und Wiedergabe</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v1-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/Pynq/Audio_Filter_Test_v2/Codec_Test_v6-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/bilinear-preview.html"><i class="bi bi-journal-code"></i>bilinear.ipynb</a></li><li><a href="chapters/bilinear/bilinear-preview.html"><i class="bi bi-journal-code"></i>Bilineartransformation</a></li><li><a href="Pynq-Z2/Dokumentation-preview.html"><i class="bi bi-journal-code"></i>Dokuemtation</a></li><li><a href="chapters/einleitung/einleitung-preview.html"><i class="bi bi-journal-code"></i>Einführung</a></li><li><a href="Pynq-Z2/Notebook_Funktionen-preview.html"><i class="bi bi-journal-code"></i>Funktionen im Notebook:</a></li><li><a href="chapters/theorie/theorie-preview.html"><i class="bi bi-journal-code"></i>IIR-Filter zweiter Ordnung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v5-preview.html"><i class="bi bi-journal-code"></i>Matlab_Filter_Test_TransmissionTest_v5.ipynb</a></li><li><a href="Pynq-Z2/Development_Notes_Pynq-Filter-preview.html"><i class="bi bi-journal-code"></i>Notiezen und Information zu dem Entwiklungsstatus</a></li><li><a href="jupyter/plotting_audio-preview.html"><i class="bi bi-journal-code"></i>plotting_audio.ipynb</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v2-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v3-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2-preview.html"><i class="bi bi-journal-code"></i>Warum Padding wichtig ist</a></li></ul></div></nav>
 </div>
@@ -196,6 +214,63 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
 <section id="bilineartransformation" class="level2">
 <h2 class="anchored" data-anchor-id="bilineartransformation">Bilineartransformation</h2>
 <p>Mittels der Bilineartransformation ist es möglich einen bestehenden analogen Filter, anhand seiner Übertragungsfunktion zu digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.</p>
+</section>
+</section>
+<section id="dokuemtation" class="level1">
+<h1>Dokuemtation</h1>
+<p>Hier werden Informationen zu DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board gesammelt und dokumentiert.</p>
+<section id="axi-protokoll" class="level2">
+<h2 class="anchored" data-anchor-id="axi-protokoll">AXI-Protokoll</h2>
+<p>Quelle 1: <a href="https://www.amd.com/de/products/adaptive-socs-and-fpgas/intellectual-property/axi.html#tabs-ceeab8b2b8-item-766c793914-tab">AMD: AMBA® AXI4 Interface Protocol</a><br></p>
+<p>Quelle 2: <a href="https://www.arm.com/architecture/system-architectures/amba/amba-specifications">ARM: AMBA Specifications</a><br> - Quelle 2.1: <a href="https://developer.arm.com/documentation/ihi0022/e">AMBA AXI and ACE Protocol Specification</a> - Quelle 2.2: <a href="https://developer.arm.com/documentation/ihi0051/a">AMBA 4 AXI4-Stream Protocol Specification</a></p>
+<p>Als standardisierte Schnittstelle für die Kommunikation in FPGA- und SoC-Designs dieht die AMBA AXI4 Interface Protocol IP (LogiCORE™). Es wird von Xilinx (jetzt AMD) in seiner IP-Architektur hauptsächlich der AXI4-Standard verwendet, der auf dem von Arm definierten AMBA AXI4-Protokoll basiert. Unterstützt werden dabei die drei Hauptvarianten: AXI4 für Hochgeschwindigkeits-Datenübertragungen mit Burst-Unterstützung, AXI4-Lite für einfache Steuerregister-Kommunikation ohne Burst-Funktion, sowie AXI-Stream für kontinuierliche Datenströme ohne Adressierung. <br></p>
+<p>Die AXI IP umfasst eine Vielzahl von IP-Blöcken, die auf AXI basieren, darunter etwa AXI SmartConnect (für automatische Verbindung und Routing), AXI Interconnect, AXI BRAM Controller, AXI GPIO und viele mehr. Diese sind darauf ausgelegt, in <strong>Vivado-Designs</strong> verwendet zu werden und bieten umfassende Kompatibilität mit dem AXI4-Protokoll.<br> In modernen Xilinx/Vivado-Designs, einschließlich solcher mit dem Pynq-Z2 Board wird die AXI4-Familie (einschließlich AXI4-Lite und AXI-Stream) verwendet.</p>
+<section id="axi4" class="level3">
+<h3 class="anchored" data-anchor-id="axi4">AXI4</h3>
+<p>Der AXI4-Standard ist eine Weiterentwicklung von AXI3, optimiert für Mehrfach‑Mas­t­er‑Interconnects. Wesentliche Merkmale sind: - Burst‑Transfers mit bis zu 256 Bits - Unterstützung von Quality‑of‑Service‑Signalisierung (QoS) - Mehrere Adressregion‑Schnittstellen möglich</p>
+</section>
+<section id="axi-lite" class="level3">
+<h3 class="anchored" data-anchor-id="axi-lite">AXI-Lite</h3>
+<p>Eine vereinfachte Variante von AXI4, ausgelegt für Steuer‑Register‑Interfaces. Merkmale: - Alle Übertragungen haben eine maximale Burst-Länge von 1 Bit - Alle Zugriffe habe die selbe länge wie die Datenleitung - Keine Unterstützung von exklusiven Zugriffen</p>
+</section>
+<section id="axi4stream" class="level3">
+<h3 class="anchored" data-anchor-id="axi4stream">AXI4‑Stream</h3>
+<p>Protokoll für unidirektionale Datenströme (Master → Slave) mit minimalem Leitungsaufwand. Merkmale: - Einzeln- und Mehrfach-Stream-Unterstützung über gemeinsame Leitungen - Verschiedene Datenbreiten innerhalb eines Interconnects - Ideal für implementierung in FPGAs</p>
+</section>
+<section id="axi-handshake-mechanismus" class="level3">
+<h3 class="anchored" data-anchor-id="axi-handshake-mechanismus">AXI Handshake-Mechanismus</h3>
+<p>Der Handshake-Mechanismus wie er in Quelle 2.1 beschrieben wird. <br> Jeder Kanal nutzt ein VALID/READY-Handshakesystem: - VALID vom Sender (Master) - READY vom Empfänger (Slave) - Ein Transfer findet nur statt, wenn beide gleichzeitig HIGH sind.</p>
+<p>Der Sender darf <strong>nicht auf READY warten</strong>, bevor er VALID aktiviert. Der Sender <strong>muss VALID so lange halten</strong>, bis der Handshake abgeschlossen ist. Der Empfänger darf READY auch vor VALID setzen, muss aber nicht. <br> Diese Bedingungen gelten für: - Write/Read Address - Write/Read Data - Write Response - sind auch für den AXI4-Stream übertragbar.</p>
+</section>
+<section id="handshake-bei-axi4-stream" class="level3">
+<h3 class="anchored" data-anchor-id="handshake-bei-axi4-stream">Handshake bei AXI4-Stream</h3>
+<p>Der Transfer basiert auf dem TVALID/TREADY-Handschlag: - <strong>TVALID</strong> <em>(Master)</em>: signalisiert, dass gültige Daten anliegen. - <strong>TREADY</strong> <em>(Slave)</em>: signalisiert, dass Daten übernommen werden können. - Daten werden übertragen, wenn beide gleichzeitig HIGH sind. - Der <em>Master</em> <strong>muss VALID</strong> setzen, auch wenn TREADY noch nicht aktiv ist. - Der <em>Slave</em> <strong>darf TREADY</strong> verzögern, muss aber bei Empfang HIGH setzen</p>
+</section>
+<section id="axi-stream-spezifische-signale" class="level3">
+<h3 class="anchored" data-anchor-id="axi-stream-spezifische-signale">AXI-Stream-spezifische Signale</h3>
+<p>Neben reset und clk benötigt der AXI-Steam mindestes 3 Signale damit dieser richtig Funktioniert. Je nach spezifikation und Anwendung stehen noch 6 Weitere zur verfügung. - TVALID: Daten sind gültig und bereit zur Übertragung - TREADY: Empfänger kann Daten übernehmen - TDATA: Datenleitung</p>
+<p>Das Protokoll unterstützt: - Byte Streams – einfache Übertragung von Daten-/Nullbytes - Continuous Aligned/Unaligned Streams – ohne Zwischenbytes oder mit beliebiger Ausrichtung - Sparse Streams – viele Daten- und Positionsbytes gemischt</p>
+</section>
+</section>
+<section id="i²s-busprotokoll-inter-ic-sound" class="level2">
+<h2 class="anchored" data-anchor-id="i²s-busprotokoll-inter-ic-sound">I²S-Busprotokoll (Inter-IC Sound)</h2>
+<p>Quelle: <a href="https://www.nxp.com/docs/en/user-manual/UM11732.pdf">NXP: I2S bus specification</a></p>
+<p>Der I²S-Bus ist ein schlanker, synchroner 3-Leiter-Bus, der speziell für hochpräzise digitale Stereo-Audioübertragung entwickelt wurde. Er ermöglicht eine flexible Wortlänge, standardisiert das Timing, reduziert Verdrahtungsaufwand und lässt sich leicht in FPGA-, DSP- oder Mikrocontroller-Umgebungen integrieren. Die klare Trennung von Takt, Daten und Kanalsteuerung macht ihn zuverlässig und gut skalierbar für moderne Audioanwendungen.</p>
+<section id="funktionsweise-des-i²s-busses" class="level3">
+<h3 class="anchored" data-anchor-id="funktionsweise-des-i²s-busses">Funktionsweise des I²S-Busses</h3>
+<p>Der I²S-Bus arbeitet voll-duplex und synchron, das bedeutet, die Übertragung erfolgt im Takt des Serial-Clock-Signals (SCK) und in beide Richtungen, wobei ein Gerät als Controller (Takt- und WS-Geber) fungiert und das andere als Target (Empfänger oder untergeordneter Sender). - Taktquelle: Der Controller generiert das Taktsignal (SCK) und das Word Select-Signal (WS). - Datenübertragung: Der Sender stellt die Daten auf der seriellen Daten-Leitung (SD) bereit, sobald WS wechselt. Empfänger lesen die Daten synchron zur steigenden Flanke von SCK ein. - Stereoübertragung: I²S überträgt abwechselnd linken und rechten Kanal, wobei WS = 0 den linken und WS = 1 den rechten Kanal kennzeichnet. - Wortlängen: Die Wortlänge (z. B. 16, 24 oder 32 Bit) ist flexibel. Es muss nicht zwingend bekannt sein, wie viele Bits gesendet oder empfangen werden, da die Position des MSB fix ist und zusätzliche Bits ignoriert oder aufgefüllt werden können.</p>
+</section>
+<section id="timing-und-synchronisation" class="level3">
+<h3 class="anchored" data-anchor-id="timing-und-synchronisation">Timing und Synchronisation</h3>
+<p>Die Daten werden typischerweise eine Taktperiode nach dem Wechsel von WS bereitgestellt, sodass der Empfänger genug Zeit hat, das vorherige Wort zu verarbeiten und sich auf das neue vorzubereiten. Das Timing ist auf minimale Latenz und hohe Synchronität ausgelegt. Der Empfänger muss alle Daten auf der steigenden Flanke von SCK abtasten. Die genaue Zeitvorgabe für Setup- und Hold-Zeiten ist im Protokoll spezifiziert, ebenso wie Mindest- und Maximalzeiten für Taktzyklen.</p>
+</section>
+<section id="aufbau-von-sender-und-empfänger-beispeil" class="level3">
+<h3 class="anchored" data-anchor-id="aufbau-von-sender-und-empfänger-beispeil">Aufbau von Sender und Empfänger (Beispeil)</h3>
+<ul>
+<li>Transmitter (z. B. ein A/D-Wandler) enthält ein Schieberegister, das bei jedem Taktbit das nächste Datenbit über SD ausgibt. WS steuert, ob es sich um den linken oder rechten Kanal handelt.</li>
+<li>Receiver (z. B. ein DAC) nutzt ebenfalls Schieberegister oder synchronisierte Latches, um die empfangenen Bits bei jedem Takt einzulesen. Nach jedem kompletten Wort wird das Register zurückgesetzt und ein neues Wort beginnt.</li>
+</ul>
+</section>
 </section>
 </section>
 

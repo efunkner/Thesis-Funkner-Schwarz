@@ -34,6 +34,3 @@ right: |
 {{< include chapters/theorie/theorie.qmd >}}
 
 {{< include chapters/bilinear/bilinear.qmd >}}
-
-
-
