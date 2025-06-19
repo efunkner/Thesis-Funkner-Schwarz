@@ -29,58 +29,8 @@ right: |
     This report was built with <a href="https://quarto.org/">Quarto</a>.
 ---
 
-# Einführung
-Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Demonstration werden digitale Biquad-Filter entworfen und auf einem ESP Lyrat V4.3 sowie einem PYNQZ2 implementiert. Die Filter werden mittels Matlab- sowie Pythontools entworfen. 
+{{< include chapters/einleitung/einleitung.qmd >}}
 
-## IIR-Filter zweiter Ordnung
-Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. Grundlegend zeichnen sich IIR-Filter durch ihre characteristik aus, bei der Berechnung des aktuellen Ausgangssingals durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.
+{{< include chapters/theorie/theorie.qmd >}}
 
-Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfter Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.
-
-Biquadratische Filter, kurz als "Biquad" bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die möglichkeit komplexe IIR-Filter höhrer Ordnung auf einfache Weise zu realsieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.
-
-# Differenzengleichung eines IIR Filters zweiter Ordnung
-Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Differenzengleichung des Biquad-Filters:
-
-$$
-y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
-$$
-
-Der Wert $y[n]$ bezeichnet den Ausgabewert zum Sample $n$, während $x[n]$ den Eingangswert darstellt. Der aktuelle Ausgabewert $y[n]$ ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten $b_0$, $b_1$ und $b_2$ bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während $a_1$ und $a_2$ den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf $a_0$ auf 1 normiert:
-$$
-y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-$$
-Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert und daraus folgt die folgende Übertragunsfunktion.
-
-# Übertragungsfunktion eines IIR-Filters zweiter Ordnung
-
-$$
-H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
-$$
-Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang im Frequenzbereich beschrieben. Um die Stabilität des Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen.
-
-## Implementierungsstrukturen biquadratischer Filter
-
-
-# Differenzengleichung der Direktform 1:
-
-$y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]$
-$w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2$
-
-
-Differenzengleichung der Direktform 2:
-
-$y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]$
-$w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]$
-
-
-Differenzengleichung der transponierten Direktform 2:
-
-$y[n] = b_0 x[n] + s_1[n-1]$
-$s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]$
-$s_2[n] = b_2 x[n] - a_2 y[n]$
-
-# Bilineartransformation
-Mittels der Bilineartransformation ist es möglich einen bestehenden analogen Filter, anhand seiner Übertragungsfunktion zu digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.
-
-
+{{< include chapters/bilinear/bilinear.qmd >}}

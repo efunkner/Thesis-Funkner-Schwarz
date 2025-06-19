@@ -1,0 +1,2 @@
+## Einführung
+Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Demonstration werden digitale Biquad-Filter entworfen und auf einem ESP Lyrat V4.3 sowie einem PYNQZ2 implementiert. Die Filter werden mittels Matlab- sowie Pythontools entworfen.

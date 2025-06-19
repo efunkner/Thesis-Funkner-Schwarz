@@ -1,151 +1,147 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+    <meta charset="utf-8">
+    <meta name="generator" content="quarto-1.7.23">
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.23">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Eduard Funkner">
-<meta name="author" content="Martin Schwarz">
-
-<title>Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-58d60837e5c3cc41aed2b21062153a0f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
+    <title>dokumentation</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+        vertical-align: middle;
       }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
+    </style>
 
-<meta name="citation_title" content="Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen">
-<meta name="citation_author" content="Eduard Funkner">
-<meta name="citation_author" content="Martin Schwarz">
-<meta name="citation_publication_date" content="2025-06-19">
-<meta name="citation_cover_date" content="2025-06-19">
-<meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-06-19">
-<meta name="citation_language" content="de">
-</head>
+    <style>
+      body.hypothesis-enabled #quarto-embed-header {
+        padding-right: 36px;
+      }
 
-<body class="quarto-light">
+      #quarto-embed-header {
+        height: 3em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px;
+      }
 
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</h1>
-          </div>
+      #quarto-embed-header h6 {
+        font-size: 1.1em;
+        padding-top: 0.6em;
+        margin-left: 1em;
+        margin-right: 1em;
+        font-weight: 400;
+      }
+
+      #quarto-embed-header a.quarto-back-link,
+      #quarto-embed-header a.quarto-download-embed {
+        font-size: 0.8em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+
+      .quarto-back-container {
+        padding-left: 0.5em;
+        display: flex;
+      }
+
+      .headroom {
+          will-change: transform;
+          transition: transform 200ms linear;
+      }
+
+      .headroom--pinned {
+          transform: translateY(0%);
+      }
+
+      .headroom--unpinned {
+          transform: translateY(-100%);
+      }      
+    </style>
+
+    <script>
+    window.document.addEventListener("DOMContentLoaded", function () {
+
+      var header = window.document.querySelector("#quarto-embed-header");
+      const titleBannerEl = window.document.querySelector("body > #title-block-header");
+      if (titleBannerEl) {
+        titleBannerEl.style.paddingTop = header.clientHeight + "px";
+      }
+      const contentEl = window.document.getElementById('quarto-content');
+      for (const child of contentEl.children) {
+        child.style.paddingTop = header.clientHeight + "px";
+        child.style.marginTop = "1em";
+      }
+
+      // Use the article root if the `back` call doesn't work. This isn't perfect
+      // but should typically work
+      window.quartoBackToArticle = () => {
+        var currentUrl = window.location.href;
+        window.history.back();
+        setTimeout(() => {
+            // if location was not changed in 100 ms, then there is no history back
+            if(currentUrl === window.location.href){              
+                // redirect to site root
+                window.location.href = "../index.html";
+            }
+        }, 100);
+      }
+
+      const headroom = new window.Headroom(header, {
+        tolerance: 5,
+        onPin: function () {
+        },
+        onUnpin: function () {
+        },
+      });
+      headroom.init();
+    });
+    </script>
 
     
-    <div class="quarto-title-meta-container">
-      <div class="quarto-title-meta-column-start">
-            <div class="quarto-title-meta-author">
-          <div class="quarto-title-meta-heading">Autor:innen</div>
-          <div class="quarto-title-meta-heading">Zugehörigkeit</div>
-          
-                <div class="quarto-title-meta-contents">
-            <p class="author">Eduard Funkner <a href="mailto:efunkner@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+<script src="../site_libs/manuscript-notebook/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-58d60837e5c3cc41aed2b21062153a0f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+     
+      </head>
+
+  <body class="quarto-notebook quarto-light">
+    <div id="quarto-embed-header" class="headroom fixed-top bg-primary">
+      
+      <a onclick="window.quartoBackToArticle(); return false;" class="btn btn-primary quarto-back-link" href=""><i class="bi bi-caret-left"></i> Zurück zum Artikel</a>
+      <h6><i class="bi bi-journal-code"></i> Dokuemtation</h6>
+
+            <a href="../Pynq-Z2/Dokumentation.md" class="btn btn-primary quarto-download-embed" download="Dokumentation.md">Notizbuch herunterladen</a>
           </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        <a href="https://www.hs-bremen.de">
-                        Hochschule Bremen - City University of Applied Sciences (HSB)
-                        </a>
-                      </p>
-                  </div>
-                      <div class="quarto-title-meta-contents">
-            <p class="author">Martin Schwarz <a href="mailto:mschwarz@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-          </div>
-                    </div>
-        
-        <div class="quarto-title-meta">
 
-                      
-                <div>
-            <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
-            <div class="quarto-title-meta-contents">
-              <p class="date">19. Juni 2025</p>
-            </div>
-          </div>
-          
-                
-              </div>
-      </div>
-      <div class="quarto-title-meta-column-end quarto-other-formats-target">
-      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Andere Formate</div><div class="quarto-title-meta-contents"><p><a href="thesis_fs.pdf"><i class="bi bi-file-pdf"></i>PDF</a></p></div></div></div>
-    </div>
-
-
-
-    <div class="quarto-other-links-text-target">
-    </div>  </div>
-</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+     <div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
 <div id="quarto-sidebar-toc-left" class="sidebar toc-left">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
-  <li><a href="#iir-filter-zweiter-ordnung" id="toc-iir-filter-zweiter-ordnung" class="nav-link" data-scroll-target="#iir-filter-zweiter-ordnung">IIR-Filter zweiter Ordnung</a></li>
-  <li><a href="#differenzengleichung-eines-iir-filters-zweiter-ordnung" id="toc-differenzengleichung-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#differenzengleichung-eines-iir-filters-zweiter-ordnung">Differenzengleichung eines IIR Filters zweiter Ordnung</a></li>
-  <li><a href="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung" id="toc-übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung">Übertragungsfunktion eines IIR-Filters zweiter Ordnung</a>
-  <ul class="collapse">
-  <li><a href="#implementierungsstrukturen-biquadratischer-filter" id="toc-implementierungsstrukturen-biquadratischer-filter" class="nav-link" data-scroll-target="#implementierungsstrukturen-biquadratischer-filter">Implementierungsstrukturen biquadratischer Filter</a></li>
-  </ul></li>
-  <li><a href="#differenzengleichung-der-direktform-1" id="toc-differenzengleichung-der-direktform-1" class="nav-link" data-scroll-target="#differenzengleichung-der-direktform-1">Differenzengleichung der Direktform 1:</a>
-  <ul class="collapse">
-  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation">Bilineartransformation</a></li>
-  </ul></li>
-  <li><a href="#dokuemtation" id="toc-dokuemtation" class="nav-link" data-scroll-target="#dokuemtation">Dokuemtation</a>
+  <li><a href="#dokuemtation" id="toc-dokuemtation" class="nav-link active" data-scroll-target="#dokuemtation">Dokuemtation</a>
   <ul class="collapse">
   <li><a href="#axi-protokoll" id="toc-axi-protokoll" class="nav-link" data-scroll-target="#axi-protokoll">AXI-Protokoll</a>
   <ul class="collapse">
@@ -164,59 +160,11 @@ window.Quarto = {
   </ul></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="Pynq-Z2/Audio_Reference_Design-preview.html"><i class="bi bi-journal-code"></i>Audio Reference Design</a></li><li><a href="jupyter/Pynq/Lerndemo_v1/Lerndemo_v1_Audio-preview.html"><i class="bi bi-journal-code"></i>Aufnahme und Wiedergabe</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v1-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/Pynq/Audio_Filter_Test_v2/Codec_Test_v6-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/bilinear-preview.html"><i class="bi bi-journal-code"></i>bilinear.ipynb</a></li><li><a href="chapters/bilinear/bilinear-preview.html"><i class="bi bi-journal-code"></i>Bilineartransformation</a></li><li><a href="Pynq-Z2/Dokumentation-preview.html"><i class="bi bi-journal-code"></i>Dokuemtation</a></li><li><a href="chapters/einleitung/einleitung-preview.html"><i class="bi bi-journal-code"></i>Einführung</a></li><li><a href="Pynq-Z2/Notebook_Funktionen-preview.html"><i class="bi bi-journal-code"></i>Funktionen im Notebook:</a></li><li><a href="chapters/theorie/theorie-preview.html"><i class="bi bi-journal-code"></i>IIR-Filter zweiter Ordnung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v5-preview.html"><i class="bi bi-journal-code"></i>Matlab_Filter_Test_TransmissionTest_v5.ipynb</a></li><li><a href="Pynq-Z2/Development_Notes_Pynq-Filter-preview.html"><i class="bi bi-journal-code"></i>Notiezen und Information zu dem Entwiklungsstatus</a></li><li><a href="jupyter/plotting_audio-preview.html"><i class="bi bi-journal-code"></i>plotting_audio.ipynb</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v2-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v3-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2-preview.html"><i class="bi bi-journal-code"></i>Warum Padding wichtig ist</a></li></ul></div></nav>
+</nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-  
-
-
-<section id="einführung" class="level2">
-<h2 class="anchored" data-anchor-id="einführung">Einführung</h2>
-<p>Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Lerndemonstration werden digitale Biquad-Filter mithilfe von Matlab- und Pythontools entworfen und im Anschluss auf Hard und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration mithilfe ihrer Hardware für sich den Prozess reproduzieren können.</p>
-</section>
-<section id="iir-filter-zweiter-ordnung" class="level2">
-<h2 class="anchored" data-anchor-id="iir-filter-zweiter-ordnung">IIR-Filter zweiter Ordnung</h2>
-<p>Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. Grundlegend zeichnen sich IIR-Filter durch ihre characteristik aus, bei der Berechnung des aktuellen Ausgangssingals durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.</p>
-<p>Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfter Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.</p>
-<p>Biquadratische Filter, kurz als “Biquad” bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die möglichkeit komplexe IIR-Filter höhrer Ordnung auf einfache Weise zu realsieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.</p>
-</section>
-<section id="differenzengleichung-eines-iir-filters-zweiter-ordnung" class="level1">
-<h1>Differenzengleichung eines IIR Filters zweiter Ordnung</h1>
-<p>Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Differenzengleichung des Biquad-Filters:</p>
-<p><span class="math display">\[
-y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
-\]</span></p>
-<p>Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zum Sample <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert: <span class="math display">\[
-y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]</span> Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittles der z-Transformation in den z-Bereich transformiert und daraus folgt die folgende Übertragunsfunktion.</p>
-</section>
-<section id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="level1">
-<h1>Übertragungsfunktion eines IIR-Filters zweiter Ordnung</h1>
-<p><span class="math display">\[
-H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
-\]</span> Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu Eingang im Frequenzbereich beschrieben. Um die Stabilität des Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen.</p>
-<section id="implementierungsstrukturen-biquadratischer-filter" class="level2">
-<h2 class="anchored" data-anchor-id="implementierungsstrukturen-biquadratischer-filter">Implementierungsstrukturen biquadratischer Filter</h2>
-</section>
-</section>
-<section id="differenzengleichung-der-direktform-1" class="level1">
-<h1>Differenzengleichung der Direktform 1:</h1>
-<p><span class="math inline">\(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)</span> <span class="math inline">\(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2\)</span></p>
-<p>Differenzengleichung der Direktform 2:</p>
-<p><span class="math inline">\(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)</span> <span class="math inline">\(w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]\)</span></p>
-<p>Differenzengleichung der transponierten Direktform 2:</p>
-<p><span class="math inline">\(y[n] = b_0 x[n] + s_1[n-1]\)</span> <span class="math inline">\(s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]\)</span> <span class="math inline">\(s_2[n] = b_2 x[n] - a_2 y[n]\)</span></p>
-<section id="bilineartransformation" class="level2">
-<h2 class="anchored" data-anchor-id="bilineartransformation">Bilineartransformation</h2>
-<p>Mittels der Bilineartransformation ist es möglich einen bestehenden analogen Filter, anhand seiner Übertragungsfunktion zu digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.</p>
-</section>
-</section>
-<section id="dokuemtation" class="level1">
+<main class="content quarto-banner-title-block" id="quarto-document-content">      <section id="dokuemtation" class="level1">
 <h1>Dokuemtation</h1>
 <p>Hier werden Informationen zu DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board gesammelt und dokumentiert.</p>
 <section id="axi-protokoll" class="level2">
@@ -273,10 +221,8 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
 </section>
 </section>
 </section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main>
-<!-- /main column -->
-<script id="quarto-html-after-body" type="application/javascript">
+     </main>
+<!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -674,10 +620,6 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
       }
     }
   });
-  </script>
-</div> <!-- /content -->
-
-
-
-
+  </script>  </div> <!-- /content --> 
+  
 </body></html>

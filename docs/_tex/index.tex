@@ -178,7 +178,7 @@
 \title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
 Systemen}
 \author{Eduard Funkner \and Martin Schwarz}
-\date{2025-06-17}
+\date{2025-06-19}
 \begin{document}
 \maketitle
 
@@ -189,13 +189,15 @@ Systemen}
 \tableofcontents
 }
 
-\chapter{Einführung}\label{einfuxfchrung}
+\section{Einführung}\label{einfuxfchrung}
 
 Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung
 von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs.
-Im Umfang dieser Demonstration werden digitale Biquad-Filter entworfen
-und auf einem ESP Lyrat V4.3 sowie einem PYNQZ2 implementiert. Die
-Filter werden mittels Matlab- sowie Pythontools entworfen.
+Im Umfang dieser Lerndemonstration werden digitale Biquad-Filter
+mithilfe von Matlab- und Pythontools entworfen und im Anschluss auf Hard
+und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis
+dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration
+mithilfe ihrer Hardware für sich den Prozess reproduzieren können.
 
 \section{IIR-Filter zweiter Ordnung}\label{iir-filter-zweiter-ordnung}
 
@@ -224,7 +226,8 @@ Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische
 Stabilität, Flexibilät bei der Parameteranpassung und Modularität des
 Designs.
 
-\chapter{Differenzengleichung}\label{differenzengleichung}
+\chapter{Differenzengleichung eines IIR Filters zweiter
+Ordnung}\label{differenzengleichung-eines-iir-filters-zweiter-ordnung}
 
 Digitale Filter können mit einer linearen Differenzengleichung
 beschrieben werden. Differenzengleichung des Biquad-Filters:
@@ -243,23 +246,25 @@ den Einfluss des aktuellen und der vergangenen Eingabewerte
 früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der
 Koeffizient auf \(a_0\) auf 1 normiert: \[
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]
-
-\chapter{Übertragungsfunktion}\label{uxfcbertragungsfunktion}
-
-Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
+\] Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
 Differenzengleichung mittles der z-Transformation in den z-Bereich
-transformiert: \[
+transformiert und daraus folgt die folgende Übertragunsfunktion.
+
+\chapter{Übertragungsfunktion eines IIR-Filters zweiter
+Ordnung}\label{uxfcbertragungsfunktion-eines-iir-filters-zweiter-ordnung}
+
+\[
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
 \] Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu
 Eingang im Frequenzbereich beschrieben. Um die Stabilität des
 Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters
 innerhalb des Einheitskreises der z-Ebene liegen.
 
-\chapter{Directform 1, 2 und
-transponiert}\label{directform-1-2-und-transponiert}
+\section{Implementierungsstrukturen biquadratischer
+Filter}\label{implementierungsstrukturen-biquadratischer-filter}
 
-Differenzengleichung der Direktform 1:
+\chapter{Differenzengleichung der Direktform
+1:}\label{differenzengleichung-der-direktform-1}
 
 \(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)
 \(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2\)
@@ -275,12 +280,95 @@ Differenzengleichung der transponierten Direktform 2:
 \(s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]\)
 \(s_2[n] = b_2 x[n] - a_2 y[n]\)
 
-\chapter{Bilineartransformation}\label{bilineartransformation}
+\section{Bilineartransformation}\label{bilineartransformation}
 
 Mittels der Bilineartransformation ist es möglich einen bestehenden
 analogen Filter, anhand seiner Übertragungsfunktion zu
 digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4
 des Analog Systems Lab Kit PRO entnommen.
+
+\chapter{Audio Reference Design}\label{audio-reference-design}
+
+Hier wird erklärt wie das Audio Referenzdesign aus dem Base-Overlay
+entstanden ist. Prinzipiell wurde der Audioanteil aus dem Base-Overlay
+übernommen und die nicht benötigten Elemente entfernt. Die Einstellungen
+der Blöcke wurden ebenfalls übernommen. Um das Design in Vivado zu
+erhalten, wurde das Base-Overlay entsprechend der Anleitung auf dem
+\href{https://github.com/Xilinx/PYNQ/tree/master}{Pynq-Repo} unter Linux
+neu generiert. \#\#\# Einstellungen \#\#\#\# Processing System (PS): In
+der Clock Config muss eines der Clock Signale auf 100 MHz eingestellt
+werden, da der \emph{audio\_codec\_controller} nur 100 MHz Clock Signale
+akzeptiert. Sollte ein anderer Tackt gegeben werden, gibt es eine
+Warnung in Vivado. Zusätzlich muss ein ein I2C Port am PS eingeschaltet
+werden. Im Base-Overlay wurde hierfür \emph{I2C1}.
+
+\subsubsection{Constraints:}\label{constraints}
+
+Die Constraints entstammen aus dem
+\href{https://github.com/Xilinx/PYNQ/tree/master}{Pynq-Repo}. Alles, was
+nicht benötigt wurde auskommentiert. Die Constraints weisen unter
+anderem den Benötigten internen Pis Namen zu, damit diese besser
+nachvollzogen werden können. Es ist notwendig, dass die Namen an dem
+Ein- und Ausgängen aus den Constraints übernommen werden, sonst greifen
+die Treiber in Pynq nicht.
+
+\subsubsection{Clocking Wizzard:}\label{clocking-wizzard}
+
+Die Einstellungen des Clocking Wizzard wurden aus dem Base-Overlay
+übernommen. Die Aufgabe des Clocking Wizzard ist es den 10 MHz Master
+Clock für den Audio Codec und damit der I2S Übertragung zu generieren.
+Hier wird dieser aus dem 100 MHz Clock generiert. Dies kann auch direkt
+über den PS mit den entsprechenden Einstellungen generiert werden. Das
+Wichtige ist, das dieses Tackt-Signal nach außen an den richtigen Pin
+geführt wird. \textbf{Zu den Einstellungen:} - Zur Sicherheit am Anfang
+die Board Parameter zurücksetzen. - \emph{clk\_in1} darf \textbf{nicht}
+auf \emph{sys clock} eingestellt sein! - Die Einstellungen sollten so
+aussehen. - Wichtig ist, dass unten die \emph{Input Frequency(MHz)} von
+\emph{clk\_in1} auf 100MHz eingestellt ist. - Wenn ein Slider vorhanden
+ist, sollte dieser auf Auto gestellt werden, dann wird die Input
+Frequenz übernommen. - Die restlichen Einstellungen sollten bereits so
+sein. - Der \emph{clk\_out1} soll auf 10MHz eingestellt werden. - Der
+\emph{Reset Type} soll auf \emph{Active Low}, da derselbe Reset vom
+\emph{codec\_controller} verwendet werden soll und dieser ebenfalls
+\emph{Active Low}. - Bei synchronisierten Rest kann dieser auch
+\emph{Active High} sein. - Diese letzten beiden Tabs sollten dienen als
+Überblick der vorherigen Einstellungen und sollten am Ende so aussehen.
+- Falls nicht: Die vorherigen Einstellungen überprüfen.
+
+\subsubsection{Audio Codec Controller:}\label{audio-codec-controller}
+
+Der \emph{audio\_codec\_controller} ist eine eigene IP aus dem
+\href{https://github.com/Xilinx/PYNQ/tree/master}{Pynq-Repo} und
+generiert die vom Codec benötigten Signale sowie steuert den I2S
+Daten-Stream. Die Namen des Ein- und Ausgänge sowie der IP selbst müssen
+übereinstimmen, sonst greift der im Pynq enthaltene Audio-Treiber nicht
+bzw. es muss sonst der neue Name an den Treiber übergeben werden. Die
+\emph{Codec Address (addr1,addr0)} sollten in den Blockeinstellungen auf
+\emph{11} bereits voreingestellt sein.
+
+\subsubsection{Anmerkungen:}\label{anmerkungen}
+
+Vivado wird Warnungen bezüglich \emph{clk\_in1} und \emph{clk\_out1}
+geben, da diese Clocksignale oft durch das Führen nach außen von Vivado
+als neuer Clock-Tree missinterpretiert werden, obwohl diese an dem Haubt
+Clock-Tree verbunden sind. Diese Warnungen können entweder ignoriert
+werden oder es kann Vivado explizit die Zusammenhänge der Clocks
+mitgeteilt werden.
+
+\section{Referenzdesign v2}\label{referenzdesign-v2}
+
+Als Folge des Versuches Echtzeitfilterung umzusetzen entstand eine
+leicht veränderte Version des ursprügliches Referenzdesign. Dieses
+unterscheidet sich nur in der Art wie das 10MHz Clock Signal generiert
+wird. In diesem aktualisierten Design wird das 10\,MHz-Taktsignal direkt
+im Processing System (PS) erzeugt, mit einem synchronisierten
+Reset-Signal. Der Vorteil dieses Ansatzes besteht darin, dass Vivado
+keine Probleme mit den Clock-Trees erkennt und entsprechend auch keine
+Warnungen ausgibt. Zusätzlich zum Taktsignal steht nun auch ein
+passendes, synchronisiertes Reset-Signal zur Verfügung.
+
+Das aktualisierte Design wird aller Voraussicht nach die Grundlage für
+zukünftige Implementierungen bilden.
 
 
 
