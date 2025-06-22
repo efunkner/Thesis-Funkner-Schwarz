@@ -1,0 +1,6 @@
+vlib work
+vcom  Ellip_HP_4_300_80_1v2_src_BiquadDF2Section1.vhd
+vcom  Ellip_HP_4_300_80_1v2_src_Biquad_Filter.vhd
+vcom  Ellip_HP_4_300_80_1v2_src_BiquadDF2Section1_block.vhd
+vcom  Ellip_HP_4_300_80_1v2_src_Biquad_Filter1.vhd
+vcom  Ellip_HP_4_300_80_1v2_src_Biquad_Filtrer.vhd

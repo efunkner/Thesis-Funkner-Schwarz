@@ -2,8 +2,10 @@ close all
 clear
 clc
 %% Filter Koeffizienten Laden
-load('Filter_WorkSpace_v1.mat') % Butter_HP_4_2500, Butter_TP_4_1000
+% load('Filter_WorkSpace_v1.mat') % Butter_HP_4_2500, Butter_TP_4_1000
 % load('Filter_WorkSpace_v2.mat') % Butter_HP_4_2500, Elliptic_TP_4_1000_1_40
+load('Filter_WorkSpace_v3.mat') % Butter_HP_4_300, Butter_TP_4_6000
+% load('Filter_WorkSpace_v3_e.mat') % Elliptic_HP_4_300_80_1, Ellip_TP_4_6000_80_1
 %% Vivado einfügen
 hdlsetuptoolpath('ToolName','Xilinx Vivado','ToolPath','C:\Xilinx\Vivado\2022.1\bin')
 %% HP-Filter: Testsignal + Signalfilterung (Matlab-Filter)
@@ -11,9 +13,10 @@ Fs = 48000;
 % Beispielsignal (z. B. mit tiefem Rauschen)
 T = 0.1;
 t = 0:1/Fs:T-1/Fs;
-x = sin(2*pi*2500*t)+sin(2*pi*100*t); % Mid + Bass
+scale = 1;
+x = scale*(sin(2*pi*2500*t)+sin(2*pi*100*t)); % Mid + Bass
 xs = timeseries(x,t);
-x_soll = sin(2*pi*2500*t);
+x_soll = scale*sin(2*pi*2500*t);
 % Butter_HP_4_2500
 % Filter anwenden
 y_m = sosfilt(SOS_HP, x)*prod(G_HP);
@@ -29,7 +32,9 @@ legend('Filtered Signal', 'OG Signal','Soll Signal');
 wl = 32;                            % Wortlänge in Bits
 fl = 16;                            % Anz. Bits für "Nachkommerstelle"
 DI_input = fixdt(1, wl, fl);
+% DI_input = fixdt(1, wl, 0);
 
+% Koff_Type = fixdt(1, wl, fl);
 sos = SOS_HP;
 g = G_HP;
 
@@ -52,9 +57,10 @@ Fs = 48000;
 % Beispielsignal (z. B. mit tiefem Rauschen)
 T = 0.01;
 t = 0:1/Fs:T-1/Fs;
-x = sin(2*pi*1000*t)+sin(2*pi*5000*t); % Mid + Bass
+scale = 1;
+x = scale*(sin(2*pi*1000*t)+sin(2*pi*5000*t)); % Mid + Bass
 xs = timeseries(x,t);
-x_soll = sin(2*pi*1000*t);
+x_soll = scale*sin(2*pi*1000*t);
 % Butter_TP_4_1000
 % Filter anwenden
 y_m = sosfilt(SOS_TP, x)*prod(G_TP);
@@ -71,6 +77,10 @@ wl = 32;                            % Wortlänge in Bits
 fl = 16;                            % Anz. Bits für "Nachkommerstelle"
 DI_input = fixdt(1, wl, fl);
 %DI_input = 'double';
+% DI_input = fixdt(1, wl, 0);
+
+% Koff_Type = fixdt(1, wl, fl);
+
 sos = SOS_TP;
 g = G_TP;
 
