@@ -178,7 +178,7 @@
 \title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
 Systemen}
 \author{Eduard Funkner \and Martin Schwarz}
-\date{2025-06-14}
+\date{2025-06-23}
 \begin{document}
 \maketitle
 
@@ -193,16 +193,21 @@ Systemen}
 
 Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung
 von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs.
-Im Umfang dieser Demonstration werden digitale Biquad-Filter entworfen
-und auf einem ESP Lyrat V4.3 sowie einem PYNQZ2 implementiert. Die
-Filter werden mittels Matlab- sowie Pythontools entworfen.
+Im Umfang dieser Lerndemonstration werden digitale Biquad-Filter
+mithilfe von Matlab- und Pythontools entworfen und im Anschluss auf Hard
+und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis
+dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration
+mithilfe ihrer Hardware für sich den Prozess reproduzieren können.
 
-\section{IIR-Filter zweiter Ordnung}\label{iir-filter-zweiter-ordnung}
+\chapter{Theoritische Grundlagen}\label{theoritische-grundlagen}
+
+\section{Infinite Impulse Response
+(IIR)-Filter}\label{infinite-impulse-response-iir-filter}
 
 Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung
-zu den grundlegenden Typen der digitalen Filter. Grundlegend zeichnen
-sich IIR-Filter durch ihre characteristik aus, bei der Berechnung des
-aktuellen Ausgangssingals durch die Verwendung des gegenwärtigen und
+zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen
+sich fundamental durch ihre characteristik aus, bei der Berechnung des
+aktuellen Ausgangswertes durch die Verwendung des gegenwärtigen und
 vergangenen Eingabewertes als auch des vorherigen Ausgabewertes.
 Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort
 von IIR-Filtern theoretisch unendlich lang andauern kann, was sie
@@ -224,7 +229,8 @@ Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische
 Stabilität, Flexibilät bei der Parameteranpassung und Modularität des
 Designs.
 
-\chapter{Differenzengleichung}\label{differenzengleichung}
+\section{Differenzengleichung eines IIR Filters zweiter
+Ordnung}\label{differenzengleichung-eines-iir-filters-zweiter-ordnung}
 
 Digitale Filter können mit einer linearen Differenzengleichung
 beschrieben werden. Differenzengleichung des Biquad-Filters:
@@ -233,7 +239,7 @@ beschrieben werden. Differenzengleichung des Biquad-Filters:
 y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
 \]
 
-Der Wert \(y[n]\) bezeichnet den Ausgabewert zur Zeit \(n\), während
+Der Wert \(y[n]\) bezeichnet den Ausgabewert zum Sample \(n\), während
 \(x[n]\) den Eingangswert darstellt. Der aktuelle Ausgabewert \(y[n]\)
 ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen
 Eingabewerte, subtrahiert mit den zwei gewichteten vergangen
@@ -243,36 +249,183 @@ den Einfluss des aktuellen und der vergangenen Eingabewerte
 früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der
 Koeffizient auf \(a_0\) auf 1 normiert: \[
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]
-
-\chapter{Übertragungsfunktion}\label{uxfcbertragungsfunktion}
-
-Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
+\] Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
 Differenzengleichung mittles der z-Transformation in den z-Bereich
-transformiert: \[
+transformiert und daraus folgt die folgende Übertragunsfunktion.
+
+\section{Übertragungsfunktion eines IIR-Filters zweiter
+Ordnung}\label{uxfcbertragungsfunktion-eines-iir-filters-zweiter-ordnung}
+
+\[
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
 \] Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu
 Eingang im Frequenzbereich beschrieben. Um die Stabilität des
 Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters
 innerhalb des Einheitskreises der z-Ebene liegen.
 
-\chapter{Directform 1, 2 und
-transponiert}\label{directform-1-2-und-transponiert}
+\chapter{Implementierungsstrukturen biquadratischer
+Filter}\label{implementierungsstrukturen-biquadratischer-filter}
 
-Differenzengleichung der Direktform 1:
+Die praktische Implementierung von biquaratischen Filtern erfolgt durch
+die direkte Umsetzung der Differezengleichungen in Software oder
+Hardware.
+
+Dafür werden die verzögerten Eingangswerte \(x[n-1]\) und \(x[n-2]\),
+sowie die Ausgangswerte \(y[n-1]\) und \(y[n-2]\) in Speicherelementen,
+sogenannten Verzögerungsgliedern, gespeichert. Der aktuelle Ausgangswert
+\(y[n]\) wird mittels der gewichteten Summation aller Terme gemäß der
+jeweiligen Differenzengleichung berechnet.
+
+Bei der numerischen Implementierung sind verschiedene Aspekte zu
+berücksichtigen, insbesondere die Wortbreite und des Zahlenformats
+(Festkomma oder Gleitkomma).
+
+Weitere Einflüsse wie Rundungsfehler oder Quantisierungsrauschen können
+die Filtercharakteristik beeinflussen und im Extremfall die Stabilität
+des Filters gefährden.
+
+Diese Implementierungsstrukturen bieten die Möglichkeit mehrere
+Filter-Sektionen aneinander zu Verbinden. Diese Modularität
+biquadratischer Filter ermöglicht, komplexere Filtersysteme höherer
+Ordnung, durch die Kaskadierung mehrerer Biquad-Sektionen zu
+realisieren.
+
+Dadurch können Vorteile im Bezug auf numerische Stabilität,
+Designflexibiltät und Implementierungseffizienz geschaffen werden, weil
+jede Sektion unabhängig entworfen und optimiert werden kann.
+
+\section{Direktform 1}\label{direktform-1}
+
+Die Direktform 1 stellt die direkte Umsetzung der biquadratischen
+Differenzengleichung in einer Signalflussstruktur dar.
+
+Die Implementierung folgt direkt der mathematischen Beschreibung unter
+der Verwendung separater Verzögerungsketten für die Eingangs- als auch
+die Ausgangswerte.
+
+Diese Struktur kann als eine Parallelschaltung eines rein rekusiven
+Teils (nur Pole) und eines nicht rekursiven Teils (nur Nullstellen)
+aufgefasst werden.
+
+\(y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]\)
+
+Für die Direktform 1 Implementierung werden zunächst alle gewichteten
+Eingangswerte und deren Verzögerungen zusammengefasst und berechnet:
+
+\(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2]\)
+
+Anschließend wird die Rückkoppling der verzögerten Ausgangswerte
+realisiert:
+
 \(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)
-\(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2\)
 
-Differenzengleichung der Direktform 2:
-\(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/DF1.png}}
+
+}
+
+\caption{Signalflussbild: Direktform 1}
+
+\end{figure}%
+
+In dieser Struktur werden vier Verzögerungselemente verwendet: zwei für
+die Eingangsverzögerung, \(x[n-1]\) und \(x[n-2]\), sowie zwei für die
+Ausgangsverzögerung, \(y[n-1]\) und \(y[n-2]\). Die Multiplikationen
+zwischen den Verzögerungselementen und den Koeffizienten erfolgen
+parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen
+lässt.
+
+Die Direktform 1 zeichnet sich durch ihre konzeptionelle Einfachheit und
+die direkte Korrespondenz zur Differenzengleichung aus. Nachteilhaft bei
+dieser Struktur ist der erhöhte Speicherbedarf, aufgrund der redundanten
+Verzögerungselemente.
+
+\section{Direktform 2 (Kanonische
+Form)}\label{direktform-2-kanonische-form}
+
+Die Direktform 2, oder auch als kanonische Form bekannt, ist eine
+optimierte Variante der Direktform 1, welche durch die Umordnung der
+Operationen die Anzahl der benötigten Verzögerungselemente minimiert.
+
+Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer
+zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der
+Vorwärts- und Rückwärtsverarbeitung vertauscht.
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/DF2.png}}
+
+}
+
+\caption{Signalflussbild: Direktform 2}
+
+\end{figure}%
+
+Zunächst wird ein Zwischenwert \(w[n]\) durch die rekursive Beziehungen
+erzeugt:
+
 \(w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]\)
 
-Differenzengleichung der transponierten Direktform 2:
-\(y[n] = b_0 x[n] + s_1[n-1]\)
-\(s_1[n] = s_2[n - 1] + b_1 x[n] - a_1 y[n]\)
-\(s_2[n] = b_2 x[n] - a_2 y[n]\)
+Der Zwischenwert \(w[n]\) dient als Substituion für die
+Verzögerungselemente der Ein- und Ausgangswerte.
 
-\chapter{Bilineartransformation}\label{bilineartransformation}
+\(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)
+
+In dieser Struktur werden nur zwei Verzögerungselemente für w{[}n-1{]}
+und w{[}n-2{]} benötigt, da die rekursive als auch die nicht-rekursive
+Verarbeitung auf diesleben verzögerten Werte zugreifen.
+
+Die Bezeichnung ``kanonisch'' bezieht sich darauf, dass diese
+Implementierung die minimal mögliche Anzahl von Verzögerungselementen
+verwendet und dadurch die Speichereffizienz optimiert.
+
+Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten
+Speicherressourcen. Jedoch weist diese Struktur eine erhöhte
+Empfindlichkeit gegenüber Quantisierungseffekten auf, da die
+Zwischenwerte \(w[n]\) größere Dynamikbereiche aufweisen können als die
+ursprünglichen Ein- und Ausgangswerte.
+
+\section{Transponierte Direktform 2:}\label{transponierte-direktform-2}
+
+Die transponierte Direktform 2 kann gebildet werden mittels der
+Anwendung des Transpositionstheorems auf die Direktform 2. Dieses
+Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei
+gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente
+Übertragungsfunktion ergibt. Die resultierende Struktur weist oft
+günstigere numerische Eigenschaften auf, als die ursprüngliche Form.
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/TDF2.png}}
+
+}
+
+\caption{Signalflussbild: Transponierte Direktform 2}
+
+\end{figure}%
+
+Die transponierte Direktform 2 wird druch die folgende
+Differenzengleichungen beschrieben:
+
+\(s_2[n] = b_2 \cdot x[n] - a_2 \cdot y[n]\)
+
+\(s_1[n] =  s_2[n] + b_1 \cdot x[n] - a_1 \cdot y[n]\)
+
+\(y[n] = s_1[n] + b_0 \cdot x[n]\)
+
+Bei der transponierten Direktform 2 werden die Zwischenwerte \(s_1[n]\)
+und \(s_2[n]\) als Verzögerungselemente verwendet. Diese Struktur eignet
+sich besonders gut in der Implementierung von Echtzeitanwendung,
+aufgrund ihrer effizienten Berechnung und der guten Eignung für
+parallele oder pipelined Hardware-Architekturen.
+
+Ein wesentlicher Vorteil der transponierten Direktfrom 2 liegt in ihrer
+reduzierten Empfindlichkeit gegenüber Koeffizientenquantisierung. Die
+Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer
+verbesserten numerischen Stabilität führt.
+
+\section{Bilineartransformation}\label{bilineartransformation}
 
 Mittels der Bilineartransformation ist es möglich einen bestehenden
 analogen Filter, anhand seiner Übertragungsfunktion zu
