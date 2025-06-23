@@ -105,6 +105,16 @@ Typischerweise umfasst dieser Prozess die folgenden Schritte:
 
 Zusätzlich bietet der HDL Coder Funktionen zur Flächen- und Timing-Schätzung, was eine frühe Bewertung der Ressourcennutzung ermöglicht. Die Integration fester und gleitender Punktarithmetik, die Einhaltung von Codierungsrichtlinien sowie die Möglichkeit zur Erstellung von HDL-Testbenches machen den HDL Coder zu einem leistungsfähigen Werkzeug in der digitalen Hardwareentwicklung.
 
+### HDL Workflow Advisor
+Quelle: [HDL Workflow Advisor](https://de.mathworks.com/help/hdlcoder/ug/overview-of-workflows-in-hdl-workflow-advisor.html)<br>
+
+Der HDL Workflow Advisor ist ein interaktives Werkzeug in MATLAB/Simulink, das Anwender schrittweise durch den gesamten Prozess der HDL-Codegenerierung und FPGA-Integration führt. Er ermöglicht es, ein Simulink-Modell systematisch für die Hardwarebeschreibung vorzubereiten, zu analysieren und in einen synthetisierbaren VHDL- oder Verilog-Code umzuwandeln. Dabei bietet der Advisor strukturierte Workflows für verschiedene Einsatzzwecke wie die IP-Core-Generierung, die Simulation über FPGA-in-the-Loop (FIL) oder die Integration in Simulink Real-Time FPGA-I/O-Systeme.<br>
+
+Zu den zentralen Funktionen gehören die Überprüfung des Modells auf HDL-Kompatibilität, das Festlegen von Zielplattformen (z. B. Xilinx Vivado), das Konfigurieren von Interface-Signalen und Taktdomänen sowie das Generieren von HDL-Code mit anschließender Erstellung eines IP-Cores. Der HDL Workflow Advisor unterstützt außerdem die automatische Einbindung in externe Synthesetools durch geeignete Toolchain-Zuweisung.<br>
+
+Durch seine geführte Oberfläche ist der HDL Workflow Advisor besonders hilfreich für Anwender, die wenig Erfahrung mit der manuellen HDL-Entwicklung haben, aber dennoch ein bestehendes Simulink-Modell effizient in ein FPGA-basiertes System überführen möchten.<br>
+
+
 ### Verwendung des HDL Coder zur Generierung von Vivado-IP-Cores
 Der HDL Coder ermöglicht es, aus einem in Simulink modellierten digitalen System automatisch einen Vivado-kompatiblen IP-Core zu erzeugen. Dieser kann anschließend direkt in einem Xilinx-FPGA-Projekt verwendet werden, z. B. im Vivado Block Design. Der Prozess ist modellbasiert und unterstützt die automatisierte Codegenerierung, Testbench-Erstellung sowie die Verpackung als IP-Core. <br>
 
