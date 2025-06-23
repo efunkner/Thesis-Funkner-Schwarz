@@ -58,7 +58,7 @@ Anschließend wird die Rückkoppling der verzögerten Ausgangswerte realisiert:
 
 $y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]$
 
-![Signalflussbild: Direktform 1](chapters/grundlagen/DF1.png)
+![Signalflussbild: Direktform 1](DF1.png)
 
 In dieser Struktur werden vier Verzögerungselemente verwendet: zwei für die Eingangsverzögerung, $x[n-1]$ und $x[n-2]$, sowie zwei für die Ausgangsverzögerung, $y[n-1]$ und $y[n-2]$. Die Multiplikationen zwischen den Verzögerungselementen und den Koeffizienten erfolgen parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen lässt.
 
@@ -70,7 +70,7 @@ Die Direktform 2, oder auch als kanonische Form bekannt, ist eine optimierte Var
 
 Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der Vorwärts- und Rückwärtsverarbeitung vertauscht.
 
-![Signalflussbild: Direktform 2](chapters/grundlagen/DF2.png)
+![Signalflussbild: Direktform 2](DF2.png)
 
 Zunächst wird ein Zwischenwert $w[n]$ durch die rekursive Beziehungen erzeugt:
 
@@ -90,7 +90,7 @@ Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten Speicherressource
 
 Die transponierte Direktform 2 kann gebildet werden mittels der Anwendung des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente Übertragungsfunktion ergibt. Die resultierende Struktur weist oft günstigere numerische Eigenschaften auf, als die ursprüngliche Form.
 
-![Signalflussbild: Transponierte Direktform 2](chapters/grundlagen/TDF2.png)
+![Signalflussbild: Transponierte Direktform 2](TDF2.png)
 
 Die transponierte Direktform 2 wird druch die folgende Differenzengleichungen beschrieben:
 
