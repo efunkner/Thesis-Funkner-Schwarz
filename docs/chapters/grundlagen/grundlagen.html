@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Eduard Funkner">
-<meta name="author" content="Martin Schwarz">
 
-<title>Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</title>
+<title>grundlagen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,20 +23,17 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-58d60837e5c3cc41aed2b21062153a0f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="grundlagen_files/libs/clipboard/clipboard.min.js"></script>
+<script src="grundlagen_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="grundlagen_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="grundlagen_files/libs/quarto-html/popper.min.js"></script>
+<script src="grundlagen_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="grundlagen_files/libs/quarto-html/anchor.min.js"></script>
+<link href="grundlagen_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="grundlagen_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="grundlagen_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="grundlagen_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="grundlagen_files/libs/bootstrap/bootstrap-464b6f5659a661a2513e379026363d1f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -70,103 +65,17 @@ window.Quarto = {
 };
 </script>
 
-<meta name="citation_title" content="Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen">
-<meta name="citation_author" content="Eduard Funkner">
-<meta name="citation_author" content="Martin Schwarz">
-<meta name="citation_publication_date" content="2025-06-23">
-<meta name="citation_cover_date" content="2025-06-23">
-<meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-06-23">
-<meta name="citation_language" content="de">
 </head>
 
-<body class="quarto-light">
+<body class="fullcontent quarto-light">
 
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</h1>
-          </div>
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
-    
-    <div class="quarto-title-meta-container">
-      <div class="quarto-title-meta-column-start">
-            <div class="quarto-title-meta-author">
-          <div class="quarto-title-meta-heading">Autor:innen</div>
-          <div class="quarto-title-meta-heading">Zugehörigkeit</div>
-          
-                <div class="quarto-title-meta-contents">
-            <p class="author">Eduard Funkner <a href="mailto:efunkner@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        <a href="https://www.hs-bremen.de">
-                        Hochschule Bremen - City University of Applied Sciences (HSB)
-                        </a>
-                      </p>
-                  </div>
-                      <div class="quarto-title-meta-contents">
-            <p class="author">Martin Schwarz <a href="mailto:mschwarz@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-          </div>
-                    </div>
-        
-        <div class="quarto-title-meta">
-
-                      
-                <div>
-            <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
-            <div class="quarto-title-meta-contents">
-              <p class="date">23. Juni 2025</p>
-            </div>
-          </div>
-          
-                
-              </div>
-      </div>
-      <div class="quarto-title-meta-column-end quarto-other-formats-target">
-      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Andere Formate</div><div class="quarto-title-meta-contents"><p><a href="thesis_fs.pdf"><i class="bi bi-file-pdf"></i>PDF</a></p></div></div></div>
-    </div>
+<main class="content" id="quarto-document-content">
 
 
 
-    <div class="quarto-other-links-text-target">
-    </div>  </div>
-</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
-<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Inhaltsverzeichnis</h2>
-   
-  <ul>
-  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
-  <li><a href="#theoritische-grundlagen" id="toc-theoritische-grundlagen" class="nav-link" data-scroll-target="#theoritische-grundlagen">Theoritische Grundlagen</a>
-  <ul class="collapse">
-  <li><a href="#infinite-impulse-response-iir-filter" id="toc-infinite-impulse-response-iir-filter" class="nav-link" data-scroll-target="#infinite-impulse-response-iir-filter">Infinite Impulse Response (IIR)-Filter</a></li>
-  <li><a href="#differenzengleichung-eines-iir-filters-zweiter-ordnung" id="toc-differenzengleichung-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#differenzengleichung-eines-iir-filters-zweiter-ordnung">Differenzengleichung eines IIR Filters zweiter Ordnung</a></li>
-  <li><a href="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung" id="toc-übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung">Übertragungsfunktion eines IIR-Filters zweiter Ordnung</a></li>
-  </ul></li>
-  <li><a href="#implementierungsstrukturen-biquadratischer-filter" id="toc-implementierungsstrukturen-biquadratischer-filter" class="nav-link" data-scroll-target="#implementierungsstrukturen-biquadratischer-filter">Implementierungsstrukturen biquadratischer Filter</a>
-  <ul class="collapse">
-  <li><a href="#direktform-1" id="toc-direktform-1" class="nav-link" data-scroll-target="#direktform-1">Direktform 1</a></li>
-  <li><a href="#direktform-2-kanonische-form" id="toc-direktform-2-kanonische-form" class="nav-link" data-scroll-target="#direktform-2-kanonische-form">Direktform 2 (Kanonische Form)</a></li>
-  <li><a href="#transponierte-direktform-2" id="toc-transponierte-direktform-2" class="nav-link" data-scroll-target="#transponierte-direktform-2">Transponierte Direktform 2:</a></li>
-  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation">Bilineartransformation</a></li>
-  </ul></li>
-  </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="Pynq-Z2/Audio_Reference_Design-preview.html"><i class="bi bi-journal-code"></i>Audio Reference Design</a></li><li><a href="jupyter/Pynq/Lerndemo_v1/Lerndemo_v1_Audio-preview.html"><i class="bi bi-journal-code"></i>Aufnahme und Wiedergabe</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v1-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/Pynq/Audio_Filter_Test_v2/Codec_Test_v6-preview.html"><i class="bi bi-journal-code"></i>Biblioteken</a></li><li><a href="jupyter/bilinear-preview.html"><i class="bi bi-journal-code"></i>bilinear.ipynb</a></li><li><a href="chapters/bilinear/bilinear-preview.html"><i class="bi bi-journal-code"></i>Bilineartransformation</a></li><li><a href="Pynq-Z2/Dokumentation-preview.html"><i class="bi bi-journal-code"></i>Dokuemtation</a></li><li><a href="chapters/einleitung/einleitung-preview.html"><i class="bi bi-journal-code"></i>Einführung</a></li><li><a href="Pynq-Z2/Filterdesign_implementation-preview.html"><i class="bi bi-journal-code"></i>Filterdesing und Implementierung</a></li><li><a href="Pynq-Z2/Notebook_Funktionen-preview.html"><i class="bi bi-journal-code"></i>Funktionen im Notebook:</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v5-preview.html"><i class="bi bi-journal-code"></i>Matlab_Filter_Test_TransmissionTest_v5.ipynb</a></li><li><a href="Pynq-Z2/Development_Notes_Pynq-Filter-preview.html"><i class="bi bi-journal-code"></i>Notiezen und Information zu dem Entwiklungsstatus</a></li><li><a href="jupyter/plotting_audio-preview.html"><i class="bi bi-journal-code"></i>plotting_audio.ipynb</a></li><li><a href="chapters/grundlagen/grundlagen-preview.html"><i class="bi bi-journal-code"></i>Theoritische Grundlagen</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v2-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Audio_duo_Filter_v1/Audio_duo_Filter_v3-preview.html"><i class="bi bi-journal-code"></i>Vorbereitung</a></li><li><a href="jupyter/Pynq/Filter_TransmissionTest/Matlab_Filter_Test_TransmissionTest_v2-preview.html"><i class="bi bi-journal-code"></i>Warum Padding wichtig ist</a></li></ul></div></nav>
-</div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-</div>
-<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-
-
-  
-
-
-<section id="einführung" class="level1">
-<h1>Einführung</h1>
-<p>Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Lerndemonstration werden digitale Biquad-Filter mithilfe von Matlab- und Pythontools entworfen und im Anschluss auf Hard und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration mithilfe ihrer Hardware für sich den Prozess reproduzieren können.</p>
-</section>
 <section id="theoritische-grundlagen" class="level1">
 <h1>Theoritische Grundlagen</h1>
 <section id="infinite-impulse-response-iir-filter" class="level2">
@@ -212,7 +121,7 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
 <p><span class="math inline">\(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/DF1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Signalflussbild: Direktform 1"><img src="images/DF1.png" class="img-fluid figure-img" alt="Signalflussbild: Direktform 1"></a></p>
+<p><img src="DF1.png" class="img-fluid figure-img"></p>
 <figcaption>Signalflussbild: Direktform 1</figcaption>
 </figure>
 </div>
@@ -225,7 +134,7 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
 <p>Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der Vorwärts- und Rückwärtsverarbeitung vertauscht.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/DF2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Signalflussbild: Direktform 2"><img src="images/DF2.png" class="img-fluid figure-img" alt="Signalflussbild: Direktform 2"></a></p>
+<p><img src="DF2.png" class="img-fluid figure-img"></p>
 <figcaption>Signalflussbild: Direktform 2</figcaption>
 </figure>
 </div>
@@ -242,7 +151,7 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
 <p>Die transponierte Direktform 2 kann gebildet werden mittels der Anwendung des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente Übertragungsfunktion ergibt. Die resultierende Struktur weist oft günstigere numerische Eigenschaften auf, als die ursprüngliche Form.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/TDF2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Signalflussbild: Transponierte Direktform 2"><img src="images/TDF2.png" class="img-fluid figure-img" alt="Signalflussbild: Transponierte Direktform 2"></a></p>
+<p><img src="TDF2.png" class="img-fluid figure-img"></p>
 <figcaption>Signalflussbild: Transponierte Direktform 2</figcaption>
 </figure>
 </div>
@@ -253,13 +162,9 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
 <p>Bei der transponierten Direktform 2 werden die Zwischenwerte <span class="math inline">\(s_1[n]\)</span> und <span class="math inline">\(s_2[n]\)</span> als Verzögerungselemente verwendet. Diese Struktur eignet sich besonders gut in der Implementierung von Echtzeitanwendung, aufgrund ihrer effizienten Berechnung und der guten Eignung für parallele oder pipelined Hardware-Architekturen.</p>
 <p>Ein wesentlicher Vorteil der transponierten Direktfrom 2 liegt in ihrer reduzierten Empfindlichkeit gegenüber Koeffizientenquantisierung. Die Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer verbesserten numerischen Stabilität führt.</p>
 </section>
-<section id="bilineartransformation" class="level2">
-<h2 class="anchored" data-anchor-id="bilineartransformation">Bilineartransformation</h2>
-<p>Mittels der Bilineartransformation ist es möglich einen bestehenden analogen Filter, anhand seiner Übertragungsfunktion zu digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.</p>
-</section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main>
+</main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -286,12 +191,12 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Kopiert");
+      button.setAttribute("title", "Copied!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Kopiert");
+        button.setAttribute("data-bs-title", "Copied!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -661,38 +566,6 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
   });
   </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
