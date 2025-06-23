@@ -1,7 +1,8 @@
 project:
   type: manuscript
   output-dir: docs
-  resources:
+
+resources:
   - images
 
 lang: de
@@ -12,6 +13,7 @@ manuscript:
 execute:
   freeze: auto
   fig-dir: "images"
+
 
 format:
   html:
