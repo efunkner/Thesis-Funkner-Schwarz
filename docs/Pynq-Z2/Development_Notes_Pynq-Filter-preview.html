@@ -174,6 +174,11 @@
   <li><a href="#stand-17.06.2025" id="toc-stand-17.06.2025" class="nav-link" data-scroll-target="#stand-17.06.2025">Stand : 17.06.2025</a>
   <ul class="collapse">
   <li><a href="#echtzeitfiltrierung-2" id="toc-echtzeitfiltrierung-2" class="nav-link" data-scroll-target="#echtzeitfiltrierung-2">Echtzeitfiltrierung 2</a></li>
+  </ul></li>
+  <li><a href="#stand-23.06.2025" id="toc-stand-23.06.2025" class="nav-link" data-scroll-target="#stand-23.06.2025">Stand : 23.06.2025</a>
+  <ul class="collapse">
+  <li><a href="#dokumentation" id="toc-dokumentation" class="nav-link" data-scroll-target="#dokumentation">Dokumentation</a></li>
+  <li><a href="#filterdesign" id="toc-filterdesign" class="nav-link" data-scroll-target="#filterdesign">Filterdesign</a></li>
   <li><a href="#noch-offene-punkte" id="toc-noch-offene-punkte" class="nav-link" data-scroll-target="#noch-offene-punkte">Noch offene Punkte:</a></li>
   <li><a href="#bereits-erledigt" id="toc-bereits-erledigt" class="nav-link" data-scroll-target="#bereits-erledigt">Bereits erledigt:</a></li>
   <li><a href="#zusatz" id="toc-zusatz" class="nav-link" data-scroll-target="#zusatz">Zusatz:</a></li>
@@ -366,26 +371,41 @@
 <p>Die Umsetzung der Audio-Echtzeitverarbeitung , zeigte deutliche Einschränkungen. Zwar funktionierten der I2S Receiver und Transmitter einwandfrei in einer Direktverbindung, doch beim Einschleifen der eigenen IP kam es unabhängig von Datentyp oder Filterlogik zu einem stark gedämpften Ausgangssignal. Auch bei Verwendung eines einfachen Bypasses ohne jegliche Verarbeitung blieb das Signal zu leise, ein Hinweis darauf, dass nicht die Filterimplementierung, sondern die AXI-Stream-Schnittstelle der IP selbst das Problem darstellt.<br> Um das Verhalten korrekt umzusetzen, wäre eine vollwertige, AXI-konforme Implementierung nötig, inklusive Pufferung, Signalweiterleitung und detaillierter Kontrolle über die Handshake-Logik. <br> Die Erstellung einer solchen IP erfordert jedoch fortgeschrittene Kenntnisse im AXI-Protokoll sowie zusätzliche manuelle Anpassungen, die über die Möglichkeiten der automatisierten HDL-Generierung hinausgehen.<br> Da der Schwerpunkt auf der Implementierung des Filters liegt und nicht auf der Low-Level-AXI-Implementierung, wurde entschieden, für weitere Tests und Anwendungen den bewährten Weg über AXI DMA zu nutzen.</p>
 </section>
 </section>
+</section>
+<section id="stand-23.06.2025" class="level1">
+<h1>Stand : 23.06.2025</h1>
+<section id="dokumentation" class="level3">
+<h3 class="anchored" data-anchor-id="dokumentation">Dokumentation</h3>
+<ul>
+<li>Es wurde mit der Dokumentation der verwendeten Hard- und Software begonnen. Relevante Informationen dazu wurden aus geeigneten Quellen recherchiert, gesammelt und nachvollziehbar festgehalten.<br></li>
+<li>Die Dokumentation des Filterdesigns und dessen Implementierung wurde ebenfalls begonnen. Dabei wird das strukturierte Vorgehen einschließlich der gewählten Einstellungen und Werkzeuge detailliert beschrieben..<br></li>
+</ul>
+</section>
+<section id="filterdesign" class="level3">
+<h3 class="anchored" data-anchor-id="filterdesign">Filterdesign</h3>
+<p>Alle vier Basisfilter wurden gemeinsam in einem Overlay implementiert, wobei das Design im weiteren Verlauf noch angepasst werden kann. Ursprünglich bestand jeder Filter aus zwei kaskadierten Biquads; diese wurden vorerst auf jeweils einen Biquad reduziert. Statt der zuvor verwendeten Direct Form II Struktur kommt nun die transponierte Direct Form II zum Einsatz, da diese sich besser für Hardwareimplementierungen eignet.<br> Zudem wurde die Größe des Output-Buffers der Filter-IP von 2^18 auf 2^16 Werte reduziert. Durch die kleinere Puffergröße wird eine verbesserte Stabilität und geringere Latenz im Jupyter Notebook erwartet.<br></p>
+</section>
 <section id="noch-offene-punkte" class="level2">
 <h2 class="anchored" data-anchor-id="noch-offene-punkte">Noch offene Punkte:</h2>
 <ul>
 <li>❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien (.wav)</li>
 <li>❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, <del>Matlab HDL-Coder</del> + Simulink, <del>Vivado</del>, <del>IP-Cores</del>, <del>I2S</del>, (I2C), <del>Pynq und Pynq-Z2 Board</del>, finales Notebook + Funktionen</li>
-<li>❌ Umrechnung der Samplerate für externe <em>.wav</em>-Datein (44.1 -&gt; 48kHz)</li>
+<li>❌ <del>Umrechnung der Samplerate für externe <em>.wav</em>-Datein (44.1 -&gt; 48kHz)</del></li>
 <li>❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles</li>
+<li>❌ Aufräumen des Git Reposetories</li>
 </ul>
 </section>
 <section id="bereits-erledigt" class="level2">
 <h2 class="anchored" data-anchor-id="bereits-erledigt">Bereits erledigt:</h2>
 <ul>
-<li>✅/❌ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi- zienten für den FPGA.</li>
+<li>✅ <strong>Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi- zienten für den FPGA.</strong></li>
 <li>✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1</li>
 <li>✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.</li>
 <li>✅✅/❌ JupiterNotebooks für Demonstration</li>
 <li>✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.</li>
-<li>✅✅/❌❌ Realesierung der 4 Basisfilter (<em>HP, TP, BS, BP</em>)</li>
+<li>✅✅✅✅ <strong>Realesierung der 4 Basisfilter (<em>HP, TP, BS, BP</em>)</strong></li>
 <li>✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.</li>
-<li>✅ Dokumentation zu: AXI, I2S, <strong>Matlab HDL-Coder</strong>, <strong>Vivado</strong>, <strong>IP-Cores</strong>, <strong>Pynq und Pynq-Z2 Board</strong></li>
+<li>✅ Dokumentation zu: AXI, I2S, Matlab HDL-Coder, Vivado, IP-Cores, Pynq und Pynq-Z2 Board</li>
 </ul>
 </section>
 <section id="zusatz" class="level2">
