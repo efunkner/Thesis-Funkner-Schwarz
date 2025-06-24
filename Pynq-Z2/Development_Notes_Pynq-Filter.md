@@ -163,23 +163,34 @@ Um das Verhalten korrekt umzusetzen, wäre eine vollwertige, AXI-konforme Implem
 Die Erstellung einer solchen IP erfordert jedoch fortgeschrittene Kenntnisse im AXI-Protokoll sowie zusätzliche manuelle Anpassungen, die über die Möglichkeiten der automatisierten HDL-Generierung hinausgehen.<br>
 Da der Schwerpunkt auf der Implementierung des Filters liegt und nicht auf der Low-Level-AXI-Implementierung, wurde entschieden, für weitere Tests und Anwendungen den bewährten Weg über AXI DMA zu nutzen.
 
+# Stand : 23.06.2025
+### Dokumentation
+- Es wurde mit der Dokumentation der verwendeten Hard- und Software begonnen. Relevante Informationen dazu wurden aus geeigneten Quellen recherchiert, gesammelt und nachvollziehbar festgehalten.<br>
+- Die Dokumentation des Filterdesigns und dessen Implementierung wurde ebenfalls begonnen. Dabei wird das strukturierte Vorgehen einschließlich der gewählten Einstellungen und Werkzeuge detailliert beschrieben..<br>
+
+### Filterdesign
+Alle vier Basisfilter wurden gemeinsam in einem Overlay implementiert, wobei das Design im weiteren Verlauf noch angepasst werden kann. Ursprünglich bestand jeder Filter aus zwei kaskadierten Biquads; diese wurden vorerst auf jeweils einen Biquad reduziert. Statt der zuvor verwendeten Direct Form II Struktur kommt nun die transponierte Direct Form II zum Einsatz, da diese sich besser für Hardwareimplementierungen eignet.<br>
+Zudem wurde die Größe des Output-Buffers der Filter-IP von 2^18 auf 2^16 Werte reduziert. Durch die kleinere Puffergröße wird eine verbesserte Stabilität und geringere Latenz im Jupyter Notebook erwartet.<br>
+
+
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, ~~Matlab HDL-Coder~~ + Simulink, ~~Vivado~~, ~~IP-Cores~~, ~~I2S~~, (I2C), ~~Pynq und Pynq-Z2 Board~~, finales Notebook + Funktionen
-- ❌ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
+- ❌ ~~Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)~~
 - ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
+- ❌ Aufräumen des Git Reposetories
 
 ## Bereits erledigt:
-- ✅/❌ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
-zienten für den FPGA.
+- ✅ **Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
+zienten für den FPGA.**
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
 - ✅✅/❌ JupiterNotebooks für Demonstration
 - ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
-- ✅✅/❌❌ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
+- ✅✅✅✅ **Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)**
 - ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
-- ✅ Dokumentation zu: AXI, I2S, **Matlab HDL-Coder**, **Vivado**, **IP-Cores**, **Pynq und Pynq-Z2 Board**
+- ✅ Dokumentation zu: AXI, I2S, Matlab HDL-Coder, Vivado, IP-Cores, Pynq und Pynq-Z2 Board
  
 
 ## Zusatz:

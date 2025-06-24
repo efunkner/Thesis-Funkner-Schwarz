@@ -66,6 +66,46 @@
 \fi
 \makeatother
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
@@ -178,7 +218,7 @@
 \title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
 Systemen}
 \author{Eduard Funkner \and Martin Schwarz}
-\date{2025-06-23}
+\date{2025-06-24}
 \begin{document}
 \maketitle
 
@@ -199,7 +239,7 @@ und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis
 dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration
 mithilfe ihrer Hardware für sich den Prozess reproduzieren können.
 
-\chapter{Theoritische Grundlagen}\label{theoritische-grundlagen}
+\chapter{Theoretische Grundlagen}\label{theoretische-grundlagen}
 
 \section{Infinite Impulse Response
 (IIR)-Filter}\label{infinite-impulse-response-iir-filter}
@@ -233,7 +273,9 @@ Designs.
 Ordnung}\label{differenzengleichung-eines-iir-filters-zweiter-ordnung}
 
 Digitale Filter können mit einer linearen Differenzengleichung
-beschrieben werden. Differenzengleichung des Biquad-Filters:
+beschrieben werden. Die biquadratischen Filter werden mit der
+Differenzengleichung eines IIR-Filters zweiter Ordnung beschrieben
+werden:
 
 \[
 y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
@@ -247,9 +289,13 @@ Ausgabewerte. Die Koeffizienten \(b_0\), \(b_1\) und \(b_2\) bestimmen
 den Einfluss des aktuellen und der vergangenen Eingabewerte
 (Feedforward), während \(a_1\) und \(a_2\) den Rückkopplungsanteil aus
 früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der
-Koeffizient auf \(a_0\) auf 1 normiert: \[
+Koeffizient auf \(a_0\) auf 1 normiert:
+
+\[
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\] Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
+\]
+
+Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
 Differenzengleichung mittles der z-Transformation in den z-Bereich
 transformiert und daraus folgt die folgende Übertragunsfunktion.
 
@@ -258,10 +304,26 @@ Ordnung}\label{uxfcbertragungsfunktion-eines-iir-filters-zweiter-ordnung}
 
 \[
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
-\] Bei dieser rationalen Funktion wird das Verhälnis zwischen Ausgang zu
-Eingang im Frequenzbereich beschrieben. Um die Stabilität des
-Biquad-Filters zu vergewissern, müssen alle Polstellen des Filters
-innerhalb des Einheitskreises der z-Ebene liegen.
+\]
+
+Die Übertragungsfunktion eines Biquads beschreibt das Verhältnis
+zwischen dem Ausgang \(Y(z)\) zu dem Eingang \(X(z)\). Diese Gleichung
+stellt die normierte Form des Biquads dar, bei welcher der
+Nennerkoeffizient auf \(a_0 = 1\) normiert ist. Für den Fall, dass
+\(a_0 ≠ 1\) beträgt müssen die Koeffzienten durch \(a_0\) geteilt werden
+um die Normalform zu erreichen.
+
+Anhand der Übetragungfunktion können die Pol- und Nullstellen des
+Filters analyziert werden, um die Stabilität des Biquad-Filters zu
+vergewissern. Dabei müssen alle Polstellen des Filters innerhalb des
+Einheitskreises der z-Ebene liegen, beziehungsweise der Betrag jedes
+Pols kleiner als 1 sein muss.
+
+Befinden sich Pole außerhalb oder direkt auf dem Einheitskreis, kann es
+dazu kommen dass das Ausgangssignal unkontrolliert schwingt und das
+System damit instabil wird. Nullstellen haben hingegen lediglichen
+Einfluss auf die Frequenzcharakteristik und nicht direkt auf die
+Stabilität.
 
 \chapter{Implementierungsstrukturen biquadratischer
 Filter}\label{implementierungsstrukturen-biquadratischer-filter}
@@ -307,21 +369,25 @@ Diese Struktur kann als eine Parallelschaltung eines rein rekusiven
 Teils (nur Pole) und eines nicht rekursiven Teils (nur Nullstellen)
 aufgefasst werden.
 
-\(y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]\)
+\[
+y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
+\]
 
 Für die Direktform 1 Implementierung werden zunächst alle gewichteten
 Eingangswerte und deren Verzögerungen zusammengefasst und berechnet:
 
-\(w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2]\)
+\[
+w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2]
+\]
 
 Anschließend wird die Rückkoppling der verzögerten Ausgangswerte
-realisiert:
-
-\(y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]\)
+realisiert: \[
+y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]
+\]
 
 \begin{figure}[H]
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/DF1.png}}
+{\centering \includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{images/DF1.png}
 
 }
 
@@ -354,7 +420,7 @@ Vorwärts- und Rückwärtsverarbeitung vertauscht.
 
 \begin{figure}[H]
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/DF2.png}}
+{\centering \includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{images/DF2.png}
 
 }
 
@@ -365,12 +431,16 @@ Vorwärts- und Rückwärtsverarbeitung vertauscht.
 Zunächst wird ein Zwischenwert \(w[n]\) durch die rekursive Beziehungen
 erzeugt:
 
-\(w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]\)
+\[
+w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]
+\]
 
 Der Zwischenwert \(w[n]\) dient als Substituion für die
 Verzögerungselemente der Ein- und Ausgangswerte.
 
-\(y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]\)
+\[
+y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]
+\]
 
 In dieser Struktur werden nur zwei Verzögerungselemente für w{[}n-1{]}
 und w{[}n-2{]} benötigt, da die rekursive als auch die nicht-rekursive
@@ -397,7 +467,7 @@ günstigere numerische Eigenschaften auf, als die ursprüngliche Form.
 
 \begin{figure}[H]
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/TDF2.png}}
+{\centering \includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{images/TDF2.png}
 
 }
 
@@ -408,11 +478,17 @@ günstigere numerische Eigenschaften auf, als die ursprüngliche Form.
 Die transponierte Direktform 2 wird druch die folgende
 Differenzengleichungen beschrieben:
 
-\(s_2[n] = b_2 \cdot x[n] - a_2 \cdot y[n]\)
+\[
+s_2[n] = b_2 \cdot x[n] - a_2 \cdot y[n]
+\]
 
-\(s_1[n] =  s_2[n] + b_1 \cdot x[n] - a_1 \cdot y[n]\)
+\[
+s_1[n] =  s_2[n] + b_1 \cdot x[n] - a_1 \cdot y[n]
+\]
 
-\(y[n] = s_1[n] + b_0 \cdot x[n]\)
+\[
+y[n] = s_1[n] + b_0 \cdot x[n]
+\]
 
 Bei der transponierten Direktform 2 werden die Zwischenwerte \(s_1[n]\)
 und \(s_2[n]\) als Verzögerungselemente verwendet. Diese Struktur eignet
@@ -424,6 +500,319 @@ Ein wesentlicher Vorteil der transponierten Direktfrom 2 liegt in ihrer
 reduzierten Empfindlichkeit gegenüber Koeffizientenquantisierung. Die
 Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer
 verbesserten numerischen Stabilität führt.
+
+\chapter{Implementierungserklärung der Biquad Filter in
+Arduino}\label{implementierungserkluxe4rung-der-biquad-filter-in-arduino}
+
+Für die Implementierung der biquadratischen Filter in Arduino werden die
+Differenzengleichungen aus den Theoretischen Grundlagen entnommen und in
+Code umgesetzt.
+
+\section{Filter Basisklasse}\label{filter-basisklasse}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{ Filter}
+  \OperatorTok{\{}
+  \KeywordTok{public}\OperatorTok{:}
+    \KeywordTok{virtual} \OperatorTok{\textasciitilde{}}\NormalTok{Filter}\OperatorTok{()} \OperatorTok{\{\}}
+    \KeywordTok{virtual} \DataTypeTok{float}\NormalTok{ filter}\OperatorTok{(}\DataTypeTok{float}\OperatorTok{)} \OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+  \OperatorTok{\};}
+\end{Highlighting}
+\end{Shaded}
+
+Diese abstrakte Basisklasse dient als Interface für alle
+Filterimplementierungsstrukturen. Der virtuelle Destruktor
+\texttt{virtual\ \textasciitilde{}Filter()\ \{\}} stellt sicher, dass
+beim Löschen eines Objekts über einen Basisklassenzeiger der korrekte
+Destruktor der abgeleiteten Klasse aufgerufen wird. Die rein virtelle
+Methode \texttt{virtual\ float\ filter(float)\ =\ 0;} definiert die
+einheitliche Schnittstelle - jede abgeleitete Filterklasse muss eine
+\texttt{filter()} - Methode implementieren, die einen float-Wert
+entgegennimmt und einen gefilterten float-Wert zurückgibt. Diese
+Struktur ermöglicht die Verwendung der verschiedenen Filtertypen im
+Anwendiungsfall einer Kaskadierung.
+
+\section{Direktform 1}\label{direktform-1-1}
+
+\subsection{Private Member-Variablen}\label{private-member-variablen}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{private}\OperatorTok{:}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_0}\OperatorTok{;} 
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_1}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_2}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_1}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_2}\OperatorTok{;}
+
+  \DataTypeTok{float}\NormalTok{ x\_1 }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+  \DataTypeTok{float}\NormalTok{ y\_1 }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+  \DataTypeTok{float}\NormalTok{ y\_2 }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Die Filterkoeffizienten \texttt{b\_0,\ b\_1,\ b\_2,\ a\_1,\ a\_2} sind
+als \texttt{const} deklariert, da sie nach der Initialisierung
+unveränderlich bleiben sollen. Dies entspricht der mathematischen
+Definition eines zeitinvarianten Systems. Die Verzögerungselemente
+\texttt{x\_1,\ y\_1,\ y\_2} speichern die vorherigen Ein- und
+Ausgangswerte. Der Wert \texttt{a\_0} wird nicht gespeichert, da durch
+die Normalisierung im Konstruktor alle Koeffizienten bereits durch
+\texttt{a\_0} geteilt wurden.
+
+\subsection{Konstruktor}\label{konstruktor}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiquadFilterDF1}\OperatorTok{(}\AttributeTok{const} \DataTypeTok{float} \OperatorTok{(\&}\NormalTok{b}\OperatorTok{)[}\DecValTok{3}\OperatorTok{],} \AttributeTok{const} \DataTypeTok{float} \OperatorTok{(\&}\NormalTok{a}\OperatorTok{)[}\DecValTok{3}\OperatorTok{],} \DataTypeTok{float}\NormalTok{ gain}\OperatorTok{)}  
+    \OperatorTok{:}\NormalTok{ b\_0}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{0}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      b\_1}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{1}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      b\_2}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{2}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      a\_1}\OperatorTok{(}\NormalTok{a}\OperatorTok{[}\DecValTok{1}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      a\_2}\OperatorTok{(}\NormalTok{a}\OperatorTok{[}\DecValTok{2}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{])} 
+\OperatorTok{\{}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Der Konstruktor verwendet Initialisierungslisten für optimale
+Performance. Die Koeffizienten werden direkt bei der Objekterstellung
+normalisiert, indem alle durch \texttt{a{[}0{]}} geteilt werden. Dies
+entspricht der Standardform der Differenzengleichung, wo der führende
+Koeffizient des Nenners auf 1 normiert wird. Der \texttt{gain} Parameter
+wird in die Zählerkoeffizienten eingerechnet, was mathematisch
+äquivalent zur Multiplikation der gesamten Übertragungsfunktion mit dem
+Verstärkungsfaktor ist. Die Array-Referenz-Syntax
+\texttt{const\ float\ (\&b){[}3{]}} stellt sicher, dass exakt drei
+Elemente übergeben werden müssen.
+
+\subsection{Filter Methode}\label{filter-methode}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{float}\NormalTok{ filter}\OperatorTok{(}\DataTypeTok{float}\NormalTok{ x\_0}\OperatorTok{)}
+\OperatorTok{\{}
+  \DataTypeTok{float}\NormalTok{ x\_2 }\OperatorTok{=}\NormalTok{ x\_1}\OperatorTok{;}
+\NormalTok{  x\_1 }\OperatorTok{=}\NormalTok{ x\_0}\OperatorTok{;}
+    
+  \DataTypeTok{float}\NormalTok{ y\_0 }\OperatorTok{=}\NormalTok{ b\_0 }\OperatorTok{*}\NormalTok{ x\_0 }\OperatorTok{+}\NormalTok{ b\_1 }\OperatorTok{*}\NormalTok{ x\_1 }\OperatorTok{+}\NormalTok{ b\_2 }\OperatorTok{*}\NormalTok{ x\_2 }\OperatorTok{{-}}\NormalTok{ a\_1 }\OperatorTok{*}\NormalTok{ y\_1 }\OperatorTok{{-}}\NormalTok{ a\_2 }\OperatorTok{*}\NormalTok{ y\_2}\OperatorTok{;}
+    
+\NormalTok{  y\_2 }\OperatorTok{=}\NormalTok{ y\_1}\OperatorTok{;}
+\NormalTok{  y\_1 }\OperatorTok{=}\NormalTok{ y\_0}\OperatorTok{;}
+
+  \ControlFlowTok{return}\NormalTok{ y\_0}\OperatorTok{;}
+\OperatorTok{\}}  
+\end{Highlighting}
+\end{Shaded}
+
+Diese Implementierung wird durch die Struktur der DF1 umgesetzt. Zuerst
+werden die Eingangsverzögerungen aktualiseirt: \texttt{x\_2} erhält den
+vorherigen Wert von \texttt{x\_1}, dann wird \texttt{x\_1} auf den
+aktuellen Eingangswert \texttt{x\_0} gesetzt. Die Differenzengleichung
+wird direkt implementiert:
+\texttt{y{[}n{]}\ =\ b\_0\ *\ x{[}n{]}\ +\ b\_1\ *\ x{[}n-1{]}\ +\ b\_2\ *\ x{[}n-2{]}\ -\ a\_1\ *\ y{[}n-1{]}\ -\ a\_2\ *\ y{[}n-2{]}}.
+Im Anschluss werden die Ausgangsverzögerungen für die nächste Iteration
+aktualisiert. Diese Reihenfolge ist kritisch, da die Berechnung vor
+Aktualisierung der Ausgangsverzögerungen erfolgen muss.
+
+\section{Direktform 2}\label{direktform-2}
+
+\subsection{Private Member Variablen}\label{private-member-variablen-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{private}\OperatorTok{:}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_0}\OperatorTok{;} 
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_1}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_2}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_1}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_2}\OperatorTok{;}
+
+  \DataTypeTok{float}\NormalTok{ w\_0 }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+  \DataTypeTok{float}\NormalTok{ w\_1 }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Die DF2-Struktur benötigt nur zwei Verzögerungselemente
+\texttt{w\_0,\ w\_1} anstatt der vier in DF1. Dies reduziert den
+Speicherbedarf um die 50\%. Die \texttt{w} Variablen repräsentieren die
+internen Knotenpunkte der DF2-Struktur, wo sowohl die Rückkopplung als
+auch die Vorwärtskopplung zusammenlaufen.
+
+\subsection{Konstruktor}\label{konstruktor-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiquadFilterDF2}\OperatorTok{(}\AttributeTok{const} \DataTypeTok{float} \OperatorTok{(\&}\NormalTok{b}\OperatorTok{)[}\DecValTok{3}\OperatorTok{],} \AttributeTok{const} \DataTypeTok{float} \OperatorTok{(\&}\NormalTok{a}\OperatorTok{)[}\DecValTok{3}\OperatorTok{],} \DataTypeTok{float}\NormalTok{ gain}\OperatorTok{)}  
+    \OperatorTok{:}\NormalTok{ b\_0}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{0}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      b\_1}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{1}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      b\_2}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{2}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      a\_1}\OperatorTok{(}\NormalTok{a}\OperatorTok{[}\DecValTok{1}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      a\_2}\OperatorTok{(}\NormalTok{a}\OperatorTok{[}\DecValTok{2}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{])} 
+\OperatorTok{\{}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Der Konstruktor ist identisch zur DF1 Implementierung, da die
+Koeffizientennormalisierung unabhängig von der internen Filterstruktur
+ist. Die mathematische Übertragungsfunktion bleibt dieselbe, nur die
+interne Realisierung unterscheidet sich
+
+\subsection{Filter Methode}\label{filter-methode-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{float}\NormalTok{ filter}\OperatorTok{(}\DataTypeTok{float}\NormalTok{ x\_0}\OperatorTok{)}
+\OperatorTok{\{}
+  \DataTypeTok{float}\NormalTok{ w\_2 }\OperatorTok{=}\NormalTok{ w\_1}\OperatorTok{;}
+\NormalTok{  w\_1 }\OperatorTok{=}\NormalTok{ w\_0}\OperatorTok{;}
+\NormalTok{  w\_0 }\OperatorTok{=}\NormalTok{ x\_0 }\OperatorTok{{-}}\NormalTok{ a\_1 }\OperatorTok{*}\NormalTok{ w\_1 }\OperatorTok{{-}}\NormalTok{ a\_2 }\OperatorTok{*}\NormalTok{ w\_2}\OperatorTok{;}
+
+  \DataTypeTok{float}\NormalTok{ y\_0 }\OperatorTok{=}\NormalTok{ b\_0 }\OperatorTok{*}\NormalTok{ w\_0 }\OperatorTok{+}\NormalTok{ b\_1 }\OperatorTok{*}\NormalTok{ w\_1 }\OperatorTok{+}\NormalTok{ b\_2 }\OperatorTok{*}\NormalTok{ w\_2}\OperatorTok{;}
+
+  \ControlFlowTok{return}\NormalTok{ y\_0}\OperatorTok{;}
+\OperatorTok{\}}  
+\end{Highlighting}
+\end{Shaded}
+
+Die DF2 Implementierung teilt die Berechnung in zwei Phasen: Zuerst wird
+der interne Zustand \texttt{w\_0} berechnet, der das Eingangssignal
+minus der Rückkopplung darstellt. Dies entspricht der Implementierung
+des Nennerpols der Übertragungsfunktion. Dann wird der Ausgang durch die
+Vorwärtskopplung mit den \texttt{b} Koeffizienten berechnet, was dem
+Zählerpolynom entspricht. Die Verzögerungselemente werden vor der
+\texttt{w\_0} Berechnung aktualisiert, damit die korrekten vorherigen
+Werte verwendet werden.
+
+\section{Transponierte Direktfrom 2}\label{transponierte-direktfrom-2}
+
+\subsection{Private Member Variablen}\label{private-member-variablen-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{private}\OperatorTok{:}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_0}\OperatorTok{;} 
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_1}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_2}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_1}\OperatorTok{;}
+  \AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_2}\OperatorTok{;}
+
+  \DataTypeTok{float} \VariableTok{s\_1} \OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+  \DataTypeTok{float} \VariableTok{s\_2} \OperatorTok{=} \DecValTok{0}\OperatorTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Die TDF2 Struktur verwendet Zustandsvariablen \texttt{s\_1,\ s\_2}, die
+als ``shift register'' fungieren. Diese Struktur ist die transponierte
+Version der DF2, was bedeutet, dass der Signalfluss umgekehrt wird: die
+Ein- und Ausgänge werden vertauscht, sowohl als auch die Richtung der
+Verzögerungselemente wird umgekehrt.
+
+\subsection{Konstruktor}\label{konstruktor-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiquadFilterTDF2}\OperatorTok{(}\AttributeTok{const} \DataTypeTok{float} \OperatorTok{(\&}\NormalTok{b}\OperatorTok{)[}\DecValTok{3}\OperatorTok{],} \AttributeTok{const} \DataTypeTok{float} \OperatorTok{(\&}\NormalTok{a}\OperatorTok{)[}\DecValTok{3}\OperatorTok{],} \DataTypeTok{float}\NormalTok{ gain}\OperatorTok{)}  
+    \OperatorTok{:}\NormalTok{ b\_0}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{0}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      b\_1}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{1}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      b\_2}\OperatorTok{(}\NormalTok{gain }\OperatorTok{*}\NormalTok{ b}\OperatorTok{[}\DecValTok{2}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      a\_1}\OperatorTok{(}\NormalTok{a}\OperatorTok{[}\DecValTok{1}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{]),}
+\NormalTok{      a\_2}\OperatorTok{(}\NormalTok{a}\OperatorTok{[}\DecValTok{2}\OperatorTok{]} \OperatorTok{/}\NormalTok{ a}\OperatorTok{[}\DecValTok{0}\OperatorTok{])} 
+\OperatorTok{\{}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Auch hier ist der Konstruktor identisch zu den anderen
+Implementierungen, da die Koeffizientennormalisierung eine mathematische
+Anforderung ist, die unabhängig von der gewählten Realisierungsform
+gilt.
+
+\subsection{Filter Methode}\label{filter-methode-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{float}\NormalTok{ filter}\OperatorTok{(}\DataTypeTok{float}\NormalTok{ x\_0}\OperatorTok{)}
+\OperatorTok{\{}
+  \DataTypeTok{float}\NormalTok{ y\_0 }\OperatorTok{=} \VariableTok{s\_1} \OperatorTok{+}\NormalTok{ b\_0 }\OperatorTok{*}\NormalTok{ x\_0}\OperatorTok{;}
+
+  \VariableTok{s\_1} \OperatorTok{=} \VariableTok{s\_2} \OperatorTok{+}\NormalTok{ b\_1 }\OperatorTok{*}\NormalTok{ x\_0 }\OperatorTok{{-}}\NormalTok{ a\_1 }\OperatorTok{*}\NormalTok{ y\_0}\OperatorTok{;} 
+  \VariableTok{s\_2} \OperatorTok{=}\NormalTok{ b\_2 }\OperatorTok{*}\NormalTok{ x\_0 }\OperatorTok{{-}}\NormalTok{ a\_2 }\OperatorTok{*}\NormalTok{ y\_0}\OperatorTok{;}
+    
+  \ControlFlowTok{return}\NormalTok{ y\_0}\OperatorTok{;}
+\OperatorTok{\}}  
+\end{Highlighting}
+\end{Shaded}
+
+Bei der TDF2 Implementierung setzt sich der Ausgangswert aus der
+addition aus dem ersten Zustandsregister \texttt{s\_1} mit dem
+verstärkten Eingangswert. Die Zustandsregister werden dann für die
+nächste Iteration aktualisiert. \texttt{s\_1} wird zum nächsten Wert von
+\texttt{s\_2} addiert mit den gewichteten Ein- und Ausgangswerten.
+\texttt{s\_2} wird komplett neu berechnet. Diese Struktur hat den
+Vorteil, dass der Ausgangswert sehr früh im Berechnungszyklus verfügbar
+ist, was bei Pipeline Implementierungen sich als vorteilhaft erweisen
+kann.
+
+\section{Eingabe Koeffiziente}\label{eingabe-koeffiziente}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_0 }\OperatorTok{=}\NormalTok{ f}\OperatorTok{;}
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_1 }\OperatorTok{=}\NormalTok{ f}\OperatorTok{;}
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_2 }\OperatorTok{=}\NormalTok{ f}\OperatorTok{;}
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_0 }\OperatorTok{=}\NormalTok{ f}\OperatorTok{;}
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_1 }\OperatorTok{=}\NormalTok{ f}\OperatorTok{;}
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_2 }\OperatorTok{=}\NormalTok{ f}\OperatorTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Bei den Eingabe-Koeffezienten wird der \texttt{f} Suffix an die float
+Literalen angehängt, sodass sicher gestellt wird das die Werte als
+singel-precision floating-point interpretiert werden, was bei
+Arduino-System von hoher Wichtigkeit ist.
+
+\section{Koeffizienten Arrays und Filter
+Instanziierung}\label{koeffizienten-arrays-und-filter-instanziierung}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ b\_coefficients}\OperatorTok{[]} \OperatorTok{=} \OperatorTok{\{}\NormalTok{ b\_0}\OperatorTok{,}\NormalTok{ b\_1}\OperatorTok{,}\NormalTok{ b\_2}\OperatorTok{\};}
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ a\_coefficients}\OperatorTok{[]} \OperatorTok{=} \OperatorTok{\{}\NormalTok{ a\_0}\OperatorTok{,}\NormalTok{ a\_1}\OperatorTok{,}\NormalTok{ a\_2}\OperatorTok{\};}
+\AttributeTok{const} \DataTypeTok{float}\NormalTok{ gain }\OperatorTok{=} \DecValTok{1}\OperatorTok{;}
+
+\NormalTok{BiquadFilterTDF2 biquad}\OperatorTok{(}\NormalTok{b\_coefficients}\OperatorTok{,}\NormalTok{ a\_coefficients}\OperatorTok{,}\NormalTok{ gain}\OperatorTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+Die Koeffizienten werden in separaten Arrays gespeichert und an den
+Konstruktor übergeben. Dies ermöglicht eine saubere Trennung zwischen
+Filterdesign (Koeffizienten) und Implementierung (Filterklasse). Über
+den \texttt{gain} Paramter kann auf den zu Implementierenden Filter eine
+gewünschte Verstärkung angewandt werden. Bei einem Wert von 1 wird keine
+zusätzliche Verstärkung angewendet. Bei dieser Filter Instanziierung
+wird die TDF2 verwendet mir ihrem korosponierenden Klassennamen. Somit
+wird das Objekt \texttt{biquad} durch die Klasse
+\texttt{BiquadFilterTDF2} instanziiert. Innerhalb des Objekts werden die
+Koeffizienten mit dem Verstärkungsfaktor an die jeweilige Filterklasse
+übergeben. Der Implementierte Filter steht bereit zur Verwendung.
+
+\section{Filter Anwendung}\label{filter-anwendung}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{float}\NormalTok{ filtered }\OperatorTok{=}\NormalTok{ biquad}\OperatorTok{.}\NormalTok{filter}\OperatorTok{(}\NormalTok{Input}\OperatorTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+Die direkte Anwendung erfolgt durch den Aufruf der
+\texttt{filter()}-Methode auf dem Filterobjekt \texttt{biquad}. Der
+Eingangswert \texttt{Input} wird der Methode übergeben, durch die
+spezifische Filterimplementierung entsprechend der definierten
+Differenzengleichung verarbeitet und als transformierter Ausgangswert
+filtered zurückgegeben.
 
 \section{Bilineartransformation}\label{bilineartransformation}
 
