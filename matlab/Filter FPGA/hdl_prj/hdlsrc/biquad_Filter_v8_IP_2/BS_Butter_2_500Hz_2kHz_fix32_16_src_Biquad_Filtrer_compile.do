@@ -1,0 +1,4 @@
+vlib work
+vcom  BS_Butter_2_500Hz_2kHz_fix32_16_src_BiquadDF2Section1.vhd
+vcom  BS_Butter_2_500Hz_2kHz_fix32_16_src_Biquad_Filter.vhd
+vcom  BS_Butter_2_500Hz_2kHz_fix32_16_src_Biquad_Filtrer.vhd
