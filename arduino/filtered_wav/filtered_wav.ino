@@ -26,7 +26,6 @@ class BiquadFilterDF1 : public Filter
     const float a_1;
     const float a_2;
 
-    float x_0 = 0;
     float x_1 = 0;
     float y_1 = 0;
     float y_2 = 0;
@@ -382,42 +381,3 @@ void loop() {
   digitalWrite(LED, LOW);
   delay(1000);
 }
-
-/*
-Transponierte Direct Form 2
-01:15:30.430 -> Kanäle: 2
-01:15:30.430 -> SampleRate: 44100
-01:15:30.430 -> Bits pro Sample: 16
-01:15:30.430 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
-01:15:30.430 -> Starte Filterung...
-01:21:48.271 -> Filterung abgeschlossen.
-Dauer -> 01:21:48.271 - 01:15:30.430 = 00:06:17.841
-
-Direct Form 1
-01:25:33.598 -> Kanäle: 2
-01:25:33.598 -> SampleRate: 44100
-01:25:33.598 -> Bits pro Sample: 16
-01:25:33.598 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
-01:25:33.598 -> Starte Filterung...
-01:31:50.674 -> Filterung abgeschlossen.
-Dauer -> 01:31:50.674 - 01:25:33.598 =  00:06:17.076
-
-Direct Form 2
-01:37:07.007 -> AudioFormat: 1
-01:37:07.007 -> Kanäle: 2
-01:37:07.007 -> SampleRate: 44100
-01:37:07.007 -> Bits pro Sample: 16
-01:37:07.039 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
-01:37:07.039 -> Starte Filterung...
-01:43:24.077 -> Filterung abgeschlossen.
-Dauer -> 01:43:24.077 - 01:37:07.039 = 00:06:17.038
-
-Transponierte Direct Form 2
-01:59:10.099 -> Kanäle: 2
-01:59:10.099 -> SampleRate: 44100
-01:59:10.099 -> Bits pro Sample: 16
-01:59:10.099 -> Gesamtanzahl Frames (Samples pro Kanal): 72739840
-01:59:10.099 -> Starte Filterung...
-02:05:28.771 -> Filterung abgeschlossen.
-Dauer -> 02:05:28.771 - 01:59:10.099 = 00:06:18.672
-*/

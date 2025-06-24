@@ -16,7 +16,6 @@ class BiquadFilterDF1 : public Filter
     const float a_1;
     const float a_2;
 
-    float x_0 = 0;
     float x_1 = 0;
     float y_1 = 0;
     float y_2 = 0;
