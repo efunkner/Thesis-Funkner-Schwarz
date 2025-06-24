@@ -113,7 +113,93 @@ Nach kurzer Generierungszeit wird die IP erstellt und ein Bericht geöffnet. Die
 Für jeden Filter wird eine eigene IP generiert. Dabei wird jeweils dasselbe Simulink-Modell verwendet, lediglich die Koeffizienten werden entsprechend angepasst.<br>
 
 ## Vivado 
-Die generierten IP kann in Vivado unter *Project Manager/Settings/IP/Repository* in das Projekt eigebunden werden<br>
+Bei der Erstellung eines Vivado-Projekts für den Pynq-Z2 muss sichergestellt werden, dass das entsprechende Board im Vivado-Board-Auswahlmenü verfügbar ist. Sollte das Pynq-Z2 nicht angezeigt werden, auch nicht nach einer Aktualisierung, müssen die zugehörigen Board-Files manuell ergänzt werden. Diese lassen sich direkt aus dem offiziellen [PYNQ GitHub Repository](https://github.com/Xilinx/PYNQ/tree/master) herunterladen. Bei einer frischen Installation von Vivado 2022.1 ist das Board in der Regel bereits enthalten.<br>
 
+Die Constraints entstammen auch aus dem [PYNQ GitHub Repository](https://github.com/Xilinx/PYNQ/tree/master). Alles, was nicht benötigt wurde auskommentiert. Die Constraints weisen unter anderem den Benötigten internen Pis Namen zu, damit diese besser nachvollzogen werden können. Es ist notwendig, dass die Namen an dem Ein- und Ausgängen aus den Constraints übernommen werden, sonst greifen die Treiber in Pynq nicht. 
+
+Für den Betrieb des Audio-Codecs auf dem Pynq-Z2 sind spezielle IP-Cores notwendig. Diese vorgefertigten IPs befinden sich ebenfalls im [PYNQ GitHub Repository](https://github.com/Xilinx/PYNQ/tree/master) und können über [*PYNQ/boards/ip/*](https://github.com/Xilinx/PYNQ/tree/master/boards/ip) ins Projekt eingebunden werden.<br>
+Vorgefertigte sowie auch eigens erstellte IP-Cores lassen sich in Vivado unter *Project Manager/Settings/IP/Repository* in das Projekt einbinden.<br>
+
+Das Design orientiert sich an den offiziellen Tutorials von **Cathal McCabe** , die im AMD PYNQ-Forum verfügbar sind. Besonders hilfreich waren die Anleitungen [Creating a new hardware design for PYNQ](https://discuss.pynq.io/t/tutorial-creating-a-hardware-design-for-pynq/145) und [PYNQ DMA](https://discuss.pynq.io/t/tutorial-pynq-dma-part-1-hardware-design/3133). Teile dieser Tutorials, insbesondere grundlegende Strukturkomponenten, wurden übernommen oder angepasst.<br>
+
+Das grundlegende Hardware-Design basiert auf dem Base-Overlay von PYNQ. Der Audio-spezifische Anteil  wurde beibehalten, während nicht benötigte Komponenten entfernt wurden. Ein wesentlicher Unterschied zum ursprünglichen Base-Design liegt in der Takterzeugung. <br>
+
+![Reference Design](Design/Reff_Design_v2.png)<br>
+
+Während das ursprüngliche Overlay einen Clocking Wizard verwendet, um aus einem 100 MHz-Systemtakt ein 10 MHz-Signal zu generieren, wird in der neuen Variante das 10 MHz-Taktsignal direkt aus dem Processing System (PS) bereitgestellt, inklusive eines synchronisierten Reset-Signals.<br>
+Diese Methode bietet den Vorteil, dass keine zusätzlichen Clock-Domain-Warnungen auftreten. Zudem wird ein vollständiger, synchroner Reset zur Verfügung gestellt, was sich positiv auf die Robustheit und das Timing des Designs auswirkt.<br>
+
+### Processing System (PS)
+<p float="left">
+  <img src="Images/Vivado_PS_Settings_PS_PL_Config.png" width="370" />
+  <img src="Images/Vivado_PS_Settings_Clock_Config.png" width="371.6" /> 
+</p>
+
+Da das Design später über ein Jupyter Notebook gesteuert werden soll, genügt eine reine RTL-Implementierung nicht. Stattdessen wird das ZYNQ Processing System (PS) benötigt. Dieses übernimmt mehrere zentrale Aufgaben. Zum einen steuert es den Audio-Codec über die entsprechenden Registerzugriffe, zum anderen generiert es wichtige Taktsignale für das gesamte Design. Zudem ist der PS notwendig, um die Filter über einen AXI Direct Memory Access (AXI-DMA) anzubinden. <br>
+Diese AXI-DMA-Verbindung ermöglicht es, gezielt Daten zwischen dem Arbeitsspeicher des PS und den in der PL implementierten Filtern zu übertragen. Dadurch kann das Jupyter Notebook über den PS gezielt Daten an die Filter senden und deren Ausgaben empfangen.<br>
+
+Damit der PS die korrekten Takt- und Schnittstellensignale erzeugt, muss er im Vivado-Design entsprechend konfiguriert werden. Die Konfiguration erfolgt über einen Doppelklick auf den PS-Block im Blockdesign, woraufhin der entsprechende Konfigurationsdialog geöffnet wird.<br>
+
+**PS-PL Cinfiguration**<br>
+Quelle: [PYNQ DMA](https://discuss.pynq.io/t/tutorial-pynq-dma-part-1-hardware-design/3133)<br>
+
+Diese beiden Anschlüsse dienen der Verbindung mit dem DRAM des Processing Systems (PS) und sind standardmäßig deaktiviert. Intern stehen zwei physische Zugänge zum DRAM zur Verfügung, wobei sich jeweils zwei Ports (HP0/1 und HP2/3) einen gemeinsamen Zugriff teilen. Für dieses Design werden lediglich zwei High-Performance-Ports benötigt, weshalb HP0 und HP2 aktiviert werden. Die Datenbreite (Data Width) kann auf dem Standardwert von 64 Bit belassen werden.<br>
+
+**Peripheral I/O Pins**<br>
+Für die Kommunikation mit dem Audio Codec Controller wird eine I²C-Verbindung benötigt. Diese Schnittstelle lässt sich in der PS-Konfiguration unter Peripheral I/O Pins aktivieren, indem der entsprechende Haken gesetzt wird. In diesem Fall wurde ISC 1 ausgewählt, da dieser Bus für den Datenaustausch mit dem Audio Codec vorgesehen ist.<br>
+
+**Clock Cinfiguration**<br>
+An dieser Stelle werden die Takt-Signale für die programmierbare Logik (PL) konfiguriert. Der Audio-Codec benötigt ein 10 MHz Taktsignal, während der Audio Codec Controller ein 100 MHz Taktsignal erfordert. Andere Frequenzen werden von dieser IP nicht unterstützt, was in Vivado durch eine entsprechende Warnung angezeigt wird. Die Filter-IPs wurden auf 50 MHz ausgelegt und benötigen daher ebenfalls ein passendes 50 MHz-Taktsignal. Alle benötigten Takte werden direkt im Processing System (PS) generiert und den jeweiligen Komponenten zugewiesen.<br>
+
+### AXI Direct Memory Access
+Quelle: [PYNQ DMA](https://discuss.pynq.io/t/tutorial-pynq-dma-part-1-hardware-design/3133)<br>
+
+![axi-DMA Config](Images/Vivado_PL_axi_DMA_Config_v2.png)<br>
+
+Die Anbindung der Filter-IP an das Processing System (PS) erfolgt über AXI Direct Memory Access (AXI-DMA). Da im Design mehrere Filter parallel verwendet werden, werden auch vier AXI-DMA-Instanzen benötigt. Alle vier AXI-DMA-Cores werden identisch konfiguriert. Eine konsistente Namenskonvention ist hierbei essenziell, da im Jupyter Notebook später über diese Namen auf die jeweiligen DMA-Schnittstellen zugegriffen wird.<br>
+
+Bei der Konfiguration ist besonders darauf zu achten, dass sowohl **Enable Scatter Gather Engine** als auch **Enable Micro DMA** deaktiviert werden, da diese Funktionen in diesem Design nicht benötigt werden. **Allow unaligned transfers** sollte ebenfalls deaktiviert bleiben, da diese Funktion auf dem Pynq nicht unterstützt wird. Die **Width of Buffer Length Register** wird auf den maximalen Wert von 26 gesetzt. Auch wenn dieser Wert die Anforderungen der Filter übersteigt, wurde er aus Gründen der Robustheit und zur Vermeidung zukünftiger Einschränkungen bewusst beibehalten. Ein großer Puffer verhindert zudem, dass Fehler fälschlicherweise dem DMA zugeordnet werden, obwohl sie tatsächlich im Filter auftreten.<br>
+
+Die **Address Width** bleibt auf dem Standardwert von 32 Bit. Die „Stream Data Width“ wird entsprechend der Konfiguration der *HP0/HP2-Ports* des PS auf 64 Bit gesetzt. Auch hier gilt  Lieber großzügig dimensionieren als zu knapp, was ebenfalls aus der Entwicklungsphase übernommen wurde.<br>
+
+Die **Max Burst Size** wird auf 16 Bit gesetzt, obwohl die Burst-Funktion im eigentlichen Betrieb nicht verwendet wird. Für den Write Channel wird die Einstellung auf *Auto*
+belassen, wodurch automatisch die Parameter des Read-Channels übernommen werden.<br>
+
+### Verbindungen
+Vivado bietet die Möglichkeit, Blöcke automatisch anhand von vorgeschlagenen Verbindungen miteinander zu verbinden. Bei standardisierten Schnittstellen sind diese Vorschläge in der Regel korrekt und können den Designprozess deutlich beschleunigen. Dennoch sollte stets überprüft werden, ob die vorgeschlagene Verbindung tatsächlich der gewünschten entspricht.<br>
+Bei Verwendung dieser Funktion fügt Vivado oft automatisch unterstützende Blöcke wie beispielsweise einen *AXI Interconnect* hinzu, was zur besseren Übersichtlichkeit und Strukturierung des Designs beiträgt.<br>
+
+Eine Ausnahme bilden jedoch die Ein- und Ausgänge, die über die Constraints-Datei (XDC) definiert sind. Für diese Signale funktioniert die automatische Verbindung nur eingeschränkt oder fehlerhaft. Daher wird empfohlen, diese Verbindungen manuell vorzunehmen, um Fehler im späteren Designverlauf zu vermeiden.<br>
+
+**S_AXI (S_AXI_LITE)**<br>
+Dabei handelt es sich um die *AXI-Lite-Schnittstelle*, die für die Registersteuerung benötigt wird. Sowohl der *Audio-Codec-Controller* als auch die *AXI-DMA-Module* besitzen jeweils eine solche Verbindung. Diese werden allerdings auf unterschiedliche Clock-Frequenzen eingestellt, da sie unterschiedliche Anforderungen an die Taktung stellen:<br>
+- **Audio Codec Controller**: 100MHz
+- **Axi-DMA**: 50MHz
+
+
+**M_AXI_MM2S/M_AXIS2MM**<br>
+Quelle: [PYNQ DMA](https://discuss.pynq.io/t/tutorial-pynq-dma-part-1-hardware-design/3133)<br>
+
+Dies sind die Verbindungen an den HP0/2-Ports des Processing Systems (PS), über die die Daten zwischen dem BRAM und dem AXI-DMA übertragen werden. Diese Anschlüsse werden ausschließlich für die AXI-DMA-Kommunikation genutzt.
+Der *M_AXI_MM2S*-Port ist der *Read Channel*, und *M_AXI_S2MM* ist der *Write Channel*. Da die AXI-DMA-Module als Master fungieren, sind sie in der Lage, sowohl Lese- als auch Schreibzugriffe durchzuführen. Der PS übernimmt hierbei die Slave-Rolle.
+Diese Verbindungen werden bei allen vier AXI-DMA-Instanzen auf die gleiche Weise hergestellt.
+- **M_AXI_MM2S:** HPO, 50MHz
+- **M_AXI_2SMM:** HP2, 50MHz
+
+**AXI-Stream**<br>
+Die Filter sowie die AXI-DMA-Module besitzen jeweils einen **S_AXIS_2SMM/AXI4_Stream-Slave** (*Slave*) und einen **M_AXIS_MM2S/AXI4_Stream-Master** (*Master*) Anschluss. Da es sich beim AXI-Stream um eine gerichtete Verbindung handelt, ist es entscheidend, dass immer ein Master-Port mit einem Slave-Port verbunden wird.<br>
+Diese Verbindungen müssen manuell vorgenommen werden, da Vivado diese Zuordnungen nicht automatisch erkennen kann. Nachdem die Datenpfade korrekt verbunden wurden, schlägt Vivado in der Regel automatisch eine Verbindung für die zugehörigen Taktsignale (Clock) und Reset-Signale vor.<br>
+Wichtig ist dabei, das richtige Taktsignal auszuwählen, in diesem Fall 50 MHz, da die Filter in dieser Taktfrequenz ausgelegt sind.<br>
+Sind alle Verbindungen korrekt vorgenommen, ergibt sich folgendes Bild:
+- *M_AXIS_MM2S (DMA) -> AXI4_Stream-Slave (Filter)*, 50MHz
+- *S_AXIS_2SMM (DMA) -> AXI4_Stream-Master (Filter)*, 50MHz
+
+### Vollendetes Design
+Sind alle Verbindungen korrekt vorgenommen, ergibt sich folgendes Blockdesign:
 
 ![audio_quad_Filter_v1](Design/audio_quad_Filter_v1_bunt.png)
+
+Die Clock-Signale sowie die wichtigsten Datenpfade wurden zusätzlich farblich hervorgehoben, um die Struktur übersichtlicher darzustellen.<br>
+Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fehler erkannt werden, kann im nächsten Schritt der Bitstream generiert werden.<br>
+
+Am Ende bilden das Overlay die .bit und .hwh-Datei.  Damit PYNQ das Overlay korrekt erkennt, müssen beide Dateien denselben Namen tragen, mit Ausnahme der Dateiendung..<br>
