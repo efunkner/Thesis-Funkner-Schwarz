@@ -166,7 +166,7 @@ float filter(float x_0)
 ```
 Bei der TDF2 Implementierung setzt sich der Ausgangswert aus der addition aus dem ersten Zustandsregister `s_1` mit dem verstärkten Eingangswert. Die Zustandsregister werden dann für die nächste Iteration aktualisiert. `s_1` wird zum nächsten Wert von `s_2` addiert mit den gewichteten Ein- und Ausgangswerten. `s_2` wird komplett neu berechnet. Diese Struktur hat den Vorteil, dass der Ausgangswert sehr früh im Berechnungszyklus verfügbar ist, was bei Pipeline Implementierungen sich als vorteilhaft erweisen kann.
 
-## Koeffizienteneingabe
+## Eingabe Koeffiziente
 ```cpp
 const float b_0 = f;
 const float b_1 = f;
@@ -192,5 +192,7 @@ Die Koeffizienten werden in separaten Arrays gespeichert und an den Konstruktor 
 ## Filter Anwendung
 ```cpp
 float filtered = biquad.filter(Input);
+
 ```
-Die direkte Anwendung erfolgt durch den Aufruf der `filter()`-Methode auf dem Filterobjekt `biquad`. Dabei wird der Eingangswert `Input` an die Methode übergeben, von der implementierten Filterklasse entsprechend ihrer charakteristischen Struktur verarbeitet und als gefilterter Ausgangswert zurückgegeben.
+Die direkte Anwendung erfolgt durch den Aufruf der `filter()`-Methode auf dem Filterobjekt `biquad`. Der Eingangswert `Input` wird der Methode übergeben, durch die spezifische Filterimplementierung entsprechend der definierten Differenzengleichung verarbeitet und als transformierter Ausgangswert filtered zurückgegeben.
+
