@@ -172,6 +172,29 @@ Da der Schwerpunkt auf der Implementierung des Filters liegt und nicht auf der L
 Alle vier Basisfilter wurden gemeinsam in einem Overlay implementiert, wobei das Design im weiteren Verlauf noch angepasst werden kann. Ursprünglich bestand jeder Filter aus zwei kaskadierten Biquads; diese wurden vorerst auf jeweils einen Biquad reduziert. Statt der zuvor verwendeten Direct Form II Struktur kommt nun die transponierte Direct Form II zum Einsatz, da diese sich besser für Hardwareimplementierungen eignet.<br>
 Zudem wurde die Größe des Output-Buffers der Filter-IP von 2^18 auf 2^16 Werte reduziert. Durch die kleinere Puffergröße wird eine verbesserte Stabilität und geringere Latenz im Jupyter Notebook erwartet.<br>
 
+# Stand : 26.06.2025
+### Filterdesign und Notebooks
+Beim Reduzieren der Outputpuffergröße der Filter-IP von 2^18 auf 2^16 wurde ein ungewöhnliches Verhalten bei der Filterung festgestellt.<br>
+Die Lautstärke des Ausgangssignals zeigte sich nach der Filterung inkonsistent und veränderte sich auf unvorhersehbare Weise.<br>
+Besonders auffällig war, dass sich bei der Aufnahme über das Mikrofon das Hintergrundrauschen in Sprechpausen mit jeder weiteren Pause zunehmend aufschaukelte.
+Dieses Verhalten trat bei allen vier implementierten Filtern gleichermaßen auf.<br>
+
+Das beobachtete Verhalten lässt sich auf das Einschwingverhalten von IIR-Filtern zurückführen. IIR-Filter besitzen eine rekursive Struktur, bei der die Filterausgabe nicht nur vom aktuellen Eingangswert, sondern auch von früheren Eingangs- und Ausgangswerten abhängt. Diese Rückkopplung führt zu einem typischen Einschwingen beim Start einer neuen Filterung.<br>
+In der praktischen Umsetzung wurde die Audioaufnahme durch die begrenzte Puffergröße der Filter-IP in mehrere kleine Datenblöcke unterteilt. Dadurch wurde der Filter mehrfach separat auf jeweils kurze Abschnitte angewendet, ohne Zustandsübernahme zwischen den Blöcken. Für jeden dieser Blöcke musste sich der Filter erneut einschwingen.<br>
+Dieses wiederholte Einschwingen in kurzen Abständen kann dazu führen, dass numerische Restwerte oder Quantisierungsrauschen im Signal verstärkt werden. In der konkreten Anwendung führte das dazu, dass bei jedem neuen "stillen" Segment das Hintergrundrauschen zunehmend stärker hervortrat.<br>
+Das ständige Einschwingen bei blockweiser Verarbeitung erklärt somit auch das inkonsistente Lautstärkeverhalten bei der Filterung.<br>
+
+Durch das Erhöhen der Outputpuffergröße der Filter-IP auf 2^20 wird das Eingangssignal nun in deutlich weniger Datenpakete aufgeteilt. Dadurch muss der Filter seltener neu ansetzen, was wiederum dazu führt, dass das Einschwingen weniger häufig auftritt und in der gefilterten Ausgabe weniger stark wahrnehmbar ist.<br>
+Da die Größe des Ausgangspuffers hardwareseitig begrenzt ist, lässt sich die Paketaufteilung nicht vollständig vermeiden. Um das Einschwingverhalten vollständig zu kontrollieren oder zu eliminieren, müsste der Filter grundlegend anders implementiert werden – beispielsweise durch eine Struktur mit Zustandspersistenz zwischen den Übertragungsblöcken oder durch eine Streaming-Architektur ohne harte Blockgrenzen.<br>
+
+### Potentielles Problem bei der Echtzeitfilterung
+Ein möglicher Grund, warum die Echtzeitfilterung derzeit nicht funktioniert, könnte ebenfalls mit dem Einschwingverhalten des IIR-Filters zusammenhängen. Bisher wurde die Filter-IP so betrieben, dass sie in Blöcken über den DMA angesteuert wurde, d. h. jedes Filtersegment begann und endete kontrolliert mit einem Datenpaket.<br>
+In einer Echtzeitanwendung hingegen liefert der I2S Receiver (RX) einen kontinuierlichen Datenstrom über AXI4-Stream, ohne klar abgegrenzte Blockstruktur. Wenn der Filter jedoch jedes eingehende Sample oder Bit wie den Beginn einer neuen Filterung interpretiert, also jedes Mal erneut einschwingt führ das dazu, dass der Filter bei jedem einzelnen Bit erneut mit seiner Einschwingphase beginnt. Dadurch wird das Ausgangsignal an den I2S Transmitter weitergeben bevor der Filter stabil arbeiten konnte.<br>
+Besonders am Anfang ist das Filterverhalten stark gedämpft oder verzerrt. Diese anfänglich starke Dämpfung die bisher beobachtet wurde war konstant und könnte daher so erkläert werden.<br>
+
+Jedoch wurde die Filter IP auch im reinen Bypass-Modus getestet, also ohne aktive Filterfunktion. Dabei zeigte sich, dass das gleiche stark dämpfende Verhalten wie im regulären Filterbetrieb auftrat. Dies spricht deutlich gegen die Annahme, dass das Einschwingen des Filters die Ursache des Problems ist.<br>
+Der Test diente gezielt dazu, den Filter selbst als Fehlerquelle auszuschließen.<br>
+Auch wenn das Einschwingverhalten nicht die direkte Ursache für das aktuelle Problem zu sein scheint, sollte es in der weiteren Entwicklung der Echtzeitfilterung als potenzielle Fehlerquelle im Blick behalten werden, insbesondere, falls in Zukunft Fortschritte in diesem Bereich erzielt werden.<br>
 
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien

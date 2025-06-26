@@ -218,7 +218,7 @@
 \title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
 Systemen}
 \author{Eduard Funkner \and Martin Schwarz}
-\date{2025-06-25}
+\date{2025-06-26}
 \begin{document}
 \maketitle
 
@@ -576,6 +576,50 @@ verbesserten numerischen Stabilität führt. Darüber hinaus ist die
 Struktur besonders gut für die Implementierung in Hardware geeignet, da
 die Berechnungen eine natürliche Pipeline-Struktur ausweisen.
 
+\chapter{Numerische Aspekte und
+Quantisierungseffekte}\label{numerische-aspekte-und-quantisierungseffekte}
+
+Die praktische Implementierung digitaler Filter auf Systemen mit
+endlicher Wortlänge birngt verschiedene Herausforderungen mit sich.
+Diese Effekte können die Filterleistung erheblich beeinträchtigen und
+müssen bereits in beim Entwerfen berücksichtigt werden. Die wichtigsten
+numerischen Aspekte sind Koeffizientenquentisierung, Rundungsrauschen,
+und nichtlineare Quantisierungseffekte.
+
+\section{Koeffizientenquantisierung}\label{koeffizientenquantisierung}
+
+Die Koeffizientenquantisierung ist einer der kritischen Aspekte bei der
+Implementierung digitaler Filter auf Systemen mit begrenzter Wortlänge.
+Bei der Darstellung der Filterkoeffizienten mit einer endlichen Anzahl
+von Bits entstehen Quantisierungsfehler, die zu einer Verschiebung der
+Pole und Nulstellen des Filters führen kann.
+
+\textbf{Auswirkung der Koeffizientenquantisierung}
+
+Die Quantisierung der Koeffizienten führt zu verschiedenen unerwünschten
+Effekten:
+
+\textbf{Polverschiebung}: Die quantisierten Koeffizienten verschieben
+die Pole des Filters, was zu einer Änderung der Filtercharakteristik
+führt. Im schlimmsten Fall können die Pole aus dem Einheitskreis
+herauswandern und zu einem instabilen Filter führen.
+
+\textbf{Frequenzgangverzerrung}: Die Verschiebung der Pole und
+Nullstellen führt zur Abweichung im Frequenzgang. Besonders kritisch ist
+dies bei scharfen Filtern mit hoher Güte.
+
+\textbf{Stabilitätsverlust}: Pole am oder auf dem Rand des
+Einheitskreises kann bereits durch kleine Quantisierung zur Instabilität
+zur Instabilität führen. Die Wahrscheinlichkeit der Instabilität steigt
+mit abnehmender Wortlänge.
+
+\section{Bilineartransformation}\label{bilineartransformation}
+
+Mittels der Bilineartransformation ist es möglich einen bestehenden
+analogen Filter, anhand seiner Übertragungsfunktion zu
+digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4
+des Analog Systems Lab Kit PRO entnommen.
+
 \chapter{Implementierungserklärung der Biquad Filter in
 Arduino}\label{implementierungserkluxe4rung-der-biquad-filter-in-arduino}
 
@@ -888,13 +932,6 @@ Eingangswert \texttt{Input} wird der Methode übergeben, durch die
 spezifische Filterimplementierung entsprechend der definierten
 Differenzengleichung verarbeitet und als transformierter Ausgangswert
 filtered zurückgegeben.
-
-\section{Bilineartransformation}\label{bilineartransformation}
-
-Mittels der Bilineartransformation ist es möglich einen bestehenden
-analogen Filter, anhand seiner Übertragungsfunktion zu
-digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4
-des Analog Systems Lab Kit PRO entnommen.
 
 
 
