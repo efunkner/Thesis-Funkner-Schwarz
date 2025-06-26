@@ -171,14 +171,14 @@ File filteredFile;  // Gefiltere Ausgangsdatei
 
 // -----------------------------------------------------------------------------------
 // --- Filter-Koeffizienten und Gain ---
-const float b_0 = 0.07033f;
-const float b_1 = -0.138;
-const float b_2 = 0.07033f;
-const float a_0 = 1.00f;
-const float a_1 = -0.138f;
-const float a_2 = -0.8593;
+const float b_0 = 1.0f;
+const float b_1 = -2.0;
+const float b_2 = 1.0f;
+const float a_0 = 1.0f;
+const float a_1 = -1.8153;
+const float a_2 = 0.8310;
 
-const float gain = 1.00f;
+const float gain = 0.9116f;
 
 const float b_coefficients[] = { b_0, b_1, b_2};
 const float a_coefficients[] = { a_0, a_1, a_2};
@@ -298,8 +298,8 @@ bool readWavHeader() {
     return false;
   }
 
-  if (bitsPerSample != 16) {
-    Serial.println("Nur 16-Bit PCM wird unterstützt.");
+  if (bitsPerSample != 16 && bitsPerSample != 24) {
+    Serial.println("Nur 16-Bit oder 24-Bit PCM wird unterstützt.");
     return false;
   }
 
@@ -330,6 +330,72 @@ bool readWavHeader() {
 
   return true;
 }
+
+
+// 16Bit mit 24Bit Filterung
+void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample) {
+  const int bufferFrames = 512;
+  uint16_t bytesPerSample = bitsPerSample / 8;
+  uint16_t blockAlign = numChannels * bytesPerSample;
+  uint32_t totalFrames = dataSize / blockAlign;
+  uint32_t framesLeft = totalFrames;
+
+  if (bitsPerSample == 16) {
+    int16_t buffer[bufferFrames * numChannels];
+
+    while (framesLeft > 0) {
+      int framesToRead = min(framesLeft, (uint32_t)bufferFrames);
+      int bytesToRead = framesToRead * blockAlign;
+      int bytesRead = wavFile.read((uint8_t*)buffer, bytesToRead);
+      if (bytesRead != bytesToRead) break;
+
+      for (int i = 0; i < framesToRead * numChannels; i += numChannels) {
+        float l = filterL.filter((float)buffer[i]);
+        buffer[i] = constrain((int)l, -32768, 32767);
+        if (numChannels == 2) {
+          float r = filterR.filter((float)buffer[i + 1]);
+          buffer[i + 1] = constrain((int)r, -32768, 32767);
+        }
+      }
+
+      filteredFile.write((uint8_t*)buffer, bytesRead);
+      framesLeft -= framesToRead;
+    }
+  }
+
+  else if (bitsPerSample == 24) {
+    uint8_t buffer[bufferFrames * blockAlign];
+
+    while (framesLeft > 0) {
+      int framesToRead = min(framesLeft, (uint32_t)bufferFrames);
+      int bytesToRead = framesToRead * blockAlign;
+      int bytesRead = wavFile.read(buffer, bytesToRead);
+      if (bytesRead != bytesToRead) break;
+
+      for (int i = 0; i < framesToRead; ++i) {
+        int base = i * blockAlign;
+
+        for (int ch = 0; ch < numChannels; ++ch) {
+          int offset = base + ch * 3;
+          int32_t s = buffer[offset] | (buffer[offset + 1] << 8) | (buffer[offset + 2] << 16);
+          if (s & 0x800000) s |= 0xFF000000;
+          float x = (float)s / 256.0f;
+          float y = (ch == 0) ? filterL.filter(x) : filterR.filter(x);
+          int32_t out = constrain((int)(y * 256.0f), -8388608, 8388607);
+          buffer[offset]     = out & 0xFF;
+          buffer[offset + 1] = (out >> 8) & 0xFF;
+          buffer[offset + 2] = (out >> 16) & 0xFF;
+        }
+      }
+
+      filteredFile.write(buffer, bytesRead);
+      framesLeft -= framesToRead;
+    }
+  }
+}
+
+
+/* Nur 16 Bit Filterung
 
 // --- Filterprozess auf Samples der WAV anwenden ---
 void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample) {
@@ -373,6 +439,8 @@ void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample
 // -----------------------------------------------------------------------------------
   }
 }
+*/
+
 
 // --- Indikator LED ---
 void loop() {

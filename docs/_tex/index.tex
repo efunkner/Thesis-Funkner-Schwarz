@@ -218,7 +218,7 @@
 \title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
 Systemen}
 \author{Eduard Funkner \and Martin Schwarz}
-\date{2025-06-24}
+\date{2025-06-25}
 \begin{document}
 \maketitle
 
@@ -242,7 +242,7 @@ mithilfe ihrer Hardware für sich den Prozess reproduzieren können.
 \chapter{Theoretische Grundlagen}\label{theoretische-grundlagen}
 
 \section{Infinite Impulse Response
-(IIR)-Filter}\label{infinite-impulse-response-iir-filter}
+(IIR-Filter)}\label{infinite-impulse-response-iir-filter}
 
 Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung
 zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen
@@ -252,6 +252,14 @@ vergangenen Eingabewertes als auch des vorherigen Ausgabewertes.
 Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort
 von IIR-Filtern theoretisch unendlich lang andauern kann, was sie
 grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.
+
+Die theoretischen Grundlagen von IIR-Filtern basieren auf der Tatsache,
+dass die Filter sowohl Nullstellen als auch Polstellen besitzen. Während
+FIR-Filter ausschließlich Nullstellen aufweisen, ermöglichen die
+Polstellen von IIR-Filtern eine effizientere Umsetzung bestimmter
+Filtereigenschaften. Dies führt zu dem Hauptvorteil von IIR-Filter für
+die Möglichkeit scharfe Übergänge im Frequenzgang mit relativ wenigen
+Koeffizienten zu erreichen.
 
 Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei
 der Realisierung scharfter Frequenzgänge mit relativ wenigen
@@ -269,7 +277,14 @@ Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische
 Stabilität, Flexibilät bei der Parameteranpassung und Modularität des
 Designs.
 
-\section{Differenzengleichung eines IIR Filters zweiter
+Die Verwendung von Biquad-Sektionen anstelle von Filtern höherer Ordnung
+in direkter Form bietet eine Vielzahl von Vorteilen. Die Anfälligkeit
+für Koeffizientenquentisierung wird enorm gemindert, da die Pole und
+Nullstellen weniger stark von kleinen Änderungen der Koeffizienten
+abhängen. Im weiteren ermöglicht die modulare Struktur eine unbahängige
+Optimierung jeder Sektion, wodurch der Entwurfsprozess vereinfacht wird.
+
+\section{Differenzengleichung eines IIR-Filters zweiter
 Ordnung}\label{differenzengleichung-eines-iir-filters-zweiter-ordnung}
 
 Digitale Filter können mit einer linearen Differenzengleichung
@@ -285,30 +300,35 @@ Der Wert \(y[n]\) bezeichnet den Ausgabewert zum Sample \(n\), während
 \(x[n]\) den Eingangswert darstellt. Der aktuelle Ausgabewert \(y[n]\)
 ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen
 Eingabewerte, subtrahiert mit den zwei gewichteten vergangen
-Ausgabewerte. Die Koeffizienten \(b_0\), \(b_1\) und \(b_2\) bestimmen
-den Einfluss des aktuellen und der vergangenen Eingabewerte
-(Feedforward), während \(a_1\) und \(a_2\) den Rückkopplungsanteil aus
-früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der
-Koeffizient auf \(a_0\) auf 1 normiert:
+Ausgabewerte.
+
+Die Koeffizienten \(b_0\), \(b_1\) und \(b_2\) bestimmen den Einfluss
+des aktuellen und der vergangenen Eingabewerte (Feedforward), während
+\(a_1\) und \(a_2\) den Rückkopplungsanteil aus früheren Ausgabewerten
+(Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf \(a_0\)
+auf 1 normiert, was zu der vereinfachten Form führt:
 
 \[
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
 \]
 
-Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
-Differenzengleichung mittles der z-Transformation in den z-Bereich
-transformiert und daraus folgt die folgende Übertragunsfunktion.
+Durch diese Normierung wird die praktische Implementierung vereinfacht,
+da ein Muliplikationsschritt entfällt.
 
 \section{Übertragungsfunktion eines IIR-Filters zweiter
 Ordnung}\label{uxfcbertragungsfunktion-eines-iir-filters-zweiter-ordnung}
+
+Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die
+Differenzengleichung mittles der z-Transformation in den z-Bereich
+transformiert und daraus folgt die resultierende Übertragunsfunktion:
 
 \[
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
 \]
 
-Die Übertragungsfunktion eines Biquads beschreibt das Verhältnis
-zwischen dem Ausgang \(Y(z)\) zu dem Eingang \(X(z)\). Diese Gleichung
-stellt die normierte Form des Biquads dar, bei welcher der
+Die rationale Funktion eines biquadratischen Filters beschreibt das
+Verhältnis zwischen dem Ausgang \(Y(z)\) zu dem Eingang \(X(z)\). Diese
+Gleichung stellt die normierte Form des Biquads dar, bei welcher der
 Nennerkoeffizient auf \(a_0 = 1\) normiert ist. Für den Fall, dass
 \(a_0 ≠ 1\) beträgt müssen die Koeffzienten durch \(a_0\) geteilt werden
 um die Normalform zu erreichen.
@@ -324,6 +344,45 @@ dazu kommen dass das Ausgangssignal unkontrolliert schwingt und das
 System damit instabil wird. Nullstellen haben hingegen lediglichen
 Einfluss auf die Frequenzcharakteristik und nicht direkt auf die
 Stabilität.
+
+\section{Stabilität und
+Pol-Nullstellen-Verteilung}\label{stabilituxe4t-und-pol-nullstellen-verteilung}
+
+Die Stabilität eines IIR-Filters ist ein kritischer Faktor, wechler für
+die Implementierung des Filters gegeben sein muss. Ein kausaler
+IIR-Filter ist genau dann stabil, wenn alle Polstellen seiner
+Übertragungsfunktion innerhalb des Einheitskreises der komplexen z-Ebene
+liegen. Mathematisch ausgedrückt muss für alle Polstellen \(|p_i| < 1\).
+
+Die Lage der Pole bestimmt nicht nur die Stäbilität, sondern auch das
+dynamische Verhalten des Filters. Pole die näher am Rand des
+Einheitskreises liegen führen zu einem resonanten Verhalten mit langen
+ausschwingendem Verhalten, während Pole näher zum Ursprung hin, ein
+gedämpfteres Verhalten bewirken. Die Nullstellen hingegen beeinflussen
+primär dern Verlauf des Frequenzgangs.
+
+Für die praktische Implementierung ist es wichtig zu beachten, dass
+Quantisierungseffekte sich auf die Lage der Pole auswirken können. Das
+kann im schlimmsten Fall dazu führen, sodass die Stabilität des Filters
+beeinträchtigt und der Filter instabil wird. Aus diesem Grund ist bei
+der Koeffizientenquantisierung besondere Vorsicht geboten, bei Filtern
+mit Polen nah oder auf dem Rand des Einheitskreises.
+
+\section{Frequenzgang und
+Phasenverhalten}\label{frequenzgang-und-phasenverhalten}
+
+Die Frequenzgang einew IIR-Filters wird durch die Auswertung der
+Übertragungsfunktion innerhalb des Einheitskreises erhalten, dafür wird
+die Substitution \(z = e^{j\omega}\) druchgeführt:
+
+\[
+H(e^{j\omega}) = \frac{b_0 + b_1 e^{-j\omega} + b_2 e^{-2j\omega}}{1 + a_1 e^{-j\omega} + a_2 e^{-j2\omega}}
+\]
+
+Der Betrag \(|H(e^{j\omega})|\) beschreibt die Amplitudencharakteristik,
+während die Phase \(\arg(H(e^{j\omega}))\) das Phasenverhalten
+wiedergibt. Bei IIR-Filtern ist das Phasenverhlten im Allgemeinen nicht
+linear, was in manchen Anwendugen als unererwünscht erweist.
 
 \chapter{Implementierungsstrukturen biquadratischer
 Filter}\label{implementierungsstrukturen-biquadratischer-filter}
@@ -358,10 +417,10 @@ jede Sektion unabhängig entworfen und optimiert werden kann.
 
 \section{Direktform 1}\label{direktform-1}
 
-Die Direktform 1 stellt die direkte Umsetzung der biquadratischen
+Die Direktform 1 stellt die direkteste Umsetzung der biquadratischen
 Differenzengleichung in einer Signalflussstruktur dar.
 
-Die Implementierung folgt direkt der mathematischen Beschreibung unter
+Diese Implementierung folgt direkt der mathematischen Beschreibung unter
 der Verwendung separater Verzögerungsketten für die Eingangs- als auch
 die Ausgangswerte.
 
@@ -402,10 +461,18 @@ zwischen den Verzögerungselementen und den Koeffizienten erfolgen
 parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen
 lässt.
 
+Ein wesentlicher Vorteil der Direktform 1 liegt in ihrer Robustheit
+gegenüber Koeffizientenquantisierung. Da die Feedforward- und
+Feedback-Pfade getrennt sind, beeinflussen Quantisierungsfehler in einem
+Pfad nicht direkt den anderen. Dies führt zu einer besseren
+numerenrischen Stabilität, besonders bei der Verwendung von
+Festkomma-Arithmetik.
+
 Die Direktform 1 zeichnet sich durch ihre konzeptionelle Einfachheit und
 die direkte Korrespondenz zur Differenzengleichung aus. Nachteilhaft bei
 dieser Struktur ist der erhöhte Speicherbedarf, aufgrund der redundanten
-Verzögerungselemente.
+Verzögerungselemente. Für Anwendungen mit strengen
+Speicherbeschränkungen kann dies eine limitierender Faktor sein.
 
 \section{Direktform 2 (Kanonische
 Form)}\label{direktform-2-kanonische-form}
@@ -444,24 +511,30 @@ y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]
 
 In dieser Struktur werden nur zwei Verzögerungselemente für w{[}n-1{]}
 und w{[}n-2{]} benötigt, da die rekursive als auch die nicht-rekursive
-Verarbeitung auf diesleben verzögerten Werte zugreifen.
-
-Die Bezeichnung ``kanonisch'' bezieht sich darauf, dass diese
-Implementierung die minimal mögliche Anzahl von Verzögerungselementen
-verwendet und dadurch die Speichereffizienz optimiert.
+Verarbeitung auf diesleben verzögerten Werte zugreifen. Die Bezeichnung
+``kanonisch'' bezieht sich darauf, dass diese Implementierung die
+minimal mögliche Anzahl von Verzögerungselementen verwendet und dadurch
+die Speichereffizienz optimiert.
 
 Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten
-Speicherressourcen. Jedoch weist diese Struktur eine erhöhte
-Empfindlichkeit gegenüber Quantisierungseffekten auf, da die
-Zwischenwerte \(w[n]\) größere Dynamikbereiche aufweisen können als die
-ursprünglichen Ein- und Ausgangswerte.
+Speicherressourcen. Der reduzierte Speicherbedarf ist insbesondere bei
+der Implementierung auf Mikrocontrollern oder in FPGA-Anwendungen von
+hohem Vorteil, bei welchen Speicher eine limitierte und kostbare
+Ressource darstellt.
+
+Jedoch weist diese Struktur eine erhöhte Anfälligkeit gegenüber
+Quantisierungseffekten auf, da die Zwischenwerte \(w[n]\) größere
+Dynamikbereiche aufweisen können als die ursprünglichen Ein- und
+Ausgangswerte. Dies kann zu einer Verschlechterung des
+Signal-Rausch-Verhältnisses führen, insbesondere bei der Verwendung von
+Festkomma-Arithmetik mit begrenzter Wortbreite.
 
 \section{Transponierte Direktform 2:}\label{transponierte-direktform-2}
 
-Die transponierte Direktform 2 kann gebildet werden mittels der
-Anwendung des Transpositionstheorems auf die Direktform 2. Dieses
-Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei
-gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente
+Die transponierte Direktform 2 kann gebildet werden durch die Anwendung
+des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt,
+dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger
+Vertauschung von Eingängen und Ausgängen eine äquivalente
 Übertragungsfunktion ergibt. Die resultierende Struktur weist oft
 günstigere numerische Eigenschaften auf, als die ursprüngliche Form.
 
@@ -497,9 +570,11 @@ aufgrund ihrer effizienten Berechnung und der guten Eignung für
 parallele oder pipelined Hardware-Architekturen.
 
 Ein wesentlicher Vorteil der transponierten Direktfrom 2 liegt in ihrer
-reduzierten Empfindlichkeit gegenüber Koeffizientenquantisierung. Die
+reduzierten Anfälligkeit gegenüber Koeffizientenquantisierung. Die
 Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer
-verbesserten numerischen Stabilität führt.
+verbesserten numerischen Stabilität führt. Darüber hinaus ist die
+Struktur besonders gut für die Implementierung in Hardware geeignet, da
+die Berechnungen eine natürliche Pipeline-Struktur ausweisen.
 
 \chapter{Implementierungserklärung der Biquad Filter in
 Arduino}\label{implementierungserkluxe4rung-der-biquad-filter-in-arduino}
