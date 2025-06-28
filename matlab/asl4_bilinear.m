@@ -12,9 +12,6 @@ R = 1000;
 C = 100e-9;
 w0 = 1 / (R*C);
 Q = 4.7;
-% Prewarping
-%fs = w0 / 2*pi; 
-
 fs = 44100;
 
 % Nenner

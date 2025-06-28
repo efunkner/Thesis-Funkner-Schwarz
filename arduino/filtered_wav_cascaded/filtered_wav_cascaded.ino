@@ -169,42 +169,57 @@ File wavFile;       // Originale Eingangsdatei
 File filteredFile;  // Gefiltere Ausgangsdatei
 
 // ===================================================================================================================================================================================================
-#define NUM_STAGES 2 // Anzahl der Filterstufen
+#define NUM_STAGES 1 // Anzahl der Filterstufen
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s1 = 1.0f;
-const float b_1_s1 = -2.0;
-const float b_2_s1 = 1.0f;
+const float b_0_s1 = 0.4934f;
+const float b_1_s1 = -0.98640;
+const float b_2_s1 = 0.4934f;
 const float a_0_s1 = 1.0f;
-const float a_1_s1 = -1.9061f;
-const float a_2_s1 = 0.9112f;
+const float a_1_s1 = -0.9847f;
+const float a_2_s1 = 0.4995f;
 
-const float gain_s1 = 16.7243;
+const float gain_s1 = 1.0;
 
 const float b_coefficients_s1[] = { b_0_s1, b_1_s1, b_2_s1};
 const float a_coefficients_s1[] = { a_0_s1, a_1_s1, a_2_s1};
 
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s2 = 1.0f;
-const float b_1_s2 = -2.0f;
-const float b_2_s2 = 1.0f;
+const float b_0_s2 = 0.4934f;
+const float b_1_s2 = -0.98640;
+const float b_2_s2 = 0.4934f;
 const float a_0_s2 = 1.0f;
-const float a_1_s2 = -1.9877f;
-const float a_2_s2 = 0.9893f;
+const float a_1_s2 = -0.9847f;
+const float a_2_s2 = 0.4995f;
 
-const float gain_s2 = 0.0506f;
+const float gain_s2 = 1.0;
 
 const float b_coefficients_s2[] = { b_0_s2, b_1_s2, b_2_s2};
 const float a_coefficients_s2[] = { a_0_s2, a_1_s2, a_2_s2};
 
+// --- Filter-Koeffizienten und Gain ---
+const float b_0_s3 = 0.4934f;
+const float b_1_s3 = -0.98640;
+const float b_2_s3 = 0.4934f;
+const float a_0_s3 = 1.0f;
+const float a_1_s3 = -0.9847f;
+const float a_2_s3 = 0.4995f;
+
+const float gain_s3 = 1.0;
+
+const float b_coefficients_s3[] = { b_0_s3, b_1_s3, b_2_s3};
+const float a_coefficients_s3[] = { a_0_s3, a_1_s3, a_2_s3};
+
 // Filter-Objekte für linken und rechten Kanal
 BiquadFilterDF2 filterL[NUM_STAGES] = {
   BiquadFilterDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
-  BiquadFilterDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+//  BiquadFilterDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+//  BiquadFilterDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
 };
 
 BiquadFilterDF2 filterR[NUM_STAGES] = {
   BiquadFilterDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
-  BiquadFilterDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+//  BiquadFilterDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+//  BiquadFilterDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
 };
 // ===================================================================================================================================================================================================
 
