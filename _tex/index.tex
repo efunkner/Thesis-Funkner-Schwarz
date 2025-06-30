@@ -218,7 +218,7 @@
 \title{Lehrdemonstrationen zur digitalen Filterung auf eingebetteten
 Systemen}
 \author{Eduard Funkner \and Martin Schwarz}
-\date{2025-06-26}
+\date{2025-06-30}
 \begin{document}
 \maketitle
 
@@ -583,8 +583,9 @@ Die praktische Implementierung digitaler Filter auf Systemen mit
 endlicher Wortlänge birngt verschiedene Herausforderungen mit sich.
 Diese Effekte können die Filterleistung erheblich beeinträchtigen und
 müssen bereits in beim Entwerfen berücksichtigt werden. Die wichtigsten
-numerischen Aspekte sind Koeffizientenquentisierung, Rundungsrauschen,
-und nichtlineare Quantisierungseffekte.
+numerischen Aspekte sind Koeffizientenquentisierung,
+Quantisierungsrauschen(Rundungsrauschen), Overflow-Probleme und
+nichtlineare Quantisierungseffekte.
 
 \section{Koeffizientenquantisierung}\label{koeffizientenquantisierung}
 
@@ -613,19 +614,287 @@ Einheitskreises kann bereits durch kleine Quantisierung zur Instabilität
 zur Instabilität führen. Die Wahrscheinlichkeit der Instabilität steigt
 mit abnehmender Wortlänge.
 
-\section{Bilineartransformation}\label{bilineartransformation}
+\chapter{Bilineartransformation}\label{bilineartransformation}
 
-Mittels der Bilineartransformation ist es möglich einen bestehenden
-analogen Filter, anhand seiner Übertragungsfunktion zu
-digitalisieren.Die analogen Biquad Filter werden aus dem Expirement 4
-des Analog Systems Lab Kit PRO entnommen.
+Die Bilineartransformation dient als ein Verfahren, welches die
+Überführung analoger kontinuerierlicher Filter in digitale
+Filterstrukturen ermöglicht. Bei diesem Verfahren wird das analoge
+Frequenzverhalten möglichst genau in den digitalen Frequenzbereich
+übertragen und bietet dabei die Erhaltung der Stabilität sowie eine
+bijektive, aliasfreie Abbildung der s-Parameter in den z-Bereich. Sei
+überführt die imaginäre Achse der s-Ebene (\(j\omega\)) exakt auf den
+Einheitskreis der z-Ebene und erhält dabei die Stabilitätsbedingungen.
+
+\section{Zentrale Substitions}\label{zentrale-substitions}
+
+Die mathematische Basis der Bilineartransformation beruht auf einer
+Substitution der s Parameter: \[
+s = \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}}
+\]
+
+Dabei ist \(T_d\) ein Entwurfsparameter mit Zeitcharakteristik, der in
+der Praxis überlicherweise mit der Abtastperiode \(T\) geleichgesetzt
+wird. Durch dieses nichtlineare Transformation werden rationale
+Funktionen im s-Bereich in rationale Funktionen im z-Bereich abgebildet,
+ohne dass die Orndung der Übertragungsfunktionen ansteigt.
+
+\section{Transformation der
+Übergangsfunktion}\label{transformation-der-uxfcbergangsfunktion}
+
+Zur Digitalisierung eines analogen Filters mit der Übertragungsfunktion
+\(H_c(s)\) wird die Subtitution in die analoge Übertragungsfunktion
+eingesetzt. Dieser Prozess führt zur digitalen Übertragungsfunktion:
+
+\[
+H(z) = H_c\left( \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}} \right)
+\]
+
+Die resultierende Übertragungsfunktion \(H(z)\) repräsentiert die
+vollständige digitale Überführung des ursprünglichen analogen Filters,
+wobei alle wesentlichen Filtereigenschaften erhalten bleiben.
+
+\section{Transformation von Polen und
+Nullstellen}\label{transformation-von-polen-und-nullstellen}
+
+Die Pol- und Nullstellen des analogen Filters unterliegen während der
+Transformation spezifischen Abbildungsregeln. Für eine analoge
+Nullstelle \(\zeta_k\) und einen analogen Pol \(s_k\) ergeben sich die
+entsprechenden digitalen Werte:
+
+\[
+z_k = \frac{1 + \frac{T_d}{2} \cdot \zeta_k}{1 - \frac{T_d}{2} \cdot \zeta_k}, \quad
+p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
+\]
+
+Diese Transformationsregeln gewährleisten, dass die fundamentalen
+Eigenschaften des Filters während der Digitalierung erhalten bleiben.
+Insbesondere stellt die Transformation sicher, dass die linke
+s-Halbebene, welche alle stabilen Pole enthält, vollständig in das
+Innere des Einheitskreises der z-Ebene abgebildet werden kann.
+
+\section{Frequenzverzerrung - Frequency
+Warping:}\label{frequenzverzerrung---frequency-warping}
+
+Ein wesentlicher und unvermeidlciher Aspekt der Bilineartransformation
+ist die nichtlineare Abbildung der Frequenzachse, bekannt als
+Frequenzverzerrung oder Frequency Warping. Die mathematische
+Beschreibung der Frequenzformation lautet:
+
+\[
+\omega = 2 \cdot \tan^{-1} \left( \frac{\Omega T_d}{2} \right), \quad
+\Omega = \frac{2}{T_d} \cdot \tan\left( \frac{\omega}{2} \right)
+\]
+
+Durch die Frequenzverzerrung kann das Verhalten digitaler Filter
+beeinflusst werden. Bei niedrigen Frequenzen, nahe \(\omega\) = 0 oder 0
+Hz, ist die Verzerrung minimal und nahezu vernachlässigbar. In diesem
+Bereich verhalten sich digitale und analoge Filter nahezu identisch. Mit
+steigender Frequenz nimmt die Verzerrung progressiv zu und erreicht ihr
+Maximum bei Frequenzen nahe der Nyquist-Frequenz \(\omega = \pi\) oder
+der halben Abtastrate \(\frac{f_s}{2}\)
+
+\section{Prewarping}\label{prewarping}
+
+Um die Abweichungen die durch das Frequency Warping entstehen zu
+kompensieren, wird die Methode des Prewarpings genutzt. Dabei wird die
+analoge Designfrequenz \(\Omega_k\) so angepasst, dass sie nach der
+Bilineartransformation genau der genwünschten digitalen Frequenz
+\(\omega_k\) entspricht:
+
+\[
+\Omega_k = \frac{2}{T_d} \cdot \tan\left( \frac{\omega_k}{2} \right) = 2 \cdot f_s \cdot \tan(\frac{\pi f_d}{f_s})
+\]
+
+In der praktischen Anwendung wird Prewarping typischerweise für
+Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und
+Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der
+-3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des
+Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass
+der digitale Filter an den spezifizierten Frequenzen das gewünschte
+Verhalten aufweist.
+
+Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate
+\(f_s\) höher als die Eckfrequenzen \(f_d\) der Filter gewählt wird.
+Dadurch wird die Abbildung durch die Bilineartransformation nahezu
+linear und die Frequenzverzerrung ist vernachlässigbar gering.
+
+\chapter{Praktische Anwendung der
+Bilinear-Transformation}\label{praktische-anwendung-der-bilinear-transformation}
+
+Die analogen Biquad Filter für die Anwendung der Bilineartransformation
+werden aus dem Experiment 4 des Analog Systems Lab Kit PRO entnommen.
+
+\section{Übertragungsfunktionen der analogen Biquad
+Filter}\label{uxfcbertragungsfunktionen-der-analogen-biquad-filter}
+
+\textbf{Tiefpass:}
+\(H_{TP}(s) = \frac{V_3}{V_i} = \frac{+H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot w_0^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)
+
+\textbf{Hochpass:}
+\(H_{HP}(s) = \frac{V_1}{V_i} = \frac{H_0 \cdot \frac{s^2}{w_0^2}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot s^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)
+
+\textbf{Bandpass:}
+\(H_{BP}(s) = \frac{V_2}{V_i} = \frac{-H_0 \cdot \frac{s}{w_0}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{-H_0 \cdot sw_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)
+
+\textbf{Bandsperre:}
+\(H_{BS}(s) = \frac{V_4}{V_i} = \frac{(1 + \frac{s^2}{w_0^2 \cdot}) \cdot H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{(w_0^2 + s^2) \cdot H_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)
+
+\section{Analoge Filterschaltung}\label{analoge-filterschaltung}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/Biquad.png}}
+
+}
+
+\caption{Analoge Biquad Schaltung}
+
+\end{figure}%
+
+Um diese analogen Filter Bilinear zu transformieren stehen MATLAB sowie
+Python zur Verfügung, um die Durchführung der Substitutionen
+durchzuführen.
+
+\section{Python}\label{python}
+
+Python mit scipy.signal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numz, denz }\OperatorTok{=}\NormalTok{ bilinear(nums ,dens ,fs }\OperatorTok{=}\NormalTok{ fs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{from}\NormalTok{ scipy.signal }\ImportTok{import}\NormalTok{ freqs, bilinear, freqz}
+\end{Highlighting}
+\end{Shaded}
+
+Für die Bilinear-Transformation wird die Scipy-Bibliothek mit dem
+Signal-Modul verwendet. Aus diesem Modul werden die Funktionen freqs,
+bilinear und freqz importiert. Für weitere Berechnungen wird Numpy als
+np importiert und für die Möglichkeit zum Plotten wird Matplotlib.pyplot
+als plt importiert.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{R }\OperatorTok{=} \DecValTok{1000}
+\NormalTok{C }\OperatorTok{=} \FloatTok{100e{-}9}
+\NormalTok{w0 }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ (R }\OperatorTok{*}\NormalTok{ C)}
+\NormalTok{Q }\OperatorTok{=} \FloatTok{4.7}
+\NormalTok{fs }\OperatorTok{=} \DecValTok{44100}
+\end{Highlighting}
+\end{Shaded}
+
+Aus dem Schaltbild der analogen Filterschaltung werden dessen Parameter
+entnommen. Die Kreisfrequenz \(w_0\) berechnet sich durch
+\(w_0 = \frac{1}{R C}\). Der Wert \(H_0\) beschreibt den Gainfaktor der
+Filterschaltungen und wird auf 1 gesetzt, wodurch dieser nicht mehr im
+Code aufkommt. Die digitalen Filter sollen für Audioanwendungen
+verwendet werden, weshalb die Wahl von 44,1 kHz als Abtastfrequenz
+getroffen wurde. Durch die Wahl der Abtastefrequenz von 44,1 kHz wird
+kein Prewarping benötigt, da die Frequenzverzerrung vernachlässigbar
+ist.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Tiefpass Zähler}
+\NormalTok{TP\_nums }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, w0}\OperatorTok{**}\DecValTok{2}\NormalTok{]}
+
+\CommentTok{\# Hochpass Zähler}
+\NormalTok{HP\_nums }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{]}
+
+\CommentTok{\# Bandpass Zähler}
+\NormalTok{BP\_nums }\OperatorTok{=}\NormalTok{  [}\DecValTok{0}\NormalTok{, }\OperatorTok{{-}}\NormalTok{w0, }\DecValTok{0}\NormalTok{]}
+
+\CommentTok{\# Bandstop Zähler}
+\NormalTok{BS\_nums }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, w0}\OperatorTok{**}\DecValTok{2}\NormalTok{]}
+
+\CommentTok{\# Nenner}
+\NormalTok{dens }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, w0}\OperatorTok{/}\NormalTok{Q, w0}\OperatorTok{**}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Die Zähler und Nenner der Übertragungsfunktionen der analogen Filter
+werden als Listen übernommen. Die Listenelemente entsprechen den
+Koeffizienten in absteigender Potenzordnung: \([s^2, s^1, s^0]\). Die
+Nenner der vier Filter sind identisch und müssen nur einmal übernommen
+werden.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Bilineartransformation}
+
+\CommentTok{\# Tiefpass}
+\NormalTok{TP\_numz, TP\_denz }\OperatorTok{=}\NormalTok{ bilinear(TP\_nums, dens, fs }\OperatorTok{=}\NormalTok{ fs)}
+
+\CommentTok{\# Hochpass}
+\NormalTok{HP\_numz, HP\_denz }\OperatorTok{=}\NormalTok{ bilinear(HP\_nums, dens, fs }\OperatorTok{=}\NormalTok{ fs)}
+
+\CommentTok{\# Bandpass}
+\NormalTok{BP\_numz, BP\_denz }\OperatorTok{=}\NormalTok{ bilinear(BP\_nums, dens, fs }\OperatorTok{=}\NormalTok{ fs)}
+
+\CommentTok{\# Bandstop}
+\NormalTok{BS\_numz, BS\_denz }\OperatorTok{=}\NormalTok{ bilinear(BS\_nums, dens, fs }\OperatorTok{=}\NormalTok{ fs)}
+\end{Highlighting}
+\end{Shaded}
+
+Die Bilineartransformation wird durch \texttt{bilinear} durchgeführt,
+indem dieser Funktion die Zähler- und Nennerlisten der jeweiligen Filter
+mit der Abtastfrequenzen \(f_s\) übergeben werden. Die Funktion liefert
+die Zähler- und Nennerkoeffizienten der digitalen Übertragungsfunktion.
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/digital_vs_analog.png}}
+
+}
+
+\caption{Vergleich zwischen analogen und digitalen Frequenz- und
+Phasengang}
+
+\end{figure}%
+
+\section{MATLAB}\label{matlab}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[}\VariableTok{numz}\OperatorTok{,} \VariableTok{denz}\NormalTok{] }\OperatorTok{=} \VariableTok{bilinear}\NormalTok{(}\VariableTok{nums} \OperatorTok{,}\VariableTok{dens} \OperatorTok{,}\VariableTok{fs} \OperatorTok{,}\VariableTok{fp}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Der Prozess der Bilinear-Transformation in MATLAB ist vom Verlauf
+identisch zu dem in Python, jedoch bietet MATLAB den Vorteil der
+direkten Einbindung vom Prewarping.
+
+Die direkte Anwendung des Prewarpings wird mit dem Parameter \texttt{fp}
+vorgenommen, welcher als Prewarping-Punkt dient. MATLAB berechnet
+automatisch die erforderliche Anpassung anhand der Abtastfrequenz
+\texttt{fs} und dem Prewarping-Punkt \texttt{fp} bei der Transformation
+der Filterkoeffizienten. Zur Demonstration wird eine \texttt{fp} von
+1600 Hz gewählt:
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{images/prewarped_digital_vs_analog.png}}
+
+}
+
+\caption{Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz-
+und Phasengang}
+
+\end{figure}%
 
 \chapter{Implementierungserklärung der Biquad Filter in
 Arduino}\label{implementierungserkluxe4rung-der-biquad-filter-in-arduino}
 
 Für die Implementierung der biquadratischen Filter in Arduino werden die
 Differenzengleichungen aus den Theoretischen Grundlagen entnommen und in
-Code umgesetzt.
+Code umgesetzt. Die Filter sollen über das Einsetzten der \texttt{b} und
+\texttt{a} Koeffizienten implementiert werden.
 
 \section{Filter Basisklasse}\label{filter-basisklasse}
 

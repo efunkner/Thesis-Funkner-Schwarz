@@ -1,6 +1,7 @@
 # Implementierungserklärung der Biquad Filter in Arduino
 
 Für die Implementierung der biquadratischen Filter in Arduino werden die Differenzengleichungen aus den Theoretischen Grundlagen entnommen und in Code umgesetzt.
+Die Filter sollen über das Einsetzten der `b` und `a` Koeffizienten implementiert werden. 
 
 ## Filter Basisklasse
 
