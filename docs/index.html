@@ -446,7 +446,7 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <h2 class="anchored" data-anchor-id="analoge-filterschaltung">Analoge Filterschaltung</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/Biquad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Analoge Biquad Schaltung"><img src="../images/Biquad.png" class="img-fluid figure-img" alt="Analoge Biquad Schaltung"></a></p>
+<p><a href="images/Biquad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Analoge Biquad Schaltung"><img src="images/Biquad.png" class="img-fluid figure-img" alt="Analoge Biquad Schaltung"></a></p>
 <figcaption>Analoge Biquad Schaltung</figcaption>
 </figure>
 </div>
@@ -497,7 +497,7 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Die Bilineartransformation wird durch <code>bilinear</code> durchgeführt, indem dieser Funktion die Zähler- und Nennerlisten der jeweiligen Filter mit der Abtastfrequenzen <span class="math inline">\(f_s\)</span> übergeben werden. Die Funktion liefert die Zähler- und Nennerkoeffizienten der digitalen Übertragungsfunktion.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/digital_vs_analog.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Vergleich zwischen analogen und digitalen Frequenz- und Phasengang"><img src="../images/digital_vs_analog.png" class="img-fluid figure-img" alt="Vergleich zwischen analogen und digitalen Frequenz- und Phasengang"></a></p>
+<p><a href="images/digital_vs_analog.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Vergleich zwischen analogen und digitalen Frequenz- und Phasengang"><img src="images/digital_vs_analog.png" class="img-fluid figure-img" alt="Vergleich zwischen analogen und digitalen Frequenz- und Phasengang"></a></p>
 <figcaption>Vergleich zwischen analogen und digitalen Frequenz- und Phasengang</figcaption>
 </figure>
 </div>
@@ -509,7 +509,7 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Die direkte Anwendung des Prewarpings wird mit dem Parameter <code>fp</code> vorgenommen, welcher als Prewarping-Punkt dient. MATLAB berechnet automatisch die erforderliche Anpassung anhand der Abtastfrequenz <code>fs</code> und dem Prewarping-Punkt <code>fp</code> bei der Transformation der Filterkoeffizienten. Zur Demonstration wird eine <code>fp</code> von 1600 Hz gewählt:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/prewarped_digital_vs_analog.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang"><img src="../images/prewarped_digital_vs_analog.png" class="img-fluid figure-img" alt="Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang"></a></p>
+<p><a href="images/prewarped_digital_vs_analog.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang"><img src="images/prewarped_digital_vs_analog.png" class="img-fluid figure-img" alt="Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang"></a></p>
 <figcaption>Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang</figcaption>
 </figure>
 </div>
@@ -517,7 +517,7 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </section>
 <section id="implementierungserklärung-der-biquad-filter-in-arduino" class="level1">
 <h1>Implementierungserklärung der Biquad Filter in Arduino</h1>
-<p>Für die Implementierung der biquadratischen Filter in Arduino werden die Differenzengleichungen aus den Theoretischen Grundlagen entnommen und in Code umgesetzt.</p>
+<p>Für die Implementierung der biquadratischen Filter in Arduino werden die Differenzengleichungen aus den Theoretischen Grundlagen entnommen und in Code umgesetzt. Die Filter sollen über das Einsetzten der <code>b</code> und <code>a</code> Koeffizienten implementiert werden.</p>
 <section id="filter-basisklasse" class="level2">
 <h2 class="anchored" data-anchor-id="filter-basisklasse">Filter Basisklasse</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Filter</span>

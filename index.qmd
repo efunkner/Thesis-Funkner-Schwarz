@@ -225,7 +225,7 @@ Die analogen Biquad Filter für die Anwendung der Bilineartransformation werden 
 **Bandsperre:** $H_{BS}(s) = \frac{V_4}{V_i} = \frac{(1 + \frac{s^2}{w_0^2 \cdot}) \cdot H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{(w_0^2 + s^2) \cdot H_0}{w_0^2 + \frac{sw_0}{Q} + s^2}$
 
 ## Analoge Filterschaltung
-![Analoge Biquad Schaltung](../images/Biquad.png)
+![Analoge Biquad Schaltung](images/Biquad.png)
 
 Um diese analogen Filter Bilinear zu transformieren stehen MATLAB sowie Python zur Verfügung, um die Durchführung der Substitutionen durchzuführen.
 
@@ -288,7 +288,7 @@ BS_numz, BS_denz = bilinear(BS_nums, dens, fs = fs)
 
 Die Bilineartransformation wird durch `bilinear` durchgeführt, indem dieser Funktion die Zähler- und Nennerlisten der jeweiligen Filter mit der Abtastfrequenzen $f_s$ übergeben werden. Die Funktion liefert die  Zähler- und Nennerkoeffizienten der digitalen Übertragungsfunktion.
 
-![Vergleich zwischen analogen und digitalen Frequenz- und Phasengang](../images/digital_vs_analog.png)
+![Vergleich zwischen analogen und digitalen Frequenz- und Phasengang](images/digital_vs_analog.png)
 
 
 ## MATLAB
@@ -299,7 +299,7 @@ Der Prozess der Bilinear-Transformation in MATLAB ist vom Verlauf identisch zu d
 
 Die direkte Anwendung des Prewarpings wird mit dem Parameter `fp` vorgenommen, welcher als Prewarping-Punkt dient. MATLAB berechnet automatisch die erforderliche Anpassung anhand der Abtastfrequenz `fs` und dem Prewarping-Punkt `fp` bei der Transformation der Filterkoeffizienten. Zur Demonstration wird eine `fp` von 1600 Hz gewählt:
 
-![Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang](../images/prewarped_digital_vs_analog.png)
+![Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang](images/prewarped_digital_vs_analog.png)
 
 
 [Füller um Inhalte zu Differenzieren]: <> (-------------------------------------------------------------------------------------------------------------------------------------------------------)
