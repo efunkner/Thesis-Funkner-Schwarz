@@ -49,15 +49,9 @@ Durch die Frequenzverzerrung kann das Verhalten digitaler Filter beeinflusst wer
 Um die Abweichungen die durch das Frequency Warping entstehen zu kompensieren, wird die Methode des Prewarpings genutzt. Dabei wird die analoge Designfrequenz $\Omega_k$ so angepasst, dass sie nach der Bilineartransformation genau der genwünschten digitalen Frequenz $\omega_k$ entspricht:
 
 $$
-\Omega_k = \frac{2}{T_d} \cdot \tan\left( \frac{\omega_k}{2} \right)
+\Omega_k = \frac{2}{T_d} \cdot \tan\left( \frac{\omega_k}{2} \right) = 2 \cdot f_s \cdot \tan(\frac{\pi f_d}{f_s})
 $$
 
-In der praktischen Anwendung wird Prewarping typischerweise für kritische Frequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist.
+In der praktischen Anwendung wird Prewarping typischerweise für Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist. 
 
-# Durchführung der Bilineartransformation
-Die analogen Biquad Filter für die Anwendung der Bilineartransformation werden aus dem Expirement 4 des Analog Systems Lab Kit PRO entnommen.
-
-
-```Matlab
-bilinear(b, a, fs)
-```
+Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate $f_s$ höher als die Eckfrequenzen $f_d$ der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.

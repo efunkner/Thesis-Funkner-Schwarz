@@ -13,6 +13,7 @@ C = 100e-9;
 w0 = 1 / (R*C);
 Q = 4.7;
 fs = 44100;
+fp = 1600;
 
 % Tiefpass Zähler
 TP_nums = [0, 0, w0^2];
@@ -61,16 +62,16 @@ xlim([0 4000]);
 ylim([-300 200]);
 legend(["Tiefpass" "Hochpass" "Bandpass" "Bandsperre"]);
 
-%% Bilineartransformation
+%% Bilineartransformation mit Prewarping
 
 %Tiefpass
-[TP_numz, TP_denz] = bilinear(TP_nums,dens,fs);
+[TP_numz, TP_denz] = bilinear(TP_nums,dens,fs,fp);
 %Hochpass
-[HP_numz, HP_denz] = bilinear(HP_nums,dens,fs);
+[HP_numz, HP_denz] = bilinear(HP_nums,dens,fs,fp);
 % Bandpass
-[BP_numz, BP_denz] = bilinear(BP_nums,dens,fs);
+[BP_numz, BP_denz] = bilinear(BP_nums,dens,fs,fp);
 % Bandstop
-[BS_numz, BS_denz] = bilinear(BS_nums,dens,fs);
+[BS_numz, BS_denz] = bilinear(BS_nums,dens,fs,fp);
 
 %% Berechnung der analogen Amplituden- und Phasengänge
 % Tiefpass
@@ -116,7 +117,7 @@ plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi),mag2db(abs([Hz_TP Hz_HP Hz_BP Hz_BS])),
 hold on;
 plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), mag2db(abs([Hs_TP Hs_HP Hs_BP Hs_BS])));
 grid on
-title("Digitale Biquad vs Analoger Biquad Frequenz");
+title("Digitaler Prewarped Biquad vs Analoger Biquad Frequenz");
 xlabel("Frequenz");
 ylabel("Amplitude in dB");
 xlim([0 4000]);
@@ -129,7 +130,7 @@ plot([wz_TP wz_HP wz_BP wz_BS]*fs/(2*pi),unwrap(angle([Hz_TP Hz_HP Hz_BP Hz_BS])
 hold on;
 plot([ws_TP ws_HP ws_BP ws_BS]/(2*pi), unwrap(angle([Hs_TP Hs_HP Hs_BP Hs_BS]))*(180/pi));
 grid on
-title("Digitale Biquad vs Analoger Biquad Phase");
+title("Digitale Prewarped Biquad vs Analoger Biquad Phase");
 xlabel("Frequenz");
 ylabel("Amplitude in dB");
 xlim([0 4000]);
