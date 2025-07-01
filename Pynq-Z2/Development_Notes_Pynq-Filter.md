@@ -206,7 +206,7 @@ Auch wenn das Einschwingverhalten nicht die direkte Ursache für das aktuelle Pr
 | *Filter_3* | **Bandpass** | Butterworth | 500Hz - 2kHz   | 2 |
 | *Filter_4* | **Bansstop** | Butterworth | 500Hz - 2kHz   | 2 |
 
-### Filter 2
+### Filter 2 (noch nicht umgetzt)
 | Name:    | Filter:  | Typ:     | Fc:      | Ordnung: |
 | -------- | -------- | -------- | -------- | -------- |
 | *Filter_1* | **Hochpass** | Butterworth | 500Hz         | 2 |
@@ -217,23 +217,25 @@ Auch wenn das Einschwingverhalten nicht die direkte Ursache für das aktuelle Pr
 ### Jupiter Notebook
 Bei dem Versuch, von 48 kHz auf 44,1 kHz umzustellen, um eine bessere Kompatibilität mit mehr Audiodateien zu erreichen, ist aufgefallen, dass der Codec zwar im Setup auf 44,1 kHz geschaltet wurde, die Aufnahme aber offenbar trotzdem weiterhin mit 48 kHz stattfindet. Bei der direkten Wiedergabe der Aufnahme über die Hardware zeigt sich dabei kein Fehler, da Ein- und Ausgabe im gleichen Clock-Domain laufen. Wenn jedoch dieselbe aufgenommene Datei extern abgespielt wird, fällt sofort ein deutlich tieferer Pitch auf. Das ist ein klarer Hinweis darauf, dass die gespeicherte Samplingfrequenz nicht mit der tatsächlich aufgenommenen übereinstimmt. Auch beim Abspielen von externen 44,1 kHz-WAV-Dateien über die Hardware wird deutlich, dass diese schneller ausgegeben werden, als sie sollten. Das zeigt eindeutig, dass die Umstellung der Samplerate in der Konfiguration zwar die Register beeinflusst, aber in der Praxis die physikalische Taktfrequenz der Hardware nicht korrekt angepasst wird, wodurch es zu Abweichungen bei der tatsächlichen Abtastrate kommt.<br>
 
-Aus diesem Grund wurde entschieden, bei den 48 kHz zu bleiben, da bei dieser Samplefrequenz solche Fehler nicht auftreten. Um dennoch gewährleisten zu können, dass auch Audiodateien mit einer niedrigeren Abtastrate korrekt gefiltert werden, werden diese nun vor dem Filtern entsprechend hochgesamplet.
+Aus diesem Grund wurde entschieden, bei den 48 kHz zu bleiben, da bei dieser Samplefrequenz solche Fehler nicht auftreten. Um dennoch gewährleisten zu können, dass auch Audiodateien mit einer niedrigeren Abtastrate korrekt gefiltert werden, werden diese nun vor dem Filtern entsprechend hochgesamplet.<br>
+
+Das Noteboob wurde verkleinert sodass immer nur 1 Filter akuell auf dem Board verfügbar ist. Dies wurde gemacht das es zu stabilitätsproblemen gekommen ist bei dem oft die Verbindung zum Notebook abgebrochen ist.<br>
+
+Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar nicht perfekt und bietet nicht die höchste Auflösung, vermittelt aber einen guten Eindruck davon, wie der Filter gearbeitet hat. Die Grenzfrequenzen lassen sich im Plot gut nachvollziehen.<br>
 
 
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, ~~Matlab HDL-Coder~~ + Simulink, ~~Vivado~~, ~~IP-Cores~~, ~~I2S~~, (I2C), ~~Pynq und Pynq-Z2 Board~~, finales Notebook + Funktionen
-- ❌ ~~Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)~~
 - ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
 - ❌ Kaskadierung der Filter durch mehrfachfilterung
-- ❌ Spektrum nach der Filterung anzeigen mittels FFT
 - ❌ Finales Filterdesign
 - ❌ Matlab + Simulink Filterdesign erklären (Designtool)
 - ❌ Aufräumen des Git Reposetories
 - ❌ ~~Board auf 44,1kHz umstellen~~
 - ❌ Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)
-- ❌ Blockschaltbilder
+- ❌ Blockschaltbilder (Simulink)
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
@@ -245,7 +247,8 @@ zienten für den FPGA.
 - ✅✅✅✅ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
 - ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
 - ✅ Dokumentation zu: AXI, I2S, Matlab HDL-Coder, Vivado, IP-Cores, Pynq und Pynq-Z2 Board
-- ✅ **Umsampeling von 44.1 auf 48kHz eingerichtet**
+- ✅ **Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)**
+- ✅ **Spektrum nach der Filterung anzeigen mittels FFT**
  
 
 ## Zusatz:
