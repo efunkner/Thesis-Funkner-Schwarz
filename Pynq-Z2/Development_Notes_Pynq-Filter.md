@@ -196,6 +196,30 @@ Jedoch wurde die Filter IP auch im reinen Bypass-Modus getestet, also ohne aktiv
 Der Test diente gezielt dazu, den Filter selbst als Fehlerquelle auszuschließen.<br>
 Auch wenn das Einschwingverhalten nicht die direkte Ursache für das aktuelle Problem zu sein scheint, sollte es in der weiteren Entwicklung der Echtzeitfilterung als potenzielle Fehlerquelle im Blick behalten werden, insbesondere, falls in Zukunft Fortschritte in diesem Bereich erzielt werden.<br>
 
+# Stand : 01.07.2025
+
+### Filter 1
+| Name:    | Filter:  | Typ:     | Fc:      | Ordnung: |
+| -------- | -------- | -------- | -------- | -------- |
+| *Filter_1* | **Hochpass** | Butterworth | 1kHz         | 2 |
+| *Filter_2* | **Tiefpass** | Butterworth | 1kHz           | 2 |
+| *Filter_3* | **Bandpass** | Butterworth | 500Hz - 2kHz   | 2 |
+| *Filter_4* | **Bansstop** | Butterworth | 500Hz - 2kHz   | 2 |
+
+### Filter 2
+| Name:    | Filter:  | Typ:     | Fc:      | Ordnung: |
+| -------- | -------- | -------- | -------- | -------- |
+| *Filter_1* | **Hochpass** | Butterworth | 500Hz         | 2 |
+| *Filter_2* | **Tiefpass** | Butterworth | 5kHz           | 2 |
+| *Filter_3* | **Bandpass** | Butterworth | 600Hz - 3kHz   | 2 |
+| *Filter_4* | **Bansstop** | Butterworth | 400Hz - 4kHz   | 2 |
+
+### Jupiter Notebook
+Bei dem Versuch, von 48 kHz auf 44,1 kHz umzustellen, um eine bessere Kompatibilität mit mehr Audiodateien zu erreichen, ist aufgefallen, dass der Codec zwar im Setup auf 44,1 kHz geschaltet wurde, die Aufnahme aber offenbar trotzdem weiterhin mit 48 kHz stattfindet. Bei der direkten Wiedergabe der Aufnahme über die Hardware zeigt sich dabei kein Fehler, da Ein- und Ausgabe im gleichen Clock-Domain laufen. Wenn jedoch dieselbe aufgenommene Datei extern abgespielt wird, fällt sofort ein deutlich tieferer Pitch auf. Das ist ein klarer Hinweis darauf, dass die gespeicherte Samplingfrequenz nicht mit der tatsächlich aufgenommenen übereinstimmt. Auch beim Abspielen von externen 44,1 kHz-WAV-Dateien über die Hardware wird deutlich, dass diese schneller ausgegeben werden, als sie sollten. Das zeigt eindeutig, dass die Umstellung der Samplerate in der Konfiguration zwar die Register beeinflusst, aber in der Praxis die physikalische Taktfrequenz der Hardware nicht korrekt angepasst wird, wodurch es zu Abweichungen bei der tatsächlichen Abtastrate kommt.<br>
+
+Aus diesem Grund wurde entschieden, bei den 48 kHz zu bleiben, da bei dieser Samplefrequenz solche Fehler nicht auftreten. Um dennoch gewährleisten zu können, dass auch Audiodateien mit einer niedrigeren Abtastrate korrekt gefiltert werden, werden diese nun vor dem Filtern entsprechend hochgesamplet.
+
+
 ## Noch offene Punkte:
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 (.wav)
@@ -205,7 +229,11 @@ Auch wenn das Einschwingverhalten nicht die direkte Ursache für das aktuelle Pr
 - ❌ Kaskadierung der Filter durch mehrfachfilterung
 - ❌ Spektrum nach der Filterung anzeigen mittels FFT
 - ❌ Finales Filterdesign
+- ❌ Matlab + Simulink Filterdesign erklären (Designtool)
 - ❌ Aufräumen des Git Reposetories
+- ❌ ~~Board auf 44,1kHz umstellen~~
+- ❌ Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)
+- ❌ Blockschaltbilder
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
@@ -217,6 +245,7 @@ zienten für den FPGA.
 - ✅✅✅✅ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
 - ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
 - ✅ Dokumentation zu: AXI, I2S, Matlab HDL-Coder, Vivado, IP-Cores, Pynq und Pynq-Z2 Board
+- ✅ **Umsampeling von 44.1 auf 48kHz eingerichtet**
  
 
 ## Zusatz:
