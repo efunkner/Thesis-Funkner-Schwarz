@@ -236,6 +236,7 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ ~~Board auf 44,1kHz umstellen~~
 - ❌ Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)
 - ❌ Blockschaltbilder (Simulink)
+- ❌ Codebeschreibung (Matlab, Python)
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
