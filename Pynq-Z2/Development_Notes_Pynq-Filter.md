@@ -202,16 +202,19 @@ Auch wenn das Einschwingverhalten nicht die direkte Ursache für das aktuelle Pr
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, ~~Matlab HDL-Coder~~ + Simulink, ~~Vivado~~, ~~IP-Cores~~, ~~I2S~~, (I2C), ~~Pynq und Pynq-Z2 Board~~, finales Notebook + Funktionen
 - ❌ ~~Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)~~
 - ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
+- ❌ Kaskadierung der Filter durch mehrfachfilterung
+- ❌ Spektrum nach der Filterung anzeigen mittels FFT
+- ❌ Finales Filterdesign
 - ❌ Aufräumen des Git Reposetories
 
 ## Bereits erledigt:
-- ✅ **Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
-zienten für den FPGA.**
+- ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
+zienten für den FPGA.
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
 - ✅✅/❌ JupiterNotebooks für Demonstration
 - ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
-- ✅✅✅✅ **Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)**
+- ✅✅✅✅ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
 - ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
 - ✅ Dokumentation zu: AXI, I2S, Matlab HDL-Coder, Vivado, IP-Cores, Pynq und Pynq-Z2 Board
  
