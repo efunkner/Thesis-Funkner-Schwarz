@@ -223,20 +223,18 @@ Das Noteboob wurde verkleinert sodass immer nur 1 Filter akuell auf dem Board ve
 
 Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar nicht perfekt und bietet nicht die höchste Auflösung, vermittelt aber einen guten Eindruck davon, wie der Filter gearbeitet hat. Die Grenzfrequenzen lassen sich im Plot gut nachvollziehen.<br>
 
-
 ## Noch offene Punkte:
-- ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
-(.wav)
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, ~~Matlab HDL-Coder~~ + Simulink, ~~Vivado~~, ~~IP-Cores~~, ~~I2S~~, (I2C), ~~Pynq und Pynq-Z2 Board~~, finales Notebook + Funktionen
-- ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
-- ❌ Kaskadierung der Filter durch mehrfachfilterung
-- ❌ Finales Filterdesign
 - ❌ Matlab + Simulink Filterdesign erklären (Designtool)
-- ❌ Aufräumen des Git Reposetories
 - ❌ ~~Board auf 44,1kHz umstellen~~
 - ❌ Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)
 - ❌ Blockschaltbilder (Simulink)
 - ❌ Codebeschreibung (Matlab, Python)
+- ❌ Vergleich zwischen Butter und Elliptic
+- ❌ Finales Filterdesign
+- ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
+- ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
+- ❌ Aufräumen des Git Reposetories
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
@@ -244,12 +242,13 @@ zienten für den FPGA.
 - ✅ Erstellung und Einbindung des Filters als AXI-fähiger IP-Block in Vivado 2022.1
 - ✅ Erstes Design mit Zynq-Processing-System und DMA-Block (Direct Memory Access) für das erste Filtern simulierter Werte.
 - ✅✅/❌ JupiterNotebooks für Demonstration
-- ✅✅/❌ Skript zur Steuerung des Filters auf PYNQ.
+- ✅✅ Skript zur Steuerung des Filters auf PYNQ.
 - ✅✅✅✅ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
 - ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
 - ✅ Dokumentation zu: AXI, I2S, Matlab HDL-Coder, Vivado, IP-Cores, Pynq und Pynq-Z2 Board
 - ✅ **Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)**
 - ✅ **Spektrum nach der Filterung anzeigen mittels FFT**
+- ✅ **Kaskadierung der Filter durch mehrfachfilterung**
  
 
 ## Zusatz:
