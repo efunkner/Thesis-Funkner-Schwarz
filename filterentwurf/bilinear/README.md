@@ -12,7 +12,7 @@ Die analogen Biquad Filter für die Anwendung der Bilineartransformation werden 
 **Bandsperre:** $H_{BS}(s) = \frac{V_4}{V_i} = \frac{(1 + \frac{s^2}{w_0^2 \cdot}) \cdot H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{(w_0^2 + s^2) \cdot H_0}{w_0^2 + \frac{sw_0}{Q} + s^2}$
 
 ## Analoge Filterschaltung
-![Analoge Biquad Schaltung](../images/Biquad.png)
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/Biquad.png">
 
 Um diese analogen Filter Bilinear zu transformieren stehen MATLAB sowie Python zur Verfügung, um die Durchführung der Substitutionen durchzuführen.
 
