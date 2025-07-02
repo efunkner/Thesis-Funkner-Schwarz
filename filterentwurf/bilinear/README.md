@@ -75,7 +75,7 @@ BS_numz, BS_denz = bilinear(BS_nums, dens, fs = fs)
 
 Die Bilineartransformation wird durch `bilinear` durchgeführt, indem dieser Funktion die Zähler- und Nennerlisten der jeweiligen Filter mit der Abtastfrequenzen $f_s$ übergeben werden. Die Funktion liefert die  Zähler- und Nennerkoeffizienten der digitalen Übertragungsfunktion.
 
-![Vergleich zwischen analogen und digitalen Frequenz- und Phasengang](../images/digital_vs_analog.png)
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/digital_vs_analog.png">
 
 
 ## MATLAB
@@ -86,4 +86,4 @@ Der Prozess der Bilinear-Transformation in MATLAB ist vom Verlauf identisch zu d
 
 Die direkte Anwendung des Prewarpings wird mit dem Parameter `fp` vorgenommen, welcher als Prewarping-Punkt dient. MATLAB berechnet automatisch die erforderliche Anpassung anhand der Abtastfrequenz `fs` und dem Prewarping-Punkt `fp` bei der Transformation der Filterkoeffizienten. Zur Demonstration wird eine `fp` von 1600 Hz gewählt:
 
-![Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang](../images/prewarped_digital_vs_analog.png)
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/prewarped_digital_vs_analog.png">
