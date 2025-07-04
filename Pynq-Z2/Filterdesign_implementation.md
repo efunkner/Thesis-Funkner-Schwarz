@@ -2,7 +2,19 @@
 Hier wird beschrieben, mit welcher Software die Filter entworfen werden. Auf die genauen Spezifikationen und deren Begründung wird an anderer Stelle eingegangen. In diesem Abschnitt steht der Prozess im Fokus, welche Schritte unternommen werden, um einen Filter auf dem Pynq-Z2 zu implementieren.<br>
 
 ## Filterdesign in Matlab
-Die Filter werden entsprechend der gewünschten Spezifikationen mit dem [Matlab Filter Designer](https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html) entworfen. Für einen Biquad-Filter wird im Filter Designer ein IIR-Filter erstellt und die Koeffizienten als SOS-Matrix inklusive Gain in das Workspace exportiert. Es empfiehlt sich, das Workspace mit den Koeffizienten und dem Gain separat zu speichern, um diese bei Bedarf einfach wiederverwenden zu können.
+Quelle 1: [Oppenheim, A. V., Schafer, R. W., & Buck, J. R. (1999).
+„Discrete-Time Signal Processing“ (2nd Edition)](https://elibrary.pearson.de/book/99.150005/9783863265441)<br>
+Quelle 2: [Filter Design“ und „Digital Filter Design](https://de.mathworks.com/help/signal/filter-design.html)
+
+MATLAB bietet eine Vielzahl von Werkzeugen, um digitale Filter effizient zu entwerfen, zu analysieren und in der Praxis einzusetzen. <br>
+IIR Filter werden für den praktischen Einsatz oft in Biquad-Strukturen implementiert. Ein Biquad ist ein 2. Ordnung IIR-Filter, der eine stabile und numerisch robuste Realisierung ermöglicht. Komplexe Filter höherer Ordnung werden dabei in mehrere Biquads zerlegt und kaskadiert, um Rundungsfehler und Instabilitäten zu vermeiden. MATLAB unterstützt die Arbeit mit Biquads durch Funktionen wie dfilt oder durch die Darstellung der Filterkoeffizienten in *Second-Order Sections* (SOS). Über die Funktion tf2sos lassen sich beliebige IIR-Filterstrukturen in eine Biquad-Kaskade umrechnen, was vor allem bei der Implementierung auf Hardwareplattformen wie FPGAs oder Mikrocontrollern von großem Vorteil ist. <br>
+
+Der Entwurfsprozess in MATLAB folgt dabei einem klaren Ablauf. Zunächst werden die Anforderungen definiert, wie Filtertyp, Filterordnung, Grenzfrequenzen und erlaubte Ripple im Durchlass- oder Sperrbereich. Anschließend wird der Filter mit den passenden MATLAB-Funktionen entworfen. Für IIR-Filter stehen unter anderem die Funktionen butter, cheby1, cheby2 oder ellip zur Verfügung. Alternativ können Filter auch grafisch über den [Filter Designer](https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html) erstellt werden, der eine interaktive Visualisierung der Frequenzgänge und Pol-Nullstellen-Diagramme ermöglicht.<br>
+
+Zur Analyse der Filter bietet MATLAB Tools wie freqz zur Darstellung von Amplituden- und Phasengang oder fvtool, das eine  Untersuchung von Frequenzverhalten, Impulsantwort, Gruppenlaufzeit sowie Pol- und Nullstellen erlaubt. Nach dem Entwurf können Filter mit der Funktion filter direkt auf digitale Signale angewendet werden. Für den Hardwareeinsatz können die berechneten Koeffizienten anschließend exportiert beispielsweise als Biquad-Parameter in Simulink übertragen werden.<br>
+
+Hier werden die Filter entsprechend der gewünschten Spezifikationen mit dem [Matlab Filter Designer](https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html) entworfen. Für einen Biquad-Filter wird im Filter Designer ein IIR-Filter erstellt und die Koeffizienten als SOS-Matrix inklusive Gain in das Workspace exportiert. Es empfiehlt sich, das Workspace mit den Koeffizienten und dem Gain separat zu speichern, um diese bei Bedarf einfach wiederverwenden zu können.<br>
+
 ![Matlab Filter Designer](Images/Matlab_Filter_Designer.png)
 Der entworfene Filter kann in Matlab mit einem Testsignal angewendet werden, um sicherzustellen, dass seine Eigenschaften den Anforderungen entsprechen.
 
