@@ -226,15 +226,14 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 ## Noch offene Punkte:
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, ~~Matlab HDL-Coder~~ + Simulink, ~~Vivado~~, ~~IP-Cores~~, ~~I2S~~, (I2C), ~~Pynq und Pynq-Z2 Board~~, finales Notebook + Funktionen
 - ❌ ~~Board auf 44,1kHz umstellen~~
-- ❌ Warum DFII und warum sind Delays schlecht umzusetzen?
-- ❌ Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)
-- ❌ Blockschaltbilder (Simulink)
-- ❌ Pipelining
-- ❌ Codebeschreibung (Matlab, Python)
-- ❌ Vergleich zwischen Butter und Elliptic
-- ❌ Finales Filterdesign
+- ❌ Warum DFII T und warum sind Delays schlecht umzusetzen?
+- ❌ Pipelining erklären
 - ❌ Warum Fixed-Point?
 - ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
+- ❌ ~~Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)~~
+- ❌ Blockschaltbilder (Simulink)
+- ❌ Codebeschreibung (Matlab, Python)
+- ❌ Finales Filterdesign
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ❌ Aufräumen des Git Reposetories
 
@@ -256,5 +255,6 @@ zienten für den FPGA.
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
-- ❔Design für die **Echtzeit-Audiofilterung** mit Audiocodec über I2S
+- ~~❔Design für die **Echtzeit-Audiofilterung** mit Audiocodec über I2S~~
+- ❔ *(Vergleich zwischen Butter und Elliptic)* wenn Zeit ist
  
