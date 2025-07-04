@@ -1,27 +1,64 @@
 project:
-  type: manuscript
-  output-dir: docs
-
-resources:
-  - images
+  type: book
+  output-dir: _book
 
 lang: de
 
-manuscript:
-  article: index.qmd
+book:
+  title: "Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen"
+  author:
+    - name: Eduard Funkner
+      orcid: 
+      email: efunkner@stud.hs-bremen.de
+      corresponding: true
+      roles: "Lead author"
+      affiliation:
+        - name: Hochschule Bremen - City University of Applied Sciences (HSB)
+          city: Bremen
+          state: Germany
+          url: https://www.hs-bremen.de  
+    - name: Martin Schwarz
+      orcid: 
+      email: mschwarz@stud.hs-bremen.de
+      corresponding: true
+      roles: "Lead author"
+  date: last-modified
+  license: "Apache-2.0 license"
+  reader-mode: true
 
-execute:
-  freeze: auto
-  fig-dir: "images"
+  page-footer:
+    left: |
+      Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+#  cover-image: images/hsb-logo.png
+#  favicon: images/hsb-logo.png
+  site-url: https://efunkner.github.io/Thesis-Funkner-Schwarz/
+  repo-url: https://github.com/efunkner/Thesis-Funkner-Schwarz/
+  repo-branch: main
+  repo-actions: [edit, issue]
+  downloads: [pdf,epub]
 
+  chapters:
+    - index.qmd
+    - part: Mikrocontroller
+      chapters:
+        - thesis_ef/index.qmd
+    - part: FPGA
+      chapters:
+        - thesis_ms/index.qmd
+
+
+bibliography: _bibliography/references.bib
 
 format:
   html:
     theme: flatly
+    # default-image-extension: svg
   pdf:
-    documentclass: scrreprt
-#    lof: true
-#    lot: true
+    documentclass: scrbook 
+    # lof: true
+    # lot: true
     toc: true    
     geometry:
       - top=30mm
@@ -31,9 +68,16 @@ format:
       - linktoc=all
     colorlinks: true
     linkcolor: "blue"
-    biblio-style: ieee
-    #    keep-tex: true
-    output-file: thesis_fs
-  # epub:
-  #   theme: flatly
-  #   output-file: thesis_fs
+    biblio-style: "ieee"
+    highlight-style: "github"
+    mainfont: "Calibri"
+    # keep-tex: true
+    # default-image-extension: tex
+    output-file: gel2
+  epub:
+    theme: flatly
+    # default-image-extension: svg
+    output-file: gel2
+  
+execute:
+  freeze: auto
