@@ -146,7 +146,23 @@ Diese Funktionalität ist besonders nützlich für die schnelle Prototypenentwic
 ### Simulink: Biquad Filter
 Quelle: [Biquadratic IIR (SOS) filter](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html)<br>
 
-Der Block Biquad Filter aus der DSP HDL Toolbox von MathWorks stellt einen HDL-optimierten digitalen IIR-Filter (Infinite Impulse Response) dar. Der Filter basiert auf sogenannten Second-Order Sections (SOS), also biquadratischen Filterabschnitten, die in der digitalen Signalverarbeitung häufig verwendet werden, um gezielt Frequenzanteile eines Eingangssignals zu verstärken oder zu dämpfen.
+Der Block Biquad Filter aus der DSP HDL Toolbox von MathWorks stellt einen HDL-optimierten digitalen IIR-Filter (Infinite Impulse Response) dar. Der Filter basiert auf sogenannten Second-Order Sections (SOS), also biquadratischen Filterabschnitten, die in der digitalen Signalverarbeitung häufig verwendet werden, um gezielt Frequenzanteile eines Eingangssignals zu verstärken oder zu dämpfen.<br>
+
+In der Praxis wird ein Biquad-Filter häufig als Direct Form II Transponiert (DF-II T) realisiert. Diese Struktur kombiniert zwei Eigenschaften:
+- Zum einen nutzt die Direct Form II den Vorteil, dass sich der Speicherbedarf minimiert, da Zähler- und Nennerteil zusammengeführt werden und nur eine minimale Anzahl von Verzögerungsgliedern erforderlich ist.
+
+- Zum anderen wird die transponierte Form verwendet, bei der das Signalflussdiagramm gespiegelt wird. Dies bewirkt, dass die Verzögerungsglieder auf den Rückkopplungswegen liegen, wodurch sich der kritische kombinatorische Pfad verkürzt. Die transponierte Form ist zudem numerisch stabiler, da die Signale in den Addierern und Multiplizierern günstiger verteilt werden und somit Rundungsfehler weniger stark auf die Filterleistung wirken.
+
+Gerade für Hardwareimplementierungen spielt die Taktfrequenz eine zentrale Rolle. Damit der Biquad-Filter auch bei hohen Datenraten stabil arbeitet, wird die DF-II T Struktur zusätzlich *pipelined*.<br>
+Beim **Pipelining** werden innerhalb der Struktur gezielt Register in die kombinatorischen Signalwege eingefügt. Dies trennt lange Logikpfade auf und verkürzt damit die kritische Pfadlänge, was zu einer deutlich höheren maximalen Taktfrequenz führt. Rückkopplungswege, die bei IIR-Filtern eine Herausforderung darstellen, können so auch bei hoher Verarbeitungsgeschwindigkeit stabil betrieben werden.<br>
+Die Kombination aus DF-II T Struktur und Pipelining ermöglicht es digitale IIR-Biquad-Filter mit hoher numerischer Genauigkeit, optimiertem Ressourceneinsatz und maximaler Geschwindigkeit in Hardware zu realisieren. Gerade in Anwendungen, in denen mehrere Biquads kaskadiert werden, kann so eine stabile, leistungsfähige und hardwarefreundliche Filterarchitektur aufgebaut werden.<br>
+
+**Pipelining**<br>
+Quelle: [Distributed Pipelining](https://de.mathworks.com/help/hdlcoder/ug/distributed-pipelining.html)<br>
+
+In der Hardware-Entwicklung für FPGAs und ASICs stellt Pipelining eine zentrale Technik dar, um die Verarbeitungs­geschwindigkeit komplexer Datenpfade zu erhöhen. Unter Pipelining versteht man das systematische Einfügen von Registerstufen zwischen aufeinanderfolgenden Rechenoperationen, wie beispielsweise Additionen oder Multiplikationen. Auf diese Weise werden lange kombinatorische Logikpfade in mehrere, kürzere Abschnitte unterteilt.<br>
+
+Diese Aufteilung hat den Vorteil, das die kritische Pfadlänge, also die längste Verzögerungsstrecke, die Signale innerhalb eines Taktsignals durchlaufen müssen, reduziert. Da die maximale Taktfrequenz eines digitalen Schaltkreises direkt von der Länge des längsten kombinierten Signalpfades abhängt, ermöglicht Pipelining eine höhere Taktrate. Dies ist besonders wichtig bei Algorithmen mit Rückkopplungsstrukturen, wie sie etwa bei IIR-Filtern vorkommen, da Rückkopplungsschleifen sonst die maximale Taktfrequenz stark begrenzen würden.<br>
 
 **Funktionalität**<br>
 Der HDL-BiquadFilter ist für die Implementierung auf Hardwareplattformen wie FPGAs und ASICs optimiert. Er unterstützt die kontinuierliche Verarbeitung eingehender Datenströme mithilfe eines oder mehrerer kaskadierter Filterabschnitte. Die Berechnungsgrundlage des Filters bilden dabei vom Benutzer definierte Koeffizienten, die als Matrizen übergeben werden. Die Numerator-Koeffizienten (b) und Denominator-Koeffizienten (a) bestimmen dabei das Frequenzverhalten der jeweiligen Filterstufe.<br>

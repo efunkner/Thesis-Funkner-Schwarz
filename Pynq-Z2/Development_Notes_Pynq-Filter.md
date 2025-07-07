@@ -226,9 +226,9 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 ## Noch offene Punkte:
 - ❌ Dokumentation zu: DSP, IIR-Filter, Biquad-Strukturen, ~~Matlab HDL-Coder~~ + Simulink, ~~Vivado~~, ~~IP-Cores~~, ~~I2S~~, (I2C), ~~Pynq und Pynq-Z2 Board~~, finales Notebook + Funktionen
 - ❌ ~~Board auf 44,1kHz umstellen~~
-- ❌ Warum DFII T und warum sind Delays schlecht umzusetzen?
-- ❌ Pipelining erklären
-- ❌ Warum Fixed-Point?
+- ❌ ~~Warum DFII T und warum sind Delays schlecht umzusetzen?~~
+- ❌~~Warum Fixed-Point?~~
+- ❌ Theorie: Quantesierung weiter Ausbauen.
 - ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
 - ❌ ~~Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)~~
 - ❌ Blockschaltbilder (Simulink)
@@ -247,10 +247,11 @@ zienten für den FPGA.
 - ✅✅✅✅ Realesierung der 4 Basisfilter (*HP, TP, BS, BP*)
 - ✅ Erstes Design einer Lerndemonstration mit Visualisierung der Signalverarbeitung.
 - ✅ Dokumentation zu: AXI, I2S, Matlab HDL-Coder, Vivado, IP-Cores, Pynq und Pynq-Z2 Board
-- ✅ **Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)**
-- ✅ **Spektrum nach der Filterung anzeigen mittels FFT**
-- ✅ **Kaskadierung der Filter durch mehrfachfilterung**
+- ✅ Umrechnung der Samplerate für externe *.wav*-Datein (44.1 -> 48kHz)
+- ✅ Spektrum nach der Filterung anzeigen mittels FFT
+- ✅ Kaskadierung der Filter durch mehrfachfilterung
 - ✅ Matlab + Simulink Filterdesign erklären (Designtool)
+- ✅ **Pipelining, Fixed-point und warum DFII T erklären**
  
 
 ## Zusatz:
