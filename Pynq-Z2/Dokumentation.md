@@ -164,6 +164,18 @@ In der Hardware-Entwicklung für FPGAs und ASICs stellt Pipelining eine zentrale
 
 Diese Aufteilung hat den Vorteil, das die kritische Pfadlänge, also die längste Verzögerungsstrecke, die Signale innerhalb eines Taktsignals durchlaufen müssen, reduziert. Da die maximale Taktfrequenz eines digitalen Schaltkreises direkt von der Länge des längsten kombinierten Signalpfades abhängt, ermöglicht Pipelining eine höhere Taktrate. Dies ist besonders wichtig bei Algorithmen mit Rückkopplungsstrukturen, wie sie etwa bei IIR-Filtern vorkommen, da Rückkopplungsschleifen sonst die maximale Taktfrequenz stark begrenzen würden.<br>
 
+**Festkommaarithmetik (Fixed-Point)**<br>
+Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)<br>
+
+Die Verwendung von Festkommaarithmetik ist in der digitalen Signalverarbeitung eine zentrale Voraussetzung, da digitale Systeme grundsätzlich nur mit einer endlichen Wortbreite arbeiten können. Das bedeutet, dass alle Signale und Rechenergebnisse mit einer begrenzten Anzahl an Bits dargestellt und verarbeitet werden. Diese Begrenzung führt dazu, dass bei Rechenoperationen unvermeidlich Rundungs- und Quantisierungsfehler entstehen, die sich direkt auf das Verhalten digitaler Systeme auswirken können.<br>
+Wortlängeneffekte können die Stabilität und Genauigkeit eines Filters beeinflussen.Besonders bei rekursiven Systemen, wie sie bei IIR-Filtern auftreten, können Rundungsfehler und Überläufe zu Instabilitäten führen, wenn sie nicht sorgfältig berücksichtigt werden.<br>
+
+Ein wesentlicher Aspekt der Festkommaarithmetik ist die Wahl einer geeigneten Zahlendarstellung. Die Zweierkomplementdarstellung ist hierbei besonders verbreitet, da sie eine einfache und effiziente Verarbeitung von vorzeichenbehafteten Zahlen ermöglicht. Um das begrenzte Werteintervall bestmöglich auszunutzen, ist eine durchdachte Skalierung erforderlich. Dadurch lassen sich Überläufe vermeiden und gleichzeitig wird die verfügbare Auflösung optimal genutzt.<br>
+
+Darüber hinaus wirkt sich die Wortlänge direkt auf den kritischen Pfad eines digitalen Systems aus. Die Länge der arithmetischen Operationen bestimmt die maximal mögliche Taktfrequenz. Eine größere Wortbreite erhöht die Komplexität der Rechenoperationen und kann somit zu längeren Verzögerungszeiten in der Hardware führen. Daher ist eine sorgfältige Abwägung zwischen ausreichender Genauigkeit und einem effizienten Ressourceneinsatz unerlässlich. => **Pipelining**<br>
+
+Festkommaarithmetik ist damit ein unverzichtbares Konzept, um Algorithmen in Systemen mit begrenzter Wortlänge stabil, ressourcenschonend und mit kontrollierbarer Genauigkeit umsetzen zu können. Eine geeignete Skalierung, die Vermeidung von Überläufen und die Analyse der Auswirkungen auf Timing und Hardware sind dabei entscheidende Schritte.<br>
+
 **Funktionalität**<br>
 Der HDL-BiquadFilter ist für die Implementierung auf Hardwareplattformen wie FPGAs und ASICs optimiert. Er unterstützt die kontinuierliche Verarbeitung eingehender Datenströme mithilfe eines oder mehrerer kaskadierter Filterabschnitte. Die Berechnungsgrundlage des Filters bilden dabei vom Benutzer definierte Koeffizienten, die als Matrizen übergeben werden. Die Numerator-Koeffizienten (b) und Denominator-Koeffizienten (a) bestimmen dabei das Frequenzverhalten der jeweiligen Filterstufe.<br>
 Typische Anwendungsbereiche dieses Filters liegen in der Echtzeit-Audiosignalverarbeitung, Kommunikationssystemen oder Regelungstechnik – insbesondere dort, wo ressourcenschonende, aber leistungsfähige Filterlösungen erforderlich sind.<br>
