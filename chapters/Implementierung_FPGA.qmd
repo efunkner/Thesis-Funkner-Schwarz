@@ -1,0 +1,51 @@
+# Implementierung
+Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Das Ziel ist die Erstellung eines Vivado-kompatiblen IP-Cores, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch die Verwendung des modellbasierten Workflows wird die Entwicklung beschleunigt und die Hardwareintegration standardisiert. <br>
+
+
+## Modellierung in Simulink
+Für die Umsetzung in Simulink wurde der in der DSP HDL Toolbox enthaltene Block [Biquadratic IIR (SOS) filter](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html) verwendet. Der Vorteil dieses Blocks gegenüber einer direkten Nachbildung der Direct Form II liegt darin, dass er speziell für die HDL-Codegenerierung optimiert ist. Er bringt bereits eine integrierte Steuerung des valid-Signals mit, was ein notwendiges Element für die AXI-Stream-Implementierung ist. Außerdem sind die Filterstrukturen bereits gepipelined, wodurch der Filter eine höhere maximale Taktfrequenz erreicht. <br>
+Die Probleme bei der Umsetzung einer Direct-Form-Struktur lagen hauptsächlich darin, dass bei der Bitstream-Generierung in Vivado die Timing-Anforderungen nicht eingehalten werden konnten und die Taktfrequenz des Filters entsprechend reduziert werden musste. Wird die Taktfrequenz zu niedrig gewählt, verlängert sich die Zeit der Filterung entsprechend.<br>
+Hinzu kam, dass ein einzelner Filter in dieser Form relativ viele Ressourcen auf dem FPGA belegte. Eine direkte Nachbildung der Direct Form II ohne korrektes Pipelining und ohne weitere Optimierungen ist sehr ineffizient.<br>
+Aus diesem Grund fiel die Entscheidung zugunsten einer vorgefertigten Lösung aus der DSP HDL Toolbox. Trotzdem musste die Taktfrequenz letztlich auf 50 MHz begrenzt werden, da bei 100 MHz ebenfalls keine vollständige Einhaltung der Timings erreicht werden konnte.<br>
+
+## Direct Form II Transponiert mit Pipelining
+Der Filter-Block wurde auf Direct Form II Transponiert eingestellt, da diese Struktur, genau wie die klassische Direct Form II, nur eine Verzögerungskette benötigt und somit weniger Register erforderlich sind. Die transponierte Form verschiebt die Verzögerungselemente auf die Rückkopplungspfade, wodurch die kritische Pfadlänge verkürzt wird. Gleichzeitig bietet sie Vorteile in Bezug auf die numerische Stabilität und ist robuster gegenüber Quantisierungseffekten.<br>
+Ergänzend ist dieser Filterblock schon gepipelined. Beim **Pipelining** werden innerhalb der Struktur gezielt Register in die kombinatorischen Signalwege eingefügt. Dies trennt lange Logikpfade auf und verkürzt damit die kritische Pfadlänge, was zu einer deutlich höheren maximalen Taktfrequenz führt. Rückkopplungswege, die bei IIR-Filtern eine Herausforderung darstellen, können so auch bei hoher Verarbeitungsgeschwindigkeit stabil betrieben werden.<br>
+Gerade in Anwendungen, in denen mehrere Biquads kaskadiert werden, kann so eine stabile und hardwarefreundliche Filterarchitektur aufgebaut werden.<br>
+
+## Festkommaarithmetik
+Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßig keine native Gleitkomma-Hardware besitzen. Für alle Signalpfade wird der Typ fixdt(1,32,16) eingesetzt, ein vorzeichenbehafteter 32-Bit-Wert mit 16 Nachkommabits. Der Typ wurde sowohl in Simulink als auch in der späteren Hardwareimplementierung experimentell getestet und hat sich dabei als optimal herausgestellt. Er bietet ein gutes Gleichgewicht zwischen Rechengenauigkeit und Ressourceneffizienz, wobei Quantisierungsfehler minimal gehalten werden konnten. Aus diesem Grund wird dieser Datentyp für alle relevanten Signalpfade verwendet.<br>
+
+## Modell und Aufbau
+Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten.<br>
+
+![Simulink Filter: Subsystem](images/Matlab_Simulink_subsystem_v2.png)
+
+Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filterlogik klar von zusätzlichen Test- und Steuerungselementen zu trennen. Um den Datentyp durchgängig korrekt zu setzen, wird ein Data Type Conversion-Block vor dem Filter-Subsystem eingefügt. Der Filter selbst ist so eingestellt, dass die Koeffizienten den Datentyp des Eingangssignals übernehmen. Die genauen Einstellungen sehen wie Folgt aus:<br>
+
+::: {#fig-elephants layout-ncol=2}
+
+![Biquad Filter: Main](images\Biquad_settings1.png)
+
+![Biquad Filter: Datatypes](images\Biquad_settings2.png)
+
+Block Parameters: Biquad Filter
+:::
+
+Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen sowie den Datentyp des Eingangssignals über einen Data Type Conversion-Block anpassen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br>
+
+![Simulink Filter](images/Matlab_Simulink_outside_v2.png)
+
+## AXI4-Stream-Schnittstelle
+Die Integration der Filterstruktur in ein FPGA-System erfolgt über eine AXI4-Stream-Schnittstelle, die sich durch ihren einfachen und unidirektionalen Datenfluss auszeichnet. Der zugrunde liegende Handshake-Mechanismus basiert auf den Signalen TVALID und TREADY. Ein Transfer erfolgt nur, wenn beide Signale gleichzeitig aktiv sind. <br>
+Der Sender (Master) setzt TVALID sobald Daten bereitstehen, und  der Empfänger (Slave) signalisiert mit TREADY, dass dieser bereit ist Daten zu empfangen. Der Sender darf **nicht auf READY warten**, bevor er VALID aktiviert. Der Sender **muss VALID so lange halten**, bis der Handshake abgeschlossen ist. Der Empfänger darf READY auch vor VALID setzen, muss aber nicht.<br>
+Die Verwendung von AXI4-Stream erlaubt es, mehrere Datenströme mit unterschiedlichen Datenbreiten über denselben Interconnect zu übertragen. Dadurch wird die Einbindung in Vivado Block Designs erleichtert, da AXI-basierte IP-Blöcke nahtlos miteinander verbunden werden können.<br>
+
+## HDL-Coder und Workflow Advisor
+Für die Überführung des in Simulink entwickelten Filtermodells in eine hardwaretaugliche Form kann der [HDL Coder](https://de.mathworks.com/products/hdl-coder.html) von MathWorks eingesetzt. Diesesr dient dazu, aus einem Simulink-Modell oder MATLAB-Algorithmus automatisch synthesefähigen HDL-Code zu generieren, der sich anschließend auf Zielplattformen implementieren lässt. Damit entfällt die Notwendigkeit, VHDL- oder Verilog-Code manuell zu schreiben und anzupassen.<br>
+Der HDL Coder kann den gesamten Entwurfsablauf auf Basis eines modellbasierten Designs abbilden. Hierfür werden HDL-kompatible Blöcke verwendet, welche speziell darauf ausgelegt, bei der späteren Übersetzung in Hardware eine korrekte Signalverarbeitung zu gewährleisten.<br>
+Über den HDL Workflow Advisor wird die automatisierte Codegenerierung durchgeführt. Bei der Nutzung werden schrittweise alle erforderlichen Arbeitsschritte, von der Überprüfung des Modells auf HDL-Tauglichkeit bis zur Konfiguration der Zielplattform und der Schnittstellen ausgeführt. So wird zu Anfang festgelegt, für welche Hardware das Design bestimmt ist und ob der generierte IP-Core über eine AXI4-Stream- oder AXI4-Lite-Schnittstelle angebunden werden soll. <br>
+Im Workflow Advisor wird der Hardware-Zielworkflow eingerichtet, die Ein- und Ausgänge des Simulink-Modells werden mit HDL-I/O-Ports oder AXI-Ports verknüpft, und es können weitere Optionen wie Pipelining oder die Umsetzung fester Wortlängen über Fixed-Point-Arithmetik eingestellt werden. Nach der Konfiguration wird der HDL-Code generiert, inklusive aller Constraints und optionaler Testbenches.<br>
+
+Für die Implementierung hier, wird nach der erfolgreichen Codegenerierung, ein Vivado-kompatibler IP-Core erzeugt, der in einem IP-Repository gespeichert wird. In Vivado kann dieser IP-Core anschließend ohne weitere manuelle Anpassungen in ein Block Design integriert werden. Die Schnittstellenanbindung über AXI4-Stream  stellt dabei sicher, dass der Filter problemlos mit dem restlichen FPGA-System kommunizieren kann.<br>
+Die Verwendung des HDL Coders zusammen mit dem HDL Workflow Advisor ist insbesondere dann vorteilhaft, wenn wenig Erfahrung mit der manuellen HDL-Entwicklung vorliegt oder wenn eine schnelle und nachvollziehbare Prototypenerstellung gefragt ist. Die strukturierte Vorgehensweise reduziert das Fehlerrisiko, erleichtert die Wiederverwendbarkeit und sorgt dafür, dass alle Schnittstellen-Anforderungen frühzeitig berücksichtigt werden. So lassen sich selbst komplexe Signalverarbeitungsblöcke wie ein IIR-Biquad-Filter mit AXI4-Stream-Anbindung hardwaregerecht umsetzen.<br>

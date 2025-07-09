@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -197,17 +162,19 @@ window.Quarto = {
   <li><a href="#transformation-von-polen-und-nullstellen" id="toc-transformation-von-polen-und-nullstellen" class="nav-link" data-scroll-target="#transformation-von-polen-und-nullstellen">Transformation von Polen und Nullstellen</a></li>
   <li><a href="#frequenzverzerrung---frequency-warping" id="toc-frequenzverzerrung---frequency-warping" class="nav-link" data-scroll-target="#frequenzverzerrung---frequency-warping">Frequenzverzerrung - Frequency Warping:</a></li>
   <li><a href="#prewarping" id="toc-prewarping" class="nav-link" data-scroll-target="#prewarping">Prewarping</a></li>
-  </ul></li>
-  <li><a href="#praktische-anwendung-der-bilinear-transformation" id="toc-praktische-anwendung-der-bilinear-transformation" class="nav-link" data-scroll-target="#praktische-anwendung-der-bilinear-transformation">Praktische Anwendung der Bilinear-Transformation</a>
-  <ul class="collapse">
-  <li><a href="#übertragungsfunktionen-der-analogen-biquad-filter" id="toc-übertragungsfunktionen-der-analogen-biquad-filter" class="nav-link" data-scroll-target="#übertragungsfunktionen-der-analogen-biquad-filter">Übertragungsfunktionen der analogen Biquad Filter</a></li>
-  <li><a href="#analoge-filterschaltung" id="toc-analoge-filterschaltung" class="nav-link" data-scroll-target="#analoge-filterschaltung">Analoge Filterschaltung</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
-  <li><a href="#matlab" id="toc-matlab" class="nav-link" data-scroll-target="#matlab">MATLAB</a></li>
-  </ul></li>
   <li><a href="#filterentwurf-in-matlab" id="toc-filterentwurf-in-matlab" class="nav-link" data-scroll-target="#filterentwurf-in-matlab">Filterentwurf in Matlab</a>
   <ul class="collapse">
   <li><a href="#spezifikation-der-filter" id="toc-spezifikation-der-filter" class="nav-link" data-scroll-target="#spezifikation-der-filter">Spezifikation der Filter</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#implementierung" id="toc-implementierung" class="nav-link" data-scroll-target="#implementierung">Implementierung</a>
+  <ul class="collapse">
+  <li><a href="#modellierung-in-simulink" id="toc-modellierung-in-simulink" class="nav-link" data-scroll-target="#modellierung-in-simulink">Modellierung in Simulink</a></li>
+  <li><a href="#direct-form-ii-transponiert-mit-pipelining" id="toc-direct-form-ii-transponiert-mit-pipelining" class="nav-link" data-scroll-target="#direct-form-ii-transponiert-mit-pipelining">Direct Form II Transponiert mit Pipelining</a></li>
+  <li><a href="#festkommaarithmetik" id="toc-festkommaarithmetik" class="nav-link" data-scroll-target="#festkommaarithmetik">Festkommaarithmetik</a></li>
+  <li><a href="#modell-und-aufbau" id="toc-modell-und-aufbau" class="nav-link" data-scroll-target="#modell-und-aufbau">Modell und Aufbau</a></li>
+  <li><a href="#axi4-stream-schnittstelle" id="toc-axi4-stream-schnittstelle" class="nav-link" data-scroll-target="#axi4-stream-schnittstelle">AXI4-Stream-Schnittstelle</a></li>
+  <li><a href="#hdl-coder-und-workflow-advisor" id="toc-hdl-coder-und-workflow-advisor" class="nav-link" data-scroll-target="#hdl-coder-und-workflow-advisor">HDL-Coder und Workflow Advisor</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -492,100 +459,123 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>In der praktischen Anwendung wird Prewarping typischerweise für Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist.</p>
 <p>Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate <span class="math inline">\(f_s\)</span> höher als die Eckfrequenzen <span class="math inline">\(f_d\)</span> der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.</p>
 </section>
-</section>
-<section id="praktische-anwendung-der-bilinear-transformation" class="level1">
-<h1>Praktische Anwendung der Bilinear-Transformation</h1>
-<p>Die analogen Biquad Filter für die Anwendung der Bilineartransformation werden aus dem Experiment 4 des Analog Systems Lab Kit PRO entnommen.</p>
-<section id="übertragungsfunktionen-der-analogen-biquad-filter" class="level2">
-<h2 class="anchored" data-anchor-id="übertragungsfunktionen-der-analogen-biquad-filter">Übertragungsfunktionen der analogen Biquad Filter</h2>
-<p><strong>Tiefpass:</strong> <span class="math inline">\(H_{TP}(s) = \frac{V_3}{V_i} = \frac{+H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot w_0^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
-<p><strong>Hochpass:</strong> <span class="math inline">\(H_{HP}(s) = \frac{V_1}{V_i} = \frac{H_0 \cdot \frac{s^2}{w_0^2}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot s^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
-<p><strong>Bandpass:</strong> <span class="math inline">\(H_{BP}(s) = \frac{V_2}{V_i} = \frac{-H_0 \cdot \frac{s}{w_0}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{-H_0 \cdot sw_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
-<p><strong>Bandsperre:</strong> <span class="math inline">\(H_{BS}(s) = \frac{V_4}{V_i} = \frac{(1 + \frac{s^2}{w_0^2 \cdot}) \cdot H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{(w_0^2 + s^2) \cdot H_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
-</section>
-<section id="analoge-filterschaltung" class="level2">
-<h2 class="anchored" data-anchor-id="analoge-filterschaltung">Analoge Filterschaltung</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="images/Biquad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Analoge Biquad Schaltung"><img src="images/Biquad.png" class="img-fluid figure-img" alt="Analoge Biquad Schaltung"></a></p>
-<figcaption>Analoge Biquad Schaltung</figcaption>
-</figure>
-</div>
-<p>Um diese analogen Filter Bilinear zu transformieren stehen MATLAB sowie Python zur Verfügung, um die Durchführung der Substitutionen durchzuführen.</p>
-</section>
-<section id="python" class="level2">
-<h2 class="anchored" data-anchor-id="python">Python</h2>
-<p>Python mit scipy.signal</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>numz, denz <span class="op">=</span> bilinear(nums ,dens ,fs <span class="op">=</span> fs)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> freqs, bilinear, freqz</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Für die Bilinear-Transformation wird die Scipy-Bibliothek mit dem Signal-Modul verwendet. Aus diesem Modul werden die Funktionen freqs, bilinear und freqz importiert. Für weitere Berechnungen wird Numpy als np importiert und für die Möglichkeit zum Plotten wird Matplotlib.pyplot als plt importiert.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">100e-9</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>w0 <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (R <span class="op">*</span> C)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="fl">4.7</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> <span class="dv">44100</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Aus dem Schaltbild der analogen Filterschaltung werden dessen Parameter entnommen. Die Kreisfrequenz <span class="math inline">\(w_0\)</span> berechnet sich durch <span class="math inline">\(w_0 = \frac{1}{R C}\)</span>. Der Wert <span class="math inline">\(H_0\)</span> beschreibt den Gainfaktor der Filterschaltungen und wird auf 1 gesetzt, wodurch dieser nicht mehr im Code aufkommt. Die digitalen Filter sollen für Audioanwendungen verwendet werden, weshalb die Wahl von 44,1 kHz als Abtastfrequenz getroffen wurde. Durch die Wahl der Abtastefrequenz von 44,1 kHz wird kein Prewarping benötigt, da die Frequenzverzerrung vernachlässigbar ist.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tiefpass Zähler</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TP_nums <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>, w0<span class="op">**</span><span class="dv">2</span>]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Hochpass Zähler</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>HP_nums <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandpass Zähler</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>BP_nums <span class="op">=</span>  [<span class="dv">0</span>, <span class="op">-</span>w0, <span class="dv">0</span>]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandstop Zähler</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>BS_nums <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">0</span>, w0<span class="op">**</span><span class="dv">2</span>]</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Nenner</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>dens <span class="op">=</span> [<span class="dv">1</span>, w0<span class="op">/</span>Q, w0<span class="op">**</span><span class="dv">2</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Die Zähler und Nenner der Übertragungsfunktionen der analogen Filter werden als Listen übernommen. Die Listenelemente entsprechen den Koeffizienten in absteigender Potenzordnung: <span class="math inline">\([s^2, s^1, s^0]\)</span>. Die Nenner der vier Filter sind identisch und müssen nur einmal übernommen werden.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bilineartransformation</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tiefpass</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>TP_numz, TP_denz <span class="op">=</span> bilinear(TP_nums, dens, fs <span class="op">=</span> fs)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Hochpass</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>HP_numz, HP_denz <span class="op">=</span> bilinear(HP_nums, dens, fs <span class="op">=</span> fs)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandpass</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>BP_numz, BP_denz <span class="op">=</span> bilinear(BP_nums, dens, fs <span class="op">=</span> fs)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandstop</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>BS_numz, BS_denz <span class="op">=</span> bilinear(BS_nums, dens, fs <span class="op">=</span> fs)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Die Bilineartransformation wird durch <code>bilinear</code> durchgeführt, indem dieser Funktion die Zähler- und Nennerlisten der jeweiligen Filter mit der Abtastfrequenzen <span class="math inline">\(f_s\)</span> übergeben werden. Die Funktion liefert die Zähler- und Nennerkoeffizienten der digitalen Übertragungsfunktion.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="images/digital_vs_analog.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Vergleich zwischen analogen und digitalen Frequenz- und Phasengang"><img src="images/digital_vs_analog.png" class="img-fluid figure-img" alt="Vergleich zwischen analogen und digitalen Frequenz- und Phasengang"></a></p>
-<figcaption>Vergleich zwischen analogen und digitalen Frequenz- und Phasengang</figcaption>
-</figure>
-</div>
-</section>
-<section id="matlab" class="level2">
-<h2 class="anchored" data-anchor-id="matlab">MATLAB</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">numz</span><span class="op">,</span> <span class="va">denz</span>] <span class="op">=</span> <span class="va">bilinear</span>(<span class="va">nums</span> <span class="op">,</span><span class="va">dens</span> <span class="op">,</span><span class="va">fs</span> <span class="op">,</span><span class="va">fp</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Der Prozess der Bilinear-Transformation in MATLAB ist vom Verlauf identisch zu dem in Python, jedoch bietet MATLAB den Vorteil der direkten Einbindung vom Prewarping.</p>
-<p>Die direkte Anwendung des Prewarpings wird mit dem Parameter <code>fp</code> vorgenommen, welcher als Prewarping-Punkt dient. MATLAB berechnet automatisch die erforderliche Anpassung anhand der Abtastfrequenz <code>fs</code> und dem Prewarping-Punkt <code>fp</code> bei der Transformation der Filterkoeffizienten. Zur Demonstration wird eine <code>fp</code> von 1600 Hz gewählt:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="images/prewarped_digital_vs_analog.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang"><img src="images/prewarped_digital_vs_analog.png" class="img-fluid figure-img" alt="Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang"></a></p>
-<figcaption>Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="filterentwurf-in-matlab" class="level1">
-<h1>Filterentwurf in Matlab</h1>
+<section id="filterentwurf-in-matlab" class="level2">
+<h2 class="anchored" data-anchor-id="filterentwurf-in-matlab">Filterentwurf in Matlab</h2>
 <p>Matlab biehtet eine Viehlzahl an Werkzeugen an digitale Filter zu entwerfen, zu analysieren und einzusetzen. Für den praktischen Einsatz von IIR Filtern, werden diese of als Biquad-Strukturen implementiert. Biquads sind IIR Filter 2. Ordnung, welche eine stabile und numerisch robuste Realisierung ermöglichen. Besonders komplexere Filter höherer Ordnung profetieren von diesen Eingenschaften, da diese einfach in mehrere Biquads zerlegt und kaskadiert werden können, wodurch Rundungsfehler und Instabilitäten verringert werden. MATLAB unterstützt die Arbeit mit Biquads durch Funktionen wie <em>dfilt</em> oder durch die Darstellung der Filterkoeffizienten als <em>Second-Order Sections</em> (SOS). Über die Funktion <em>tf2sos</em> lassen sich beliebige IIR-Filterstrukturen in eine Biquad-Kaskade umrechnen, was vor allem bei der Implementierung auf Hardwareplattformen wie FPGAs oder Mikrocontrollern von großem Vorteil ist.<br></p>
 <p>Der Entwurfsprozess in MATLAB folgt dabei einem klaren Ablauf. Zunächst werden die Anforderungen definiert, wie Filtertyp, Filterordnung, Grenzfrequenzen und ggf. erlaubte Ripple im Durchlass- oder Sperrbereich. Anschließend wird der Filter mit den passenden MATLAB-Funktionen entworfen. Für IIR-Filter stehen unter anderem die Funktionen <em>butter</em>, <em>cheby1</em>, <em>cheby2</em> oder <em>ellip</em> zur Verfügung. <strong>[Einfügen was genau die Funktionen machen]</strong> Alternativ können Filter auch grafisch über den <a href="https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html">Filter Designer</a> erstellt werden, der eine interaktive Visualisierung der Frequenzgänge und Pol-Nullstellen-Diagramme ermöglicht.<br></p>
 <p>Neben dem Design bietet MATLAB Tools wie freqz zur Darstellung von Amplituden- und Phasengang oder fvtool, das eine Untersuchung von Frequenzverhalten, Impulsantwort, Gruppenlaufzeit sowie Pol- und Nullstellen erlaubt. Nach dem Entwurf können Filter direkt auf digitale Signale angewendet werden. Für den Hardwareeinsatz lassen sich die berechneten Koeffizienten anschließend exportieren und beispielsweise als Biquad-Parameter in Simulink übergeben werden.<br></p>
-<section id="spezifikation-der-filter" class="level2">
-<h2 class="anchored" data-anchor-id="spezifikation-der-filter">Spezifikation der Filter</h2>
+<section id="spezifikation-der-filter" class="level3">
+<h3 class="anchored" data-anchor-id="spezifikation-der-filter">Spezifikation der Filter</h3>
 <p>Für die Demonstration wurde entschieden, alle vier grundlegenden Filtertypen als Butterworth-Filter zu realisieren. Diese besitzen den Vorteil kein Ripple im Durchlass- und Sperrbereich aufzuweisen. Gerade bei der Verarbeitung von Audiosignalen können Ripple im Frequenzgang zu unerwünschten Artefakten führen. Ein möglichst glatter Amplitudenverlauf ist daher insbesondere in der Audioanwendung vom Vorteil.<br> Im direkten Vergleich zu elliptischen oder Chebyshev-Filtern weisen Butterworth-Filter bei gleicher Flankensteilheit eine höhere erforderliche Filterordnung auf. Diese höhere Ordnung würde in einer Hardwareumsetzung prinzipiell mehr Biquad-Stufen benötigen und damit mehr Ressourcen. Bei der Implementierung wurde die Filterordnung auf 2. Ordnung beschränkt. Damit reicht für jeden Filter genau eine Biquad-Stufe aus. <br> Da bei einer so niedrigen Filterordnung alle Filter, unabhängig davon ob sie als Butterworth- oder elliptischer Filter realisiert werden, ohnehin nur aus einer Biquad-Stufe bestehen, hätte die Wahl des Filtertyps keinen nennenswerten Unterschied bei den Hardwareanforderungen gemacht. Der Hauptgrund für die Entscheidung zugunsten der Butterworth-Filter liegt somit vor allem im glatten Frequenzverlauf, der für die Audiobearbeitung besonders geeignet ist.<br></p>
-<p>Bei der genauen Spezifiaktion der Filter wurde sich an dem Beispiel von <a href="https://nbviewer.org/github/spatialaudio/digital-signal-processing-lecture/blob/master/filter_design/audiofilter.ipynb#bandstop2nd">Design of Digital Audio IIR Filters</a> von Frank Schultz gehalten. Dabei ergaben sich Folgende Spezifikationen:<br> | Filter: | Typ: | Fc: | Ordnung: | | ——– | ——– | ——– | ——– | | <strong>Hochpass</strong> | Butterworth | 1kHz | 2 | | <strong>Tiefpass</strong> | Butterworth | 1kHz | 2 | | <strong>Bandpass</strong> | Butterworth | 500Hz - 2kHz | 2 | | <strong>Bansstop</strong> | Butterworth | 500Hz - 2kHz | 2 |</p>
+<p>Bei der genauen Spezifiaktion der Filter wurde sich an dem Beispiel von <a href="https://nbviewer.org/github/spatialaudio/digital-signal-processing-lecture/blob/master/filter_design/audiofilter.ipynb#bandstop2nd">Design of Digital Audio IIR Filters</a> von Frank Schultz gehalten. Dabei ergaben sich Folgende Spezifikationen:<br></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Filter:</th>
+<th>Typ:</th>
+<th>Fc:</th>
+<th>Ordnung:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Hochpass</strong></td>
+<td>Butterworth</td>
+<td>1kHz</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>Tiefpass</strong></td>
+<td>Butterworth</td>
+<td>1kHz</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>Bandpass</strong></td>
+<td>Butterworth</td>
+<td>500Hz - 2kHz</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>Bansstop</strong></td>
+<td>Butterworth</td>
+<td>500Hz - 2kHz</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
 <p>Alle Filter wurden mit dem <a href="https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html">Filter Designer</a> auf einer Samplefrequenz von 48kHz entforfen und die Koeffizienten als SOS-Matrix inklusive Gain in das Workspace exportiert.</p>
+</section>
+</section>
+</section>
+<section id="implementierung" class="level1">
+<h1>Implementierung</h1>
+<p>Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Das Ziel ist die Erstellung eines Vivado-kompatiblen IP-Cores, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch die Verwendung des modellbasierten Workflows wird die Entwicklung beschleunigt und die Hardwareintegration standardisiert. <br></p>
+<section id="modellierung-in-simulink" class="level2">
+<h2 class="anchored" data-anchor-id="modellierung-in-simulink">Modellierung in Simulink</h2>
+<p>Für die Umsetzung in Simulink wurde der in der DSP HDL Toolbox enthaltene Block <a href="https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html">Biquadratic IIR (SOS) filter</a> verwendet. Der Vorteil dieses Blocks gegenüber einer direkten Nachbildung der Direct Form II liegt darin, dass er speziell für die HDL-Codegenerierung optimiert ist. Er bringt bereits eine integrierte Steuerung des valid-Signals mit, was ein notwendiges Element für die AXI-Stream-Implementierung ist. Außerdem sind die Filterstrukturen bereits gepipelined, wodurch der Filter eine höhere maximale Taktfrequenz erreicht. <br> Die Probleme bei der Umsetzung einer Direct-Form-Struktur lagen hauptsächlich darin, dass bei der Bitstream-Generierung in Vivado die Timing-Anforderungen nicht eingehalten werden konnten und die Taktfrequenz des Filters entsprechend reduziert werden musste. Wird die Taktfrequenz zu niedrig gewählt, verlängert sich die Zeit der Filterung entsprechend.<br> Hinzu kam, dass ein einzelner Filter in dieser Form relativ viele Ressourcen auf dem FPGA belegte. Eine direkte Nachbildung der Direct Form II ohne korrektes Pipelining und ohne weitere Optimierungen ist sehr ineffizient.<br> Aus diesem Grund fiel die Entscheidung zugunsten einer vorgefertigten Lösung aus der DSP HDL Toolbox. Trotzdem musste die Taktfrequenz letztlich auf 50 MHz begrenzt werden, da bei 100 MHz ebenfalls keine vollständige Einhaltung der Timings erreicht werden konnte.<br></p>
+</section>
+<section id="direct-form-ii-transponiert-mit-pipelining" class="level2">
+<h2 class="anchored" data-anchor-id="direct-form-ii-transponiert-mit-pipelining">Direct Form II Transponiert mit Pipelining</h2>
+<p>Der Filter-Block wurde auf Direct Form II Transponiert eingestellt, da diese Struktur, genau wie die klassische Direct Form II, nur eine Verzögerungskette benötigt und somit weniger Register erforderlich sind. Die transponierte Form verschiebt die Verzögerungselemente auf die Rückkopplungspfade, wodurch die kritische Pfadlänge verkürzt wird. Gleichzeitig bietet sie Vorteile in Bezug auf die numerische Stabilität und ist robuster gegenüber Quantisierungseffekten.<br> Ergänzend ist dieser Filterblock schon gepipelined. Beim <strong>Pipelining</strong> werden innerhalb der Struktur gezielt Register in die kombinatorischen Signalwege eingefügt. Dies trennt lange Logikpfade auf und verkürzt damit die kritische Pfadlänge, was zu einer deutlich höheren maximalen Taktfrequenz führt. Rückkopplungswege, die bei IIR-Filtern eine Herausforderung darstellen, können so auch bei hoher Verarbeitungsgeschwindigkeit stabil betrieben werden.<br> Gerade in Anwendungen, in denen mehrere Biquads kaskadiert werden, kann so eine stabile und hardwarefreundliche Filterarchitektur aufgebaut werden.<br></p>
+</section>
+<section id="festkommaarithmetik" class="level2">
+<h2 class="anchored" data-anchor-id="festkommaarithmetik">Festkommaarithmetik</h2>
+<p>Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßig keine native Gleitkomma-Hardware besitzen. Für alle Signalpfade wird der Typ fixdt(1,32,16) eingesetzt, ein vorzeichenbehafteter 32-Bit-Wert mit 16 Nachkommabits. Der Typ wurde sowohl in Simulink als auch in der späteren Hardwareimplementierung experimentell getestet und hat sich dabei als optimal herausgestellt. Er bietet ein gutes Gleichgewicht zwischen Rechengenauigkeit und Ressourceneffizienz, wobei Quantisierungsfehler minimal gehalten werden konnten. Aus diesem Grund wird dieser Datentyp für alle relevanten Signalpfade verwendet.<br></p>
+</section>
+<section id="modell-und-aufbau" class="level2">
+<h2 class="anchored" data-anchor-id="modell-und-aufbau">Modell und Aufbau</h2>
+<p>Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Matlab_Simulink_subsystem_v2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Simulink Filter: Subsystem"><img src="images/Matlab_Simulink_subsystem_v2.png" class="img-fluid figure-img" alt="Simulink Filter: Subsystem"></a></p>
+<figcaption>Simulink Filter: Subsystem</figcaption>
+</figure>
+</div>
+<p>Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filterlogik klar von zusätzlichen Test- und Steuerungselementen zu trennen. Um den Datentyp durchgängig korrekt zu setzen, wird ein Data Type Conversion-Block vor dem Filter-Subsystem eingefügt. Der Filter selbst ist so eingestellt, dass die Koeffizienten den Datentyp des Eingangssignals übernehmen. Die genauen Einstellungen sehen wie Folgt aus:<br></p>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images\Biquad_settings1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Biquad Filter: Main"><img src="images\Biquad_settings1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Biquad Filter: Main</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images\Biquad_settings2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Biquad Filter: Datatypes"><img src="images\Biquad_settings2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Biquad Filter: Datatypes</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;1: Block Parameters: Biquad Filter
+</figcaption>
+</figure>
+</div>
+<p>Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen sowie den Datentyp des Eingangssignals über einen Data Type Conversion-Block anpassen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Matlab_Simulink_outside_v2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Simulink Filter"><img src="images/Matlab_Simulink_outside_v2.png" class="img-fluid figure-img" alt="Simulink Filter"></a></p>
+<figcaption>Simulink Filter</figcaption>
+</figure>
+</div>
+</section>
+<section id="axi4-stream-schnittstelle" class="level2">
+<h2 class="anchored" data-anchor-id="axi4-stream-schnittstelle">AXI4-Stream-Schnittstelle</h2>
+<p>Die Integration der Filterstruktur in ein FPGA-System erfolgt über eine AXI4-Stream-Schnittstelle, die sich durch ihren einfachen und unidirektionalen Datenfluss auszeichnet. Der zugrunde liegende Handshake-Mechanismus basiert auf den Signalen TVALID und TREADY. Ein Transfer erfolgt nur, wenn beide Signale gleichzeitig aktiv sind. <br> Der Sender (Master) setzt TVALID sobald Daten bereitstehen, und der Empfänger (Slave) signalisiert mit TREADY, dass dieser bereit ist Daten zu empfangen. Der Sender darf <strong>nicht auf READY warten</strong>, bevor er VALID aktiviert. Der Sender <strong>muss VALID so lange halten</strong>, bis der Handshake abgeschlossen ist. Der Empfänger darf READY auch vor VALID setzen, muss aber nicht.<br> Die Verwendung von AXI4-Stream erlaubt es, mehrere Datenströme mit unterschiedlichen Datenbreiten über denselben Interconnect zu übertragen. Dadurch wird die Einbindung in Vivado Block Designs erleichtert, da AXI-basierte IP-Blöcke nahtlos miteinander verbunden werden können.<br></p>
+</section>
+<section id="hdl-coder-und-workflow-advisor" class="level2">
+<h2 class="anchored" data-anchor-id="hdl-coder-und-workflow-advisor">HDL-Coder und Workflow Advisor</h2>
+<p>Für die Überführung des in Simulink entwickelten Filtermodells in eine hardwaretaugliche Form kann der <a href="https://de.mathworks.com/products/hdl-coder.html">HDL Coder</a> von MathWorks eingesetzt. Diesesr dient dazu, aus einem Simulink-Modell oder MATLAB-Algorithmus automatisch synthesefähigen HDL-Code zu generieren, der sich anschließend auf Zielplattformen implementieren lässt. Damit entfällt die Notwendigkeit, VHDL- oder Verilog-Code manuell zu schreiben und anzupassen.<br> Der HDL Coder kann den gesamten Entwurfsablauf auf Basis eines modellbasierten Designs abbilden. Hierfür werden HDL-kompatible Blöcke verwendet, welche speziell darauf ausgelegt, bei der späteren Übersetzung in Hardware eine korrekte Signalverarbeitung zu gewährleisten.<br> Über den HDL Workflow Advisor wird die automatisierte Codegenerierung durchgeführt. Bei der Nutzung werden schrittweise alle erforderlichen Arbeitsschritte, von der Überprüfung des Modells auf HDL-Tauglichkeit bis zur Konfiguration der Zielplattform und der Schnittstellen ausgeführt. So wird zu Anfang festgelegt, für welche Hardware das Design bestimmt ist und ob der generierte IP-Core über eine AXI4-Stream- oder AXI4-Lite-Schnittstelle angebunden werden soll. <br> Im Workflow Advisor wird der Hardware-Zielworkflow eingerichtet, die Ein- und Ausgänge des Simulink-Modells werden mit HDL-I/O-Ports oder AXI-Ports verknüpft, und es können weitere Optionen wie Pipelining oder die Umsetzung fester Wortlängen über Fixed-Point-Arithmetik eingestellt werden. Nach der Konfiguration wird der HDL-Code generiert, inklusive aller Constraints und optionaler Testbenches.<br></p>
+<p>Für die Implementierung hier, wird nach der erfolgreichen Codegenerierung, ein Vivado-kompatibler IP-Core erzeugt, der in einem IP-Repository gespeichert wird. In Vivado kann dieser IP-Core anschließend ohne weitere manuelle Anpassungen in ein Block Design integriert werden. Die Schnittstellenanbindung über AXI4-Stream stellt dabei sicher, dass der Filter problemlos mit dem restlichen FPGA-System kommunizieren kann.<br> Die Verwendung des HDL Coders zusammen mit dem HDL Workflow Advisor ist insbesondere dann vorteilhaft, wenn wenig Erfahrung mit der manuellen HDL-Entwicklung vorliegt oder wenn eine schnelle und nachvollziehbare Prototypenerstellung gefragt ist. Die strukturierte Vorgehensweise reduziert das Fehlerrisiko, erleichtert die Wiederverwendbarkeit und sorgt dafür, dass alle Schnittstellen-Anforderungen frühzeitig berücksichtigt werden. So lassen sich selbst komplexe Signalverarbeitungsblöcke wie ein IIR-Biquad-Filter mit AXI4-Stream-Anbindung hardwaregerecht umsetzen.<br></p>
 </section>
 </section>
 

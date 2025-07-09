@@ -28,6 +28,6 @@ right: |
 
 {{< include ../chapters/bilinear.qmd >}}
 
-{{< include ../chapters/ans_bilinear.qmd >}}
-
 {{< include ../chapters/Filterdesign_Matlab.qmd >}}
+
+{{< include ../chapters/Implementierung_FPGA.qmd >}}
