@@ -171,12 +171,12 @@ File filteredFile;  // Gefiltere Ausgangsdatei
 // ===================================================================================================================================================================================================
 #define NUM_STAGES 1 // Anzahl der Filterstufen
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s1 = 0.4934f;
-const float b_1_s1 = -0.98640;
-const float b_2_s1 = 0.4934f;
+const float b_0_s1 = 0.004604f;
+const float b_1_s1 = 0.009208f;
+const float b_2_s1 = 0.004604f;
 const float a_0_s1 = 1.0f;
-const float a_1_s1 = -0.9847f;
-const float a_2_s1 = 0.4995f;
+const float a_1_s1 = -1.79909641f;
+const float a_2_s1 = 0.8175124f;
 
 const float gain_s1 = 1.0;
 
@@ -184,12 +184,12 @@ const float b_coefficients_s1[] = { b_0_s1, b_1_s1, b_2_s1};
 const float a_coefficients_s1[] = { a_0_s1, a_1_s1, a_2_s1};
 
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s2 = 0.4934f;
-const float b_1_s2 = -0.98640;
-const float b_2_s2 = 0.4934f;
+const float b_0_s2 = 0.004604f;
+const float b_1_s2 = 0.009208f;
+const float b_2_s2 = 0.004604f;
 const float a_0_s2 = 1.0f;
-const float a_1_s2 = -0.9847f;
-const float a_2_s2 = 0.4995f;
+const float a_1_s2 = -1.79909641f;
+const float a_2_s2 = 0.8175124f;
 
 const float gain_s2 = 1.0;
 
@@ -197,12 +197,12 @@ const float b_coefficients_s2[] = { b_0_s2, b_1_s2, b_2_s2};
 const float a_coefficients_s2[] = { a_0_s2, a_1_s2, a_2_s2};
 
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s3 = 0.4934f;
-const float b_1_s3 = -0.98640;
-const float b_2_s3 = 0.4934f;
+const float b_0_s3 = 0.004604f;
+const float b_1_s3 = 0.009208f;
+const float b_2_s3 = 0.004604f;
 const float a_0_s3 = 1.0f;
-const float a_1_s3 = -0.9847f;
-const float a_2_s3 = 0.4995f;
+const float a_1_s3 = -1.79909641f;
+const float a_2_s3 = 0.8175124f;
 
 const float gain_s3 = 1.0;
 
@@ -210,16 +210,16 @@ const float b_coefficients_s3[] = { b_0_s3, b_1_s3, b_2_s3};
 const float a_coefficients_s3[] = { a_0_s3, a_1_s3, a_2_s3};
 
 // Filter-Objekte für linken und rechten Kanal
-BiquadFilterDF2 filterL[NUM_STAGES] = {
-  BiquadFilterDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
-//  BiquadFilterDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
-//  BiquadFilterDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
+BiquadFilterTDF2 filterL[NUM_STAGES] = {
+  BiquadFilterTDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
+  BiquadFilterTDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+  BiquadFilterTDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
 };
 
-BiquadFilterDF2 filterR[NUM_STAGES] = {
-  BiquadFilterDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
-//  BiquadFilterDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
-//  BiquadFilterDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
+BiquadFilterTDF2 filterR[NUM_STAGES] = {
+  BiquadFilterTDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
+  BiquadFilterTDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+  BiquadFilterTDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
 };
 // ===================================================================================================================================================================================================
 
@@ -248,7 +248,7 @@ void setup() {
   delay(1000);
 
   // Eingangs WAV Datei öffnen
-  wavFile = SD_MMC.open("/original.wav", FILE_READ);
+  wavFile = SD_MMC.open("/TF2_theme.wav", FILE_READ);
   if (!wavFile) {
     Serial.println("Fehler beim Öffnen der WAV-Datei.");
     return;
@@ -342,14 +342,14 @@ bool readWavHeader() {
     Serial.println("Nur Mono oder Stereo wird unterstützt.");
     return false;
   }
-
+// ===================================================================================================================================================================================================
   // Ausgabedatei erstellen und Header schreiben
-  filteredFile = SD_MMC.open("/gefiltert.wav", FILE_WRITE);
+  filteredFile = SD_MMC.open("/butter_lp_2.wav", FILE_WRITE);
   if (!filteredFile) {
     Serial.println("Fehler beim Öffnen der Ausgabedatei.");
     return false;
   }
-
+// ===================================================================================================================================================================================================
   writeWavHeader(filteredFile, dataSize, numChannels, sampleRate, bitsPerSample);
 
   Serial.printf("Gesamtanzahl Frames (Samples pro Kanal): %d\n", dataSize / (numChannels * bitsPerSample / 8));
