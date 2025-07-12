@@ -1,9 +1,10 @@
 /*  Echtzeitfilterung eines Bluetoothstreams
-    Filter können mit MODE gewechselt werden    
+    Filter können mit dem MODE-Taster gewechselt werden    
     Bibliotheken:
     https://github.com/pschatzmann/ESP32-A2DP
     https://github.com/pschatzmann/arduino-audio-tools
     https://github.com/pschatzmann/arduino-audio-driver
+    Zur Verwendung von TDF2 die Filter.h austauschen mit der aus dem REPO
 */
 
 #include "AudioTools.h"

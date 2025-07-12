@@ -1,0 +1,24 @@
+## Filterentwurf in Python
+
+Für den Entwurf von digitalen IIR-Filtern in Python wird die Scipy Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine vielzahl Funktionen zum Entwerfen und analysieren von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.
+
+Beim diesem Verfahren wird zunächst ein analoger Filter mit den gewünschten Eigenschaften entworfen, welcher mittels der Bilineartransformation und Prewarping digitalisiert wird.
+
+
+ 
+```Python
+b, a = butter(N = Order, Wn = wn, btype = 'low', analog = False)
+```
+
+```Python
+b, a = cheby1(N = Order, rp = rp, Wn = wn, btype = 'low', analog = False)
+```
+
+```Python
+b, a = cheby2(N = Order, rs = rs, Wn = wn, btype = 'low', analog = False)
+```
+
+```Python
+b, a = ellip(N = Order, rp = rp, rs = rs, Wn = wn, btype = 'low', analog = False)
+```
+
