@@ -1,24 +1,86 @@
-## Filterentwurf in Python
+# Filterentwurf in Python
 
-Für den Entwurf von digitalen IIR-Filtern in Python wird die Scipy Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine vielzahl Funktionen zum Entwerfen und analysieren von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.
-
-Beim diesem Verfahren wird zunächst ein analoger Filter mit den gewünschten Eigenschaften entworfen, welcher mittels der Bilineartransformation und Prewarping digitalisiert wird.
-
-
- 
+Für den Entwurf von digitalen IIR-Filtern in Python wird die Scipy Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine vielzahl von Funktionen zum Entwerfen und analysieren von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.
 ```Python
-b, a = butter(N = Order, Wn = wn, btype = 'low', analog = False)
+from scipy.signal import butter, cheby1, cheby2, ellip
+```
+
+Beim diesem Verfahren wird zunächst ein analoger Filter mit den gewünschten Eigenschaften entworfen, welcher direkt mittels der Bilineartransformation und Prewarping digitalisiert wird. 
+
+Als Beispiel zur Nutzung der Funktionen werden die vier Grundfiltertypen nach den folgenden Paramtern entworfen.
+
+```Python
+# Ordnung für Tief- und Hochpass
+order = 2
+# Ordnung für Bandpass und Bandsperre
+order_b = 1
+```
+Zum Entwerfen von biquadratischen Tief- und Hochpässen wird die Ordnung auf `2` gesetzt. Bei Bandpässen und Bandsperren muss die Ordnung jedoch auf `1` gesetzt werden, damit ein biquadratischer Filter entsteht. Bei dem Entwurf von Bandpässen und Bandsperren wird ein Tiefpass-Prototyp transformiert, wodurch sich die Ordnung automatisch verdoppelt, weil bie der Frequenztransformation jede `s`-Varible quadriert wird.
+
+```Python
+# Abtastrate für Audioanwendungen - Standard für CD-Qualität
+fs = 44100
 ```
 
 ```Python
-b, a = cheby1(N = Order, rp = rp, Wn = wn, btype = 'low', analog = False)
+# Grenzfrequenz für Tief- und Hochpass
+fc = 1000
+# Normalisierte Grenzfrequenz
+wn = fc/(fs/2)
+```
+
+
+```Python
+# Untere und obere Grenzen für Bandpass und Bandsperre
+low = 500
+high = 2000
+# Normalisierte untere und obere Grenzen
+wn_b = [low/(fs/2), high/(fs/2)]
 ```
 
 ```Python
-b, a = cheby2(N = Order, rs = rs, Wn = wn, btype = 'low', analog = False)
+# Welligkeit(Ripple) im Durchlassbereich in dB
+rp = 1
+# Dämpfung im Sperrbereich in dB
+rs = 70
 ```
+Über die Funtkionen `butter`, `cheby1`, `cheby2` und `ellip` werden die dementsprechenden Filtern enworfen. Über den Parameter `btype` wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von `low`, `high`, `bandpass`und `bandstop`.
 
+Die Koeffizienten können als sepreate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung als kaskadierte Biquad-Sektionen zu realisieren.
+
+Tiefpass Butterworth-Filter
 ```Python
-b, a = ellip(N = Order, rp = rp, rs = rs, Wn = wn, btype = 'low', analog = False)
+b, a = butter(N = Order,
+              Wn = wn,
+              btype = 'low',
+              analog = False)
 ```
 
+Hochpass Chebychev1-Filter
+```Python
+b, a = cheby1(N = Order,
+              rp = rp,
+              Wn = wn,
+              btype = 'high', 
+              analog = False)
+```
+
+Bandpass Chebychev2-Filter
+```Python
+sos = cheby2(N = Order, 
+             rs = rs,
+             Wn = wn_b,
+             btype = 'bandpass',
+             analog = False, output = 'sos')
+```
+
+Bandstop Elliptischer-Filter (Cauer)
+```Python
+sos = ellip(N = Order,
+            rp = rp,
+            rs = rs,
+            Wn = wn_b,
+            btype = 'bandstop',
+            analog = False,
+            output = 'sos')
+```

@@ -169,14 +169,14 @@ File wavFile;       // Originale Eingangsdatei
 File filteredFile;  // Gefiltere Ausgangsdatei
 
 // ===================================================================================================================================================================================================
-#define NUM_STAGES 1 // Anzahl der Filterstufen
+#define NUM_STAGES 3 // Anzahl der Filterstufen
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s1 = 0.004604f;
-const float b_1_s1 = 0.009208f;
-const float b_2_s1 = 0.004604f;
+const float b_0_s1 = 0.001216f;
+const float b_1_s1 = -0.0029f;
+const float b_2_s1 = 0.002134f;
 const float a_0_s1 = 1.0f;
-const float a_1_s1 = -1.79909641f;
-const float a_2_s1 = 0.8175124f;
+const float a_1_s1 = -7.295f;
+const float a_2_s1 = 23.52f;
 
 const float gain_s1 = 1.0;
 
@@ -184,12 +184,12 @@ const float b_coefficients_s1[] = { b_0_s1, b_1_s1, b_2_s1};
 const float a_coefficients_s1[] = { a_0_s1, a_1_s1, a_2_s1};
 
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s2 = 0.004604f;
-const float b_1_s2 = 0.009208f;
-const float b_2_s2 = 0.004604f;
-const float a_0_s2 = 1.0f;
-const float a_1_s2 = -1.79909641f;
-const float a_2_s2 = 0.8175124f;
+const float b_0_s2 = -0.001882f;
+const float b_1_s2 = 0.002866f;
+const float b_2_s2 = -0.001882f;
+const float a_0_s2 = -43.81f;
+const float a_1_s2 = 51.56f;
+const float a_2_s2 = -39.28f;
 
 const float gain_s2 = 1.0;
 
@@ -197,12 +197,12 @@ const float b_coefficients_s2[] = { b_0_s2, b_1_s2, b_2_s2};
 const float a_coefficients_s2[] = { a_0_s2, a_1_s2, a_2_s2};
 
 // --- Filter-Koeffizienten und Gain ---
-const float b_0_s3 = 0.004604f;
-const float b_1_s3 = 0.009208f;
-const float b_2_s3 = 0.004604f;
-const float a_0_s3 = 1.0f;
-const float a_1_s3 = -1.79909641f;
-const float a_2_s3 = 0.8175124f;
+const float b_0_s3 = 0.002134f;
+const float b_1_s3 = -0.0029f;
+const float b_2_s3 = 0.001216f;
+const float a_0_s3 = 18.92f;
+const float a_1_s3 = -5.266f;
+const float a_2_s3 = 0.6486f;
 
 const float gain_s3 = 1.0;
 
@@ -344,7 +344,7 @@ bool readWavHeader() {
   }
 // ===================================================================================================================================================================================================
   // Ausgabedatei erstellen und Header schreiben
-  filteredFile = SD_MMC.open("/butter_lp_2.wav", FILE_WRITE);
+  filteredFile = SD_MMC.open("/BANDPASS_300_3500_4Ord.wav", FILE_WRITE);
   if (!filteredFile) {
     Serial.println("Fehler beim Öffnen der Ausgabedatei.");
     return false;
