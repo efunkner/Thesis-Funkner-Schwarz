@@ -30,4 +30,6 @@ right: |
 
 {{< include ../chapters/ans_bilinear.qmd >}}
 
+{{< include ../chapters/filter_python.qmd >}}
+
 {{< include ../chapters/arduino.qmd >}}
