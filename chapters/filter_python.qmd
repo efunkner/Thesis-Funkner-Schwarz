@@ -1,13 +1,13 @@
 # Filterentwurf in Python
 
-Für den Entwurf von digitalen IIR-Filtern in Python wird die Scipy Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine vielzahl von Funktionen zum Entwerfen und analysieren von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.
+Für den Entwurf von digitalen IIR-Filtern wird in Python die Scipy-Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine umfassendende Sammlung von Funktionen für den Entwurf und die Analyse von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.
 ```Python
 from scipy.signal import butter, cheby1, cheby2, ellip
 ```
 
-Beim diesem Verfahren wird zunächst ein analoger Filter mit den gewünschten Eigenschaften entworfen, welcher direkt mittels der Bilineartransformation und Prewarping digitalisiert wird. 
+Das Entwurfsverfahren basiert auf der Transformation analoger Filterprototypen, bei welchem ein analoger Filter mit den gewünschten Eigenschaften entworfen wird und anschließend durch die Bilineartransformation mit Prewarping in den digitalen Bereich überführt wird.
 
-Als Beispiel zur Nutzung der Funktionen werden die vier Grundfiltertypen nach den folgenden Paramtern entworfen.
+Zur beispielhaften Nutzung der Funktionen werden die vier Grundfiltertypen nach den folgenden Paramtern entworfen:
 
 ```Python
 # Ordnung für Tief- und Hochpass
@@ -15,15 +15,17 @@ order = 2
 # Ordnung für Bandpass und Bandsperre
 order_b = 1
 ```
-Zum Entwerfen von biquadratischen Tief- und Hochpässen wird die Ordnung auf `2` gesetzt. Bei Bandpässen und Bandsperren muss die Ordnung jedoch auf `1` gesetzt werden, damit ein biquadratischer Filter entsteht. Bei dem Entwurf von Bandpässen und Bandsperren wird ein Tiefpass-Prototyp transformiert, wodurch sich die Ordnung automatisch verdoppelt, weil bie der Frequenztransformation jede `s`-Varible quadriert wird.
+Zum Entwerfen von biquadratischen Tief- und Hochpässen wird die Ordnung auf den Wert `2` gesetzt.  Bei Bandpässen und Bandsperren muss die Ordnung auf `1` gesetzt werden, um einen biquadratischer Filter zu erhalten.
+
+Beim Entwurf von Bandpass- und Bandsperrfiltern wird eine Frequenztransformation eines Tiefpass-Prototyps durchgeführt, bei welcher jede s-Variable quadriert wird, wodurch sich die Filterordnung automatisch verdoppelt.
 
 ```Python
-# Abtastrate für Audioanwendungen - Standard für CD-Qualität
+# Abtastrate für Audioanwendungen in Hz - Standard für CD-Qualität
 fs = 44100
 ```
 
 ```Python
-# Grenzfrequenz für Tief- und Hochpass
+# Grenzfrequenz für Tief- und Hochpass in Hz
 fc = 1000
 # Normalisierte Grenzfrequenz
 wn = fc/(fs/2)
@@ -31,7 +33,7 @@ wn = fc/(fs/2)
 
 
 ```Python
-# Untere und obere Grenzen für Bandpass und Bandsperre
+# Untere und obere Grenzen für Bandpass und Bandsperre in Hz
 low = 500
 high = 2000
 # Normalisierte untere und obere Grenzen
@@ -46,9 +48,12 @@ rs = 70
 ```
 Über die Funtkionen `butter`, `cheby1`, `cheby2` und `ellip` werden die dementsprechenden Filtern enworfen. Über den Parameter `btype` wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von `low`, `high`, `bandpass`und `bandstop`.
 
-Die Koeffizienten können als sepreate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung als kaskadierte Biquad-Sektionen zu realisieren.
+Die Koeffizienten können als separate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Paramter `analog = False` gesetzt.
 
-Tiefpass Butterworth-Filter
+Butterworth-Filter
+
+Der Butterwoth-Filter zeichnet sich aus mit seiner maximalen Flachheit im Durchlass bereich ohne Welligkeit aus. Als Kompromiss weist dieser einen relativ langsamen Übergang vom Durchlass- zum Sperrbereich auf. Er bietet ein ausgewogenes Verhältnis zwischen Phasenverhalten und Flankensteilheit.
+
 ```Python
 b, a = butter(N = Order,
               Wn = wn,
@@ -56,7 +61,10 @@ b, a = butter(N = Order,
               analog = False)
 ```
 
-Hochpass Chebychev1-Filter
+Chebyshev Typ 1-Filter
+
+Der Chebyshev Typ 1-Filter weist Welligkeit im Durchlassbereich auf,ermöglicht jedoch einen steileren Übergang im Vergleich zum Butterworth-Filter. Die Wellikgkeit ist gleichmäßig über den gesamten Durchlassbereich verteilt.
+
 ```Python
 b, a = cheby1(N = Order,
               rp = rp,
@@ -65,7 +73,10 @@ b, a = cheby1(N = Order,
               analog = False)
 ```
 
-Bandpass Chebychev2-Filter
+Chebyshev Typ 2-Filter
+
+Der Chebyshev Typ 2-Filter kombiniert einen flachen Durchlassbereich, vergleichbar mit dem Butterworth-Filter, mit Welligkeit im Sperrbereich. Bei gleichmäßiger Sperrbereichdämpfung ermöglicht dieser steile Übergangsflanken.
+
 ```Python
 sos = cheby2(N = Order, 
              rs = rs,
@@ -74,7 +85,10 @@ sos = cheby2(N = Order,
              analog = False, output = 'sos')
 ```
 
-Bandstop Elliptischer-Filter (Cauer)
+Elliptischer Filter (Cauer)
+
+Der elliptische Filter bietet die steilsten Übergangsflanken aller dargestellten Filtertypen, weist jedoch Welligkeiten sowohl im Durchlass- als auch im Sperrbereich auf. Dieser eignet sich Optimal für Anwendungen mit strengen Anforderungen an die Übergangsanforderungen.
+
 ```Python
 sos = ellip(N = Order,
             rp = rp,
@@ -84,3 +98,5 @@ sos = ellip(N = Order,
             analog = False,
             output = 'sos')
 ```
+
+Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedeneb Entwurfsmethoden unter indentischen Parameterbedingungen und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.
