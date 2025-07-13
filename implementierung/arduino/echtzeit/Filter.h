@@ -285,12 +285,70 @@ class BiQuadDF2 : public Filter<T> {
   T a_1 = 0;
   T a_2 = 0;
 
-  // allow constructor w/o parameter in subclasses
-  BiQuadDF2() = default;
-
   T w_0 = 0;
   T w_1 = 0;
 };
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+
+/**
+ * @brief Biquad TDF2 Filter.
+ * Use float or double (and not a integer type) as type parameter
+ * @ingroup filter
+ * @author Pieter P tttapa  / pschatzmann / efunkner
+ * @copyright GNU General Public License v3.0
+ * @tparam T
+ */
+ template <typename T>
+class BiQuadTDF2 : public Filter<T> {
+ public:
+  BiQuadTDF2(const T (&b)[3], const T (&a)[3])
+      : b_0(b[0] / a[0]),
+        b_1(b[1] / a[0]),
+        b_2(b[2] / a[0]),
+        a_1(a[1] / a[0]),
+        a_2(a[2] / a[0]) {}
+  BiQuadTDF2(const T (&b)[3], const T (&a)[2])
+      : b_0(b[0]), b_1(b[1]), b_2(b[2]), a_1(a[0]), a_2(a[1]) {}
+  BiQuadTDF2(const T (&b)[3], const T (&a)[2], T gain)
+      : b_0(gain * b[0]),
+        b_1(gain * b[1]),
+        b_2(gain * b[2]),
+        a_1(a[0]),
+        a_2(a[1]) {}
+  BiQuadTDF2(const T (&b)[3], const T (&a)[3], T gain)
+      : b_0(gain * b[0] / a[0]),
+        b_1(gain * b[1] / a[0]),
+        b_2(gain * b[2] / a[0]),
+        a_1(a[1] / a[0]),
+        a_2(a[2] / a[0]) {}
+
+  T process(T value) {
+    T y_0 = s_1 + b_0 * value;
+
+    s_1 = s_2 + b_1 * value - a_1 * y_0; 
+    s_2 = b_2 * value - a_2 * y_0;
+    
+    return y_0;
+ }
+ protected:
+  T b_0 = 0;
+  T b_1 = 0;
+  T b_2 = 0;
+  T a_1 = 0;
+  T a_2 = 0;
+
+  // allow constructor w/o parameter in subclasses
+  BiQuadTDF2() = default;
+
+  T s_1 = 0;
+  T s_2 = 0;
+};
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+
 
 /**
  * @brief Biquad DF2 Low Pass Filter. When dealing with high-order IIR
