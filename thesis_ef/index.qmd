@@ -2,7 +2,7 @@
 title: "Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern"
 author:
   - name: Eduard Funkner
-    orcid: 
+    orcid: 0009-0003-5073-0204
     email: efunkner@stud.hs-bremen.de
     corresponding: true
     roles: "Lead author"
