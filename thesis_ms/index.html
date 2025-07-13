@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -276,44 +241,32 @@ window.Quarto = {
   <li><a href="#transformation-von-polen-und-nullstellen" id="toc-transformation-von-polen-und-nullstellen" class="nav-link" data-scroll-target="#transformation-von-polen-und-nullstellen"><span class="header-section-number">8.3</span> Transformation von Polen und Nullstellen</a></li>
   <li><a href="#frequenzverzerrung---frequency-warping" id="toc-frequenzverzerrung---frequency-warping" class="nav-link" data-scroll-target="#frequenzverzerrung---frequency-warping"><span class="header-section-number">8.4</span> Frequenzverzerrung - Frequency Warping:</a></li>
   <li><a href="#prewarping" id="toc-prewarping" class="nav-link" data-scroll-target="#prewarping"><span class="header-section-number">8.5</span> Prewarping</a></li>
+  <li><a href="#filterentwurf-in-matlab" id="toc-filterentwurf-in-matlab" class="nav-link" data-scroll-target="#filterentwurf-in-matlab"><span class="header-section-number">8.6</span> Filterentwurf in Matlab</a>
+  <ul class="collapse">
+  <li><a href="#spezifikation-der-filter" id="toc-spezifikation-der-filter" class="nav-link" data-scroll-target="#spezifikation-der-filter"><span class="header-section-number">8.6.1</span> Spezifikation der Filter</a></li>
   </ul></li>
-  <li><a href="#praktische-anwendung-der-bilinear-transformation" id="toc-praktische-anwendung-der-bilinear-transformation" class="nav-link" data-scroll-target="#praktische-anwendung-der-bilinear-transformation"><span class="header-section-number">9</span> Praktische Anwendung der Bilinear-Transformation</a>
-  <ul class="collapse">
-  <li><a href="#übertragungsfunktionen-der-analogen-biquad-filter" id="toc-übertragungsfunktionen-der-analogen-biquad-filter" class="nav-link" data-scroll-target="#übertragungsfunktionen-der-analogen-biquad-filter"><span class="header-section-number">9.1</span> Übertragungsfunktionen der analogen Biquad Filter</a></li>
-  <li><a href="#analoge-filterschaltung" id="toc-analoge-filterschaltung" class="nav-link" data-scroll-target="#analoge-filterschaltung"><span class="header-section-number">9.2</span> Analoge Filterschaltung</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">9.3</span> Python</a></li>
-  <li><a href="#matlab" id="toc-matlab" class="nav-link" data-scroll-target="#matlab"><span class="header-section-number">9.4</span> MATLAB</a></li>
   </ul></li>
-  <li><a href="#dokuemtation" id="toc-dokuemtation" class="nav-link" data-scroll-target="#dokuemtation"><span class="header-section-number">10</span> Dokuemtation</a>
+  <li><a href="#implementierung" id="toc-implementierung" class="nav-link" data-scroll-target="#implementierung"><span class="header-section-number">9</span> Implementierung</a>
   <ul class="collapse">
-  <li><a href="#axi-protokoll" id="toc-axi-protokoll" class="nav-link" data-scroll-target="#axi-protokoll"><span class="header-section-number">10.1</span> AXI-Protokoll</a>
+  <li><a href="#modellierung-in-simulink" id="toc-modellierung-in-simulink" class="nav-link" data-scroll-target="#modellierung-in-simulink"><span class="header-section-number">9.1</span> Modellierung in Simulink</a>
   <ul class="collapse">
-  <li><a href="#axi4" id="toc-axi4" class="nav-link" data-scroll-target="#axi4"><span class="header-section-number">10.1.1</span> AXI4</a></li>
-  <li><a href="#axi-lite" id="toc-axi-lite" class="nav-link" data-scroll-target="#axi-lite"><span class="header-section-number">10.1.2</span> AXI-Lite</a></li>
-  <li><a href="#axi4stream" id="toc-axi4stream" class="nav-link" data-scroll-target="#axi4stream"><span class="header-section-number">10.1.3</span> AXI4‑Stream</a></li>
-  <li><a href="#axi-handshake-mechanismus" id="toc-axi-handshake-mechanismus" class="nav-link" data-scroll-target="#axi-handshake-mechanismus"><span class="header-section-number">10.1.4</span> AXI Handshake-Mechanismus</a></li>
-  <li><a href="#handshake-bei-axi4-stream" id="toc-handshake-bei-axi4-stream" class="nav-link" data-scroll-target="#handshake-bei-axi4-stream"><span class="header-section-number">10.1.5</span> Handshake bei AXI4-Stream</a></li>
-  <li><a href="#axi-stream-spezifische-signale" id="toc-axi-stream-spezifische-signale" class="nav-link" data-scroll-target="#axi-stream-spezifische-signale"><span class="header-section-number">10.1.6</span> AXI-Stream-spezifische Signale</a></li>
+  <li><a href="#direct-form-ii-transponiert-mit-pipelining" id="toc-direct-form-ii-transponiert-mit-pipelining" class="nav-link" data-scroll-target="#direct-form-ii-transponiert-mit-pipelining"><span class="header-section-number">9.1.1</span> Direct Form II Transponiert mit Pipelining</a></li>
+  <li><a href="#festkommaarithmetik" id="toc-festkommaarithmetik" class="nav-link" data-scroll-target="#festkommaarithmetik"><span class="header-section-number">9.1.2</span> Festkommaarithmetik</a></li>
+  <li><a href="#modell-und-aufbau" id="toc-modell-und-aufbau" class="nav-link" data-scroll-target="#modell-und-aufbau"><span class="header-section-number">9.1.3</span> Modell und Aufbau</a></li>
+  <li><a href="#axi4-stream-schnittstelle" id="toc-axi4-stream-schnittstelle" class="nav-link" data-scroll-target="#axi4-stream-schnittstelle"><span class="header-section-number">9.1.4</span> AXI4-Stream-Schnittstelle</a></li>
   </ul></li>
-  <li><a href="#i²s-busprotokoll-inter-ic-sound" id="toc-i²s-busprotokoll-inter-ic-sound" class="nav-link" data-scroll-target="#i²s-busprotokoll-inter-ic-sound"><span class="header-section-number">10.2</span> I²S-Busprotokoll (Inter-IC Sound)</a>
+  <li><a href="#hdl-coder-und-workflow-advisor" id="toc-hdl-coder-und-workflow-advisor" class="nav-link" data-scroll-target="#hdl-coder-und-workflow-advisor"><span class="header-section-number">9.2</span> HDL-Coder und Workflow Advisor</a>
   <ul class="collapse">
-  <li><a href="#funktionsweise-des-i²s-busses" id="toc-funktionsweise-des-i²s-busses" class="nav-link" data-scroll-target="#funktionsweise-des-i²s-busses"><span class="header-section-number">10.2.1</span> Funktionsweise des I²S-Busses</a></li>
-  <li><a href="#timing-und-synchronisation" id="toc-timing-und-synchronisation" class="nav-link" data-scroll-target="#timing-und-synchronisation"><span class="header-section-number">10.2.2</span> Timing und Synchronisation</a></li>
-  <li><a href="#aufbau-von-sender-und-empfänger-beispeil" id="toc-aufbau-von-sender-und-empfänger-beispeil" class="nav-link" data-scroll-target="#aufbau-von-sender-und-empfänger-beispeil"><span class="header-section-number">10.2.3</span> Aufbau von Sender und Empfänger (Beispeil)</a></li>
+  <li><a href="#modellvorbereitung-für-den-hdl-coder" id="toc-modellvorbereitung-für-den-hdl-coder" class="nav-link" data-scroll-target="#modellvorbereitung-für-den-hdl-coder"><span class="header-section-number">9.2.1</span> Modellvorbereitung für den HDL-Coder</a></li>
+  <li><a href="#einstellungen-vom-hdl-workflow-advisor" id="toc-einstellungen-vom-hdl-workflow-advisor" class="nav-link" data-scroll-target="#einstellungen-vom-hdl-workflow-advisor"><span class="header-section-number">9.2.2</span> Einstellungen vom HDL Workflow Advisor</a></li>
   </ul></li>
-  <li><a href="#matlab-hdl-coder" id="toc-matlab-hdl-coder" class="nav-link" data-scroll-target="#matlab-hdl-coder"><span class="header-section-number">10.3</span> Matlab: HDL-Coder</a>
+  <li><a href="#design-in-vivado" id="toc-design-in-vivado" class="nav-link" data-scroll-target="#design-in-vivado"><span class="header-section-number">9.3</span> Design in Vivado</a>
   <ul class="collapse">
-  <li><a href="#hdl-workflow-advisor" id="toc-hdl-workflow-advisor" class="nav-link" data-scroll-target="#hdl-workflow-advisor"><span class="header-section-number">10.3.1</span> HDL Workflow Advisor</a></li>
-  <li><a href="#verwendung-des-hdl-coder-zur-generierung-von-vivado-ip-cores" id="toc-verwendung-des-hdl-coder-zur-generierung-von-vivado-ip-cores" class="nav-link" data-scroll-target="#verwendung-des-hdl-coder-zur-generierung-von-vivado-ip-cores"><span class="header-section-number">10.3.2</span> Verwendung des HDL Coder zur Generierung von Vivado-IP-Cores</a></li>
-  <li><a href="#simulink-biquad-filter" id="toc-simulink-biquad-filter" class="nav-link" data-scroll-target="#simulink-biquad-filter"><span class="header-section-number">10.3.3</span> Simulink: Biquad Filter</a></li>
-  </ul></li>
-  <li><a href="#vivado" id="toc-vivado" class="nav-link" data-scroll-target="#vivado"><span class="header-section-number">10.4</span> Vivado</a>
-  <ul class="collapse">
-  <li><a href="#ip-cores" id="toc-ip-cores" class="nav-link" data-scroll-target="#ip-cores"><span class="header-section-number">10.4.1</span> IP-Cores</a></li>
-  </ul></li>
-  <li><a href="#pynq" id="toc-pynq" class="nav-link" data-scroll-target="#pynq"><span class="header-section-number">10.5</span> Pynq</a>
-  <ul class="collapse">
-  <li><a href="#pynq-z2-board" id="toc-pynq-z2-board" class="nav-link" data-scroll-target="#pynq-z2-board"><span class="header-section-number">10.5.1</span> PYNQ-Z2 Board</a></li>
+  <li><a href="#audio-codec-controller" id="toc-audio-codec-controller" class="nav-link" data-scroll-target="#audio-codec-controller"><span class="header-section-number">9.3.1</span> Audio Codec Controller</a></li>
+  <li><a href="#processing-system-ps" id="toc-processing-system-ps" class="nav-link" data-scroll-target="#processing-system-ps"><span class="header-section-number">9.3.2</span> Processing System (PS)</a></li>
+  <li><a href="#axi-direct-memory-access" id="toc-axi-direct-memory-access" class="nav-link" data-scroll-target="#axi-direct-memory-access"><span class="header-section-number">9.3.3</span> AXI Direct Memory Access</a></li>
+  <li><a href="#verbindungen-im-blockdesign" id="toc-verbindungen-im-blockdesign" class="nav-link" data-scroll-target="#verbindungen-im-blockdesign"><span class="header-section-number">9.3.4</span> Verbindungen im Blockdesign</a></li>
+  <li><a href="#vollendetes-design" id="toc-vollendetes-design" class="nav-link" data-scroll-target="#vollendetes-design"><span class="header-section-number">9.3.5</span> Vollendetes Design</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -350,7 +303,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">5. Juli 2025</p>
+      <p class="date">12. Juli 2025</p>
     </div>
   </div>
   
@@ -633,213 +586,301 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>In der praktischen Anwendung wird Prewarping typischerweise für Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist.</p>
 <p>Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate <span class="math inline">\(f_s\)</span> höher als die Eckfrequenzen <span class="math inline">\(f_d\)</span> der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.</p>
 </section>
+<section id="filterentwurf-in-matlab" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="filterentwurf-in-matlab"><span class="header-section-number">8.6</span> Filterentwurf in Matlab</h2>
+<p>Matlab biehtet eine Viehlzahl an Werkzeugen an digitale Filter zu entwerfen, zu analysieren und einzusetzen. Für den praktischen Einsatz von IIR Filtern, werden diese of als Biquad-Strukturen implementiert. Biquads sind IIR Filter 2. Ordnung, welche eine stabile und numerisch robuste Realisierung ermöglichen. Besonders komplexere Filter höherer Ordnung profetieren von diesen Eingenschaften, da diese einfach in mehrere Biquads zerlegt und kaskadiert werden können, wodurch Rundungsfehler und Instabilitäten verringert werden. MATLAB unterstützt die Arbeit mit Biquads durch Funktionen wie <em>dfilt</em> oder durch die Darstellung der Filterkoeffizienten als <em>Second-Order Sections</em> (SOS). Über die Funktion <em>tf2sos</em> lassen sich beliebige IIR-Filterstrukturen in eine Biquad-Kaskade umrechnen, was vor allem bei der Implementierung auf Hardwareplattformen wie FPGAs oder Mikrocontrollern von großem Vorteil ist.<br></p>
+<p>Der Entwurfsprozess in MATLAB folgt dabei einem klaren Ablauf. Zunächst werden die Anforderungen definiert, wie Filtertyp, Filterordnung, Grenzfrequenzen und ggf. erlaubte Ripple im Durchlass- oder Sperrbereich. Anschließend wird der Filter mit den passenden MATLAB-Funktionen entworfen. Für IIR-Filter stehen unter anderem die Funktionen <em>butter</em>, <em>cheby1</em>, <em>cheby2</em> oder <em>ellip</em> zur Verfügung. <strong>[Einfügen was genau die Funktionen machen]</strong> Alternativ können Filter auch grafisch über den <a href="https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html">Filter Designer</a> erstellt werden, der eine interaktive Visualisierung der Frequenzgänge und Pol-Nullstellen-Diagramme ermöglicht.<br></p>
+<p>Neben dem Design bietet MATLAB Tools wie freqz zur Darstellung von Amplituden- und Phasengang oder fvtool, das eine Untersuchung von Frequenzverhalten, Impulsantwort, Gruppenlaufzeit sowie Pol- und Nullstellen erlaubt. Nach dem Entwurf können Filter direkt auf digitale Signale angewendet werden. Für den Hardwareeinsatz lassen sich die berechneten Koeffizienten anschließend exportieren und beispielsweise als Biquad-Parameter in Simulink übergeben werden.<br></p>
+<section id="spezifikation-der-filter" class="level3" data-number="8.6.1">
+<h3 data-number="8.6.1" class="anchored" data-anchor-id="spezifikation-der-filter"><span class="header-section-number">8.6.1</span> Spezifikation der Filter</h3>
+<p>Für die Demonstration wurde entschieden, alle vier grundlegenden Filtertypen als Butterworth-Filter zu realisieren. Diese besitzen den Vorteil kein Ripple im Durchlass- und Sperrbereich aufzuweisen. Gerade bei der Verarbeitung von Audiosignalen können Ripple im Frequenzgang zu unerwünschten Artefakten führen. Ein möglichst glatter Amplitudenverlauf ist daher insbesondere in der Audioanwendung vom Vorteil.<br> Im direkten Vergleich zu elliptischen oder Chebyshev-Filtern weisen Butterworth-Filter bei gleicher Flankensteilheit eine höhere erforderliche Filterordnung auf. Diese höhere Ordnung würde in einer Hardwareumsetzung prinzipiell mehr Biquad-Stufen benötigen und damit mehr Ressourcen. Bei der Implementierung wurde die Filterordnung auf 2. Ordnung beschränkt. Damit reicht für jeden Filter genau eine Biquad-Stufe aus. <br> Da bei einer so niedrigen Filterordnung alle Filter, unabhängig davon ob sie als Butterworth- oder elliptischer Filter realisiert werden, ohnehin nur aus einer Biquad-Stufe bestehen, hätte die Wahl des Filtertyps keinen nennenswerten Unterschied bei den Hardwareanforderungen gemacht. Der Hauptgrund für die Entscheidung zugunsten der Butterworth-Filter liegt somit vor allem im glatten Frequenzverlauf, der für die Audiobearbeitung besonders geeignet ist.<br></p>
+<p>Bei der genauen Spezifiaktion der Filter wurde sich an dem Beispiel von <a href="https://nbviewer.org/github/spatialaudio/digital-signal-processing-lecture/blob/master/filter_design/audiofilter.ipynb#bandstop2nd">Design of Digital Audio IIR Filters</a> von Frank Schultz gehalten. Dabei ergaben sich Folgende Spezifikationen:<br></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Filter:</th>
+<th>Typ:</th>
+<th>Fc:</th>
+<th>Ordnung:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Hochpass</strong></td>
+<td>Butterworth</td>
+<td>1kHz</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>Tiefpass</strong></td>
+<td>Butterworth</td>
+<td>1kHz</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>Bandpass</strong></td>
+<td>Butterworth</td>
+<td>500Hz - 2kHz</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>Bansstop</strong></td>
+<td>Butterworth</td>
+<td>500Hz - 2kHz</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Alle Filter wurden mit dem <a href="https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html">Filter Designer</a> auf einer Samplefrequenz von 48kHz entforfen und die Koeffizienten als SOS-Matrix inklusive Gain in das Workspace exportiert.</p>
 </section>
-<section id="praktische-anwendung-der-bilinear-transformation" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Praktische Anwendung der Bilinear-Transformation</h1>
-<p>Die analogen Biquad Filter für die Anwendung der Bilineartransformation werden aus dem Experiment 4 des Analog Systems Lab Kit PRO entnommen.</p>
-<section id="übertragungsfunktionen-der-analogen-biquad-filter" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="übertragungsfunktionen-der-analogen-biquad-filter"><span class="header-section-number">9.1</span> Übertragungsfunktionen der analogen Biquad Filter</h2>
-<p><strong>Tiefpass:</strong> <span class="math inline">\(H_{TP}(s) = \frac{V_3}{V_i} = \frac{+H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot w_0^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
-<p><strong>Hochpass:</strong> <span class="math inline">\(H_{HP}(s) = \frac{V_1}{V_i} = \frac{H_0 \cdot \frac{s^2}{w_0^2}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot s^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
-<p><strong>Bandpass:</strong> <span class="math inline">\(H_{BP}(s) = \frac{V_2}{V_i} = \frac{-H_0 \cdot \frac{s}{w_0}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{-H_0 \cdot sw_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
-<p><strong>Bandsperre:</strong> <span class="math inline">\(H_{BS}(s) = \frac{V_4}{V_i} = \frac{(1 + \frac{s^2}{w_0^2 \cdot}) \cdot H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{(w_0^2 + s^2) \cdot H_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
 </section>
-<section id="analoge-filterschaltung" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="analoge-filterschaltung"><span class="header-section-number">9.2</span> Analoge Filterschaltung</h2>
+</section>
+<section id="implementierung" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Implementierung</h1>
+<p>Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Das Ziel ist die Erstellung eines Vivado-kompatiblen IP-Cores, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch die Verwendung des modellbasierten Workflows wird die Entwicklung beschleunigt und die Hardwareintegration standardisiert. <br></p>
+<section id="modellierung-in-simulink" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="modellierung-in-simulink"><span class="header-section-number">9.1</span> Modellierung in Simulink</h2>
+<p>Für die Umsetzung in Simulink wurde der in der DSP HDL Toolbox enthaltene Block <a href="https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html">Biquadratic IIR (SOS) filter</a> verwendet. Der Vorteil dieses Blocks gegenüber einer direkten Nachbildung der Direct Form II liegt darin, dass er speziell für die HDL-Codegenerierung optimiert ist. Er bringt bereits eine integrierte Steuerung des valid-Signals mit, was ein notwendiges Element für die AXI-Stream-Implementierung ist. Außerdem sind die Filterstrukturen bereits gepipelined, wodurch der Filter eine höhere maximale Taktfrequenz erreicht. <br> Die Probleme bei der Umsetzung einer Direct-Form-Struktur lagen hauptsächlich darin, dass bei der Bitstream-Generierung in Vivado die Timing-Anforderungen nicht eingehalten werden konnten und die Taktfrequenz des Filters entsprechend reduziert werden musste. Wird die Taktfrequenz zu niedrig gewählt, verlängert sich die Zeit der Filterung entsprechend.<br> Hinzu kam, dass ein einzelner Filter in dieser Form relativ viele Ressourcen auf dem FPGA belegte. Eine direkte Nachbildung der Direct Form II ohne korrektes Pipelining und ohne weitere Optimierungen ist sehr ineffizient.<br> Aus diesem Grund fiel die Entscheidung zugunsten einer vorgefertigten Lösung aus der DSP HDL Toolbox. Trotzdem musste die Taktfrequenz letztlich auf 50 MHz begrenzt werden, da bei 100 MHz ebenfalls keine vollständige Einhaltung der Timings erreicht werden konnte.<br></p>
+<section id="direct-form-ii-transponiert-mit-pipelining" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="direct-form-ii-transponiert-mit-pipelining"><span class="header-section-number">9.1.1</span> Direct Form II Transponiert mit Pipelining</h3>
+<p>Der Filter-Block wurde auf Direct Form II Transponiert eingestellt, da diese Struktur, genau wie die klassische Direct Form II, nur eine Verzögerungskette benötigt und somit weniger Register erforderlich sind. Die transponierte Form verschiebt die Verzögerungselemente auf die Rückkopplungspfade, wodurch die kritische Pfadlänge verkürzt wird. Gleichzeitig bietet sie Vorteile in Bezug auf die numerische Stabilität und ist robuster gegenüber Quantisierungseffekten.<br> Ergänzend ist dieser Filterblock schon gepipelined. Beim <strong>Pipelining</strong> werden innerhalb der Struktur gezielt Register in die kombinatorischen Signalwege eingefügt. Dies trennt lange Logikpfade auf und verkürzt damit die kritische Pfadlänge, was zu einer deutlich höheren maximalen Taktfrequenz führt. Rückkopplungswege, die bei IIR-Filtern eine Herausforderung darstellen, können so auch bei hoher Verarbeitungsgeschwindigkeit stabil betrieben werden.<br> Gerade in Anwendungen, in denen mehrere Biquads kaskadiert werden, kann so eine stabile und hardwarefreundliche Filterarchitektur aufgebaut werden.<br></p>
+</section>
+<section id="festkommaarithmetik" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="festkommaarithmetik"><span class="header-section-number">9.1.2</span> Festkommaarithmetik</h3>
+<p>Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßig keine native Gleitkomma-Hardware besitzen. Für alle Signalpfade wird der Typ fixdt(1,32,16) eingesetzt, ein vorzeichenbehafteter 32-Bit-Wert mit 16 Nachkommabits. Der Typ wurde sowohl in Simulink als auch in der späteren Hardwareimplementierung experimentell getestet und hat sich dabei als optimal herausgestellt. Er bietet ein gutes Gleichgewicht zwischen Rechengenauigkeit und Ressourceneffizienz, wobei Quantisierungsfehler minimal gehalten werden konnten. Aus diesem Grund wird dieser Datentyp für alle relevanten Signalpfade verwendet.<br></p>
+</section>
+<section id="modell-und-aufbau" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="modell-und-aufbau"><span class="header-section-number">9.1.3</span> Modell und Aufbau</h3>
+<p>Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/Biquad.png" class="img-fluid figure-img"></p>
-<figcaption>Analoge Biquad Schaltung</figcaption>
+<p><img src="images/Matlab_Simulink_subsystem_v2.png" class="img-fluid figure-img"></p>
+<figcaption>Simulink Filter: Subsystem</figcaption>
 </figure>
 </div>
-<p>Um diese analogen Filter Bilinear zu transformieren stehen MATLAB sowie Python zur Verfügung, um die Durchführung der Substitutionen durchzuführen.</p>
-</section>
-<section id="python" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="python"><span class="header-section-number">9.3</span> Python</h2>
-<p>Python mit scipy.signal</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>numz, denz <span class="op">=</span> bilinear(nums ,dens ,fs <span class="op">=</span> fs)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> freqs, bilinear, freqz</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Für die Bilinear-Transformation wird die Scipy-Bibliothek mit dem Signal-Modul verwendet. Aus diesem Modul werden die Funktionen freqs, bilinear und freqz importiert. Für weitere Berechnungen wird Numpy als np importiert und für die Möglichkeit zum Plotten wird Matplotlib.pyplot als plt importiert.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">100e-9</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>w0 <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (R <span class="op">*</span> C)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="fl">4.7</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> <span class="dv">44100</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Aus dem Schaltbild der analogen Filterschaltung werden dessen Parameter entnommen. Die Kreisfrequenz <span class="math inline">\(w_0\)</span> berechnet sich durch <span class="math inline">\(w_0 = \frac{1}{R C}\)</span>. Der Wert <span class="math inline">\(H_0\)</span> beschreibt den Gainfaktor der Filterschaltungen und wird auf 1 gesetzt, wodurch dieser nicht mehr im Code aufkommt. Die digitalen Filter sollen für Audioanwendungen verwendet werden, weshalb die Wahl von 44,1 kHz als Abtastfrequenz getroffen wurde. Durch die Wahl der Abtastefrequenz von 44,1 kHz wird kein Prewarping benötigt, da die Frequenzverzerrung vernachlässigbar ist.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tiefpass Zähler</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TP_nums <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>, w0<span class="op">**</span><span class="dv">2</span>]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Hochpass Zähler</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>HP_nums <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandpass Zähler</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>BP_nums <span class="op">=</span>  [<span class="dv">0</span>, <span class="op">-</span>w0, <span class="dv">0</span>]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandstop Zähler</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>BS_nums <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">0</span>, w0<span class="op">**</span><span class="dv">2</span>]</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Nenner</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>dens <span class="op">=</span> [<span class="dv">1</span>, w0<span class="op">/</span>Q, w0<span class="op">**</span><span class="dv">2</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Die Zähler und Nenner der Übertragungsfunktionen der analogen Filter werden als Listen übernommen. Die Listenelemente entsprechen den Koeffizienten in absteigender Potenzordnung: <span class="math inline">\([s^2, s^1, s^0]\)</span>. Die Nenner der vier Filter sind identisch und müssen nur einmal übernommen werden.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bilineartransformation</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tiefpass</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>TP_numz, TP_denz <span class="op">=</span> bilinear(TP_nums, dens, fs <span class="op">=</span> fs)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Hochpass</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>HP_numz, HP_denz <span class="op">=</span> bilinear(HP_nums, dens, fs <span class="op">=</span> fs)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandpass</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>BP_numz, BP_denz <span class="op">=</span> bilinear(BP_nums, dens, fs <span class="op">=</span> fs)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandstop</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>BS_numz, BS_denz <span class="op">=</span> bilinear(BS_nums, dens, fs <span class="op">=</span> fs)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Die Bilineartransformation wird durch <code>bilinear</code> durchgeführt, indem dieser Funktion die Zähler- und Nennerlisten der jeweiligen Filter mit der Abtastfrequenzen <span class="math inline">\(f_s\)</span> übergeben werden. Die Funktion liefert die Zähler- und Nennerkoeffizienten der digitalen Übertragungsfunktion.</p>
+<p>Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filterlogik klar von zusätzlichen Test- und Steuerungselementen zu trennen. Um den Datentyp durchgängig korrekt zu setzen, wird ein Data Type Conversion-Block vor dem Filter-Subsystem eingefügt. Der Filter selbst ist so eingestellt, dass die Koeffizienten den Datentyp des Eingangssignals übernehmen. Die genauen Einstellungen sehen wie Folgt aus:<br></p>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/digital_vs_analog.png" class="img-fluid figure-img"></p>
-<figcaption>Vergleich zwischen analogen und digitalen Frequenz- und Phasengang</figcaption>
+<p><img src="images\Biquad_settings1.png" class="img-fluid figure-img"></p>
+<figcaption>Biquad Filter: Main</figcaption>
 </figure>
 </div>
-</section>
-<section id="matlab" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="matlab"><span class="header-section-number">9.4</span> MATLAB</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">numz</span><span class="op">,</span> <span class="va">denz</span>] <span class="op">=</span> <span class="va">bilinear</span>(<span class="va">nums</span> <span class="op">,</span><span class="va">dens</span> <span class="op">,</span><span class="va">fs</span> <span class="op">,</span><span class="va">fp</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Der Prozess der Bilinear-Transformation in MATLAB ist vom Verlauf identisch zu dem in Python, jedoch bietet MATLAB den Vorteil der direkten Einbindung vom Prewarping.</p>
-<p>Die direkte Anwendung des Prewarpings wird mit dem Parameter <code>fp</code> vorgenommen, welcher als Prewarping-Punkt dient. MATLAB berechnet automatisch die erforderliche Anpassung anhand der Abtastfrequenz <code>fs</code> und dem Prewarping-Punkt <code>fp</code> bei der Transformation der Filterkoeffizienten. Zur Demonstration wird eine <code>fp</code> von 1600 Hz gewählt:</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/prewarped_digital_vs_analog.png" class="img-fluid figure-img"></p>
-<figcaption>Vergleich zwischen anaolgen und digitalen (Prewarped) Frequenz- und Phasengang</figcaption>
+<p><img src="images\Biquad_settings2.png" class="img-fluid figure-img"></p>
+<figcaption>Biquad Filter: Datatypes</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;9.1
+</figcaption>
+</figure>
+</div>
+<p>Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen sowie den Datentyp des Eingangssignals über einen Data Type Conversion-Block anpassen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Matlab_Simulink_outside_v2.png" class="img-fluid figure-img"></p>
+<figcaption>Simulink Filter</figcaption>
 </figure>
 </div>
 </section>
-</section>
-<section id="dokuemtation" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Dokuemtation</h1>
-<p>Hier werden Informationen zu DSP, IIR-Filter, Biquad-Strukturen, Matlab HDL-Coder + Simulink, Vivado, IP-Cores, AXI, I2S, (I2C), Pynq und Pynq-Z2 Board gesammelt und dokumentiert. <br> Passende Bilder werden zu einem späteren Zeitpunkt aus den Quellen eingesetzt.</p>
-<p><strong>Wandele die <em>md</em> in eine <em>qmd</em> für Quarto um!</strong></p>
-<section id="axi-protokoll" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="axi-protokoll"><span class="header-section-number">10.1</span> AXI-Protokoll</h2>
-<p>Quelle 1: <a href="https://www.amd.com/de/products/adaptive-socs-and-fpgas/intellectual-property/axi.html#tabs-ceeab8b2b8-item-766c793914-tab">AMD: AMBA® AXI4 Interface Protocol</a><br></p>
-<p>Quelle 2: <a href="https://www.arm.com/architecture/system-architectures/amba/amba-specifications">ARM: AMBA Specifications</a><br> - Quelle 2.1: <a href="https://developer.arm.com/documentation/ihi0022/e">AMBA AXI and ACE Protocol Specification</a> - Quelle 2.2: <a href="https://developer.arm.com/documentation/ihi0051/a">AMBA 4 AXI4-Stream Protocol Specification</a></p>
-<p>Als standardisierte Schnittstelle für die Kommunikation in FPGA- und SoC-Designs dieht die AMBA AXI4 Interface Protocol IP (LogiCORE™). Es wird von Xilinx (jetzt AMD) in seiner IP-Architektur hauptsächlich der AXI4-Standard verwendet, der auf dem von Arm definierten AMBA AXI4-Protokoll basiert. Unterstützt werden dabei die drei Hauptvarianten: AXI4 für Hochgeschwindigkeits-Datenübertragungen mit Burst-Unterstützung, AXI4-Lite für einfache Steuerregister-Kommunikation ohne Burst-Funktion, sowie AXI-Stream für kontinuierliche Datenströme ohne Adressierung. <br></p>
-<p>Die AXI IP umfasst eine Vielzahl von IP-Blöcken, die auf AXI basieren, darunter etwa AXI SmartConnect (für automatische Verbindung und Routing), AXI Interconnect, AXI BRAM Controller, AXI GPIO und viele mehr. Diese sind darauf ausgelegt, in <strong>Vivado-Designs</strong> verwendet zu werden und bieten umfassende Kompatibilität mit dem AXI4-Protokoll.<br> In modernen Xilinx/Vivado-Designs, einschließlich solcher mit dem Pynq-Z2 Board wird die AXI4-Familie (einschließlich AXI4-Lite und AXI-Stream) verwendet.</p>
-<section id="axi4" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="axi4"><span class="header-section-number">10.1.1</span> AXI4</h3>
-<p>Der AXI4-Standard ist eine Weiterentwicklung von AXI3, optimiert für Mehrfach‑Mas­t­er‑Interconnects. Wesentliche Merkmale sind: - Burst‑Transfers mit bis zu 256 Bits - Unterstützung von Quality‑of‑Service‑Signalisierung (QoS) - Mehrere Adressregion‑Schnittstellen möglich</p>
-</section>
-<section id="axi-lite" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="axi-lite"><span class="header-section-number">10.1.2</span> AXI-Lite</h3>
-<p>Eine vereinfachte Variante von AXI4, ausgelegt für Steuer‑Register‑Interfaces. Merkmale: - Alle Übertragungen haben eine maximale Burst-Länge von 1 Bit - Alle Zugriffe habe die selbe länge wie die Datenleitung - Keine Unterstützung von exklusiven Zugriffen</p>
-</section>
-<section id="axi4stream" class="level3" data-number="10.1.3">
-<h3 data-number="10.1.3" class="anchored" data-anchor-id="axi4stream"><span class="header-section-number">10.1.3</span> AXI4‑Stream</h3>
-<p>Protokoll für unidirektionale Datenströme (Master → Slave) mit minimalem Leitungsaufwand. Merkmale: - Einzeln- und Mehrfach-Stream-Unterstützung über gemeinsame Leitungen - Verschiedene Datenbreiten innerhalb eines Interconnects - Ideal für implementierung in FPGAs</p>
-</section>
-<section id="axi-handshake-mechanismus" class="level3" data-number="10.1.4">
-<h3 data-number="10.1.4" class="anchored" data-anchor-id="axi-handshake-mechanismus"><span class="header-section-number">10.1.4</span> AXI Handshake-Mechanismus</h3>
-<p>Der Handshake-Mechanismus wie er in Quelle 2.1 beschrieben wird. <br> Jeder Kanal nutzt ein VALID/READY-Handshakesystem: - VALID vom Sender (Master) - READY vom Empfänger (Slave) - Ein Transfer findet nur statt, wenn beide gleichzeitig HIGH sind.</p>
-<p>Der Sender darf <strong>nicht auf READY warten</strong>, bevor er VALID aktiviert. Der Sender <strong>muss VALID so lange halten</strong>, bis der Handshake abgeschlossen ist. Der Empfänger darf READY auch vor VALID setzen, muss aber nicht. <br> Diese Bedingungen gelten für: - Write/Read Address - Write/Read Data - Write Response - sind auch für den AXI4-Stream übertragbar.</p>
-</section>
-<section id="handshake-bei-axi4-stream" class="level3" data-number="10.1.5">
-<h3 data-number="10.1.5" class="anchored" data-anchor-id="handshake-bei-axi4-stream"><span class="header-section-number">10.1.5</span> Handshake bei AXI4-Stream</h3>
-<p>Der Transfer basiert auf dem TVALID/TREADY-Handschlag: - <strong>TVALID</strong> <em>(Master)</em>: signalisiert, dass gültige Daten anliegen. - <strong>TREADY</strong> <em>(Slave)</em>: signalisiert, dass Daten übernommen werden können. - Daten werden übertragen, wenn beide gleichzeitig HIGH sind. - Der <em>Master</em> <strong>muss VALID</strong> setzen, auch wenn TREADY noch nicht aktiv ist. - Der <em>Slave</em> <strong>darf TREADY</strong> verzögern, muss aber bei Empfang HIGH setzen</p>
-</section>
-<section id="axi-stream-spezifische-signale" class="level3" data-number="10.1.6">
-<h3 data-number="10.1.6" class="anchored" data-anchor-id="axi-stream-spezifische-signale"><span class="header-section-number">10.1.6</span> AXI-Stream-spezifische Signale</h3>
-<p>Neben reset und clk benötigt der AXI-Steam mindestes 3 Signale damit dieser richtig Funktioniert. Je nach spezifikation und Anwendung stehen noch 6 Weitere zur verfügung. - TVALID: Daten sind gültig und bereit zur Übertragung - TREADY: Empfänger kann Daten übernehmen - TDATA: Datenleitung</p>
-<p>Das Protokoll unterstützt: - Byte Streams – einfache Übertragung von Daten-/Nullbytes - Continuous Aligned/Unaligned Streams – ohne Zwischenbytes oder mit beliebiger Ausrichtung - Sparse Streams – viele Daten- und Positionsbytes gemischt</p>
+<section id="axi4-stream-schnittstelle" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="axi4-stream-schnittstelle"><span class="header-section-number">9.1.4</span> AXI4-Stream-Schnittstelle</h3>
+<p>Die Integration der Filterstruktur in ein FPGA-System erfolgt über eine AXI4-Stream-Schnittstelle, die sich durch ihren einfachen und unidirektionalen Datenfluss auszeichnet. Der zugrunde liegende Handshake-Mechanismus basiert auf den Signalen TVALID und TREADY. Ein Transfer erfolgt nur, wenn beide Signale gleichzeitig aktiv sind. <br> Der Sender (Master) setzt TVALID sobald Daten bereitstehen, und der Empfänger (Slave) signalisiert mit TREADY, dass dieser bereit ist Daten zu empfangen. Der Sender darf <strong>nicht auf READY warten</strong>, bevor er VALID aktiviert. Der Sender <strong>muss VALID so lange halten</strong>, bis der Handshake abgeschlossen ist. Der Empfänger darf READY auch vor VALID setzen, muss aber nicht.<br> Die Verwendung von AXI4-Stream erlaubt es, mehrere Datenströme mit unterschiedlichen Datenbreiten über denselben Interconnect zu übertragen. Dadurch wird die Einbindung in Vivado Block Designs erleichtert, da AXI-basierte IP-Blöcke nahtlos miteinander verbunden werden können.<br></p>
 </section>
 </section>
-<section id="i²s-busprotokoll-inter-ic-sound" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="i²s-busprotokoll-inter-ic-sound"><span class="header-section-number">10.2</span> I²S-Busprotokoll (Inter-IC Sound)</h2>
-<p>Quelle: <a href="https://www.nxp.com/docs/en/user-manual/UM11732.pdf">NXP: I2S bus specification</a></p>
-<p>Der I²S-Bus ist ein schlanker, synchroner 3-Leiter-Bus, der speziell für hochpräzise digitale Stereo-Audioübertragung entwickelt wurde. Er ermöglicht eine flexible Wortlänge, standardisiert das Timing, reduziert Verdrahtungsaufwand und lässt sich leicht in FPGA-, DSP- oder Mikrocontroller-Umgebungen integrieren. Die klare Trennung von Takt, Daten und Kanalsteuerung macht ihn zuverlässig und gut skalierbar für moderne Audioanwendungen.</p>
-<section id="funktionsweise-des-i²s-busses" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="funktionsweise-des-i²s-busses"><span class="header-section-number">10.2.1</span> Funktionsweise des I²S-Busses</h3>
-<p>Der I²S-Bus arbeitet voll-duplex und synchron, das bedeutet, die Übertragung erfolgt im Takt des Serial-Clock-Signals (SCK) und in beide Richtungen, wobei ein Gerät als Controller (Takt- und WS-Geber) fungiert und das andere als Target (Empfänger oder untergeordneter Sender). - Taktquelle: Der Controller generiert das Taktsignal (SCK) und das Word Select-Signal (WS). - Datenübertragung: Der Sender stellt die Daten auf der seriellen Daten-Leitung (SD) bereit, sobald WS wechselt. Empfänger lesen die Daten synchron zur steigenden Flanke von SCK ein. - Stereoübertragung: I²S überträgt abwechselnd linken und rechten Kanal, wobei WS = 0 den linken und WS = 1 den rechten Kanal kennzeichnet. - Wortlängen: Die Wortlänge (z. B. 16, 24 oder 32 Bit) ist flexibel. Es muss nicht zwingend bekannt sein, wie viele Bits gesendet oder empfangen werden, da die Position des MSB fix ist und zusätzliche Bits ignoriert oder aufgefüllt werden können.</p>
+<section id="hdl-coder-und-workflow-advisor" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="hdl-coder-und-workflow-advisor"><span class="header-section-number">9.2</span> HDL-Coder und Workflow Advisor</h2>
+<p>Für die Überführung des in Simulink entwickelten Filtermodells in eine hardwaretaugliche Form kann der <a href="https://de.mathworks.com/products/hdl-coder.html">HDL Coder</a> von MathWorks eingesetzt. Dieser dient dazu, aus einem Simulink-Modell oder MATLAB-Algorithmus automatisch synthesefähigen HDL-Code zu generieren, der sich anschließend auf Zielplattformen implementieren lässt. Damit entfällt die Notwendigkeit, VHDL- oder Verilog-Code manuell zu schreiben und anzupassen.<br> Der HDL Coder kann den gesamten Entwurfsablauf auf Basis eines modellbasierten Designs abbilden. Hierfür werden HDL-kompatible Blöcke verwendet, welche speziell darauf ausgelegt, bei der späteren Übersetzung in Hardware eine korrekte Signalverarbeitung zu gewährleisten.<br> Über den HDL Workflow Advisor wird die automatisierte Codegenerierung durchgeführt. Bei der Nutzung werden schrittweise alle erforderlichen Arbeitsschritte, von der Überprüfung des Modells auf HDL-Tauglichkeit bis zur Konfiguration der Zielplattform und der Schnittstellen ausgeführt. So wird zu Anfang festgelegt, für welche Hardware das Design bestimmt ist und ob der generierte IP-Core über eine AXI4-Stream- oder AXI4-Lite-Schnittstelle angebunden werden soll. <br> Im Workflow Advisor wird der Hardware-Zielworkflow eingerichtet, die Ein- und Ausgänge des Simulink-Modells werden mit HDL-I/O-Ports oder AXI-Ports verknüpft, und es können weitere Optionen wie Pipelining oder die Umsetzung fester Wortlängen über Fixed-Point-Arithmetik eingestellt werden. Nach der Konfiguration wird der HDL-Code generiert, inklusive aller Constraints und optionaler Testbenches.<br></p>
+<p>Für die Implementierung hier, wird nach der erfolgreichen Codegenerierung, ein Vivado-kompatibler IP-Core erzeugt, der in einem IP-Repository gespeichert wird. In Vivado kann dieser IP-Core anschließend ohne weitere manuelle Anpassungen in ein Block Design integriert werden. Die Schnittstellenanbindung über AXI4-Stream stellt dabei sicher, dass der Filter problemlos mit dem restlichen FPGA-System kommunizieren kann.<br> Die Verwendung des HDL Coders zusammen mit dem HDL Workflow Advisor ist insbesondere dann vorteilhaft, wenn wenig Erfahrung mit der manuellen HDL-Entwicklung vorliegt oder wenn eine schnelle und nachvollziehbare Prototypenerstellung gefragt ist. Die strukturierte Vorgehensweise reduziert das Fehlerrisiko, erleichtert die Wiederverwendbarkeit und sorgt dafür, dass alle Schnittstellen-Anforderungen frühzeitig berücksichtigt werden. So lassen sich selbst komplexe Signalverarbeitungsblöcke wie ein IIR-Biquad-Filter mit AXI4-Stream-Anbindung hardwaregerecht umsetzen.<br></p>
+<section id="modellvorbereitung-für-den-hdl-coder" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="modellvorbereitung-für-den-hdl-coder"><span class="header-section-number">9.2.1</span> Modellvorbereitung für den HDL-Coder</h3>
+<p>Damit das Simulink-Modell für den HDL-Coder verwendet werden kann, müssem, neben den HDL-Coder kompatiblen Blöcken, einige Einstellungen in Simulink selbst dirchgeführt werden.<br> Dieses Setupt lässt ich im Comand Window in Matlab austomatisch gestallten, mit der Voraussetzung, dass Vivado instaliert ist. Für dieses Projekt wird Vivado 2022.1 verwendet, dies ist die aktuellste Version von Vivado welche von Pynq unterstützt wird. Diese Information stammen aus dem <a href="https://pynq.readthedocs.io/en/latest/changelog.html#version-3-0-0">Pynq: Change Log</a>.<br></p>
+<p>Das Setup in Simulink lässt sich mit der Funktion <a href="https://de.mathworks.com/help/hdlcoder/ref/hdlsetup.html"><em>hdlsetup(modelname)</em></a> ausführen. Diese Funktion konfiguriert das geöffnete Modell für den HDL-Workflow, indem sie notwendige Pfade und Einstellungen für den HDL Coder ergänzt. Sie bereitet Simulink gezielt für die Codegenerierung und FPGA-Implementierung vor.<br> Die Funktion muss pro Modell nur einmalig ausgeführt werden. Nach erfolgreicher Ausführung wird das Simulink-Modell typischerweise durch einen roten Rahmen markiert, ein Hinweis darauf, dass es für die HDL-Codegenerierung vorbereitet ist.<br></p>
+<p>Die Funktion <a href="https://de.mathworks.com/help/hdlcoder/gs/toolbox-setup.html#btp_lw0"><em>hdlsetuptoolpath(path)</em></a> konfiguriert den Pfad zu externen Synthese-Tools, die für Codegenerierung benötigt werden. Dieser Schritt ist erforderlich, damit die HDL Workflow Advisor-Umgebung später auf die notwendigen Werkzeuge zugreifen und einen IP-Core generieren kann.<br> Der Befehl sollte vor dem Öffnen des HDL Workflow Advisor ausgeführt werden, andernfalls kann der Toolpfad nicht korrekt übernommen werden. Es empfiehlt sich daher, diesen Befehl in ein MATLAB-Skript zu integrieren, um eine konsistente und automatisierte Projektumgebung sicherzustellen.<br></p>
 </section>
-<section id="timing-und-synchronisation" class="level3" data-number="10.2.2">
-<h3 data-number="10.2.2" class="anchored" data-anchor-id="timing-und-synchronisation"><span class="header-section-number">10.2.2</span> Timing und Synchronisation</h3>
-<p>Die Daten werden typischerweise eine Taktperiode nach dem Wechsel von WS bereitgestellt, sodass der Empfänger genug Zeit hat, das vorherige Wort zu verarbeiten und sich auf das neue vorzubereiten. Das Timing ist auf minimale Latenz und hohe Synchronität ausgelegt. Der Empfänger muss alle Daten auf der steigenden Flanke von SCK abtasten. Die genaue Zeitvorgabe für Setup- und Hold-Zeiten ist im Protokoll spezifiziert, ebenso wie Mindest- und Maximalzeiten für Taktzyklen.</p>
+<section id="einstellungen-vom-hdl-workflow-advisor" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="einstellungen-vom-hdl-workflow-advisor"><span class="header-section-number">9.2.2</span> Einstellungen vom HDL Workflow Advisor</h3>
+<p>Der <a href="https://de.mathworks.com/help/hdlcoder/ug/overview-of-workflows-in-hdl-workflow-advisor.html">HDL Workflow Advisor</a> wird hier eingesetzt, um aus dem Simulink-Modell einen AXI4-Stream-fähigen IP-Core zu generieren. Im Folgenden werden die wichtigsten Einstellungen beschrieben, die für die Erstellung und Konfiguration des IP-Cores vorgenommen wurden.<br></p>
+<section id="set-target-device-and-synthesis-tool" class="level4" data-number="9.2.2.1">
+<h4 data-number="9.2.2.1" class="anchored" data-anchor-id="set-target-device-and-synthesis-tool"><span class="header-section-number">9.2.2.1</span> 1.1 Set Target Device and Synthesis Tool</h4>
+<p>Im ersten Schritt werden im HDL Workflow Advisor die grundlegenden Parameter für die Zielhardware festgelegt. Als <strong>Target Workflow</strong> wird <em>IP Core Generation</em> ausgewählt, wodurch der Workflow Advisor für die Erstellung eines eigenständigen IP-Cores konfiguriert wird. Die <strong>Target Platform</strong> ist auf <em>Generic Xilinx Platform</em> eingestellt, es wird also keine boardspezifische Plattform gewählt, sondern eine generische Xilinx-Zielumgebung genutzt.<br> Als <strong>Synthesis Tool</strong> kommt <em>Xilinx Vivado</em> in der Version 2022.1 zum Einsatz. Damit wird definiert, dass die Synthese, die Implementierung und die spätere IP-Integration in einem Vivado-Projekt erfolgen. Unter <strong>Family</strong>, <strong>Device</strong>, <strong>Package</strong> und <strong>Speed</strong> sind die Werte <em>Zynq</em>, <em>xc7z020</em>, <em>clg400</em> und <em>-1</em> gesetzt. Diese Einstellungen entsprechen den Anforderungen des PYNQ-Z2 Boards. Die Werte für Package und Speed-Grade wurden dabei automatisch erkannt und übernommen.<br> Anschließend wird der Zielpfad angegeben, an dem die generierte IP gespeichert werden soll. Auf diese Weise ist sichergestellt, dass der IP-Core später direkt in Vivado eingebunden werden kann.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/HDL_Workflow_TargetDevice.png" class="img-fluid figure-img"></p>
+<figcaption>HDL Workflow: Target Device</figcaption>
+</figure>
+</div>
 </section>
-<section id="aufbau-von-sender-und-empfänger-beispeil" class="level3" data-number="10.2.3">
-<h3 data-number="10.2.3" class="anchored" data-anchor-id="aufbau-von-sender-und-empfänger-beispeil"><span class="header-section-number">10.2.3</span> Aufbau von Sender und Empfänger (Beispeil)</h3>
-<ul>
-<li>Transmitter (z. B. ein A/D-Wandler) enthält ein Schieberegister, das bei jedem Taktbit das nächste Datenbit über SD ausgibt. WS steuert, ob es sich um den linken oder rechten Kanal handelt.</li>
-<li>Receiver (z. B. ein DAC) nutzt ebenfalls Schieberegister oder synchronisierte Latches, um die empfangenen Bits bei jedem Takt einzulesen. Nach jedem kompletten Wort wird das Register zurückgesetzt und ein neues Wort beginnt.</li>
-</ul>
+<section id="set-target-interface" class="level4" data-number="9.2.2.2">
+<h4 data-number="9.2.2.2" class="anchored" data-anchor-id="set-target-interface"><span class="header-section-number">9.2.2.2</span> 1.2 Set Target Interface</h4>
+<p>In diesem Schritt werden die Ein- und Ausgänge des Simulink-Modells den Schnittstellen der AXI-Stream-Plattform zugewiesen. Die Option <strong>Processor/FPGA Synchronization</strong> ist auf <em>Free running</em> gesetzt, da die spätere Anwendung als kontinuierlicher Datenstrom (Streaming) ausgelegt ist.<br> Die Übersicht in der Tabelle bietet zusätzlich einen guten Überblick über die zugewiesenen Datentypen der Ports. Bei den Signalen In1 und Out1 ist erkennbar, dass der zuvor über einen Data Type Conversion-Block eingestellte Festkommadatentyp übernommen wurde.<br> Wichtig ist außerdem, dass die Ein- und Ausgänge für das Valid-Signal (In2 und Out2) den Datentyp boolean besitzen, da dies der AXI-Stream-Konvention entspricht.<br> Für den Ausgang Out1 kann über die Schaltfläche Options zusätzlich die Größe des Ausgangspuffers konfiguriert werden. Standardmäßig ist dieser auf 1024 Bits eingestellt. Die größe des Ausgangspuffers wurde auf 2^20 eingestellt. Wichtig ist es die Einstellung des Ausgangspuffers zu mekren, da dieses später die Buffergröße der <em>DMA</em> Übertragung festlegt und nicht unter- oder überschritten werden darf. Wenn der Ausgangspuffer der Filter-IP zu klein gewählt wird, muss das Eingangssignal in viele kleine Datenblöcke unterteilt werden. Der IIR-Filter muss sich dann für jeden Block neu einschwingen, da keine Zustände zwischen den Datenblöcke übernommen werden. Dieses wiederholte Einschwingen kann dazu führen, dass Hintergrundrauschen und numerische Störungen verstärkt werden, was sich in einer inkonsistenten Lautstärke und einem zunehmend hörbaren Rauschen bemerkbar macht. <br></p>
+<p>Der Haken bei <strong>Generate default AXI4 slave interface</strong> sollte entfernt werden, sofern er gesetzt ist. Andernfalls wird automatisch eine AXI4-Lite-Schnittstelle erzeugt. Diese wird üblicherweise für die Registersteuerung verwendet.<br> Da die hier entwickelte IP jedoch für einen kontinuierlichen Datenstrom (Streaming) ausgelegt ist, ist eine Steuer-Schnittstelle nicht erforderlich. Sie würde das Design unnötig verkomplizieren und zusätzlichen Ressourcenverbrauch verursachen.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/HDL_Workflow_TargetInterface.png" class="img-fluid figure-img"></p>
+<figcaption>HDL Workflow: Target Interface</figcaption>
+</figure>
+</div>
+</section>
+<section id="set-target-frequency" class="level4" data-number="9.2.2.3">
+<h4 data-number="9.2.2.3" class="anchored" data-anchor-id="set-target-frequency"><span class="header-section-number">9.2.2.3</span> 1.3 Set Target Frequency</h4>
+<p>An dieser Stelle wird die Zielfrequenz der zu generierenden IP festgelegt. Ursprünglich war diese auf 100 MHz gesetzt. Da jedoch bei der späteren Bitstream-Erzeugung die Timing-Anforderungen nicht erfüllt werden konnten, wurde die Frequenz auf 50 MHz halbiert. Diese reduzierte Taktfrequenz zeigte im Design stabile Timingergebnisse und wurde daher für die weitere Implementierung beibehalten.<br></p>
+</section>
+<section id="check-model-settings" class="level4" data-number="9.2.2.4">
+<h4 data-number="9.2.2.4" class="anchored" data-anchor-id="check-model-settings"><span class="header-section-number">9.2.2.4</span> 2.1 Check Model Settings</h4>
+<p>In diesem Schritt werden die verwendeten Simulink-Blöcke daraufhin überprüft, ob sie für die HDL-Codegenerierung geeignet sind. Zusätzlich kann ein <strong>Industry Standard Check</strong> durchgeführt werden, der das Modell hinsichtlich Industriestandards bewertet. Dabei werden häufig Warnungen ausgegeben, insbesondere bezüglich der Namenskonventionen, wenn diese nicht den typischen Industriestandards entsprechen.<br> Für die hier verfolgte Anwendung ist es nicht erforderlich, den Industry Standard Check zu aktivieren, und es wird empfohlen, diesen nicht auszuführen, um unnötige Warnmeldungen zu vermeiden.<br></p>
+</section>
+<section id="set-hdl-options" class="level4" data-number="9.2.2.5">
+<h4 data-number="9.2.2.5" class="anchored" data-anchor-id="set-hdl-options"><span class="header-section-number">9.2.2.5</span> 3.1 Set HDL Options</h4>
+<p>Hier werden die Einstellungen für die Codegenerierung getroffen. Im Bereich <strong>Optimization/General</strong> wurden die Einstellungen größtenteils unverändert übernommen. Dabei ist es jedoch wichtig, darauf zu achten, dass die Option <em>Enable-based</em> constraints deaktiviert ist. Diese Funktion erzeugt zusätzliche Timing-Beschränkungen auf Basis von Enable-Signalen, was insbesondere bei einfacheren Designs oder kontinuierlich laufenden IPs zu unerwünschten Timing-Problemen führen kann.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/HDL_Workflow_HDL_Optiones_opti_general.png" class="img-fluid figure-img"></p>
+<figcaption>HDL Workflow: HDL Options/ Optimization/ General</figcaption>
+</figure>
+</div>
+<p>Im Abschnitt <strong>Optimization/Pipelining</strong> blieben die Voreinstellungen ebenfalls weitgehend bestehen. Die Option <em>Adaptive Pipelining</em> kann dabei aktiviert werden. Diese Einstellung ermöglicht normalerweise eine automatische Optimierung der Pipeline-Struktur im Datenpfad. Da jedoch ein fertiger Block aus der DSP HDL Toolbox verwendet wurde, der intern bereits gepipelined ist, kann diese Option in diesem Fall auch deaktiviert bleiben.<br></p>
+<p>Während der Entwicklung wurde Adaptive Pipelining zunächst genutzt, um eine direkte Nachbildung der Direct-Form-Struktur zu pipelinen. Diese automatische Pipelining-Methode reichte jedoch nicht aus, um das Modell ausreichend zu optimieren.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/HDL_Workflow_HDL_Optiones_opti_pipe.png" class="img-fluid figure-img"></p>
+<figcaption>HDL Workflow: HDL Options/ Optimization/ Pipelining</figcaption>
+</figure>
+</div>
+<p>Die <strong>Global Settings</strong> wurden größtenteils automatisch gesetzt. Dennoch sollte unbedingt geprüft werden, dass der <em>Reset type</em> auf <em>Synchronous</em> und der <em>Reset asserted level</em> auf <em>Active-high</em> eingestellt ist. Eine inkorrekte Reset-Konfiguration kann andernfalls beim Generieren der IP zu Warnungen oder Fehlern im Abschlussbericht führen.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/HDL_Workflow_HDL_Optiones_global.png" class="img-fluid figure-img"></p>
+<figcaption>HDL Workflow: HDL Options/ Global Settings</figcaption>
+</figure>
+</div>
+</section>
+<section id="generate-rtl-code-and-ip-core" class="level4" data-number="9.2.2.6">
+<h4 data-number="9.2.2.6" class="anchored" data-anchor-id="generate-rtl-code-and-ip-core"><span class="header-section-number">9.2.2.6</span> 3.2 Generate RTL Code and IP Core</h4>
+<p>Hier lässt sich der zu generierende IP-Core benennen und eine Versionsnummer vergeben. Für die IP sollte ein aussagekräftiger Name gewählt werden, damit sie später in Vivado leicht auffindbar ist.<br></p>
+<p>Um die IP zu generieren und alle vorgenommenen Einstellungen anzuwenden und zu überprüfen, klickt man mit der rechten Maustaste auf den Schritt <strong>3.2 Generate RTL Code and IP Core</strong> und wählt <em>Run to Selected Task</em> aus. Dadurch werden alle vorherigen Schritte automatisch durchlaufen. Tritt dabei ein Fehler auf oder wird eine Prüfung nicht bestanden, wird der Vorgang an der entsprechenden Stelle unterbrochen.<br></p>
+<p>Nach kurzer Generierungszeit wird die IP erstellt und ein Bericht geöffnet. Dieser enthält sowohl eventuelle Warnungen als auch den generierten HDL-Code. Der vollständige Report gibt zusätzlich einen Überblick über die verwendeten Ressourcen, beispielsweise zur Nutzung von LUTs, Flip-Flops oder Multiplikatoren.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/HDL_Workflow_Generate.png" class="img-fluid figure-img"></p>
+<figcaption>HDL Workflow: Generate RTL Code and IP Core</figcaption>
+</figure>
+</div>
+<p>Für jeden Filter wird eine eigene IP generiert. Dabei wird jeweils dasselbe Simulink-Modell verwendet, lediglich die Koeffizienten werden angepasst.<br></p>
 </section>
 </section>
-<section id="matlab-hdl-coder" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="matlab-hdl-coder"><span class="header-section-number">10.3</span> Matlab: HDL-Coder</h2>
-<p>Quelle 1: <a href="https://de.mathworks.com/products/hdl-coder.html">Matlab: HDL Coder</a><br> Quelle 2: <a href="https://de.mathworks.com/help/hdlcoder/index.html">Matlab: HDL Coder Dokumentation</a><br></p>
-<p>Der HDL Coder von MathWorks ist ein Werkzeug zur automatisierten Codegenerierung, das die Entwicklung digitaler Schaltungen für FPGAs, SoCs und ASICs aus hochabstrakten Modellen ermöglicht. Dabei wird aus MATLAB-Funktionen, Simulink-Modellen oder Stateflow-Charts automatisch synthesefähiger VHDL- oder Verilog-Code erzeugt. Dies erleichtert die Implementierung hardwareoptimierter Algorithmen erheblich.<br></p>
-<p>Der HDL Coder eignet sich insbesondere für modellbasiertes Design und ermöglicht die Generierung von Hardware Description Language (HDL)-Code, der auf eine Vielzahl von Zielplattformen – darunter Xilinx Vivado – ausgerichtet ist. Für die zielgerichtete Entwicklung stellt das Tool den sogenannten HDL Workflow Advisor bereit, der den Nutzer schrittweise durch den gesamten Generierungsprozess führt.<br></p>
-<p>Typischerweise umfasst dieser Prozess die folgenden Schritte: - <strong>Modellierung:</strong> Zunächst wird ein digitales System, beispielsweise ein Filter oder Steueralgorithmus, in MATLAB oder Simulink modelliert. - <strong>Workflow-Setup:</strong> Der HDL Workflow Advisor wird gestartet, wobei das Zielsystem (z. B. Vivado), die Zielsprache (VHDL oder Verilog) und zusätzliche Einstellungen wie die Erzeugung einer AXI4-Schnittstelle konfiguriert werden können. - <strong>Codegenerierung:</strong> Der HDL Coder erzeugt daraufhin den HDL-Quellcode, inklusive zugehöriger Testbenches und optionaler Fixed-Point-Konvertierungen. - <strong>IP-Export:</strong> Für FPGA-Designs besteht die Möglichkeit, direkt einen Vivado-kompatiblen IP-Core mit AXI4- oder AXI4-Lite-Schnittstelle zu erzeugen. Dieser kann in ein bestehendes Vivado Block Design integriert werden. - <strong>Verifikation:</strong> Die generierte Logik kann innerhalb von Simulink getestet oder in einer HDL-Co-Simulation mit externen Tools überprüft werden.</p>
-<p>Zusätzlich bietet der HDL Coder Funktionen zur Flächen- und Timing-Schätzung, was eine frühe Bewertung der Ressourcennutzung ermöglicht. Die Integration fester und gleitender Punktarithmetik, die Einhaltung von Codierungsrichtlinien sowie die Möglichkeit zur Erstellung von HDL-Testbenches machen den HDL Coder zu einem leistungsfähigen Werkzeug in der digitalen Hardwareentwicklung.</p>
-<section id="hdl-workflow-advisor" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="hdl-workflow-advisor"><span class="header-section-number">10.3.1</span> HDL Workflow Advisor</h3>
-<p>Quelle: <a href="https://de.mathworks.com/help/hdlcoder/ug/overview-of-workflows-in-hdl-workflow-advisor.html">HDL Workflow Advisor</a><br></p>
-<p>Der HDL Workflow Advisor ist ein interaktives Werkzeug in MATLAB/Simulink, das Anwender schrittweise durch den gesamten Prozess der HDL-Codegenerierung und FPGA-Integration führt. Er ermöglicht es, ein Simulink-Modell systematisch für die Hardwarebeschreibung vorzubereiten, zu analysieren und in einen synthetisierbaren VHDL- oder Verilog-Code umzuwandeln. Dabei bietet der Advisor strukturierte Workflows für verschiedene Einsatzzwecke wie die IP-Core-Generierung, die Simulation über FPGA-in-the-Loop (FIL) oder die Integration in Simulink Real-Time FPGA-I/O-Systeme.<br></p>
-<p>Zu den zentralen Funktionen gehören die Überprüfung des Modells auf HDL-Kompatibilität, das Festlegen von Zielplattformen (z. B. Xilinx Vivado), das Konfigurieren von Interface-Signalen und Taktdomänen sowie das Generieren von HDL-Code mit anschließender Erstellung eines IP-Cores. Der HDL Workflow Advisor unterstützt außerdem die automatische Einbindung in externe Synthesetools durch geeignete Toolchain-Zuweisung.<br></p>
-<p>Durch seine geführte Oberfläche ist der HDL Workflow Advisor besonders hilfreich für Anwender, die wenig Erfahrung mit der manuellen HDL-Entwicklung haben, aber dennoch ein bestehendes Simulink-Modell effizient in ein FPGA-basiertes System überführen möchten.<br></p>
 </section>
-<section id="verwendung-des-hdl-coder-zur-generierung-von-vivado-ip-cores" class="level3" data-number="10.3.2">
-<h3 data-number="10.3.2" class="anchored" data-anchor-id="verwendung-des-hdl-coder-zur-generierung-von-vivado-ip-cores"><span class="header-section-number">10.3.2</span> Verwendung des HDL Coder zur Generierung von Vivado-IP-Cores</h3>
-<p>Der HDL Coder ermöglicht es, aus einem in Simulink modellierten digitalen System automatisch einen Vivado-kompatiblen IP-Core zu erzeugen. Dieser kann anschließend direkt in einem Xilinx-FPGA-Projekt verwendet werden, z. B. im Vivado Block Design. Der Prozess ist modellbasiert und unterstützt die automatisierte Codegenerierung, Testbench-Erstellung sowie die Verpackung als IP-Core. <br></p>
-<p><strong>Systemmodellierung in Simulink</strong><br> Zunächst wird das gewünschte System (z. B. ein Signalverarbeitungssystem wie ein Filter oder Regler) mithilfe von Simulink-Blöcken modelliert. Dabei werden bevorzugt HDL-kompatible Blöcke verwendet, also solche, die für die HDL-Codegenerierung geeignet sind. Auch Stateflow-Diagramme und MATLAB-Funktionen können eingebunden werden.</p>
-<p><strong>HDL Workflow Advisor</strong> <br> Über den HDL Workflow Advisor wird der Hardware-Zielworkflow eingerichtet. In einem geführten Ablauf kann der Benutzer: - das Zielsystem (Target) auswählen (z. B. Xilinx Vivado), - die gewünschte Schnittstelle definieren (z. B. AXI4 oder AXI4-Lite), - und die IP-Core-Generierung aktivieren.</p>
-<p><strong>Definition der Schnittstellen</strong> <br> Die Ein- und Ausgänge des Simulink-Modells werden mit HDL-I/O-Ports oder AXI-Schnittstellen verknüpft. Für eine Integration in Vivado ist besonders die Auswahl von AXI4-Lite oder AXI4-Stream relevant, da sie die Standard-IP-Kommunikation mit dem Zynq-SoC ermöglichen.</p>
-<p><strong>Codegenerierung</strong><br> Der HDL Coder erzeugt aus dem Modell automatisch: - synthesefähigen HDL-Code (VHDL oder Verilog), - die zugehörigen Constraints, - und eine IP-Core-Struktur, die in Vivado eingebunden werden kann.</p>
-<p><strong>Export als Vivado-kompatibler IP-Core</strong><br> Der generierte IP-Core wird in einem IP-Repository gespeichert. In Vivado kann dieses Repository eingebunden und der Core per Drag-and-Drop in das Block Design eingefügt werden. Die AXI4-Anbindung ermöglicht dabei eine direkte Kommunikation mit dem Zynq-Processing-System.</p>
-<p><strong>Das Ergebnis</strong><br> Am Ende des Workflows erhält der Entwickler einen vollständig paketierten IP-Core, der direkt mit Vivado kompatibel ist, über AXI-Schnittstellen steuerbar ist und in einem FPGA-System (z. B. auf dem Pynq-Z2 Board) eingesetzt werden kann, ohne manuell HDL schreiben zu müssen.<br> Diese Funktionalität ist besonders nützlich für die schnelle Prototypenentwicklung, das automatische Design Space Exploration und die Implementierung modellbasierter Steuer- oder Signalverarbeitungssysteme auf FPGAs.<br></p>
+<section id="design-in-vivado" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="design-in-vivado"><span class="header-section-number">9.3</span> Design in Vivado</h2>
+<p>Bei der Erstellung eines Vivado-Projekts für den Pynq-Z2 muss sichergestellt werden, dass das entsprechende Board im Vivado-Board-Auswahlmenü verfügbar ist. Sollte das Pynq-Z2 nicht angezeigt werden, auch nicht nach einer Aktualisierung, müssen die zugehörigen Board-Files manuell ergänzt werden. Diese lassen sich direkt aus dem offiziellen <a href="https://github.com/Xilinx/PYNQ/tree/master">PYNQ GitHub Repository</a> herunterladen. Bei einer frischen Installation von Vivado 2022.1 ist das Board in der Regel bereits enthalten.<br> Für die Aufnahme und Wiedergabe von Audio über das Pynq-Board wurde prinzipiell der Audioanteil aus dem Base-Overlay übernommen und die nicht benötigten Elemente entfernt. Die Einstellungen der Blöcke wurden ebenfalls übernommen. Auch die Constraints wurden so angepasst, dass die Audiofunktionalität erhalten blieb. Die Constraints weisen unter anderem den Benötigten internen Pis Namen zu, damit diese besser nachvollzogen werden können. Es ist notwendig, dass die Namen an dem Ein- und Ausgängen aus den Constraints übernommen werden. <br> Für den Betrieb des Audio-Codecs auf dem Pynq-Z2 sind spezielle IP-Cores von Pynq notwendig. Diese IPs sowie auch die Constraints befinden sich ebenfalls im <a href="https://github.com/Xilinx/PYNQ/tree/master">PYNQ GitHub Repository</a> und müssen in das Projekt eingebunden werden.<br> Vorgefertigte sowie auch eigens erstellte IP-Cores lassen sich in Vivado unter <em>Project Manager/Settings/IP/Repository</em> in das Projekt einbinden.<br></p>
+<p>Teile des Designs orientieren sich an den offiziellen Tutorials von <strong>Cathal McCabe</strong> , die im AMD PYNQ-Forum verfügbar sind. Besonders hilfreich waren die Anleitungen <a href="https://discuss.pynq.io/t/tutorial-creating-a-hardware-design-for-pynq/145">Creating a new hardware design for PYNQ</a> und <a href="https://discuss.pynq.io/t/tutorial-pynq-dma-part-1-hardware-design/3133">PYNQ DMA</a>. Teile dieser Tutorials, insbesondere grundlegende Strukturkomponenten, wurden angepasst übernommen.<br></p>
+<section id="audio-codec-controller" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="audio-codec-controller"><span class="header-section-number">9.3.1</span> Audio Codec Controller</h3>
+<p>Der <em>audio_codec_controller</em> ist eine eigene IP von Pynq und generiert die vom Audio-Codec benötigten Signale sowie steuert den I2S Daten-Stream. Die Namen des Ein- und Ausgänge sowie der IP selbst müssen übereinstimmen, sonst greift der im Pynq enthaltene Python-Modul nicht bzw. es muss sonst der neue Name an den Treiber übergeben werden. <br> Die <em>Codec Address (addr1,addr0)</em> sollten in den Blockeinstellungen auf <em>11</em> bereits voreingestellt sein.<br> Während das ursprüngliche Overlay einen Clocking Wizard verwendet, um aus einem 100 MHz-Systemtakt ein 10 MHz-Signal zu generieren, wird in der neuen Variante das 10 MHz-Taktsignal direkt aus dem Processing System (PS) bereitgestellt, inklusive eines synchronisierten Reset-Signals.<br> Diese Methode bietet den Vorteil, dass keine zusätzlichen Clock-Domain-Warnungen auftreten.<br></p>
+<p>Dieses Design bildet die Grundlage in den nachfolgenden Entwicklungen.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Reff_Design_v2.png" class="img-fluid figure-img"></p>
+<figcaption>Reference Design</figcaption>
+</figure>
+</div>
 </section>
-<section id="simulink-biquad-filter" class="level3" data-number="10.3.3">
-<h3 data-number="10.3.3" class="anchored" data-anchor-id="simulink-biquad-filter"><span class="header-section-number">10.3.3</span> Simulink: Biquad Filter</h3>
-<p>Quelle: <a href="https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html">Biquadratic IIR (SOS) filter</a><br></p>
-<p>Der Block Biquad Filter aus der DSP HDL Toolbox von MathWorks stellt einen HDL-optimierten digitalen IIR-Filter (Infinite Impulse Response) dar. Der Filter basiert auf sogenannten Second-Order Sections (SOS), also biquadratischen Filterabschnitten, die in der digitalen Signalverarbeitung häufig verwendet werden, um gezielt Frequenzanteile eines Eingangssignals zu verstärken oder zu dämpfen.</p>
-<p><strong>Funktionalität</strong><br> Der HDL-BiquadFilter ist für die Implementierung auf Hardwareplattformen wie FPGAs und ASICs optimiert. Er unterstützt die kontinuierliche Verarbeitung eingehender Datenströme mithilfe eines oder mehrerer kaskadierter Filterabschnitte. Die Berechnungsgrundlage des Filters bilden dabei vom Benutzer definierte Koeffizienten, die als Matrizen übergeben werden. Die Numerator-Koeffizienten (b) und Denominator-Koeffizienten (a) bestimmen dabei das Frequenzverhalten der jeweiligen Filterstufe.<br> Typische Anwendungsbereiche dieses Filters liegen in der Echtzeit-Audiosignalverarbeitung, Kommunikationssystemen oder Regelungstechnik – insbesondere dort, wo ressourcenschonende, aber leistungsfähige Filterlösungen erforderlich sind.<br></p>
-<p><strong>Filterarchitekturen</strong><br> Der Block unterstützt verschiedene interne Filterstrukturen, die unterschiedliche Optimierungsschwerpunkte aufweisen: - <strong>Direct Form II:</strong> kompakte Darstellung mit geringem Ressourcenbedarf - <strong>Direct Form II Transposed:</strong> numerisch stabilere Variante für bestimmte Koeffizientenverteilungen - <strong>Pipelined Feedback Form:</strong> für höhere Taktfrequenzen optimiert - <strong>Direct Form I Fully Serial:</strong> besonders resourcenschonend; arbeitet mit serieller Datenverarbeitung und zusätzlichem Steuersignal ready</p>
-<p>Diese Varianten ermöglichen es dem Entwickler, gezielt zwischen Flächenbedarf, Durchsatz und Latenz zu optimieren, abhängig von den Anforderungen der Zielhardware.</p>
-<p><strong>Anwendung</strong><br> Die Verwendung des BiquadFilter-Blocks erfolgt typischerweise in folgenden Schritten: - Einbindung in eine Simulink-Modellierungsumgebung oder als MATLAB-Systemobjekt. Festlegung der Filterstruktur und Definition der Fixpunkt-Datentypen für Eingabe, Koeffizienten und Recheneinheiten. - Übergabe der Koeffizienten als Matrizen, bei Mehrfachsektionen erfolgt die Kaskadierung automatisch durch die Struktur des Blocks. - <strong>Datenverarbeitung:</strong> Eingangsdaten (dataIn) werden zusammen mit einem Gültigkeitssignal (validIn) dem Filter zugeführt. Die gefilterten Ausgabedaten erscheinen verzögert am Ausgang (dataOut) mit entsprechendem Ausgabesignal (validOut). Bei seriellen Architekturen ist zudem das Signal ready relevant, das angibt, wann neue Eingangsdaten entgegengenommen werden können. - <strong>Latenzanalyse:</strong> Zur Einschätzung der Systemverzögerung kann das Systemobjekt getLatency verwendet werden, um die Anzahl an Taktzyklen zwischen Eingabe und Ausgabe zu ermitteln.</p>
-<p>Der BiquadFilter bietet eine effiziente Möglichkeit, digitale IIR-Filter für Hardwareanwendungen in MATLAB und Simulink zu entwickeln und zu testen. Durch die direkte Unterstützung für HDL-Codegenerierung und die Wahl zwischen verschiedenen optimierten Filterarchitekturen stellt dieser Block ein vielseitiges Werkzeug zur Verfügung, das sich für den Einsatz in Echtzeitsystemen mit begrenzten Ressourcen besonders gut eignet.</p>
+<section id="processing-system-ps" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="processing-system-ps"><span class="header-section-number">9.3.2</span> Processing System (PS)</h3>
+<p>Da das Design später über ein Jupyter Notebook gesteuert werden soll, genügt eine reine RTL-Implementierung nicht. Stattdessen wird das ZYNQ Processing System (PS) benötigt. Dieses übernimmt mehrere zentrale Aufgaben. Zum einen steuert es den Audio-Codec über die entsprechenden Registerzugriffe, zum anderen generiert es wichtige Taktsignale für das gesamte Design. Zudem ist der PS notwendig, um die Filter über einen AXI Direct Memory Access (AXI-DMA) anzubinden. <br> Diese AXI-DMA-Verbindung ermöglicht es, gezielt Daten zwischen dem Arbeitsspeicher des PS und den in der PL (Programmable Logic) implementierten Filtern zu übertragen. Dadurch kann das Jupyter Notebook über den PS gezielt Daten an die Filter senden und deren Ausgaben empfangen.<br></p>
+<p>Damit der PS die korrekten Takt- und Schnittstellensignale erzeugt, muss er im Vivado-Design entsprechend konfiguriert werden. Die Konfiguration erfolgt über einen Doppelklick auf den PS-Block im Blockdesign, woraufhin der entsprechende Konfigurationsdialog geöffnet wird.<br></p>
+<section id="ps-pl-cinfiguration" class="level4" data-number="9.3.2.1">
+<h4 data-number="9.3.2.1" class="anchored" data-anchor-id="ps-pl-cinfiguration"><span class="header-section-number">9.3.2.1</span> PS-PL Cinfiguration</h4>
+<p>Um Daten über die AXI-DMA-Schnittstellen an die Filter übergeben zu können, werden zusätzliche Anschlüsse am Processing System (PS) benötigt. Der PS besitzt intern zwei physische Zugänge zum DRAM, wobei sich jeweils zwei Ports (HP0/1 und HP2/3) einen gemeinsamen Zugriff teilen. Für dieses Design werden lediglich zwei High-Performance-Ports benötigt, weshalb HP0 und HP2 aktiviert werden. Die Datenbreite (Data Width) kann auf dem Standardwert von 64 Bit belassen werden.<br></p>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\Vivado_PS_Settings_PS_PL_Config.png" class="img-fluid figure-img"></p>
+<figcaption>Vivado:PS Settings/ PS-PL-Configuration</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\Biquad_settings2.png" class="img-fluid figure-img"></p>
+<figcaption>Vivado:PS Settings/ Clock Configuration</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;9.2
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="clock-cinfiguration" class="level4" data-number="9.3.2.2">
+<h4 data-number="9.3.2.2" class="anchored" data-anchor-id="clock-cinfiguration"><span class="header-section-number">9.3.2.2</span> Clock Cinfiguration</h4>
+<p>Alle benötigten Takt-Signale werden direkt im Processing System (PS) generiert und den jeweiligen Komponenten zugewiesen. Der Audio-Codec benötigt ein 10 MHz Taktsignal, während der Audio Codec Controller ein 100 MHz Taktsignal erfordert. Andere Frequenzen werden von dieser IP nicht unterstützt, was in Vivado durch eine entsprechende Warnung angezeigt wird. Die Filter-IPs wurden auf 50 MHz ausgelegt und benötigen daher ebenfalls ein passendes 50 MHz-Taktsignal. <br></p>
+</section>
+<section id="peripheral-io-pins" class="level4" data-number="9.3.2.3">
+<h4 data-number="9.3.2.3" class="anchored" data-anchor-id="peripheral-io-pins"><span class="header-section-number">9.3.2.3</span> Peripheral I/O Pins</h4>
+<p>Für die Kommunikation mit dem Audio Codec Controller wird eine I²C-Verbindung benötigt. Diese Schnittstelle lässt sich in der PS-Konfiguration unter Peripheral I/O Pins aktivieren, indem der entsprechende Haken gesetzt wird. In diesem Fall wurde ISC 1 ausgewählt, da dieser Bus auch Base-Overlay für den Datenaustausch mit dem Audio Codec verwendet wurde.<br></p>
 </section>
 </section>
-<section id="vivado" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="vivado"><span class="header-section-number">10.4</span> Vivado</h2>
-<p>Quelle 1: <a href="https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html?utm_source=chatgpt.com">AMD Vivado™ Design Suite</a><br> Quelle 2: <a href="https://docs.amd.com/r/2022.1-English/ug910-vivado-getting-started">Vivado Design Suite User Guide: Getting Started</a><br></p>
-<p>Die Vivado Design Suite ist die offizielle Entwicklungsplattform von AMD für die Erstellung digitaler Logiksysteme auf FPGAs, adaptive SoCs und 3D ICs der aktuellen AMD/Xilinx-Produktlinien. Sie wurde entwickelt, um moderne, hochintegrierte Schaltungen effizient zu entwerfen, zu analysieren und zu implementieren, unter anderem für die Baureihen Zynq-7000, Zynq UltraScale+, Versal Adaptive SoCs und Virtex UltraScale+. <br></p>
-<p>Vivado bietet einen umfassenden, speicherbasierten Design-Workflow mit einem Fokus auf Produktivität, hohe Designqualität (QoR) und beschleunigter Implementierung. Der integrierte Ansatz ersetzt klassische toolbasierte Entwicklungsumgebungen wie Xilinx ISE vollständig. <br></p>
-<p>Die Vivado Design Suite kombiniert eine Vielzahl leistungsfähiger Funktionen: - <strong>Design Entry:</strong> Unterstützung von HDL-Quelltexten (VHDL, Verilog), grafischem Schaltungsentwurf sowie High-Level-Modellierung über IP-Blöcke. - <strong>IP-Integration:</strong> Der Vivado IP Integrator ermöglicht die einfache Verwendung vorgefertigter und benutzerdefinierter IPs in einem grafischen Block-Design-Editor. - <strong>Synthese und Implementierung:</strong> Werkzeuge zur automatisierten Erzeugung der FPGA-Netzlisten und deren physikalischer Platzierung und Verdrahtung. - <strong>Bitstream-Generierung:</strong> Erstellung der Konfigurationsdateien zur Programmierung des Zielgeräts. - <strong>Hardware-Debugging:</strong> Analysefunktionen zur Laufzeit, einschließlich integrierter Logic Analyzer- und ILA-Cores. - <strong>Automatisierung und Scripting:</strong> Vollständige Unterstützung von Tcl-Skripten zur Steuerung des Design-Flows.</p>
-<p><strong>Anwendungsbereiche</strong><br> Vivado richtet sich an Entwickler, die digitale Systeme für adaptive Plattformen realisieren darunter Signalverarbeitung, Kommunikation, Embedded Systeme, Steuerungen oder KI-Anwendungen. Es unterstützt sowohl klassische RTL-Entwicklung als auch IP-basierte und modellbasierte Methoden.<br></p>
-<p>Die Suite erlaubt sowohl manuelle als auch automatisierte Abläufe, um FPGA-Designs mit hoher Taktrate und geringer Leistungsaufnahme umzusetzen. Darüber hinaus kann Vivado mit externen Tools wie MATLAB/Simulink (z. B. über HDL Coder) kombiniert werden, um IP-Cores automatisch zu generieren und nahtlos in das Vivado-Projekt zu integrieren.<br></p>
-<section id="ip-cores" class="level3" data-number="10.4.1">
-<h3 data-number="10.4.1" class="anchored" data-anchor-id="ip-cores"><span class="header-section-number">10.4.1</span> IP-Cores</h3>
-<p>Quelle 1: <a href="https://docs.amd.com/r/2022.1-English/ug895-vivado-system-level-design-entry?tocId=Qo7sDmUYKQJ8QDtPFnnfzA">Vivado Design Suite User Guide: System-Level Design Entry</a><br> Quelle 2: <a href="https://docs.amd.com/r/2022.1-English/ug896-vivado-ip">Vivado Design Suite User Guide : Designing with IP</a><br></p>
-<p>In der Vivado Design Suite von AMD/Xilinx nehmen sogenannte IP-Cores (Intellectual Property Cores) eine zentrale Rolle bei der Entwicklung komplexer digitaler Systeme ein. Dabei handelt es sich um wiederverwendbare, vorkonfigurierte Hardwaremodule, die in strukturierter Form in FPGA- und SoC-Designs integriert werden können. IP-Cores ermöglichen es, standardisierte Funktionen, wie Speicherzugriffe, Kommunikation, Signalverarbeitung oder Steuerlogik – modular und effizient zu realisieren, ohne dass diese Komponenten jedes Mal neu entworfen werden müssen. <br></p>
-<p>Ein IP-Core in Vivado umfasst mehrere strukturierte Bestandteile, dazu gehören insbesondere: - Eine XCI-Datei (.xci), welche die spezifische Konfiguration und Parametrierung des IP-Cores speichert. - HDL-Quelltextdateien, die die funktionale Implementierung des Cores in VHDL oder Verilog enthalten. - optional auch Synthese- und Implementierungsdaten (.dcp), Constraint-Dateien (.xdc) und Simulationsmodelle und Instanziierungsvorlagen (.veo, .vho)</p>
-<p>Diese Dateien werden nach der Konfiguration automatisch vom Vivado-Tool erzeugt und im Projekt verwaltet.<br></p>
-<p><strong>Verwendung und Integration</strong><br> IP-Cores in Vivado lassen sich auf zwei Hauptwege in ein Design integrieren: - Über den <strong>IP Integrator (Blockdesign-Umgebung)</strong>, können IP-Cores per Drag-and-Drop in ein Blockdesign eingefügt, miteinander verbunden und angepasst werden. Vivado übernimmt dabei die automatische Zuordnung von Schnittstellen (z. B. AXI), Takten und Resets. - Alternativ ist es möglich, manuell IP-Cores direkt über HDL-Quellcode in ein Design einzubinden. Die dazu erforderlichen Templates werden bei der IP-Erzeugung automatisch bereitgestellt.</p>
-<p>Die Verwaltung erfolgt zentral über den <strong>IP Sources View</strong>, der einen Überblick über alle im Projekt enthaltenen IP-Module und deren Abhängigkeiten bietet.</p>
-<p><strong>Anpassung und Wiederverwendung</strong><br> Ein wesentlicher Vorteil des IP-basierten Entwicklungsansatzes ist die Parametrierbarkeit und Wiederverwendbarkeit. IP-Cores lassen sich über Benutzeroberflächen oder Tcl-Skripte individuell konfigurieren, beispielsweise hinsichtlich Datenbreite, Pipelining, Speichergröße oder unterstützter Protokolle. Änderungen an IP-Cores führen automatisch zur Regenerierung aller zugehörigen Dateien. Darüber hinaus können eigene Designbestandteile mithilfe des Vivado IP Packagers in benutzerdefinierte IP-Cores umgewandelt und erneut verwendet werden.</p>
+<section id="axi-direct-memory-access" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="axi-direct-memory-access"><span class="header-section-number">9.3.3</span> AXI Direct Memory Access</h3>
+<p>Die Anbindung der Filter-IP an das Processing System (PS) erfolgt über AXI Direct Memory Access (AXI-DMA). Dieser ermöglicht Daten direkt zwischen dem Speicher des Processing Systems (PS) und der Programmable Logic (PL) zu übertragen, ohne dass der Prozessor selbst aktiv Daten verschieben muss.<br> Da im Design vier Filter parallel verwendet werden, werden auch vier AXI-DMA-Instanzen benötigt, die alle identisch konfiguriert werden. Eine konsistente Namenskonvention ist hierbei praktisch, da im Jupyter Notebook später über diese Namen auf die jeweiligen DMA-Schnittstellen zugegriffen wird.<br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Vivado_PL_axi_DMA_Config_v2.png" class="img-fluid figure-img"></p>
+<figcaption>AXI-DMA Config</figcaption>
+</figure>
+</div>
+<p>Bei der Konfiguration ist besonders darauf zu achten, dass sowohl <em>Enable Scatter Gather Engine</em> als auch <em>Enable Micro DMA</em> deaktiviert werden, da diese Funktionen in diesem Design nicht benötigt werden. <em>Allow unaligned transfers</em> sollte ebenfalls deaktiviert bleiben, da diese Funktion auf dem Pynq nicht unterstützt wird. Die <em>Width of Buffer Length Register</em> wird auf den maximalen Wert von 26 gesetzt. Auch wenn dieser Wert die Anforderungen der Filter übersteigt, wurde er aus Gründen der Robustheit und zur Vermeidung zukünftiger Einschränkungen bewusst beibehalten. Ein großer Puffer verhindert zudem, dass Fehler fälschlicherweise dem DMA zugeordnet werden, obwohl sie tatsächlich im Filter auftreten.<br></p>
+<p>Die <em>Address Width</em> bleibt auf dem Standardwert von 32 Bit. Die <em>Stream Data Width</em> wird entsprechend der Konfiguration der <em>HP0/HP2-Ports</em> des PS auf 64 Bit gesetzt. Auch hier gilt Lieber großzügig dimensionieren als zu knapp, was ebenfalls aus der Entwicklungsphase übernommen wurde.<br></p>
+<p>Die <em>Max Burst Size</em> wird auf 16 Bit gesetzt, obwohl die Burst-Funktion im eigentlichen Betrieb nicht verwendet wird. Für den <em>Write Channel</em> wird die Einstellung auf <em>Auto</em> belassen, wodurch automatisch die Parameter des Read-Channels übernommen werden.<br></p>
+</section>
+<section id="verbindungen-im-blockdesign" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="verbindungen-im-blockdesign"><span class="header-section-number">9.3.4</span> Verbindungen im Blockdesign</h3>
+<p>Vivado bietet die Möglichkeit, Blöcke automatisch anhand von vorgeschlagenen Verbindungen miteinander zu verbinden. Bei standardisierten Schnittstellen sind diese Vorschläge in der Regel korrekt und können den Designprozess beschleunigen. Dennoch sollte stets überprüft werden, ob die vorgeschlagene Verbindung tatsächlich der gewünschten entspricht.<br> Bei Verwendung dieser Funktion fügt Vivado oft automatisch unterstützende Blöcke wie beispielsweise einen <em>AXI Interconnect</em> hinzu, was zur besseren Übersichtlichkeit und Strukturierung des Designs beiträgt.<br></p>
+<p>Eine Ausnahme bilden jedoch die Ein- und Ausgänge, die über die Constraints-Datei (XDC) definiert sind. Für diese Signale funktioniert die automatische Verbindung nur eingeschränkt oder fehlerhaft. Daher wird empfohlen, diese Verbindungen manuell vorzunehmen, um Fehler im späteren Designverlauf zu vermeiden.<br></p>
+<section id="s_axi-s_axi_lite" class="level4" data-number="9.3.4.1">
+<h4 data-number="9.3.4.1" class="anchored" data-anchor-id="s_axi-s_axi_lite"><span class="header-section-number">9.3.4.1</span> S_AXI (S_AXI_LITE)</h4>
+<p>Dabei handelt es sich um die <em>AXI-Lite-Schnittstelle</em>, die für die Registersteuerung benötigt wird. Sowohl der <em>Audio-Codec-Controller</em> als auch die <em>AXI-DMA-Module</em> besitzen jeweils eine solche Verbindung. Diese werden allerdings auf unterschiedliche Clock-Frequenzen eingestellt, da sie unterschiedliche Anforderungen an die Taktung stellen<br> Der <em>Audio Codec Controller</em> wird auf 100MHz eingestellt und der <em>Axi-DMA</em> auf 50MHz.<br></p>
+</section>
+<section id="high-performace-slave-interface" class="level4" data-number="9.3.4.2">
+<h4 data-number="9.3.4.2" class="anchored" data-anchor-id="high-performace-slave-interface"><span class="header-section-number">9.3.4.2</span> High performace slave interface</h4>
+<p>Dies sind die Verbindungen an den HP0/2-Ports des Processing Systems (PS), über die die Daten zwischen dem BRAM und dem AXI-DMA übertragen werden. Diese Anschlüsse werden ausschließlich für die AXI-DMA-Kommunikation genutzt. Der <em>M_AXI_MM2S</em>-Port ist der <em>Read Channel</em>, und <em>M_AXI_S2MM</em> ist der <em>Write Channel</em>. Da die AXI-DMA-Module als Master fungieren, sind sie in der Lage, sowohl Lese- als auch Schreibzugriffe durchzuführen. Der PS übernimmt hierbei die Slave-Rolle.<br> Diese Verbindungen werden bei allen vier AXI-DMA-Instanzen auf die gleiche Weise hergestellt.<br> An den <em>HP0</em> wird der <em>M_AXI_MM2S</em> angeschlossen und an den <em>HP2</em> der <em>M_AXI_2SMM</em>, beide auf 50MHz.</p>
+</section>
+<section id="axi-stream" class="level4" data-number="9.3.4.3">
+<h4 data-number="9.3.4.3" class="anchored" data-anchor-id="axi-stream"><span class="header-section-number">9.3.4.3</span> AXI-Stream</h4>
+<p>Die Filter sowie die AXI-DMA-Module besitzen jeweils einen <em>S_AXIS_2SMM </em> bzw. <em>AXI4_Stream-Slave</em> (Slave) und einen <em>M_AXIS_MM2S</em> bzw. <em>AXI4_Stream-Master</em> (Master) Anschluss. Da es sich beim AXI-Stream um eine gerichtete Verbindung handelt, ist es entscheidend, dass immer ein Master-Port mit einem Slave-Port verbunden wird.<br> Diese Verbindungen müssen manuell vorgenommen werden, da Vivado diese Zuordnungen nicht automatisch erkennen kann. Nachdem die Datenpfade korrekt verbunden wurden, schlägt Vivado in der Regel automatisch eine Verbindung für die zugehörigen Taktsignale und Reset-Signale vor.<br> Wichtig ist dabei, das richtige Taktsignal auszuwählen, in diesem Fall 50 MHz, da die Filter in dieser Taktfrequenz ausgelegt sind.<br> <strong>[Bild einfüger welcher die Verbindungen genau zeigt]</strong></p>
 </section>
 </section>
-<section id="pynq" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="pynq"><span class="header-section-number">10.5</span> Pynq</h2>
-<p>Quelle 1: <a href="https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html">Tul: Product - FPGA</a><br> Quelle 2: <a href="https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources">AMD: AUP PYNQ-Z2</a><br> Quelle 3: <a href="https://www.pynq.io/">AMD: Pynq</a><br> Quelle 4: <a href="https://pynq.readthedocs.io/en/latest/">PYNQ: Python productivity for Adaptive Computing platforms latest</a><br></p>
-<p>PYNQ (Python Productivity for Zynq) ist ein Open-Source-Projekt von AMD/Xilinx mit dem Ziel, die Entwicklung auf programmierbarer Logik, insbesondere dem Zynq-7000 SoC, zu vereinfachen. Es erlaubt es, die programmierbare Logik (PL) eines FPGAs direkt aus Python zu steuern, ohne dass herkömmliche Hardwarebeschreibungssprachen wie VHDL oder Verilog verwendet werden müssen.<br></p>
-<p>Das zugrundeliegende Prinzip basiert auf der Verwendung von Overlays, das sind vorimplementierte FPGA-Designs, die sich wie Softwarebibliotheken aus Python heraus verwenden lassen. Entwickler können so auf die programmierbare Hardware zugreifen, sie konfigurieren und einsetzen, ohne tief in HDL-Design einsteigen zu müssen. <br></p>
-<p><strong>Architektur und Komponenten</strong><br> PYNQ nutzt das Zynq-7000 SoC, das einen ARM Cortex-A9 Prozessor (Processing System, PS) mit einem FPGA-Fabric (Programmable Logic, PL) kombiniert. Auf dem PS läuft ein angepasstes Linux-System, das u. a. einen Jupyter Notebook Server bereitstellt. Darüber werden Benutzerinteraktionen realisiert, direkt über den Webbrowser.<br> Die Kommunikation mit der PL erfolgt über vorgefertigte AXI-Schnittstellen, wodurch sich Hardwarebeschleunigung und -steuerung über einfache Python-Skripte realisieren lassen.<br></p>
-<section id="pynq-z2-board" class="level3" data-number="10.5.1">
-<h3 data-number="10.5.1" class="anchored" data-anchor-id="pynq-z2-board"><span class="header-section-number">10.5.1</span> PYNQ-Z2 Board</h3>
-<p>Das PYNQ-Z2 Board wurde von TUL speziell für das PYNQ-Projekt entwickelt und basiert auf dem Xilinx Zynq XC7Z020-1CLG400C SoC. Es verfügt über: - 512 MB DDR3 RAM - HDMI-Eingang und -Ausgang - Audio-I/O - USB-UART, Ethernet, MicroSD - 2 Pmod-Ports, Arduino-kompatiblen Header, Raspberry Pi-GPIO-Header - Taster, LEDs und DIP-Schalter zur Benutzerinteraktion</p>
-<p>Das Board ist vollständig PYNQ-kompatibel und wird mit einem vorkonfigurierten SD-Karten-Image betrieben, das die PYNQ-Linux-Distribution und alle erforderlichen Tools enthält.<br></p>
-<p><strong>Einsatzmöglichkeiten</strong><br> PYNQ eignet sich besonders für: - Lehre und Ausbildung im Bereich eingebetteter Systeme, digitale Signalverarbeitung und FPGA-Design - Schnelles Prototyping von Hardware-beschleunigten Anwendungen - Forschungs- und Entwicklungsarbeiten mit Python-zugänglicher FPGA-Hardware</p>
-<p>Die intuitive Python-Umgebung und die Unterstützung durch Overlays machen PYNQ zu einem leistungsstarken Werkzeug für Anwender, die ohne tiefgreifende Hardwarekenntnisse dennoch programmierbare Logik nutzen möchten</p>
+<section id="vollendetes-design" class="level3" data-number="9.3.5">
+<h3 data-number="9.3.5" class="anchored" data-anchor-id="vollendetes-design"><span class="header-section-number">9.3.5</span> Vollendetes Design</h3>
+<p>Sind alle Verbindungen korrekt vorgenommen, ergibt sich folgendes Blockdesign:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/audio_quad_Filter_v1_bunt.png" class="img-fluid figure-img"></p>
+<figcaption>Blockdesign</figcaption>
+</figure>
+</div>
+<p>Die Clock-Signale sowie die wichtigsten Datenpfade wurden zusätzlich farblich hervorgehoben, um die Struktur übersichtlicher darzustellen.<br> Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fehler erkannt werden, kann im nächsten Schritt der Bitstream generiert werden.<br></p>
+<p>Am Ende bilden das Overlay die .bit und .hwh-Datei. Damit PYNQ das Overlay korrekt erkennt, müssen beide Dateien denselben Namen tragen, mit Ausnahme der Dateiendung.<br></p>
 
 
 </section>

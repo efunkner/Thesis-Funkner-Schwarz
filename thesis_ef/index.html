@@ -285,30 +285,31 @@ window.Quarto = {
   <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">8.3</span> Python</a></li>
   <li><a href="#matlab" id="toc-matlab" class="nav-link" data-scroll-target="#matlab"><span class="header-section-number">8.4</span> MATLAB</a></li>
   </ul></li>
-  <li><a href="#implementierungserklärung-der-biquad-filter-in-arduino" id="toc-implementierungserklärung-der-biquad-filter-in-arduino" class="nav-link" data-scroll-target="#implementierungserklärung-der-biquad-filter-in-arduino"><span class="header-section-number">9</span> Implementierungserklärung der Biquad Filter in Arduino</a>
+  <li><a href="#filterentwurf-in-python" id="toc-filterentwurf-in-python" class="nav-link" data-scroll-target="#filterentwurf-in-python"><span class="header-section-number">9</span> Filterentwurf in Python</a></li>
+  <li><a href="#implementierungserklärung-der-biquad-filter-in-arduino" id="toc-implementierungserklärung-der-biquad-filter-in-arduino" class="nav-link" data-scroll-target="#implementierungserklärung-der-biquad-filter-in-arduino"><span class="header-section-number">10</span> Implementierungserklärung der Biquad Filter in Arduino</a>
   <ul class="collapse">
-  <li><a href="#filter-basisklasse" id="toc-filter-basisklasse" class="nav-link" data-scroll-target="#filter-basisklasse"><span class="header-section-number">9.1</span> Filter Basisklasse</a></li>
-  <li><a href="#direktform-1-1" id="toc-direktform-1-1" class="nav-link" data-scroll-target="#direktform-1-1"><span class="header-section-number">9.2</span> Direktform 1</a>
+  <li><a href="#filter-basisklasse" id="toc-filter-basisklasse" class="nav-link" data-scroll-target="#filter-basisklasse"><span class="header-section-number">10.1</span> Filter Basisklasse</a></li>
+  <li><a href="#direktform-1-1" id="toc-direktform-1-1" class="nav-link" data-scroll-target="#direktform-1-1"><span class="header-section-number">10.2</span> Direktform 1</a>
   <ul class="collapse">
-  <li><a href="#private-member-variablen" id="toc-private-member-variablen" class="nav-link" data-scroll-target="#private-member-variablen"><span class="header-section-number">9.2.1</span> Private Member-Variablen</a></li>
-  <li><a href="#konstruktor" id="toc-konstruktor" class="nav-link" data-scroll-target="#konstruktor"><span class="header-section-number">9.2.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode" id="toc-filter-methode" class="nav-link" data-scroll-target="#filter-methode"><span class="header-section-number">9.2.3</span> Filter Methode</a></li>
+  <li><a href="#private-member-variablen" id="toc-private-member-variablen" class="nav-link" data-scroll-target="#private-member-variablen"><span class="header-section-number">10.2.1</span> Private Member-Variablen</a></li>
+  <li><a href="#konstruktor" id="toc-konstruktor" class="nav-link" data-scroll-target="#konstruktor"><span class="header-section-number">10.2.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode" id="toc-filter-methode" class="nav-link" data-scroll-target="#filter-methode"><span class="header-section-number">10.2.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#direktform-2" id="toc-direktform-2" class="nav-link" data-scroll-target="#direktform-2"><span class="header-section-number">9.3</span> Direktform 2</a>
+  <li><a href="#direktform-2" id="toc-direktform-2" class="nav-link" data-scroll-target="#direktform-2"><span class="header-section-number">10.3</span> Direktform 2</a>
   <ul class="collapse">
-  <li><a href="#private-member-variablen-1" id="toc-private-member-variablen-1" class="nav-link" data-scroll-target="#private-member-variablen-1"><span class="header-section-number">9.3.1</span> Private Member Variablen</a></li>
-  <li><a href="#konstruktor-1" id="toc-konstruktor-1" class="nav-link" data-scroll-target="#konstruktor-1"><span class="header-section-number">9.3.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode-1" id="toc-filter-methode-1" class="nav-link" data-scroll-target="#filter-methode-1"><span class="header-section-number">9.3.3</span> Filter Methode</a></li>
+  <li><a href="#private-member-variablen-1" id="toc-private-member-variablen-1" class="nav-link" data-scroll-target="#private-member-variablen-1"><span class="header-section-number">10.3.1</span> Private Member Variablen</a></li>
+  <li><a href="#konstruktor-1" id="toc-konstruktor-1" class="nav-link" data-scroll-target="#konstruktor-1"><span class="header-section-number">10.3.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode-1" id="toc-filter-methode-1" class="nav-link" data-scroll-target="#filter-methode-1"><span class="header-section-number">10.3.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#transponierte-direktfrom-2" id="toc-transponierte-direktfrom-2" class="nav-link" data-scroll-target="#transponierte-direktfrom-2"><span class="header-section-number">9.4</span> Transponierte Direktfrom 2</a>
+  <li><a href="#transponierte-direktfrom-2" id="toc-transponierte-direktfrom-2" class="nav-link" data-scroll-target="#transponierte-direktfrom-2"><span class="header-section-number">10.4</span> Transponierte Direktfrom 2</a>
   <ul class="collapse">
-  <li><a href="#private-member-variablen-2" id="toc-private-member-variablen-2" class="nav-link" data-scroll-target="#private-member-variablen-2"><span class="header-section-number">9.4.1</span> Private Member Variablen</a></li>
-  <li><a href="#konstruktor-2" id="toc-konstruktor-2" class="nav-link" data-scroll-target="#konstruktor-2"><span class="header-section-number">9.4.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode-2" id="toc-filter-methode-2" class="nav-link" data-scroll-target="#filter-methode-2"><span class="header-section-number">9.4.3</span> Filter Methode</a></li>
+  <li><a href="#private-member-variablen-2" id="toc-private-member-variablen-2" class="nav-link" data-scroll-target="#private-member-variablen-2"><span class="header-section-number">10.4.1</span> Private Member Variablen</a></li>
+  <li><a href="#konstruktor-2" id="toc-konstruktor-2" class="nav-link" data-scroll-target="#konstruktor-2"><span class="header-section-number">10.4.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode-2" id="toc-filter-methode-2" class="nav-link" data-scroll-target="#filter-methode-2"><span class="header-section-number">10.4.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#eingabe-koeffiziente" id="toc-eingabe-koeffiziente" class="nav-link" data-scroll-target="#eingabe-koeffiziente"><span class="header-section-number">9.5</span> Eingabe Koeffiziente</a></li>
-  <li><a href="#koeffizienten-arrays-und-filter-instanziierung" id="toc-koeffizienten-arrays-und-filter-instanziierung" class="nav-link" data-scroll-target="#koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">9.6</span> Koeffizienten Arrays und Filter Instanziierung</a></li>
-  <li><a href="#filter-anwendung" id="toc-filter-anwendung" class="nav-link" data-scroll-target="#filter-anwendung"><span class="header-section-number">9.7</span> Filter Anwendung</a></li>
+  <li><a href="#eingabe-koeffiziente" id="toc-eingabe-koeffiziente" class="nav-link" data-scroll-target="#eingabe-koeffiziente"><span class="header-section-number">10.5</span> Eingabe Koeffiziente</a></li>
+  <li><a href="#koeffizienten-arrays-und-filter-instanziierung" id="toc-koeffizienten-arrays-und-filter-instanziierung" class="nav-link" data-scroll-target="#koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">10.6</span> Koeffizienten Arrays und Filter Instanziierung</a></li>
+  <li><a href="#filter-anwendung" id="toc-filter-anwendung" class="nav-link" data-scroll-target="#filter-anwendung"><span class="header-section-number">10.7</span> Filter Anwendung</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/thesis_ef/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
@@ -327,7 +328,7 @@ window.Quarto = {
   <div class="quarto-title-meta-heading">Zugehörigkeit</div>
   
     <div class="quarto-title-meta-contents">
-    <p class="author">Eduard Funkner <a href="mailto:efunkner@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+    <p class="author">Eduard Funkner <a href="mailto:efunkner@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0003-5073-0204" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -344,7 +345,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">6. Juli 2025</p>
+      <p class="date">13. Juli 2025</p>
     </div>
   </div>
   
@@ -711,169 +712,229 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </div>
 </section>
 </section>
-<section id="implementierungserklärung-der-biquad-filter-in-arduino" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Implementierungserklärung der Biquad Filter in Arduino</h1>
+<section id="filterentwurf-in-python" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Filterentwurf in Python</h1>
+<p>Für den Entwurf von digitalen IIR-Filtern wird in Python die Scipy-Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine umfassende Sammlung von Funktionen für den Entwurf und die Analyse von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> butter, cheby1, cheby2, ellip</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Das Entwurfsverfahren basiert auf der Transformation analoger Filterprototypen, bei welchem ein analoger Filter mit den gewünschten Eigenschaften entworfen wird und anschließend durch die Bilineartransformation mit Prewarping in den digitalen Bereich überführt wird.</p>
+<p>Zur beispielhaften Nutzung der Funktionen werden die vier Grundfiltertypen nach den folgenden Parametern entworfen:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordnung für Tief- und Hochpass</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordnung für Bandpass und Bandsperre</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>order_b <span class="op">=</span> <span class="dv">1</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Für den Entwurf von biquadratischen Tief- und Hochpass-Filter wird die Ordnung auf den Wert <code>2</code> gesetzt. Bei Bandpass und Bandsperr-Filtern muss die Ordnung auf <code>1</code> gesetzt werden, um einen biquadratischer Filter zu erhalten.</p>
+<p>Beim Entwurf von Bandpass- und Bandsperr-Filtern wird eine Frequenztransformation eines Tiefpass-Prototyps durchgeführt, bei welcher jede s-Variable quadriert wird, wodurch sich die Filterordnung automatisch verdoppelt.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abtastrate für Audioanwendungen in Hz - Standard für CD-Qualität</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> <span class="dv">44100</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grenzfrequenz für Tief- und Hochpass in Hz</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fc <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalisierte Grenzfrequenz</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>wn <span class="op">=</span> fc<span class="op">/</span>(fs<span class="op">/</span><span class="dv">2</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Untere und obere Grenzen für Bandpass und Bandsperre in Hz</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>low <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>high <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalisierte untere und obere Grenzen</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>wn_b <span class="op">=</span> [low<span class="op">/</span>(fs<span class="op">/</span><span class="dv">2</span>), high<span class="op">/</span>(fs<span class="op">/</span><span class="dv">2</span>)]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Welligkeit(Ripple) im Durchlassbereich in dB</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rp <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Dämpfung im Sperrbereich in dB</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>rs <span class="op">=</span> <span class="dv">70</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Über die Funtkionen <code>butter</code>, <code>cheby1</code>, <code>cheby2</code> und <code>ellip</code> werden die dementsprechenden Filter enworfen. Über den Parameter <code>btype</code> wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von <code>low</code>, <code>high</code>, <code>bandpass</code>und <code>bandstop</code>.</p>
+<p>Die Koeffizienten können als separate <code>b</code> und <code>a</code> Arrays oder als eine Second Order System (SOS)-Matrix ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter <code>analog = False</code> gesetzt.</p>
+<p>Butterworth-Filter</p>
+<p>Der Butterwoth-Filter zeichnet sich aus mit seiner maximalen Flachheit im Durchlassbereich ohne Welligkeit aus. Als Kompromiss weist dieser einen relativ langsamen Übergang vom Durchlass- zum Sperrbereich auf. Er bietet ein ausgewogenes Verhältnis zwischen Phasenverhalten und Flankensteilheit.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> butter(N <span class="op">=</span> Order,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>              Wn <span class="op">=</span> wn,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>              btype <span class="op">=</span> <span class="st">'low'</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              analog <span class="op">=</span> <span class="va">False</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Chebyshev Typ 1-Filter</p>
+<p>Der Chebyshev Typ 1-Filter weist Welligkeit im Durchlassbereich auf, ermöglicht jedoch einen steileren Übergang im Vergleich zum Butterworth-Filter. Die Wellikgkeit ist gleichmäßig über den gesamten Durchlassbereich verteilt.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> cheby1(N <span class="op">=</span> Order,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>              rp <span class="op">=</span> rp,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>              Wn <span class="op">=</span> wn,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>              btype <span class="op">=</span> <span class="st">'high'</span>, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>              analog <span class="op">=</span> <span class="va">False</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Chebyshev Typ 2-Filter</p>
+<p>Der Chebyshev Typ 2-Filter kombiniert einen flachen Durchlassbereich, vergleichbar mit dem Butterworth-Filter, mit Welligkeit im Sperrbereich. Bei gleichmäßiger Sperrbereichsdämpfung ermöglicht dieser steile Übergangsflanken.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> cheby2(N <span class="op">=</span> Order, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>             rs <span class="op">=</span> rs,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>             Wn <span class="op">=</span> wn_b,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>             btype <span class="op">=</span> <span class="st">'bandpass'</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>             analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Elliptischer Filter (Cauer)</p>
+<p>Der elliptische Filter bietet die steilsten Übergangsflanken aller dargestellten Filtertypen, weist jedoch Welligkeiten sowohl im Durchlass- als auch im Sperrbereich auf. Dieser eignet sich Optimal für Anwendungen mit strengen Anforderungen an die Übergangsanforderungen.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> ellip(N <span class="op">=</span> Order,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            rp <span class="op">=</span> rp,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            rs <span class="op">=</span> rs,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>            Wn <span class="op">=</span> wn_b,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>            btype <span class="op">=</span> <span class="st">'bandstop'</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            analog <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Das Notebook <code>filter_desing.ipynb</code> ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parameternb und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.</p>
+</section>
+<section id="implementierungserklärung-der-biquad-filter-in-arduino" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Implementierungserklärung der Biquad Filter in Arduino</h1>
 <p>Für die Implementierung der biquadratischen Filter in Arduino werden die Differenzengleichungen aus den Theoretischen Grundlagen entnommen und in Code umgesetzt. Die Filter sollen über das Einsetzten der <code>b</code> und <code>a</code> Koeffizienten implementiert werden.</p>
-<section id="filter-basisklasse" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="filter-basisklasse"><span class="header-section-number">9.1</span> Filter Basisklasse</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Filter</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="op">~</span>Filter<span class="op">()</span> <span class="op">{}</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span><span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="filter-basisklasse" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="filter-basisklasse"><span class="header-section-number">10.1</span> Filter Basisklasse</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Filter</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="op">~</span>Filter<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span><span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Diese abstrakte Basisklasse dient als Interface für alle Filterimplementierungsstrukturen. Der virtuelle Destruktor <code>virtual ~Filter() {}</code> stellt sicher, dass beim Löschen eines Objekts über einen Basisklassenzeiger der korrekte Destruktor der abgeleiteten Klasse aufgerufen wird. Die rein virtelle Methode <code>virtual float filter(float) = 0;</code> definiert die einheitliche Schnittstelle - jede abgeleitete Filterklasse muss eine <code>filter()</code> - Methode implementieren, die einen float-Wert entgegennimmt und einen gefilterten float-Wert zurückgibt. Diese Struktur ermöglicht die Verwendung der verschiedenen Filtertypen im Anwendiungsfall einer Kaskadierung.</p>
 </section>
-<section id="direktform-1-1" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="direktform-1-1"><span class="header-section-number">9.2</span> Direktform 1</h2>
-<section id="private-member-variablen" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="private-member-variablen"><span class="header-section-number">9.2.1</span> Private Member-Variablen</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_2<span class="op">;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_1<span class="op">;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_2<span class="op">;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> x_1 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_1 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_2 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="direktform-1-1" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="direktform-1-1"><span class="header-section-number">10.2</span> Direktform 1</h2>
+<section id="private-member-variablen" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="private-member-variablen"><span class="header-section-number">10.2.1</span> Private Member-Variablen</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_2<span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_1<span class="op">;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_2<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> x_1 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_1 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_2 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die Filterkoeffizienten <code>b_0, b_1, b_2, a_1, a_2</code> sind als <code>const</code> deklariert, da sie nach der Initialisierung unveränderlich bleiben sollen. Dies entspricht der mathematischen Definition eines zeitinvarianten Systems. Die Verzögerungselemente <code>x_1, y_1, y_2</code> speichern die vorherigen Ein- und Ausgangswerte. Der Wert <code>a_0</code> wird nicht gespeichert, da durch die Normalisierung im Konstruktor alle Koeffizienten bereits durch <code>a_0</code> geteilt wurden.</p>
 </section>
-<section id="konstruktor" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="konstruktor"><span class="header-section-number">9.2.2</span> Konstruktor</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterDF1<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      b_2<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      a_1<span class="op">(</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      a_2<span class="op">(</span>a<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">])</span> </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="konstruktor" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="konstruktor"><span class="header-section-number">10.2.2</span> Konstruktor</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterDF1<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      b_2<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>      a_1<span class="op">(</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>      a_2<span class="op">(</span>a<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">])</span> </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der Konstruktor verwendet Initialisierungslisten für optimale Performance. Die Koeffizienten werden direkt bei der Objekterstellung normalisiert, indem alle durch <code>a[0]</code> geteilt werden. Dies entspricht der Standardform der Differenzengleichung, wo der führende Koeffizient des Nenners auf 1 normiert wird. Der <code>gain</code> Parameter wird in die Zählerkoeffizienten eingerechnet, was mathematisch äquivalent zur Multiplikation der gesamten Übertragungsfunktion mit dem Verstärkungsfaktor ist. Die Array-Referenz-Syntax <code>const float (&amp;b)[3]</code> stellt sicher, dass exakt drei Elemente übergeben werden müssen.</p>
 </section>
-<section id="filter-methode" class="level3" data-number="9.2.3">
-<h3 data-number="9.2.3" class="anchored" data-anchor-id="filter-methode"><span class="header-section-number">9.2.3</span> Filter Methode</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> x_2 <span class="op">=</span> x_1<span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  x_1 <span class="op">=</span> x_0<span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_0 <span class="op">=</span> b_0 <span class="op">*</span> x_0 <span class="op">+</span> b_1 <span class="op">*</span> x_1 <span class="op">+</span> b_2 <span class="op">*</span> x_2 <span class="op">-</span> a_1 <span class="op">*</span> y_1 <span class="op">-</span> a_2 <span class="op">*</span> y_2<span class="op">;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  y_2 <span class="op">=</span> y_1<span class="op">;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  y_1 <span class="op">=</span> y_0<span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> y_0<span class="op">;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="filter-methode" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="filter-methode"><span class="header-section-number">10.2.3</span> Filter Methode</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> x_2 <span class="op">=</span> x_1<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  x_1 <span class="op">=</span> x_0<span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_0 <span class="op">=</span> b_0 <span class="op">*</span> x_0 <span class="op">+</span> b_1 <span class="op">*</span> x_1 <span class="op">+</span> b_2 <span class="op">*</span> x_2 <span class="op">-</span> a_1 <span class="op">*</span> y_1 <span class="op">-</span> a_2 <span class="op">*</span> y_2<span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  y_2 <span class="op">=</span> y_1<span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  y_1 <span class="op">=</span> y_0<span class="op">;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> y_0<span class="op">;</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Diese Implementierung wird durch die Struktur der DF1 umgesetzt. Zuerst werden die Eingangsverzögerungen aktualiseirt: <code>x_2</code> erhält den vorherigen Wert von <code>x_1</code>, dann wird <code>x_1</code> auf den aktuellen Eingangswert <code>x_0</code> gesetzt. Die Differenzengleichung wird direkt implementiert: <code>y[n] = b_0 * x[n] + b_1 * x[n-1] + b_2 * x[n-2] - a_1 * y[n-1] - a_2 * y[n-2]</code>. Im Anschluss werden die Ausgangsverzögerungen für die nächste Iteration aktualisiert. Diese Reihenfolge ist kritisch, da die Berechnung vor Aktualisierung der Ausgangsverzögerungen erfolgen muss.</p>
 </section>
 </section>
-<section id="direktform-2" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="direktform-2"><span class="header-section-number">9.3</span> Direktform 2</h2>
-<section id="private-member-variablen-1" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="private-member-variablen-1"><span class="header-section-number">9.3.1</span> Private Member Variablen</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_2<span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_1<span class="op">;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_2<span class="op">;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_0 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_1 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="direktform-2" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="direktform-2"><span class="header-section-number">10.3</span> Direktform 2</h2>
+<section id="private-member-variablen-1" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="private-member-variablen-1"><span class="header-section-number">10.3.1</span> Private Member Variablen</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_2<span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_1<span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_2<span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_0 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_1 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die DF2-Struktur benötigt nur zwei Verzögerungselemente <code>w_0, w_1</code> anstatt der vier in DF1. Dies reduziert den Speicherbedarf um die 50%. Die <code>w</code> Variablen repräsentieren die internen Knotenpunkte der DF2-Struktur, wo sowohl die Rückkopplung als auch die Vorwärtskopplung zusammenlaufen.</p>
 </section>
-<section id="konstruktor-1" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="konstruktor-1"><span class="header-section-number">9.3.2</span> Konstruktor</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterDF2<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      b_2<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      a_1<span class="op">(</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      a_2<span class="op">(</span>a<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">])</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="konstruktor-1" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="konstruktor-1"><span class="header-section-number">10.3.2</span> Konstruktor</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterDF2<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>      b_2<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>      a_1<span class="op">(</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>      a_2<span class="op">(</span>a<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">])</span> </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der Konstruktor ist identisch zur DF1 Implementierung, da die Koeffizientennormalisierung unabhängig von der internen Filterstruktur ist. Die mathematische Übertragungsfunktion bleibt dieselbe, nur die interne Realisierung unterscheidet sich</p>
 </section>
-<section id="filter-methode-1" class="level3" data-number="9.3.3">
-<h3 data-number="9.3.3" class="anchored" data-anchor-id="filter-methode-1"><span class="header-section-number">9.3.3</span> Filter Methode</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_2 <span class="op">=</span> w_1<span class="op">;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  w_1 <span class="op">=</span> w_0<span class="op">;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  w_0 <span class="op">=</span> x_0 <span class="op">-</span> a_1 <span class="op">*</span> w_1 <span class="op">-</span> a_2 <span class="op">*</span> w_2<span class="op">;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_0 <span class="op">=</span> b_0 <span class="op">*</span> w_0 <span class="op">+</span> b_1 <span class="op">*</span> w_1 <span class="op">+</span> b_2 <span class="op">*</span> w_2<span class="op">;</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> y_0<span class="op">;</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="filter-methode-1" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="filter-methode-1"><span class="header-section-number">10.3.3</span> Filter Methode</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_2 <span class="op">=</span> w_1<span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  w_1 <span class="op">=</span> w_0<span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  w_0 <span class="op">=</span> x_0 <span class="op">-</span> a_1 <span class="op">*</span> w_1 <span class="op">-</span> a_2 <span class="op">*</span> w_2<span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_0 <span class="op">=</span> b_0 <span class="op">*</span> w_0 <span class="op">+</span> b_1 <span class="op">*</span> w_1 <span class="op">+</span> b_2 <span class="op">*</span> w_2<span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> y_0<span class="op">;</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die DF2 Implementierung teilt die Berechnung in zwei Phasen: Zuerst wird der interne Zustand <code>w_0</code> berechnet, der das Eingangssignal minus der Rückkopplung darstellt. Dies entspricht der Implementierung des Nennerpols der Übertragungsfunktion. Dann wird der Ausgang durch die Vorwärtskopplung mit den <code>b</code> Koeffizienten berechnet, was dem Zählerpolynom entspricht. Die Verzögerungselemente werden vor der <code>w_0</code> Berechnung aktualisiert, damit die korrekten vorherigen Werte verwendet werden.</p>
 </section>
 </section>
-<section id="transponierte-direktfrom-2" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="transponierte-direktfrom-2"><span class="header-section-number">9.4</span> Transponierte Direktfrom 2</h2>
-<section id="private-member-variablen-2" class="level3" data-number="9.4.1">
-<h3 data-number="9.4.1" class="anchored" data-anchor-id="private-member-variablen-2"><span class="header-section-number">9.4.1</span> Private Member Variablen</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_2<span class="op">;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_1<span class="op">;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_2<span class="op">;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> <span class="va">s_1</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> <span class="va">s_2</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="transponierte-direktfrom-2" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="transponierte-direktfrom-2"><span class="header-section-number">10.4</span> Transponierte Direktfrom 2</h2>
+<section id="private-member-variablen-2" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="private-member-variablen-2"><span class="header-section-number">10.4.1</span> Private Member Variablen</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_2<span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_1<span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> a_2<span class="op">;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> <span class="va">s_1</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> <span class="va">s_2</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die TDF2 Struktur verwendet Zustandsvariablen <code>s_1, s_2</code>, die als “shift register” fungieren. Diese Struktur ist die transponierte Version der DF2, was bedeutet, dass der Signalfluss umgekehrt wird: die Ein- und Ausgänge werden vertauscht, sowohl als auch die Richtung der Verzögerungselemente wird umgekehrt.</p>
 </section>
-<section id="konstruktor-2" class="level3" data-number="9.4.2">
-<h3 data-number="9.4.2" class="anchored" data-anchor-id="konstruktor-2"><span class="header-section-number">9.4.2</span> Konstruktor</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterTDF2<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>      b_2<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>      a_1<span class="op">(</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>      a_2<span class="op">(</span>a<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">])</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="konstruktor-2" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="konstruktor-2"><span class="header-section-number">10.4.2</span> Konstruktor</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterTDF2<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>      b_2<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>      a_1<span class="op">(</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>      a_2<span class="op">(</span>a<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">])</span> </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Auch hier ist der Konstruktor identisch zu den anderen Implementierungen, da die Koeffizientennormalisierung eine mathematische Anforderung ist, die unabhängig von der gewählten Realisierungsform gilt.</p>
 </section>
-<section id="filter-methode-2" class="level3" data-number="9.4.3">
-<h3 data-number="9.4.3" class="anchored" data-anchor-id="filter-methode-2"><span class="header-section-number">9.4.3</span> Filter Methode</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_0 <span class="op">=</span> <span class="va">s_1</span> <span class="op">+</span> b_0 <span class="op">*</span> x_0<span class="op">;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">s_1</span> <span class="op">=</span> <span class="va">s_2</span> <span class="op">+</span> b_1 <span class="op">*</span> x_0 <span class="op">-</span> a_1 <span class="op">*</span> y_0<span class="op">;</span> </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">s_2</span> <span class="op">=</span> b_2 <span class="op">*</span> x_0 <span class="op">-</span> a_2 <span class="op">*</span> y_0<span class="op">;</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> y_0<span class="op">;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="filter-methode-2" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="filter-methode-2"><span class="header-section-number">10.4.3</span> Filter Methode</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_0 <span class="op">=</span> <span class="va">s_1</span> <span class="op">+</span> b_0 <span class="op">*</span> x_0<span class="op">;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">s_1</span> <span class="op">=</span> <span class="va">s_2</span> <span class="op">+</span> b_1 <span class="op">*</span> x_0 <span class="op">-</span> a_1 <span class="op">*</span> y_0<span class="op">;</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">s_2</span> <span class="op">=</span> b_2 <span class="op">*</span> x_0 <span class="op">-</span> a_2 <span class="op">*</span> y_0<span class="op">;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> y_0<span class="op">;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>  </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Bei der TDF2 Implementierung setzt sich der Ausgangswert aus der addition aus dem ersten Zustandsregister <code>s_1</code> mit dem verstärkten Eingangswert. Die Zustandsregister werden dann für die nächste Iteration aktualisiert. <code>s_1</code> wird zum nächsten Wert von <code>s_2</code> addiert mit den gewichteten Ein- und Ausgangswerten. <code>s_2</code> wird komplett neu berechnet. Diese Struktur hat den Vorteil, dass der Ausgangswert sehr früh im Berechnungszyklus verfügbar ist, was bei Pipeline Implementierungen sich als vorteilhaft erweisen kann.</p>
 </section>
 </section>
-<section id="eingabe-koeffiziente" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="eingabe-koeffiziente"><span class="header-section-number">9.5</span> Eingabe Koeffiziente</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_0 <span class="op">=</span> f<span class="op">;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_1 <span class="op">=</span> f<span class="op">;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_2 <span class="op">=</span> f<span class="op">;</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_0 <span class="op">=</span> f<span class="op">;</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_1 <span class="op">=</span> f<span class="op">;</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_2 <span class="op">=</span> f<span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="eingabe-koeffiziente" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="eingabe-koeffiziente"><span class="header-section-number">10.5</span> Eingabe Koeffiziente</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_0 <span class="op">=</span> f<span class="op">;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_1 <span class="op">=</span> f<span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_2 <span class="op">=</span> f<span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_0 <span class="op">=</span> f<span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_1 <span class="op">=</span> f<span class="op">;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_2 <span class="op">=</span> f<span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Bei den Eingabe-Koeffezienten wird der <code>f</code> Suffix an die float Literalen angehängt, sodass sicher gestellt wird das die Werte als singel-precision floating-point interpretiert werden, was bei Arduino-System von hoher Wichtigkeit ist.</p>
 </section>
-<section id="koeffizienten-arrays-und-filter-instanziierung" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">9.6</span> Koeffizienten Arrays und Filter Instanziierung</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_coefficients<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> b_0<span class="op">,</span> b_1<span class="op">,</span> b_2<span class="op">};</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_coefficients<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> a_0<span class="op">,</span> a_1<span class="op">,</span> a_2<span class="op">};</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> gain <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>BiquadFilterTDF2 biquad<span class="op">(</span>b_coefficients<span class="op">,</span> a_coefficients<span class="op">,</span> gain<span class="op">);</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="koeffizienten-arrays-und-filter-instanziierung" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">10.6</span> Koeffizienten Arrays und Filter Instanziierung</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_coefficients<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> b_0<span class="op">,</span> b_1<span class="op">,</span> b_2<span class="op">};</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_coefficients<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> a_0<span class="op">,</span> a_1<span class="op">,</span> a_2<span class="op">};</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> gain <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>BiquadFilterTDF2 biquad<span class="op">(</span>b_coefficients<span class="op">,</span> a_coefficients<span class="op">,</span> gain<span class="op">);</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die Koeffizienten werden in separaten Arrays gespeichert und an den Konstruktor übergeben. Dies ermöglicht eine saubere Trennung zwischen Filterdesign (Koeffizienten) und Implementierung (Filterklasse). Über den <code>gain</code> Paramter kann auf den zu Implementierenden Filter eine gewünschte Verstärkung angewandt werden. Bei einem Wert von 1 wird keine zusätzliche Verstärkung angewendet. Bei dieser Filter Instanziierung wird die TDF2 verwendet mir ihrem korosponierenden Klassennamen. Somit wird das Objekt <code>biquad</code> durch die Klasse <code>BiquadFilterTDF2</code> instanziiert. Innerhalb des Objekts werden die Koeffizienten mit dem Verstärkungsfaktor an die jeweilige Filterklasse übergeben. Der Implementierte Filter steht bereit zur Verwendung.</p>
 </section>
-<section id="filter-anwendung" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="filter-anwendung"><span class="header-section-number">9.7</span> Filter Anwendung</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filtered <span class="op">=</span> biquad<span class="op">.</span>filter<span class="op">(</span>Input<span class="op">);</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="filter-anwendung" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="filter-anwendung"><span class="header-section-number">10.7</span> Filter Anwendung</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filtered <span class="op">=</span> biquad<span class="op">.</span>filter<span class="op">(</span>Input<span class="op">);</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die direkte Anwendung erfolgt durch den Aufruf der <code>filter()</code>-Methode auf dem Filterobjekt <code>biquad</code>. Der Eingangswert <code>Input</code> wird der Methode übergeben, durch die spezifische Filterimplementierung entsprechend der definierten Differenzengleichung verarbeitet und als transformierter Ausgangswert filtered zurückgegeben.</p>
 
 
