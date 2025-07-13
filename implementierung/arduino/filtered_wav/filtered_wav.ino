@@ -1,6 +1,6 @@
 #include "SD_MMC.h" // SD-Karten-Support für ESP32 mit SD_MMC-Anschluss
 
-// --- Lyrat Mini SD Init
+// --- Für Lyrat Mini SD Init ---
 const int PIN_SD_CARD_POWER = 13;  
 const int PIN_SD_CARD_DET = 34;
 
@@ -171,12 +171,12 @@ File filteredFile;  // Gefiltere Ausgangsdatei
 
 // -----------------------------------------------------------------------------------
 // --- Filter-Koeffizienten und Gain ---
-const float b_0 = 0.05198f;
-const float b_1 = 0.101;
-const float b_2 = 0.05198f;
+const float b_0 = 1.0f;
+const float b_1 = 0.0f;
+const float b_2 = 0.0f;
 const float a_0 = 1.0f;
-const float a_1 = -1.355;
-const float a_2 = 1.459;
+const float a_1 = 0.0f;
+const float a_2 = 0.0f;
 
 const float gain = 1.0f;
 
@@ -373,7 +373,6 @@ void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample
 // -----------------------------------------------------------------------------------
   }
 }
-
 
 // --- Indikator LED ---
 void loop() {
