@@ -233,9 +233,10 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ ~~Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)~~
 - ❌ Blockschaltbilder (Simulink)
 - ❌ Codebeschreibung (Matlab, Python)
-- ❌ Finales Filterdesign
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ❌ Aufräumen des Git Reposetories
+- ❌ OrgID erstellen
+- ❌ Demo-Notebook vertig stellen und dokumentieren
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
@@ -251,7 +252,9 @@ zienten für den FPGA.
 - ✅ Spektrum nach der Filterung anzeigen mittels FFT
 - ✅ Kaskadierung der Filter durch mehrfachfilterung
 - ✅ Matlab + Simulink Filterdesign erklären (Designtool)
-- ✅ **Pipelining, Fixed-point und warum DFII T erklären**
+- ✅ Pipelining, Fixed-point und warum DFII T erklären
+- ✅ Finales Filterdesign
+- ✅ Filterentwurf in Matlab ausgebaut
  
 
 ## Zusatz:
