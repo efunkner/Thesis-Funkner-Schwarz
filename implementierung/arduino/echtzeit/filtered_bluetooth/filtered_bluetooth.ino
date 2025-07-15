@@ -95,8 +95,8 @@ void applyFilterState(int state) {
   }
 
   // --- Filter setzen für beide Kanäle ---
-  filtered.setFilter(0, new BiQuadDF1<float>(*b, *a, gain));
-  filtered.setFilter(1, new BiQuadDF1<float>(*b, *a, gain));
+  filtered.setFilter(0, new BiQuadTDF2<float>(*b, *a, gain));
+  filtered.setFilter(1, new BiQuadTDF2<float>(*b, *a, gain));
 }
 
 // --- Taster-Loop ---

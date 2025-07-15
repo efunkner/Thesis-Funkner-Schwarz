@@ -20,14 +20,6 @@ FilteredStream<int16_t, float> filtered(lyrat, info.channels);
 // --- Bluetooth-Stream ---
 BluetoothA2DPSinkQueued a2dp_sink(filtered);
 
-const float sosmatrix[][6] = {
-  {0.004636, -0.009406, 0.003445, 1.0, -6.857, 20.96},
-  {-0.003295, 0.00924, -0.003295, -37.39, 42.63, -31.84}
-//  {0.003445, -0.009406, 0.004636, 15.21, -4.247, 0.5306}
-};
-
-const float gainarray[] = {1, 1, 1};
-
 // --- Setup ---
 void setup() {
   Serial.begin(115200);
