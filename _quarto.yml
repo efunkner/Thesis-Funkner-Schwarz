@@ -18,8 +18,8 @@ book:
           state: Germany
           url: https://www.hs-bremen.de  
     - name: Martin Schwarz
-      orcid: 
-      email: mschwarz@stud.hs-bremen.de
+      orcid: 0009-0009-5403-9553
+      email: maschwarz@stud.hs-bremen.de
       corresponding: true
       roles: "Lead author"
   date: last-modified

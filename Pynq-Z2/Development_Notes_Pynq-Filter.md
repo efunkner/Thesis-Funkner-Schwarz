@@ -235,7 +235,7 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ Codebeschreibung (Matlab, Python)
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ❌ Aufräumen des Git Reposetories
-- ❌ OrgID erstellen
+- ❌ ~~OrgID erstellen~~
 - ❌ Demo-Notebook vertig stellen und dokumentieren
 
 ## Bereits erledigt:

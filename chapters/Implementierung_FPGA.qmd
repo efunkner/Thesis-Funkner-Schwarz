@@ -198,3 +198,23 @@ Die Clock-Signale sowie die wichtigsten Datenpfade wurden zusätzlich farblich h
 Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fehler erkannt werden, kann im nächsten Schritt der Bitstream generiert werden.<br>
 
 Am Ende bilden das Overlay die .bit und .hwh-Datei. Damit PYNQ das Overlay korrekt erkennt, müssen beide Dateien denselben Namen tragen, mit Ausnahme der Dateiendung.<br>
+
+## Architektur und Hardwareumsetzung der Biquad-Filter
+### Allgemeine Architektur
+![Signalfluss eines Biquad-Filters in Direct-Form-II-Transposed-Struktur mit Pipelining ](images\biquad_df2t.png)
+
+Wie bereits ewrwhnt wurde für die Realisierung ein vorgefertigster [Biquad-Filter-Block](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html) aus der DSP HDL Toolbox verwendet.
+Die Abblindung zeigt den Signalfluss der transponierten Direktform II zusammen mit pipelinig.<br>
+
+Das Eingangssignal wird zunächst in Verzögerungsgliedern gespeichert und mit den Feedforward-Koeffizienten *b0,b1,b2*​ multipliziert. Die gewichteten Terme werden über Addierer zusammengeführt, um das Ausgangssignal zu berechnen.<br>
+Die Feedback-Pfade sind als Schleifen mit Verzögerungsgliedern z^−1 erkennbar. Dort werden die gespeicherten Zwischenwerte mit den Feedback-Koeffizienten a1,a2​ multipliziert und erneut in den Summationspfad eingespeist. Multiplikationen werden dabei in DSP-Slices, Additionen und Verzögerungen in Logikzellen und Registern realisiert.<br>
+Der Signalfluss ist so aufgebaut, dass er Ressourcensharing und optionales Pipelining ermöglicht, was auch im automatisch generierten HDL-Design berücksichtigt wird.<br>
+
+### Umsetzung im generierten HDL-Design
+
+
+<!--Der mit dem HDL Coder erstellte VHDL-Code überträgt diese allgemeine Architektur  in eine FPGA-taugliche Struktur. Jede Biquad-Sektion wird dabei als eigenständige Recheneinheit umgesetzt, die genau dem dokumentierten Signalfluss folgt. Die Verzögerungsglieder werden durch synchron getaktete Registerketten realisiert, während die Multiplikationen fest in dedizierte Prozesse eingebunden sind und auf die DSP-Slices des FPGA abgebildet werden können.<br>-->
+
+
+<!--Die Additionen sind als eigenständige logische Operationen beschrieben und werden in der FPGA-Logik ausgeführt. Eingangs- und Ausgangsdaten werden über standardisierte AXI4-Stream-Schnittstellen eingebunden, die in den generierten Modulen realisiert sind. FIFO- und RAM-Komponenten sorgen dafür, dass Daten zwischengespeichert und taktsynchron verarbeitet werden können, auch wenn mehrere Biquad-Sektionen in Serie geschaltet sind.<br>
+Die Taktsteuerung und Reset-Logik gewährleisten, dass die gesamte Schaltung stabil startet und synchron läuft. Der HDL Coder Report zeigt dabei, dass die Ressourcennutzung die typische Aufteilung widerspiegelt. Multiplikationen werden auf DSP-Blöcke gemappt, Verzögerungen auf Registerketten, Additionen auf Logikzellen. Das Pipelining ist ebenfalls integriert, um die maximale Taktfrequenz zu erhöhen.-->
