@@ -199,8 +199,31 @@ Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fe
 
 Am Ende bilden das Overlay die .bit und .hwh-Datei. Damit PYNQ das Overlay korrekt erkennt, müssen beide Dateien denselben Namen tragen, mit Ausnahme der Dateiendung.<br>
 
-## Architektur und Hardwareumsetzung der Biquad-Filter
-### Allgemeine Architektur
+## Aufbau des Genereierten Codes
+Da für die ralisierung ein vorgefertigster [Biquad-Filter-Block](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html) aus der DSP HDL Toolbox verwendet wurde, welcher anschließend mit dem HDL-Coder in ein AXI4-Stream fähingen IP-Core umgesetzt wurde, ist der generierte vhdl-Code für alle viel filter gleich.<br>
+
+Das Top-Level Modul bildet die oberste Instanz und bindet alle Funktionseinheiten zusammen. Die AXI4-Stream Schnittstellen werden von zwei Modulen beschreiben, je eines für den AXI4-Stream Slave und Master. Der AXI4-Stream Slave empfängt die Eingangsdaten von einem übergeordneten System, welche zunächst in einem Eingangs-FIFO zwischengespeichert werden. Die eigentliche Signalverarbeitung findet im Design-Under-Test (DUT) statt. ier werden die gepufferten Eingangsdaten durch eine Kaskade von Biquad-Filtersektionen geleitet. Unter dem DUT ist ein Modul, welches den Gesamt-Biquad-Filter beschreibt, welchser selbst mehere Sectionen enthalten kann. Jede einzelne Seczion wird durch ein eigenes Modul implementiert.  Für die Filterung wird das Signal durch diese Sectionen geführt, bis die die gewünschte Filtercharakteristik erreicht ist.<br>
+Nach der Filterung werden die gefilterten Daten erneut in einem Ausgangs-FIFO gespeichert, um sie gepuffert bereitzuhalten. Ein spezieller FIFO kümmert sich um das Handling des TLAST-Signals, das im AXI4-Stream Protokoll das Ende eines Frames oder Datenpakets signalisiert.<br>
+Die Ausgabe erfolgt über den AXI4-Stream Master, der die gefilterten Daten wieder an das übergeordnete System liefert. in separates Modul zur Reset-Synchronisation sorgt dafür, dass ein globales Reset-Signal sicher in allen Takt- und Logikbereichen übernommen wird.<br>
+
+Für den Datenfluss ergibt sich damit: Die Eingangsdaten werden über AXI4-Stream empfangen, in FIFOs gepuffert, durch den Biquad-Filter verarbeitet, wieder gepuffert und schließlich über AXI4-Stream ausgegeben. Dabei wird der Datenfluss über Handshake-Signale gesteuert, um Datenverlust oder Überläufe zu vermeiden.
+
+Die gesamte Struktur ist klar hierarchisch aufgebaut. Das Top-Level Modul bindet alle Funktionseinheiten, as DUT (HP_Butter_2_1kHz_fix32_16_v2_dut.vhd) enthält die Kernverarbeitung, während separate Module für die Filterstufen, Pufferung (FIFOs), Speicher (RAM) und Schnittstellen (AXI4-Stream) zuständig sind.<br>
+
+
+<!--
+- wie ist der hierarchische aufbau des codes?
+- was macht welche file?
+- Wo sind die koeffizeinten?
+- wo lässt sich die DFII T erkennen und wie?
+- wo und wie werden die koeffizenten verrechnet?
+- beispielhaft am HP: erwähnen dass die anderen Filter auf ähnliche weise generiert sind!
+- wo sind multiplikatoren, delays und addierer im code? -> beispiele zeigen
+- generell kurz erklären wie dieser code arbeiet
+=> ziehl ist es prinzipiell des aufbau des Codes zu erklären
+ --> 
+
+<!--### Allgemeine Architektur
 ![Signalfluss eines Biquad-Filters in Direct-Form-II-Transposed-Struktur mit Pipelining ](images\biquad_df2t.png)
 
 Wie bereits ewrwhnt wurde für die Realisierung ein vorgefertigster [Biquad-Filter-Block](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html) aus der DSP HDL Toolbox verwendet.
@@ -213,8 +236,8 @@ Der Signalfluss ist so aufgebaut, dass er Ressourcensharing und optionales Pipel
 ### Umsetzung im generierten HDL-Design
 
 
-<!--Der mit dem HDL Coder erstellte VHDL-Code überträgt diese allgemeine Architektur  in eine FPGA-taugliche Struktur. Jede Biquad-Sektion wird dabei als eigenständige Recheneinheit umgesetzt, die genau dem dokumentierten Signalfluss folgt. Die Verzögerungsglieder werden durch synchron getaktete Registerketten realisiert, während die Multiplikationen fest in dedizierte Prozesse eingebunden sind und auf die DSP-Slices des FPGA abgebildet werden können.<br>-->
+<!--Der mit dem HDL Coder erstellte VHDL-Code überträgt diese allgemeine Architektur  in eine FPGA-taugliche Struktur. Jede Biquad-Sektion wird dabei als eigenständige Recheneinheit umgesetzt, die genau dem dokumentierten Signalfluss folgt. Die Verzögerungsglieder werden durch synchron getaktete Registerketten realisiert, während die Multiplikationen fest in dedizierte Prozesse eingebunden sind und auf die DSP-Slices des FPGA abgebildet werden können.<br>
 
 
-<!--Die Additionen sind als eigenständige logische Operationen beschrieben und werden in der FPGA-Logik ausgeführt. Eingangs- und Ausgangsdaten werden über standardisierte AXI4-Stream-Schnittstellen eingebunden, die in den generierten Modulen realisiert sind. FIFO- und RAM-Komponenten sorgen dafür, dass Daten zwischengespeichert und taktsynchron verarbeitet werden können, auch wenn mehrere Biquad-Sektionen in Serie geschaltet sind.<br>
+Die Additionen sind als eigenständige logische Operationen beschrieben und werden in der FPGA-Logik ausgeführt. Eingangs- und Ausgangsdaten werden über standardisierte AXI4-Stream-Schnittstellen eingebunden, die in den generierten Modulen realisiert sind. FIFO- und RAM-Komponenten sorgen dafür, dass Daten zwischengespeichert und taktsynchron verarbeitet werden können, auch wenn mehrere Biquad-Sektionen in Serie geschaltet sind.<br>
 Die Taktsteuerung und Reset-Logik gewährleisten, dass die gesamte Schaltung stabil startet und synchron läuft. Der HDL Coder Report zeigt dabei, dass die Ressourcennutzung die typische Aufteilung widerspiegelt. Multiplikationen werden auf DSP-Blöcke gemappt, Verzögerungen auf Registerketten, Additionen auf Logikzellen. Das Pipelining ist ebenfalls integriert, um die maximale Taktfrequenz zu erhöhen.-->
