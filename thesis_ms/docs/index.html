@@ -71,10 +71,10 @@ window.Quarto = {
 
 <meta name="citation_title" content="Biquads: Digitale Filter auf dem Pynq-Z2 als Lehrdemonstration">
 <meta name="citation_author" content="Martin Schwarz">
-<meta name="citation_publication_date" content="2025-07-14">
-<meta name="citation_cover_date" content="2025-07-14">
+<meta name="citation_publication_date" content="2025-07-16">
+<meta name="citation_cover_date" content="2025-07-16">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-07-14">
+<meta name="citation_online_date" content="2025-07-16">
 <meta name="citation_language" content="de">
 </head>
 
@@ -111,7 +111,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">14. Juli 2025</p>
+              <p class="date">16. Juli 2025</p>
             </div>
           </div>
           
@@ -188,6 +188,17 @@ window.Quarto = {
   <li><a href="#axi-direct-memory-access" id="toc-axi-direct-memory-access" class="nav-link" data-scroll-target="#axi-direct-memory-access">AXI Direct Memory Access</a></li>
   <li><a href="#verbindungen-im-blockdesign" id="toc-verbindungen-im-blockdesign" class="nav-link" data-scroll-target="#verbindungen-im-blockdesign">Verbindungen im Blockdesign</a></li>
   <li><a href="#vollendetes-design" id="toc-vollendetes-design" class="nav-link" data-scroll-target="#vollendetes-design">Vollendetes Design</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#funktionsweise-des-generierten-filter-codes" id="toc-funktionsweise-des-generierten-filter-codes" class="nav-link" data-scroll-target="#funktionsweise-des-generierten-filter-codes">Funktionsweise des generierten Filter-Codes</a>
+  <ul class="collapse">
+  <li><a href="#struktur-des-generierten-codes" id="toc-struktur-des-generierten-codes" class="nav-link" data-scroll-target="#struktur-des-generierten-codes">Struktur des generierten Codes</a></li>
+  <li><a href="#umsetzung-des-filters" id="toc-umsetzung-des-filters" class="nav-link" data-scroll-target="#umsetzung-des-filters">Umsetzung des Filters</a>
+  <ul class="collapse">
+  <li><a href="#filter-dut" id="toc-filter-dut" class="nav-link" data-scroll-target="#filter-dut">Filter DUT</a></li>
+  <li><a href="#filter-wrapper" id="toc-filter-wrapper" class="nav-link" data-scroll-target="#filter-wrapper">Filter-Wrapper</a></li>
+  <li><a href="#die-filterlogik" id="toc-die-filterlogik" class="nav-link" data-scroll-target="#die-filterlogik">Die Filterlogik</a></li>
+  <li><a href="#filter-sektion" id="toc-filter-sektion" class="nav-link" data-scroll-target="#filter-sektion">Filter-Sektion</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -776,6 +787,39 @@ Abbildung&nbsp;2
 </div>
 <p>Die Clock-Signale sowie die wichtigsten Datenpfade wurden zusätzlich farblich hervorgehoben, um die Struktur übersichtlicher darzustellen.<br> Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fehler erkannt werden, kann im nächsten Schritt der Bitstream generiert werden.<br></p>
 <p>Am Ende bilden das Overlay die .bit und .hwh-Datei. Damit PYNQ das Overlay korrekt erkennt, müssen beide Dateien denselben Namen tragen, mit Ausnahme der Dateiendung.<br></p>
+</section>
+</section>
+</section>
+<section id="funktionsweise-des-generierten-filter-codes" class="level1">
+<h1>Funktionsweise des generierten Filter-Codes</h1>
+<p>Die Modulnamen wurden automatisch vom HDL Coder generiert und unverändert übernommen. Der hier beschriebene Code bezieht sich exemplarisch auf den Hochpass-Filter. Da jedoch alle Filter mit demselben Simulink-Modell erstellt und nach dem gleichen Verfahren generiert wurden, sind die allgemeinen Beschreibungen sinngemäß auch auf die übrigen Filter übertragbar.<br> Für die Implementierung kam ein vorgefertigter <a href="https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html">Biquad-Filter-Block</a> aus der DSP HDL Toolbox zum Einsatz. Dieser wurde mithilfe des HDL Coders in einen AXI4-Stream-fähigen IP-Core umgesetzt, sodass der generierte VHDL-Code für alle Filter dieser Art weitgehend identisch ist.<br></p>
+<section id="struktur-des-generierten-codes" class="level2">
+<h2 class="anchored" data-anchor-id="struktur-des-generierten-codes">Struktur des generierten Codes</h2>
+<p>Das Top-Level-Modul bildet die oberste Instanz und integriert alle Funktionseinheiten. Die AXI4-Stream-Schnittstellen werden von zwei Modulen umgesetzt, einem AXI4-Stream Slave und einem Master. Der Slave empfängt die Eingangsdaten vom übergeordneten System und speichert sie zunächst in einem Eingangs-FIFO. Die eigentliche Signalverarbeitung findet im Design Under Test (DUT) statt. Hier werden die zwischengespeicherten Eingangsdaten durch eine Kaskade von Biquad-Filtersektionen geleitet. Jede Sektion wird dabei durch ein separates Modul realisiert. Das DUT enthält ein Modul, das die gesamte Biquad-Filterstruktur beschreibt, die wiederum aus mehreren Sektionen bestehen kann. Die Daten werden Sektion für Sektion gefiltert, bis die gewünschte Filtercharakteristik erreicht ist.<br></p>
+<p>Nach der Filterung werden die Ausgangsdaten in einem Ausgangs-FIFO zwischengespeichert, damit sie gepuffert zur Verfügung stehen. Ein spezieller FIFO sorgt für die korrekte Handhabung des TLAST-Signals, das im AXI4-Stream-Protokoll das Ende eines Frames oder Datenpakets signalisiert. Der AXI4-Stream Master gibt die gefilterten Daten schließlich zurück an das übergeordnete System. Ein zusätzliches Modul zur Reset-Synchronisation stellt sicher, dass ein globales Reset-Signal in allen Takt- und Logikbereichen zuverlässig übernommen wird.<br></p>
+<p>Für den Datenverlauf bedeutet das, dass die Eingangsdaten über einen AXI4-Stream empfangen, gepuffert, durch den Biquad-Filter verarbeitet, erneut gepuffert und schließlich über AXI4-Stream ausgegeben werden. Der Datenfluss wird über Handshake-Signale gesteuert, um Datenverlust oder Überläufe zu vermeiden.<br></p>
+</section>
+<section id="umsetzung-des-filters" class="level2">
+<h2 class="anchored" data-anchor-id="umsetzung-des-filters">Umsetzung des Filters</h2>
+<section id="filter-dut" class="level3">
+<h3 class="anchored" data-anchor-id="filter-dut">Filter DUT</h3>
+<p>Wie bereits erwähnt, folgt der Code einer klaren Hierarchie. Das DUT übernimmt innerhalb dieses Designs mehrere Aufgaben. Es steuert, wann neue Daten aus dem Eingangs-FIFO gelesen werden und führt diese der Filter-Komponente zu. Nach der Filterung nimmt es die Ergebnisse entgegen, speichert sie im Ausgangs-FIFO und kümmert sich um alle notwendigen Steuersignale wie <em>Valid-/Ready</em>-Signale und Handshake-Mechanismen. Zudem stellt es sicher, dass die Filter-Komponente korrekt in die übergeordnete Takt- und Reset-Logik eingebunden ist.<br></p>
+</section>
+<section id="filter-wrapper" class="level3">
+<h3 class="anchored" data-anchor-id="filter-wrapper">Filter-Wrapper</h3>
+<p>Innerhalb des DUT wird die Komponente <strong>src_Biquad_Filter</strong> instanziiert. Diese Komponente fungiert als Wrapper und kapselt die eigentliche Filterkette. Sie nimmt die Eingangssignale entgegen, leitet sie unverändert weiter und gibt die Ergebnisse der Filterkette zurück an das DUT. Zudem stellt der Wrapper sicher, dass die Port-Zuordnung und Taktanbindung korrekt sind und das <em>clk_enable-Signal</em> richtig durchgereicht wird. Auf diese Weise wird die gesamte Filterlogik mit den Biquad-Sektionen innerhalb des Wrappers gebündelt.<br></p>
+</section>
+<section id="die-filterlogik" class="level3">
+<h3 class="anchored" data-anchor-id="die-filterlogik">Die Filterlogik</h3>
+<p>Wie bereits erwähnt, wird die Filterlogik exemplarisch am Hochpass-Filter erläutert. Es kann dabei zu minimalen Abweichungen bei anderen Filtern kommen, die grundsätzliche Funktionsweise ist jedoch bei allen Filtern vergleichbar.<br></p>
+<p>Innerhalb des Wrappers wird eine gleichnamige Komponente instanziiert, die hierarchisch unterhalb des Wrappers angesiedelt ist. Hier befindet sich die eigentliche Filterlogik.<br> Die Eingangsdaten (<em>dataIn)</em> werden zunächst in ein vorzeichenbehaftetes Signal (<em>dataIn_signed</em>) umgewandelt und im Register <em>sec0reg</em> zwischengespeichert. In der ersten Shifting- und Multiplikationsstufe (<em>sec0</em>) wird der Eingangswert durch Konkatenation mit Nullen nach links verschoben, um die gewünschte Fixpunkt-Skalierung zu erreichen. Das Ergebnis wird im Register <em>sec0mulreg</em> abgelegt, der relevante Bitbereich extrahiert (<em>sec0dtc</em>) und in <em>sec0out</em> zwischengespeichert. Von dort wird das Signal an die erste Biquad-Sektion weitergegeben. <br></p>
+<p>Parallel dazu wird das Valid-Signal über eine Signalkette geführt, sodass die Gültigkeit der Daten in jeder Stufe erhalten bleibt.<br> Die instanzierte Biquad-Sektion verarbeitet <em>sec0out</em> und liefert die gefilterten Daten (<em>sec1out</em>) sowie das zugehörige Valid-Signal (<em>sec1validout</em>). Anschließend folgt eine zweite Shifting- und Multiplikationsstufe (<em>sec1</em>), in der <em>sec1out</em> erneut skaliert und vorbereitet wird. Auch hier wird das Valid-Signal entsprechend weitergereicht.<br> Für einen Filter zweiter Ordnung wird diese Sektion nur einmal aufgerufen, bei höheren Ordnungen werden mehrere Sektionen kaskadiert.<br> Die Ausgabe wird konditional gesteuert. Wenn das Valid-Signal gültig ist, wird das gefilterte Ergebnis an <em>dataOut</em> ausgegeben. Ein synchronisiertes Valid-Signal (<em>validOut</em>) zeigt an, wann die Daten gültig sind.<br></p>
+</section>
+<section id="filter-sektion" class="level3">
+<h3 class="anchored" data-anchor-id="filter-sektion">Filter-Sektion</h3>
+<p>Die Filter-Sektion bildet die eigentliche Biquad-Filterstruktur und enthält die entsprechenden Koeffizienten. Die Biquad-Sektion ist in transponierter Direct Form II umgesetzt und übernimmt die arithmetischen Berechnungen des IIR-Filters. Sie erhält ein Eingangssample (<em>dataIn</em>) mit zugehörigem Gültigkeitssignal (<em>validIn</em>) und liefert das gefilterte Sample samt gültigem Ausgangssignal zurück.<br></p>
+<p>Zunächst wird das Eingangssignal gepuffert. Anschließend wird es in drei Numerator-Zweigen parallel mit festen Koeffizienten multipliziert. Jeder Pfad besteht aus einem Vor-Register, dem Multiplizierer und einem Nach-Register. Die Denominator-Seite arbeitet mit zwei internen Zuständen (<em>state1</em> und <em>state2</em>), die über Multiplikationen und Addierer-Ketten rekursiv zurückgeführt werden. Diese Rückkopplung bildet den IIR-Charakter der Filterung.<br></p>
+<p>Die kombinierte Summe wird auf den gewünschten Fixpunktbereich begrenzt und ausgegeben. Ein mehrstufiges Delay-Register sorgt dafür, dass das Ausgangssignal und das Valid-Signal zeitlich synchron anliegen.<br> Zusammengefasst wird das Eingangssignal gepuffert, in drei parallelen Numerator-Zweigen mit festen Koeffizienten verarbeitet und mit den Rückkopplungswerten kombiniert. Die resultierende Summe wird skaliert und als gefiltertes Signal bereitgestellt, während das Valid-Signal die zeitliche Korrektheit sicherstellt.<br></p>
 </section>
 </section>
 </section>

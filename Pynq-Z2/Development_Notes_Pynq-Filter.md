@@ -229,10 +229,9 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ ~~Warum DFII T und warum sind Delays schlecht umzusetzen?~~
 - ❌~~Warum Fixed-Point?~~
 - ❌ Theorie: Quantesierung weiter Ausbauen.
-- ❌ Schematische Beschreibung der Funktionsweise der Filter IP anhand eines Beispieles
 - ❌ ~~Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)~~
 - ❌ Blockschaltbilder (Simulink)
-- ❌ Codebeschreibung (Matlab, Python)
+- ❌ Codebeschreibung (~~Matlab~~, Python)
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ❌ Aufräumen des Git Reposetories
 - ❌ ~~OrgID erstellen~~
@@ -255,7 +254,7 @@ zienten für den FPGA.
 - ✅ Pipelining, Fixed-point und warum DFII T erklären
 - ✅ Finales Filterdesign
 - ✅ Filterentwurf in Matlab ausgebaut
- 
+- ✅ Schematische Beschreibung der Funktionsweise der Filter IP
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)

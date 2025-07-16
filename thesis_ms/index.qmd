@@ -31,3 +31,5 @@ right: |
 {{< include ../chapters/Filterdesign_Matlab.qmd >}}
 
 {{< include ../chapters/Implementierung_FPGA.qmd >}}
+
+{{< include ../chapters/Filter_Code_v2.qmd >}}
