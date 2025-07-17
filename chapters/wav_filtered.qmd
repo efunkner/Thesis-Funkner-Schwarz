@@ -1,51 +1,8 @@
 # Filterung einer WAV Datei
 
-Filterung von einer WAV auf der Basis von der Biquad.ino
+Zur Demonstration von digitalen Filtern wird eine WAV-Datei mittels eines Mikrocontroller giltert. Die Audiodatei wird von einer SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert. 
 
-Datei wird von einer SD-Karte im 4 Wire-Mode oder 1 Wire-Mode eingelesen.
+Zu beachten ist, dass die Datei ein 16 Bit Format sein muss, damit diese gefiltert werden kann.
 
-Der Header der WAV-Datei wird analysiert und die Paramter zur Erstellung der gefilterten Datei von dieser Entnommen übernommen.
-
-```c++
-// --- Filterprozess auf Samples der WAV anwenden ---
-void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample) {
-  uint16_t blockAlign = numChannels * bitsPerSample / 8;
-  const int bufferFrames = 512;
-  int16_t buffer[bufferFrames * numChannels]; // Zwsichenspeicher für Samples
-
-  uint32_t totalFrames = dataSize / blockAlign;
-  uint32_t framesLeft = totalFrames;
-
-  while (framesLeft > 0) {
-    int framesToRead = (framesLeft > bufferFrames) ? bufferFrames : framesLeft;
-    int bytesToRead = framesToRead * blockAlign;
-
-    // Rohdaten lesen
-    int bytesRead = wavFile.read((uint8_t*)buffer, bytesToRead);
-    if (bytesRead != bytesToRead) {
-      Serial.println("Fehler beim Lesen der Samples.");
-      break;
-    }
-
-    int samplesInBuffer = bytesRead / 2; // 2 Bytes = 16 Bit pro Sample
-
-
-    // Samples einzeln filtern
-    for (int i = 0; i < samplesInBuffer; i += numChannels) {
-      if (numChannels == 1) {
-        float filteredSample = filterL.filter((float)buffer[i]);
-        buffer[i] = constrain((int)filteredSample, -32768, 32767);
-      }
-      else {
-        float filteredL = filterL.filter((float)buffer[i]);
-        float filteredR = filterR.filter((float)buffer[i + 1]);
-        buffer[i] = constrain((int)filteredL, -32768, 32767);
-        buffer[i + 1] = constrain((int)filteredR, -32768, 32767);
-      }
-    }
-    // Gefilterte Daten in neue Datei schreiben
-    filteredFile.write((uint8_t*)buffer, bytesRead);
-    framesLeft -= framesToRead;
-  }
-}
+```cpp
 ```
