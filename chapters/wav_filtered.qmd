@@ -1,8 +1,99 @@
 # Filterung einer WAV Datei
 
-Zur Demonstration von digitalen Filtern wird eine WAV-Datei mittels eines Mikrocontroller giltert. Die Audiodatei wird von einer SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert. 
+Zur Demonstration von digitalen Filtern auf Mikrocontrollern wird eine WAV-Datei mittels eines ESP32 giltert. Die Audiodatei wird über eine SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert. 
 
-Zu beachten ist, dass die Datei ein 16 Bit Format sein muss, damit diese gefiltert werden kann.
+Zu beachten ist, dass nur 16 Bit WAV Dateien unterstütz werden. Die Datei kann jedoch Mono oder Stereo mit und eine beliebige Abtastrat sein. Die WAV-Datei, die gefiltert werden soll muss vor der Übertragung auf die SD-karte zu `original.wav` umbenannt werden.
 
 ```cpp
+#include "SD_MMC.h" // SD-Karten-Support für ESP32 mit SD_MMC-Anschluss
 ```
+Durch die Einbindung vom SD_MMC.h wird eine erleichterte Nutzung von SD-Karten mit einem ESP32 geboten, als auch die Möglichkeit für 1-Wire-Modus sowie 4-Wire-Modus.
+
+
+```cpp
+// --- WAV Hilfsfunktionen ---
+uint32_t readLEUint32(uint8_t* buf) {
+  return (uint32_t)buf[0] | ((uint32_t)buf[1] << 8) | ((uint32_t)buf[2] << 16) | ((uint32_t)buf[3] << 24);
+}
+uint16_t readLEUint16(uint8_t* buf) {
+  return (uint16_t)buf[0] | ((uint16_t)buf[1] << 8);
+}
+```
+WAV HILFE KRAM
+
+```cpp
+// WAV-Header für die Ausgabedatei schreiben
+void writeWavHeader(File &file, uint32_t dataSize, uint16_t channels, uint32_t sampleRate, uint16_t bitsPerSample) {
+  const char* riff = "RIFF";
+  const char* wave = "WAVE";
+  const char* fmt  = "fmt ";
+  const char* data = "data";
+
+  uint32_t chunkSize = 36 + dataSize;
+  uint16_t blockAlign = channels * bitsPerSample / 8;
+  uint32_t byteRate = sampleRate * blockAlign;
+  uint32_t subchunk1Size = 16;
+  uint16_t audioFormat = 1; // PCM
+
+  file.seek(0);
+  file.write((const uint8_t*)riff, 4);
+  file.write((uint8_t*)&chunkSize, 4);
+  file.write((const uint8_t*)wave, 4);
+  file.write((const uint8_t*)fmt, 4);
+  file.write((uint8_t*)&subchunk1Size, 4);
+  file.write((uint8_t*)&audioFormat, 2);
+  file.write((uint8_t*)&channels, 2);
+  file.write((uint8_t*)&sampleRate, 4);
+  file.write((uint8_t*)&byteRate, 4);
+  file.write((uint8_t*)&blockAlign, 2);
+  file.write((uint8_t*)&bitsPerSample, 2);
+  file.write((const uint8_t*)data, 4);
+  file.write((uint8_t*)&dataSize, 4);
+}
+```
+WAV-Header Erstellung für die gefilterte Samples der Eingangsdatei.
+
+
+```cpp
+// --- Variablen für die Ein- und Ausgangsdatei --
+File wavFile;       // Originale Eingangsdatei
+File filteredFile;  // Gefiltere Ausgangsdatei
+
+```
+Hilfvariablen für die originle Eingangsdatei als auch die gefilterte Ausgangsdatei.
+
+
+Der Gesamtprozess bestehend aus einlesen, filtern und neuen WAV-Datei erstellen wird innerhalb der `Setup()`-Funktion durchgeführt.
+
+```cpp
+void setup() {
+  Serial.begin(115200);
+```
+Zunächst wird die serielle Kommunikation mit 115200 Baud initialisiert, um Imformationen des Mikrocontroller in der Konsole auslesen zu können.
+
+```cpp
+  // SD-Karte im 4-Wire Modus initialisieren
+  if (!SD_MMC.begin("/sdcard", false)) {  //false = 4-Wire, true - 1-Wire
+    Serial.println("Fehler beim Initialisieren der SD-Karte.");
+    return;
+  }
+  Serial.println("SD-Karte gefunden.");
+```
+Die SD-Karte wird im 4-Wire-Modus initialisert, welcher eine höhere Datenübertragungsrate ermöglicht als der 1-Wire-Modus. Durch den Parameter `false` wird der 4-Wire-Modus aktiviert, während `true` den 1-Wire-Modus aktiviert.
+
+```cpp
+  // Eingangs WAV Datei öffnen
+  wavFile = SD_MMC.open("/original.wav", FILE_READ);
+  if (!wavFile) {
+    Serial.println("Fehler beim Öffnen der WAV-Datei.");
+    return;
+  }
+
+  // WAV Header auslesen
+  if (!readWavHeader()) {
+    wavFile.close();
+    return;
+  }
+```
+Die originale WAV-Datei wird im Lesemodus geöffnet. Für den Fall, dass das Öffnen fehlschlägt, wird eine dementsprechende Fehlermeldung ausgegeben und das Programm beendet. Bei erfolgreichen Öffnen wird die Funktion `readWavHeader` aufgerufen und der Header der Einangsdatei analysiert. Falls diese Funktion `false` zurückgibt, wird die Datei geschlossen und das Programm beendet.
+

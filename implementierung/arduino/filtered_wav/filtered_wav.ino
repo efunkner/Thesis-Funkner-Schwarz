@@ -3,7 +3,6 @@
 // --- Für Lyrat Mini SD Init ---
 const int PIN_SD_CARD_POWER = 13;  
 const int PIN_SD_CARD_DET = 34;
-
 // --- Indikator LED ---
 const int LED = 22; // V43 = 22, Mini = 27
 
@@ -206,7 +205,7 @@ void setup() {
   }
   Serial.println("SD-Karte gefunden.");
 
-  // Vorherige Filterung löschen
+  // Vorherige Filterung löschen *optional
   Serial.println("Löschen der vorherigen Filterung.");
   if (SD_MMC.exists("/gefiltert.wav"))
   SD_MMC.remove("/gefiltert.wav");
@@ -298,8 +297,8 @@ bool readWavHeader() {
     return false;
   }
 
-  if (bitsPerSample != 16 && bitsPerSample != 24) {
-    Serial.println("Nur 16-Bit oder 24-Bit PCM wird unterstützt.");
+  if (bitsPerSample != 16) {
+    Serial.println("Nur 16-Bit PCM wird unterstützt.");
     return false;
   }
 
