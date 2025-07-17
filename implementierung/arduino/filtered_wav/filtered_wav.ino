@@ -331,6 +331,7 @@ bool readWavHeader() {
   return true;
 }
 
+// -----------------------------------------------------------------------------------
 // --- Filterprozess auf Samples der WAV anwenden ---
 void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample) {
   uint16_t blockAlign = numChannels * bitsPerSample / 8;
@@ -353,7 +354,7 @@ void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample
 
     int samplesInBuffer = bytesRead / 2; // 2 Bytes = 16 Bit pro Sample
 
-// -----------------------------------------------------------------------------------
+
     // Samples einzeln filtern
     for (int i = 0; i < samplesInBuffer; i += numChannels) {
       if (numChannels == 1) {
