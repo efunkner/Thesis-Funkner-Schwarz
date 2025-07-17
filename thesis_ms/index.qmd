@@ -33,3 +33,5 @@ right: |
 {{< include ../chapters/Implementierung_FPGA.qmd >}}
 
 {{< include ../chapters/Filter_Code_v2.qmd >}}
+
+{{< include ../chapters/FPGA_RealTime.qmd >}}

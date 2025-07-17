@@ -235,7 +235,9 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ❌ Aufräumen des Git Reposetories
 - ❌ ~~OrgID erstellen~~
-- ❌ Demo-Notebook vertig stellen und dokumentieren
+- ❌ Demo-Notebook fertig stellen und dokumentieren
+- ❌ hanrdware beschreibung
+- ❌ Einleitung und Motivation
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
@@ -255,6 +257,7 @@ zienten für den FPGA.
 - ✅ Finales Filterdesign
 - ✅ Filterentwurf in Matlab ausgebaut
 - ✅ Schematische Beschreibung der Funktionsweise der Filter IP
+- ✅ Beschreibung echtzeitfilterung
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
