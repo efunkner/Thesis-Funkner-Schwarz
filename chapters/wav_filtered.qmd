@@ -1,8 +1,8 @@
 # Filterung einer WAV Datei
 
-Zur Demonstration von digitalen Filtern auf Mikrocontrollern wird eine WAV-Datei mittels eines ESP32 giltert. Die Audiodatei wird über eine SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert. 
+Zur Demonstration von digitalen Filtern auf Mikrocontrollern wird eine WAV-Datei mittels eines ESP32 gefiltert. Die Audio-Datei wird über eine SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert. 
 
-Zu beachten ist, dass nur 16-Bit-WAV-Dateien unterstütz werden. Die Datei kann jedoch Mono oder Stereo mit und eine beliebige Abtastrat sein. Die WAV-Datei, die gefiltert werden soll muss vor der Übertragung auf die SD-karte zu `original.wav` umbenannt werden.
+Zu beachten ist, dass nur 16-Bit-WAV-Dateien unterstütz werden. Die Datei kann jedoch Mono oder Stereo mit und eine beliebige Samplerate sein. Die WAV-Datei, die gefiltert werden soll muss zu `original.wav` umbenannt werden bevor diese auf die SD-karte übertragen wird.
 
 ## Vorbereitung der WAV-Filterung
 
