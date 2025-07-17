@@ -1,0 +1,36 @@
+# Funktionsweise des generierten Filter-Codes
+Die Modulnamen wurden automatisch vom HDL Coder generiert und unverändert übernommen. Der hier beschriebene Code bezieht sich exemplarisch auf den Hochpass-Filter. Da jedoch alle Filter mit demselben Simulink-Modell erstellt und nach dem gleichen Verfahren generiert wurden, sind die allgemeinen Beschreibungen sinngemäß auch auf die übrigen Filter übertragbar.<br>
+Für die Implementierung kam ein vorgefertigter [Biquad-Filter-Block](https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html) aus der DSP HDL Toolbox zum Einsatz. Dieser wurde mithilfe des HDL Coders in einen AXI4-Stream-fähigen IP-Core umgesetzt, sodass der generierte VHDL-Code für alle Filter dieser Art weitgehend identisch ist.<br>
+
+## Struktur des generierten Codes
+Das Top-Level-Modul bildet die oberste Instanz und integriert alle Funktionseinheiten. Die AXI4-Stream-Schnittstellen werden von zwei Modulen umgesetzt, einem AXI4-Stream Slave und einem Master. Der Slave empfängt die Eingangsdaten vom übergeordneten System und speichert sie zunächst in einem Eingangs-FIFO. Die eigentliche Signalverarbeitung findet im Design Under Test (DUT) statt. Hier werden die zwischengespeicherten Eingangsdaten durch eine Kaskade von Biquad-Filtersektionen geleitet. Jede Sektion wird dabei durch ein separates Modul realisiert. Das DUT enthält ein Modul, das die gesamte Biquad-Filterstruktur beschreibt, die wiederum aus mehreren Sektionen bestehen kann. Die Daten werden Sektion für Sektion gefiltert, bis die gewünschte Filtercharakteristik erreicht ist.<br>
+
+Nach der Filterung werden die Ausgangsdaten in einem Ausgangs-FIFO zwischengespeichert, damit sie gepuffert zur Verfügung stehen. Ein spezieller FIFO sorgt für die korrekte Handhabung des TLAST-Signals, das im AXI4-Stream-Protokoll das Ende eines Frames oder Datenpakets signalisiert. Der AXI4-Stream Master gibt die gefilterten Daten schließlich zurück an das übergeordnete System. Ein zusätzliches Modul zur Reset-Synchronisation stellt sicher, dass ein globales Reset-Signal in allen Takt- und Logikbereichen zuverlässig übernommen wird.<br>
+
+Für den Datenverlauf bedeutet das, dass die Eingangsdaten über einen AXI4-Stream empfangen, gepuffert, durch den Biquad-Filter verarbeitet, erneut gepuffert und schließlich über AXI4-Stream ausgegeben werden. Der Datenfluss wird über Handshake-Signale gesteuert, um Datenverlust oder Überläufe zu vermeiden.<br>
+
+## Umsetzung des Filters
+### Filter DUT
+Wie bereits erwähnt, folgt der Code einer klaren Hierarchie. Das DUT übernimmt innerhalb dieses Designs mehrere Aufgaben. Es steuert, wann neue Daten aus dem Eingangs-FIFO gelesen werden und führt diese der Filter-Komponente zu. Nach der Filterung nimmt es die Ergebnisse entgegen, speichert sie im Ausgangs-FIFO und kümmert sich um alle notwendigen Steuersignale wie *Valid-/Ready*-Signale und Handshake-Mechanismen. Zudem stellt es sicher, dass die Filter-Komponente korrekt in die übergeordnete Takt- und Reset-Logik eingebunden ist.<br>
+
+### Filter-Wrapper
+Innerhalb des DUT wird die Komponente **src_Biquad_Filter** instanziiert. Diese Komponente fungiert als Wrapper und kapselt die eigentliche Filterkette. Sie nimmt die Eingangssignale entgegen, leitet sie unverändert weiter und gibt die Ergebnisse der Filterkette zurück an das DUT. Zudem stellt der Wrapper sicher, dass die Port-Zuordnung und Taktanbindung korrekt sind und das *clk_enable-Signal* richtig durchgereicht wird. Auf diese Weise wird die gesamte Filterlogik mit den Biquad-Sektionen innerhalb des Wrappers gebündelt.<br>
+
+### Die Filterlogik
+Wie bereits erwähnt, wird die Filterlogik exemplarisch am Hochpass-Filter erläutert. Es kann dabei zu minimalen Abweichungen bei anderen Filtern kommen, die grundsätzliche Funktionsweise ist jedoch bei allen Filtern vergleichbar.<br>
+
+Innerhalb des Wrappers wird eine gleichnamige Komponente instanziiert, die hierarchisch unterhalb des Wrappers angesiedelt ist. Hier befindet sich die eigentliche Filterlogik.<br>
+Die Eingangsdaten (*dataIn)* werden zunächst in ein vorzeichenbehaftetes Signal (*dataIn_signed*) umgewandelt und im Register *sec0reg* zwischengespeichert. In der ersten Shifting- und Multiplikationsstufe (*sec0*) wird der Eingangswert durch Konkatenation mit Nullen nach links verschoben, um die gewünschte Fixpunkt-Skalierung zu erreichen. Das Ergebnis wird im Register *sec0mulreg* abgelegt, der relevante Bitbereich extrahiert (*sec0dtc*) und in *sec0out* zwischengespeichert. Von dort wird das Signal an die erste Biquad-Sektion weitergegeben. <br>
+
+Parallel dazu wird das Valid-Signal über eine Signalkette geführt, sodass die Gültigkeit der Daten in jeder Stufe erhalten bleibt.<br>
+Die instanzierte Biquad-Sektion verarbeitet *sec0out* und liefert die gefilterten Daten (*sec1out*) sowie das zugehörige Valid-Signal (*sec1validout*). Anschließend folgt eine zweite Shifting- und Multiplikationsstufe (*sec1*), in der *sec1out* erneut skaliert und vorbereitet wird. Auch hier wird das Valid-Signal entsprechend weitergereicht.<br>
+Für einen Filter zweiter Ordnung wird diese Sektion nur einmal aufgerufen, bei höheren Ordnungen werden mehrere Sektionen kaskadiert.<br>
+Die Ausgabe wird konditional gesteuert. Wenn das Valid-Signal gültig ist, wird das gefilterte Ergebnis an *dataOut* ausgegeben. Ein synchronisiertes Valid-Signal (*validOut*) zeigt an, wann die Daten gültig sind.<br>
+
+### Filter-Sektion
+Die Filter-Sektion bildet die eigentliche Biquad-Filterstruktur und enthält die entsprechenden Koeffizienten. Die Biquad-Sektion ist in transponierter Direct Form II umgesetzt und übernimmt die arithmetischen Berechnungen des IIR-Filters. Sie erhält ein Eingangssample (*dataIn*) mit zugehörigem Gültigkeitssignal (*validIn*) und liefert das gefilterte Sample samt gültigem Ausgangssignal zurück.<br>
+
+Zunächst wird das Eingangssignal gepuffert. Anschließend wird es in drei Numerator-Zweigen parallel mit festen Koeffizienten multipliziert. Jeder Pfad besteht aus einem Vor-Register, dem Multiplizierer und einem Nach-Register. Die Denominator-Seite arbeitet mit zwei internen Zuständen (*state1* und *state2*), die über Multiplikationen und Addierer-Ketten rekursiv zurückgeführt werden. Diese Rückkopplung bildet den IIR-Charakter der Filterung.<br>
+
+Die kombinierte Summe wird auf den gewünschten Fixpunktbereich begrenzt und ausgegeben. Ein mehrstufiges Delay-Register sorgt dafür, dass das Ausgangssignal und das Valid-Signal zeitlich synchron anliegen.<br>
+Zusammengefasst wird das Eingangssignal gepuffert, in drei parallelen Numerator-Zweigen mit festen Koeffizienten verarbeitet und mit den Rückkopplungswerten kombiniert. Die resultierende Summe wird skaliert und als gefiltertes Signal bereitgestellt, während das Valid-Signal die zeitliche Korrektheit sicherstellt.<br>
