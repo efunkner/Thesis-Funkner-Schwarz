@@ -1,0 +1,24 @@
+# Steuerung des Filters
+Das erzeugte overlay kann nun auf das Pynq-Board geladen werden. Dort befindet sich ein Notebook mit welchen die Filterung aber auch die Aufnahme analoger Audio durchgeführt werden kann. Neben dem Notebook selbst, der eine Interaktive bediehnung und einfache Form der Analayse ermöglicht, existiert eine Weite Python File namen Filter_Overlay.py, welche direkt im Notebook aufgerufen wird. In diesem Python skript befinden sich alle nötigen Biblioteken welche notwendig sind die Filterung zu bedeihenen, sowie auch weitere Funktionen die die bediehnung vereinfachen und einheitlich machen. 
+
+<!--
+Biblioteken:
+- beschreiben welche standet sind und welche pynq-spezifisch sind
+Zueisung der Filter:
+- filter werden anhand der axi-dma zugewiesen -> deshaölb war namensgebung so wichtig
+- diese können dann einfach aufgerufen werden
+Audiocodec treiber
+- wo kommen die funktionen her und was machen die
+- anmerken dann nicht von 48kHz  weck eingestellt werden kann, was hat man beobachtet
+Funktionen
+- wie genau funktioniert die übertragung -> alocate
+- wie und warum muss was umgerechnet werden -> padding etc.
+- warum wird in pakete aufgeteilt
+- wo kommen die funktionen her -> welche wurden aus den Pynq beispielen übernommen?
+Analyse
+- warum FFT und wie funktioniert das 
+
+Notebook zum bediehen
+- kurz erklärten wie das notebook aufgebaut ist und was es alles kann, sowie wie man es anwendet
+- 
+-->

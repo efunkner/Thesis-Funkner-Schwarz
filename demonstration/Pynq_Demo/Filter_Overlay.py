@@ -49,12 +49,6 @@ def init_codec(sample_rate):
     pAudio.configure(sample_rate, iic_index=1, uio_name='audio-codec-ctrl')
     return pAudio
 
-def FormatChange_new(x):
-    x = x * (2**16) 
-    x = np.round(x).astype(np.int32)
-    input_data = x.view(np.uint32)
-    return input_data
-
 def FormatChange(x):
     x = x * (2**16)
     x = x.astype(np.int32)
