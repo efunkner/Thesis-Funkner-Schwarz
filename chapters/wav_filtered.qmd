@@ -227,8 +227,6 @@ Es wird überprüft, ob Format- und Data-Chunk gefunden wurden und ob die Datei 
 ```
 Die Ausgabedatei "gefiltert.wav" wird im Schreibmodus erstellt und erhält einen neuen WAV-Header mit den identischen Parametern der Eingangsdatei. Würde man keinen neuen WAV-Header erstellen, sondern den bestehenden verwenden, würde die resultierende Datei fehlerhaft enden. Es werden die Anzahl der Frames berechnet und ausgeben, und im Anschluss wird die Sample-für-Sample Filterung über die `filterAudio()`-Funktion gestartet. Nach der Filterung werden beide Dateien geschlossen und endet damit das Programm. 
 
-
-
 ## Filterprozess der WAV-Datei
 ```cpp
 // --- Filterprozess auf Samples der WAV anwenden ---
