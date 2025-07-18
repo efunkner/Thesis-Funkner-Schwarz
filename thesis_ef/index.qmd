@@ -33,3 +33,5 @@ right: |
 {{< include ../chapters/filter_python.qmd >}}
 
 {{< include ../chapters/arduino.qmd >}}
+
+{{< include ../chapters/wav_filtered.qmd >}}

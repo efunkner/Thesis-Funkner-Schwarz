@@ -2,7 +2,7 @@
 
 Zur Demonstration von digitalen Filtern auf Mikrocontrollern wird eine WAV-Datei mittels eines ESP32 gefiltert. Die Audio-Datei wird über eine SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert. 
 
-Zu beachten ist, dass nur 16-Bit-WAV-Dateien unterstütz werden. Die Datei kann jedoch Mono oder Stereo mit und eine beliebige Samplerate sein. Die WAV-Datei, die gefiltert werden soll muss zu `original.wav` umbenannt werden bevor diese auf die SD-karte übertragen wird.
+Zu beachten ist, dass nur 16-Bit-WAV-Dateien unterstützt werden. Die Datei kann jedoch Mono oder Stereo mit und einer beliebigen Samplerate sein. Die WAV-Datei, die gefiltert werden soll, muss zu `original.wav` umbenannt werden bevor diese auf die SD-Karte übertragen wird.
 
 ## Vorbereitung der WAV-Filterung
 
@@ -21,7 +21,7 @@ uint16_t readLEUint16(uint8_t* buf) {
   return (uint16_t)buf[0] | ((uint16_t)buf[1] << 8);
 }
 ```
-Diese Hilfsfunktionen konvertieren Byte-Arrays aus WAV Dateien in Ganzzahlen im Little-Edian-Format. `readLEUint32()` kombiniert 4 Bytes zu einem 32-Bit-wert, `readLEUint16()` kombiniert 2 Bytes zu einem 16-Bit-Wert, wobei das niedrigste Byte zuerst kommt.
+Diese Hilfsfunktionen konvertieren Byte-Arrays aus WAV-Dateien in Ganzzahlen im Little-Edian-Format um. `readLEUint32()` kombiniert 4 Bytes zu einem 32-Bit-wert, `readLEUint16()` kombiniert 2 Bytes zu einem 16-Bit-Wert, wobei das niedrigste Byte zuerst kommt.
 
 ```cpp
 // WAV-Header für die Ausgabedatei schreiben
@@ -53,7 +53,7 @@ void writeWavHeader(File &file, uint32_t dataSize, uint16_t channels, uint32_t s
   file.write((uint8_t*)&dataSize, 4);
 }
 ```
-Die `writeWavHeader`-Funktion schreibt einen WAV-Header in die Ausgabedatei. Die Funktion erstellt die erforderlichen Chunks (RIFF, WAVE, fmt, data) mit den übergebenen Audio-Parametern und berechnet automatisch die abgeleiten Werte wie Byte-Rate und Block-Alignment. Der Header wird im Little-Endian-Format geschrieben.
+Die `writeWavHeader`-Funktion schreibt einen WAV-Header in die Ausgabedatei. Die Funktion erstellt die erforderlichen Chunks (RIFF, WAVE, fmt, data) mit den übergebenen Audio-Parametern und berechnet automatisch die abgeleiteten Werte wie Byte-Rate und Block-Alignment. Der Header wird im Little-Endian-Format geschrieben.
 
 
 ```cpp
@@ -62,7 +62,7 @@ File wavFile;       // Originale Eingangsdatei
 File filteredFile;  // Gefiltere Ausgangsdatei
 
 ```
-Hilfvariablen für die originle Eingangsdatei als auch die gefilterte Ausgangsdatei.
+Hilfsvariablen für die originale Eingangsdatei als auch die gefilterte Ausgangsdatei.
 
 
 Der Gesamtprozess bestehend aus einlesen, filtern und neuen WAV-Datei erstellen wird innerhalb der `Setup()`-Funktion durchgeführt.
@@ -71,7 +71,7 @@ Der Gesamtprozess bestehend aus einlesen, filtern und neuen WAV-Datei erstellen 
 void setup() {
   Serial.begin(115200);
 ```
-Zunächst wird die serielle Kommunikation mit 115200 Baud initialisiert, um Imformationen des Mikrocontroller in der Konsole auslesen zu können.
+Zunächst wird die serielle Kommunikation mit 115200 Baud initialisiert, um Informationen des Mikrocontroller in der Konsole auslesen zu können.
 
 ```cpp
   // SD-Karte im 4-Wire Modus initialisieren
@@ -81,7 +81,7 @@ Zunächst wird die serielle Kommunikation mit 115200 Baud initialisiert, um Imfo
   }
   Serial.println("SD-Karte gefunden.");
 ```
-Die SD-Karte wird im 4-Wire-Modus initialisert, welcher eine höhere Datenübertragungsrate ermöglicht als der 1-Wire-Modus. Durch den Parameter `false` wird der 4-Wire-Modus aktiviert, während `true` den 1-Wire-Modus aktiviert. Wird keine SD-Karte gefunden oder besteht ein Problem bei der Inistialisierung, wird eine Fehlermeldung ausgegeben und das Programm beendet.
+Die SD-Karte wird im 4-Wire-Modus initialisiert, welcher eine höhere Datenübertragungsrate ermöglicht als der 1-Wire-Modus. Durch den Parameter `false` wird der 4-Wire-Modus aktiviert, während `true` den 1-Wire-Modus aktiviert. Wird keine SD-Karte gefunden oder besteht ein Problem bei der Initialisierung, wird eine Fehlermeldung ausgegeben und das Programm beendet.
 
 ```cpp
   // Eingangs WAV Datei öffnen
@@ -97,7 +97,7 @@ Die SD-Karte wird im 4-Wire-Modus initialisert, welcher eine höhere Datenübert
     return;
   }
 ```
-Die originale WAV-Datei wird im Lesemodus geöffnet. Für den Fall, dass das Öffnen fehlschlägt, wird dementsprechende Fehlermeldung ausgegeben und das Programm beendet. Bei erfolgreichen Öffnen wird die Funktion `readWavHeader` aufgerufen und der Header der Einangsdatei analysiert. Falls diese Funktion `false` zurückgibt, wird die Datei geschlossen und das Programm beendet.
+Die originale WAV-Datei wird im Lesemodus geöffnet. Für den Fall, dass das Öffnen fehlschlägt, wird dementsprechende Fehlermeldung ausgegeben und das Programm beendet. Bei erfolgreichen Öffnen wird die Funktion `readWavHeader` aufgerufen und der Header der Eingangsdatei analysiert. Falls diese Funktion `false` zurückgibt, wird die Datei geschlossen und das Programm beendet.
 
 
 ```cpp
@@ -113,7 +113,7 @@ bool readWavHeader() {
     return false;
   }
 ```
-Die Header-Analyse-Funkion beginnt mit der Validierung der WAV-Datei Signatur. Dazu werden die ersten 12 Bytes der Datei gelesen, die den RIFF-Header bilden. Anschließend wird überprüft, ob die Bytes 0-3 die Zeichenkette "RIFF" und die Bytes 8-11 die Zeichenkette "WAVE" enthalten. Diese Signaturen sind für alle gültigen WAV-Dateien notwendig und indentifizieren das genaue Dateiformat.
+Die Header-Analyse-Funkion beginnt mit der Validierung der WAV-Datei Signatur. Dazu werden die ersten 12 Bytes der Datei gelesen, die den RIFF-Header bilden. Anschließend wird überprüft, ob die Bytes 0-3 die Zeichenkette "RIFF" und die Bytes 8-11 die Zeichenkette "WAVE" enthalten. Diese Signaturen sind für alle gültigen WAV-Dateien notwendig und identifizieren das genaue Dateiformat.
 
 ```cpp
   // Variablen für WAV-Informationen
@@ -121,7 +121,7 @@ Die Header-Analyse-Funkion beginnt mit der Validierung der WAV-Datei Signatur. D
   uint32_t sampleRate = 0, dataSize = 0;
   bool fmtFound = false, dataFound = false;
 ```
-Für die Chunk-Analyse werden die folgenden Variablen initialsiert, welche die Audio-Parameter speichern. Die 16-Bit Variablen `audioFormat`, `numChannels` und `bitsPerSample` enthalten die grundlegenden Format-Informationen, während `sampleRate` und `dataSize` als 32-Bit-Werte die Abtastrate und Datengröße speichern. Die booleschen Flags `fmtFound` und `dataFound` verfolgen, die notwendigen Chunks bereits gefunden wurden.
+Für die Chunk-Analyse werden die folgenden Variablen initialisiert, welche die Audio-Parameter speichern. Die 16-Bit Variablen `audioFormat`, `numChannels` und `bitsPerSample` enthalten die grundlegenden Format-Informationen, während `sampleRate` und `dataSize` als 32-Bit-Werte die Abtastrate und Datengröße speichern. Die booleschen Flags `fmtFound` und `dataFound` verfolgen, die notwendigen Chunks bereits gefunden wurden.
 
 ```cpp
   // Suche nach "fmt " und "data" Chunks
@@ -158,7 +158,7 @@ Der Chunk-Parser durchläuft systematisch die WAV-Datei, um relevante Datenabsch
       if (chunkSize % 2 == 1) wavFile.seek(wavFile.position() + 1);
     }
 ```
-Wenn der Chunk-Header "fmt" gefunden wird, werden die Chunk-Daten in einen Puffer geladen und die wichtigsten Audio-Paramter extraiert: Audi-Format(PCM), Kanalzahl(Mono oder Stereo), Samplerate und die Bits pro Sample aus festen Byte-Positionen. Die Parameter werden zur Kontrolle ausgegeben und bei ungerader Chunk-Größe wird ein Padding-Byte übersprungen.
+Wenn der Chunk-Header "fmt" gefunden wird, werden die Chunk-Daten in einen Puffer geladen und die wichtigsten Audio-Parameter extrahiert: Audi-Format(PCM), Kanalzahl(Mono oder Stereo), Samplerate und die Bits pro Sample aus festen Byte-Positionen. Die Parameter werden zur Kontrolle ausgegeben und bei ungerader Chunk-Größe wird ein Padding-Byte übersprungen.
 
 ```cpp
     // Daten-Chunk gefunden
@@ -178,7 +178,7 @@ Der Data-Chunk enthält die eigentlichen Audio-Daten mit den Samples. Sobald die
     }
   }
 ```
-Irrelavante Chunks, wie LIST oder INFO, werden übersprungen, indem der Dateizeiger um die Chunk-Größe voran bewegt wird. Bei ungerader Chunk-Größe wird ein zusätzliches Padding-Byte übersprungen.
+Irrelevante Chunks, wie LIST oder INFO, werden übersprungen, indem der Dateizeiger um die Chunk-Größe voranbewegt wird. Bei ungerader Chunk-Größe wird ein zusätzliches Padding-Byte übersprungen.
 
 ```cpp
   // Überprüfen ob alle nötigen Informationen gefunden wurden
@@ -202,7 +202,7 @@ Irrelavante Chunks, wie LIST oder INFO, werden übersprungen, indem der Dateizei
     return false;
   }
 ```
-Es wird überprüft, ob Format- und Data-Chunk gefunden wurden und ob die Datei das kompatible Format besitzt. Enspricht die Datei nicht dem vorgesetzten Format wird eine Fehlermeldung ausgeben und das Programm beendet.
+Es wird überprüft, ob Format- und Data-Chunk gefunden wurden und ob die Datei das kompatible Format besitzt. Entspricht die Datei nicht dem vorgesetzten Format wird eine Fehlermeldung ausgeben und das Programm beendet.
 
 ```cpp
   // Ausgabedatei erstellen und Header schreiben
@@ -227,7 +227,7 @@ Es wird überprüft, ob Format- und Data-Chunk gefunden wurden und ob die Datei 
 
   return true;
 ```
-Die Ausgabedatei "gefiltert.wav" wird im Schreibmodus erstellt und erhält eine neuen WAV-Header mit den identischen Parameter der Eingangsdatei. Würde man keinen neuen WAV-Header erstellen sondern den bestehenden versuchen zu verwenden, würde die resultierende Datei fehlerhaft enden. Es werden die Anzahl der Frames berechnet und ausgeben, und im Anschluss wird die Sample-für-Sample Filterung über die `filterAudio()`-Funktion gestartet. Nach der Filterung werden beide Dateien geschlossen und endet damit das Programm. 
+Die Ausgabedatei "gefiltert.wav" wird im Schreibmodus erstellt und erhält einen neuen WAV-Header mit den identischen Parametern der Eingangsdatei. Würde man keinen neuen WAV-Header erstellen, sondern den bestehenden verwenden, würde die resultierende Datei fehlerhaft enden. Es werden die Anzahl der Frames berechnet und ausgeben, und im Anschluss wird die Sample-für-Sample Filterung über die `filterAudio()`-Funktion gestartet. Nach der Filterung werden beide Dateien geschlossen und endet damit das Programm. 
 
 
 
@@ -278,9 +278,56 @@ Die `filterAudio`-Funktion führt die Sample-für-Sample-Verabreitung der Audio-
 
 **Blockweise Verarbeitung**: Die Audio-Daten werden in 512-Frame-Blöcken eingelesen, anstatt die gesamte Datei in den Speicher zu laden. Die ermöglicht auch die Verarbeitung großer Dateien mit begrenztem Arbeitsspeicher.
 
-**Filteranwendung**: Jedes der Sample wird durch die digitalen Filter gesendet. Bei Mono wird jeweils jedes Sample durch eine einzige Filterinstanz (`filterL`) verabreitet. Bei Stereo liegen die 16-Bit-Samples im Interleaved-Format vor, bei welchem sich der linken und rechten Kanalsamples abwechseln(LRLRLR...). Die Schleife springt um `numChannels` Positionen (`i +=numChannels`), wodurch `buffer[i]` stets den linken und `buffer[i]` den rechten Kanal adressiert. Beide Kanäle werden durch seperate Filterinstanzen (`filterL` für links, `filterR` für rechts) unabhängig voneinander gefiltert, was die Stereo-Trennung gewährleistet.
+**Filteranwendung**: Jedes der Sample wird durch die digitalen Filter gesendet. Bei Mono wird jeweils jedes Sample durch eine einzige Filterinstanz (`filterL`) verarbeitet. Bei Stereo liegen die 16-Bit-Samples im Interleaved-Format vor, bei welchem sich der linken und rechten Kanalsamples abwechseln(LRLRLR...). Die Schleife springt um `numChannels` Positionen (`i +=numChannels`), wodurch `buffer[i]` stets den linken und `buffer[i]` den rechten Kanal adressiert. Beide Kanäle werden durch separate Filterinstanzen (`filterL` für links, `filterR` für rechts) unabhängig voneinander gefiltert, was die Stereo-Trennung gewährleistet.
 
-**Wertebreichtsschutz**: Da digitale Filter die Amplitude verstärken können, werden die gefilterten Werte mit `constrain()` auf den gültigen 16-Bit-Bereich begrenzt. Dies verhindert Übersteuerung und damit verbundene Verzerrungen.
+**Wertebreichsschutz**: Da digitale Filter die Amplitude verstärken können, werden die gefilterten Werte mit `constrain()` auf den gültigen 16-Bit-Bereich begrenzt. Dies verhindert Übersteuerung und damit verbundene Verzerrungen.
 
-**Kontinuirliche Ausgabe**: Die verarbeiteten Samples werden sofort in die Ausgabedatei geschrieben, wodurch ein kontinuierlicher Datenfluss ohne große Zwischenspeicherung gewährleistet wird.
+**Kontinuierliche Ausgabe**: Die verarbeiteten Samples werden sofort in die Ausgabedatei geschrieben, wodurch ein kontinuierlicher Datenfluss ohne große Zwischenspeicherung gewährleistet wird.
 
+## Kaskadierung
+
+
+```cpp
+#define NUM_STAGES 2 // Anzahl der Filterstufen
+
+// Erste Sektion
+const float gain_s1 = 1.0;
+const float b_coefficients_s1[] = { b_0_s1, b_1_s1, b_2_s1};
+const float a_coefficients_s1[] = { a_0_s1, a_1_s1, a_2_s1};
+// Zweite Sektion
+const float gain_s2 = 1.0;
+const float b_coefficients_s2[] = { b_0_s2, b_1_s2, b_2_s2};
+const float a_coefficients_s2[] = { a_0_s2, a_1_s2, a_2_s2};
+
+BiquadFilterTDF2 filterL[NUM_STAGES] = {
+  BiquadFilterTDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
+  BiquadFilterTDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+};
+
+BiquadFilterTDF2 filterR[NUM_STAGES] = {
+  BiquadFilterTDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
+  BiquadFilterTDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
+};
+```
+
+```cpp
+  // Samples einzeln filtern - KASKADIERT
+  for (int i = 0; i < samplesInBuffer; i += numChannels) {
+    if (numChannels == 1) {
+      float sample = (float)buffer[i];
+      for (int s = 0; s < NUM_STAGES; s++) {
+        sample = filterL[s].filter(sample);
+      }
+      buffer[i] = constrain((int)sample, -32768, 32767);
+    }
+    else {
+      float left = (float)buffer[i];
+      float right = (float)buffer[i + 1];
+      for (int s = 0; s < NUM_STAGES; s++) {
+        left = filterL[s].filter(left);
+        right = filterR[s].filter(right);
+      }
+    buffer[i] = constrain((int)left, -32768, 32767);
+    buffer[i + 1] = constrain((int)right, -32768, 32767);
+  }
+```

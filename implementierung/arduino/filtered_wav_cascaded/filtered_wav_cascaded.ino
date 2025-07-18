@@ -3,7 +3,6 @@
 // ---  Für Lyrat Mini SD Init ---
 const int PIN_SD_CARD_POWER = 13;  
 const int PIN_SD_CARD_DET = 34;
-
 // --- Indikator LED ---
 const int LED = 22; // V43 = 22, Mini = 27
 
@@ -389,7 +388,7 @@ void filterAudio(uint16_t numChannels, uint32_t dataSize, uint16_t bitsPerSample
     int samplesInBuffer = bytesRead / 2; // 2 Bytes = 16 Bit pro Sample
 
 // ===================================================================================================================================================================================================
-    // Samples einzeln filtern
+    // Samples einzeln filtern - KASKADIERT
   for (int i = 0; i < samplesInBuffer; i += numChannels) {
     if (numChannels == 1) {
       float sample = (float)buffer[i];
