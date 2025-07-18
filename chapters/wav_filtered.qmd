@@ -11,7 +11,6 @@ Zu beachten ist, dass nur 16-Bit-WAV-Dateien unterstützt werden. Die Datei kann
 ```
 Durch die Einbindung vom SD_MMC.h wird eine erleichterte Nutzung von SD-Karten mit einem ESP32 geboten, als auch die Möglichkeit für 1-Wire-Modus sowie 4-Wire-Modus.
 
-
 ```cpp
 // --- WAV Hilfsfunktionen ---
 uint32_t readLEUint32(uint8_t* buf) {
@@ -98,7 +97,6 @@ Die SD-Karte wird im 4-Wire-Modus initialisiert, welcher eine höhere Datenüber
   }
 ```
 Die originale WAV-Datei wird im Lesemodus geöffnet. Für den Fall, dass das Öffnen fehlschlägt, wird dementsprechende Fehlermeldung ausgegeben und das Programm beendet. Bei erfolgreichen Öffnen wird die Funktion `readWavHeader` aufgerufen und der Header der Eingangsdatei analysiert. Falls diese Funktion `false` zurückgibt, wird die Datei geschlossen und das Programm beendet.
-
 
 ```cpp
 bool readWavHeader() {
