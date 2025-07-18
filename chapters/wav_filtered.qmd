@@ -284,9 +284,7 @@ Die `filterAudio`-Funktion führt die Sample-für-Sample-Verabreitung der Audio-
 
 **Kontinuierliche Ausgabe**: Die verarbeiteten Samples werden sofort in die Ausgabedatei geschrieben, wodurch ein kontinuierlicher Datenfluss ohne große Zwischenspeicherung gewährleistet wird.
 
-## Kaskadierung
-
-
+## Filterkaskadierung
 ```cpp
 #define NUM_STAGES 2 // Anzahl der Filterstufen
 
@@ -309,6 +307,9 @@ BiquadFilterTDF2 filterR[NUM_STAGES] = {
   BiquadFilterTDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
 };
 ```
+Anhand des Parameters `NUM_STAGES` kann die Anzahl der Biquad-Sektionen definiert werden. Jede Sektion hat ihre eigenen `b`- und `a`-Koeffizienten sowie einen `gain`-Parameter mit den entsprechenden Bezeichnungen. Die Filterinstanzierung erfolgt durch Arrays von Biquad-Filtern, wobei jedes Array-Elemement eine separate Filtersstufe mit eigenen Koeffizienten repräsentiert.
+
+Werden identische Filterparameter in mehrere Filterstufen implementiert, wird die Filtercharakteristik der vorherigen Stufe verstärkt. Alternativ können Filter höherer Ordnung implementiert werden, indem die SOS-Matrix etappenweise auf die einzelnen Filterstufen aufgeteilt wird.
 
 ```cpp
   // Samples einzeln filtern - KASKADIERT
@@ -331,3 +332,4 @@ BiquadFilterTDF2 filterR[NUM_STAGES] = {
     buffer[i + 1] = constrain((int)right, -32768, 32767);
   }
 ```
+Bei der kaskadierten Filterung werden die Filterstufen in Serie Implementiert, bei welcher die Samples durch jede Stufe sequenziell verarbeitet werden. Das Ausgangssignal einer Stufe wird zum Eingangssignal der nächsten Stufe, wodurch eine erhöhte Filterordnung oder verstärkte Filterwirkung ermöglicht. Bei Mono druchläuft jedes Sample alle `NUM_STAGES` Filterstufen des `filterL`-Arrays, bei Stereo werden beide Kanäle parallel durch ihre jeweiligen Filterkaskaden(`filterL` und `filterR`) verarbeitet. Nach der kompletten Kaskadierung werden die gefilterten Daten auf den 16-Bit-Bereich begrenzt und zurückgeschrieben.
