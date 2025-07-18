@@ -232,10 +232,8 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ ~~Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)~~
 - ❌ Blockschaltbilder (Simulink)
 - ❌ Codebeschreibung (~~Matlab~~, Python)
-- ❌ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ❌ Aufräumen des Git Reposetories
 - ❌ ~~OrgID erstellen~~
-- ❌ Demo-Notebook fertig stellen und dokumentieren
 - ❌ hanrdware beschreibung
 - ❌ Einleitung und Motivation
 
@@ -258,6 +256,8 @@ zienten für den FPGA.
 - ✅ Filterentwurf in Matlab ausgebaut
 - ✅ Schematische Beschreibung der Funktionsweise der Filter IP
 - ✅ Beschreibung echtzeitfilterung
+- ✅ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
+- ✅ Demo-Notebook fertig stellen und dokumentieren
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
