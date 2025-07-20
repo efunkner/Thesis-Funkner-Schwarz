@@ -1,7 +1,268 @@
-# Steuerung des Filters
-Das erzeugte overlay kann nun auf das Pynq-Board geladen werden. Dort befindet sich ein Notebook mit welchen die Filterung aber auch die Aufnahme analoger Audio durchgeführt werden kann. Neben dem Notebook selbst, der eine Interaktive bediehnung und einfache Form der Analayse ermöglicht, existiert eine Weite Python File namen Filter_Overlay.py, welche direkt im Notebook aufgerufen wird. In diesem Python skript befinden sich alle nötigen Biblioteken welche notwendig sind die Filterung zu bedeihenen, sowie auch weitere Funktionen die die bediehnung vereinfachen und einheitlich machen. 
+# Aufbau und Funktion der Lehrdemonstration
+Ein zentrales Element der Lehrdemonstration ist ein vorgefertigtes Jupyter-Notebook, mit dem sich die verschiedenen Filter einfach bedienen lassen. Innerhalb dieses Notebooks können analoge Audiosignale über die Eingänge des Boards aufgenommen und sowohl im Notebook selbst als auch über den analogen Audioausgang des PYNQ-Z2 wiedergegeben werden.<br>
+Darüber hinaus besteht die Möglichkeit, sowohl die aufgenommenen Audiodaten als auch externe Audiodateien mit einem der vier implementierten Filter zu verarbeiten. Nach der Auswahl eines Filters wird das gefilterte Signal gespeichert und kann angehört oder weiter analysiert werden.<br>
+
+Da sowohl das Audiosignal vor als auch nach der Filterung gespeichert wird, besteht die Möglichkeit, beide Versionen direkt miteinander zu vergleichen. Neben dem reinen Abhören der Audiodateien kann zusätzlich ein definierter Ausschnitt des Frequenzspektrums vor und nach der Filterung visualisiert werden.<br>
+Dies ermöglicht eine anschauliche Analyse der Signalveränderung im Frequenzbereich und macht die Wirkung des gewählten Filters unmittelbar sichtbar. Auf diese Weise wird die digitale Signalverarbeitung nicht nur hörbar, sondern auch grafisch nachvollziehbar.<br>
+
+## Pynq Overlays
+Zur Nutzung individuell entwickelter Hardwaredesigns auf dem PYNQ-Z2-Board werden Overlays verwendet. Diese bestehen aus einer Bitstream-Datei (.bit) und der zugehörigen Hardware Handoff-Datei (.hwh), die zuvor mit Vivado generiert werden.<br>
+In einigen PYNQ-Dokumentationen wird teilweise auch auf .tcl-Dateien verwiesen. Im Rahmen der hier eingesetzten PYNQ-Version hat sich gezeigt, dass diese Datei nicht erforderlich ist. Das Overlay lässt sich vollständig mit der .bit- und der .hwh-Datei verwenden.<br>
+
+Die eigentliche Ansteuerung der Hardware erfolgt über das auf dem PYNQ-Board vorinstallierte Python-Modul [pynq](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#). Dieses Modul stellt eine spezielle Bibliothek bereit, mit der sich aus Python heraus direkt auf die programmierbare Logik (PL) zugreifen lässt. Dadurch können AXI-DMA-Schnittstellen genutzt, Register beschrieben oder externe IP-Cores über vordefinierte Treiber angesprochen werden. Die Steuerung der Hardware erfolgt in Python über Jupyter Notebooks, die direkt auf dem PYNQ-Board ausgeführt werden. Der Zugriff auf die Notebooks erfolgt remote über Geräte im selben Netzwerk.<br>
+
+Zum einen wird das Modul [pynq.lib.dma](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.dma.html#pynq-lib-dma) verwendet, das den Zugriff auf die AXI-DMA-Schnittstellen der programmierbaren Logik ermöglicht. Über dieses Modul können mit wenigen Python-Befehlen Daten an die Filter-IP-Cores gesendet und die verarbeiteten Daten wieder empfangen werden. Die Übertragung wird dabei automatisch vom Modul verwaltet, sodass keine manuelle Kontrolle über Adressen notwendig ist <br>
+
+Zum anderen kommt das Modul [pynq.lib.audio](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html) zum Einsatz. Dieses Modul enthält den Treiber für den auf dem PYNQ-Z2-Board verbauten ADAU1761-Audiocodec und ermöglicht es, die analogen Audioein- und -ausgänge des Boards direkt aus Python heraus anzusteuern. Über den Treiber können zentrale Funktionen wie das Setzen der Abtastrate, das Aktivieren oder Deaktivieren von Ein- und Ausgängen gesteuert werden. Darüber hinaus bietet das Modul die Möglichkeit, Audiosignale über die analogen Eingänge aufzunehmen.<br>
+
+## Funktionsweise des Notebooks
+Zur besseren Übersicht und vereinfachten Bedienung wurden alle wesentlichen Prozesse, wie Datenübertragung, Speichern und Visualisierung, in einer separaten Python-Datei als einheitliche Funktionssammlung zusammengeführt. Diese Struktur ermöglicht es, komplexe Abläufe mit nur wenigen, klaren Funktionsaufrufen direkt im Jupyter Notebook auszuführen.<br>
+
+Die wichtigste Rolle spielt dabei die Übertragung der Audiodaten an den DMA, der diese durch den Filter-IP-Core leitet und anschließend wieder zurückgibt.<br>
+Die grundlegende Datenübertragung an den DMA erfolgt dabei relativ einfach und orientiert sich im Prinzip an dem Ablauf, wie er auch in den offiziellen PYNQ-Tutorials und der [PYNQ-Dokumentation](https://pynq.readthedocs.io/en/latest/pynq_libraries/dma.html) beschrieben ist. <br>
+
+
+## Initialisierung des DMA-Kanals
+Am Anfang werden alle notwendigen Bibliotheken importiert, einschließlich der PYNQ-spezifischen Module wie Overlay, allocate sowie die Treiberbibliothek pynq.lib.audio. Anschließend wird das entsprechende DMA-IP-Core aus dem zuvor geladenen Overlay angesprochen und in einer Variable gespeichert. Die DMA-Instanz verfügt über zwei Kanäle. *sendchannel* für das Senden an den DAM und *recvchannel* für das Empfangen. Für jeden der vier Filter wird eine eigene DMA-Instanz erzeugt und jeweils den zugehörigen Variablen zugewiesen.<br>
+
+```python
+from pynq import Overlay
+from pynq import allocate
+from pynq.lib.audio import AudioADAU1761
+
+ol = Overlay("Audio_quad_Filter_v7.bit")
+
+dma_Filter_1 = ol.dma_Filter_1
+dma_Filter_1_send = ol.dma_Filter_1.sendchannel
+dma_Filter_1_recv = ol.dma_Filter_1.recvchannel
+
+```
+## DMA Übertragung
+Eine Zentrafe Funktion ist die *Transmission(input_data,ip_buffer,dma,dma_send, dma_recv)*. Diese Funktion wird für jede übertragung aufgerufen und übernimmt die Kernaufgaben für eine vollständige übertragung.<br>
+
+Bevor die Audiodaten an die DMA-Schnittstelle übergeben werden können, müssen sie zunächst normiert und in ein kompatibles Datenformat umgewandelt werden. Dies ist notwendig, da die AXI-DMA-Schnittstelle nur mit bestimmten Datentypen arbeiten kann.<br>
+
+```python
+# Festlegen der Größen
+buffer_size = int(ip_buffer)
+input_data = FormatChange(input_data)
+data_size = int(len(input_data))
+
+```
+
+Die DMA-Instanz verfügt über zwei Kanäle, den *sendchannel* zum Senden von Daten und den *recvchannel* zum Empfangen der verarbeiteten Daten. Diese beiden Kanäle werden für die gewählte DMA-Instanz initialisiert.<br>
+Bevor die Audiodaten in den input_buffer geladen werden, wird dieser zunächst vollständig mit Nullwerten gepuffert. Der Hintergrund ist, dass beim Anlegen des Buffers mittels *allocate()* dieser zunächst undefinierte Werte enthält. Falls die zu übertragende Datenmenge kleiner als die definierte Buffergröße ist, bleiben einzelne Felder leer. Der AXI-DMA prüft jedoch bei jedem Transfer, ob gültige Daten im Puffer vorhanden sind. Sind nicht alle Speicherbereiche korrekt befüllt, kann der DMA in einen Fehlerzustand übergehen. In diesem Fall wird der gesamte Datenpfad blockiert, und es sind keine weiteren Übertragungen möglich, bis ein manueller Reset durchgeführt wird.<br>
+Um diesem vorzubeugen, wird der *input_buffer* vor dem eigentlichen Datentransfer vollständig mit Nullen überschrieben. Anschließend werden die eigentlichen Nutzdaten an den Anfang des Buffers geschrieben. Nach der Übertragung wird der Puffer anhand der bekannten Datenlänge wieder korrekt zurückgeschnitten.<br>
+
+```python
+# Padding
+pad = np.zeros(ip_buffer)
+pad_frame = FormatChange(pad)
+    
+# Leere Buffer
+input_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
+output_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
+    
+# Padding Inputbuffer
+input_buffer[:] = pad_frame
+    
+# Laden der Daten in Inputbuffer
+input_buffer[: data_size] = input_data
+
+```
+
+Die Datenübertragung wird mithilfe der Methode *transfer()* sowohl für den Sende- als auch für den Empfangskanal gestartet. Dadurch wird der Übertragungsvorgang an den DMA angestoßen. Nach dem Start der Übertragung wird mit *wait()* auf den Abschluss des Transfers gewartet. Während dieser Phase ist die DMA-Schnittstelle blockiert,<br>
+
+```python
+# Senden un Empfangen der Daten
+dma.sendchannel.transfer(input_buffer)
+dma.recvchannel.transfer(output_buffer)
+dma.sendchannel.wait()
+dma.recvchannel.wait()
+
+```
+
+Nach dem Empfang der Daten über den DMA werden diese wieder in das ursprüngliche Format zurückkonvertiert. Falls der Eingabepuffer aufgrund von Padding mit Nullen aufgefüllt wurde, werden diese nach dem Empfang anhand der bekannten Originallänge entfernt, sodass nur die tatsächlich relevanten Audiodaten weiterverarbeitet werden.<br>
+
+```python
+# Umrechnen der Empfangenen Daten
+output_data = np.array(output_buffer[: data_size]).view(np.int32)
+
+```
+
+## Öffnen und Einlesen von .wav-Dateien
+Zur Verarbeitung von Audiodaten werden zunächst .wav-Dateien geöffnet und eingelesen. Dies geschieht über die Funktion *read_wav()*, die mithilfe des Python-Moduls wave Zugriff auf die Audiodaten ermöglicht. Die Funktion basiert auf einem Beispiel aus den PYNQ-Audio-Demonstrationen, die auf dem Board vorinstalliert sind, und wurde entsprechend angepasst. Beim Einlesen der Datei werden zunächst grundlegende Metainformationen wie Anzahl der Kanäle, Abtastrate, Anzahl der Frames sowie die Sample-Breite ausgelesen. Anschließend werden die Rohdaten  byteweise in ein Array geladen und abhängig von der Kanalanzahl und Samplegröße korrekt umstrukturiert.<br>
+Am Ende gibt die Funktion sowohl die Audiodaten als auch die zugehörigen Metadaten (Frame-Anzahl, Kanalzahl, Samplingrate, Sample-Breite) zurück. <br>
+
+```python
+def read_wav(wav_path):
+    with wave.open(wav_path, 'r') as wav_file:
+        raw_frames = wav_file.readframes(-1)
+        num_frames = wav_file.getnframes()
+        num_channels = wav_file.getnchannels()
+        sample_rate = wav_file.getframerate()
+        sample_width = wav_file.getsampwidth()
+    
+    temp_buffer = np.empty((num_frames, num_channels, 4), dtype=np.uint8)
+    raw_bytes = np.frombuffer(raw_frames, dtype=np.uint8)
+    temp_buffer[:, :, :sample_width] = raw_bytes.reshape(-1, num_channels, 
+                                                    sample_width)
+    temp_buffer[:, :, sample_width:] = \
+    (temp_buffer[:, :, sample_width-1:sample_width] >> 7) * 255
+    frames = temp_buffer.view('<i4').reshape(temp_buffer.shape[:-1])
+    
+    print("Frames:",len(frames), "Channels:", num_channels, "Sample Rate:",sample_rate, "Sample Width", sample_width )
+    return frames, num_frames, num_channels, sample_rate, sample_width 
+```
+
+## Schreiben und Speichern von .wav-Dateien
+Nach der Verarbeitung der Audiodaten können die Ergebnisse als WAV-Datei gespeichert werden. Dies geschieht über die Funktion *save_to_24bit_wav()*, die die beiden Audiokanäle entgegennimmt und diese gemeinsam in eine Stereo-WAV-Datei schreibt. Die Funktion ist in ihrer Struktur an *read_wav()* angelehnt und übernimmt das Schreiben der Daten im passenden Format. Das Schreiben erfolgt über das Python-Modul *wave*, wobei die Daten als flache Bytefolge übergeben werden. Die resultierende Datei kann anschließend direkt im Notebook abgespielt oder zur externen Weiterverarbeitung verwendet werden.<br>
+
+```python
+def save_to_24bit_wav(chan_l, chan_r, sample_rate, path):
+    frames = np.stack((chan_l, chan_r), axis=1) 
+    max_val = 2**23  # 24-bit max signed int
+    frames = np.clip(frames, -1.0, 1.0)
+    frames_int = (frames * max_val).astype(np.int32)
+
+    # In Bytes umwandeln
+    temp_bytes = frames_int.reshape((*frames.shape, 1)).view(np.uint8)
+    raw_bytes = temp_bytes[:, :, :3].reshape(-1)
+
+    with wave.open(path, 'wb') as wav_out:
+        wav_out.setnchannels(frames.shape[1])
+        wav_out.setsampwidth(3)  # 24-bit
+        wav_out.setframerate(sample_rate)
+        wav_out.writeframes(raw_bytes.tobytes())
+```
+
+## Paketaufteilung
+Wie bereits bekannt, ist die Puffergröße der Filter-IP auf 2^20 Bit festgelegt. Nach dem Einlesen einer .wav-Datei kann es jedoch vorkommen, dass die Audiodaten (Frames) länger sind als der verfügbare Puffer.<br>
+Um dennoch eine korrekte Filterung beliebiger Signallängen zu ermöglichen, werden die Daten vor der Übertragung in kleinere Teilstücke zerlegt. Dies erfolgt über die Funktion *Split2Packets()*, die das Array mit den Audiodaten in mehrere Pakete unterteilt, jeweils mit einer maximalen Größe, die dem festgelegten Puffer entspricht.<br>
+
+```python
+def Split2Packets(data,packet_size):
+    packets = []
+    for i in range(0, len(data), packet_size):
+        packet = data[i:i+packet_size]
+        packets.append(packet)
+    return packets
+```
+
+Die Funktion *send2receive()* nutzt zunächst *Split2Packets()*, um die Eingangsdaten in kleinere Teilstücke aufzuteilen. Für jedes dieser Datenpakete wird anschließend die Übertragung mithilfe der Funktion *Transmission()* durchgeführt.<br>
+Die dabei empfangenen, gefilterten Daten werden jeweils aneinandergehängt und in einem Ausgabearray gesammelt. Auf diese Weise entsteht am Ende ein vollständiges gefiltertes Signal, das dieselbe Länge wie das ursprüngliche Eingangsframe besitzt.<br>
+
+```python
+def send2receive(Data_In, dma, dma_send, dma_recv):
+    ip_buffer = 2**20
+    # Filtern Kanal
+    Data_Out = []
+
+    # Zerteilung und Übertragung in Packeten
+    Packets = Split2Packets(Data_In, ip_buffer)
+    anz_trans = 0
+    for packet in Packets:
+        result = Transmission(packet, ip_buffer,dma, dma_send, dma_recv)
+        Data_Out.extend(result)
+        anz_trans = anz_trans + 1
+    print(anz_trans, "Transmissions")
+    return Data_Out
+```
+
+## vollständige Filter-Anwendung
+Die Funktion *UseFilter()* bildet den zentralen Ablauf zur Anwendung eines digitalen Filters auf eine Audiodatei. Sie automatisiert dabei alle notwendigen Schritte, vom Einlesen der Datei bis zur Speicherung des gefilterten Ergebnisses.<br>
+
+Zu Beginn wird die gewählte Filterinstanz ausgewählt. Anschließend wird die angegebene .wav-Datei über die Funktion *read_wav()* geöffnet. Dabei werden sowohl die Audiodaten der beiden Kanäle als auch relevante Metainformationen ausgelesen. Anschließend erfolgt eine Normierung der Audiodaten um eine saubere Signalverarbeitung sicherzustellen.<br>
+
+Falls die Samplerate der Eingangsdaten nicht 48 kHz beträgt, was häufig bei Standard-Audiodateien mit 44,1 kHz der Fall ist, wird automatisch ein Upsampling auf 48 kHz durchgeführt. Dies ist erforderlich, da die Filter für diese Abtastrate ausgelegt wurden. Auf diese weise wird das richtige Verhalten des Filters sichergestellt.<br>
+
+Im nächsten Schritt wird das normierte Audiosignal für jeden Kanal getrennt an den zuvor ausgewählten Filter übergeben. Die Übertragung und Filterung wird über die Funktion *send2receive()* abgewickelt, die das Signal in Pakete unterteilt, überträgt, empfängt und anschließend wieder zusammensetzt.<br>
+
+Zuletzt werden die gefilterten Daten beider Kanäle mithilfe der Funktion *save_to_24bit_wav()* wieder zu einer Stereo-WAV-Datei zusammengeführt und unter dem angegebenen Ausgabedateinamen gespeichert.<br>
+
+
+```python
+def UseFilter(in_Name, out_Name,Filter):
+    import time
+    start = time.time()
+    dma = Filter[0]
+    dma_send = Filter[1]
+    dma_recv = Filter[2]
+    [frames, num_frames, channels, Fs, Fw] = read_wav(in_Name)
+    # Read Data
+    data_l = Normierung(frames[:,0])
+    data_r = Normierung(frames[:,1])
+    if Fs != 48000:
+        data_l = resample_poly(data_l,48000, Fs)
+        data_r = resample_poly(data_r,48000, Fs)
+        print("up-sampled: 44.1 -> 48kHz")
+        Fs = 48000     
+    print("Start Sending left Channel")
+    Data_Out_L = send2receive(data_l, dma, dma_send, dma_recv)
+    print("Start Sending right Channel")
+    Data_Out_R = send2receive(data_r, dma, dma_send, dma_recv)
+    print("Saving File")
+    save_to_24bit_wav(Data_Out_L, Data_Out_R, Fs, out_Name)
+    end = time.time()
+    print("Finished")
+    print(f"Dauer: {end - start:.2f} Sekunden")
+```
+
+## Kaskadierung der Filter
+Neben der Standardfunktion *UseFilter()* steht eine erweiterte Variante zur Verfügung, die es ermöglicht, dasselbe Audiosignal mehrfach durch denselben Filter zu leiten. *UseFilterCascade()* erlaubt es, über einen Parameter festzulegen, wie oft die Filterung wiederholt werden soll.<br>
+Hintergrund ist, dass in jedem Filter-IP-Core lediglich ein einzelnes Biquad-Segment implementiert ist. Durch die wiederholte Anwendung desselben Filters lässt sich somit eine Kaskadierung mehrerer Biquads realisieren. Dies führt zu einer Erhöhung der effektiven Filterordnung und damit zu einer steileren Flankensteilheit im Frequenzgang, ein Effekt, der deutlich hör- und sichtbar wird.<br>
+
+Diese Funktion dient ausschließlich zu Demonstrationszwecken, bei der gezeigt werden soll, wie sich die Eigenschaften eines Filters durch mehrfache Anwendung bzw. Kaskadierung verändern lassen.<br>
 
 <!--
+
+u erst werden die Module und das Overlay geladen:
+
+```python
+from pynq import Overlay
+from pynq import allocate
+
+ol = Overlay("Audio_quad_Filter_v7.bit")
+
+```
+Anschließend wird das ensprechende DMA-IP-Core aus dem geladenen Overlay angesprochen:
+
+```python
+dma_Filter_1 = ol.dma_Filter_1
+
+```
+Die DMA-Instanz verfügt über zwei Kanäle. *sendchannel* für das Senden an den DAM und *recvchannel* für das Empfangen:
+
+```python
+dma_Filter_1_send = ol.dma_Filter_1.sendchannel
+dma_Filter_1_recv = ol.dma_Filter_1.recvchannel
+
+```
+Für die Übertragung müssen Eingabe- und Ausgabepuffer im Shared Memory zwischen PS und PL angelegt werden. Dies wird später in einer Funktion für jede Übertragung durchgeführt:
+
+```python
+input_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
+output_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
+
+```
+
+Für die Übertragung müssen die Daten in das richtige format gebracht werden bevor diese in den Buffer geschrieben werden können. Die Audiodaten werden zunächst normiert und in das richtige Format gebracht, da AXI-DMA nur mit bestimmten Datentypen arbeitet:
+
+```python
+def FormatChange(x):
+    x = x * (2**16)
+    x = x.astype(np.int32)
+    input_data = x.view(np.uint32)
+    return input_data
+
+```
+
+[pynq](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#)
+[pynq.lib.dma](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.dma.html#pynq-lib-dma)
+[pynq.lib.audio](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html)
+
+Das erzeugte overlay kann nun auf das Pynq-Board geladen werden. Dort befindet sich ein Notebook mit welchen die Filterung aber auch die Aufnahme analoger Audio durchgeführt werden kann. Neben dem Notebook selbst, der eine Interaktive bediehnung und einfache Form der Analayse ermöglicht, existiert eine Weite Python File namen Filter_Overlay.py, welche direkt im Notebook aufgerufen wird. In diesem Python skript befinden sich alle nötigen Biblioteken welche notwendig sind die Filterung zu bedeihenen, sowie auch weitere Funktionen die die bediehnung vereinfachen und einheitlich machen. 
+
 Biblioteken:
 - beschreiben welche standet sind und welche pynq-spezifisch sind
 Zueisung der Filter:

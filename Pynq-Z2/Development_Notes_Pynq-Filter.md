@@ -231,11 +231,11 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ Theorie: Quantesierung weiter Ausbauen.
 - ❌ ~~Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)~~
 - ❌ Blockschaltbilder (Simulink)
-- ❌ Codebeschreibung (~~Matlab~~, Python)
 - ❌ Aufräumen des Git Reposetories
 - ❌ ~~OrgID erstellen~~
 - ❌ hanrdware beschreibung
 - ❌ Einleitung und Motivation
+- ❌ Überprüfung und Finale Formulierung der BA
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
@@ -258,6 +258,7 @@ zienten für den FPGA.
 - ✅ Beschreibung echtzeitfilterung
 - ✅ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ✅ Demo-Notebook fertig stellen und dokumentieren
+- ✅ Codebeschreibung (Matlab, Python)
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)

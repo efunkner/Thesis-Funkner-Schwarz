@@ -35,3 +35,5 @@ right: |
 {{< include ../chapters/Filter_Code_v2.qmd >}}
 
 {{< include ../chapters/FPGA_RealTime.qmd >}}
+
+{{< include ../chapters/Pynq_Notebook_code.qmd >}}
