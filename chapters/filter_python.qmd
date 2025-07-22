@@ -31,7 +31,6 @@ fc = 1000
 wn = fc/(fs/2)
 ```
 
-
 ```Python
 # Untere und obere Grenzen für Bandpass und Bandsperre in Hz
 low = 500
@@ -48,7 +47,7 @@ rs = 80
 ```
 Über die Funtkionen `butter`, `cheby1`, `cheby2` und `ellip` werden die dementsprechenden Filter enworfen. Über den Parameter `btype` wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von `low`, `high`, `bandpass`und `bandstop`.
 
-Die Koeffizienten können als separate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter `analog = False` gesetzt.
+Die Koeffizienten können als separate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix durch `output = 'sos'` ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter `analog = False` gesetzt.
 
 Butterworth-Filter
 
