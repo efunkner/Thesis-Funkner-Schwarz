@@ -31,7 +31,6 @@ fc = 1000
 wn = fc/(fs/2)
 ```
 
-
 ```Python
 # Untere und obere Grenzen für Bandpass und Bandsperre in Hz
 low = 500
@@ -48,7 +47,7 @@ rs = 80
 ```
 Über die Funtkionen `butter`, `cheby1`, `cheby2` und `ellip` werden die dementsprechenden Filter enworfen. Über den Parameter `btype` wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von `low`, `high`, `bandpass`und `bandstop`.
 
-Die Koeffizienten können als separate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter `analog = False` gesetzt.
+Die Koeffizienten können als separate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix durch `output = 'sos'` ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter `analog = False` gesetzt.
 
 Butterworth-Filter
 
@@ -60,6 +59,7 @@ b, a = butter(N = Order,
               btype = 'low',
               analog = False)
 ```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/butter_tp.png">
 
 Chebyshev Typ 1-Filter
 
@@ -72,6 +72,7 @@ b, a = cheby1(N = Order,
               btype = 'high', 
               analog = False)
 ```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/cheby1_hp.png">
 
 Chebyshev Typ 2-Filter
 
@@ -84,6 +85,7 @@ sos = cheby2(N = Order,
              btype = 'bandpass',
              analog = False, output = 'sos')
 ```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/cheby2_bp.png">
 
 Elliptischer Filter (Cauer)
 
@@ -98,5 +100,6 @@ sos = ellip(N = Order,
             analog = False,
             output = 'sos')
 ```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/ellip_bs.png">
 
 Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parameternb und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.
