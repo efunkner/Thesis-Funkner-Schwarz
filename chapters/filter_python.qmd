@@ -59,6 +59,7 @@ b, a = butter(N = Order,
               btype = 'low',
               analog = False)
 ```
+![Butterworth-Tiefpass](images/butter_tp.png)
 
 Chebyshev Typ 1-Filter
 
@@ -71,6 +72,7 @@ b, a = cheby1(N = Order,
               btype = 'high', 
               analog = False)
 ```
+![Chebychev Typ 1-Hochpass](images/cheby1_hp.png)
 
 Chebyshev Typ 2-Filter
 
@@ -83,6 +85,7 @@ sos = cheby2(N = Order,
              btype = 'bandpass',
              analog = False, output = 'sos')
 ```
+![Chebychev Typ 2-Bandpass](images/cheby2_bp.png)
 
 Elliptischer Filter (Cauer)
 
@@ -97,5 +100,6 @@ sos = ellip(N = Order,
             analog = False,
             output = 'sos')
 ```
+![Elliptischer Bandstop](images/ellip_bp.png)
 
 Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parameternb und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.
