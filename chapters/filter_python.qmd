@@ -102,4 +102,4 @@ sos = ellip(N = Order,
 ```
 ![Elliptischer Bandstop](images/ellip_bp.png)
 
-Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parameternb und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.
+Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parametern und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.

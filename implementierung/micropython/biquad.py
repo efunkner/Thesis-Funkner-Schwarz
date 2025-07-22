@@ -1,5 +1,3 @@
-from machine import ADC, Pin
-import time
 import micropython
 
 # --- Direct Form I ---
@@ -71,34 +69,3 @@ class BiquadFilterTDF2:
         self.s1 = self.s2 + self.b1 * x0 - self.a1 * y0
         self.s2 = self.b2 * x0 - self.a2 * y0
         return y0
-
-# --- Filter-Koeffizienten (Beispiel: Tiefpass) ---
-b_coeffs = [0.07033, -0.1380, 0.07033]
-a_coeffs = [1.00000, -0.1380, -0.8593]
-gain = 1.0
-
-# --- FILTER-WAHL: Nur EINES aktiv lassen ---
-#filter_instance = BiquadFilterDF1(b_coeffs, a_coeffs, gain)
-#filter_instance = BiquadFilterDF2(b_coeffs, a_coeffs, gain)
-filter_instance = BiquadFilterTDF2(b_coeffs, a_coeffs, gain)
-
-# --- ADC Initialisierung ---
-adc = ADC(Pin(34))               # ADC auf GPIO34
-adc.atten(ADC.ATTN_11DB)         # 0–3.3V Bereich
-adc.width(ADC.WIDTH_12BIT)      # 12 Bit (0–4095)
-
-# --- Hauptloop ---
-print("Starte Biquad-ADC-Filterung (nur Eingang, keine Ausgabe)...")
-
-try:
-    while True:
-        raw = adc.read()                     # 0–4095
-        centered = raw - 2048                # verschieben nach ±2048
-        filtered = filter_instance.filter(float(centered))
-
-        # Ausgabe über UART (Konsole)
-        print("ADC:", raw, "→ Gefiltert:", int(filtered))
-
-        time.sleep_us(1)
-except KeyboardInterrupt:
-    print("Abbruch durch Benutzer")
