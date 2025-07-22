@@ -32,7 +32,7 @@ format:
     colorlinks: true
     linkcolor: "blue"
     biblio-style: ieee
-    #    keep-tex: true
+    keep-tex: true
     output-file: thesis_fs
   # epub:
   #   theme: flatly

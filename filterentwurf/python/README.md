@@ -42,9 +42,9 @@ wn_b = [low/(fs/2), high/(fs/2)]
 
 ```Python
 # Welligkeit(Ripple) im Durchlassbereich in dB
-rp = 1
+rp = 0.5
 # Dämpfung im Sperrbereich in dB
-rs = 70
+rs = 80
 ```
 Über die Funtkionen `butter`, `cheby1`, `cheby2` und `ellip` werden die dementsprechenden Filter enworfen. Über den Parameter `btype` wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von `low`, `high`, `bandpass`und `bandstop`.
 
