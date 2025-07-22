@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -286,6 +321,23 @@ window.Quarto = {
   <li><a href="#ursache-und-bewertung" id="toc-ursache-und-bewertung" class="nav-link" data-scroll-target="#ursache-und-bewertung"><span class="header-section-number">12.2</span> Ursache und Bewertung</a></li>
   <li><a href="#analoge-audioquellen" id="toc-analoge-audioquellen" class="nav-link" data-scroll-target="#analoge-audioquellen"><span class="header-section-number">12.3</span> Analoge Audioquellen</a></li>
   </ul></li>
+  <li><a href="#das-pynq-z2-und-die-pynq-plattform" id="toc-das-pynq-z2-und-die-pynq-plattform" class="nav-link" data-scroll-target="#das-pynq-z2-und-die-pynq-plattform"><span class="header-section-number">13</span> Das PYNQ-Z2 und die PYNQ-Plattform</a>
+  <ul class="collapse">
+  <li><a href="#hardware-spezifikationen-des-pynq-z2" id="toc-hardware-spezifikationen-des-pynq-z2" class="nav-link" data-scroll-target="#hardware-spezifikationen-des-pynq-z2"><span class="header-section-number">13.1</span> Hardware-Spezifikationen des PYNQ-Z2</a></li>
+  <li><a href="#adau1761-audio-codec" id="toc-adau1761-audio-codec" class="nav-link" data-scroll-target="#adau1761-audio-codec"><span class="header-section-number">13.2</span> ADAU1761 Audio-Codec</a></li>
+  </ul></li>
+  <li><a href="#aufbau-und-funktion-der-lehrdemonstration" id="toc-aufbau-und-funktion-der-lehrdemonstration" class="nav-link" data-scroll-target="#aufbau-und-funktion-der-lehrdemonstration"><span class="header-section-number">14</span> Aufbau und Funktion der Lehrdemonstration</a>
+  <ul class="collapse">
+  <li><a href="#pynq-overlays" id="toc-pynq-overlays" class="nav-link" data-scroll-target="#pynq-overlays"><span class="header-section-number">14.1</span> Pynq Overlays</a></li>
+  <li><a href="#funktionsweise-des-notebooks" id="toc-funktionsweise-des-notebooks" class="nav-link" data-scroll-target="#funktionsweise-des-notebooks"><span class="header-section-number">14.2</span> Funktionsweise des Notebooks</a></li>
+  <li><a href="#initialisierung-des-dma-kanals" id="toc-initialisierung-des-dma-kanals" class="nav-link" data-scroll-target="#initialisierung-des-dma-kanals"><span class="header-section-number">14.3</span> Initialisierung des DMA-Kanals</a></li>
+  <li><a href="#dma-übertragung" id="toc-dma-übertragung" class="nav-link" data-scroll-target="#dma-übertragung"><span class="header-section-number">14.4</span> DMA Übertragung</a></li>
+  <li><a href="#öffnen-und-einlesen-von-.wav-dateien" id="toc-öffnen-und-einlesen-von-.wav-dateien" class="nav-link" data-scroll-target="#öffnen-und-einlesen-von-.wav-dateien"><span class="header-section-number">14.5</span> Öffnen und Einlesen von .wav-Dateien</a></li>
+  <li><a href="#schreiben-und-speichern-von-.wav-dateien" id="toc-schreiben-und-speichern-von-.wav-dateien" class="nav-link" data-scroll-target="#schreiben-und-speichern-von-.wav-dateien"><span class="header-section-number">14.6</span> Schreiben und Speichern von .wav-Dateien</a></li>
+  <li><a href="#paketaufteilung" id="toc-paketaufteilung" class="nav-link" data-scroll-target="#paketaufteilung"><span class="header-section-number">14.7</span> Paketaufteilung</a></li>
+  <li><a href="#vollständige-filter-anwendung" id="toc-vollständige-filter-anwendung" class="nav-link" data-scroll-target="#vollständige-filter-anwendung"><span class="header-section-number">14.8</span> vollständige Filter-Anwendung</a></li>
+  <li><a href="#kaskadierung-der-filter" id="toc-kaskadierung-der-filter" class="nav-link" data-scroll-target="#kaskadierung-der-filter"><span class="header-section-number">14.9</span> Kaskadierung der Filter</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/thesis_ms/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
     </div>
@@ -320,7 +372,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">17. Juli 2025</p>
+      <p class="date">22. Juli 2025</p>
     </div>
   </div>
   
@@ -662,7 +714,11 @@ Neben dem Design bietet MATLAB Tools wie freqz zur Darstellung von Amplituden- u
 </section>
 <section id="implementierung" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Implementierung</h1>
-<p>Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Das Ziel ist die Erstellung eines Vivado-kompatiblen IP-Cores, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch die Verwendung des modellbasierten Workflows wird die Entwicklung beschleunigt und die Hardwareintegration standardisiert. <br></p>
+<p>Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Ziel ist es, daraus einen Vivado-kompatiblen IP-Core zu erzeugen, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch diesen modellbasierten Entwicklungsansatz wird nicht nur die Entwicklungszeit reduziert, sondern auch die Integration vereinfacht.<br> In der Vivado Design Suite von AMD/Xilinx spielen <a href="https://docs.amd.com/r/2022.1-English/ug896-vivado-ip">IP-Cores (Intellectual Property Cores)</a> eine zentrale Rolle. Dabei handelt es sich um wiederverwendbare Hardwaremodule, die sich modular in digitale Systeme einfügen lassen. Für die Implementierung von digitalen Filtern bieten IP-Cores einen Vorteil. Die gesamte Filterlogik kann als in sich geschlossenes Modul gekapselt werden. Dadurch wird die Funktionalität des Filters klar abgegrenzt und lässt sich ohne großen Aufwand mehrfach instanziieren, in Kaskade schalten oder austauschen.<br> Gerade bei Anwendungen wie dieser ermöglicht der Einsatz von IP-Cores eine klare Trennung zwischen Logikdesign und Systemintegration, was sowohl die Wartung als auch die Wiederverwendbarkeit verbessert. Ein einmal entwickelter Filter-IP kann unkompliziert in andere Designs oder Projekte übernommen und betrieben werden, ohne den zugrunde liegenden HDL-Code erneut anpassen zu müssen.<br></p>
+<!--
+Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Das Ziel ist die Erstellung eines Vivado-kompatiblen IP-Cores, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch die Verwendung des modellbasierten Workflows wird die Entwicklung beschleunigt und die Hardwareintegration standardisiert. <br>
+In der Vivado Design Suite von AMD/Xilinx nehmen IP-Cores (Intellectual Property Cores) eine zentrale Rolle bei der Entwicklung komplexer digitaler Systeme ein. Dabei handelt es sich um wiederverwendbare, Hardwaremodule, die in strukturierter Form in FPGA- und SoC-Designs integriert werden können. IP-Cores ermöglichen es, standardisierte Funktionen modular zu realisieren, ohne dass diese Komponenten jedes Mal neu entworfen werden müssen.
+-->
 <section id="modellierung-in-simulink" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="modellierung-in-simulink"><span class="header-section-number">10.1</span> Modellierung in Simulink</h2>
 <p>Für die Umsetzung in Simulink wurde der in der DSP HDL Toolbox enthaltene Block <a href="https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html">Biquadratic IIR (SOS) filter</a> verwendet. Der Vorteil dieses Blocks gegenüber einer direkten Nachbildung der Direct Form II liegt darin, dass er speziell für die HDL-Codegenerierung optimiert ist. Er bringt bereits eine integrierte Steuerung des valid-Signals mit, was ein notwendiges Element für die AXI-Stream-Implementierung ist. Außerdem sind die Filterstrukturen bereits gepipelined, wodurch der Filter eine höhere maximale Taktfrequenz erreicht. <br> Die Probleme bei der Umsetzung einer Direct-Form-Struktur lagen hauptsächlich darin, dass bei der Bitstream-Generierung in Vivado die Timing-Anforderungen nicht eingehalten werden konnten und die Taktfrequenz des Filters entsprechend reduziert werden musste. Wird die Taktfrequenz zu niedrig gewählt, verlängert sich die Zeit der Filterung entsprechend.<br> Hinzu kam, dass ein einzelner Filter in dieser Form relativ viele Ressourcen auf dem FPGA belegte. Eine direkte Nachbildung der Direct Form II ohne korrektes Pipelining und ohne weitere Optimierungen ist sehr ineffizient.<br> Aus diesem Grund fiel die Entscheidung zugunsten einer vorgefertigten Lösung aus der DSP HDL Toolbox. Trotzdem musste die Taktfrequenz letztlich auf 50 MHz begrenzt werden, da bei 100 MHz ebenfalls keine vollständige Einhaltung der Timings erreicht werden konnte.<br></p>
@@ -905,7 +961,7 @@ Abbildung&nbsp;10.2
 </figure>
 </div>
 <p>Die Clock-Signale sowie die wichtigsten Datenpfade wurden zusätzlich farblich hervorgehoben, um die Struktur übersichtlicher darzustellen.<br> Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fehler erkannt werden, kann im nächsten Schritt der Bitstream generiert werden.<br></p>
-<p>Am Ende bilden das Overlay die .bit und .hwh-Datei. Damit PYNQ das Overlay korrekt erkennt, müssen beide Dateien denselben Namen tragen, mit Ausnahme der Dateiendung.<br></p>
+<p>Am Ende besteht ein vollständiges Overlay aus zwei Dateien. Der generierten Bitstream-Datei (.bit) und der zugehörigen Hardware-Handoff-Datei (.hwh), welche die notwendigen Metadaten über das Design beinhaltet. Damit das Overlay von PYNQ korrekt erkannt und geladen werden kann, müssen beide Dateien denselben Basisnamen tragen mit Ausnahme der Dateiendung.<br></p>
 </section>
 </section>
 </section>
@@ -986,6 +1042,329 @@ Eine möglichekit dem entgegen zu wirken währe es einen Ein vollständiger, kom
 ## Analoge Audioquelle
 Da die echtzeitfilterung nicht zeitnahe umgesetzt weden kann, wurde das design für die Filterung digitaler quellen dahingend erweitert, dass mit dem auf dem Pnyq-Z2 enhaltenen Audiocode analoge Quellen aufgenommen und wiedergegeben werden können. Diese werden dabei digital als wav-File auf dem Borad gespeichert und anschließend von dem bestehenden Design gefiltert werden. <br>
 Auf dieser weise ist es möglich analoge Quellen zu filtern, nur nicht in echtzeit.<br>-->
+</section>
+</section>
+<section id="das-pynq-z2-und-die-pynq-plattform" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Das PYNQ-Z2 und die PYNQ-Plattform</h1>
+<p>Das PYNQ-Z2 ist ein FPGA-Entwicklungsboard, das speziell für die Verwendung mit der PYNQ-Plattform konzipiert wurde. Die Plattform wurde von Xilinx (heute AMD) entwickelt und verfolgt das Ziel, die Entwicklung von FPGA-Anwendungen mithilfe von Python zu vereinfachen. Anstelle über herkömmlicher Hardwarebeschreibungssprachen ermöglicht PYNQ die Nutzung von Python-Code zur Steuerung und Nutzung programmierbarer Logik auf Zynq-SoCs, direkt über Jupyter Notebooks im Webbrowser.<br> PYNQ steht für Python Productivity for Zynq und ist ein Open-Source-Projekt von AMD, das die Entwicklung von Anwendungen für Zynq-SoCs erheblich vereinfacht. Ziel der Plattform ist es, die komplexe Hardwareentwicklung mit FPGAs zugänglicher zu machen.<br> Das Board wird typischerweise mit einer speziell angepassten Linux-Distribution für PYNQ von einer microSD-Karte gestartet. Über das Netzwerk lässt sich die integrierte Jupyter-Notebook-Oberfläche aufrufen, um direkt mit Python zu arbeiten und Hardwarefunktionen anzusteuern.<br> Die Besonderheit von PYNQ liegt darin, dass komplexe Hardwaredesigns in der programmierbaren Logik per Overlay integriert und anschließend per Python angesteuert werden können. Dies ermöglicht beispielsweise Anwendungen in der Signalverarbeitung, beim maschinellen Lernen, in der Bildverarbeitung oder Robotik, ohne tiefgehende FPGA-Kenntnisse.<br></p>
+<section id="hardware-spezifikationen-des-pynq-z2" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="hardware-spezifikationen-des-pynq-z2"><span class="header-section-number">13.1</span> Hardware-Spezifikationen des PYNQ-Z2</h2>
+<p>Die vollständigen Hardware-Spezifikationen des Boards sind auf der <a href="https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources">offiziellen Produktseite bei AMD</a> einsehbar.<br></p>
+<p>Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikationen relevant:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>PYNQ-Z2</th>
+<th>Spezifikationen:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>FPGA / SoC:</strong></td>
+<td>Xilinx Zynq-7000 SoC (XC7Z020-1CLG400C), 256 KB On-Chip-Memory, 630 KB Block RAM, 220 DSP-Slices</td>
+</tr>
+<tr class="even">
+<td><strong>Audio-I/O:</strong></td>
+<td>I²S-Interface mit 24-Bit-DAC (3,5 mm TRRS-Buchse), Line-In (3,5 mm Klinke)</td>
+</tr>
+<tr class="odd">
+<td><strong>Netzwerk:</strong></td>
+<td>10/100/1000 Mbit/s Ethernet</td>
+</tr>
+<tr class="even">
+<td><strong>Speicher:</strong></td>
+<td>512 MB DDR3-RAM (16-Bit-Bus, 1050 Mbps), 128 Mbit Quad-SPI-Flash, microSD-Karten-Slot</td>
+</tr>
+<tr class="odd">
+<td><strong>Taktquellen:</strong></td>
+<td>125 MHz für die programmierbare Logik (PL), 50 MHz für den Prozessor (PS)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adau1761-audio-codec" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="adau1761-audio-codec"><span class="header-section-number">13.2</span> ADAU1761 Audio-Codec</h2>
+<p>Auf dem PYNQ-Z2 ist ein <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/adau1761.pdf">ADAU1761 Audio-Codec</a> von Analog Devices verbaut. In Kombination mit dem entsprechenden <a href="https://pynq.readthedocs.io/en/latest/pynq_libraries/audio.html">Audio-Modul</a> aus der PYNQ-Bibliothek ermöglicht dieser Codec die direkte Aufnahme und Wiedergabe von Audiosignalen über die analogen Ein- und Ausgänge des Boards.<br> Obwohl der ADAU1761 über integrierte DSP-Funktionen verfügt, werden diese nicht genutzt, da die Filterung vollständig in der programmierbaren Logik (PL) des FPGAs erfolgt.<br> Ein besonderes Merkmal des ADAU1761 ist sein integrierter fraktionaler Phasenregelkreis (PLL). Dieser erlaubt es, aus einer Vielzahl externer Takteingänge (8 MHz bis 27 MHz) intern stabile Systemtakte zu erzeugen.<br> Die vollständigen Spezifikationen sind im Datenblatt zu dem <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/adau1761.pdf">ADAU1761 Audio-Codec</a> einsehbar.<br></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ADAU1761</th>
+<th>Spezifikationen:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Audioauflösung:</strong></td>
+<td>24 Bit (Sigma-Delta ADC/DAC)</td>
+</tr>
+<tr class="even">
+<td><strong>Abtastraten:</strong></td>
+<td>8 kHz bis 96 kHz (standardmäßig 48 kHz)</td>
+</tr>
+<tr class="odd">
+<td><strong>Schnittstelle:</strong></td>
+<td>I²S (Inter-IC Sound) – digitale Audioverbindung in programmierbarer Logik</td>
+</tr>
+<tr class="even">
+<td><strong>Steuerung:</strong></td>
+<td>Über I²C-Bus (in PYNQ über <em>pynq.lib.audio.AudioADAU1761</em>)</td>
+</tr>
+<tr class="odd">
+<td><strong>PLL-Taktgenerator:</strong></td>
+<td>Intern aus 8 MHz–27 MHz Eingangstakt generierbar</td>
+</tr>
+</tbody>
+</table>
+<!--
+quellen:
+Quelle 1: [Tul: Product - FPGA](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)<br>
+Quelle 2: [AMD: AUP PYNQ-Z2](https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources)<br>
+Quelle 3: [AMD: Pynq](https://www.pynq.io/)<br>
+Quelle 4: [PYNQ: Python productivity for Adaptive Computing platforms latest](https://pynq.readthedocs.io/en/latest/)
+
+-->
+</section>
+</section>
+<section id="aufbau-und-funktion-der-lehrdemonstration" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Aufbau und Funktion der Lehrdemonstration</h1>
+<p>Ein zentrales Element der Lehrdemonstration ist ein vorgefertigtes Jupyter-Notebook, mit dem sich die verschiedenen Filter einfach bedienen lassen. Innerhalb dieses Notebooks können analoge Audiosignale über die Eingänge des Boards aufgenommen und sowohl im Notebook selbst als auch über den analogen Audioausgang des PYNQ-Z2 wiedergegeben werden.<br> Darüber hinaus besteht die Möglichkeit, sowohl die aufgenommenen Audiodaten als auch externe Audiodateien mit einem der vier implementierten Filter zu verarbeiten. Nach der Auswahl eines Filters wird das gefilterte Signal gespeichert und kann angehört oder weiter analysiert werden.<br></p>
+<p>Da sowohl das Audiosignal vor als auch nach der Filterung gespeichert wird, besteht die Möglichkeit, beide Versionen direkt miteinander zu vergleichen. Neben dem reinen Abhören der Audiodateien kann zusätzlich ein definierter Ausschnitt des Frequenzspektrums vor und nach der Filterung visualisiert werden.<br> Dies ermöglicht eine anschauliche Analyse der Signalveränderung im Frequenzbereich und macht die Wirkung des gewählten Filters unmittelbar sichtbar. Auf diese Weise wird die digitale Signalverarbeitung nicht nur hörbar, sondern auch grafisch nachvollziehbar.<br></p>
+<section id="pynq-overlays" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="pynq-overlays"><span class="header-section-number">14.1</span> Pynq Overlays</h2>
+<p>Zur Nutzung individuell entwickelter Hardwaredesigns auf dem PYNQ-Z2-Board werden Overlays verwendet. Diese bestehen aus einer Bitstream-Datei (.bit) und der zugehörigen Hardware Handoff-Datei (.hwh), die zuvor mit Vivado generiert werden.<br> In einigen PYNQ-Dokumentationen wird teilweise auch auf .tcl-Dateien verwiesen. Im Rahmen der hier eingesetzten PYNQ-Version hat sich gezeigt, dass diese Datei nicht erforderlich ist. Das Overlay lässt sich vollständig mit der .bit- und der .hwh-Datei verwenden.<br></p>
+<p>Die eigentliche Ansteuerung der Hardware erfolgt über das auf dem PYNQ-Board vorinstallierte Python-Modul <a href="https://pynq.readthedocs.io/en/latest/pynq_libraries.html#">pynq</a>. Dieses Modul stellt eine spezielle Bibliothek bereit, mit der sich aus Python heraus direkt auf die programmierbare Logik (PL) zugreifen lässt. Dadurch können AXI-DMA-Schnittstellen genutzt, Register beschrieben oder externe IP-Cores über vordefinierte Treiber angesprochen werden. Die Steuerung der Hardware erfolgt in Python über Jupyter Notebooks, die direkt auf dem PYNQ-Board ausgeführt werden. Der Zugriff auf die Notebooks erfolgt remote über Geräte im selben Netzwerk.<br></p>
+<p>Zum einen wird das Modul <a href="https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.dma.html#pynq-lib-dma">pynq.lib.dma</a> verwendet, das den Zugriff auf die AXI-DMA-Schnittstellen der programmierbaren Logik ermöglicht. Über dieses Modul können mit wenigen Python-Befehlen Daten an die Filter-IP-Cores gesendet und die verarbeiteten Daten wieder empfangen werden. Die Übertragung wird dabei automatisch vom Modul verwaltet, sodass keine manuelle Kontrolle über Adressen notwendig ist <br></p>
+<p>Zum anderen kommt das Modul <a href="https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html">pynq.lib.audio</a> zum Einsatz. Dieses Modul enthält den Treiber für den auf dem PYNQ-Z2-Board verbauten ADAU1761-Audiocodec und ermöglicht es, die analogen Audioein- und -ausgänge des Boards direkt aus Python heraus anzusteuern. Über den Treiber können zentrale Funktionen wie das Setzen der Abtastrate, das Aktivieren oder Deaktivieren von Ein- und Ausgängen gesteuert werden. Darüber hinaus bietet das Modul die Möglichkeit, Audiosignale über die analogen Eingänge aufzunehmen.<br></p>
+</section>
+<section id="funktionsweise-des-notebooks" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="funktionsweise-des-notebooks"><span class="header-section-number">14.2</span> Funktionsweise des Notebooks</h2>
+<p>Zur besseren Übersicht und vereinfachten Bedienung wurden alle wesentlichen Prozesse, wie Datenübertragung, Speichern und Visualisierung, in einer separaten Python-Datei als einheitliche Funktionssammlung zusammengeführt. Diese Struktur ermöglicht es, komplexe Abläufe mit nur wenigen, klaren Funktionsaufrufen direkt im Jupyter Notebook auszuführen.<br></p>
+<p>Die wichtigste Rolle spielt dabei die Übertragung der Audiodaten an den DMA, der diese durch den Filter-IP-Core leitet und anschließend wieder zurückgibt.<br> Die grundlegende Datenübertragung an den DMA erfolgt dabei relativ einfach und orientiert sich im Prinzip an dem Ablauf, wie er auch in den offiziellen PYNQ-Tutorials und der <a href="https://pynq.readthedocs.io/en/latest/pynq_libraries/dma.html">PYNQ-Dokumentation</a> beschrieben ist. <br></p>
+</section>
+<section id="initialisierung-des-dma-kanals" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="initialisierung-des-dma-kanals"><span class="header-section-number">14.3</span> Initialisierung des DMA-Kanals</h2>
+<p>Am Anfang werden alle notwendigen Bibliotheken importiert, einschließlich der PYNQ-spezifischen Module wie Overlay, allocate sowie die Treiberbibliothek pynq.lib.audio. Anschließend wird das entsprechende DMA-IP-Core aus dem zuvor geladenen Overlay angesprochen und in einer Variable gespeichert. Die DMA-Instanz verfügt über zwei Kanäle. <em>sendchannel</em> für das Senden an den DAM und <em>recvchannel</em> für das Empfangen. Für jeden der vier Filter wird eine eigene DMA-Instanz erzeugt und jeweils den zugehörigen Variablen zugewiesen.<br></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pynq <span class="im">import</span> Overlay</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pynq <span class="im">import</span> allocate</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pynq.lib.audio <span class="im">import</span> AudioADAU1761</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ol <span class="op">=</span> Overlay(<span class="st">"Audio_quad_Filter_v7.bit"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dma_Filter_1 <span class="op">=</span> ol.dma_Filter_1</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>dma_Filter_1_send <span class="op">=</span> ol.dma_Filter_1.sendchannel</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dma_Filter_1_recv <span class="op">=</span> ol.dma_Filter_1.recvchannel</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dma-übertragung" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="dma-übertragung"><span class="header-section-number">14.4</span> DMA Übertragung</h2>
+<p>Eine Zentrafe Funktion ist die <em>Transmission(input_data,ip_buffer,dma,dma_send, dma_recv)</em>. Diese Funktion wird für jede übertragung aufgerufen und übernimmt die Kernaufgaben für eine vollständige übertragung.<br></p>
+<p>Bevor die Audiodaten an die DMA-Schnittstelle übergeben werden können, müssen sie zunächst normiert und in ein kompatibles Datenformat umgewandelt werden. Dies ist notwendig, da die AXI-DMA-Schnittstelle nur mit bestimmten Datentypen arbeiten kann.<br></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Festlegen der Größen</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>buffer_size <span class="op">=</span> <span class="bu">int</span>(ip_buffer)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>input_data <span class="op">=</span> FormatChange(input_data)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data_size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(input_data))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Die DMA-Instanz verfügt über zwei Kanäle, den <em>sendchannel</em> zum Senden von Daten und den <em>recvchannel</em> zum Empfangen der verarbeiteten Daten. Diese beiden Kanäle werden für die gewählte DMA-Instanz initialisiert.<br> Bevor die Audiodaten in den input_buffer geladen werden, wird dieser zunächst vollständig mit Nullwerten gepuffert. Der Hintergrund ist, dass beim Anlegen des Buffers mittels <em>allocate()</em> dieser zunächst undefinierte Werte enthält. Falls die zu übertragende Datenmenge kleiner als die definierte Buffergröße ist, bleiben einzelne Felder leer. Der AXI-DMA prüft jedoch bei jedem Transfer, ob gültige Daten im Puffer vorhanden sind. Sind nicht alle Speicherbereiche korrekt befüllt, kann der DMA in einen Fehlerzustand übergehen. In diesem Fall wird der gesamte Datenpfad blockiert, und es sind keine weiteren Übertragungen möglich, bis ein manueller Reset durchgeführt wird.<br> Um diesem vorzubeugen, wird der <em>input_buffer</em> vor dem eigentlichen Datentransfer vollständig mit Nullen überschrieben. Anschließend werden die eigentlichen Nutzdaten an den Anfang des Buffers geschrieben. Nach der Übertragung wird der Puffer anhand der bekannten Datenlänge wieder korrekt zurückgeschnitten.<br></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Padding</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pad <span class="op">=</span> np.zeros(ip_buffer)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pad_frame <span class="op">=</span> FormatChange(pad)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Leere Buffer</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>input_buffer <span class="op">=</span> allocate(shape<span class="op">=</span>(buffer_size,), dtype<span class="op">=</span>np.uint32)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>output_buffer <span class="op">=</span> allocate(shape<span class="op">=</span>(buffer_size,), dtype<span class="op">=</span>np.uint32)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Padding Inputbuffer</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>input_buffer[:] <span class="op">=</span> pad_frame</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Laden der Daten in Inputbuffer</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>input_buffer[: data_size] <span class="op">=</span> input_data</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Die Datenübertragung wird mithilfe der Methode <em>transfer()</em> sowohl für den Sende- als auch für den Empfangskanal gestartet. Dadurch wird der Übertragungsvorgang an den DMA angestoßen. Nach dem Start der Übertragung wird mit <em>wait()</em> auf den Abschluss des Transfers gewartet. Während dieser Phase ist die DMA-Schnittstelle blockiert,<br></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Senden un Empfangen der Daten</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dma.sendchannel.transfer(input_buffer)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dma.recvchannel.transfer(output_buffer)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>dma.sendchannel.wait()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dma.recvchannel.wait()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Nach dem Empfang der Daten über den DMA werden diese wieder in das ursprüngliche Format zurückkonvertiert. Falls der Eingabepuffer aufgrund von Padding mit Nullen aufgefüllt wurde, werden diese nach dem Empfang anhand der bekannten Originallänge entfernt, sodass nur die tatsächlich relevanten Audiodaten weiterverarbeitet werden.<br></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Umrechnen der Empfangenen Daten</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>output_data <span class="op">=</span> np.array(output_buffer[: data_size]).view(np.int32)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="öffnen-und-einlesen-von-.wav-dateien" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="öffnen-und-einlesen-von-.wav-dateien"><span class="header-section-number">14.5</span> Öffnen und Einlesen von .wav-Dateien</h2>
+<p>Zur Verarbeitung von Audiodaten werden zunächst .wav-Dateien geöffnet und eingelesen. Dies geschieht über die Funktion <em>read_wav()</em>, die mithilfe des Python-Moduls wave Zugriff auf die Audiodaten ermöglicht. Die Funktion basiert auf einem Beispiel aus den PYNQ-Audio-Demonstrationen, die auf dem Board vorinstalliert sind, und wurde entsprechend angepasst. Beim Einlesen der Datei werden zunächst grundlegende Metainformationen wie Anzahl der Kanäle, Abtastrate, Anzahl der Frames sowie die Sample-Breite ausgelesen. Anschließend werden die Rohdaten byteweise in ein Array geladen und abhängig von der Kanalanzahl und Samplegröße korrekt umstrukturiert.<br> Am Ende gibt die Funktion sowohl die Audiodaten als auch die zugehörigen Metadaten (Frame-Anzahl, Kanalzahl, Samplingrate, Sample-Breite) zurück. <br></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_wav(wav_path):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> wave.<span class="bu">open</span>(wav_path, <span class="st">'r'</span>) <span class="im">as</span> wav_file:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        raw_frames <span class="op">=</span> wav_file.readframes(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        num_frames <span class="op">=</span> wav_file.getnframes()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        num_channels <span class="op">=</span> wav_file.getnchannels()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        sample_rate <span class="op">=</span> wav_file.getframerate()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        sample_width <span class="op">=</span> wav_file.getsampwidth()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    temp_buffer <span class="op">=</span> np.empty((num_frames, num_channels, <span class="dv">4</span>), dtype<span class="op">=</span>np.uint8)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    raw_bytes <span class="op">=</span> np.frombuffer(raw_frames, dtype<span class="op">=</span>np.uint8)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    temp_buffer[:, :, :sample_width] <span class="op">=</span> raw_bytes.reshape(<span class="op">-</span><span class="dv">1</span>, num_channels, </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                                                    sample_width)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    temp_buffer[:, :, sample_width:] <span class="op">=</span> <span class="op">\</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    (temp_buffer[:, :, sample_width<span class="op">-</span><span class="dv">1</span>:sample_width] <span class="op">&gt;&gt;</span> <span class="dv">7</span>) <span class="op">*</span> <span class="dv">255</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> temp_buffer.view(<span class="st">'&lt;i4'</span>).reshape(temp_buffer.shape[:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Frames:"</span>,<span class="bu">len</span>(frames), <span class="st">"Channels:"</span>, num_channels, <span class="st">"Sample Rate:"</span>,sample_rate, <span class="st">"Sample Width"</span>, sample_width )</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> frames, num_frames, num_channels, sample_rate, sample_width </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="schreiben-und-speichern-von-.wav-dateien" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="schreiben-und-speichern-von-.wav-dateien"><span class="header-section-number">14.6</span> Schreiben und Speichern von .wav-Dateien</h2>
+<p>Nach der Verarbeitung der Audiodaten können die Ergebnisse als WAV-Datei gespeichert werden. Dies geschieht über die Funktion <em>save_to_24bit_wav()</em>, die die beiden Audiokanäle entgegennimmt und diese gemeinsam in eine Stereo-WAV-Datei schreibt. Die Funktion ist in ihrer Struktur an <em>read_wav()</em> angelehnt und übernimmt das Schreiben der Daten im passenden Format. Das Schreiben erfolgt über das Python-Modul <em>wave</em>, wobei die Daten als flache Bytefolge übergeben werden. Die resultierende Datei kann anschließend direkt im Notebook abgespielt oder zur externen Weiterverarbeitung verwendet werden.<br></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_to_24bit_wav(chan_l, chan_r, sample_rate, path):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> np.stack((chan_l, chan_r), axis<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    max_val <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">23</span>  <span class="co"># 24-bit max signed int</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> np.clip(frames, <span class="op">-</span><span class="fl">1.0</span>, <span class="fl">1.0</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    frames_int <span class="op">=</span> (frames <span class="op">*</span> max_val).astype(np.int32)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># In Bytes umwandeln</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    temp_bytes <span class="op">=</span> frames_int.reshape((<span class="op">*</span>frames.shape, <span class="dv">1</span>)).view(np.uint8)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    raw_bytes <span class="op">=</span> temp_bytes[:, :, :<span class="dv">3</span>].reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> wave.<span class="bu">open</span>(path, <span class="st">'wb'</span>) <span class="im">as</span> wav_out:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        wav_out.setnchannels(frames.shape[<span class="dv">1</span>])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        wav_out.setsampwidth(<span class="dv">3</span>)  <span class="co"># 24-bit</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        wav_out.setframerate(sample_rate)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        wav_out.writeframes(raw_bytes.tobytes())</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="paketaufteilung" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="paketaufteilung"><span class="header-section-number">14.7</span> Paketaufteilung</h2>
+<p>Wie bereits bekannt, ist die Puffergröße der Filter-IP auf 2^20 Bit festgelegt. Nach dem Einlesen einer .wav-Datei kann es jedoch vorkommen, dass die Audiodaten (Frames) länger sind als der verfügbare Puffer.<br> Um dennoch eine korrekte Filterung beliebiger Signallängen zu ermöglichen, werden die Daten vor der Übertragung in kleinere Teilstücke zerlegt. Dies erfolgt über die Funktion <em>Split2Packets()</em>, die das Array mit den Audiodaten in mehrere Pakete unterteilt, jeweils mit einer maximalen Größe, die dem festgelegten Puffer entspricht.<br></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> Split2Packets(data,packet_size):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    packets <span class="op">=</span> []</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(data), packet_size):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        packet <span class="op">=</span> data[i:i<span class="op">+</span>packet_size]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        packets.append(packet)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> packets</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Die Funktion <em>send2receive()</em> nutzt zunächst <em>Split2Packets()</em>, um die Eingangsdaten in kleinere Teilstücke aufzuteilen. Für jedes dieser Datenpakete wird anschließend die Übertragung mithilfe der Funktion <em>Transmission()</em> durchgeführt.<br> Die dabei empfangenen, gefilterten Daten werden jeweils aneinandergehängt und in einem Ausgabearray gesammelt. Auf diese Weise entsteht am Ende ein vollständiges gefiltertes Signal, das dieselbe Länge wie das ursprüngliche Eingangsframe besitzt.<br></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> send2receive(Data_In, dma, dma_send, dma_recv):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ip_buffer <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">20</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filtern Kanal</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    Data_Out <span class="op">=</span> []</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Zerteilung und Übertragung in Packeten</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    Packets <span class="op">=</span> Split2Packets(Data_In, ip_buffer)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    anz_trans <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> packet <span class="kw">in</span> Packets:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> Transmission(packet, ip_buffer,dma, dma_send, dma_recv)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        Data_Out.extend(result)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        anz_trans <span class="op">=</span> anz_trans <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(anz_trans, <span class="st">"Transmissions"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Data_Out</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="vollständige-filter-anwendung" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="vollständige-filter-anwendung"><span class="header-section-number">14.8</span> vollständige Filter-Anwendung</h2>
+<p>Die Funktion <em>UseFilter()</em> bildet den zentralen Ablauf zur Anwendung eines digitalen Filters auf eine Audiodatei. Sie automatisiert dabei alle notwendigen Schritte, vom Einlesen der Datei bis zur Speicherung des gefilterten Ergebnisses.<br></p>
+<p>Zu Beginn wird die gewählte Filterinstanz ausgewählt. Anschließend wird die angegebene .wav-Datei über die Funktion <em>read_wav()</em> geöffnet. Dabei werden sowohl die Audiodaten der beiden Kanäle als auch relevante Metainformationen ausgelesen. Anschließend erfolgt eine Normierung der Audiodaten um eine saubere Signalverarbeitung sicherzustellen.<br></p>
+<p>Falls die Samplerate der Eingangsdaten nicht 48 kHz beträgt, was häufig bei Standard-Audiodateien mit 44,1 kHz der Fall ist, wird automatisch ein Upsampling auf 48 kHz durchgeführt. Dies ist erforderlich, da die Filter für diese Abtastrate ausgelegt wurden. Auf diese weise wird das richtige Verhalten des Filters sichergestellt.<br></p>
+<p>Im nächsten Schritt wird das normierte Audiosignal für jeden Kanal getrennt an den zuvor ausgewählten Filter übergeben. Die Übertragung und Filterung wird über die Funktion <em>send2receive()</em> abgewickelt, die das Signal in Pakete unterteilt, überträgt, empfängt und anschließend wieder zusammensetzt.<br></p>
+<p>Zuletzt werden die gefilterten Daten beider Kanäle mithilfe der Funktion <em>save_to_24bit_wav()</em> wieder zu einer Stereo-WAV-Datei zusammengeführt und unter dem angegebenen Ausgabedateinamen gespeichert.<br></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> UseFilter(in_Name, out_Name,Filter):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> time</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> time.time()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    dma <span class="op">=</span> Filter[<span class="dv">0</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    dma_send <span class="op">=</span> Filter[<span class="dv">1</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    dma_recv <span class="op">=</span> Filter[<span class="dv">2</span>]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    [frames, num_frames, channels, Fs, Fw] <span class="op">=</span> read_wav(in_Name)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Read Data</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    data_l <span class="op">=</span> Normierung(frames[:,<span class="dv">0</span>])</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    data_r <span class="op">=</span> Normierung(frames[:,<span class="dv">1</span>])</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> Fs <span class="op">!=</span> <span class="dv">48000</span>:</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        data_l <span class="op">=</span> resample_poly(data_l,<span class="dv">48000</span>, Fs)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        data_r <span class="op">=</span> resample_poly(data_r,<span class="dv">48000</span>, Fs)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"up-sampled: 44.1 -&gt; 48kHz"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        Fs <span class="op">=</span> <span class="dv">48000</span>     </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Start Sending left Channel"</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    Data_Out_L <span class="op">=</span> send2receive(data_l, dma, dma_send, dma_recv)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Start Sending right Channel"</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    Data_Out_R <span class="op">=</span> send2receive(data_r, dma, dma_send, dma_recv)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Saving File"</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    save_to_24bit_wav(Data_Out_L, Data_Out_R, Fs, out_Name)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> time.time()</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Finished"</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Dauer: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">:.2f}</span><span class="ss"> Sekunden"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="kaskadierung-der-filter" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="kaskadierung-der-filter"><span class="header-section-number">14.9</span> Kaskadierung der Filter</h2>
+<p>Neben der Standardfunktion <em>UseFilter()</em> steht eine erweiterte Variante zur Verfügung, die es ermöglicht, dasselbe Audiosignal mehrfach durch denselben Filter zu leiten. <em>UseFilterCascade()</em> erlaubt es, über einen Parameter festzulegen, wie oft die Filterung wiederholt werden soll.<br> Hintergrund ist, dass in jedem Filter-IP-Core lediglich ein einzelnes Biquad-Segment implementiert ist. Durch die wiederholte Anwendung desselben Filters lässt sich somit eine Kaskadierung mehrerer Biquads realisieren. Dies führt zu einer Erhöhung der effektiven Filterordnung und damit zu einer steileren Flankensteilheit im Frequenzgang, ein Effekt, der deutlich hör- und sichtbar wird.<br></p>
+<p>Diese Funktion dient ausschließlich zu Demonstrationszwecken, bei der gezeigt werden soll, wie sich die Eigenschaften eines Filters durch mehrfache Anwendung bzw. Kaskadierung verändern lassen.<br></p>
+<!--
+
+u erst werden die Module und das Overlay geladen:
+
+```python
+from pynq import Overlay
+from pynq import allocate
+
+ol = Overlay("Audio_quad_Filter_v7.bit")
+
+```
+Anschließend wird das ensprechende DMA-IP-Core aus dem geladenen Overlay angesprochen:
+
+```python
+dma_Filter_1 = ol.dma_Filter_1
+
+```
+Die DMA-Instanz verfügt über zwei Kanäle. *sendchannel* für das Senden an den DAM und *recvchannel* für das Empfangen:
+
+```python
+dma_Filter_1_send = ol.dma_Filter_1.sendchannel
+dma_Filter_1_recv = ol.dma_Filter_1.recvchannel
+
+```
+Für die Übertragung müssen Eingabe- und Ausgabepuffer im Shared Memory zwischen PS und PL angelegt werden. Dies wird später in einer Funktion für jede Übertragung durchgeführt:
+
+```python
+input_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
+output_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
+
+```
+
+Für die Übertragung müssen die Daten in das richtige format gebracht werden bevor diese in den Buffer geschrieben werden können. Die Audiodaten werden zunächst normiert und in das richtige Format gebracht, da AXI-DMA nur mit bestimmten Datentypen arbeitet:
+
+```python
+def FormatChange(x):
+    x = x * (2**16)
+    x = x.astype(np.int32)
+    input_data = x.view(np.uint32)
+    return input_data
+
+```
+
+[pynq](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#)
+[pynq.lib.dma](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.dma.html#pynq-lib-dma)
+[pynq.lib.audio](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html)
+
+Das erzeugte overlay kann nun auf das Pynq-Board geladen werden. Dort befindet sich ein Notebook mit welchen die Filterung aber auch die Aufnahme analoger Audio durchgeführt werden kann. Neben dem Notebook selbst, der eine Interaktive bediehnung und einfache Form der Analayse ermöglicht, existiert eine Weite Python File namen Filter_Overlay.py, welche direkt im Notebook aufgerufen wird. In diesem Python skript befinden sich alle nötigen Biblioteken welche notwendig sind die Filterung zu bedeihenen, sowie auch weitere Funktionen die die bediehnung vereinfachen und einheitlich machen. 
+
+Biblioteken:
+- beschreiben welche standet sind und welche pynq-spezifisch sind
+Zueisung der Filter:
+- filter werden anhand der axi-dma zugewiesen -> deshaölb war namensgebung so wichtig
+- diese können dann einfach aufgerufen werden
+Audiocodec treiber
+- wo kommen die funktionen her und was machen die
+- anmerken dann nicht von 48kHz  weck eingestellt werden kann, was hat man beobachtet
+Funktionen
+- wie genau funktioniert die übertragung -> alocate
+- wie und warum muss was umgerechnet werden -> padding etc.
+- warum wird in pakete aufgeteilt
+- wo kommen die funktionen her -> welche wurden aus den Pynq beispielen übernommen?
+Analyse
+- warum FFT und wie funktioniert das 
+
+Notebook zum bediehen
+- kurz erklärten wie das notebook aufgebaut ist und was es alles kann, sowie wie man es anwendet
+- 
+-->
 
 
 </section>
