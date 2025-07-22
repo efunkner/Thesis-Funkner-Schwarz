@@ -231,10 +231,13 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ Theorie: Quantesierung weiter Ausbauen.
 - ❌ ~~Alle Filter erklären (Butterworth, Tschebyscheff, Elliptic)~~
 - ❌ Blockschaltbilder (Simulink)
+- ❌ redmes schreiben
 - ❌ Aufräumen des Git Reposetories
 - ❌ ~~OrgID erstellen~~
 - ❌ Einleitung und Motivation
 - ❌ Überprüfung und Finale Formulierung der BA
+- ❌ Einwilligubgserklärung wegen dem gemeinsamen teil formulieren
+
 
 ## Bereits erledigt:
 - ✅ Design eines digitalen IIR-Biquad-Filters mit Fixpunktkonvertierung der Koeffi-
