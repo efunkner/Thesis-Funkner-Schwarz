@@ -73,11 +73,11 @@ format:
     # mainfont: "Calibri"
     # keep-tex: true
     # default-image-extension: tex
-    output-file: gel2
+    output-file: thesis-fs
   epub:
     theme: flatly
     # default-image-extension: svg
-    output-file: gel2
+    output-file: thesis-fs
   
 execute:
   freeze: auto
