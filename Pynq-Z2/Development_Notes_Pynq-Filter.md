@@ -233,7 +233,6 @@ Die Darstellung des Spektrums ist auch direkt im Notebook möglich. Sie ist zwar
 - ❌ Blockschaltbilder (Simulink)
 - ❌ Aufräumen des Git Reposetories
 - ❌ ~~OrgID erstellen~~
-- ❌ hanrdware beschreibung
 - ❌ Einleitung und Motivation
 - ❌ Überprüfung und Finale Formulierung der BA
 
@@ -259,6 +258,7 @@ zienten für den FPGA.
 - ✅ Finales Design mit Audiofilterung und Einlesen digitaler Audiodateien
 - ✅ Demo-Notebook fertig stellen und dokumentieren
 - ✅ Codebeschreibung (Matlab, Python)
+- ✅ hanrdware beschreibung
 
 ## Zusatz:
 - ❔Vergleich Filtertypen und Ordnung (Ellip, Butter, Chebyshev)
