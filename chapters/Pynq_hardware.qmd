@@ -1,0 +1,43 @@
+# Das PYNQ-Z2 und die PYNQ-Plattform
+Das PYNQ-Z2 ist ein FPGA-Entwicklungsboard, das speziell für die Verwendung mit der PYNQ-Plattform konzipiert wurde. Die Plattform wurde von Xilinx (heute AMD) entwickelt und verfolgt das Ziel, die Entwicklung von FPGA-Anwendungen mithilfe von Python zu vereinfachen. Anstelle über herkömmlicher Hardwarebeschreibungssprachen ermöglicht PYNQ die Nutzung von Python-Code zur Steuerung und Nutzung programmierbarer Logik auf Zynq-SoCs, direkt über Jupyter Notebooks im Webbrowser.<br>
+PYNQ steht für Python Productivity for Zynq und ist ein Open-Source-Projekt von AMD, das die Entwicklung von Anwendungen für Zynq-SoCs erheblich vereinfacht. Ziel der Plattform ist es, die komplexe Hardwareentwicklung mit FPGAs zugänglicher zu machen.<br>
+Das Board wird typischerweise mit einer speziell angepassten Linux-Distribution für PYNQ von einer microSD-Karte gestartet. Über das Netzwerk lässt sich die integrierte Jupyter-Notebook-Oberfläche aufrufen, um direkt mit Python zu arbeiten und Hardwarefunktionen anzusteuern.<br>
+Die Besonderheit von PYNQ liegt darin, dass komplexe Hardwaredesigns in der programmierbaren Logik per Overlay integriert und anschließend per Python angesteuert werden können. Dies ermöglicht beispielsweise Anwendungen in der Signalverarbeitung, beim maschinellen Lernen, in der Bildverarbeitung oder Robotik, ohne tiefgehende FPGA-Kenntnisse.<br>
+
+## Hardware-Spezifikationen des PYNQ-Z2
+Die vollständigen Hardware-Spezifikationen des Boards sind auf der [offiziellen Produktseite bei AMD](https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources) einsehbar.<br>
+
+Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikationen relevant:
+
+| PYNQ-Z2 | Spezifikationen: |
+| -------- | -------- |
+| **FPGA / SoC:** | Xilinx Zynq-7000 SoC (XC7Z020-1CLG400C), 256 KB On-Chip-Memory, 630 KB Block RAM, 220 DSP-Slices |
+| **Audio-I/O:** | I²S-Interface mit 24-Bit-DAC (3,5 mm TRRS-Buchse), Line-In (3,5 mm Klinke) |
+| **Netzwerk:** | 10/100/1000 Mbit/s Ethernet |
+| **Speicher:** | 	512 MB DDR3-RAM (16-Bit-Bus, 1050 Mbps), 128 Mbit Quad-SPI-Flash, microSD-Karten-Slot |
+| **Taktquellen:** | 	125 MHz für die programmierbare Logik (PL), 50 MHz für den Prozessor (PS) |
+
+
+## ADAU1761 Audio-Codec 
+Auf dem PYNQ-Z2 ist ein [ADAU1761 Audio-Codec](https://www.analog.com/media/en/technical-documentation/data-sheets/adau1761.pdf) von Analog Devices verbaut. In Kombination mit dem entsprechenden [Audio-Modul](https://pynq.readthedocs.io/en/latest/pynq_libraries/audio.html) aus der PYNQ-Bibliothek ermöglicht dieser Codec die direkte Aufnahme und Wiedergabe von Audiosignalen über die analogen Ein- und Ausgänge des Boards.<br>
+Obwohl der ADAU1761 über integrierte DSP-Funktionen verfügt, werden diese nicht genutzt, da die Filterung vollständig in der programmierbaren Logik (PL) des FPGAs erfolgt.<br>
+Ein besonderes Merkmal des ADAU1761 ist sein integrierter fraktionaler Phasenregelkreis (PLL). Dieser erlaubt es, aus einer Vielzahl externer Takteingänge (8 MHz bis 27 MHz) intern stabile Systemtakte zu erzeugen.<br>
+Die vollständigen Spezifikationen sind im Datenblatt zu dem [ADAU1761 Audio-Codec](https://www.analog.com/media/en/technical-documentation/data-sheets/adau1761.pdf) einsehbar.<br>
+
+
+| ADAU1761 | Spezifikationen: |
+| -------- | -------- |
+| **Audioauflösung:** | 24 Bit (Sigma-Delta ADC/DAC) |
+| **Abtastraten:** | 8 kHz bis 96 kHz (standardmäßig 48 kHz) |
+| **Schnittstelle:** | I²S (Inter-IC Sound) – digitale Audioverbindung in programmierbarer Logik |
+| **Steuerung:** | 	Über I²C-Bus (in PYNQ über *pynq.lib.audio.AudioADAU1761*) |
+| **PLL-Taktgenerator:** | Intern aus 8 MHz–27 MHz Eingangstakt generierbar	 |
+
+<!--
+quellen:
+Quelle 1: [Tul: Product - FPGA](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)<br>
+Quelle 2: [AMD: AUP PYNQ-Z2](https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources)<br>
+Quelle 3: [AMD: Pynq](https://www.pynq.io/)<br>
+Quelle 4: [PYNQ: Python productivity for Adaptive Computing platforms latest](https://pynq.readthedocs.io/en/latest/)
+
+-->

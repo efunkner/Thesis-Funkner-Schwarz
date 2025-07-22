@@ -36,4 +36,6 @@ right: |
 
 {{< include ../chapters/FPGA_RealTime.qmd >}}
 
+{{< include ../chapters/Pynq_hardware.qmd >}}
+
 {{< include ../chapters/Pynq_Notebook_code.qmd >}}

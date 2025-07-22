@@ -106,10 +106,10 @@ window.Quarto = {
 
 <meta name="citation_title" content="Biquads: Digitale Filter auf dem Pynq-Z2 als Lehrdemonstration">
 <meta name="citation_author" content="Martin Schwarz">
-<meta name="citation_publication_date" content="2025-07-20">
-<meta name="citation_cover_date" content="2025-07-20">
+<meta name="citation_publication_date" content="2025-07-22">
+<meta name="citation_cover_date" content="2025-07-22">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-07-20">
+<meta name="citation_online_date" content="2025-07-22">
 <meta name="citation_language" content="de">
 </head>
 
@@ -146,7 +146,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">20. Juli 2025</p>
+              <p class="date">22. Juli 2025</p>
             </div>
           </div>
           
@@ -241,6 +241,11 @@ window.Quarto = {
   <li><a href="#funktionstest-filtereinbindung" id="toc-funktionstest-filtereinbindung" class="nav-link" data-scroll-target="#funktionstest-filtereinbindung">Funktionstest &amp; Filtereinbindung</a></li>
   <li><a href="#ursache-und-bewertung" id="toc-ursache-und-bewertung" class="nav-link" data-scroll-target="#ursache-und-bewertung">Ursache und Bewertung</a></li>
   <li><a href="#analoge-audioquellen" id="toc-analoge-audioquellen" class="nav-link" data-scroll-target="#analoge-audioquellen">Analoge Audioquellen</a></li>
+  </ul></li>
+  <li><a href="#das-pynq-z2-und-die-pynq-plattform" id="toc-das-pynq-z2-und-die-pynq-plattform" class="nav-link" data-scroll-target="#das-pynq-z2-und-die-pynq-plattform">Das PYNQ-Z2 und die PYNQ-Plattform</a>
+  <ul class="collapse">
+  <li><a href="#hardware-spezifikationen-des-pynq-z2" id="toc-hardware-spezifikationen-des-pynq-z2" class="nav-link" data-scroll-target="#hardware-spezifikationen-des-pynq-z2">Hardware-Spezifikationen des PYNQ-Z2</a></li>
+  <li><a href="#adau1761-audio-codec" id="toc-adau1761-audio-codec" class="nav-link" data-scroll-target="#adau1761-audio-codec">ADAU1761 Audio-Codec</a></li>
   </ul></li>
   <li><a href="#aufbau-und-funktion-der-lehrdemonstration" id="toc-aufbau-und-funktion-der-lehrdemonstration" class="nav-link" data-scroll-target="#aufbau-und-funktion-der-lehrdemonstration">Aufbau und Funktion der Lehrdemonstration</a>
   <ul class="collapse">
@@ -596,7 +601,11 @@ Neben dem Design bietet MATLAB Tools wie freqz zur Darstellung von Amplituden- u
 </section>
 <section id="implementierung" class="level1">
 <h1>Implementierung</h1>
-<p>Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Das Ziel ist die Erstellung eines Vivado-kompatiblen IP-Cores, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch die Verwendung des modellbasierten Workflows wird die Entwicklung beschleunigt und die Hardwareintegration standardisiert. <br></p>
+<p>Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Ziel ist es, daraus einen Vivado-kompatiblen IP-Core zu erzeugen, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch diesen modellbasierten Entwicklungsansatz wird nicht nur die Entwicklungszeit reduziert, sondern auch die Integration vereinfacht.<br> In der Vivado Design Suite von AMD/Xilinx spielen <a href="https://docs.amd.com/r/2022.1-English/ug896-vivado-ip">IP-Cores (Intellectual Property Cores)</a> eine zentrale Rolle. Dabei handelt es sich um wiederverwendbare Hardwaremodule, die sich modular in digitale Systeme einfügen lassen. Für die Implementierung von digitalen Filtern bieten IP-Cores einen Vorteil. Die gesamte Filterlogik kann als in sich geschlossenes Modul gekapselt werden. Dadurch wird die Funktionalität des Filters klar abgegrenzt und lässt sich ohne großen Aufwand mehrfach instanziieren, in Kaskade schalten oder austauschen.<br> Gerade bei Anwendungen wie dieser ermöglicht der Einsatz von IP-Cores eine klare Trennung zwischen Logikdesign und Systemintegration, was sowohl die Wartung als auch die Wiederverwendbarkeit verbessert. Ein einmal entwickelter Filter-IP kann unkompliziert in andere Designs oder Projekte übernommen und betrieben werden, ohne den zugrunde liegenden HDL-Code erneut anpassen zu müssen.<br></p>
+<!--
+Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Das Ziel ist die Erstellung eines Vivado-kompatiblen IP-Cores, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch die Verwendung des modellbasierten Workflows wird die Entwicklung beschleunigt und die Hardwareintegration standardisiert. <br>
+In der Vivado Design Suite von AMD/Xilinx nehmen IP-Cores (Intellectual Property Cores) eine zentrale Rolle bei der Entwicklung komplexer digitaler Systeme ein. Dabei handelt es sich um wiederverwendbare, Hardwaremodule, die in strukturierter Form in FPGA- und SoC-Designs integriert werden können. IP-Cores ermöglichen es, standardisierte Funktionen modular zu realisieren, ohne dass diese Komponenten jedes Mal neu entworfen werden müssen.
+-->
 <section id="modellierung-in-simulink" class="level2">
 <h2 class="anchored" data-anchor-id="modellierung-in-simulink">Modellierung in Simulink</h2>
 <p>Für die Umsetzung in Simulink wurde der in der DSP HDL Toolbox enthaltene Block <a href="https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html">Biquadratic IIR (SOS) filter</a> verwendet. Der Vorteil dieses Blocks gegenüber einer direkten Nachbildung der Direct Form II liegt darin, dass er speziell für die HDL-Codegenerierung optimiert ist. Er bringt bereits eine integrierte Steuerung des valid-Signals mit, was ein notwendiges Element für die AXI-Stream-Implementierung ist. Außerdem sind die Filterstrukturen bereits gepipelined, wodurch der Filter eine höhere maximale Taktfrequenz erreicht. <br> Die Probleme bei der Umsetzung einer Direct-Form-Struktur lagen hauptsächlich darin, dass bei der Bitstream-Generierung in Vivado die Timing-Anforderungen nicht eingehalten werden konnten und die Taktfrequenz des Filters entsprechend reduziert werden musste. Wird die Taktfrequenz zu niedrig gewählt, verlängert sich die Zeit der Filterung entsprechend.<br> Hinzu kam, dass ein einzelner Filter in dieser Form relativ viele Ressourcen auf dem FPGA belegte. Eine direkte Nachbildung der Direct Form II ohne korrektes Pipelining und ohne weitere Optimierungen ist sehr ineffizient.<br> Aus diesem Grund fiel die Entscheidung zugunsten einer vorgefertigten Lösung aus der DSP HDL Toolbox. Trotzdem musste die Taktfrequenz letztlich auf 50 MHz begrenzt werden, da bei 100 MHz ebenfalls keine vollständige Einhaltung der Timings erreicht werden konnte.<br></p>
@@ -920,6 +929,95 @@ Eine möglichekit dem entgegen zu wirken währe es einen Ein vollständiger, kom
 ## Analoge Audioquelle
 Da die echtzeitfilterung nicht zeitnahe umgesetzt weden kann, wurde das design für die Filterung digitaler quellen dahingend erweitert, dass mit dem auf dem Pnyq-Z2 enhaltenen Audiocode analoge Quellen aufgenommen und wiedergegeben werden können. Diese werden dabei digital als wav-File auf dem Borad gespeichert und anschließend von dem bestehenden Design gefiltert werden. <br>
 Auf dieser weise ist es möglich analoge Quellen zu filtern, nur nicht in echtzeit.<br>-->
+</section>
+</section>
+<section id="das-pynq-z2-und-die-pynq-plattform" class="level1">
+<h1>Das PYNQ-Z2 und die PYNQ-Plattform</h1>
+<p>Das PYNQ-Z2 ist ein FPGA-Entwicklungsboard, das speziell für die Verwendung mit der PYNQ-Plattform konzipiert wurde. Die Plattform wurde von Xilinx (heute AMD) entwickelt und verfolgt das Ziel, die Entwicklung von FPGA-Anwendungen mithilfe von Python zu vereinfachen. Anstelle über herkömmlicher Hardwarebeschreibungssprachen ermöglicht PYNQ die Nutzung von Python-Code zur Steuerung und Nutzung programmierbarer Logik auf Zynq-SoCs, direkt über Jupyter Notebooks im Webbrowser.<br> PYNQ steht für Python Productivity for Zynq und ist ein Open-Source-Projekt von AMD, das die Entwicklung von Anwendungen für Zynq-SoCs erheblich vereinfacht. Ziel der Plattform ist es, die komplexe Hardwareentwicklung mit FPGAs zugänglicher zu machen.<br> Das Board wird typischerweise mit einer speziell angepassten Linux-Distribution für PYNQ von einer microSD-Karte gestartet. Über das Netzwerk lässt sich die integrierte Jupyter-Notebook-Oberfläche aufrufen, um direkt mit Python zu arbeiten und Hardwarefunktionen anzusteuern.<br> Die Besonderheit von PYNQ liegt darin, dass komplexe Hardwaredesigns in der programmierbaren Logik per Overlay integriert und anschließend per Python angesteuert werden können. Dies ermöglicht beispielsweise Anwendungen in der Signalverarbeitung, beim maschinellen Lernen, in der Bildverarbeitung oder Robotik, ohne tiefgehende FPGA-Kenntnisse.<br></p>
+<section id="hardware-spezifikationen-des-pynq-z2" class="level2">
+<h2 class="anchored" data-anchor-id="hardware-spezifikationen-des-pynq-z2">Hardware-Spezifikationen des PYNQ-Z2</h2>
+<p>Die vollständigen Hardware-Spezifikationen des Boards sind auf der <a href="https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources">offiziellen Produktseite bei AMD</a> einsehbar.<br></p>
+<p>Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikationen relevant:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>PYNQ-Z2</th>
+<th>Spezifikationen:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>FPGA / SoC:</strong></td>
+<td>Xilinx Zynq-7000 SoC (XC7Z020-1CLG400C), 256 KB On-Chip-Memory, 630 KB Block RAM, 220 DSP-Slices</td>
+</tr>
+<tr class="even">
+<td><strong>Audio-I/O:</strong></td>
+<td>I²S-Interface mit 24-Bit-DAC (3,5 mm TRRS-Buchse), Line-In (3,5 mm Klinke)</td>
+</tr>
+<tr class="odd">
+<td><strong>Netzwerk:</strong></td>
+<td>10/100/1000 Mbit/s Ethernet</td>
+</tr>
+<tr class="even">
+<td><strong>Speicher:</strong></td>
+<td>512 MB DDR3-RAM (16-Bit-Bus, 1050 Mbps), 128 Mbit Quad-SPI-Flash, microSD-Karten-Slot</td>
+</tr>
+<tr class="odd">
+<td><strong>Taktquellen:</strong></td>
+<td>125 MHz für die programmierbare Logik (PL), 50 MHz für den Prozessor (PS)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adau1761-audio-codec" class="level2">
+<h2 class="anchored" data-anchor-id="adau1761-audio-codec">ADAU1761 Audio-Codec</h2>
+<p>Auf dem PYNQ-Z2 ist ein <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/adau1761.pdf">ADAU1761 Audio-Codec</a> von Analog Devices verbaut. In Kombination mit dem entsprechenden <a href="https://pynq.readthedocs.io/en/latest/pynq_libraries/audio.html">Audio-Modul</a> aus der PYNQ-Bibliothek ermöglicht dieser Codec die direkte Aufnahme und Wiedergabe von Audiosignalen über die analogen Ein- und Ausgänge des Boards.<br> Obwohl der ADAU1761 über integrierte DSP-Funktionen verfügt, werden diese nicht genutzt, da die Filterung vollständig in der programmierbaren Logik (PL) des FPGAs erfolgt.<br> Ein besonderes Merkmal des ADAU1761 ist sein integrierter fraktionaler Phasenregelkreis (PLL). Dieser erlaubt es, aus einer Vielzahl externer Takteingänge (8 MHz bis 27 MHz) intern stabile Systemtakte zu erzeugen.<br> Die vollständigen Spezifikationen sind im Datenblatt zu dem <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/adau1761.pdf">ADAU1761 Audio-Codec</a> einsehbar.<br></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ADAU1761</th>
+<th>Spezifikationen:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Audioauflösung:</strong></td>
+<td>24 Bit (Sigma-Delta ADC/DAC)</td>
+</tr>
+<tr class="even">
+<td><strong>Abtastraten:</strong></td>
+<td>8 kHz bis 96 kHz (standardmäßig 48 kHz)</td>
+</tr>
+<tr class="odd">
+<td><strong>Schnittstelle:</strong></td>
+<td>I²S (Inter-IC Sound) – digitale Audioverbindung in programmierbarer Logik</td>
+</tr>
+<tr class="even">
+<td><strong>Steuerung:</strong></td>
+<td>Über I²C-Bus (in PYNQ über <em>pynq.lib.audio.AudioADAU1761</em>)</td>
+</tr>
+<tr class="odd">
+<td><strong>PLL-Taktgenerator:</strong></td>
+<td>Intern aus 8 MHz–27 MHz Eingangstakt generierbar</td>
+</tr>
+</tbody>
+</table>
+<!--
+quellen:
+Quelle 1: [Tul: Product - FPGA](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)<br>
+Quelle 2: [AMD: AUP PYNQ-Z2](https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources)<br>
+Quelle 3: [AMD: Pynq](https://www.pynq.io/)<br>
+Quelle 4: [PYNQ: Python productivity for Adaptive Computing platforms latest](https://pynq.readthedocs.io/en/latest/)
+
+-->
 </section>
 </section>
 <section id="aufbau-und-funktion-der-lehrdemonstration" class="level1">
