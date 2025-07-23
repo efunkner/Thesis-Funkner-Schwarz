@@ -63,6 +63,7 @@ b, a = butter(N = order, Wn = wn, btype = 'high', analog = False)
 sos = butter(N = order_b, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
 sos = butter(N = order_b, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
+![Butterworth-Filter](images/butter.png)
 
 Chebyshev Typ 1-Filter
 
@@ -74,6 +75,7 @@ b, a = cheby1(N = order, rp = rp, Wn = wn, btype = 'high', analog = False)
 sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
 sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
+![Chebyshev1-Filter](images/cheby1.png)
 
 Chebyshev Typ 2-Filter
 
@@ -85,6 +87,7 @@ b, a = cheby2(N = order, rs = rs, Wn = wn, btype = 'high', analog = False)
 sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
 sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
+![Chebyshev2-Filter](images/cheby2.png)
 
 Elliptischer Filter (Cauer)
 
@@ -96,5 +99,6 @@ b, a = ellip(N = order, rp = rp, rs = rs, Wn = wn, btype = 'high', analog = Fals
 sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
 sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
+![Elliptischer Filter](images/ellip.png)
 
 Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parametern und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.

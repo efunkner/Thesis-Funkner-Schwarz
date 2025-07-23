@@ -1,1 +1,104 @@
-PLACEHOLDER FILTERENTWURF
+# Filterentwurf in Python
+
+Für den Entwurf von digitalen IIR-Filtern wird in Python die Scipy-Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine umfassende Sammlung von Funktionen für den Entwurf und die Analyse von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.
+```Python
+from scipy.signal import butter, cheby1, cheby2, ellip
+```
+
+Das Entwurfsverfahren basiert auf der Transformation analoger Filterprototypen, bei welchem ein analoger Filter mit den gewünschten Eigenschaften entworfen wird und anschließend durch die Bilineartransformation mit Prewarping in den digitalen Bereich überführt wird.
+
+Zur beispielhaften Nutzung der Funktionen werden die vier Grundfiltertypen nach den folgenden Parametern entworfen:
+
+```Python
+# Ordnung für Tief- und Hochpass
+order = 4
+# Ordnung für Bandpass und Bandsperre
+order_b = 2
+```
+Zur Demonstration werden Filter vierter Ordnung entworfen, um die Unterschiede zwischen der Filterprotypen zu verdeutlichen.
+
+Für den Entwurf von biquadratischen Tief- und Hochpass-Filter wird die Ordnung auf den Wert `2` gesetzt.  Bei Bandpass und Bandsperr-Filtern muss die Ordnung auf `1` gesetzt werden, um einen biquadratischer Filter zu erhalten.
+
+Beim Entwurf von Bandpass- und Bandsperr-Filtern wird eine Frequenztransformation eines Tiefpass-Prototyps durchgeführt, bei welcher jede s-Variable quadriert wird, wodurch sich die Filterordnung automatisch verdoppelt.
+
+```Python
+# Abtastrate für Audioanwendungen in Hz - Standard für CD-Qualität
+fs = 44100
+```
+
+```Python
+# Grenzfrequenz für Tief- und Hochpass in Hz
+fc = 1000
+# Normalisierte Grenzfrequenz
+wn = fc/(fs/2)
+```
+
+```Python
+# Untere und obere Grenzen für Bandpass und Bandsperre in Hz
+low = 500
+high = 2000
+# Normalisierte untere und obere Grenzen
+wn_b = [low/(fs/2), high/(fs/2)]
+```
+
+```Python
+# Welligkeit(Ripple) im Durchlassbereich in dB
+rp = 0.5
+# Dämpfung im Sperrbereich in dB
+rs = 80
+```
+Über die Funtkionen `butter`, `cheby1`, `cheby2` und `ellip` werden die dementsprechenden Filter enworfen. Über den Parameter `btype` wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von `low`, `high`, `bandpass`und `bandstop`.
+
+Die Koeffizienten können als separate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix durch `output = 'sos'` ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter `analog = False` gesetzt.
+
+Mit dem Parameter `rp` lässt sich die Welligkeit (Ripple) im Durchlassbereich von Chebyshev1- und Elliptischen Filtern kontrollieren und mit dem Parameter `rs` die Dämpfung im Sperrbereich von Chebyshev2- und Elliptischen Filtern.
+
+Butterworth-Filter
+
+Der Butterwoth-Filter zeichnet sich aus mit seiner maximalen Flachheit im Durchlassbereich ohne Welligkeit aus. Als Kompromiss weist dieser einen relativ langsamen Übergang vom Durchlass- zum Sperrbereich auf. Er bietet ein ausgewogenes Verhältnis zwischen Phasenverhalten und Flankensteilheit.
+
+```Python
+b, a = butter(N = order, Wn = wn, btype = 'low', analog = False)
+b, a = butter(N = order, Wn = wn, btype = 'high', analog = False)
+sos = butter(N = order_b, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = butter(N = order_b, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/butter.png">
+
+Chebyshev Typ 1-Filter
+
+Der Chebyshev Typ 1-Filter weist Welligkeit im Durchlassbereich auf, ermöglicht jedoch einen steileren Übergang im Vergleich zum Butterworth-Filter. Die Wellikgkeit ist gleichmäßig über den gesamten Durchlassbereich verteilt.
+
+```Python
+b, a = cheby1(N = order, rp = rp,Wn = wn, btype = 'low', analog = False)
+b, a = cheby1(N = order, rp = rp, Wn = wn, btype = 'high', analog = False)
+sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/cheby1.png">
+
+Chebyshev Typ 2-Filter
+
+Der Chebyshev Typ 2-Filter kombiniert einen flachen Durchlassbereich, vergleichbar mit dem Butterworth-Filter, mit Welligkeit im Sperrbereich. Bei gleichmäßiger Sperrbereichsdämpfung ermöglicht dieser steile Übergangsflanken.
+
+```Python
+b, a = cheby2(N = order, rs = rs,Wn = wn, btype = 'low', analog = False)
+b, a = cheby2(N = order, rs = rs, Wn = wn, btype = 'high', analog = False)
+sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/cheby2.png">
+
+Elliptischer Filter (Cauer)
+
+Der elliptische Filter bietet die steilsten Übergangsflanken aller dargestellten Filtertypen, weist jedoch Welligkeiten sowohl im Durchlass- als auch im Sperrbereich auf. Dieser eignet sich Optimal für Anwendungen mit strengen Anforderungen an die Übergangsanforderungen.
+
+```Python
+b, a = ellip(N = order, rp = rp, rs = rs,Wn = wn, btype = 'low', analog = False)
+b, a = ellip(N = order, rp = rp, rs = rs, Wn = wn, btype = 'high', analog = False)
+sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+```
+<img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/ellip.png">
+
+Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parametern und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.
