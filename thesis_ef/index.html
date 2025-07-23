@@ -351,7 +351,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">19. Juli 2025</p>
+      <p class="date">22. Juli 2025</p>
     </div>
   </div>
   
@@ -725,9 +725,10 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Das Entwurfsverfahren basiert auf der Transformation analoger Filterprototypen, bei welchem ein analoger Filter mit den gewünschten Eigenschaften entworfen wird und anschließend durch die Bilineartransformation mit Prewarping in den digitalen Bereich überführt wird.</p>
 <p>Zur beispielhaften Nutzung der Funktionen werden die vier Grundfiltertypen nach den folgenden Parametern entworfen:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordnung für Tief- und Hochpass</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordnung für Bandpass und Bandsperre</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>order_b <span class="op">=</span> <span class="dv">1</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>order_b <span class="op">=</span> <span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Zur Demonstration werden Filter vierter Ordnung entworfen, um die Unterschiede zwischen der Filterprotypen zu verdeutlichen.</p>
 <p>Für den Entwurf von biquadratischen Tief- und Hochpass-Filter wird die Ordnung auf den Wert <code>2</code> gesetzt. Bei Bandpass und Bandsperr-Filtern muss die Ordnung auf <code>1</code> gesetzt werden, um einen biquadratischer Filter zu erhalten.</p>
 <p>Beim Entwurf von Bandpass- und Bandsperr-Filtern wird eine Frequenztransformation eines Tiefpass-Prototyps durchgeführt, bei welcher jede s-Variable quadriert wird, wodurch sich die Filterordnung automatisch verdoppelt.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abtastrate für Audioanwendungen in Hz - Standard für CD-Qualität</span></span>
@@ -746,37 +747,57 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Dämpfung im Sperrbereich in dB</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>rs <span class="op">=</span> <span class="dv">80</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Über die Funtkionen <code>butter</code>, <code>cheby1</code>, <code>cheby2</code> und <code>ellip</code> werden die dementsprechenden Filter enworfen. Über den Parameter <code>btype</code> wird entschieden, welcher Filtertyp entworfen wird durchs Einsetzen von <code>low</code>, <code>high</code>, <code>bandpass</code>und <code>bandstop</code>.</p>
-<p>Die Koeffizienten können als separate <code>b</code> und <code>a</code> Arrays oder als eine Second Order System (SOS)-Matrix ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter <code>analog = False</code> gesetzt.</p>
+<p>Die Koeffizienten können als separate <code>b</code> und <code>a</code> Arrays oder als eine Second Order System (SOS)-Matrix durch <code>output = 'sos'</code> ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter <code>analog = False</code> gesetzt.</p>
+<p>Mit dem Parameter <code>rp</code> lässt sich die Welligkeit (Ripple) im Durchlassbereich von Chebyshev1- und Elliptischen Filtern kontrollieren und mit dem Parameter <code>rs</code> die Dämpfung im Sperrbereich von Chebyshev2- und Elliptischen Filtern.</p>
 <p>Butterworth-Filter</p>
 <p>Der Butterwoth-Filter zeichnet sich aus mit seiner maximalen Flachheit im Durchlassbereich ohne Welligkeit aus. Als Kompromiss weist dieser einen relativ langsamen Übergang vom Durchlass- zum Sperrbereich auf. Er bietet ein ausgewogenes Verhältnis zwischen Phasenverhalten und Flankensteilheit.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> butter(N <span class="op">=</span> Order,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>              Wn <span class="op">=</span> wn,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>              btype <span class="op">=</span> <span class="st">'low'</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              analog <span class="op">=</span> <span class="va">False</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> butter(N <span class="op">=</span> order, Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'low'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> butter(N <span class="op">=</span> order, Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'high'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> butter(N <span class="op">=</span> order_b, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandpass'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> butter(N <span class="op">=</span> order_b, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandstop'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/butter.png" class="img-fluid figure-img"></p>
+<figcaption>Butterworth-Filter</figcaption>
+</figure>
+</div>
 <p>Chebyshev Typ 1-Filter</p>
 <p>Der Chebyshev Typ 1-Filter weist Welligkeit im Durchlassbereich auf, ermöglicht jedoch einen steileren Übergang im Vergleich zum Butterworth-Filter. Die Wellikgkeit ist gleichmäßig über den gesamten Durchlassbereich verteilt.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> cheby1(N <span class="op">=</span> Order,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>              rp <span class="op">=</span> rp,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>              Wn <span class="op">=</span> wn,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>              btype <span class="op">=</span> <span class="st">'high'</span>, </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>              analog <span class="op">=</span> <span class="va">False</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> cheby1(N <span class="op">=</span> order, rp <span class="op">=</span> rp,Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'low'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> cheby1(N <span class="op">=</span> order, rp <span class="op">=</span> rp, Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'high'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> cheby1(N <span class="op">=</span> order_b, rp <span class="op">=</span> rp, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandpass'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> cheby1(N <span class="op">=</span> order_b, rp <span class="op">=</span> rp, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandstop'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/cheby1.png" class="img-fluid figure-img"></p>
+<figcaption>Chebyshev1-Filter</figcaption>
+</figure>
+</div>
 <p>Chebyshev Typ 2-Filter</p>
 <p>Der Chebyshev Typ 2-Filter kombiniert einen flachen Durchlassbereich, vergleichbar mit dem Butterworth-Filter, mit Welligkeit im Sperrbereich. Bei gleichmäßiger Sperrbereichsdämpfung ermöglicht dieser steile Übergangsflanken.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> cheby2(N <span class="op">=</span> Order, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>             rs <span class="op">=</span> rs,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>             Wn <span class="op">=</span> wn_b,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>             btype <span class="op">=</span> <span class="st">'bandpass'</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>             analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> cheby2(N <span class="op">=</span> order, rs <span class="op">=</span> rs,Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'low'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> cheby2(N <span class="op">=</span> order, rs <span class="op">=</span> rs, Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'high'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> cheby2(N <span class="op">=</span> order_b, rs <span class="op">=</span> rs, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandpass'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> cheby2(N <span class="op">=</span> order_b, rs <span class="op">=</span> rs, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandstop'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/cheby2.png" class="img-fluid figure-img"></p>
+<figcaption>Chebyshev2-Filter</figcaption>
+</figure>
+</div>
 <p>Elliptischer Filter (Cauer)</p>
 <p>Der elliptische Filter bietet die steilsten Übergangsflanken aller dargestellten Filtertypen, weist jedoch Welligkeiten sowohl im Durchlass- als auch im Sperrbereich auf. Dieser eignet sich Optimal für Anwendungen mit strengen Anforderungen an die Übergangsanforderungen.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> ellip(N <span class="op">=</span> Order,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            rp <span class="op">=</span> rp,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            rs <span class="op">=</span> rs,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>            Wn <span class="op">=</span> wn_b,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>            btype <span class="op">=</span> <span class="st">'bandstop'</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            analog <span class="op">=</span> <span class="va">False</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Das Notebook <code>filter_desing.ipynb</code> ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parameternb und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> ellip(N <span class="op">=</span> order, rp <span class="op">=</span> rp, rs <span class="op">=</span> rs,Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'low'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> ellip(N <span class="op">=</span> order, rp <span class="op">=</span> rp, rs <span class="op">=</span> rs, Wn <span class="op">=</span> wn, btype <span class="op">=</span> <span class="st">'high'</span>, analog <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> ellip(N <span class="op">=</span> order_b, rp <span class="op">=</span> rp,  rs <span class="op">=</span> rs, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandpass'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>sos <span class="op">=</span> ellip(N <span class="op">=</span> order_b, rp <span class="op">=</span> rp,  rs <span class="op">=</span> rs, Wn <span class="op">=</span> wn_b, btype <span class="op">=</span> <span class="st">'bandstop'</span>, analog <span class="op">=</span> <span class="va">False</span>, output <span class="op">=</span> <span class="st">'sos'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ellip.png" class="img-fluid figure-img"></p>
+<figcaption>Elliptischer Filter</figcaption>
+</figure>
+</div>
+<p>Das Notebook <code>filter_desing.ipynb</code> ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parametern und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.</p>
 </section>
 <section id="implementierungserklärung-der-biquad-filter-in-arduino" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Implementierungserklärung der Biquad Filter in Arduino</h1>
@@ -1172,6 +1193,7 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </section>
 <section id="filterkaskadierung" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="filterkaskadierung"><span class="header-section-number">11.3</span> Filterkaskadierung</h2>
+<p>Die Kaskadierung wird durchgeführt, indem die Filterung durch mehrere Stufen durchgeführt wird. Diese Stufen können durch Biquad-Filter oder Segmente einer SOS-Matrix definiert werden.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NUM_STAGES </span><span class="dv">2</span><span class="pp"> </span><span class="co">// Anzahl der Filterstufen</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Erste Sektion</span></span>
