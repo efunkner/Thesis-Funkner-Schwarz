@@ -13,8 +13,10 @@ Zur beispielhaften Nutzung der Funktionen werden die vier Grundfiltertypen nach 
 # Ordnung für Tief- und Hochpass
 order = 4
 # Ordnung für Bandpass und Bandsperre
-order_b = 4
+order_b = 2
 ```
+Zur Demonstration werden Filter vierter Ordnung entworfen, um die Unterschiede zwischen der Filterprotypen zu verdeutlichen.
+
 Für den Entwurf von biquadratischen Tief- und Hochpass-Filter wird die Ordnung auf den Wert `2` gesetzt.  Bei Bandpass und Bandsperr-Filtern muss die Ordnung auf `1` gesetzt werden, um einen biquadratischer Filter zu erhalten.
 
 Beim Entwurf von Bandpass- und Bandsperr-Filtern wird eine Frequenztransformation eines Tiefpass-Prototyps durchgeführt, bei welcher jede s-Variable quadriert wird, wodurch sich die Filterordnung automatisch verdoppelt.
@@ -49,54 +51,50 @@ rs = 80
 
 Die Koeffizienten können als separate `b` und `a` Arrays oder als eine Second Order System (SOS)-Matrix durch `output = 'sos'` ausgegeben werden. Mit der SOS-Matrix bietet sich die Möglichkeit auch Filter höherer Ordnung, als kaskadierte Biquad-Sektionen zu realisieren. Für den Entwurf von digitalen Filtern wird beim Parameter `analog = False` gesetzt.
 
+Mit dem Parameter `rp` lässt sich die Welligkeit (Ripple) im Durchlassbereich von Chebyshev1- und Elliptischen Filtern kontrollieren und mit dem Parameter `rs` die Dämpfung im Sperrbereich von Chebyshev2- und Elliptischen Filtern.
+
 Butterworth-Filter
 
 Der Butterwoth-Filter zeichnet sich aus mit seiner maximalen Flachheit im Durchlassbereich ohne Welligkeit aus. Als Kompromiss weist dieser einen relativ langsamen Übergang vom Durchlass- zum Sperrbereich auf. Er bietet ein ausgewogenes Verhältnis zwischen Phasenverhalten und Flankensteilheit.
 
 ```Python
-b, a = butter(N = Order, Wn = wn, btype = 'low', analog = False)
+b, a = butter(N = order, Wn = wn, btype = 'low', analog = False)
+b, a = butter(N = order, Wn = wn, btype = 'high', analog = False)
+sos = butter(N = order_b, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = butter(N = order_b, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
-![Butterworth-Tiefpass](images/butter_tp.png)
 
 Chebyshev Typ 1-Filter
 
 Der Chebyshev Typ 1-Filter weist Welligkeit im Durchlassbereich auf, ermöglicht jedoch einen steileren Übergang im Vergleich zum Butterworth-Filter. Die Wellikgkeit ist gleichmäßig über den gesamten Durchlassbereich verteilt.
 
 ```Python
-b, a = cheby1(N = Order,
-              rp = rp,
-              Wn = wn,
-              btype = 'high', 
-              analog = False)
+b, a = cheby1(N = order, rp = rp,Wn = wn, btype = 'low', analog = False)
+b, a = cheby1(N = order, rp = rp, Wn = wn, btype = 'high', analog = False)
+sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
-![Chebychev Typ 1-Hochpass](images/cheby1_hp.png)
 
 Chebyshev Typ 2-Filter
 
 Der Chebyshev Typ 2-Filter kombiniert einen flachen Durchlassbereich, vergleichbar mit dem Butterworth-Filter, mit Welligkeit im Sperrbereich. Bei gleichmäßiger Sperrbereichsdämpfung ermöglicht dieser steile Übergangsflanken.
 
 ```Python
-sos = cheby2(N = Order, 
-             rs = rs,
-             Wn = wn_b,
-             btype = 'bandpass',
-             analog = False, output = 'sos')
+b, a = cheby2(N = order, rs = rs,Wn = wn, btype = 'low', analog = False)
+b, a = cheby2(N = order, rs = rs, Wn = wn, btype = 'high', analog = False)
+sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
-![Chebychev Typ 2-Bandpass](images/cheby2_bp.png)
 
 Elliptischer Filter (Cauer)
 
 Der elliptische Filter bietet die steilsten Übergangsflanken aller dargestellten Filtertypen, weist jedoch Welligkeiten sowohl im Durchlass- als auch im Sperrbereich auf. Dieser eignet sich Optimal für Anwendungen mit strengen Anforderungen an die Übergangsanforderungen.
 
 ```Python
-sos = ellip(N = Order,
-            rp = rp,
-            rs = rs,
-            Wn = wn_b,
-            btype = 'bandstop',
-            analog = False,
-            output = 'sos')
+b, a = ellip(N = order, rp = rp, rs = rs,Wn = wn, btype = 'low', analog = False)
+b, a = ellip(N = order, rp = rp, rs = rs, Wn = wn, btype = 'high', analog = False)
+sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
+sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
 ```
-![Elliptischer Bandstop](images/ellip_bp.png)
 
 Das Notebook `filter_desing.ipynb` ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parametern und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.
