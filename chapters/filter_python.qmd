@@ -11,9 +11,9 @@ Zur beispielhaften Nutzung der Funktionen werden die vier Grundfiltertypen nach 
 
 ```Python
 # Ordnung für Tief- und Hochpass
-order = 2
+order = 4
 # Ordnung für Bandpass und Bandsperre
-order_b = 1
+order_b = 4
 ```
 Für den Entwurf von biquadratischen Tief- und Hochpass-Filter wird die Ordnung auf den Wert `2` gesetzt.  Bei Bandpass und Bandsperr-Filtern muss die Ordnung auf `1` gesetzt werden, um einen biquadratischer Filter zu erhalten.
 
@@ -54,10 +54,7 @@ Butterworth-Filter
 Der Butterwoth-Filter zeichnet sich aus mit seiner maximalen Flachheit im Durchlassbereich ohne Welligkeit aus. Als Kompromiss weist dieser einen relativ langsamen Übergang vom Durchlass- zum Sperrbereich auf. Er bietet ein ausgewogenes Verhältnis zwischen Phasenverhalten und Flankensteilheit.
 
 ```Python
-b, a = butter(N = Order,
-              Wn = wn,
-              btype = 'low',
-              analog = False)
+b, a = butter(N = Order, Wn = wn, btype = 'low', analog = False)
 ```
 ![Butterworth-Tiefpass](images/butter_tp.png)
 
