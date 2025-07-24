@@ -34,4 +34,4 @@ right: |
 
 {{< include ../chapters/arduino.qmd >}}
 
-{{< include ../chapters/wav_filtered.qmd >}}
+{{< include ../chapters/arduino_wav_filtered.qmd >}}
