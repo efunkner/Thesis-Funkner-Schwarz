@@ -30,7 +30,7 @@ class BiquadFilterDF1:
     __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 'x1', 'x2', 'y1', 'y2')
 ```
 
-Die Filterkoeffizienten `b0, b1, b2, a1, a2` werden nach der Initialisierung im Konstruktor nicht mehr verändert, was der mathematischen Definition eines zeitinvarianten Systems entspricht. Die Verzögerungselemente `x1, x2` speichern die vorherigen Einangswerte, während `y1, y2` die vorherigen Ausgangswerte speichern. Der Wert `a0` wird nicht gespeichert, da durch die Normalisierung im Konstruktor alle Koeffizienten bereits durch `a[0]` geteilt wurden.
+Die Filterkoeffizienten `b0, b1, b2, a1, a2` werden nach der Initialisierung im Konstruktor nicht mehr verändert, was der mathematischen Definition eines zeitinvarianten Systems entspricht. Die Verzögerungselemente `x1, x2` speichern die vorherigen Eingangswerte, während `y1, y2` die vorherigen Ausgangswerte speichern. Der Wert `a0` wird nicht gespeichert, da durch die Normalisierung im Konstruktor alle Koeffizienten bereits durch `a[0]` geteilt wurden.
 
 ### Konstruktor
 
@@ -63,14 +63,13 @@ Der Konstruktor normalisiert alle Koeffizienten druch die Division mit `a[0]`, w
         return y0
 ```
 
-Für die Implementierung der der Direktform 1 wird die Differenzengleichung dieser Struktur direkt implementiert: `y[n] = b0 * x[n] + b1 * x[n-1] + b2 * [x-2] - a1 * y[n-1] - a2 * y[n-2]`. Anschließend werden die Verzögerungselemente für die nächste Iteration aktualisiert. Die Eingangsverzögerung werden durch `self.x2 = self.x1` und `self.x1 = x0` verschoben, während die Ausgangsverzögerung durch `self.y2=self.y1` und `self.y1 = y0` aktualisiert werden. Diese Reihenfolge ist kritisch, da die Berechnung vor der Aktualisierung der Ausgangswerte erfolgen muss.
+Für die Implementierung der DF1 wird die Differenzengleichung dieser Struktur direkt implementiert: `y[n] = b0 * x[n] + b1 * x[n-1] + b2 * [x-2] - a1 * y[n-1] - a2 * y[n-2]`. Anschließend werden die Verzögerungselemente für die nächste Iteration aktualisiert. Die Eingangsverzögerung werden durch `self.x2 = self.x1` und `self.x1 = x0` verschoben, während die Ausgangsverzögerung durch `self.y2=self.y1` und `self.y1 = y0` aktualisiert werden. Diese Reihenfolge ist kritisch, da die Berechnung vor der Aktualisierung der Ausgangswerte erfolgen muss.
 
 ## Direktform 2
 
 ### Instanzvariablen
 
 ```python
-# --- Direct Form II ---
 class BiquadFilterDF2:
     __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 'w0', 'w1', 'w2')
 ```
@@ -105,18 +104,17 @@ Der Konstruktor ist geradezu identisch zur DF1 Implementierung, da die Koeffizie
         return y0
 ```
 
-Die DF2 Implementierung teilt die Berechnung in zwei Phasen: Zuerst wird der Ausgang aus den aktuellen Zustandsvariablen und den Zählerkoeffizienten berechnet. Dies entspricht der Implementierung des Zählerpolynoms der Übergrangsfunktion. Dann wird der neue Zustand `self.w0` berechnet, der das Eingangssignal minus der Rückkopplung darstellt. Die Verzögerungselemente werden durch `self.w2 = self.w1` und `self.w1 = self.w0` für die nächste Iteration verschoben.
+Die DF2 Implementierung teilt die Berechnung in zwei Phasen: Zuerst wird der Ausgang aus den aktuellen Zustandsvariablen und den Zählerkoeffizienten berechnet. Dies entspricht der Implementierung des Zählerpolynoms der Übertrangungsfunktion. Dann wird der neue Zustand `self.w0` berechnet, der das Eingangssignal minus der Rückkopplung darstellt. Die Verzögerungselemente werden durch `self.w2 = self.w1` und `self.w1 = self.w0` für die nächste Iteration verschoben.
 
 ## Transponierte Direktform 2
 
 ### Instanzvariablen
 
 ```python
-# --- Transposed Direct Form II ---
 class BiquadFilterTDF2:
     __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 's1', 's2')
 ```
-Die TDF2-Struktur verwendet Zustandsvariablen `s1, s2`, die als "shift register" fungieren. Diese Struktur ist die Transponierte Version der DF2, was bedeutet, dass der Signalfluss umgekehrt wird: die Ein- und Ausgänge werden vertauscht, sowie die Richtung der Verzögerungselemente wird umgekehrt.
+Die TDF2-Struktur verwendet Zustandsvariablen `s1, s2`, die als "shift register" fungieren. Diese Struktur ist die transponierte Version der DF2, was bedeutet, dass der Signalfluss umgekehrt wird: die Ein- und Ausgänge werden vertauscht, sowie die Richtung der Verzögerungselemente wird umgekehrt.
 
 ### Konstruktor
 
@@ -131,7 +129,7 @@ Die TDF2-Struktur verwendet Zustandsvariablen `s1, s2`, die als "shift register"
         self.s1 = 0.0
         self.s2 = 0.0
 ```
-Auch hier ist der Konstruktor identisch zu den anderen Implementierungen, da die Koeffizientennormalisierung eine mathematische Anforderung ist, die unabhängig von der gewählten Realisierungform gilt. In diesem Konstruktor werden die Variblen `self.s1, self.s2` auf 0.0 gesetzt.
+Auch hier ist der Konstruktor identisch zu den anderen Implementierungen, da die Koeffizientennormalisierung eine mathematische Anforderung ist, die unabhängig von der gewählten Realisierungsform gilt. In diesem Konstruktor werden die Variablen `self.s1, self.s2` auf 0.0 gesetzt.
 
 ### Filter Methode
 ```python
@@ -158,10 +156,10 @@ gain = 1.0
 
 biquad = BiquadFilterTDF2(b, a, gain)
 ```
-Die Koeffizienten werden in seperaten Listen gespeichert und an den Konstruktor übergeben. Über den `gain` Parameter kann auf den zu implementierenden Filter eine gewünschte Verstärkung angewandt werden. Bei dieser Filter Instanziirung wird die TDF2 verwendet mit ihren entsprechenden Klassennamen. Somit wird das Objekt `biquad` durch die Klasse `BiquadFilterTDF2` instanziiert. Innerhalb des Objekts werden die Koeffizienten mit dem Verstärkungsfaktor an die jeweilige Filterklasse übergeben und der Filter steht bereit zur Verwendung.
+Die Koeffizienten werden in separaten Listen gespeichert und an den Konstruktor übergeben. Über den `gain` Parameter kann auf den zu implementierenden Filter eine gewünschte Verstärkung angewandt werden. Bei dieser Filter Instanziierung wird die TDF2 verwendet mit ihren entsprechenden Klassennamen. Somit wird das Objekt `biquad` durch die Klasse `BiquadFilterTDF2` instanziiert. Innerhalb des Objekts werden die Koeffizienten mit dem Verstärkungsfaktor an die jeweilige Filterklasse übergeben und der Filter steht bereit zur Verwendung.
 
 ```python
 filtered = biquad.filter(input)
 ```
 
-Die direkte Anwendung erfolg durch den Aufruf der filter()-Methode auf dem Filterobjekt `biquad`. Der Eingangswert `input` wird der Methode übergeben, durch die spezifische Filterimplementierung entsprechend der definierten Differenzengleichung verarbeitet und als transformierter Ausgangswert `filtered` zurückgegeben.
+Die direkte Anwendung erfolgt durch den Aufruf der filter()-Methode auf dem Filterobjekt `biquad`. Der Eingangswert `input` wird der Methode übergeben, durch die spezifische Filterimplementierung entsprechend der definierten Differenzengleichung verarbeitet und als transformierter Ausgangswert `filtered` zurückgegeben.
