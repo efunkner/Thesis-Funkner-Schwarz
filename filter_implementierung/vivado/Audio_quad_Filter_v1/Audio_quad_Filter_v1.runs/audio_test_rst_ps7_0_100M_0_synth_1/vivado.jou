@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Tue May 27 10:30:16 2025
+# Process ID: 31412
+# Current directory: F:/Virtuel_Folder/boards/Pynq-Z2/base/audio_test_v1/audio_test_v1.runs/audio_test_rst_ps7_0_100M_0_synth_1
+# Command line: vivado.exe -log audio_test_rst_ps7_0_100M_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source audio_test_rst_ps7_0_100M_0.tcl
+# Log file: F:/Virtuel_Folder/boards/Pynq-Z2/base/audio_test_v1/audio_test_v1.runs/audio_test_rst_ps7_0_100M_0_synth_1/audio_test_rst_ps7_0_100M_0.vds
+# Journal file: F:/Virtuel_Folder/boards/Pynq-Z2/base/audio_test_v1/audio_test_v1.runs/audio_test_rst_ps7_0_100M_0_synth_1\vivado.jou
+# Running On: PCZ-01, OS: Windows, CPU Frequency: 3800 MHz, CPU Physical cores: 16, Host memory: 34282 MB
+#-----------------------------------------------------------
+source audio_test_rst_ps7_0_100M_0.tcl -notrace
