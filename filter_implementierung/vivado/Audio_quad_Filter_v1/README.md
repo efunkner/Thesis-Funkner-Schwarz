@@ -1,0 +1,5 @@
+# Vivado-Projekt für die Filterimplementierung
+Dieses Verzeichnis enthält das vollständige Vivado-Projekt, mit dem die Filter-IP-Cores in das FPGA-Design integriert wurden. Entwickelt wurde das Projekt mit Vivado 2021.1, da dies die neueste von PYNQ unterstützte Version ist.<br>
+Das Projekt ist so aufgebaut, dass die von MATLAB generierten Filter-IP-Cores bereits eingebunden sind. Dabei wird der im GitHub-Repository vorgegebene Dateipfad verwendet. Es wird daher empfohlen, das Repository als Ganzes zu klonen. Falls das Projekt in ein anderes Verzeichnis verschoben wird, müssen die IP-Pfade manuell angepasst werden.<br>
+
+Zusätzlich wird die [*audio_codec_ctrl-IP*](https://github.com/Xilinx/PYNQ/tree/master/boards/ip/audio_codec_ctrl_v1.0) benötigt, die nicht im Projekt enthalten ist. Diese kann aus dem offiziellen [PYNQ-GitHub-Repository](https://github.com/Xilinx/PYNQ/tree/master) bezogen und anschließend separat in das Projekt eingefügt werden.
