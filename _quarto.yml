@@ -31,8 +31,8 @@ book:
       Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
-#  cover-image: images/hsb-logo.png
-#  favicon: images/hsb-logo.png
+  cover-image: images/HSB_Logo.png
+  favicon: images/HSB_Logo.png
   site-url: https://efunkner.github.io/Thesis-Funkner-Schwarz/
   repo-url: https://github.com/efunkner/Thesis-Funkner-Schwarz/
   repo-branch: main

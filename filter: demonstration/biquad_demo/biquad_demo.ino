@@ -175,5 +175,8 @@ void loop() {
   }
   //Filterung des Rechtecksignals
   float filtered = biquad.filter(signalValue); 
+
+  Serial.print(signalValue);
+  Serial.print("\t");
   Serial.println(filtered);
 }
