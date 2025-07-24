@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="audio_test_HP_Butter_2_1kHz_fix_0_0_synth_1" LaunchDir="F:/MyGit_Folder/Thesis-Funkner-Schwarz/filter_implementierung/vivado/Audio_quad_Filter_v1/Audio_quad_Filter_v1.runs/audio_test_HP_Butter_2_1kHz_fix_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Parameters>
+		<Parameter Name="runs.monitorLSFJobs" Val="true" Type="bool"/>
+		<Parameter Name="runs.enableClusterConf" Val="true" Type="bool"/>
+	</Parameters>
+</Runs>
+
