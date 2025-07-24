@@ -2,12 +2,13 @@ import micropython
 
 # --- Direct Form I ---
 class BiquadFilterDF1:
-    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'x1', 'x2', 'y1', 'y2')
+    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 'x1', 'x2', 'y1', 'y2')
 
     def __init__(self, b, a, gain=1.0):
-        self.b0 = gain * (b[0] / a[0])
-        self.b1 = gain * (b[1] / a[0])
-        self.b2 = gain * (b[2] / a[0])
+        self.gain = gain
+        self.b0 = self.gain * (b[0] / a[0])
+        self.b1 = self.gain * (b[1] / a[0])
+        self.b2 = self.gain * (b[2] / a[0])
         self.a1 = a[1] / a[0]
         self.a2 = a[2] / a[0]
         self.x1 = 0.0
@@ -30,12 +31,13 @@ class BiquadFilterDF1:
 
 # --- Direct Form II ---
 class BiquadFilterDF2:
-    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'w0', 'w1', 'w2')
+    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 'w0', 'w1', 'w2')
 
     def __init__(self, b, a, gain=1.0):
-        self.b0 = gain * (b[0] / a[0])
-        self.b1 = gain * (b[1] / a[0])
-        self.b2 = gain * (b[2] / a[0])
+        self.gain = gain
+        self.b0 = self.gain * (b[0] / a[0])
+        self.b1 = self.gain * (b[1] / a[0])
+        self.b2 = self.gain * (b[2] / a[0])
         self.a1 = a[1] / a[0]
         self.a2 = a[2] / a[0]
         self.w0 = 0.0
@@ -52,12 +54,13 @@ class BiquadFilterDF2:
 
 # --- Transposed Direct Form II ---
 class BiquadFilterTDF2:
-    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 's1', 's2')
+    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 's1', 's2')
 
     def __init__(self, b, a, gain=1.0):
-        self.b0 = gain * (b[0] / a[0])
-        self.b1 = gain * (b[1] / a[0])
-        self.b2 = gain * (b[2] / a[0])
+        self.gain = gain
+        self.b0 = self.gain * (b[0] / a[0])
+        self.b1 = self.gain * (b[1] / a[0])
+        self.b2 = self.gain * (b[2] / a[0])
         self.a1 = a[1] / a[0]
         self.a2 = a[2] / a[0]
         self.s1 = 0.0

@@ -23,8 +23,9 @@ BLOCK_SIZE = BLOCK_FRAMES * BYTES_PER_FRAME
 # Biquad-Filter
 b = [0.07033, -0.1380, 0.07033]
 a = [1.00000, -0.1380, -0.8593]
-filtL = BiquadFilterTDF2(b, a)
-filtR = BiquadFilterTDF2(b, a)
+gain = 1.0
+filtL = BiquadFilterTDF2(b, a, gain)
+filtR = BiquadFilterTDF2(b, a, gain)
 
 # WAV-Header schreiben
 def write_header(f, frames):
