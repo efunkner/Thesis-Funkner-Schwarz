@@ -1,7 +1,6 @@
-import struct, os, time
+import micropython, struct, os, time
 from machine import SDCard, freq
 from biquad import BiquadFilterTDF2
-import micropython
 
 # CPU-Frequenz (240 MHz)
 freq(240000000)

@@ -1,12 +1,21 @@
+
 ```python
 import micropython
 ```
 
-```
+```python
 # --- Direct Form I ---
 class BiquadFilterDF1:
     __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 'x1', 'x2', 'y1', 'y2')
 ```
+
+```python
+# --- Direct Form II ---
+class BiquadFilterDF2:
+    __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 'w0', 'w1', 'w2')
+```
+
+```python
     def __init__(self, b, a, gain=1):
         slef.gain = gain
         self.b0 = self.gain * (b[0] / a[0])
@@ -19,6 +28,9 @@ class BiquadFilterDF1:
         self.y1 = 0.0
         self.y2 = 0.0
 
+```
+
+```python
     @micropython.native
     def filter(self, x0):
         y0 = (self.b0 * x0 +
@@ -31,7 +43,9 @@ class BiquadFilterDF1:
         self.y2 = self.y1
         self.y1 = y0
         return y0
+```
 
+```python
 # --- Direct Form II ---
 class BiquadFilterDF2:
     __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 'w0', 'w1', 'w2')
@@ -46,7 +60,9 @@ class BiquadFilterDF2:
         self.w0 = 0.0
         self.w1 = 0.0
         self.w2 = 0.0
+```
 
+```python
     @micropython.native
     def filter(self, x0):
         y0 = self.b0 * self.w0 + self.b1 * self.w1 + self.b2 * self.w2
@@ -54,7 +70,9 @@ class BiquadFilterDF2:
         self.w2 = self.w1
         self.w1 = self.w0
         return y0
+```
 
+```python
 # --- Transposed Direct Form II ---
 class BiquadFilterTDF2:
     __slots__ = ('b0', 'b1', 'b2', 'a1', 'a2', 'gain', 's1', 's2')
@@ -68,10 +86,13 @@ class BiquadFilterTDF2:
         self.a2 = a[2] / a[0]
         self.s1 = 0.0
         self.s2 = 0.0
+```
 
+```python
     @micropython.native
     def filter(self, x0):
         y0 = self.b0 * x0 + self.s1
         self.s1 = self.s2 + self.b1 * x0 - self.a1 * y0
         self.s2 = self.b2 * x0 - self.a2 * y0
         return y0
+```
