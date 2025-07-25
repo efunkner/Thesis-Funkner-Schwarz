@@ -2,7 +2,7 @@
 title: "Biquads: Digitale Filter auf dem Pynq-Z2 als Lehrdemonstration"
 author:
   - name: Martin Schwarz
-    orcid: 
+    orcid: 0009-0009-5403-9553
     email: mschwarz@stud.hs-bremen.de
     corresponding: true
     roles: "Lead author"
