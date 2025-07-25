@@ -749,7 +749,7 @@ Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßi
 <p>Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Matlab_Simulink_subsystem_v2.png" class="img-fluid figure-img"></p>
+<p><img src="images/Matlab_Simulink_subsystem_v2.png" class="img-fluid figure-img"></p>
 <figcaption>Simulink Filter: Subsystem</figcaption>
 </figure>
 </div>
@@ -761,7 +761,7 @@ Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßi
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Biquad_settings1.png" class="img-fluid figure-img"></p>
+<p><img src="images/Biquad_settings1.png" class="img-fluid figure-img"></p>
 <figcaption>Biquad Filter: Main</figcaption>
 </figure>
 </div>
@@ -769,7 +769,7 @@ Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßi
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Biquad_settings2.png" class="img-fluid figure-img"></p>
+<p><img src="images/Biquad_settings2.png" class="img-fluid figure-img"></p>
 <figcaption>Biquad Filter: Datatypes</figcaption>
 </figure>
 </div>
@@ -784,7 +784,7 @@ Abbildung&nbsp;10.1
 <p>Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen sowie den Datentyp des Eingangssignals über einen Data Type Conversion-Block anpassen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Matlab_Simulink_outside_v2.png" class="img-fluid figure-img"></p>
+<p><img src="images/Matlab_Simulink_outside_v2.png" class="img-fluid figure-img"></p>
 <figcaption>Simulink Filter</figcaption>
 </figure>
 </div>
@@ -812,7 +812,7 @@ Abbildung&nbsp;10.1
 <p>Im ersten Schritt werden im HDL Workflow Advisor die grundlegenden Parameter für die Zielhardware festgelegt. Als <strong>Target Workflow</strong> wird <em>IP Core Generation</em> ausgewählt, wodurch der Workflow Advisor für die Erstellung eines eigenständigen IP-Cores konfiguriert wird. Die <strong>Target Platform</strong> ist auf <em>Generic Xilinx Platform</em> eingestellt, es wird also keine board-spezifische Plattform gewählt, sondern eine generische Xilinx-Zielumgebung genutzt.<br> Als <strong>Synthesis Tool</strong> kommt <em>Xilinx Vivado</em> in der Version 2022.1 zum Einsatz. Damit wird definiert, dass die Synthese, die Implementierung und die spätere IP-Integration in einem Vivado-Projekt erfolgen. Unter <strong>Family</strong>, <strong>Device</strong>, <strong>Package</strong> und <strong>Speed</strong> sind die Werte <em>Zynq</em>, <em>xc7z020</em>, <em>clg400</em> und <em>-1</em> gesetzt. Diese Einstellungen entsprechen den Anforderungen des PYNQ-Z2 Boards. Die Werte für Package und Speed-Grade wurden dabei automatisch erkannt und übernommen.<br> Anschließend wird der Zielpfad angegeben, an dem die generierte IP gespeichert werden soll. Auf diese Weise ist sichergestellt, dass der IP-Core später direkt in Vivado eingebunden werden kann.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\HDL_Workflow_TargetDevice.png" class="img-fluid figure-img"></p>
+<p><img src="images/HDL_Workflow_TargetDevice.png" class="img-fluid figure-img"></p>
 <figcaption>HDL Workflow: Target Device</figcaption>
 </figure>
 </div>
@@ -823,7 +823,7 @@ Abbildung&nbsp;10.1
 <p>Der Haken bei <strong>Generate default AXI4 slave interface</strong> sollte entfernt werden, sofern er gesetzt ist. Andernfalls wird automatisch eine AXI4-Lite-Schnittstelle erzeugt. Diese wird üblicherweise für die Registersteuerung verwendet.<br> Da die hier entwickelte IP jedoch für einen kontinuierlichen Datenstrom (Streaming) ausgelegt ist, ist eine Steuer-Schnittstelle nicht erforderlich. Sie würde das Design unnötig verkomplizieren und zusätzlichen Ressourcenverbrauch verursachen.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\HDL_Workflow_TargetInterface.png" class="img-fluid figure-img"></p>
+<p><img src="images/HDL_Workflow_TargetInterface.png" class="img-fluid figure-img"></p>
 <figcaption>HDL Workflow: Target Interface</figcaption>
 </figure>
 </div>
@@ -841,7 +841,7 @@ Abbildung&nbsp;10.1
 <p>Hier werden die Einstellungen für die Codegenerierung getroffen. Im Bereich <strong>Optimization/General</strong> wurden die Einstellungen größtenteils unverändert übernommen. Dabei ist es jedoch wichtig, darauf zu achten, dass die Option <em>Enable-based</em> constraints deaktiviert ist. Diese Funktion erzeugt zusätzliche Timing-Beschränkungen auf Basis von Enable-Signalen, was insbesondere bei einfacheren Designs oder kontinuierlich laufenden IPs zu unerwünschten Timing-Problemen führen kann.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\HDL_Workflow_HDL_Optiones_opti_general.png" class="img-fluid figure-img"></p>
+<p><img src="images/HDL_Workflow_HDL_Optiones_opti_general.png" class="img-fluid figure-img"></p>
 <figcaption>HDL Workflow: HDL Options/ Optimization/ General</figcaption>
 </figure>
 </div>
@@ -849,14 +849,14 @@ Abbildung&nbsp;10.1
 <p>Während der Entwicklung wurde Adaptive Pipelining zunächst genutzt, um eine direkte Nachbildung der Direct-Form-Struktur zu pipelinen. Diese automatische Pipelining-Methode reichte jedoch nicht aus, um das Modell ausreichend zu optimieren.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\HDL_Workflow_HDL_Optiones_opti_pipe.png" class="img-fluid figure-img"></p>
+<p><img src="images/HDL_Workflow_HDL_Optiones_opti_pipe.png" class="img-fluid figure-img"></p>
 <figcaption>HDL Workflow: HDL Options/ Optimization/ Pipelining</figcaption>
 </figure>
 </div>
 <p>Die <strong>Global Settings</strong> wurden größtenteils automatisch gesetzt. Dennoch sollte unbedingt geprüft werden, dass der <em>Reset type</em> auf <em>Synchronous</em> und der <em>Reset asserted level</em> auf <em>Active-high</em> eingestellt ist. Eine inkorrekte Reset-Konfiguration kann andernfalls beim Generieren der IP zu Warnungen oder Fehlern im Abschlussbericht führen.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\HDL_Workflow_HDL_Optiones_global.png" class="img-fluid figure-img"></p>
+<p><img src="images/HDL_Workflow_HDL_Optiones_global.png" class="img-fluid figure-img"></p>
 <figcaption>HDL Workflow: HDL Options/ Global Settings</figcaption>
 </figure>
 </div>
@@ -868,7 +868,7 @@ Abbildung&nbsp;10.1
 <p>Nach kurzer Generierungszeit wird die IP erstellt und ein Bericht geöffnet. Dieser enthält sowohl eventuelle Warnungen als auch den generierten HDL-Code. Der vollständige Report gibt zusätzlich einen Überblick über die verwendeten Ressourcen, beispielsweise zur Nutzung von LUTs, Flip-Flops oder Multiplikatoren.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\HDL_Workflow_Generate.png" class="img-fluid figure-img"></p>
+<p><img src="images/HDL_Workflow_Generate.png" class="img-fluid figure-img"></p>
 <figcaption>HDL Workflow: Generate RTL Code and IP Core</figcaption>
 </figure>
 </div>
@@ -886,7 +886,7 @@ Abbildung&nbsp;10.1
 <p>Dieses Design bildet die Grundlage in den nachfolgenden Entwicklungen.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Reff_Design_v2.png" class="img-fluid figure-img"></p>
+<p><img src="images/Reff_Design_v2.png" class="img-fluid figure-img"></p>
 <figcaption>Reference Design</figcaption>
 </figure>
 </div>
@@ -905,7 +905,7 @@ Abbildung&nbsp;10.1
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Vivado_PS_Settings_PS_PL_Config.png" class="img-fluid figure-img"></p>
+<p><img src="images/Vivado_PS_Settings_PS_PL_Config.png" class="img-fluid figure-img"></p>
 <figcaption>Vivado:PS Settings/ PS-PL-Configuration</figcaption>
 </figure>
 </div>
@@ -913,7 +913,7 @@ Abbildung&nbsp;10.1
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Biquad_settings2.png" class="img-fluid figure-img"></p>
+<p><img src="images/Biquad_settings2.png" class="img-fluid figure-img"></p>
 <figcaption>Vivado:PS Settings/ Clock Configuration</figcaption>
 </figure>
 </div>
@@ -940,7 +940,7 @@ Abbildung&nbsp;10.2
 <p>Die Anbindung der Filter-IP an das Processing System (PS) erfolgt über AXI Direct Memory Access (AXI-DMA). Dieser ermöglicht Daten direkt zwischen dem Speicher des Processing Systems (PS) und der Programmable Logic (PL) zu übertragen, ohne dass der Prozessor selbst aktiv Daten verschieben muss.<br> Da im Design vier Filter parallel verwendet werden, werden auch vier AXI-DMA-Instanzen benötigt, die alle identisch konfiguriert werden. Eine konsistente Namenskonvention ist hierbei praktisch, da im Jupyter Notebook später über diese Namen auf die jeweiligen DMA-Schnittstellen zugegriffen wird.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\Vivado_PL_axi_DMA_Config_v2.png" class="img-fluid figure-img"></p>
+<p><img src="images/Vivado_PL_axi_DMA_Config_v2.png" class="img-fluid figure-img"></p>
 <figcaption>AXI-DMA Config</figcaption>
 </figure>
 </div>
@@ -970,7 +970,7 @@ Abbildung&nbsp;10.2
 <p>Sind alle Verbindungen korrekt vorgenommen, ergibt sich folgendes Blockdesign:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\audio_quad_Filter_v1_bunt.png" class="img-fluid figure-img"></p>
+<p><img src="images/audio_quad_Filter_v1_bunt.png" class="img-fluid figure-img"></p>
 <figcaption>Blockdesign</figcaption>
 </figure>
 </div>
