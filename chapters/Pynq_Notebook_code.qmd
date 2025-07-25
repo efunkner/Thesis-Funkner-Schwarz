@@ -214,6 +214,8 @@ Hintergrund ist, dass in jedem Filter-IP-Core lediglich ein einzelnes Biquad-Seg
 
 Diese Funktion dient ausschließlich zu Demonstrationszwecken, bei der gezeigt werden soll, wie sich die Eigenschaften eines Filters durch mehrfache Anwendung bzw. Kaskadierung verändern lassen.<br>
 
+
+
 <!--
 
 u erst werden die Module und das Overlay geladen:

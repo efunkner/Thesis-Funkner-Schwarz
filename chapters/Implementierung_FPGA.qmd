@@ -1,5 +1,14 @@
 # Implementierung
-Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Ziel ist es, daraus einen Vivado-kompatiblen IP-Core zu erzeugen, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch diesen modellbasierten Entwicklungsansatz wird nicht nur die Entwicklungszeit reduziert, sondern auch die Integration vereinfacht.<br>
+<!-- Für die Implementierung von IIR-Filtern mittels VHDL gibt es mehrere Möglichkeiten. Eine direkte Umsetzung der Differenzengleichung eines IIR-Filters in HDL-Code ist prinzipiell möglich. Das Problem bei diesem Ansatz liegt im hohen Aufwand für das Testen, Validieren und Debuggen des Designs. Gerade im Kontext einer Abschlussarbeit mit begrenztem Zeitrahmen ist eine manuelle Umsetzung in dieser Tiefe realistisch schwer umsetzbar, zumindest nicht in einem vergleichbaren Umfang wie bei der Verwendung des HDL Coders von MATLAB/Simulink.<br>
+
+Der modellbasierte Ansatz über Matlab bietet eine schnellere Entwicklungszeit und ermöglicht die automatische Generierung von synthesefähigem VHDL-Code auf Basis eines getesteten Simulink-Modells, was besonders die Erstellung mehrerer Filter erleichtert.<br>
+
+Für die Implementierung eines digitalen IIR-Biquad-Filters wurde ein Simulink-Modell entwickelt, das anschließend mit dem HDL Coder automatisch in synthesefähigen HDL-Code übersetzt wird. Ziel ist es, daraus einen Vivado-kompatiblen IP-Core zu erzeugen, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Durch diesen modellbasierten Entwicklungsansatz wird nicht nur die Entwicklungszeit reduziert, sondern auch die Integration vereinfacht.<br>-->
+
+Für die Implementierung von IIR-Filtern mittels VHDL gibt es mehrere Ansätze. Eine direkte Umsetzung der Differenzengleichung eines IIR-Filters in HDL-Code ist grundsätzlich möglich. Der Nachteil dieses Verfahrens liegt jedoch im Aufwand für Test, Validierung und Debugging. Gerade im Rahmen einer Abschlussarbeit mit begrenztem Zeitrahmen ist eine manuelle Umsetzung in dieser Tiefe schwer umsetzbar, zumindest nicht in einem vergleichbaren Umfang wie bei der Verwendung des HDL Coders von MATLAB/Simulink.<br>
+Der modellbasierte Ansatz über MATLAB ermöglicht eine deutlich schnellere Entwicklung und erlaubt die automatische Generierung von synthesefähigem VHDL-Code auf Basis eines zuvor getesteten Simulink-Modells. Dies erleichtert insbesondere die Erstellung mehrerer Filtervarianten.<br>
+
+Für die Umsetzung eines digitalen IIR-Biquad-Filters wurde daher ein Simulink-Modell entwickelt, das mithilfe des HDL Coders in VHDL-Code übersetzt wird. Ziel ist es, daraus einen Vivado-kompatiblen IP-Core zu erzeugen, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Dieser modellbasierte Workflow reduziert nicht nur die Entwicklungszeit, sondern vereinfacht auch die Integration in die bestehende FPGA-Architektur erheblich.<br>
 In der Vivado Design Suite von AMD/Xilinx spielen [IP-Cores (Intellectual Property Cores)](https://docs.amd.com/r/2022.1-English/ug896-vivado-ip) eine zentrale Rolle. Dabei handelt es sich um wiederverwendbare Hardwaremodule, die sich modular in digitale Systeme einfügen lassen. Für die Implementierung von digitalen Filtern bieten IP-Cores einen Vorteil. Die gesamte Filterlogik kann als in sich geschlossenes Modul gekapselt werden. Dadurch wird die Funktionalität des Filters klar abgegrenzt und lässt sich ohne großen Aufwand mehrfach instanziieren, in Kaskade schalten oder austauschen.<br>
 Gerade bei Anwendungen wie dieser ermöglicht der Einsatz von IP-Cores eine klare Trennung zwischen Logikdesign und Systemintegration, was sowohl die Wartung als auch die Wiederverwendbarkeit verbessert. Ein einmal entwickelter Filter-IP kann unkompliziert in andere Designs oder Projekte übernommen und betrieben werden, ohne den zugrunde liegenden HDL-Code erneut anpassen zu müssen.<br>
 
@@ -20,12 +29,23 @@ Ergänzend ist dieser Filterblock schon gepipelined. Beim **Pipelining** werden 
 Gerade in Anwendungen, in denen mehrere Biquads kaskadiert werden, kann so eine stabile und hardwarefreundliche Filterarchitektur aufgebaut werden.<br>
 
 ### Festkommaarithmetik
+Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßig keine native Gleitkomma-Hardware besitzen. In digitalen Systemen ist die Verwendung von Festkomma eine zentrale Voraussetzung, da alle Signale und Rechenergebnisse nur mit einer endlichen Wortbreite dargestellt und verarbeitet werden können. Dies führt zwangsläufig zu Rundungs- und Quantisierungsfehlern, die insbesondere bei rekursiven Systemen wie IIR-Filtern zu Stabilitätsproblemen führen können, wenn sie nicht sorgfältig berücksichtigt werden.<br>
+Ein zentraler Aspekt der Festkommaarithmetik ist die Wahl einer geeigneten Zahlendarstellung. Um die endliche Bitbreite bestmöglich auszunutzen, ist eine durchdachte Skalierung erforderlich, sie hilft dabei, Überläufe zu vermeiden und gleichzeitig die verfügbare numerische Auflösung voll auszuschöpfen.<br>
+Außerdem wirkt sich die gewählte Wortlänge unmittelbar auf den kritischen Pfad im digitalen System aus. Je länger die arithmetischen Operationen, desto größer sind die resultierenden Verzögerungszeiten, was wiederum die maximal erreichbare Taktfrequenz limitiert. Daher ist es notwendig, die Wortbreite, Rechengenauigkeit und Ressourcennutzung in einem ausgewogenen Verhältnis zu wählen, insbesondere im Hinblick auf Timing, Synthesefähigkeit und Pipelining.<br>
+
+Unter anbetracht dessen, wird für alle Signalpfade ein vorzeichenbehafteter 32-Bit-Festkommatyp mit 16 Nachkommabits verwendet. Dieser wurde sowohl in Simulink als auch in der späteren Hardwareimplementierung experimentell validiert und hat sich als optimaler Kompromiss zwischen Rechengenauigkeit und Ressourceneffizienz erwiesen. Die Quantisierungsfehler konnten dabei auf ein Minimum reduziert werden, weshalb dieser Datentyp konsistent für alle relevanten Signalpfade verwendet wird.<br>
+
+<!--
+Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
+
 Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßig keine native Gleitkomma-Hardware besitzen. Für alle Signalpfade wird der Typ fixdt(1,32,16) eingesetzt, ein vorzeichenbehafteter 32-Bit-Wert mit 16 Nachkommabits. Der Typ wurde sowohl in Simulink als auch in der späteren Hardwareimplementierung experimentell getestet und hat sich dabei als optimal herausgestellt. Er bietet ein gutes Gleichgewicht zwischen Rechengenauigkeit und Ressourceneffizienz, wobei Quantisierungsfehler minimal gehalten werden konnten. Aus diesem Grund wird dieser Datentyp für alle relevanten Signalpfade verwendet.<br>
+
+-->
 
 ### Modell und Aufbau
 Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten.<br>
 
-![Simulink Filter: Subsystem](images/Matlab_Simulink_subsystem_v2.png)
+![Simulink Filter: Subsystem](images\Matlab_Simulink_subsystem_v2.png)
 
 Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filterlogik klar von zusätzlichen Test- und Steuerungselementen zu trennen. Um den Datentyp durchgängig korrekt zu setzen, wird ein Data Type Conversion-Block vor dem Filter-Subsystem eingefügt. Der Filter selbst ist so eingestellt, dass die Koeffizienten den Datentyp des Eingangssignals übernehmen. Die genauen Einstellungen sehen wie Folgt aus:<br>
 
@@ -39,7 +59,7 @@ Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filter
 
 Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen sowie den Datentyp des Eingangssignals über einen Data Type Conversion-Block anpassen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br>
 
-![Simulink Filter](images/Matlab_Simulink_outside_v2.png)
+![Simulink Filter](images\Matlab_Simulink_outside_v2.png)
 
 ### AXI4-Stream-Schnittstelle
 Die Integration der Filterstruktur in ein FPGA-System erfolgt über eine AXI4-Stream-Schnittstelle, die sich durch ihren einfachen und unidirektionalen Datenfluss auszeichnet. Der zugrunde liegende Handshake-Mechanismus basiert auf den Signalen TVALID und TREADY. Ein Transfer erfolgt nur, wenn beide Signale gleichzeitig aktiv sind. <br>
@@ -56,8 +76,8 @@ Für die Implementierung hier, wird nach der erfolgreichen Codegenerierung, ein 
 Die Verwendung des HDL Coders zusammen mit dem HDL Workflow Advisor ist insbesondere dann vorteilhaft, wenn wenig Erfahrung mit der manuellen HDL-Entwicklung vorliegt oder wenn eine schnelle und nachvollziehbare Prototypenerstellung gefragt ist. Die strukturierte Vorgehensweise reduziert das Fehlerrisiko, erleichtert die Wiederverwendbarkeit und sorgt dafür, dass alle Schnittstellen-Anforderungen frühzeitig berücksichtigt werden. So lassen sich selbst komplexe Signalverarbeitungsblöcke wie ein IIR-Biquad-Filter mit AXI4-Stream-Anbindung hardwaregerecht umsetzen.<br>
 
 ### Modellvorbereitung für den HDL-Coder
-Damit das Simulink-Modell für den HDL-Coder verwendet werden kann, müssem, neben den HDL-Coder kompatiblen Blöcken, einige Einstellungen in Simulink selbst dirchgeführt werden.<br>
-Dieses Setupt lässt ich im Comand Window in Matlab austomatisch gestallten, mit der Voraussetzung, dass Vivado instaliert ist. Für dieses Projekt wird Vivado 2022.1 verwendet, dies ist die aktuellste Version von Vivado welche von Pynq unterstützt wird. Diese Information stammen aus dem [Pynq: Change Log](https://pynq.readthedocs.io/en/latest/changelog.html#version-3-0-0).<br>
+Damit das Simulink-Modell für den HDL-Coder verwendet werden kann, müssen, neben den HDL-Coder kompatiblen Blöcken, einige Einstellungen in Simulink selbst durchgeführt werden.<br>
+Dieses Setupt lässt ich im Comand Window in Matlab automatisch gestalten, mit der Voraussetzung, dass Vivado installiert ist. Für dieses Projekt wird Vivado 2022.1 verwendet, dies ist die aktuellste Version von Vivado welche von Pynq unterstützt wird. Diese Information stammen aus dem [Pynq: Change Log](https://pynq.readthedocs.io/en/latest/changelog.html#version-3-0-0).<br>
 
 Das Setup in Simulink lässt sich mit der Funktion [*hdlsetup(modelname)*](https://de.mathworks.com/help/hdlcoder/ref/hdlsetup.html) ausführen. Diese Funktion konfiguriert das geöffnete Modell für den HDL-Workflow, indem sie notwendige Pfade und Einstellungen für den HDL Coder ergänzt. Sie bereitet Simulink gezielt für die Codegenerierung und FPGA-Implementierung vor.<br>
 Die Funktion muss pro Modell nur einmalig ausgeführt werden. Nach erfolgreicher Ausführung wird das Simulink-Modell typischerweise durch einen roten Rahmen markiert, ein Hinweis darauf, dass es für die HDL-Codegenerierung vorbereitet ist.<br>
@@ -69,26 +89,25 @@ Der Befehl sollte vor dem Öffnen des HDL Workflow Advisor ausgeführt werden, a
 Der [HDL Workflow Advisor](https://de.mathworks.com/help/hdlcoder/ug/overview-of-workflows-in-hdl-workflow-advisor.html) wird hier eingesetzt, um aus dem Simulink-Modell einen AXI4-Stream-fähigen IP-Core zu generieren. Im Folgenden werden die wichtigsten Einstellungen beschrieben, die für die Erstellung und Konfiguration des IP-Cores vorgenommen wurden.<br>
 
 #### 1.1 Set Target Device and Synthesis Tool
-Im ersten Schritt werden im HDL Workflow Advisor die grundlegenden Parameter für die Zielhardware festgelegt. Als **Target Workflow** wird *IP Core Generation* ausgewählt, wodurch der Workflow Advisor für die Erstellung eines eigenständigen IP-Cores konfiguriert wird. Die **Target Platform** ist auf *Generic Xilinx Platform* eingestellt, es wird also keine boardspezifische Plattform gewählt, sondern eine generische Xilinx-Zielumgebung genutzt.<br>
+Im ersten Schritt werden im HDL Workflow Advisor die grundlegenden Parameter für die Zielhardware festgelegt. Als **Target Workflow** wird *IP Core Generation* ausgewählt, wodurch der Workflow Advisor für die Erstellung eines eigenständigen IP-Cores konfiguriert wird. Die **Target Platform** ist auf *Generic Xilinx Platform* eingestellt, es wird also keine board-spezifische Plattform gewählt, sondern eine generische Xilinx-Zielumgebung genutzt.<br>
 Als **Synthesis Tool** kommt *Xilinx Vivado* in der Version 2022.1 zum Einsatz. Damit wird definiert, dass die Synthese, die Implementierung und die spätere IP-Integration in einem Vivado-Projekt erfolgen. Unter **Family**, **Device**, **Package** und **Speed** sind die Werte *Zynq*, *xc7z020*, *clg400* und *-1* gesetzt. Diese Einstellungen entsprechen den Anforderungen des PYNQ-Z2 Boards. Die Werte für Package und Speed-Grade wurden dabei automatisch erkannt und übernommen.<br>
 Anschließend wird der Zielpfad angegeben, an dem die generierte IP gespeichert werden soll. Auf diese Weise ist sichergestellt, dass der IP-Core später direkt in Vivado eingebunden werden kann.
 
-![HDL Workflow: Target Device](images/HDL_Workflow_TargetDevice.png)
+![HDL Workflow: Target Device](images\HDL_Workflow_TargetDevice.png)
 
 #### 1.2 Set Target Interface
 In diesem Schritt werden die Ein- und Ausgänge des Simulink-Modells den Schnittstellen der AXI-Stream-Plattform zugewiesen. Die Option **Processor/FPGA Synchronization** ist auf *Free running* gesetzt, da die spätere Anwendung als kontinuierlicher Datenstrom (Streaming) ausgelegt ist.<br>
 Die Übersicht in der Tabelle bietet zusätzlich einen guten Überblick über die zugewiesenen Datentypen der Ports. Bei den Signalen In1 und Out1 ist erkennbar, dass der zuvor über einen Data Type Conversion-Block eingestellte Festkommadatentyp übernommen wurde.<br>
 Wichtig ist außerdem, dass die Ein- und Ausgänge für das Valid-Signal (In2 und Out2) den Datentyp boolean besitzen, da dies der AXI-Stream-Konvention entspricht.<br>
-Für den Ausgang Out1 kann über die Schaltfläche Options zusätzlich die Größe des Ausgangspuffers konfiguriert werden. Standardmäßig ist dieser auf 1024 Bits eingestellt. Die größe des Ausgangspuffers wurde auf 2^20 eingestellt. Wichtig ist es die Einstellung des Ausgangspuffers zu mekren, da dieses später die Buffergröße der *DMA* Übertragung festlegt und nicht unter- oder überschritten werden darf. Wenn der Ausgangspuffer der Filter-IP zu klein gewählt wird, muss das Eingangssignal in viele kleine Datenblöcke unterteilt werden. Der IIR-Filter muss sich dann für jeden Block neu einschwingen, da keine Zustände zwischen den Datenblöcke übernommen werden. Dieses wiederholte Einschwingen kann dazu führen, dass Hintergrundrauschen und numerische Störungen verstärkt werden, was sich in einer inkonsistenten Lautstärke und einem zunehmend hörbaren Rauschen bemerkbar macht. <br>
+Für den Ausgang Out1 kann über die Schaltfläche Options zusätzlich die Größe des Ausgangspuffers konfiguriert werden. Standardmäßig ist dieser auf 1024 Bits eingestellt. Die Größe des Ausgangspuffers wurde auf 2^20 eingestellt. Wichtig ist es die Einstellung des Ausgangspuffers zu merken, da dieses später die Buffergröße der *DMA* Übertragung festlegt und nicht unter- oder überschritten werden darf. Wenn der Ausgangspuffer der Filter-IP zu klein gewählt wird, muss das Eingangssignal in viele kleine Datenblöcke unterteilt werden. Der IIR-Filter muss sich dann für jeden Block neu einschwingen, da keine Zustände zwischen den Datenblöcke übernommen werden. Dieses wiederholte Einschwingen kann dazu führen, dass Hintergrundrauschen und numerische Störungen verstärkt werden, was sich in einer inkonsistenten Lautstärke und einem zunehmend hörbaren Rauschen bemerkbar macht. <br>
 
 Der Haken bei **Generate default AXI4 slave interface** sollte entfernt werden, sofern er gesetzt ist. Andernfalls wird automatisch eine AXI4-Lite-Schnittstelle erzeugt. Diese wird üblicherweise für die Registersteuerung verwendet.<br>
 Da die hier entwickelte IP jedoch für einen kontinuierlichen Datenstrom (Streaming) ausgelegt ist, ist eine Steuer-Schnittstelle nicht erforderlich. Sie würde das Design unnötig verkomplizieren und zusätzlichen Ressourcenverbrauch verursachen.<br>
 
-![HDL Workflow: Target Interface](images/HDL_Workflow_TargetInterface.png)
-
+![HDL Workflow: Target Interface](images\HDL_Workflow_TargetInterface.png)
 
 #### 1.3 Set Target Frequency
-An dieser Stelle wird die Zielfrequenz der zu generierenden IP festgelegt. Ursprünglich war diese auf 100 MHz gesetzt. Da jedoch bei der späteren Bitstream-Erzeugung die Timing-Anforderungen nicht erfüllt werden konnten, wurde die Frequenz auf 50 MHz halbiert. Diese reduzierte Taktfrequenz zeigte im Design stabile Timingergebnisse und wurde daher für die weitere Implementierung beibehalten.<br>
+An dieser Stelle wird die Zielfrequenz der zu generierenden IP festgelegt. Ursprünglich war diese auf 100 MHz gesetzt. Da jedoch bei der späteren Bitstream-Erzeugung die Timing-Anforderungen nicht erfüllt werden konnten, wurde die Frequenz auf 50 MHz halbiert. Diese reduzierte Taktfrequenz zeigte im Design stabile Timing-Ergebnisse und wurde daher für die weitere Implementierung beibehalten.<br>
 
 #### 2.1 Check Model Settings
 In diesem Schritt werden die verwendeten Simulink-Blöcke daraufhin überprüft, ob sie für die HDL-Codegenerierung geeignet sind. Zusätzlich kann ein **Industry Standard Check** durchgeführt werden, der das Modell hinsichtlich Industriestandards bewertet. Dabei werden häufig Warnungen ausgegeben, insbesondere bezüglich der Namenskonventionen, wenn diese nicht den typischen Industriestandards entsprechen.<br>
@@ -97,17 +116,17 @@ Für die hier verfolgte Anwendung ist es nicht erforderlich, den Industry Standa
 #### 3.1 Set HDL Options
 Hier werden die Einstellungen für die Codegenerierung getroffen. Im Bereich **Optimization/General** wurden die Einstellungen größtenteils unverändert übernommen. Dabei ist es jedoch wichtig, darauf zu achten, dass die Option *Enable-based* constraints deaktiviert ist. Diese Funktion erzeugt zusätzliche Timing-Beschränkungen auf Basis von Enable-Signalen, was insbesondere bei einfacheren Designs oder kontinuierlich laufenden IPs zu unerwünschten Timing-Problemen führen kann.<br>
 
-![HDL Workflow: HDL Options/ Optimization/ General](images/HDL_Workflow_HDL_Optiones_opti_general.png)
+![HDL Workflow: HDL Options/ Optimization/ General](images\HDL_Workflow_HDL_Optiones_opti_general.png)
 
 Im Abschnitt **Optimization/Pipelining** blieben die Voreinstellungen ebenfalls weitgehend bestehen. Die Option *Adaptive Pipelining* kann dabei aktiviert werden. Diese Einstellung ermöglicht normalerweise eine automatische Optimierung der Pipeline-Struktur im Datenpfad. Da jedoch ein fertiger Block aus der DSP HDL Toolbox verwendet wurde, der intern bereits gepipelined ist, kann diese Option in diesem Fall auch deaktiviert bleiben.<br>
 
 Während der Entwicklung wurde Adaptive Pipelining zunächst genutzt, um eine direkte Nachbildung der Direct-Form-Struktur zu pipelinen. Diese automatische Pipelining-Methode reichte jedoch nicht aus, um das Modell ausreichend zu optimieren.<br>
 
-![HDL Workflow: HDL Options/ Optimization/  Pipelining](images/HDL_Workflow_HDL_Optiones_opti_pipe.png)
+![HDL Workflow: HDL Options/ Optimization/  Pipelining](images\HDL_Workflow_HDL_Optiones_opti_pipe.png)
 
 Die **Global Settings** wurden größtenteils automatisch gesetzt. Dennoch sollte unbedingt geprüft werden, dass der *Reset type* auf *Synchronous* und der *Reset asserted level* auf *Active-high* eingestellt ist. Eine inkorrekte Reset-Konfiguration kann andernfalls beim Generieren der IP zu Warnungen oder Fehlern im Abschlussbericht führen.<br>
 
-![HDL Workflow: HDL Options/ Global Settings](images/HDL_Workflow_HDL_Optiones_global.png)
+![HDL Workflow: HDL Options/ Global Settings](images\HDL_Workflow_HDL_Optiones_global.png)
 
 #### 3.2 Generate RTL Code and IP Core
 Hier lässt sich der zu generierende IP-Core benennen und eine Versionsnummer vergeben. Für die IP sollte ein aussagekräftiger Name gewählt werden, damit sie später in Vivado leicht auffindbar ist.<br>
@@ -116,7 +135,7 @@ Um die IP zu generieren und alle vorgenommenen Einstellungen anzuwenden und zu �
 
 Nach kurzer Generierungszeit wird die IP erstellt und ein Bericht geöffnet. Dieser enthält sowohl eventuelle Warnungen als auch den generierten HDL-Code. Der vollständige Report gibt zusätzlich einen Überblick über die verwendeten Ressourcen, beispielsweise zur Nutzung von LUTs, Flip-Flops oder Multiplikatoren.<br>
 
-![HDL Workflow: Generate RTL Code and IP Core](images/HDL_Workflow_Generate.png)
+![HDL Workflow: Generate RTL Code and IP Core](images\HDL_Workflow_Generate.png)
 
 Für jeden Filter wird eine eigene IP generiert. Dabei wird jeweils dasselbe Simulink-Modell verwendet, lediglich die Koeffizienten werden angepasst.<br>
 
@@ -136,7 +155,7 @@ Diese Methode bietet den Vorteil, dass keine zusätzlichen Clock-Domain-Warnunge
 
 Dieses Design bildet die Grundlage in den nachfolgenden Entwicklungen.<br>
 
-![Reference Design](images/Reff_Design_v2.png)
+![Reference Design](images\Reff_Design_v2.png)
 
 ### Processing System (PS)
 Da das Design später über ein Jupyter Notebook gesteuert werden soll, genügt eine reine RTL-Implementierung nicht. Stattdessen wird das ZYNQ Processing System (PS) benötigt. Dieses übernimmt mehrere zentrale Aufgaben. Zum einen steuert es den Audio-Codec über die entsprechenden Registerzugriffe, zum anderen generiert es wichtige Taktsignale für das gesamte Design. Zudem ist der PS notwendig, um die Filter über einen AXI Direct Memory Access (AXI-DMA) anzubinden. <br>
@@ -155,7 +174,7 @@ Um Daten über die AXI-DMA-Schnittstellen an die Filter übergeben zu können, w
 
 :::
 
-#### Clock Cinfiguration
+#### Clock Configuration
 Alle benötigten Takt-Signale werden direkt im Processing System (PS) generiert und den jeweiligen Komponenten zugewiesen. Der Audio-Codec benötigt ein 10 MHz Taktsignal, während der Audio Codec Controller ein 100 MHz Taktsignal erfordert. Andere Frequenzen werden von dieser IP nicht unterstützt, was in Vivado durch eine entsprechende Warnung angezeigt wird. Die Filter-IPs wurden auf 50 MHz ausgelegt und benötigen daher ebenfalls ein passendes 50 MHz-Taktsignal. <br>
 
 #### Peripheral I/O Pins
@@ -165,7 +184,7 @@ Für die Kommunikation mit dem Audio Codec Controller wird eine I²C-Verbindung 
 Die Anbindung der Filter-IP an das Processing System (PS) erfolgt über AXI Direct Memory Access (AXI-DMA). Dieser ermöglicht Daten direkt zwischen dem Speicher des Processing Systems (PS) und der Programmable Logic (PL) zu übertragen, ohne dass der Prozessor selbst aktiv Daten verschieben muss.<br>
 Da im Design vier Filter parallel verwendet werden, werden auch vier AXI-DMA-Instanzen benötigt, die alle identisch konfiguriert werden. Eine konsistente Namenskonvention ist hierbei praktisch, da im Jupyter Notebook später über diese Namen auf die jeweiligen DMA-Schnittstellen zugegriffen wird.<br>
 
-![AXI-DMA Config](images/Vivado_PL_axi_DMA_Config_v2.png)
+![AXI-DMA Config](images\Vivado_PL_axi_DMA_Config_v2.png)
 
 Bei der Konfiguration ist besonders darauf zu achten, dass sowohl *Enable Scatter Gather Engine* als auch *Enable Micro DMA* deaktiviert werden, da diese Funktionen in diesem Design nicht benötigt werden. *Allow unaligned transfers* sollte ebenfalls deaktiviert bleiben, da diese Funktion auf dem Pynq nicht unterstützt wird. Die *Width of Buffer Length Register* wird auf den maximalen Wert von 26 gesetzt. Auch wenn dieser Wert die Anforderungen der Filter übersteigt, wurde er aus Gründen der Robustheit und zur Vermeidung zukünftiger Einschränkungen bewusst beibehalten. Ein großer Puffer verhindert zudem, dass Fehler fälschlicherweise dem DMA zugeordnet werden, obwohl sie tatsächlich im Filter auftreten.<br>
 
@@ -194,16 +213,17 @@ An den *HP0* wird der *M_AXI_MM2S* angeschlossen und an den *HP2* der *M_AXI_2SM
 Die Filter sowie die AXI-DMA-Module besitzen jeweils einen *S_AXIS_2SMM * bzw. *AXI4_Stream-Slave* (Slave) und einen *M_AXIS_MM2S* bzw. *AXI4_Stream-Master* (Master) Anschluss. Da es sich beim AXI-Stream um eine gerichtete Verbindung handelt, ist es entscheidend, dass immer ein Master-Port mit einem Slave-Port verbunden wird.<br>
 Diese Verbindungen müssen manuell vorgenommen werden, da Vivado diese Zuordnungen nicht automatisch erkennen kann. Nachdem die Datenpfade korrekt verbunden wurden, schlägt Vivado in der Regel automatisch eine Verbindung für die zugehörigen Taktsignale und Reset-Signale vor.<br>
 Wichtig ist dabei, das richtige Taktsignal auszuwählen, in diesem Fall 50 MHz, da die Filter in dieser Taktfrequenz ausgelegt sind.<br>
-**[Bild einfüger welcher die Verbindungen genau zeigt]**
+
 
 ### Vollendetes Design
 Sind alle Verbindungen korrekt vorgenommen, ergibt sich folgendes Blockdesign:
 
-![Blockdesign](images/audio_quad_Filter_v1_bunt.png)
+![Blockdesign](images\audio_quad_Filter_v1_bunt.png)
 
 Die Clock-Signale sowie die wichtigsten Datenpfade wurden zusätzlich farblich hervorgehoben, um die Struktur übersichtlicher darzustellen.<br>
 Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fehler erkannt werden, kann im nächsten Schritt der Bitstream generiert werden.<br>
 
 Am Ende besteht ein vollständiges Overlay aus zwei Dateien. Der generierten Bitstream-Datei (.bit) und der zugehörigen Hardware-Handoff-Datei (.hwh), welche die notwendigen Metadaten über das Design beinhaltet. Damit das Overlay von PYNQ korrekt erkannt und geladen werden kann, müssen beide Dateien denselben Basisnamen tragen mit Ausnahme der Dateiendung.<br>
+
 
 
