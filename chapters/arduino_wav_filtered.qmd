@@ -1,4 +1,4 @@
-# Filterung einer WAV Datei
+# Filterung einer WAV Datei in Arduino
 
 Zur Demonstration von digitalen Filtern auf Mikrocontrollern wird eine WAV-Datei mittels eines ESP32 gefiltert. Die Audio-Datei wird über eine SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert. 
 

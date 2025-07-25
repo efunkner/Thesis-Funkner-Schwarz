@@ -18,11 +18,7 @@ class BiquadFilterDF1:
 
     @micropython.native
     def filter(self, x0):
-        y0 = (self.b0 * x0 +
-        self.b1 * self.x1 +
-        self.b2 * self.x2 -
-        self.a1 * self.y1 -
-        self.a2 * self.y2)
+        y0 = (self.b0 * x0 + self.b1 * self.x1 + self.b2 * self.x2 - self.a1 * self.y1 - self.a2 * self.y2)
         self.x2 = self.x1
         self.x1 = x0
         self.y2 = self.y1
