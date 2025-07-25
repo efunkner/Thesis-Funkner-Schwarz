@@ -46,7 +46,7 @@ Anschließend wird die kombinierte Summe (denSum1) für die Fixpunkt-Skalierung 
 
 Das validOut-Signal wird über ein vierstufiges Delay-Register (intdelay_reg_1) synchron zur Datenverarbeitung verzögert, sodass der Ausgangswert und sein Gültigkeitssignal zeitlich korrekt anliegen.
 
-Zusammengefasst bedeutet das: Das Eingangssignal wird zunächst gepuffert, anschließend über drei parallele Numerator-Zweige mit festen Koeffizienten multipliziert und mit den rekursiven Rückkopplungswerten aus zwei internen Zuständen kombiniert. Addierer-Ketten berechnen die resultierende Summe, die anschließend auf den gewünschten Fixpunktbereich geshiftet wird. Am Ende wird das gefilterte Ausgangssample ausgegeben, während das Valid-Signal die zeitliche Korrektheit sicherstellt.
+Zusammengefasst bedeutet das, das Eingangssignal wird zunächst gepuffert, anschließend über drei parallele Numerator-Zweige mit festen Koeffizienten multipliziert und mit den rekursiven Rückkopplungswerten aus zwei internen Zuständen kombiniert. Addierer-Ketten berechnen die resultierende Summe, die anschließend auf den gewünschten Fixpunktbereich geshiftet wird. Am Ende wird das gefilterte Ausgangssample ausgegeben, während das Valid-Signal die zeitliche Korrektheit sicherstellt.
 
 
 
