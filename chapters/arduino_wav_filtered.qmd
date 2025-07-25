@@ -14,7 +14,8 @@ Durch die Einbindung vom SD_MMC.h wird eine erleichterte Nutzung von SD-Karten m
 ```cpp
 // --- WAV Hilfsfunktionen ---
 uint32_t readLEUint32(uint8_t* buf) {
-  return (uint32_t)buf[0] | ((uint32_t)buf[1] << 8) | ((uint32_t)buf[2] << 16) | ((uint32_t)buf[3] << 24);
+  return (uint32_t)buf[0] | ((uint32_t)buf[1] << 8) 
+  | ((uint32_t)buf[2] << 16) | ((uint32_t)buf[3] << 24);
 }
 uint16_t readLEUint16(uint8_t* buf) {
   return (uint16_t)buf[0] | ((uint16_t)buf[1] << 8);
@@ -24,7 +25,8 @@ Diese Hilfsfunktionen konvertieren Byte-Arrays aus WAV-Dateien in Ganzzahlen im 
 
 ```cpp
 // WAV-Header für die Ausgabedatei schreiben
-void writeWavHeader(File &file, uint32_t dataSize, uint16_t channels, uint32_t sampleRate, uint16_t bitsPerSample) {
+void writeWavHeader(File &file, uint32_t dataSize, uint16_t channels, 
+uint32_t sampleRate, uint16_t bitsPerSample) {
   const char* riff = "RIFF";
   const char* wave = "WAVE";
   const char* fmt  = "fmt ";
@@ -106,7 +108,8 @@ bool readWavHeader() {
     return false;
   }
   //Prüfen auf "RIFF" und "WAVE"
-  if (memcmp(riffHeader, "RIFF", 4) != 0 || memcmp(&riffHeader[8], "WAVE", 4) != 0) {
+  if (memcmp(riffHeader, "RIFF", 4) != 0 || memcmp(&riffHeader[8],
+   "WAVE", 4) != 0) {
     Serial.println("Keine gültige WAV-Datei.");
     return false;
   }
@@ -212,7 +215,8 @@ Es wird überprüft, ob Format- und Data-Chunk gefunden wurden und ob die Datei 
 
   writeWavHeader(filteredFile, dataSize, numChannels, sampleRate, bitsPerSample);
 
-  Serial.printf("Gesamtanzahl Frames (Samples pro Kanal): %d\n", dataSize / (numChannels * bitsPerSample / 8));
+  Serial.printf("Gesamtanzahl Frames (Samples pro Kanal): %d\n", 
+                dataSize / (numChannels * bitsPerSample / 8));
   Serial.println("Starte Filterung...");
 
   // Filterprozess starten

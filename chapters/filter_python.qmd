@@ -60,8 +60,10 @@ Der Butterwoth-Filter zeichnet sich aus mit seiner maximalen Flachheit im Durchl
 ```Python
 b, a = butter(N = order, Wn = wn, btype = 'low', analog = False)
 b, a = butter(N = order, Wn = wn, btype = 'high', analog = False)
-sos = butter(N = order_b, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
-sos = butter(N = order_b, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+sos = butter(N = order_b, Wn = wn_b, btype = 'bandpass',
+             analog = False, output = 'sos')
+sos = butter(N = order_b, Wn = wn_b, btype = 'bandstop',
+             analog = False, output = 'sos')
 ```
 ![Butterworth-Filter](images/butter.png)
 
@@ -72,8 +74,10 @@ Der Chebyshev Typ 1-Filter weist Welligkeit im Durchlassbereich auf, ermöglicht
 ```Python
 b, a = cheby1(N = order, rp = rp,Wn = wn, btype = 'low', analog = False)
 b, a = cheby1(N = order, rp = rp, Wn = wn, btype = 'high', analog = False)
-sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
-sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandpass',
+             analog = False, output = 'sos')
+sos = cheby1(N = order_b, rp = rp, Wn = wn_b, btype = 'bandstop',
+             analog = False, output = 'sos')
 ```
 ![Chebyshev1-Filter](images/cheby1.png)
 
@@ -84,8 +88,10 @@ Der Chebyshev Typ 2-Filter kombiniert einen flachen Durchlassbereich, vergleichb
 ```Python
 b, a = cheby2(N = order, rs = rs,Wn = wn, btype = 'low', analog = False)
 b, a = cheby2(N = order, rs = rs, Wn = wn, btype = 'high', analog = False)
-sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
-sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandpass',
+             analog = False, output = 'sos')
+sos = cheby2(N = order_b, rs = rs, Wn = wn_b, btype = 'bandstop',
+             analog = False, output = 'sos')
 ```
 ![Chebyshev2-Filter](images/cheby2.png)
 
@@ -96,8 +102,10 @@ Der elliptische Filter bietet die steilsten Übergangsflanken aller dargestellte
 ```Python
 b, a = ellip(N = order, rp = rp, rs = rs,Wn = wn, btype = 'low', analog = False)
 b, a = ellip(N = order, rp = rp, rs = rs, Wn = wn, btype = 'high', analog = False)
-sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandpass', analog = False, output = 'sos')
-sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandstop', analog = False, output = 'sos')
+sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandpass',
+            analog = False, output = 'sos')
+sos = ellip(N = order_b, rp = rp,  rs = rs, Wn = wn_b, btype = 'bandstop',
+            analog = False, output = 'sos')
 ```
 ![Elliptischer Filter](images/ellip.png)
 

@@ -63,7 +63,7 @@ def write_header(f, frames):
         b'data', size
     ))
 ```
-Die `write_header()` Funktion generiert einen standardkonformen WAV-Header im Little-Endian Format. Der Header enthält alle notwendigen Informationen: Dateigröße, Audioformat(PCM), Kanalanzahl, Abtastrate und Bit-Tiefe. Das `struct.pack()` mit "<" Format sorgt für die korrekte Byte-Reihenfolge auf verschiedenen Plattformen. 
+Die `write_header()` Funktion generiert einen standardkonformen WAV-Header im Little-Endian Format. Der Header enthält alle notwendigen Informationen: Dateigröße, Audioformat(PCM), Kanalanzahl, Abtastrate und Bit-Tiefe. Das `struct.pack()` mit `"<4sI4s4sIHHIIHH4sI"` Format sorgt für die korrekte Byte-Reihenfolge auf verschiedenen Plattformen. 
 
 ## Blockverarbeitung
 ```python
