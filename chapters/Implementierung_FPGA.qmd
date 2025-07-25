@@ -45,21 +45,21 @@ Die gesamte Filterlogik basiert auf Festkommaarithmetik, da FPGAs standardmäßi
 ### Modell und Aufbau
 Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten.<br>
 
-![Simulink Filter: Subsystem](images\Matlab_Simulink_subsystem_v2.png)
+![Simulink Filter: Subsystem](images/Matlab_Simulink_subsystem_v2.png)
 
 Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filterlogik klar von zusätzlichen Test- und Steuerungselementen zu trennen. Um den Datentyp durchgängig korrekt zu setzen, wird ein Data Type Conversion-Block vor dem Filter-Subsystem eingefügt. Der Filter selbst ist so eingestellt, dass die Koeffizienten den Datentyp des Eingangssignals übernehmen. Die genauen Einstellungen sehen wie Folgt aus:<br>
 
 ::: {#fig-elephants layout-ncol=2}
 
-![Biquad Filter: Main](images\Biquad_settings1.png)
+![Biquad Filter: Main](images/Biquad_settings1.png)
 
-![Biquad Filter: Datatypes](images\Biquad_settings2.png)
+![Biquad Filter: Datatypes](images/Biquad_settings2.png)
 
 :::
 
 Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen sowie den Datentyp des Eingangssignals über einen Data Type Conversion-Block anpassen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br>
 
-![Simulink Filter](images\Matlab_Simulink_outside_v2.png)
+![Simulink Filter](images/Matlab_Simulink_outside_v2.png)
 
 ### AXI4-Stream-Schnittstelle
 Die Integration der Filterstruktur in ein FPGA-System erfolgt über eine AXI4-Stream-Schnittstelle, die sich durch ihren einfachen und unidirektionalen Datenfluss auszeichnet. Der zugrunde liegende Handshake-Mechanismus basiert auf den Signalen TVALID und TREADY. Ein Transfer erfolgt nur, wenn beide Signale gleichzeitig aktiv sind. <br>
@@ -93,7 +93,7 @@ Im ersten Schritt werden im HDL Workflow Advisor die grundlegenden Parameter fü
 Als **Synthesis Tool** kommt *Xilinx Vivado* in der Version 2022.1 zum Einsatz. Damit wird definiert, dass die Synthese, die Implementierung und die spätere IP-Integration in einem Vivado-Projekt erfolgen. Unter **Family**, **Device**, **Package** und **Speed** sind die Werte *Zynq*, *xc7z020*, *clg400* und *-1* gesetzt. Diese Einstellungen entsprechen den Anforderungen des PYNQ-Z2 Boards. Die Werte für Package und Speed-Grade wurden dabei automatisch erkannt und übernommen.<br>
 Anschließend wird der Zielpfad angegeben, an dem die generierte IP gespeichert werden soll. Auf diese Weise ist sichergestellt, dass der IP-Core später direkt in Vivado eingebunden werden kann.
 
-![HDL Workflow: Target Device](images\HDL_Workflow_TargetDevice.png)
+![HDL Workflow: Target Device](images/HDL_Workflow_TargetDevice.png)
 
 #### 1.2 Set Target Interface
 In diesem Schritt werden die Ein- und Ausgänge des Simulink-Modells den Schnittstellen der AXI-Stream-Plattform zugewiesen. Die Option **Processor/FPGA Synchronization** ist auf *Free running* gesetzt, da die spätere Anwendung als kontinuierlicher Datenstrom (Streaming) ausgelegt ist.<br>
@@ -104,7 +104,7 @@ Für den Ausgang Out1 kann über die Schaltfläche Options zusätzlich die Grö�
 Der Haken bei **Generate default AXI4 slave interface** sollte entfernt werden, sofern er gesetzt ist. Andernfalls wird automatisch eine AXI4-Lite-Schnittstelle erzeugt. Diese wird üblicherweise für die Registersteuerung verwendet.<br>
 Da die hier entwickelte IP jedoch für einen kontinuierlichen Datenstrom (Streaming) ausgelegt ist, ist eine Steuer-Schnittstelle nicht erforderlich. Sie würde das Design unnötig verkomplizieren und zusätzlichen Ressourcenverbrauch verursachen.<br>
 
-![HDL Workflow: Target Interface](images\HDL_Workflow_TargetInterface.png)
+![HDL Workflow: Target Interface](images/HDL_Workflow_TargetInterface.png)
 
 #### 1.3 Set Target Frequency
 An dieser Stelle wird die Zielfrequenz der zu generierenden IP festgelegt. Ursprünglich war diese auf 100 MHz gesetzt. Da jedoch bei der späteren Bitstream-Erzeugung die Timing-Anforderungen nicht erfüllt werden konnten, wurde die Frequenz auf 50 MHz halbiert. Diese reduzierte Taktfrequenz zeigte im Design stabile Timing-Ergebnisse und wurde daher für die weitere Implementierung beibehalten.<br>
@@ -116,17 +116,17 @@ Für die hier verfolgte Anwendung ist es nicht erforderlich, den Industry Standa
 #### 3.1 Set HDL Options
 Hier werden die Einstellungen für die Codegenerierung getroffen. Im Bereich **Optimization/General** wurden die Einstellungen größtenteils unverändert übernommen. Dabei ist es jedoch wichtig, darauf zu achten, dass die Option *Enable-based* constraints deaktiviert ist. Diese Funktion erzeugt zusätzliche Timing-Beschränkungen auf Basis von Enable-Signalen, was insbesondere bei einfacheren Designs oder kontinuierlich laufenden IPs zu unerwünschten Timing-Problemen führen kann.<br>
 
-![HDL Workflow: HDL Options/ Optimization/ General](images\HDL_Workflow_HDL_Optiones_opti_general.png)
+![HDL Workflow: HDL Options/ Optimization/ General](images/HDL_Workflow_HDL_Optiones_opti_general.png)
 
 Im Abschnitt **Optimization/Pipelining** blieben die Voreinstellungen ebenfalls weitgehend bestehen. Die Option *Adaptive Pipelining* kann dabei aktiviert werden. Diese Einstellung ermöglicht normalerweise eine automatische Optimierung der Pipeline-Struktur im Datenpfad. Da jedoch ein fertiger Block aus der DSP HDL Toolbox verwendet wurde, der intern bereits gepipelined ist, kann diese Option in diesem Fall auch deaktiviert bleiben.<br>
 
 Während der Entwicklung wurde Adaptive Pipelining zunächst genutzt, um eine direkte Nachbildung der Direct-Form-Struktur zu pipelinen. Diese automatische Pipelining-Methode reichte jedoch nicht aus, um das Modell ausreichend zu optimieren.<br>
 
-![HDL Workflow: HDL Options/ Optimization/  Pipelining](images\HDL_Workflow_HDL_Optiones_opti_pipe.png)
+![HDL Workflow: HDL Options/ Optimization/  Pipelining](images/HDL_Workflow_HDL_Optiones_opti_pipe.png)
 
 Die **Global Settings** wurden größtenteils automatisch gesetzt. Dennoch sollte unbedingt geprüft werden, dass der *Reset type* auf *Synchronous* und der *Reset asserted level* auf *Active-high* eingestellt ist. Eine inkorrekte Reset-Konfiguration kann andernfalls beim Generieren der IP zu Warnungen oder Fehlern im Abschlussbericht führen.<br>
 
-![HDL Workflow: HDL Options/ Global Settings](images\HDL_Workflow_HDL_Optiones_global.png)
+![HDL Workflow: HDL Options/ Global Settings](images/HDL_Workflow_HDL_Optiones_global.png)
 
 #### 3.2 Generate RTL Code and IP Core
 Hier lässt sich der zu generierende IP-Core benennen und eine Versionsnummer vergeben. Für die IP sollte ein aussagekräftiger Name gewählt werden, damit sie später in Vivado leicht auffindbar ist.<br>
@@ -135,7 +135,7 @@ Um die IP zu generieren und alle vorgenommenen Einstellungen anzuwenden und zu �
 
 Nach kurzer Generierungszeit wird die IP erstellt und ein Bericht geöffnet. Dieser enthält sowohl eventuelle Warnungen als auch den generierten HDL-Code. Der vollständige Report gibt zusätzlich einen Überblick über die verwendeten Ressourcen, beispielsweise zur Nutzung von LUTs, Flip-Flops oder Multiplikatoren.<br>
 
-![HDL Workflow: Generate RTL Code and IP Core](images\HDL_Workflow_Generate.png)
+![HDL Workflow: Generate RTL Code and IP Core](images/HDL_Workflow_Generate.png)
 
 Für jeden Filter wird eine eigene IP generiert. Dabei wird jeweils dasselbe Simulink-Modell verwendet, lediglich die Koeffizienten werden angepasst.<br>
 
@@ -155,7 +155,7 @@ Diese Methode bietet den Vorteil, dass keine zusätzlichen Clock-Domain-Warnunge
 
 Dieses Design bildet die Grundlage in den nachfolgenden Entwicklungen.<br>
 
-![Reference Design](images\Reff_Design_v2.png)
+![Reference Design](images/Reff_Design_v2.png)
 
 ### Processing System (PS)
 Da das Design später über ein Jupyter Notebook gesteuert werden soll, genügt eine reine RTL-Implementierung nicht. Stattdessen wird das ZYNQ Processing System (PS) benötigt. Dieses übernimmt mehrere zentrale Aufgaben. Zum einen steuert es den Audio-Codec über die entsprechenden Registerzugriffe, zum anderen generiert es wichtige Taktsignale für das gesamte Design. Zudem ist der PS notwendig, um die Filter über einen AXI Direct Memory Access (AXI-DMA) anzubinden. <br>
@@ -168,9 +168,9 @@ Um Daten über die AXI-DMA-Schnittstellen an die Filter übergeben zu können, w
 
 ::: {#fig-elephants layout-ncol=2}
 
-![Vivado:PS Settings/ PS-PL-Configuration](images\Vivado_PS_Settings_PS_PL_Config.png)
+![Vivado:PS Settings/ PS-PL-Configuration](images/Vivado_PS_Settings_PS_PL_Config.png)
 
-![Vivado:PS Settings/ Clock Configuration](images\Biquad_settings2.png)
+![Vivado:PS Settings/ Clock Configuration](images/Biquad_settings2.png)
 
 :::
 
@@ -184,7 +184,7 @@ Für die Kommunikation mit dem Audio Codec Controller wird eine I²C-Verbindung 
 Die Anbindung der Filter-IP an das Processing System (PS) erfolgt über AXI Direct Memory Access (AXI-DMA). Dieser ermöglicht Daten direkt zwischen dem Speicher des Processing Systems (PS) und der Programmable Logic (PL) zu übertragen, ohne dass der Prozessor selbst aktiv Daten verschieben muss.<br>
 Da im Design vier Filter parallel verwendet werden, werden auch vier AXI-DMA-Instanzen benötigt, die alle identisch konfiguriert werden. Eine konsistente Namenskonvention ist hierbei praktisch, da im Jupyter Notebook später über diese Namen auf die jeweiligen DMA-Schnittstellen zugegriffen wird.<br>
 
-![AXI-DMA Config](images\Vivado_PL_axi_DMA_Config_v2.png)
+![AXI-DMA Config](images/Vivado_PL_axi_DMA_Config_v2.png)
 
 Bei der Konfiguration ist besonders darauf zu achten, dass sowohl *Enable Scatter Gather Engine* als auch *Enable Micro DMA* deaktiviert werden, da diese Funktionen in diesem Design nicht benötigt werden. *Allow unaligned transfers* sollte ebenfalls deaktiviert bleiben, da diese Funktion auf dem Pynq nicht unterstützt wird. Die *Width of Buffer Length Register* wird auf den maximalen Wert von 26 gesetzt. Auch wenn dieser Wert die Anforderungen der Filter übersteigt, wurde er aus Gründen der Robustheit und zur Vermeidung zukünftiger Einschränkungen bewusst beibehalten. Ein großer Puffer verhindert zudem, dass Fehler fälschlicherweise dem DMA zugeordnet werden, obwohl sie tatsächlich im Filter auftreten.<br>
 
@@ -218,7 +218,7 @@ Wichtig ist dabei, das richtige Taktsignal auszuwählen, in diesem Fall 50 MHz
 ### Vollendetes Design
 Sind alle Verbindungen korrekt vorgenommen, ergibt sich folgendes Blockdesign:
 
-![Blockdesign](images\audio_quad_Filter_v1_bunt.png)
+![Blockdesign](images/audio_quad_Filter_v1_bunt.png)
 
 Die Clock-Signale sowie die wichtigsten Datenpfade wurden zusätzlich farblich hervorgehoben, um die Struktur übersichtlicher darzustellen.<br>
 Mit der Taste F6 kann das Design in Vivado validiert werden. Wenn dabei keine Fehler erkannt werden, kann im nächsten Schritt der Bitstream generiert werden.<br>
