@@ -28,10 +28,6 @@ right: |
 
 {{< include ../chapters/bilinear.qmd >}}
 -->
-{{< include ../chapters/ans_bilinear_python.qmd >}}
-
-{{< include ../chapters/filter_python.qmd >}}
-
 {{< include ../chapters/arduino.qmd >}}
 
 {{< include ../chapters/arduino_wav_filtered.qmd >}}
@@ -41,3 +37,8 @@ right: |
 {{< include ../chapters/micropython_wav_filtered.qmd >}}
 
 {{< include ../chapters/arduino_echtzeit.qmd >}}
+
+{{< include ../chapters/ans_bilinear_python.qmd >}}
+
+{{< include ../chapters/filter_python.qmd >}}
+

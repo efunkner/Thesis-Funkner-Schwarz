@@ -7,4 +7,4 @@ Für die Echtzeitfilterung werden die Audio-Tools-, Audio-Driver- und A2DP-Bibli
 
 Die Echtzeitfilterung wird mit dem ESP Lyrat 4.3 durchgeführt. Bei dieser wird ein I2S-Stream generiert, gefiltert und über den AUX-Out des Lyrat ausgeben.
 
-Der I2S-Stream kann entweder über das Onboard Mikrofon oder Bluetooth-Stream generiert werden.
+Der I2S-Stream kann entweder über die Onboard-Mikrofone oder Bluetooth-Stream generiert werden.
