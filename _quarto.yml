@@ -73,7 +73,7 @@ format:
     # mainfont: "Calibri"
     #keep-tex: true
     #default-image-extension: tex
-    output-file: thesis-fs
+    output-file: thesis-ms
   epub:
     theme: flatly
     # default-image-extension: svg
