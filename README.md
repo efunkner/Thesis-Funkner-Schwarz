@@ -17,13 +17,20 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
 ├── filter_demonstration/
 │   ├── mikrocontroller_demo/
 │   │   ├── biquad_demo/
-│   │   └── echtzeit/
-│   │       ├── filtered_bluetooth/
-│   │       ├── filtered_bluetooth_switch/
-│   │       ├── filtered_microphone/
-│   │       ├── filtered_bluetooth_switch/
-│   │       └── Filter.h/
-│   │
+│   │   ├── echtzeit/
+│   │   │   ├── filtered_bluetooth/
+│   │   │   ├── filtered_bluetooth_switch/
+│   │   │   ├── filtered_microphone/
+│   │   │   ├── filtered_bluetooth_switch/
+│   │   │   └── Filter.h/
+│   │   │
+│   │   ├── wav_arduino
+│   │   │   ├── filtered_wav/
+│   │   │   └── filtered_wav_cascaded/
+│   │   │   
+│   │   └── wav_micropython
+│   │       └── filtered_wav.py/
+│   │ 
 │   ├── pynq_demo/
 |   |   ├── Audio_quad_Filter_v7.bit/
 |   |   ├── Audio_quad_Filter_v7.hwh/
@@ -69,13 +76,10 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
 │
 └── filter_implementierung/
     ├── arduino/
-    │   ├── biquad/
-    │   ├── filtered_wav/
-    │   └── filtered_wav_cascaded/
+    │   └── biquad/
     │    
     ├── micropython/
-    │   ├── biquad/
-    │   └── filtered_wav/
+    │   └── biquad/
     │
     └── vivado/
         └── Audio_quad_Filter_v1/
