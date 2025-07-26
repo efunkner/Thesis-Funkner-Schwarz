@@ -254,6 +254,14 @@ window.Quarto = {
   <li><a href="#kaskadierung" id="toc-kaskadierung" class="nav-link" data-scroll-target="#kaskadierung"><span class="header-section-number">6.4</span> Kaskadierung</a></li>
   <li><a href="#strukturenvergleich" id="toc-strukturenvergleich" class="nav-link" data-scroll-target="#strukturenvergleich"><span class="header-section-number">6.5</span> Strukturenvergleich</a></li>
   </ul></li>
+  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation"><span class="header-section-number">7</span> Bilineartransformation</a>
+  <ul class="collapse">
+  <li><a href="#zentrale-substitions" id="toc-zentrale-substitions" class="nav-link" data-scroll-target="#zentrale-substitions"><span class="header-section-number">7.1</span> Zentrale Substitions</a></li>
+  <li><a href="#transformation-der-übergangsfunktion" id="toc-transformation-der-übergangsfunktion" class="nav-link" data-scroll-target="#transformation-der-übergangsfunktion"><span class="header-section-number">7.2</span> Transformation der Übergangsfunktion</a></li>
+  <li><a href="#transformation-von-polen-und-nullstellen" id="toc-transformation-von-polen-und-nullstellen" class="nav-link" data-scroll-target="#transformation-von-polen-und-nullstellen"><span class="header-section-number">7.3</span> Transformation von Polen und Nullstellen</a></li>
+  <li><a href="#frequenzverzerrung---frequency-warping" id="toc-frequenzverzerrung---frequency-warping" class="nav-link" data-scroll-target="#frequenzverzerrung---frequency-warping"><span class="header-section-number">7.4</span> Frequenzverzerrung - Frequency Warping:</a></li>
+  <li><a href="#prewarping" id="toc-prewarping" class="nav-link" data-scroll-target="#prewarping"><span class="header-section-number">7.5</span> Prewarping</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/grundlagen/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
     </div>
@@ -529,6 +537,52 @@ y[n] = s_1[n] + b_0 \cdot x[n]
 </table>
 <p><strong>Rundungsrauschverhalten</strong>: Die transponierte Direktform 2 weist das günstigste Rundungsrauschverhalten auf, da die Rundungsquellen näher am Ausgang liegen und weniger stark durch die Rückkopplung verstärkt werden. Die Direktform 2 zeigt das ungünstigste Verhalten, da die Rundungsfehler durch die rekursive Struktur mehrfach zirkulieren.<br> <strong>Koeffizientenempfindlichkeit</strong>: Die Direktform 1 bietet die beste Robustheit gegenüber Koeffizientenquantisierung, da die Feedforward- und Feedback-Koeffizienten unabhängig quantisiert werden können. Die Direktform 2 zeigt die höchste Empfindlichkeit aufgrund der gekoppelten Struktur.</p>
 <p>Die Wahl der optimalen Struktur hängt von den spezifischen Anforderungen der Anwendung ab. Für Anwendungen mit strengen Speicherbeschränkungen sind die Direktform 2 und transponierte Direktform 2 vorzuziehen. Bei hohen Anforderungen an die numerische Genauigkeit und Robustheit ist die transponierte Direktform 2 oder die Direktform 1 die bessere Wahl. Für Echtzeitanwendungen eignet sich die transponierte Direktform 2 besonders gut aufgrund ihrer speicher- und rechen Zeiteffizienz sowie ihrer numerischen Stabilität.</p>
+</section>
+</section>
+<section id="bilineartransformation" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Bilineartransformation</h1>
+<p>Die Bilineartransformation dient als ein Verfahren, welches die Überführung analoger kontinuerierlicher Filter in digitale Filterstrukturen ermöglicht. Bei diesem Verfahren wird das analoge Frequenzverhalten möglichst genau in den digitalen Frequenzbereich übertragen und bietet dabei die Erhaltung der Stabilität sowie eine bijektive, aliasfreie Abbildung der s-Parameter in den z-Bereich. Sei überführt die imaginäre Achse der s-Ebene (<span class="math inline">\(j\omega\)</span>) exakt auf den Einheitskreis der z-Ebene und erhält dabei die Stabilitätsbedingungen.</p>
+<section id="zentrale-substitions" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="zentrale-substitions"><span class="header-section-number">7.1</span> Zentrale Substitions</h2>
+<p>Die mathematische Basis der Bilineartransformation beruht auf einer Substitution der s Parameter: <span class="math display">\[
+s = \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}}
+\]</span></p>
+<p>Dabei ist <span class="math inline">\(T_d\)</span> ein Entwurfsparameter mit Zeitcharakteristik, der in der Praxis überlicherweise mit der Abtastperiode <span class="math inline">\(T\)</span> geleichgesetzt wird. Durch dieses nichtlineare Transformation werden rationale Funktionen im s-Bereich in rationale Funktionen im z-Bereich abgebildet, ohne dass die Orndung der Übertragungsfunktionen ansteigt.</p>
+</section>
+<section id="transformation-der-übergangsfunktion" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="transformation-der-übergangsfunktion"><span class="header-section-number">7.2</span> Transformation der Übergangsfunktion</h2>
+<p>Zur Digitalisierung eines analogen Filters mit der Übertragungsfunktion <span class="math inline">\(H_c(s)\)</span> wird die Subtitution in die analoge Übertragungsfunktion eingesetzt. Dieser Prozess führt zur digitalen Übertragungsfunktion:</p>
+<p><span class="math display">\[
+H(z) = H_c\left( \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}} \right)
+\]</span></p>
+<p>Die resultierende Übertragungsfunktion <span class="math inline">\(H(z)\)</span> repräsentiert die vollständige digitale Überführung des ursprünglichen analogen Filters, wobei alle wesentlichen Filtereigenschaften erhalten bleiben.</p>
+</section>
+<section id="transformation-von-polen-und-nullstellen" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="transformation-von-polen-und-nullstellen"><span class="header-section-number">7.3</span> Transformation von Polen und Nullstellen</h2>
+<p>Die Pol- und Nullstellen des analogen Filters unterliegen während der Transformation spezifischen Abbildungsregeln. Für eine analoge Nullstelle <span class="math inline">\(\zeta_k\)</span> und einen analogen Pol <span class="math inline">\(s_k\)</span> ergeben sich die entsprechenden digitalen Werte:</p>
+<p><span class="math display">\[
+z_k = \frac{1 + \frac{T_d}{2} \cdot \zeta_k}{1 - \frac{T_d}{2} \cdot \zeta_k}, \quad
+p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
+\]</span></p>
+<p>Diese Transformationsregeln gewährleisten, dass die fundamentalen Eigenschaften des Filters während der Digitalierung erhalten bleiben. Insbesondere stellt die Transformation sicher, dass die linke s-Halbebene, welche alle stabilen Pole enthält, vollständig in das Innere des Einheitskreises der z-Ebene abgebildet werden kann.</p>
+</section>
+<section id="frequenzverzerrung---frequency-warping" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="frequenzverzerrung---frequency-warping"><span class="header-section-number">7.4</span> Frequenzverzerrung - Frequency Warping:</h2>
+<p>Ein wesentlicher und unvermeidlciher Aspekt der Bilineartransformation ist die nichtlineare Abbildung der Frequenzachse, bekannt als Frequenzverzerrung oder Frequency Warping. Die mathematische Beschreibung der Frequenzformation lautet:</p>
+<p><span class="math display">\[
+\omega = 2 \cdot \tan^{-1} \left( \frac{\Omega T_d}{2} \right), \quad
+\Omega = \frac{2}{T_d} \cdot \tan\left( \frac{\omega}{2} \right)
+\]</span></p>
+<p>Durch die Frequenzverzerrung kann das Verhalten digitaler Filter beeinflusst werden. Bei niedrigen Frequenzen, nahe <span class="math inline">\(\omega\)</span> = 0 oder 0 Hz, ist die Verzerrung minimal und nahezu vernachlässigbar. In diesem Bereich verhalten sich digitale und analoge Filter nahezu identisch. Mit steigender Frequenz nimmt die Verzerrung progressiv zu und erreicht ihr Maximum bei Frequenzen nahe der Nyquist-Frequenz <span class="math inline">\(\omega = \pi\)</span> oder der halben Abtastrate <span class="math inline">\(\frac{f_s}{2}\)</span></p>
+</section>
+<section id="prewarping" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="prewarping"><span class="header-section-number">7.5</span> Prewarping</h2>
+<p>Um die Abweichungen die durch das Frequency Warping entstehen zu kompensieren, wird die Methode des Prewarpings genutzt. Dabei wird die analoge Designfrequenz <span class="math inline">\(\Omega_k\)</span> so angepasst, dass sie nach der Bilineartransformation genau der genwünschten digitalen Frequenz <span class="math inline">\(\omega_k\)</span> entspricht:</p>
+<p><span class="math display">\[
+\Omega_k = \frac{2}{T_d} \cdot \tan\left( \frac{\omega_k}{2} \right) = 2 \cdot f_s \cdot \tan(\frac{\pi f_d}{f_s})
+\]</span></p>
+<p>In der praktischen Anwendung wird Prewarping typischerweise für Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist.</p>
+<p>Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate <span class="math inline">\(f_s\)</span> höher als die Eckfrequenzen <span class="math inline">\(f_d\)</span> der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.</p>
 
 
 </section>
