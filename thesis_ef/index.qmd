@@ -25,9 +25,9 @@ right: |
 {{< include ../chapters/einleitung.qmd >}}
 
 {{< include ../chapters/grundlagen.qmd >}}
--->
-{{< include ../chapters/bilinear.qmd >}}
 
+{{< include ../chapters/bilinear.qmd >}}
+-->
 {{< include ../chapters/ans_bilinear_python.qmd >}}
 
 {{< include ../chapters/filter_python.qmd >}}
