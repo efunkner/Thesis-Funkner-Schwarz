@@ -11,6 +11,8 @@ Mit diesen Lehrdemonstrationen möchten wir zwei Ansätze zur Hardware-Implement
 # Verzeichnisstruktur
 
 Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner eingeteilt.
+
+```text
 .
 ├── filter_demonstration/
 │   ├── mikrocontroller_demo/
@@ -52,7 +54,7 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
     │   └── filtered_wav/
     │
     └── vivado/
-
+```
 # Theoretischer Hintergrund
 
 
