@@ -49,7 +49,7 @@ filtR = BiquadFilterTDF2(b, a, gain)
 Für die Filterung vom Stereo-Format werden zwei Filterinstanzen, filtL für den linken Kanal und filtR für den rechten Kanal, erstellt.
 
 
-# WAV-Header erstellung
+## WAV-Header Erstellung
 ```python
 def write_header(f, frames):
     rate = 44100
