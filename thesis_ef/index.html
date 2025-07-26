@@ -216,7 +216,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../grundlagen/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoritischen Grundlagen zur Implementierung von digitalen Biquads</span></span></a>
   </div>
 </li>
       </ul>
@@ -265,107 +265,84 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung"><span class="header-section-number">4</span> Einführung</a></li>
-  <li><a href="#theoretische-grundlagen" id="toc-theoretische-grundlagen" class="nav-link" data-scroll-target="#theoretische-grundlagen"><span class="header-section-number">5</span> Theoretische Grundlagen</a>
+  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link active" data-scroll-target="#bilineartransformation"><span class="header-section-number">4</span> Bilineartransformation</a>
   <ul class="collapse">
-  <li><a href="#infinite-impulse-response-iir-filter" id="toc-infinite-impulse-response-iir-filter" class="nav-link" data-scroll-target="#infinite-impulse-response-iir-filter"><span class="header-section-number">5.1</span> Infinite Impulse Response (IIR-Filter)</a></li>
-  <li><a href="#differenzengleichung-eines-iir-filters-zweiter-ordnung" id="toc-differenzengleichung-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">5.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</a></li>
-  <li><a href="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung" id="toc-übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">5.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</a></li>
-  <li><a href="#stabilität-und-pol-nullstellen-verteilung" id="toc-stabilität-und-pol-nullstellen-verteilung" class="nav-link" data-scroll-target="#stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">5.4</span> Stabilität und Pol-Nullstellen-Verteilung</a></li>
-  <li><a href="#frequenzgang-und-phasenverhalten" id="toc-frequenzgang-und-phasenverhalten" class="nav-link" data-scroll-target="#frequenzgang-und-phasenverhalten"><span class="header-section-number">5.5</span> Frequenzgang und Phasenverhalten</a></li>
+  <li><a href="#zentrale-substitions" id="toc-zentrale-substitions" class="nav-link" data-scroll-target="#zentrale-substitions"><span class="header-section-number">4.1</span> Zentrale Substitions</a></li>
+  <li><a href="#transformation-der-übergangsfunktion" id="toc-transformation-der-übergangsfunktion" class="nav-link" data-scroll-target="#transformation-der-übergangsfunktion"><span class="header-section-number">4.2</span> Transformation der Übergangsfunktion</a></li>
+  <li><a href="#transformation-von-polen-und-nullstellen" id="toc-transformation-von-polen-und-nullstellen" class="nav-link" data-scroll-target="#transformation-von-polen-und-nullstellen"><span class="header-section-number">4.3</span> Transformation von Polen und Nullstellen</a></li>
+  <li><a href="#frequenzverzerrung---frequency-warping" id="toc-frequenzverzerrung---frequency-warping" class="nav-link" data-scroll-target="#frequenzverzerrung---frequency-warping"><span class="header-section-number">4.4</span> Frequenzverzerrung - Frequency Warping:</a></li>
+  <li><a href="#prewarping" id="toc-prewarping" class="nav-link" data-scroll-target="#prewarping"><span class="header-section-number">4.5</span> Prewarping</a></li>
   </ul></li>
-  <li><a href="#implementierungsstrukturen-biquadratischer-filter" id="toc-implementierungsstrukturen-biquadratischer-filter" class="nav-link" data-scroll-target="#implementierungsstrukturen-biquadratischer-filter"><span class="header-section-number">6</span> Implementierungsstrukturen biquadratischer Filter</a>
+  <li><a href="#praktische-anwendung-der-bilinear-transformation" id="toc-praktische-anwendung-der-bilinear-transformation" class="nav-link" data-scroll-target="#praktische-anwendung-der-bilinear-transformation"><span class="header-section-number">5</span> Praktische Anwendung der Bilinear-Transformation</a>
   <ul class="collapse">
-  <li><a href="#direktform-1" id="toc-direktform-1" class="nav-link" data-scroll-target="#direktform-1"><span class="header-section-number">6.1</span> Direktform 1</a></li>
-  <li><a href="#direktform-2-kanonische-form" id="toc-direktform-2-kanonische-form" class="nav-link" data-scroll-target="#direktform-2-kanonische-form"><span class="header-section-number">6.2</span> Direktform 2 (Kanonische Form)</a></li>
-  <li><a href="#transponierte-direktform-2" id="toc-transponierte-direktform-2" class="nav-link" data-scroll-target="#transponierte-direktform-2"><span class="header-section-number">6.3</span> Transponierte Direktform 2:</a></li>
+  <li><a href="#übertragungsfunktionen-der-analogen-biquad-filter" id="toc-übertragungsfunktionen-der-analogen-biquad-filter" class="nav-link" data-scroll-target="#übertragungsfunktionen-der-analogen-biquad-filter"><span class="header-section-number">5.1</span> Übertragungsfunktionen der analogen Biquad Filter</a></li>
+  <li><a href="#analoge-filterschaltung" id="toc-analoge-filterschaltung" class="nav-link" data-scroll-target="#analoge-filterschaltung"><span class="header-section-number">5.2</span> Analoge Filterschaltung</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">5.3</span> Python</a></li>
   </ul></li>
-  <li><a href="#numerische-aspekte-und-quantisierungseffekte" id="toc-numerische-aspekte-und-quantisierungseffekte" class="nav-link" data-scroll-target="#numerische-aspekte-und-quantisierungseffekte"><span class="header-section-number">7</span> Numerische Aspekte und Quantisierungseffekte</a>
+  <li><a href="#filterentwurf-in-python" id="toc-filterentwurf-in-python" class="nav-link" data-scroll-target="#filterentwurf-in-python"><span class="header-section-number">6</span> Filterentwurf in Python</a></li>
+  <li><a href="#implementierungserklärung-der-biquad-filter-in-arduino" id="toc-implementierungserklärung-der-biquad-filter-in-arduino" class="nav-link" data-scroll-target="#implementierungserklärung-der-biquad-filter-in-arduino"><span class="header-section-number">7</span> Implementierungserklärung der Biquad Filter in Arduino</a>
   <ul class="collapse">
-  <li><a href="#koeffizientenquantisierung" id="toc-koeffizientenquantisierung" class="nav-link" data-scroll-target="#koeffizientenquantisierung"><span class="header-section-number">7.1</span> Koeffizientenquantisierung</a></li>
-  <li><a href="#quantisierungsrauschen-rundungsrauschen" id="toc-quantisierungsrauschen-rundungsrauschen" class="nav-link" data-scroll-target="#quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">7.2</span> Quantisierungsrauschen (Rundungsrauschen)</a></li>
-  <li><a href="#limit-cycle-oszilationen" id="toc-limit-cycle-oszilationen" class="nav-link" data-scroll-target="#limit-cycle-oszilationen"><span class="header-section-number">7.3</span> Limit-Cycle-Oszilationen</a></li>
-  <li><a href="#kaskadierung" id="toc-kaskadierung" class="nav-link" data-scroll-target="#kaskadierung"><span class="header-section-number">7.4</span> Kaskadierung</a></li>
-  <li><a href="#strukturenvergleich" id="toc-strukturenvergleich" class="nav-link" data-scroll-target="#strukturenvergleich"><span class="header-section-number">7.5</span> Strukturenvergleich</a></li>
+  <li><a href="#filter-basisklasse" id="toc-filter-basisklasse" class="nav-link" data-scroll-target="#filter-basisklasse"><span class="header-section-number">7.1</span> Filter Basisklasse</a></li>
+  <li><a href="#direktform-1" id="toc-direktform-1" class="nav-link" data-scroll-target="#direktform-1"><span class="header-section-number">7.2</span> Direktform 1</a>
+  <ul class="collapse">
+  <li><a href="#private-member-variablen" id="toc-private-member-variablen" class="nav-link" data-scroll-target="#private-member-variablen"><span class="header-section-number">7.2.1</span> Private Member-Variablen</a></li>
+  <li><a href="#konstruktor" id="toc-konstruktor" class="nav-link" data-scroll-target="#konstruktor"><span class="header-section-number">7.2.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode" id="toc-filter-methode" class="nav-link" data-scroll-target="#filter-methode"><span class="header-section-number">7.2.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation"><span class="header-section-number">8</span> Bilineartransformation</a>
+  <li><a href="#direktform-2" id="toc-direktform-2" class="nav-link" data-scroll-target="#direktform-2"><span class="header-section-number">7.3</span> Direktform 2</a>
   <ul class="collapse">
-  <li><a href="#zentrale-substitions" id="toc-zentrale-substitions" class="nav-link" data-scroll-target="#zentrale-substitions"><span class="header-section-number">8.1</span> Zentrale Substitions</a></li>
-  <li><a href="#transformation-der-übergangsfunktion" id="toc-transformation-der-übergangsfunktion" class="nav-link" data-scroll-target="#transformation-der-übergangsfunktion"><span class="header-section-number">8.2</span> Transformation der Übergangsfunktion</a></li>
-  <li><a href="#transformation-von-polen-und-nullstellen" id="toc-transformation-von-polen-und-nullstellen" class="nav-link" data-scroll-target="#transformation-von-polen-und-nullstellen"><span class="header-section-number">8.3</span> Transformation von Polen und Nullstellen</a></li>
-  <li><a href="#frequenzverzerrung---frequency-warping" id="toc-frequenzverzerrung---frequency-warping" class="nav-link" data-scroll-target="#frequenzverzerrung---frequency-warping"><span class="header-section-number">8.4</span> Frequenzverzerrung - Frequency Warping:</a></li>
-  <li><a href="#prewarping" id="toc-prewarping" class="nav-link" data-scroll-target="#prewarping"><span class="header-section-number">8.5</span> Prewarping</a></li>
+  <li><a href="#private-member-variablen-1" id="toc-private-member-variablen-1" class="nav-link" data-scroll-target="#private-member-variablen-1"><span class="header-section-number">7.3.1</span> Private Member Variablen</a></li>
+  <li><a href="#konstruktor-1" id="toc-konstruktor-1" class="nav-link" data-scroll-target="#konstruktor-1"><span class="header-section-number">7.3.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode-1" id="toc-filter-methode-1" class="nav-link" data-scroll-target="#filter-methode-1"><span class="header-section-number">7.3.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#praktische-anwendung-der-bilinear-transformation" id="toc-praktische-anwendung-der-bilinear-transformation" class="nav-link" data-scroll-target="#praktische-anwendung-der-bilinear-transformation"><span class="header-section-number">9</span> Praktische Anwendung der Bilinear-Transformation</a>
+  <li><a href="#transponierte-direktfrom-2" id="toc-transponierte-direktfrom-2" class="nav-link" data-scroll-target="#transponierte-direktfrom-2"><span class="header-section-number">7.4</span> Transponierte Direktfrom 2</a>
   <ul class="collapse">
-  <li><a href="#übertragungsfunktionen-der-analogen-biquad-filter" id="toc-übertragungsfunktionen-der-analogen-biquad-filter" class="nav-link" data-scroll-target="#übertragungsfunktionen-der-analogen-biquad-filter"><span class="header-section-number">9.1</span> Übertragungsfunktionen der analogen Biquad Filter</a></li>
-  <li><a href="#analoge-filterschaltung" id="toc-analoge-filterschaltung" class="nav-link" data-scroll-target="#analoge-filterschaltung"><span class="header-section-number">9.2</span> Analoge Filterschaltung</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">9.3</span> Python</a></li>
+  <li><a href="#private-member-variablen-2" id="toc-private-member-variablen-2" class="nav-link" data-scroll-target="#private-member-variablen-2"><span class="header-section-number">7.4.1</span> Private Member Variablen</a></li>
+  <li><a href="#konstruktor-2" id="toc-konstruktor-2" class="nav-link" data-scroll-target="#konstruktor-2"><span class="header-section-number">7.4.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode-2" id="toc-filter-methode-2" class="nav-link" data-scroll-target="#filter-methode-2"><span class="header-section-number">7.4.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#filterentwurf-in-python" id="toc-filterentwurf-in-python" class="nav-link" data-scroll-target="#filterentwurf-in-python"><span class="header-section-number">10</span> Filterentwurf in Python</a></li>
-  <li><a href="#implementierungserklärung-der-biquad-filter-in-arduino" id="toc-implementierungserklärung-der-biquad-filter-in-arduino" class="nav-link" data-scroll-target="#implementierungserklärung-der-biquad-filter-in-arduino"><span class="header-section-number">11</span> Implementierungserklärung der Biquad Filter in Arduino</a>
-  <ul class="collapse">
-  <li><a href="#filter-basisklasse" id="toc-filter-basisklasse" class="nav-link" data-scroll-target="#filter-basisklasse"><span class="header-section-number">11.1</span> Filter Basisklasse</a></li>
-  <li><a href="#direktform-1-1" id="toc-direktform-1-1" class="nav-link" data-scroll-target="#direktform-1-1"><span class="header-section-number">11.2</span> Direktform 1</a>
-  <ul class="collapse">
-  <li><a href="#private-member-variablen" id="toc-private-member-variablen" class="nav-link" data-scroll-target="#private-member-variablen"><span class="header-section-number">11.2.1</span> Private Member-Variablen</a></li>
-  <li><a href="#konstruktor" id="toc-konstruktor" class="nav-link" data-scroll-target="#konstruktor"><span class="header-section-number">11.2.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode" id="toc-filter-methode" class="nav-link" data-scroll-target="#filter-methode"><span class="header-section-number">11.2.3</span> Filter Methode</a></li>
+  <li><a href="#eingabe-koeffiziente" id="toc-eingabe-koeffiziente" class="nav-link" data-scroll-target="#eingabe-koeffiziente"><span class="header-section-number">7.5</span> Eingabe Koeffiziente</a></li>
+  <li><a href="#koeffizienten-arrays-und-filter-instanziierung" id="toc-koeffizienten-arrays-und-filter-instanziierung" class="nav-link" data-scroll-target="#koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">7.6</span> Koeffizienten Arrays und Filter Instanziierung</a></li>
+  <li><a href="#filter-anwendung" id="toc-filter-anwendung" class="nav-link" data-scroll-target="#filter-anwendung"><span class="header-section-number">7.7</span> Filter Anwendung</a></li>
   </ul></li>
-  <li><a href="#direktform-2" id="toc-direktform-2" class="nav-link" data-scroll-target="#direktform-2"><span class="header-section-number">11.3</span> Direktform 2</a>
+  <li><a href="#filterung-einer-wav-datei-in-arduino" id="toc-filterung-einer-wav-datei-in-arduino" class="nav-link" data-scroll-target="#filterung-einer-wav-datei-in-arduino"><span class="header-section-number">8</span> Filterung einer WAV Datei in Arduino</a>
   <ul class="collapse">
-  <li><a href="#private-member-variablen-1" id="toc-private-member-variablen-1" class="nav-link" data-scroll-target="#private-member-variablen-1"><span class="header-section-number">11.3.1</span> Private Member Variablen</a></li>
-  <li><a href="#konstruktor-1" id="toc-konstruktor-1" class="nav-link" data-scroll-target="#konstruktor-1"><span class="header-section-number">11.3.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode-1" id="toc-filter-methode-1" class="nav-link" data-scroll-target="#filter-methode-1"><span class="header-section-number">11.3.3</span> Filter Methode</a></li>
+  <li><a href="#vorbereitung-der-wav-filterung" id="toc-vorbereitung-der-wav-filterung" class="nav-link" data-scroll-target="#vorbereitung-der-wav-filterung"><span class="header-section-number">8.1</span> Vorbereitung der WAV-Filterung</a></li>
+  <li><a href="#filterprozess-der-wav-datei" id="toc-filterprozess-der-wav-datei" class="nav-link" data-scroll-target="#filterprozess-der-wav-datei"><span class="header-section-number">8.2</span> Filterprozess der WAV-Datei</a></li>
+  <li><a href="#filterkaskadierung" id="toc-filterkaskadierung" class="nav-link" data-scroll-target="#filterkaskadierung"><span class="header-section-number">8.3</span> Filterkaskadierung</a></li>
   </ul></li>
-  <li><a href="#transponierte-direktfrom-2" id="toc-transponierte-direktfrom-2" class="nav-link" data-scroll-target="#transponierte-direktfrom-2"><span class="header-section-number">11.4</span> Transponierte Direktfrom 2</a>
+  <li><a href="#implementierungserklärung-der-biquad-filter-in-micropython" id="toc-implementierungserklärung-der-biquad-filter-in-micropython" class="nav-link" data-scroll-target="#implementierungserklärung-der-biquad-filter-in-micropython"><span class="header-section-number">9</span> Implementierungserklärung der Biquad Filter in Micropython</a>
   <ul class="collapse">
-  <li><a href="#private-member-variablen-2" id="toc-private-member-variablen-2" class="nav-link" data-scroll-target="#private-member-variablen-2"><span class="header-section-number">11.4.1</span> Private Member Variablen</a></li>
-  <li><a href="#konstruktor-2" id="toc-konstruktor-2" class="nav-link" data-scroll-target="#konstruktor-2"><span class="header-section-number">11.4.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode-2" id="toc-filter-methode-2" class="nav-link" data-scroll-target="#filter-methode-2"><span class="header-section-number">11.4.3</span> Filter Methode</a></li>
-  </ul></li>
-  <li><a href="#eingabe-koeffiziente" id="toc-eingabe-koeffiziente" class="nav-link" data-scroll-target="#eingabe-koeffiziente"><span class="header-section-number">11.5</span> Eingabe Koeffiziente</a></li>
-  <li><a href="#koeffizienten-arrays-und-filter-instanziierung" id="toc-koeffizienten-arrays-und-filter-instanziierung" class="nav-link" data-scroll-target="#koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">11.6</span> Koeffizienten Arrays und Filter Instanziierung</a></li>
-  <li><a href="#filter-anwendung" id="toc-filter-anwendung" class="nav-link" data-scroll-target="#filter-anwendung"><span class="header-section-number">11.7</span> Filter Anwendung</a></li>
-  </ul></li>
-  <li><a href="#filterung-einer-wav-datei-in-arduino" id="toc-filterung-einer-wav-datei-in-arduino" class="nav-link" data-scroll-target="#filterung-einer-wav-datei-in-arduino"><span class="header-section-number">12</span> Filterung einer WAV Datei in Arduino</a>
+  <li><a href="#micropython-native-optimierung" id="toc-micropython-native-optimierung" class="nav-link" data-scroll-target="#micropython-native-optimierung"><span class="header-section-number">9.1</span> Micropython-Native Optimierung</a></li>
+  <li><a href="#slots__optimierung" id="toc-slots__optimierung" class="nav-link" data-scroll-target="#slots__optimierung"><span class="header-section-number">9.2</span> <code>__slots__</code>Optimierung</a></li>
+  <li><a href="#direktform-1-1" id="toc-direktform-1-1" class="nav-link" data-scroll-target="#direktform-1-1"><span class="header-section-number">9.3</span> Direktform 1</a>
   <ul class="collapse">
-  <li><a href="#vorbereitung-der-wav-filterung" id="toc-vorbereitung-der-wav-filterung" class="nav-link" data-scroll-target="#vorbereitung-der-wav-filterung"><span class="header-section-number">12.1</span> Vorbereitung der WAV-Filterung</a></li>
-  <li><a href="#filterprozess-der-wav-datei" id="toc-filterprozess-der-wav-datei" class="nav-link" data-scroll-target="#filterprozess-der-wav-datei"><span class="header-section-number">12.2</span> Filterprozess der WAV-Datei</a></li>
-  <li><a href="#filterkaskadierung" id="toc-filterkaskadierung" class="nav-link" data-scroll-target="#filterkaskadierung"><span class="header-section-number">12.3</span> Filterkaskadierung</a></li>
+  <li><a href="#instanzvariablen" id="toc-instanzvariablen" class="nav-link" data-scroll-target="#instanzvariablen"><span class="header-section-number">9.3.1</span> Instanzvariablen</a></li>
+  <li><a href="#konstruktor-3" id="toc-konstruktor-3" class="nav-link" data-scroll-target="#konstruktor-3"><span class="header-section-number">9.3.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode-3" id="toc-filter-methode-3" class="nav-link" data-scroll-target="#filter-methode-3"><span class="header-section-number">9.3.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#implementierungserklärung-der-biquad-filter-in-micropython" id="toc-implementierungserklärung-der-biquad-filter-in-micropython" class="nav-link" data-scroll-target="#implementierungserklärung-der-biquad-filter-in-micropython"><span class="header-section-number">13</span> Implementierungserklärung der Biquad Filter in Micropython</a>
+  <li><a href="#direktform-2-1" id="toc-direktform-2-1" class="nav-link" data-scroll-target="#direktform-2-1"><span class="header-section-number">9.4</span> Direktform 2</a>
   <ul class="collapse">
-  <li><a href="#micropython-native-optimierung" id="toc-micropython-native-optimierung" class="nav-link" data-scroll-target="#micropython-native-optimierung"><span class="header-section-number">13.1</span> Micropython-Native Optimierung</a></li>
-  <li><a href="#slots__optimierung" id="toc-slots__optimierung" class="nav-link" data-scroll-target="#slots__optimierung"><span class="header-section-number">13.2</span> <code>__slots__</code>Optimierung</a></li>
-  <li><a href="#direktform-1-2" id="toc-direktform-1-2" class="nav-link" data-scroll-target="#direktform-1-2"><span class="header-section-number">13.3</span> Direktform 1</a>
-  <ul class="collapse">
-  <li><a href="#instanzvariablen" id="toc-instanzvariablen" class="nav-link" data-scroll-target="#instanzvariablen"><span class="header-section-number">13.3.1</span> Instanzvariablen</a></li>
-  <li><a href="#konstruktor-3" id="toc-konstruktor-3" class="nav-link" data-scroll-target="#konstruktor-3"><span class="header-section-number">13.3.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode-3" id="toc-filter-methode-3" class="nav-link" data-scroll-target="#filter-methode-3"><span class="header-section-number">13.3.3</span> Filter Methode</a></li>
+  <li><a href="#instanzvariablen-1" id="toc-instanzvariablen-1" class="nav-link" data-scroll-target="#instanzvariablen-1"><span class="header-section-number">9.4.1</span> Instanzvariablen</a></li>
+  <li><a href="#konstruktor-4" id="toc-konstruktor-4" class="nav-link" data-scroll-target="#konstruktor-4"><span class="header-section-number">9.4.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode-4" id="toc-filter-methode-4" class="nav-link" data-scroll-target="#filter-methode-4"><span class="header-section-number">9.4.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#direktform-2-1" id="toc-direktform-2-1" class="nav-link" data-scroll-target="#direktform-2-1"><span class="header-section-number">13.4</span> Direktform 2</a>
+  <li><a href="#transponierte-direktform-2" id="toc-transponierte-direktform-2" class="nav-link" data-scroll-target="#transponierte-direktform-2"><span class="header-section-number">9.5</span> Transponierte Direktform 2</a>
   <ul class="collapse">
-  <li><a href="#instanzvariablen-1" id="toc-instanzvariablen-1" class="nav-link" data-scroll-target="#instanzvariablen-1"><span class="header-section-number">13.4.1</span> Instanzvariablen</a></li>
-  <li><a href="#konstruktor-4" id="toc-konstruktor-4" class="nav-link" data-scroll-target="#konstruktor-4"><span class="header-section-number">13.4.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode-4" id="toc-filter-methode-4" class="nav-link" data-scroll-target="#filter-methode-4"><span class="header-section-number">13.4.3</span> Filter Methode</a></li>
+  <li><a href="#instanzvariablen-2" id="toc-instanzvariablen-2" class="nav-link" data-scroll-target="#instanzvariablen-2"><span class="header-section-number">9.5.1</span> Instanzvariablen</a></li>
+  <li><a href="#konstruktor-5" id="toc-konstruktor-5" class="nav-link" data-scroll-target="#konstruktor-5"><span class="header-section-number">9.5.2</span> Konstruktor</a></li>
+  <li><a href="#filter-methode-5" id="toc-filter-methode-5" class="nav-link" data-scroll-target="#filter-methode-5"><span class="header-section-number">9.5.3</span> Filter Methode</a></li>
   </ul></li>
-  <li><a href="#transponierte-direktform-2-1" id="toc-transponierte-direktform-2-1" class="nav-link" data-scroll-target="#transponierte-direktform-2-1"><span class="header-section-number">13.5</span> Transponierte Direktform 2</a>
+  <li><a href="#filter-anwendung-1" id="toc-filter-anwendung-1" class="nav-link" data-scroll-target="#filter-anwendung-1"><span class="header-section-number">9.6</span> Filter Anwendung</a></li>
+  </ul></li>
+  <li><a href="#filterung-einer-wav-datei-in-micropython" id="toc-filterung-einer-wav-datei-in-micropython" class="nav-link" data-scroll-target="#filterung-einer-wav-datei-in-micropython"><span class="header-section-number">10</span> Filterung einer WAV Datei in Micropython</a>
   <ul class="collapse">
-  <li><a href="#instanzvariablen-2" id="toc-instanzvariablen-2" class="nav-link" data-scroll-target="#instanzvariablen-2"><span class="header-section-number">13.5.1</span> Instanzvariablen</a></li>
-  <li><a href="#konstruktor-5" id="toc-konstruktor-5" class="nav-link" data-scroll-target="#konstruktor-5"><span class="header-section-number">13.5.2</span> Konstruktor</a></li>
-  <li><a href="#filter-methode-5" id="toc-filter-methode-5" class="nav-link" data-scroll-target="#filter-methode-5"><span class="header-section-number">13.5.3</span> Filter Methode</a></li>
-  </ul></li>
-  <li><a href="#filter-anwendung-1" id="toc-filter-anwendung-1" class="nav-link" data-scroll-target="#filter-anwendung-1"><span class="header-section-number">13.6</span> Filter Anwendung</a></li>
-  </ul></li>
-  <li><a href="#filterung-einer-wav-datei-in-micropython" id="toc-filterung-einer-wav-datei-in-micropython" class="nav-link" data-scroll-target="#filterung-einer-wav-datei-in-micropython"><span class="header-section-number">14</span> Filterung einer WAV Datei in Micropython</a>
-  <ul class="collapse">
-  <li><a href="#vorbereitung-des-programms" id="toc-vorbereitung-des-programms" class="nav-link" data-scroll-target="#vorbereitung-des-programms"><span class="header-section-number">14.1</span> Vorbereitung des Programms</a></li>
-  <li><a href="#konfiguration-der-audioverarbeitung" id="toc-konfiguration-der-audioverarbeitung" class="nav-link" data-scroll-target="#konfiguration-der-audioverarbeitung"><span class="header-section-number">14.2</span> Konfiguration der Audioverarbeitung</a></li>
-  <li><a href="#wav-header-erstellung" id="toc-wav-header-erstellung" class="nav-link" data-scroll-target="#wav-header-erstellung"><span class="header-section-number">14.3</span> WAV-Header Erstellung</a></li>
-  <li><a href="#blockverarbeitung" id="toc-blockverarbeitung" class="nav-link" data-scroll-target="#blockverarbeitung"><span class="header-section-number">14.4</span> Blockverarbeitung</a></li>
-  <li><a href="#filterung-und-clamping" id="toc-filterung-und-clamping" class="nav-link" data-scroll-target="#filterung-und-clamping"><span class="header-section-number">14.5</span> Filterung und Clamping</a></li>
-  <li><a href="#hauptverarbeitung" id="toc-hauptverarbeitung" class="nav-link" data-scroll-target="#hauptverarbeitung"><span class="header-section-number">14.6</span> Hauptverarbeitung</a></li>
+  <li><a href="#vorbereitung-des-programms" id="toc-vorbereitung-des-programms" class="nav-link" data-scroll-target="#vorbereitung-des-programms"><span class="header-section-number">10.1</span> Vorbereitung des Programms</a></li>
+  <li><a href="#konfiguration-der-audioverarbeitung" id="toc-konfiguration-der-audioverarbeitung" class="nav-link" data-scroll-target="#konfiguration-der-audioverarbeitung"><span class="header-section-number">10.2</span> Konfiguration der Audioverarbeitung</a></li>
+  <li><a href="#wav-header-erstellung" id="toc-wav-header-erstellung" class="nav-link" data-scroll-target="#wav-header-erstellung"><span class="header-section-number">10.3</span> WAV-Header Erstellung</a></li>
+  <li><a href="#blockverarbeitung" id="toc-blockverarbeitung" class="nav-link" data-scroll-target="#blockverarbeitung"><span class="header-section-number">10.4</span> Blockverarbeitung</a></li>
+  <li><a href="#filterung-und-clamping" id="toc-filterung-und-clamping" class="nav-link" data-scroll-target="#filterung-und-clamping"><span class="header-section-number">10.5</span> Filterung und Clamping</a></li>
+  <li><a href="#hauptverarbeitung" id="toc-hauptverarbeitung" class="nav-link" data-scroll-target="#hauptverarbeitung"><span class="header-section-number">10.6</span> Hauptverarbeitung</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/thesis_ef/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
@@ -401,7 +378,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">25. Juli 2025</p>
+      <p class="date">26. Juli 2025</p>
     </div>
   </div>
   
@@ -413,252 +390,250 @@ window.Quarto = {
 </header>
 
 
-<section id="einführung" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Einführung</h1>
-<p>Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Lerndemonstration werden digitale Biquad-Filter mithilfe von Matlab- und Pythontools entworfen und im Anschluss auf Hard und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration mithilfe ihrer Hardware für sich den Prozess reproduzieren können.</p>
-</section>
-<section id="theoretische-grundlagen" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Theoretische Grundlagen</h1>
-<section id="infinite-impulse-response-iir-filter" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="infinite-impulse-response-iir-filter"><span class="header-section-number">5.1</span> Infinite Impulse Response (IIR-Filter)</h2>
-<p>Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen sich fundamental durch ihre Charakteristik aus, bei der Berechnung des aktuellen Ausgangswertes durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.</p>
-<p>Die theoretischen Grundlagen von IIR-Filtern basieren auf der Tatsache, dass die Filter sowohl Nullstellen als auch Polstellen besitzen. Während FIR-Filter ausschließlich Nullstellen aufweisen, ermöglichen die Polstellen von IIR-Filtern eine effizientere Umsetzung bestimmter Filtereigenschaften. Dies führt zu dem Hauptvorteil von IIR-Filter für die Möglichkeit scharfe Übergänge im Frequenzgang mit relativ wenigen Koeffizienten zu erreichen.</p>
-<p>Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfer Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.</p>
-<p>Biquadratische Filter, kurz als “Biquad” bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die Möglichkeit komplexe IIR-Filter höherer Ordnung auf einfache Weise zu realisieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.</p>
-<p>Die Verwendung von Biquad-Sektionen anstelle von Filtern höherer Ordnung in direkter Form bietet eine Vielzahl von Vorteilen. Die Anfälligkeit für Koeffizientenquantisierung wird enorm gemindert, da die Pole und Nullstellen weniger stark von kleinen Änderungen der Koeffizienten abhängen. Im Weiteren ermöglicht die modulare Struktur eine unabhängige Optimierung jeder Sektion, wodurch der Entwurfsprozess vereinfacht wird.</p>
-</section>
-<section id="differenzengleichung-eines-iir-filters-zweiter-ordnung" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">5.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</h2>
-<p>Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Die biquadratischen Filter werden mit der Differenzengleichung eines IIR-Filters zweiter Ordnung beschrieben werden:</p>
-<p><span class="math display">\[
+<!--
+# Einführung
+Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Lerndemonstration werden digitale Biquad-Filter mithilfe von Matlab- und Pythontools entworfen und im Anschluss auf Hard und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration mithilfe ihrer Hardware für sich den Prozess reproduzieren können.
+
+
+# Theoretische Grundlagen
+
+## Infinite Impulse Response (IIR-Filter)
+Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen sich fundamental durch ihre Charakteristik aus, bei der Berechnung des aktuellen Ausgangswertes durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.
+
+Die theoretischen Grundlagen von IIR-Filtern basieren auf der Tatsache, dass die Filter sowohl Nullstellen als auch Polstellen besitzen. Während FIR-Filter ausschließlich Nullstellen aufweisen, ermöglichen die Polstellen von IIR-Filtern eine effizientere Umsetzung bestimmter Filtereigenschaften. Dies führt zu dem Hauptvorteil von IIR-Filter für die Möglichkeit scharfe Übergänge im Frequenzgang mit relativ wenigen Koeffizienten zu erreichen.
+
+Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfer Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.
+
+Biquadratische Filter, kurz als "Biquad" bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die Möglichkeit komplexe IIR-Filter höherer Ordnung auf einfache Weise zu realisieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.
+
+Die Verwendung von Biquad-Sektionen anstelle von Filtern höherer Ordnung in direkter Form bietet eine Vielzahl von Vorteilen. Die Anfälligkeit für Koeffizientenquantisierung wird enorm gemindert, da die Pole und Nullstellen weniger stark von kleinen Änderungen der Koeffizienten abhängen. Im Weiteren ermöglicht die modulare Struktur eine unabhängige Optimierung jeder Sektion, wodurch der Entwurfsprozess vereinfacht wird. 
+
+## Differenzengleichung eines IIR-Filters zweiter Ordnung
+Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Die biquadratischen Filter werden mit der Differenzengleichung eines IIR-Filters zweiter Ordnung beschrieben werden:
+
+$$
 y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
-\]</span></p>
-<p>Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zum Sample <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte.</p>
-<p>Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert, was zu der vereinfachten Form führt:</p>
-<p><span class="math display">\[
+$$
+
+Der Wert $y[n]$ bezeichnet den Ausgabewert zum Sample $n$, während $x[n]$ den Eingangswert darstellt. Der aktuelle Ausgabewert $y[n]$ ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. 
+
+Die Koeffizienten $b_0$, $b_1$ und $b_2$ bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während $a_1$ und $a_2$ den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf $a_0$ auf 1 normiert, was zu der vereinfachten Form führt:
+
+$$
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]</span></p>
-<p>Durch diese Normierung wird die praktische Implementierung vereinfacht, da ein Multiplikationsschritt entfällt.</p>
-</section>
-<section id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">5.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</h2>
-<p>Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittels der z-Transformation in den z-Bereich transformiert und daraus folgt die resultierende Übertragungsfunktion:</p>
-<p><span class="math display">\[
+$$
+
+Durch diese Normierung wird die praktische Implementierung vereinfacht, da ein Multiplikationsschritt entfällt.
+
+## Übertragungsfunktion eines IIR-Filters zweiter Ordnung
+
+Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittels der z-Transformation in den z-Bereich transformiert und daraus folgt die resultierende Übertragungsfunktion:
+
+$$
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
-\]</span></p>
-<p>Die rationale Funktion eines biquadratischen Filters beschreibt das Verhältnis zwischen dem Ausgang <span class="math inline">\(Y(z)\)</span> zu dem Eingang <span class="math inline">\(X(z)\)</span>. Diese Gleichung stellt die normierte Form des Biquads dar, bei welcher der Nennerkoeffizient auf <span class="math inline">\(a_0 = 1\)</span> normiert ist. Für den Fall, dass <span class="math inline">\(a_0 ≠ 1\)</span> beträgt müssen die Koeffizienten durch <span class="math inline">\(a_0\)</span> geteilt werden, um die Normalform zu erreichen.</p>
-<p>Anhand der Übetragungsfunktion können die Pol- und Nullstellen des Filters analysiert werden, um die Stabilität des Biquad-Filters zu vergewissern. Dabei müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen, beziehungsweise der Betrag jedes Pols kleiner als 1 sein muss.</p>
-<p>Befinden sich Pole außerhalb oder direkt auf dem Einheitskreis, kann es dazu kommen, dass das Ausgangssignal unkontrolliert schwingt und das System damit instabil wird. Nullstellen haben hingegen lediglich Einfluss auf die Frequenzcharakteristik und nicht direkt auf die Stabilität.</p>
-</section>
-<section id="stabilität-und-pol-nullstellen-verteilung" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">5.4</span> Stabilität und Pol-Nullstellen-Verteilung</h2>
-<p>Die Stabilität eines IIR-Filters ist ein kritischer Faktor, wechler für die Implementierung des Filters gegeben sein muss. Ein kausaler IIR-Filter ist genau dann stabil, wenn alle Polstellen seiner Übertragungsfunktion innerhalb des Einheitskreises der komplexen z-Ebene liegen. Mathematisch ausgedrückt muss für alle Polstellen <span class="math inline">\(|p_i| &lt; 1\)</span>.</p>
-<p>Die Lage der Pole bestimmt nicht nur die Stäbilität, sondern auch das dynamische Verhalten des Filters. Pole die näher am Rand des Einheitskreises liegen führen zu einem resonanten Verhalten mit langen ausschwingendem Verhalten, während Pole näher zum Ursprung hin, ein gedämpfteres Verhalten bewirken. Die Nullstellen hingegen beeinflussen primär dern Verlauf des Frequenzgangs.</p>
-<p>Für die praktische Implementierung ist es wichtig zu beachten, dass Quantisierungseffekte sich auf die Lage der Pole auswirken können. Das kann im schlimmsten Fall dazu führen, sodass die Stabilität des Filters beeinträchtigt und der Filter instabil wird. Aus diesem Grund ist bei der Koeffizientenquantisierung besondere Vorsicht geboten, bei Filtern mit Polen nah oder auf dem Rand des Einheitskreises.</p>
-</section>
-<section id="frequenzgang-und-phasenverhalten" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="frequenzgang-und-phasenverhalten"><span class="header-section-number">5.5</span> Frequenzgang und Phasenverhalten</h2>
-<p>Die Frequenzgang eines IIR-Filters wird durch die Auswertung der Übertragungsfunktion innerhalb des Einheitskreises erhalten, dafür wird die Substitution <span class="math inline">\(z = e^{j\omega}\)</span> durchgeführt:</p>
-<p><span class="math display">\[
+$$
+
+Die rationale Funktion eines biquadratischen Filters beschreibt das Verhältnis zwischen dem Ausgang $Y(z)$ zu dem Eingang $X(z)$. Diese Gleichung stellt die normierte Form des Biquads dar, bei welcher der Nennerkoeffizient auf $a_0 = 1$ normiert ist. Für den Fall, dass $a_0 ≠ 1$ beträgt müssen die Koeffizienten durch $a_0$ geteilt werden, um die Normalform zu erreichen.
+
+Anhand der Übetragungsfunktion können die Pol- und Nullstellen des Filters analysiert werden, um die Stabilität des Biquad-Filters zu vergewissern. Dabei müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen, beziehungsweise der Betrag jedes Pols kleiner als 1 sein muss.
+
+Befinden sich Pole außerhalb oder direkt auf dem Einheitskreis, kann es dazu kommen, dass das Ausgangssignal unkontrolliert schwingt und das System damit instabil wird. Nullstellen haben hingegen lediglich Einfluss auf die Frequenzcharakteristik und nicht direkt auf die Stabilität.
+
+## Stabilität und Pol-Nullstellen-Verteilung
+
+Die Stabilität eines IIR-Filters ist ein kritischer Faktor, wechler für die Implementierung des Filters gegeben sein muss. Ein kausaler IIR-Filter ist genau dann stabil, wenn alle Polstellen seiner Übertragungsfunktion innerhalb des Einheitskreises der komplexen z-Ebene liegen. Mathematisch ausgedrückt muss für alle Polstellen $|p_i| < 1$.
+
+Die Lage der Pole bestimmt nicht nur die Stäbilität, sondern auch das dynamische Verhalten des Filters. Pole die näher am Rand des Einheitskreises liegen führen zu einem resonanten Verhalten mit langen ausschwingendem Verhalten, während Pole näher zum Ursprung hin, ein gedämpfteres Verhalten bewirken. Die Nullstellen hingegen beeinflussen primär dern Verlauf des Frequenzgangs.
+
+Für die praktische Implementierung ist es wichtig zu beachten, dass Quantisierungseffekte sich auf die Lage der Pole auswirken können. Das kann im schlimmsten Fall dazu führen, sodass die Stabilität des Filters beeinträchtigt und der Filter instabil wird. Aus diesem Grund ist bei der  Koeffizientenquantisierung besondere Vorsicht geboten, bei Filtern mit Polen nah oder auf dem Rand des Einheitskreises.
+
+## Frequenzgang und Phasenverhalten
+
+Die Frequenzgang eines IIR-Filters wird durch die Auswertung der Übertragungsfunktion innerhalb des Einheitskreises erhalten, dafür wird die Substitution $z = e^{j\omega}$ durchgeführt:
+
+$$
 H(e^{j\omega}) = \frac{b_0 + b_1 e^{-j\omega} + b_2 e^{-2j\omega}}{1 + a_1 e^{-j\omega} + a_2 e^{-j2\omega}}
-\]</span></p>
-<p>Der Betrag <span class="math inline">\(|H(e^{j\omega})|\)</span> beschreibt die Amplitudencharakteristik, während die Phase <span class="math inline">\(\arg(H(e^{j\omega}))\)</span> das Phasenverhalten wiedergibt. Bei IIR-Filtern ist das Phasenverhalten im Allgemeinen nicht linear, was in manchen Anwendungen als unerwünscht erweist.</p>
-</section>
-</section>
-<section id="implementierungsstrukturen-biquadratischer-filter" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Implementierungsstrukturen biquadratischer Filter</h1>
-<p>Die praktische Implementierung von biquadratischen Filtern erfolgt durch die direkte Umsetzung der Differezengleichungen in Software oder Hardware.</p>
-<p>Dafür werden die verzögerten Eingangswerte <span class="math inline">\(x[n-1]\)</span> und <span class="math inline">\(x[n-2]\)</span>, sowie die Ausgangswerte <span class="math inline">\(y[n-1]\)</span> und <span class="math inline">\(y[n-2]\)</span> in Speicherelementen, sogenannten Verzögerungsgliedern, gespeichert. Der aktuelle Ausgangswert <span class="math inline">\(y[n]\)</span> wird mittels der gewichteten Summation aller Terme gemäß der jeweiligen Differenzengleichung berechnet.</p>
-<p>Bei der numerischen Implementierung sind verschiedene Aspekte zu berücksichtigen, insbesondere die Wortbreite und des Zahlenformats (Festkomma oder Gleitkomma).</p>
-<p>Weitere Einflüsse wie Rundungsfehler oder Quantisierungsrauschen können die Filtercharakteristik beeinflussen und im Extremfall die Stabilität des Filters gefährden.</p>
-<p>Diese Implementierungsstrukturen bieten die Möglichkeit, mehrere Filter-Sektionen aneinander zu Verbinden. Diese Modularität biquadratischer Filter ermöglicht, komplexere Filtersysteme höherer Ordnung, durch die Kaskadierung mehrerer Biquad-Sektionen zu realisieren.</p>
-<p>Dadurch können Vorteile in Bezug auf numerische Stabilität, Designflexibilität und Implementierungseffizienz geschaffen werden, weil jede Sektion unabhängig entworfen und optimiert werden kann.</p>
-<section id="direktform-1" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="direktform-1"><span class="header-section-number">6.1</span> Direktform 1</h2>
-<p>Die Direktform 1 stellt die direkteste Umsetzung der biquadratischen Differenzengleichung in einer Signalflussstruktur dar.</p>
-<p>Diese Implementierung folgt direkt der mathematischen Beschreibung unter der Verwendung separater Verzögerungsketten für die Eingangs- als auch die Ausgangswerte.</p>
-<p>Diese Struktur kann als eine Parallelschaltung eines rein rekursiven Teils (nur Pole) und eines nicht rekursiven Teils (nur Nullstellen) aufgefasst werden.</p>
-<p><span class="math display">\[
+$$
+
+Der Betrag $|H(e^{j\omega})|$ beschreibt die Amplitudencharakteristik, während die Phase $\arg(H(e^{j\omega}))$ das Phasenverhalten wiedergibt. Bei IIR-Filtern ist das Phasenverhalten im Allgemeinen nicht linear, was in manchen Anwendungen als unerwünscht erweist.
+
+# Implementierungsstrukturen biquadratischer Filter
+
+Die praktische Implementierung von biquadratischen Filtern erfolgt durch die direkte Umsetzung der Differezengleichungen in Software oder Hardware. 
+
+Dafür werden die verzögerten Eingangswerte $x[n-1]$ und $x[n-2]$, sowie die Ausgangswerte $y[n-1]$ und $y[n-2]$ in Speicherelementen, sogenannten Verzögerungsgliedern, gespeichert. Der aktuelle Ausgangswert $y[n]$ wird mittels der gewichteten Summation aller Terme gemäß der jeweiligen Differenzengleichung berechnet.
+
+Bei der numerischen Implementierung sind verschiedene Aspekte zu berücksichtigen, insbesondere die Wortbreite und des Zahlenformats (Festkomma oder Gleitkomma).
+
+Weitere Einflüsse wie Rundungsfehler oder Quantisierungsrauschen können die Filtercharakteristik beeinflussen und im Extremfall die Stabilität des Filters gefährden.
+
+Diese Implementierungsstrukturen bieten die Möglichkeit, mehrere Filter-Sektionen aneinander zu Verbinden. Diese Modularität biquadratischer Filter ermöglicht, komplexere Filtersysteme höherer Ordnung, durch die Kaskadierung mehrerer Biquad-Sektionen zu realisieren. 
+
+Dadurch können Vorteile in Bezug auf numerische Stabilität, Designflexibilität und Implementierungseffizienz geschaffen werden, weil jede Sektion unabhängig entworfen und optimiert werden kann.
+
+##  Direktform 1
+
+Die Direktform 1 stellt die direkteste Umsetzung der biquadratischen Differenzengleichung in einer Signalflussstruktur dar. 
+
+Diese Implementierung folgt direkt der mathematischen Beschreibung unter der Verwendung separater Verzögerungsketten für die Eingangs- als auch die Ausgangswerte. 
+
+Diese Struktur kann als eine Parallelschaltung eines rein rekursiven Teils (nur Pole) und eines nicht rekursiven Teils (nur Nullstellen) aufgefasst werden.
+
+$$
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]</span></p>
-<p>Für die Direktform 1 Implementierung werden zunächst alle gewichteten Eingangswerte und deren Verzögerungen zusammengefasst und berechnet:</p>
-<p><span class="math display">\[
+$$
+
+Für die Direktform 1 Implementierung werden zunächst alle gewichteten Eingangswerte und deren Verzögerungen zusammengefasst und berechnet:
+
+$$
 w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2]
-\]</span></p>
-<p>Anschließend wird die Rückkoppling der verzögerten Ausgangswerte realisiert: <span class="math display">\[
+$$
+
+Anschließend wird die Rückkoppling der verzögerten Ausgangswerte realisiert:
+$$
 y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]
-\]</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/DF1.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Signalflussbild: Direktform 1</figcaption>
-</figure>
-</div>
-<p>In dieser Struktur werden vier Verzögerungselemente verwendet: zwei für die Eingangsverzögerung, <span class="math inline">\(x[n-1]\)</span> und <span class="math inline">\(x[n-2]\)</span>, sowie zwei für die Ausgangsverzögerung, <span class="math inline">\(y[n-1]\)</span> und <span class="math inline">\(y[n-2]\)</span>. Die Multiplikationen zwischen den Verzögerungselementen und den Koeffizienten erfolgen parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen lässt.</p>
-<p>Ein wesentlicher Vorteil der Direktform 1 liegt in ihrer Robustheit gegenüber Koeffizientenquantisierung. Da die Feedforward- und Feedback-Pfade getrennt sind, beeinflussen Quantisierungsfehler in einem Pfad nicht direkt den anderen. Dies führt zu einer besseren numerischen Stabilität, besonders bei der Verwendung von Festkomma-Arithmetik.</p>
-<p>Die Direktform 1 zeichnet sich durch ihre konzeptionelle Einfachheit und die direkte Korrespondenz zur Differenzengleichung aus. Nachteilhaft bei dieser Struktur ist der erhöhte Speicherbedarf, aufgrund der redundanten Verzögerungselemente. Für Anwendungen mit strengen Speicherbeschränkungen kann dies ein limitierender Faktor sein.</p>
-</section>
-<section id="direktform-2-kanonische-form" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="direktform-2-kanonische-form"><span class="header-section-number">6.2</span> Direktform 2 (Kanonische Form)</h2>
-<p>Die Direktform 2, oder auch als kanonische Form bekannt, ist eine optimierte Variante der Direktform 1, welche durch die Umordnung der Operationen die Anzahl der benötigten Verzögerungselemente minimiert.</p>
-<p>Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der Vorwärts- und Rückwärtsverarbeitung vertauscht.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/DF2.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Signalflussbild: Direktform 2</figcaption>
-</figure>
-</div>
-<p>Zunächst wird ein Zwischenwert <span class="math inline">\(w[n]\)</span> durch die rekursive Beziehungen erzeugt:</p>
-<p><span class="math display">\[
+$$
+
+![Signalflussbild: Direktform 1](images/DF1.png){width=50%}
+
+In dieser Struktur werden vier Verzögerungselemente verwendet: zwei für die Eingangsverzögerung, $x[n-1]$ und $x[n-2]$, sowie zwei für die Ausgangsverzögerung, $y[n-1]$ und $y[n-2]$. Die Multiplikationen zwischen den Verzögerungselementen und den Koeffizienten erfolgen parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen lässt.
+
+Ein wesentlicher Vorteil der Direktform 1 liegt in ihrer Robustheit gegenüber Koeffizientenquantisierung. Da die Feedforward- und Feedback-Pfade getrennt sind, beeinflussen Quantisierungsfehler in einem Pfad nicht direkt den anderen. Dies führt zu einer besseren numerischen Stabilität, besonders bei der Verwendung von Festkomma-Arithmetik.
+
+Die Direktform 1 zeichnet sich durch ihre konzeptionelle Einfachheit und die direkte Korrespondenz zur Differenzengleichung aus. Nachteilhaft bei dieser Struktur ist der erhöhte Speicherbedarf, aufgrund der redundanten Verzögerungselemente. Für Anwendungen mit strengen Speicherbeschränkungen kann dies ein limitierender Faktor sein.
+
+## Direktform 2 (Kanonische Form)
+
+Die Direktform 2, oder auch als kanonische Form bekannt, ist eine optimierte Variante der Direktform 1, welche durch die Umordnung der Operationen die Anzahl der benötigten Verzögerungselemente minimiert.
+
+Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der Vorwärts- und Rückwärtsverarbeitung vertauscht.
+
+![Signalflussbild: Direktform 2](images/DF2.png){width=50%}
+
+Zunächst wird ein Zwischenwert $w[n]$ durch die rekursive Beziehungen erzeugt:
+
+$$
 w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]
-\]</span></p>
-<p>Der Zwischenwert <span class="math inline">\(w[n]\)</span> dient als Substitution für die Verzögerungselemente der Ein- und Ausgangswerte.</p>
-<p><span class="math display">\[
+$$
+
+Der Zwischenwert $w[n]$ dient als Substitution für die Verzögerungselemente der Ein- und Ausgangswerte.
+
+$$
 y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]
-\]</span></p>
-<p>In dieser Struktur werden nur zwei Verzögerungselemente für w[n-1] und w[n-2] benötigt, da die rekursive als auch die nicht-rekursive Verarbeitung auf dieselben verzögerten Werte zugreifen. Die Bezeichnung “kanonisch” bezieht sich darauf, dass diese Implementierung die minimal mögliche Anzahl von Verzögerungselementen verwendet und dadurch die Speichereffizienz optimiert.</p>
-<p>Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten Speicherressourcen. Der reduzierte Speicherbedarf ist insbesondere bei der Implementierung auf Mikrocontrollern oder in FPGA-Anwendungen von hohem Vorteil, bei welchen Speicher eine limitierte und kostbare Ressource darstellt.</p>
-<p>Jedoch weist diese Struktur eine erhöhte Anfälligkeit gegenüber Quantisierungseffekten auf, da die Zwischenwerte <span class="math inline">\(w[n]\)</span> größere Dynamikbereiche aufweisen können als die ursprünglichen Ein- und Ausgangswerte. Dies kann zu einer Verschlechterung des Signal-Rausch-Verhältnisses führen, primär bei der Verwendung von Festkomma-Arithmetik mit begrenzter Wortbreite.</p>
-</section>
-<section id="transponierte-direktform-2" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="transponierte-direktform-2"><span class="header-section-number">6.3</span> Transponierte Direktform 2:</h2>
-<p>Die transponierte Direktform 2 kann gebildet werden durch die Anwendung des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente Übertragungsfunktion ergibt. Die resultierende Struktur weist oft günstigere numerische Eigenschaften auf, als die ursprüngliche Form.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/TDF2.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Signalflussbild: Transponierte Direktform 2</figcaption>
-</figure>
-</div>
-<p>Die transponierte Direktform 2 wird druch die folgende Differenzengleichungen beschrieben:</p>
-<p><span class="math display">\[
+$$
+
+In dieser Struktur werden nur zwei Verzögerungselemente für w[n-1] und w[n-2] benötigt, da die rekursive als auch die nicht-rekursive Verarbeitung auf dieselben verzögerten Werte zugreifen. Die Bezeichnung "kanonisch" bezieht sich darauf, dass diese Implementierung die minimal mögliche Anzahl von Verzögerungselementen verwendet und dadurch die Speichereffizienz optimiert.
+
+Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten Speicherressourcen. Der reduzierte Speicherbedarf ist insbesondere bei der Implementierung auf Mikrocontrollern oder in FPGA-Anwendungen von hohem Vorteil, bei welchen Speicher eine limitierte und kostbare Ressource darstellt.
+
+Jedoch weist diese Struktur eine erhöhte Anfälligkeit gegenüber Quantisierungseffekten auf, da die Zwischenwerte $w[n]$ größere Dynamikbereiche aufweisen können als die ursprünglichen Ein- und Ausgangswerte. Dies kann zu einer Verschlechterung des Signal-Rausch-Verhältnisses führen, primär bei der Verwendung von Festkomma-Arithmetik mit begrenzter Wortbreite.
+
+## Transponierte Direktform 2:
+
+Die transponierte Direktform 2 kann gebildet werden durch die Anwendung des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente Übertragungsfunktion ergibt. Die resultierende Struktur weist oft günstigere numerische Eigenschaften auf, als die ursprüngliche Form.
+
+![Signalflussbild: Transponierte Direktform 2](images/TDF2.png){width=50%}
+
+Die transponierte Direktform 2 wird druch die folgende Differenzengleichungen beschrieben:
+
+$$
 s_2[n] = b_2 \cdot x[n] - a_2 \cdot y[n]
-\]</span></p>
-<p><span class="math display">\[
+$$
+
+$$
 s_1[n] =  s_2[n] + b_1 \cdot x[n] - a_1 \cdot y[n]
-\]</span></p>
-<p><span class="math display">\[
+$$
+
+$$
 y[n] = s_1[n] + b_0 \cdot x[n]
-\]</span></p>
-<p>Bei der transponierten Direktform 2 werden die Zwischenwerte <span class="math inline">\(s_1[n]\)</span> und <span class="math inline">\(s_2[n]\)</span> als Verzögerungselemente verwendet. Diese Struktur eignet sich besonders gut in der Implementierung von Echtzeitanwendung, aufgrund ihrer effizienten Berechnung und der guten Eignung für parallele oder pipelined Hardware-Architekturen.</p>
-<p>Ein wesentlicher Vorteil der transponierten Direktform 2 liegt in ihrer reduzierten Anfälligkeit gegenüber Koeffizientenquantisierung. Die Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer verbesserten numerischen Stabilität führt. Darüber hinaus ist die Struktur besonders gut für die Implementierung in Hardware geeignet, da die Berechnungen eine natürliche Pipeline-Struktur ausweisen.</p>
-</section>
-</section>
-<section id="numerische-aspekte-und-quantisierungseffekte" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Numerische Aspekte und Quantisierungseffekte</h1>
-<p>Die praktische Implementierung digitaler Filter auf Systemen mit endlicher Wortlänge bringt verschiedene Herausforderungen mit sich. Diese Effekte können die Filterleistung erheblich beeinträchtigen und müssen bereits in beim Entwerfen berücksichtigt werden. Die wichtigsten numerischen Aspekte sind Koeffizientenquantisierung, Quantisierungsrauschen(Rundungsrauschen) und nichtlineare Quantisierungseffekte.</p>
-<section id="koeffizientenquantisierung" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="koeffizientenquantisierung"><span class="header-section-number">7.1</span> Koeffizientenquantisierung</h2>
-<p>Die Koeffizientenquantisierung ist einer der kritischen Aspekte bei der Implementierung digitaler Filter auf Systemen mit begrenzter Wortlänge. Bei der Darstellung der Filterkoeffizienten mit einer endlichen Anzahl von Bits entstehen Quantisierungsfehler, die zu einer Verschiebung der Pole und Nullstellen des Filters führen kann.</p>
-<p><strong>Auswirkung der Koeffizientenquantisierung</strong></p>
-<p>Die Quantisierung der Koeffizienten führt zu verschiedenen unerwünschten Effekten:</p>
-<p><strong>Polverschiebung</strong>: Die quantisierten Koeffizienten verschieben die Pole des Filters, was zu einer Änderung der Filtercharakteristik führt. Im schlimmsten Fall können die Pole aus dem Einheitskreis herauswandern und zu einem instabilen Filter führen.</p>
-<p><strong>Frequenzgangverzerrung</strong>: Die Verschiebung der Pole und Nullstellen führt zur Abweichung im Frequenzgang. Besonders kritisch ist dies bei scharfen Filtern mit hoher Güte.</p>
-<p><strong>Stabilitätsverlust</strong>: Pole am oder auf dem Rand des Einheitskreises kann bereits durch kleine Quantisierung zur Instabilität führen. Die Wahrscheinlichkeit der Instabilität steigt mit abnehmender Wortlänge.</p>
-<p><strong>Strukturelle Gegenmaßnahmen</strong></p>
-<p>Die Wahl der Filterstruktur hat einen wesentlichen Einfluss auf die Robustheit gegenüber Quantisierungseffekten. Die Direktform 1 ist aufgrund der getrennten Pfade für Feedforward- und Feedbackanteile weniger anfällig für Fehlerausbreitung und bietet bessere numerische Stabilität bei Festkomma-Arithmetik. Die Direktform 2 bietet gegenüber der Direktform 1 eine bessere Speichereffizienz, jedoch können größere Zwischenwerte zum Überlaufen bei begrenzter Wortbreite mit erhöhtem Rauschen führen.</p>
-<p>Die transponierte Direktform 2 kombiniert die Vorteile der beiden genannten Strukturen und zeichnet sich durch eine besonders hohe Resistenz gegenüber Koeffizientenquantisierung aus. Dies liegt an der kürzeren Rückkopplungskette und der numerisch günstigen Struktur für Echtzeitanwendungen. Bei der Implementierung der digitalen Filter ist es zu empfehlen eine Wortlänge von mindestens 16 Bit mit enger Bandbreite zu wählen, um Koeffizientenquantisierung bei einem Minimum zu halten.</p>
-</section>
-<section id="quantisierungsrauschen-rundungsrauschen" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">7.2</span> Quantisierungsrauschen (Rundungsrauschen)</h2>
-<p>Bei der Implementierung digitaler Filter entstehen bei jeder arithmetischen Operation Rundungsfehler, die sich als additives Rauschen am Filterausgang manifestieren. Diese Fehler sind unvermeidlich bei der Verwendung von Festkomma-Arithmetik und können das Signal-Rausch-Verhältnis des Filters erheblich verschlechtern. Um diesem Entgegen zu wirken, kann die durch die Wahl einer geeigneten Implementierungsstruktur das Rundungsrauschen minimiert werden.</p>
-<p><strong>Direktform 1</strong>: Die Rundungsrauschquellen in den Feedforward- und Feedback-Pfaden sind weitgehend entkoppelt. Dadurch führt es zu einer moderaten Gesamtvarianz des Rundungsrauschens.<br> <strong>Direktform 2</strong>: Die gemeinsame Nutzung der Verzögerungselemente führt zu einer höheren Rundsrauschvarianz, da die Rundungsfehler mehrfach durch das rekursive System zirkulieren.<br> <strong>Transponierte Direktform 2</strong>: Diese Struktur weist das günstigste Rundungsrauschen auf, da die Rundungsrauschquellen näher am Ausgang liegen und weniger stark gefiltert werden.</p>
-</section>
-<section id="limit-cycle-oszilationen" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="limit-cycle-oszilationen"><span class="header-section-number">7.3</span> Limit-Cycle-Oszilationen</h2>
-<p>Limit-Cycle-Oszillationen sind selbsterhaltende Schwingungen, die in nichtlinearen digitalen Filtern auftreten können. Sie entstehen durch die Kombination von Quantisierung und Rückkopplung und können auch bei stabilen linearen Filtern auftreten, wenn nichtlineare Quantisierungseffekte berücksichtigt werden.</p>
-<p><strong>Zero-Input Limit Cycles</strong> sind Oszillationen die auftreten, wenn das Eingangssignal null entspricht, aber der Filter aufgrund gespeicherter Energie in den Verzögerungselementen weiterhin schwingt.</p>
-<p><strong>Large-Scale Limit</strong> können bei hohen Eingangssignalpegeln auftreten und sind nicht auf kleine Amplituden beschränkt. Sie entstehen durch die Sättigungscharakteristik der Arithmetik und können zu großen, störenden Ausgangssignalen führen.</p>
-</section>
-<section id="kaskadierung" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="kaskadierung"><span class="header-section-number">7.4</span> Kaskadierung</h2>
-<p>Für Filter höherer Ordnung bietet die kaskadierte-Realisierung aus Biquad-Sektionen deutliche Vorteile gegenüber der direkten Implementierung. Die optimale Anordnung und Paarung der Pole und Nullstellen in einzelnen Sektionen kann die numerische Stabilität verbessern, sowie das Rundungsrauschen minimieren als auch die Anfälligkeit für Koeffizientenquantisierung reduzieren.</p>
-</section>
-<section id="strukturenvergleich" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="strukturenvergleich"><span class="header-section-number">7.5</span> Strukturenvergleich</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Eigenschaft</th>
-<th>Direktform 1</th>
-<th>Direktform 2</th>
-<th>Transp. Direktform 2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Verzögerungselemente</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td>Speicherbedarf</td>
-<td>Hoch</td>
-<td>Minimal</td>
-<td>Minimal</td>
-</tr>
-<tr class="odd">
-<td>Koeff.-Empfindlichkeit</td>
-<td>Niedrig</td>
-<td>Hoch</td>
-<td>Mittel</td>
-</tr>
-<tr class="even">
-<td>Rundungsrauschen</td>
-<td>Mittel</td>
-<td>Hoch</td>
-<td>Niedrig</td>
-</tr>
-<tr class="odd">
-<td>Limit-Cycle-Anfälligkeit</td>
-<td>Niedrig</td>
-<td>Hoch</td>
-<td>Niedrig</td>
-</tr>
-<tr class="even">
-<td>Hardware-Eignung</td>
-<td>Gut</td>
-<td>Mittel</td>
-<td>Sehr gut</td>
-</tr>
-<tr class="odd">
-<td>Dynamikbereich</td>
-<td>Gut</td>
-<td>Begrenzt</td>
-<td>Sehr gut</td>
-</tr>
-<tr class="even">
-<td>Quantisierungsrobustheit</td>
-<td>Hoch</td>
-<td>Niedrig</td>
-<td>Mittel</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Rundungsrauschverhalten</strong>: Die transponierte Direktform 2 weist das günstigste Rundungsrauschverhalten auf, da die Rundungsquellen näher am Ausgang liegen und weniger stark durch die Rückkopplung verstärkt werden. Die Direktform 2 zeigt das ungünstigste Verhalten, da die Rundungsfehler durch die rekursive Struktur mehrfach zirkulieren.<br> <strong>Koeffizientenempfindlichkeit</strong>: Die Direktform 1 bietet die beste Robustheit gegenüber Koeffizientenquantisierung, da die Feedforward- und Feedback-Koeffizienten unabhängig quantisiert werden können. Die Direktform 2 zeigt die höchste Empfindlichkeit aufgrund der gekoppelten Struktur.</p>
-<p>Die Wahl der optimalen Struktur hängt von den spezifischen Anforderungen der Anwendung ab. Für Anwendungen mit strengen Speicherbeschränkungen sind die Direktform 2 und transponierte Direktform 2 vorzuziehen. Bei hohen Anforderungen an die numerische Genauigkeit und Robustheit ist die transponierte Direktform 2 oder die Direktform 1 die bessere Wahl. Für Echtzeitanwendungen eignet sich die transponierte Direktform 2 besonders gut aufgrund ihrer speicher- und rechen Zeiteffizienz sowie ihrer numerischen Stabilität.</p>
-</section>
-</section>
-<section id="bilineartransformation" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Bilineartransformation</h1>
+$$
+
+Bei der transponierten Direktform 2 werden die Zwischenwerte $s_1[n]$ und $s_2[n]$ als Verzögerungselemente verwendet. Diese Struktur eignet sich besonders gut in der Implementierung von Echtzeitanwendung, aufgrund ihrer effizienten Berechnung und der guten Eignung für parallele oder pipelined Hardware-Architekturen.
+
+Ein wesentlicher Vorteil der transponierten Direktform 2 liegt in ihrer reduzierten Anfälligkeit gegenüber Koeffizientenquantisierung. Die Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer verbesserten numerischen Stabilität führt. Darüber hinaus ist die Struktur besonders gut für die Implementierung in Hardware geeignet, da die Berechnungen eine natürliche Pipeline-Struktur ausweisen.
+
+# Numerische Aspekte und Quantisierungseffekte
+
+Die praktische Implementierung digitaler Filter auf Systemen mit endlicher Wortlänge bringt verschiedene Herausforderungen mit sich. Diese Effekte können die Filterleistung erheblich beeinträchtigen und müssen bereits in beim Entwerfen berücksichtigt werden. Die wichtigsten numerischen Aspekte sind Koeffizientenquantisierung, Quantisierungsrauschen(Rundungsrauschen) und nichtlineare Quantisierungseffekte.
+
+## Koeffizientenquantisierung
+
+Die Koeffizientenquantisierung ist einer der kritischen Aspekte bei der Implementierung digitaler Filter auf Systemen mit begrenzter Wortlänge. Bei der Darstellung der Filterkoeffizienten mit einer endlichen Anzahl von Bits entstehen Quantisierungsfehler, die zu einer Verschiebung der Pole und Nullstellen des Filters führen kann.
+
+**Auswirkung der Koeffizientenquantisierung**
+
+Die Quantisierung der Koeffizienten führt zu verschiedenen unerwünschten Effekten:
+
+**Polverschiebung**: Die quantisierten Koeffizienten verschieben die Pole des Filters, was zu einer Änderung der Filtercharakteristik führt. Im schlimmsten Fall können die Pole aus dem Einheitskreis herauswandern und zu einem instabilen Filter führen.
+
+**Frequenzgangverzerrung**: Die Verschiebung der Pole und Nullstellen führt zur Abweichung im Frequenzgang. Besonders kritisch ist dies bei scharfen Filtern mit hoher Güte.
+
+**Stabilitätsverlust**: Pole am oder auf dem Rand des Einheitskreises kann bereits durch kleine Quantisierung zur Instabilität führen. Die Wahrscheinlichkeit der Instabilität steigt mit abnehmender Wortlänge.
+
+**Strukturelle Gegenmaßnahmen**
+
+Die Wahl der Filterstruktur hat einen wesentlichen Einfluss auf die Robustheit gegenüber Quantisierungseffekten. Die Direktform 1 ist aufgrund der getrennten Pfade für Feedforward- und Feedbackanteile weniger anfällig für Fehlerausbreitung und bietet bessere numerische Stabilität bei Festkomma-Arithmetik. Die Direktform 2 bietet gegenüber der Direktform 1 eine bessere Speichereffizienz, jedoch können größere Zwischenwerte zum Überlaufen bei begrenzter Wortbreite mit erhöhtem Rauschen führen.
+
+Die transponierte Direktform 2 kombiniert die Vorteile der beiden genannten Strukturen und zeichnet sich durch eine besonders hohe Resistenz gegenüber Koeffizientenquantisierung aus. Dies liegt an der kürzeren Rückkopplungskette und der numerisch günstigen Struktur für Echtzeitanwendungen. Bei der Implementierung der digitalen Filter ist es zu empfehlen eine Wortlänge von mindestens 16 Bit mit enger Bandbreite zu wählen, um Koeffizientenquantisierung bei einem Minimum zu halten.
+
+## Quantisierungsrauschen (Rundungsrauschen)
+
+Bei der Implementierung digitaler Filter entstehen bei jeder arithmetischen Operation Rundungsfehler, die sich als additives Rauschen am Filterausgang manifestieren. Diese Fehler sind unvermeidlich bei der Verwendung von Festkomma-Arithmetik und können das Signal-Rausch-Verhältnis des Filters erheblich verschlechtern. Um diesem Entgegen zu wirken, kann die durch die Wahl einer geeigneten Implementierungsstruktur das Rundungsrauschen minimiert werden. 
+
+**Direktform 1**: Die Rundungsrauschquellen in den Feedforward- und Feedback-Pfaden sind weitgehend entkoppelt. Dadurch führt es zu einer moderaten Gesamtvarianz des Rundungsrauschens.<br>
+**Direktform 2**: Die gemeinsame Nutzung der Verzögerungselemente führt zu einer höheren Rundsrauschvarianz, da die Rundungsfehler mehrfach durch das rekursive System zirkulieren.<br>
+**Transponierte Direktform 2**: Diese Struktur weist das günstigste Rundungsrauschen auf, da die Rundungsrauschquellen näher am Ausgang liegen und weniger stark gefiltert werden.
+
+## Limit-Cycle-Oszilationen
+
+Limit-Cycle-Oszillationen sind selbsterhaltende Schwingungen, die in nichtlinearen digitalen Filtern auftreten können. Sie entstehen durch die Kombination von Quantisierung und Rückkopplung und können auch bei stabilen linearen Filtern auftreten, wenn nichtlineare Quantisierungseffekte berücksichtigt werden.
+
+**Zero-Input Limit Cycles** sind Oszillationen die auftreten, wenn das Eingangssignal null entspricht, aber der Filter aufgrund gespeicherter Energie in den Verzögerungselementen weiterhin schwingt.
+
+**Large-Scale Limit** können bei hohen Eingangssignalpegeln auftreten und sind nicht auf kleine Amplituden beschränkt. Sie entstehen durch die Sättigungscharakteristik der Arithmetik und können zu großen, störenden Ausgangssignalen führen.
+
+## Kaskadierung
+Für Filter höherer Ordnung bietet die kaskadierte-Realisierung aus Biquad-Sektionen deutliche Vorteile gegenüber der direkten Implementierung. Die optimale Anordnung und Paarung der Pole und Nullstellen in einzelnen Sektionen kann die numerische Stabilität verbessern, sowie das Rundungsrauschen minimieren als auch die Anfälligkeit für Koeffizientenquantisierung reduzieren.
+
+## Strukturenvergleich
+
+| Eigenschaft | Direktform 1 | Direktform 2 | Transp. Direktform 2 |
+|-------------|--------------|--------------|---------------------|
+| Verzögerungselemente | 4 | 2 | 2 |
+| Speicherbedarf | Hoch | Minimal | Minimal |
+| Koeff.-Empfindlichkeit | Niedrig | Hoch | Mittel |
+| Rundungsrauschen | Mittel | Hoch | Niedrig |
+| Limit-Cycle-Anfälligkeit | Niedrig | Hoch | Niedrig |
+| Hardware-Eignung | Gut | Mittel | Sehr gut |
+| Dynamikbereich | Gut | Begrenzt | Sehr gut |
+| Quantisierungsrobustheit | Hoch | Niedrig | Mittel |
+
+**Rundungsrauschverhalten**: Die transponierte Direktform 2 weist das günstigste Rundungsrauschverhalten auf, da die Rundungsquellen näher am Ausgang liegen und weniger stark durch die Rückkopplung verstärkt werden. Die Direktform 2 zeigt das ungünstigste Verhalten, da die Rundungsfehler durch die rekursive Struktur mehrfach zirkulieren.<br>
+**Koeffizientenempfindlichkeit**: Die Direktform 1 bietet die beste Robustheit gegenüber Koeffizientenquantisierung, da die Feedforward- und Feedback-Koeffizienten unabhängig quantisiert werden können. Die Direktform 2 zeigt die höchste Empfindlichkeit aufgrund der gekoppelten Struktur.
+
+Die Wahl der optimalen Struktur hängt von den spezifischen Anforderungen der Anwendung ab. Für Anwendungen mit strengen Speicherbeschränkungen sind die Direktform 2 und transponierte Direktform 2 vorzuziehen. Bei hohen Anforderungen an die numerische Genauigkeit und Robustheit ist die transponierte Direktform 2 oder die Direktform 1 die bessere Wahl. Für Echtzeitanwendungen eignet sich die transponierte Direktform 2 besonders gut aufgrund ihrer speicher- und rechen Zeiteffizienz sowie ihrer numerischen Stabilität.
+
+-->
+<section id="bilineartransformation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Bilineartransformation</h1>
 <p>Die Bilineartransformation dient als ein Verfahren, welches die Überführung analoger kontinuerierlicher Filter in digitale Filterstrukturen ermöglicht. Bei diesem Verfahren wird das analoge Frequenzverhalten möglichst genau in den digitalen Frequenzbereich übertragen und bietet dabei die Erhaltung der Stabilität sowie eine bijektive, aliasfreie Abbildung der s-Parameter in den z-Bereich. Sei überführt die imaginäre Achse der s-Ebene (<span class="math inline">\(j\omega\)</span>) exakt auf den Einheitskreis der z-Ebene und erhält dabei die Stabilitätsbedingungen.</p>
-<section id="zentrale-substitions" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="zentrale-substitions"><span class="header-section-number">8.1</span> Zentrale Substitions</h2>
+<section id="zentrale-substitions" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="zentrale-substitions"><span class="header-section-number">4.1</span> Zentrale Substitions</h2>
 <p>Die mathematische Basis der Bilineartransformation beruht auf einer Substitution der s Parameter: <span class="math display">\[
 s = \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}}
 \]</span></p>
 <p>Dabei ist <span class="math inline">\(T_d\)</span> ein Entwurfsparameter mit Zeitcharakteristik, der in der Praxis überlicherweise mit der Abtastperiode <span class="math inline">\(T\)</span> geleichgesetzt wird. Durch dieses nichtlineare Transformation werden rationale Funktionen im s-Bereich in rationale Funktionen im z-Bereich abgebildet, ohne dass die Orndung der Übertragungsfunktionen ansteigt.</p>
 </section>
-<section id="transformation-der-übergangsfunktion" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="transformation-der-übergangsfunktion"><span class="header-section-number">8.2</span> Transformation der Übergangsfunktion</h2>
+<section id="transformation-der-übergangsfunktion" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="transformation-der-übergangsfunktion"><span class="header-section-number">4.2</span> Transformation der Übergangsfunktion</h2>
 <p>Zur Digitalisierung eines analogen Filters mit der Übertragungsfunktion <span class="math inline">\(H_c(s)\)</span> wird die Subtitution in die analoge Übertragungsfunktion eingesetzt. Dieser Prozess führt zur digitalen Übertragungsfunktion:</p>
 <p><span class="math display">\[
 H(z) = H_c\left( \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}} \right)
 \]</span></p>
 <p>Die resultierende Übertragungsfunktion <span class="math inline">\(H(z)\)</span> repräsentiert die vollständige digitale Überführung des ursprünglichen analogen Filters, wobei alle wesentlichen Filtereigenschaften erhalten bleiben.</p>
 </section>
-<section id="transformation-von-polen-und-nullstellen" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="transformation-von-polen-und-nullstellen"><span class="header-section-number">8.3</span> Transformation von Polen und Nullstellen</h2>
+<section id="transformation-von-polen-und-nullstellen" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="transformation-von-polen-und-nullstellen"><span class="header-section-number">4.3</span> Transformation von Polen und Nullstellen</h2>
 <p>Die Pol- und Nullstellen des analogen Filters unterliegen während der Transformation spezifischen Abbildungsregeln. Für eine analoge Nullstelle <span class="math inline">\(\zeta_k\)</span> und einen analogen Pol <span class="math inline">\(s_k\)</span> ergeben sich die entsprechenden digitalen Werte:</p>
 <p><span class="math display">\[
 z_k = \frac{1 + \frac{T_d}{2} \cdot \zeta_k}{1 - \frac{T_d}{2} \cdot \zeta_k}, \quad
@@ -666,8 +641,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 \]</span></p>
 <p>Diese Transformationsregeln gewährleisten, dass die fundamentalen Eigenschaften des Filters während der Digitalierung erhalten bleiben. Insbesondere stellt die Transformation sicher, dass die linke s-Halbebene, welche alle stabilen Pole enthält, vollständig in das Innere des Einheitskreises der z-Ebene abgebildet werden kann.</p>
 </section>
-<section id="frequenzverzerrung---frequency-warping" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="frequenzverzerrung---frequency-warping"><span class="header-section-number">8.4</span> Frequenzverzerrung - Frequency Warping:</h2>
+<section id="frequenzverzerrung---frequency-warping" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="frequenzverzerrung---frequency-warping"><span class="header-section-number">4.4</span> Frequenzverzerrung - Frequency Warping:</h2>
 <p>Ein wesentlicher und unvermeidlciher Aspekt der Bilineartransformation ist die nichtlineare Abbildung der Frequenzachse, bekannt als Frequenzverzerrung oder Frequency Warping. Die mathematische Beschreibung der Frequenzformation lautet:</p>
 <p><span class="math display">\[
 \omega = 2 \cdot \tan^{-1} \left( \frac{\Omega T_d}{2} \right), \quad
@@ -675,8 +650,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 \]</span></p>
 <p>Durch die Frequenzverzerrung kann das Verhalten digitaler Filter beeinflusst werden. Bei niedrigen Frequenzen, nahe <span class="math inline">\(\omega\)</span> = 0 oder 0 Hz, ist die Verzerrung minimal und nahezu vernachlässigbar. In diesem Bereich verhalten sich digitale und analoge Filter nahezu identisch. Mit steigender Frequenz nimmt die Verzerrung progressiv zu und erreicht ihr Maximum bei Frequenzen nahe der Nyquist-Frequenz <span class="math inline">\(\omega = \pi\)</span> oder der halben Abtastrate <span class="math inline">\(\frac{f_s}{2}\)</span></p>
 </section>
-<section id="prewarping" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="prewarping"><span class="header-section-number">8.5</span> Prewarping</h2>
+<section id="prewarping" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="prewarping"><span class="header-section-number">4.5</span> Prewarping</h2>
 <p>Um die Abweichungen die durch das Frequency Warping entstehen zu kompensieren, wird die Methode des Prewarpings genutzt. Dabei wird die analoge Designfrequenz <span class="math inline">\(\Omega_k\)</span> so angepasst, dass sie nach der Bilineartransformation genau der genwünschten digitalen Frequenz <span class="math inline">\(\omega_k\)</span> entspricht:</p>
 <p><span class="math display">\[
 \Omega_k = \frac{2}{T_d} \cdot \tan\left( \frac{\omega_k}{2} \right) = 2 \cdot f_s \cdot \tan(\frac{\pi f_d}{f_s})
@@ -685,18 +660,18 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate <span class="math inline">\(f_s\)</span> höher als die Eckfrequenzen <span class="math inline">\(f_d\)</span> der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.</p>
 </section>
 </section>
-<section id="praktische-anwendung-der-bilinear-transformation" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Praktische Anwendung der Bilinear-Transformation</h1>
+<section id="praktische-anwendung-der-bilinear-transformation" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Praktische Anwendung der Bilinear-Transformation</h1>
 <p>Die analogen Biquad Filter für die Anwendung der Bilineartransformation werden aus dem Experiment 4 des Analog Systems Lab Kit PRO entnommen.</p>
-<section id="übertragungsfunktionen-der-analogen-biquad-filter" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="übertragungsfunktionen-der-analogen-biquad-filter"><span class="header-section-number">9.1</span> Übertragungsfunktionen der analogen Biquad Filter</h2>
+<section id="übertragungsfunktionen-der-analogen-biquad-filter" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="übertragungsfunktionen-der-analogen-biquad-filter"><span class="header-section-number">5.1</span> Übertragungsfunktionen der analogen Biquad Filter</h2>
 <p><strong>Tiefpass:</strong> <span class="math inline">\(H_{TP}(s) = \frac{V_3}{V_i} = \frac{+H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot w_0^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
 <p><strong>Hochpass:</strong> <span class="math inline">\(H_{HP}(s) = \frac{V_1}{V_i} = \frac{H_0 \cdot \frac{s^2}{w_0^2}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{+H_0 \cdot s^2}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
 <p><strong>Bandpass:</strong> <span class="math inline">\(H_{BP}(s) = \frac{V_2}{V_i} = \frac{-H_0 \cdot \frac{s}{w_0}}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{-H_0 \cdot sw_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
 <p><strong>Bandsperre:</strong> <span class="math inline">\(H_{BS}(s) = \frac{V_4}{V_i} = \frac{(1 + \frac{s^2}{w_0^2 \cdot}) \cdot H_0}{1 + \frac{s}{w_0Q} + \frac{s^2}{w_0^2}} = \frac{(w_0^2 + s^2) \cdot H_0}{w_0^2 + \frac{sw_0}{Q} + s^2}\)</span></p>
 </section>
-<section id="analoge-filterschaltung" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="analoge-filterschaltung"><span class="header-section-number">9.2</span> Analoge Filterschaltung</h2>
+<section id="analoge-filterschaltung" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="analoge-filterschaltung"><span class="header-section-number">5.2</span> Analoge Filterschaltung</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Biquad.png" class="img-fluid figure-img"></p>
@@ -705,8 +680,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </div>
 <p>Um diese analogen Filter Bilinear zu transformieren stehen MATLAB sowie Python zur Verfügung, um die Durchführung der Substitutionen durchzuführen.</p>
 </section>
-<section id="python" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="python"><span class="header-section-number">9.3</span> Python</h2>
+<section id="python" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="python"><span class="header-section-number">5.3</span> Python</h2>
 <p>Python mit scipy.signal</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>numz, denz <span class="op">=</span> bilinear(nums ,dens ,fs <span class="op">=</span> fs)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -756,8 +731,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </div>
 </section>
 </section>
-<section id="filterentwurf-in-python" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Filterentwurf in Python</h1>
+<section id="filterentwurf-in-python" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Filterentwurf in Python</h1>
 <p>Für den Entwurf von digitalen IIR-Filtern wird in Python die Scipy-Bibliothek mit dem Signal-Modul verwendet. Diese Bibliothek bietet über eine umfassende Sammlung von Funktionen für den Entwurf und die Analyse von digitalen Filtern. Für den Entwurf von digitalen Biquad-Filtern wird das Entwurfsverfahren mit analogem Prototyping durchgeführt.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> butter, cheby1, cheby2, ellip</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Das Entwurfsverfahren basiert auf der Transformation analoger Filterprototypen, bei welchem ein analoger Filter mit den gewünschten Eigenschaften entworfen wird und anschließend durch die Bilineartransformation mit Prewarping in den digitalen Bereich überführt wird.</p>
@@ -845,11 +820,11 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </div>
 <p>Das Notebook <code>filter_desing.ipynb</code> ermöglicht eine Vergleichsanalyse der verschiedenen Entwurfsmethoden unter indentischen Parametern und bietet eine Basis für die Filterauswahl basierend auf den spezifischen Anwendungsanforderungen.</p>
 </section>
-<section id="implementierungserklärung-der-biquad-filter-in-arduino" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Implementierungserklärung der Biquad Filter in Arduino</h1>
+<section id="implementierungserklärung-der-biquad-filter-in-arduino" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Implementierungserklärung der Biquad Filter in Arduino</h1>
 <p>Für die Implementierung der biquadratischen Filter in Arduino werden die Differenzengleichungen aus den Theoretischen Grundlagen entnommen und in Code umgesetzt. Die Filter sollen über das Einsetzten der <code>b</code> und <code>a</code> Koeffizienten implementiert werden.</p>
-<section id="filter-basisklasse" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="filter-basisklasse"><span class="header-section-number">11.1</span> Filter Basisklasse</h2>
+<section id="filter-basisklasse" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="filter-basisklasse"><span class="header-section-number">7.1</span> Filter Basisklasse</h2>
 <div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Filter</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
@@ -858,10 +833,10 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Diese abstrakte Basisklasse dient als Interface für alle Filterimplementierungsstrukturen. Der virtuelle Destruktor <code>virtual ~Filter() {}</code> stellt sicher, dass beim Löschen eines Objekts über einen Basisklassenzeiger der korrekte Destruktor der abgeleiteten Klasse aufgerufen wird. Die rein virtelle Methode <code>virtual float filter(float) = 0;</code> definiert die einheitliche Schnittstelle - jede abgeleitete Filterklasse muss eine <code>filter()</code> - Methode implementieren, die einen float-Wert entgegennimmt und einen gefilterten float-Wert zurückgibt. Diese Struktur ermöglicht die Verwendung der verschiedenen Filtertypen im Anwendiungsfall einer Kaskadierung.</p>
 </section>
-<section id="direktform-1-1" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="direktform-1-1"><span class="header-section-number">11.2</span> Direktform 1</h2>
-<section id="private-member-variablen" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="private-member-variablen"><span class="header-section-number">11.2.1</span> Private Member-Variablen</h3>
+<section id="direktform-1" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="direktform-1"><span class="header-section-number">7.2</span> Direktform 1</h2>
+<section id="private-member-variablen" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="private-member-variablen"><span class="header-section-number">7.2.1</span> Private Member-Variablen</h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
@@ -874,8 +849,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_2 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die Filterkoeffizienten <code>b_0, b_1, b_2, a_1, a_2</code> sind als <code>const</code> deklariert, da sie nach der Initialisierung unveränderlich bleiben sollen. Dies entspricht der mathematischen Definition eines zeitinvarianten Systems. Die Verzögerungselemente <code>x_1, y_1, y_2</code> speichern die vorherigen Ein- und Ausgangswerte. Der Wert <code>a_0</code> wird nicht gespeichert, da durch die Normalisierung im Konstruktor alle Koeffizienten bereits durch <code>a_0</code> geteilt wurden.</p>
 </section>
-<section id="konstruktor" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="konstruktor"><span class="header-section-number">11.2.2</span> Konstruktor</h3>
+<section id="konstruktor" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="konstruktor"><span class="header-section-number">7.2.2</span> Konstruktor</h3>
 <div class="sourceCode" id="cb18"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterDF1<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
@@ -886,8 +861,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der Konstruktor verwendet Initialisierungslisten für optimale Performance. Die Koeffizienten werden direkt bei der Objekterstellung normalisiert, indem alle durch <code>a[0]</code> geteilt werden. Dies entspricht der Standardform der Differenzengleichung, wo der führende Koeffizient des Nenners auf 1 normiert wird. Der <code>gain</code> Parameter wird in die Zählerkoeffizienten eingerechnet, was mathematisch äquivalent zur Multiplikation der gesamten Übertragungsfunktion mit dem Verstärkungsfaktor ist. Die Array-Referenz-Syntax <code>const float (&amp;b)[3]</code> stellt sicher, dass exakt drei Elemente übergeben werden müssen.</p>
 </section>
-<section id="filter-methode" class="level3" data-number="11.2.3">
-<h3 data-number="11.2.3" class="anchored" data-anchor-id="filter-methode"><span class="header-section-number">11.2.3</span> Filter Methode</h3>
+<section id="filter-methode" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="filter-methode"><span class="header-section-number">7.2.3</span> Filter Methode</h3>
 <div class="sourceCode" id="cb19"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> x_2 <span class="op">=</span> x_1<span class="op">;</span></span>
@@ -903,10 +878,10 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Diese Implementierung wird durch die Struktur der DF1 umgesetzt. Zuerst werden die Eingangsverzögerungen aktualiseirt: <code>x_2</code> erhält den vorherigen Wert von <code>x_1</code>, dann wird <code>x_1</code> auf den aktuellen Eingangswert <code>x_0</code> gesetzt. Die Differenzengleichung wird direkt implementiert: <code>y[n] = b_0 * x[n] + b_1 * x[n-1] + b_2 * x[n-2] - a_1 * y[n-1] - a_2 * y[n-2]</code>. Im Anschluss werden die Ausgangsverzögerungen für die nächste Iteration aktualisiert. Diese Reihenfolge ist kritisch, da die Berechnung vor Aktualisierung der Ausgangsverzögerungen erfolgen muss.</p>
 </section>
 </section>
-<section id="direktform-2" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="direktform-2"><span class="header-section-number">11.3</span> Direktform 2</h2>
-<section id="private-member-variablen-1" class="level3" data-number="11.3.1">
-<h3 data-number="11.3.1" class="anchored" data-anchor-id="private-member-variablen-1"><span class="header-section-number">11.3.1</span> Private Member Variablen</h3>
+<section id="direktform-2" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="direktform-2"><span class="header-section-number">7.3</span> Direktform 2</h2>
+<section id="private-member-variablen-1" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="private-member-variablen-1"><span class="header-section-number">7.3.1</span> Private Member Variablen</h3>
 <div class="sourceCode" id="cb20"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
@@ -918,8 +893,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_1 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die DF2-Struktur benötigt nur zwei Verzögerungselemente <code>w_0, w_1</code> anstatt der vier in DF1. Dies reduziert den Speicherbedarf um die 50%. Die <code>w</code> Variablen repräsentieren die internen Knotenpunkte der DF2-Struktur, wo sowohl die Rückkopplung als auch die Vorwärtskopplung zusammenlaufen.</p>
 </section>
-<section id="konstruktor-1" class="level3" data-number="11.3.2">
-<h3 data-number="11.3.2" class="anchored" data-anchor-id="konstruktor-1"><span class="header-section-number">11.3.2</span> Konstruktor</h3>
+<section id="konstruktor-1" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="konstruktor-1"><span class="header-section-number">7.3.2</span> Konstruktor</h3>
 <div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterDF2<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
@@ -930,8 +905,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der Konstruktor ist identisch zur DF1 Implementierung, da die Koeffizientennormalisierung unabhängig von der internen Filterstruktur ist. Die mathematische Übertragungsfunktion bleibt dieselbe, nur die interne Realisierung unterscheidet sich</p>
 </section>
-<section id="filter-methode-1" class="level3" data-number="11.3.3">
-<h3 data-number="11.3.3" class="anchored" data-anchor-id="filter-methode-1"><span class="header-section-number">11.3.3</span> Filter Methode</h3>
+<section id="filter-methode-1" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="filter-methode-1"><span class="header-section-number">7.3.3</span> Filter Methode</h3>
 <div class="sourceCode" id="cb22"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> w_2 <span class="op">=</span> w_1<span class="op">;</span></span>
@@ -945,10 +920,10 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Die DF2 Implementierung teilt die Berechnung in zwei Phasen: Zuerst wird der interne Zustand <code>w_0</code> berechnet, der das Eingangssignal minus der Rückkopplung darstellt. Dies entspricht der Implementierung des Nennerpols der Übertragungsfunktion. Dann wird der Ausgang durch die Vorwärtskopplung mit den <code>b</code> Koeffizienten berechnet, was dem Zählerpolynom entspricht. Die Verzögerungselemente werden vor der <code>w_0</code> Berechnung aktualisiert, damit die korrekten vorherigen Werte verwendet werden.</p>
 </section>
 </section>
-<section id="transponierte-direktfrom-2" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="transponierte-direktfrom-2"><span class="header-section-number">11.4</span> Transponierte Direktfrom 2</h2>
-<section id="private-member-variablen-2" class="level3" data-number="11.4.1">
-<h3 data-number="11.4.1" class="anchored" data-anchor-id="private-member-variablen-2"><span class="header-section-number">11.4.1</span> Private Member Variablen</h3>
+<section id="transponierte-direktfrom-2" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="transponierte-direktfrom-2"><span class="header-section-number">7.4</span> Transponierte Direktfrom 2</h2>
+<section id="private-member-variablen-2" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="private-member-variablen-2"><span class="header-section-number">7.4.1</span> Private Member Variablen</h3>
 <div class="sourceCode" id="cb23"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_0<span class="op">;</span> </span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">float</span> b_1<span class="op">;</span></span>
@@ -960,8 +935,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> <span class="va">s_2</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die TDF2 Struktur verwendet Zustandsvariablen <code>s_1, s_2</code>, die als “shift register” fungieren. Diese Struktur ist die transponierte Version der DF2, was bedeutet, dass der Signalfluss umgekehrt wird: die Ein- und Ausgänge werden vertauscht, sowohl als auch die Richtung der Verzögerungselemente wird umgekehrt.</p>
 </section>
-<section id="konstruktor-2" class="level3" data-number="11.4.2">
-<h3 data-number="11.4.2" class="anchored" data-anchor-id="konstruktor-2"><span class="header-section-number">11.4.2</span> Konstruktor</h3>
+<section id="konstruktor-2" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="konstruktor-2"><span class="header-section-number">7.4.2</span> Konstruktor</h3>
 <div class="sourceCode" id="cb24"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>BiquadFilterTDF2<span class="op">(</span><span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>b<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="at">const</span> <span class="dt">float</span> <span class="op">(&amp;</span>a<span class="op">)[</span><span class="dv">3</span><span class="op">],</span> <span class="dt">float</span> gain<span class="op">)</span>  </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> b_0<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>      b_1<span class="op">(</span>gain <span class="op">*</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">/</span> a<span class="op">[</span><span class="dv">0</span><span class="op">]),</span></span>
@@ -972,8 +947,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Auch hier ist der Konstruktor identisch zu den anderen Implementierungen, da die Koeffizientennormalisierung eine mathematische Anforderung ist, die unabhängig von der gewählten Realisierungsform gilt.</p>
 </section>
-<section id="filter-methode-2" class="level3" data-number="11.4.3">
-<h3 data-number="11.4.3" class="anchored" data-anchor-id="filter-methode-2"><span class="header-section-number">11.4.3</span> Filter Methode</h3>
+<section id="filter-methode-2" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="filter-methode-2"><span class="header-section-number">7.4.3</span> Filter Methode</h3>
 <div class="sourceCode" id="cb25"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filter<span class="op">(</span><span class="dt">float</span> x_0<span class="op">)</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> y_0 <span class="op">=</span> <span class="va">s_1</span> <span class="op">+</span> b_0 <span class="op">*</span> x_0<span class="op">;</span></span>
@@ -986,8 +961,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Bei der TDF2 Implementierung setzt sich der Ausgangswert aus der addition aus dem ersten Zustandsregister <code>s_1</code> mit dem verstärkten Eingangswert. Die Zustandsregister werden dann für die nächste Iteration aktualisiert. <code>s_1</code> wird zum nächsten Wert von <code>s_2</code> addiert mit den gewichteten Ein- und Ausgangswerten. <code>s_2</code> wird komplett neu berechnet. Diese Struktur hat den Vorteil, dass der Ausgangswert sehr früh im Berechnungszyklus verfügbar ist, was bei Pipeline Implementierungen sich als vorteilhaft erweisen kann.</p>
 </section>
 </section>
-<section id="eingabe-koeffiziente" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="eingabe-koeffiziente"><span class="header-section-number">11.5</span> Eingabe Koeffiziente</h2>
+<section id="eingabe-koeffiziente" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="eingabe-koeffiziente"><span class="header-section-number">7.5</span> Eingabe Koeffiziente</h2>
 <div class="sourceCode" id="cb26"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_0 <span class="op">=</span> f<span class="op">;</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_1 <span class="op">=</span> f<span class="op">;</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_2 <span class="op">=</span> f<span class="op">;</span></span>
@@ -996,8 +971,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_2 <span class="op">=</span> f<span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Bei den Eingabe-Koeffezienten wird der <code>f</code> Suffix an die float Literalen angehängt, sodass sicher gestellt wird das die Werte als singel-precision floating-point interpretiert werden, was bei Arduino-System von hoher Wichtigkeit ist.</p>
 </section>
-<section id="koeffizienten-arrays-und-filter-instanziierung" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">11.6</span> Koeffizienten Arrays und Filter Instanziierung</h2>
+<section id="koeffizienten-arrays-und-filter-instanziierung" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="koeffizienten-arrays-und-filter-instanziierung"><span class="header-section-number">7.6</span> Koeffizienten Arrays und Filter Instanziierung</h2>
 <div class="sourceCode" id="cb27"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> b_coefficients<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> b_0<span class="op">,</span> b_1<span class="op">,</span> b_2<span class="op">};</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> a_coefficients<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> a_0<span class="op">,</span> a_1<span class="op">,</span> a_2<span class="op">};</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> gain <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
@@ -1005,18 +980,18 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>BiquadFilterTDF2 biquad<span class="op">(</span>b_coefficients<span class="op">,</span> a_coefficients<span class="op">,</span> gain<span class="op">);</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die Koeffizienten werden in separaten Arrays gespeichert und an den Konstruktor übergeben. Dies ermöglicht eine saubere Trennung zwischen Filterdesign (Koeffizienten) und Implementierung (Filterklasse). Über den <code>gain</code> Paramter kann auf den zu Implementierenden Filter eine gewünschte Verstärkung angewandt werden. Bei einem Wert von 1 wird keine zusätzliche Verstärkung angewendet. Bei dieser Filter Instanziierung wird die TDF2 verwendet mir ihrem korosponierenden Klassennamen. Somit wird das Objekt <code>biquad</code> durch die Klasse <code>BiquadFilterTDF2</code> instanziiert. Innerhalb des Objekts werden die Koeffizienten mit dem Verstärkungsfaktor an die jeweilige Filterklasse übergeben. Der Implementierte Filter steht bereit zur Verwendung.</p>
 </section>
-<section id="filter-anwendung" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="filter-anwendung"><span class="header-section-number">11.7</span> Filter Anwendung</h2>
+<section id="filter-anwendung" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="filter-anwendung"><span class="header-section-number">7.7</span> Filter Anwendung</h2>
 <div class="sourceCode" id="cb28"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> filtered <span class="op">=</span> biquad<span class="op">.</span>filter<span class="op">(</span>Input<span class="op">);</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die direkte Anwendung erfolgt durch den Aufruf der <code>filter()</code>-Methode auf dem Filterobjekt <code>biquad</code>. Der Eingangswert <code>Input</code> wird der Methode übergeben, durch die spezifische Filterimplementierung entsprechend der definierten Differenzengleichung verarbeitet und als transformierter Ausgangswert filtered zurückgegeben.</p>
 </section>
 </section>
-<section id="filterung-einer-wav-datei-in-arduino" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Filterung einer WAV Datei in Arduino</h1>
+<section id="filterung-einer-wav-datei-in-arduino" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Filterung einer WAV Datei in Arduino</h1>
 <p>Zur Demonstration von digitalen Filtern auf Mikrocontrollern wird eine WAV-Datei mittels eines ESP32 gefiltert. Die Audio-Datei wird über eine SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert.</p>
 <p>Zu beachten ist, dass nur 16-Bit-WAV-Dateien unterstützt werden. Die Datei kann jedoch Mono oder Stereo mit und einer beliebigen Samplerate sein. Die WAV-Datei, die gefiltert werden soll, muss zu <code>original.wav</code> umbenannt werden bevor diese auf die SD-Karte übertragen wird.</p>
-<section id="vorbereitung-der-wav-filterung" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="vorbereitung-der-wav-filterung"><span class="header-section-number">12.1</span> Vorbereitung der WAV-Filterung</h2>
+<section id="vorbereitung-der-wav-filterung" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="vorbereitung-der-wav-filterung"><span class="header-section-number">8.1</span> Vorbereitung der WAV-Filterung</h2>
 <div class="sourceCode" id="cb29"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"SD_MMC.h"</span><span class="pp"> </span><span class="co">// SD-Karten-Support für ESP32 mit SD_MMC-Anschluss</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Durch die Einbindung vom SD_MMC.h wird eine erleichterte Nutzung von SD-Karten mit einem ESP32 geboten, als auch die Möglichkeit für 1-Wire-Modus sowie 4-Wire-Modus.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --- WAV Hilfsfunktionen ---</span></span>
@@ -1194,8 +1169,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die Ausgabedatei “gefiltert.wav” wird im Schreibmodus erstellt und erhält einen neuen WAV-Header mit den identischen Parametern der Eingangsdatei. Würde man keinen neuen WAV-Header erstellen, sondern den bestehenden verwenden, würde die resultierende Datei fehlerhaft enden. Es werden die Anzahl der Frames berechnet und ausgeben, und im Anschluss wird die Sample-für-Sample Filterung über die <code>filterAudio()</code>-Funktion gestartet. Nach der Filterung werden beide Dateien geschlossen und endet damit das Programm.</p>
 </section>
-<section id="filterprozess-der-wav-datei" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="filterprozess-der-wav-datei"><span class="header-section-number">12.2</span> Filterprozess der WAV-Datei</h2>
+<section id="filterprozess-der-wav-datei" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="filterprozess-der-wav-datei"><span class="header-section-number">8.2</span> Filterprozess der WAV-Datei</h2>
 <div class="sourceCode" id="cb44"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">// --- Filterprozess auf Samples der WAV anwenden ---</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> filterAudio<span class="op">(</span><span class="dt">uint16_t</span> numChannels<span class="op">,</span> <span class="dt">uint32_t</span> dataSize<span class="op">,</span> <span class="dt">uint16_t</span> bitsPerSample<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint16_t</span> blockAlign <span class="op">=</span> numChannels <span class="op">*</span> bitsPerSample <span class="op">/</span> <span class="dv">8</span><span class="op">;</span></span>
@@ -1241,8 +1216,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p><strong>Wertebreichsschutz</strong>: Da digitale Filter die Amplitude verstärken können, werden die gefilterten Werte mit <code>constrain()</code> auf den gültigen 16-Bit-Bereich begrenzt. Dies verhindert Übersteuerung und damit verbundene Verzerrungen.</p>
 <p><strong>Kontinuierliche Ausgabe</strong>: Die verarbeiteten Samples werden sofort in die Ausgabedatei geschrieben, wodurch ein kontinuierlicher Datenfluss ohne große Zwischenspeicherung gewährleistet wird.</p>
 </section>
-<section id="filterkaskadierung" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="filterkaskadierung"><span class="header-section-number">12.3</span> Filterkaskadierung</h2>
+<section id="filterkaskadierung" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="filterkaskadierung"><span class="header-section-number">8.3</span> Filterkaskadierung</h2>
 <p>Die Kaskadierung wird durchgeführt, indem die Filterung durch mehrere Stufen durchgeführt wird. Diese Stufen können durch Biquad-Filter oder Segmente einer SOS-Matrix definiert werden.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NUM_STAGES </span><span class="dv">2</span><span class="pp"> </span><span class="co">// Anzahl der Filterstufen</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1288,32 +1263,32 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Bei der kaskadierten Filterung werden die Filterstufen in Serie Implementiert, bei welcher die Samples durch jede Stufe sequenziell verarbeitet werden. Das Ausgangssignal einer Stufe wird zum Eingangssignal der nächsten Stufe, wodurch eine erhöhte Filterordnung oder verstärkte Filterwirkung ermöglicht. Bei Mono druchläuft jedes Sample alle <code>NUM_STAGES</code> Filterstufen des <code>filterL</code>-Arrays, bei Stereo werden beide Kanäle parallel durch ihre jeweiligen Filterkaskaden(<code>filterL</code> und <code>filterR</code>) verarbeitet. Nach der kompletten Kaskadierung werden die gefilterten Daten auf den 16-Bit-Bereich begrenzt und zurückgeschrieben.</p>
 </section>
 </section>
-<section id="implementierungserklärung-der-biquad-filter-in-micropython" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Implementierungserklärung der Biquad Filter in Micropython</h1>
+<section id="implementierungserklärung-der-biquad-filter-in-micropython" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Implementierungserklärung der Biquad Filter in Micropython</h1>
 <p>Für die Implementierung der biquadratischen Filter in Micropython werden die Differenzengleichungen aus den theoretischen Grundlagen entnommen und in Code umgesetzt. Die Filter werden über das Einsetzen der <code>b</code> und <code>a</code> Koeffizienten implementiert. Die DF1, DF2 und TDF2 werden als Klassen umgesetzt.</p>
-<section id="micropython-native-optimierung" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="micropython-native-optimierung"><span class="header-section-number">13.1</span> Micropython-Native Optimierung</h2>
+<section id="micropython-native-optimierung" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="micropython-native-optimierung"><span class="header-section-number">9.1</span> Micropython-Native Optimierung</h2>
 <div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> micropython</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="at">@micropthon.native</span></span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="bu">filter</span>(<span class="va">self</span>,x0):</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der <code>@micropython.native</code> Decorator kompiliert die <code>filter()</code> Methoden zu nativem Maschinencode, was eine erhebliche Leistungssteigerung bei rechenintensiven Operationen ermöglicht.</p>
 </section>
-<section id="slots__optimierung" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="slots__optimierung"><span class="header-section-number">13.2</span> <code>__slots__</code>Optimierung</h2>
+<section id="slots__optimierung" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="slots__optimierung"><span class="header-section-number">9.2</span> <code>__slots__</code>Optimierung</h2>
 <div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="va">__slots__</span><span class="op">=</span>(<span class="st">'b0'</span>, <span class="st">'b1'</span>, <span class="st">'b2'</span>, <span class="st">'a2'</span>, <span class="st">'gain'</span>)`</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Alle Filterklassen verwenden <code>__slots__</code>, um den Speicherverbrauch zu reduzieren und die Attributzugriffe zu beschleunigen. Dies verhindert, dass Python ein dynamisches Dictionary für jede Instanz erstellt, wodurch sowohl Speicher als auch Zugriffszeit gespart werden.</p>
 </section>
-<section id="direktform-1-2" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="direktform-1-2"><span class="header-section-number">13.3</span> Direktform 1</h2>
-<section id="instanzvariablen" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="instanzvariablen"><span class="header-section-number">13.3.1</span> Instanzvariablen</h3>
+<section id="direktform-1-1" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="direktform-1-1"><span class="header-section-number">9.3</span> Direktform 1</h2>
+<section id="instanzvariablen" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="instanzvariablen"><span class="header-section-number">9.3.1</span> Instanzvariablen</h3>
 <div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BiquadFilterDF1:</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">__slots__</span> <span class="op">=</span> (<span class="st">'b0'</span>, <span class="st">'b1'</span>, <span class="st">'b2'</span>, <span class="st">'a1'</span>, <span class="st">'a2'</span>, <span class="st">'gain'</span>, <span class="st">'x1'</span>, <span class="st">'x2'</span>, <span class="st">'y1'</span>, <span class="st">'y2'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die Filterkoeffizienten <code>b0, b1, b2, a1, a2</code> werden nach der Initialisierung im Konstruktor nicht mehr verändert, was der mathematischen Definition eines zeitinvarianten Systems entspricht. Die Verzögerungselemente <code>x1, x2</code> speichern die vorherigen Eingangswerte, während <code>y1, y2</code> die vorherigen Ausgangswerte speichern. Der Wert <code>a0</code> wird nicht gespeichert, da durch die Normalisierung im Konstruktor alle Koeffizienten bereits durch <code>a[0]</code> geteilt wurden.</p>
 </section>
-<section id="konstruktor-3" class="level3" data-number="13.3.2">
-<h3 data-number="13.3.2" class="anchored" data-anchor-id="konstruktor-3"><span class="header-section-number">13.3.2</span> Konstruktor</h3>
+<section id="konstruktor-3" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="konstruktor-3"><span class="header-section-number">9.3.2</span> Konstruktor</h3>
 <div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, b, a, gain<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.gain <span class="op">=</span> gain</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.b0 <span class="op">=</span> <span class="va">self</span>.gain <span class="op">*</span> (b[<span class="dv">0</span>] <span class="op">/</span> a[<span class="dv">0</span>])</span>
@@ -1327,8 +1302,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.y2 <span class="op">=</span> <span class="fl">0.0</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der Konstruktor normalisiert alle Koeffizienten druch die Division mit <code>a[0]</code>, wodurch die Standardform der Differenzengleichung erreicht wird. Dies entspricht der Standardform, wo der führende Koeffizient des Nenners auf 1 normiert wird. Der <code>gain</code> Parameter wird in die Zählerkoeffizienten eingerechnet, was mathematisch äquivalent zur Multiplikation der gesamten Übertragungsfunktion mit dem Verstärkungsfaktor ist. Die Verzögerungselemente werden auf <code>0.0</code> initialisiert, was einem System ohne vorherigen Werte entspricht.</p>
 </section>
-<section id="filter-methode-3" class="level3" data-number="13.3.3">
-<h3 data-number="13.3.3" class="anchored" data-anchor-id="filter-methode-3"><span class="header-section-number">13.3.3</span> Filter Methode</h3>
+<section id="filter-methode-3" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="filter-methode-3"><span class="header-section-number">9.3.3</span> Filter Methode</h3>
 <div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>    <span class="at">@micropython.native</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">filter</span>(<span class="va">self</span>, x0):</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>        y0 <span class="op">=</span> (<span class="va">self</span>.b0 <span class="op">*</span> x0 <span class="op">+</span> <span class="va">self</span>.b1 <span class="op">*</span> <span class="va">self</span>.x1 <span class="op">+</span> <span class="va">self</span>.b2 <span class="op">*</span> <span class="va">self</span>.x2 </span>
@@ -1341,16 +1316,16 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Für die Implementierung der DF1 wird die Differenzengleichung dieser Struktur direkt implementiert: <code>y[n] = b0 * x[n] + b1 * x[n-1] + b2 * [x-2] - a1 * y[n-1] - a2 * y[n-2]</code>. Anschließend werden die Verzögerungselemente für die nächste Iteration aktualisiert. Die Eingangsverzögerung werden durch <code>self.x2 = self.x1</code> und <code>self.x1 = x0</code> verschoben, während die Ausgangsverzögerung durch <code>self.y2=self.y1</code> und <code>self.y1 = y0</code> aktualisiert werden. Diese Reihenfolge ist kritisch, da die Berechnung vor der Aktualisierung der Ausgangswerte erfolgen muss.</p>
 </section>
 </section>
-<section id="direktform-2-1" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="direktform-2-1"><span class="header-section-number">13.4</span> Direktform 2</h2>
-<section id="instanzvariablen-1" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="instanzvariablen-1"><span class="header-section-number">13.4.1</span> Instanzvariablen</h3>
+<section id="direktform-2-1" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="direktform-2-1"><span class="header-section-number">9.4</span> Direktform 2</h2>
+<section id="instanzvariablen-1" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="instanzvariablen-1"><span class="header-section-number">9.4.1</span> Instanzvariablen</h3>
 <div class="sourceCode" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BiquadFilterDF2:</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">__slots__</span> <span class="op">=</span> (<span class="st">'b0'</span>, <span class="st">'b1'</span>, <span class="st">'b2'</span>, <span class="st">'a1'</span>, <span class="st">'a2'</span>, <span class="st">'gain'</span>, <span class="st">'w0'</span>, <span class="st">'w1'</span>, <span class="st">'w2'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die DF2-Struktur benötigt drei Verzögerungselemente <code>w0, w1, w2</code> statt der vier in der DF1. Dies reduziert den Speicherbedarf gegenüber der DF1. Die <code>w</code> Variablen repräsentieren die internen Knotenpunkte der DF2-Struktur, wo sowohl die Rückkopplung als auch die Vorwärtskopplung zusammenlaufen.</p>
 </section>
-<section id="konstruktor-4" class="level3" data-number="13.4.2">
-<h3 data-number="13.4.2" class="anchored" data-anchor-id="konstruktor-4"><span class="header-section-number">13.4.2</span> Konstruktor</h3>
+<section id="konstruktor-4" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="konstruktor-4"><span class="header-section-number">9.4.2</span> Konstruktor</h3>
 <div class="sourceCode" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, b, a, gain<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>        slef.gain <span class="op">=</span> gain</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.b0 <span class="op">=</span> <span class="va">self</span>.gain <span class="op">*</span> (b[<span class="dv">0</span>] <span class="op">/</span> a[<span class="dv">0</span>])</span>
@@ -1363,8 +1338,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.w2 <span class="op">=</span> <span class="fl">0.0</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der Konstruktor ist geradezu identisch zur DF1 Implementierung, da die Koeffizientennormalisierung unabhängig von der internen Filterstruktur ist. Der Unterschied liegt in der Vordefinition der Verzögerungselemente <code>self.w0, self.w1, self.w2</code>, welchen der Wert von 0.0 zugewiesen wird.</p>
 </section>
-<section id="filter-methode-4" class="level3" data-number="13.4.3">
-<h3 data-number="13.4.3" class="anchored" data-anchor-id="filter-methode-4"><span class="header-section-number">13.4.3</span> Filter Methode</h3>
+<section id="filter-methode-4" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="filter-methode-4"><span class="header-section-number">9.4.3</span> Filter Methode</h3>
 <div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>    <span class="at">@micropython.native</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">filter</span>(<span class="va">self</span>, x0):</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>        y0 <span class="op">=</span> <span class="va">self</span>.b0 <span class="op">*</span> <span class="va">self</span>.w0 <span class="op">+</span> <span class="va">self</span>.b1 <span class="op">*</span> <span class="va">self</span>.w1 <span class="op">+</span> <span class="va">self</span>.b2 <span class="op">*</span> <span class="va">self</span>.w2</span>
@@ -1375,16 +1350,16 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Die DF2 Implementierung teilt die Berechnung in zwei Phasen: Zuerst wird der Ausgang aus den aktuellen Zustandsvariablen und den Zählerkoeffizienten berechnet. Dies entspricht der Implementierung des Zählerpolynoms der Übertrangungsfunktion. Dann wird der neue Zustand <code>self.w0</code> berechnet, der das Eingangssignal minus der Rückkopplung darstellt. Die Verzögerungselemente werden durch <code>self.w2 = self.w1</code> und <code>self.w1 = self.w0</code> für die nächste Iteration verschoben.</p>
 </section>
 </section>
-<section id="transponierte-direktform-2-1" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="transponierte-direktform-2-1"><span class="header-section-number">13.5</span> Transponierte Direktform 2</h2>
-<section id="instanzvariablen-2" class="level3" data-number="13.5.1">
-<h3 data-number="13.5.1" class="anchored" data-anchor-id="instanzvariablen-2"><span class="header-section-number">13.5.1</span> Instanzvariablen</h3>
+<section id="transponierte-direktform-2" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="transponierte-direktform-2"><span class="header-section-number">9.5</span> Transponierte Direktform 2</h2>
+<section id="instanzvariablen-2" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="instanzvariablen-2"><span class="header-section-number">9.5.1</span> Instanzvariablen</h3>
 <div class="sourceCode" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BiquadFilterTDF2:</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">__slots__</span> <span class="op">=</span> (<span class="st">'b0'</span>, <span class="st">'b1'</span>, <span class="st">'b2'</span>, <span class="st">'a1'</span>, <span class="st">'a2'</span>, <span class="st">'gain'</span>, <span class="st">'s1'</span>, <span class="st">'s2'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die TDF2-Struktur verwendet Zustandsvariablen <code>s1, s2</code>, die als “shift register” fungieren. Diese Struktur ist die transponierte Version der DF2, was bedeutet, dass der Signalfluss umgekehrt wird: die Ein- und Ausgänge werden vertauscht, sowie die Richtung der Verzögerungselemente wird umgekehrt.</p>
 </section>
-<section id="konstruktor-5" class="level3" data-number="13.5.2">
-<h3 data-number="13.5.2" class="anchored" data-anchor-id="konstruktor-5"><span class="header-section-number">13.5.2</span> Konstruktor</h3>
+<section id="konstruktor-5" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="konstruktor-5"><span class="header-section-number">9.5.2</span> Konstruktor</h3>
 <div class="sourceCode" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>   <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, b, a, gain<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>        slef.gain <span class="op">=</span> gain</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.b0 <span class="op">=</span> <span class="va">self</span>.gain <span class="op">*</span> (b[<span class="dv">0</span>] <span class="op">/</span> a[<span class="dv">0</span>])</span>
@@ -1396,8 +1371,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.s2 <span class="op">=</span> <span class="fl">0.0</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Auch hier ist der Konstruktor identisch zu den anderen Implementierungen, da die Koeffizientennormalisierung eine mathematische Anforderung ist, die unabhängig von der gewählten Realisierungsform gilt. In diesem Konstruktor werden die Variablen <code>self.s1, self.s2</code> auf 0.0 gesetzt.</p>
 </section>
-<section id="filter-methode-5" class="level3" data-number="13.5.3">
-<h3 data-number="13.5.3" class="anchored" data-anchor-id="filter-methode-5"><span class="header-section-number">13.5.3</span> Filter Methode</h3>
+<section id="filter-methode-5" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="filter-methode-5"><span class="header-section-number">9.5.3</span> Filter Methode</h3>
 <div class="sourceCode" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>    <span class="at">@micropython.native</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">filter</span>(<span class="va">self</span>, x0):</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>        y0 <span class="op">=</span> <span class="va">self</span>.b0 <span class="op">*</span> x0 <span class="op">+</span> <span class="va">self</span>.s1</span>
@@ -1407,8 +1382,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Bei der TDF2 Implementierung setzt sich der Ausgangswert aus der Addition aus dem ersten Zustandsregister <code>self.s1</code> mit dem verstärkten Eingangswert zusammen. Die Zustandsregister werden dann für die nächste Iteration aktualisiert. <code>self.s1</code>wird zum nächsten Wert von <code>self.s2</code> addiert mit den gewichteten Ein- und Ausgangswerten. <code>self.s2</code> wird komplett neu berechnet. Diese Struktur hat den Vorteil, dass der Ausgangswert sehr früh im Berechnungszyklus verfügbar ist, was bei Pipeline Implementierung vorteilhaft ist.</p>
 </section>
 </section>
-<section id="filter-anwendung-1" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="filter-anwendung-1"><span class="header-section-number">13.6</span> Filter Anwendung</h2>
+<section id="filter-anwendung-1" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="filter-anwendung-1"><span class="header-section-number">9.6</span> Filter Anwendung</h2>
 <div class="sourceCode" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> biquad <span class="im">import</span> BiquadFilterTDF2</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Für die Verwendung der Biquad-Filter wird aus der biquad.py die gewünschte Filterimplementierung importiert.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>]</span>
@@ -1421,12 +1396,12 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p>Die direkte Anwendung erfolgt durch den Aufruf der filter()-Methode auf dem Filterobjekt <code>biquad</code>. Der Eingangswert <code>input</code> wird der Methode übergeben, durch die spezifische Filterimplementierung entsprechend der definierten Differenzengleichung verarbeitet und als transformierter Ausgangswert <code>filtered</code> zurückgegeben.</p>
 </section>
 </section>
-<section id="filterung-einer-wav-datei-in-micropython" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Filterung einer WAV Datei in Micropython</h1>
+<section id="filterung-einer-wav-datei-in-micropython" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Filterung einer WAV Datei in Micropython</h1>
 <p>Zur Demonstration von digitalen Filtern in Micropython wird eine WAV-Datei mittels eines ESP32 gefiltert. Die Audio-Datei wird über eine SD-Karte eingelesen, gefiltert und als gefilterte Variante abgespeichert.</p>
 <p>Zu beachten ist, dass nur 16-Bit-WAV-Dateien unterstützt werden. Die Datei kann jedoch Mono oder Stereo mit und einer beliebigen Samplerate sein. Die WAV-Datei, die gefiltert werden soll, muss zu <code>input.wav</code> umbenannt werden bevor diese auf die SD-Karte übertragen wird.</p>
-<section id="vorbereitung-des-programms" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="vorbereitung-des-programms"><span class="header-section-number">14.1</span> Vorbereitung des Programms</h2>
+<section id="vorbereitung-des-programms" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="vorbereitung-des-programms"><span class="header-section-number">10.1</span> Vorbereitung des Programms</h2>
 <div class="sourceCode" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> micropython, struct, os,</span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> machine <span class="im">import</span> SDCard, freq</span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> biquad <span class="im">import</span> BiquadFilterTDF2</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1436,8 +1411,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <div class="sourceCode" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>os.mount(SDCard(slot<span class="op">=</span><span class="dv">1</span>, width<span class="op">=</span><span class="dv">4</span>), <span class="st">"/sd"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die SD-Karte wird über das SPI-Interface mit 4-Bit Breite gemountet, um höhere Datenübertragungsraten zu ermöglichen.</p>
 </section>
-<section id="konfiguration-der-audioverarbeitung" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="konfiguration-der-audioverarbeitung"><span class="header-section-number">14.2</span> Konfiguration der Audioverarbeitung</h2>
+<section id="konfiguration-der-audioverarbeitung" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="konfiguration-der-audioverarbeitung"><span class="header-section-number">10.2</span> Konfiguration der Audioverarbeitung</h2>
 <p><strong>Audio-Parameter</strong></p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>INPUT <span class="op">=</span> <span class="st">"/sd/input.wav"</span></span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>OUTPUT <span class="op">=</span> <span class="st">"/sd/output_filtered.wav"</span></span>
@@ -1457,8 +1432,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>filtR <span class="op">=</span> BiquadFilterTDF2(b, a, gain)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Für die Filterung vom Stereo-Format werden zwei Filterinstanzen, filtL für den linken Kanal und filtR für den rechten Kanal, erstellt.</p>
 </section>
-<section id="wav-header-erstellung" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="wav-header-erstellung"><span class="header-section-number">14.3</span> WAV-Header Erstellung</h2>
+<section id="wav-header-erstellung" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="wav-header-erstellung"><span class="header-section-number">10.3</span> WAV-Header Erstellung</h2>
 <div class="sourceCode" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> write_header(f, frames):</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    rate <span class="op">=</span> <span class="dv">44100</span></span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    byte_rate <span class="op">=</span> rate <span class="op">*</span> CHANNELS <span class="op">*</span> BYTES_PER_SAMPLE</span>
@@ -1472,8 +1447,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>    ))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Die <code>write_header()</code> Funktion generiert einen standardkonformen WAV-Header im Little-Endian Format. Der Header enthält alle notwendigen Informationen: Dateigröße, Audioformat(PCM), Kanalanzahl, Abtastrate und Bit-Tiefe. Das <code>struct.pack()</code> mit <code>"&lt;4sI4s4sIHHIIHH4sI"</code> Format sorgt für die korrekte Byte-Reihenfolge auf verschiedenen Plattformen.</p>
 </section>
-<section id="blockverarbeitung" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="blockverarbeitung"><span class="header-section-number">14.4</span> Blockverarbeitung</h2>
+<section id="blockverarbeitung" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="blockverarbeitung"><span class="header-section-number">10.4</span> Blockverarbeitung</h2>
 <div class="sourceCode" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="at">@micropython.native</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_block_native(read_mv, write_mv, sample_count, filtL, filtR):</span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, sample_count, <span class="dv">2</span>):</span>
@@ -1488,8 +1463,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <p><strong><em>Sample-Konvertierung</em></strong></p>
 <p>Die 16-Bit-Samples werden aus dem Byte-Array im Little-Endian Format rekonstruiert. Die bitweise OR-Operation kombiniert die Low- und High-Bytes: das erste Byte wird als niederwertige Bits verwendet, das zweite Byte wird um 8 nach links verschoben für die höherwertigen Bits. Die anschließende Überprüfung konvertiert unsigned 16-Bit Werte in signed Werte durch die Subtraktion von 65536 für Werte über 32767.</p>
 </section>
-<section id="filterung-und-clamping" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="filterung-und-clamping"><span class="header-section-number">14.5</span> Filterung und Clamping</h2>
+<section id="filterung-und-clamping" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="filterung-und-clamping"><span class="header-section-number">10.5</span> Filterung und Clamping</h2>
 <div class="sourceCode" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> <span class="bu">int</span>(filtL.<span class="bu">filter</span>(sL))</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="bu">int</span>(filtR.<span class="bu">filter</span>(sR))</span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1501,8 +1476,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 <span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>    struct.pack_into(<span class="st">"&lt;hh"</span>, write_mv, i<span class="op">*</span><span class="dv">2</span>, l, r)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Bei der Filterung werden die Samples auf ganze Zahlen gerundet und auf den gültigen 16-Bit Bereich begrenzt. Das Clamping verhindert Überläufe und damit verbundene Verzerrung im Ausgangssignal. Die Begrenzung ist notwendig, da die Filteroperation Werte außerhalb des ursprünglichen Bereichs erzeugen kann. Abschließend werden die verarbeiteten Samples mit <code>struct.pack_into()</code> direkt in den Ausgabepuffer geschrieben. Das Format <code>"&lt;hh"</code> definiert zwei signed 16-Bit Integers im Little-Endian Format.</p>
 </section>
-<section id="hauptverarbeitung" class="level2" data-number="14.6">
-<h2 data-number="14.6" class="anchored" data-anchor-id="hauptverarbeitung"><span class="header-section-number">14.6</span> Hauptverarbeitung</h2>
+<section id="hauptverarbeitung" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="hauptverarbeitung"><span class="header-section-number">10.6</span> Hauptverarbeitung</h2>
 <div class="sourceCode" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>    read_buf <span class="op">=</span> <span class="bu">bytearray</span>(BLOCK_SIZE)</span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>    write_buf <span class="op">=</span> <span class="bu">bytearray</span>(BLOCK_SIZE)</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>    read_mv <span class="op">=</span> <span class="bu">memoryview</span>(read_buf)</span>
@@ -1937,8 +1912,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../grundlagen/index.html" class="pagination-link" aria-label="Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</span></span>
+      <a href="../grundlagen/index.html" class="pagination-link" aria-label="Theoritischen Grundlagen zur Implementierung von digitalen Biquads">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoritischen Grundlagen zur Implementierung von digitalen Biquads</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
