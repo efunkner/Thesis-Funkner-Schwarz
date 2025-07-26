@@ -1,10 +1,10 @@
-# Echtzeit-Audiofilterung in Arduino
+# Echtzeit-Bluetoothfilterung in Arduino
 
 Mit diesem Programm wird die Echtzeitfilterung von Audiosignalen mithilfe biquadratischer Filter demonstriert. Ein Audiostreams wird digital gefiltert und in Echtzeit verarbeitet. Die Implementierung erfolgt auf einem ESP LyRaT 4.3 Board unter Verwendung der `audio-tools` sowie der `audio-board-driver` Bibliotheken. Zusätzlich wird die Filteranwendung auf Bluetooth-Audiostreams durch die A2DP-Bibliothek ermöglicht.
 
 Für die Implementierung wurde die `Filter.h` Bibliothek modifiziert, um die transponierte Direktform 2 zu nutzen. Diese modifizierte Version muss im Bibliotheksverzeichnis ausgetauscht werden.
 
-## Arduino IDE Bedingungen
+## Arduino IDE Bedingungen für Bluetooth
 
 Zum Flashend von den `filtered_bluetooth.ino` muss in der Arduino IDE unter Boards das `ESP32 Dev Module`gewählt werden. Dadurch stehen unter dem Tools-Reiter eine vielzahl von Voreinstellungen zum Kompilieren und Flashen des Programms zur Verfügung. Bei der Option `Partition Scheme:` muss die `Huge APP (3MB No OTA/1MB SPIFFS)` gewählt werden, da die Bibliotheken zur Nutzung der Bluetooth-Funktionen einen hohen Speicher bedarf haben.
 ```cpp
