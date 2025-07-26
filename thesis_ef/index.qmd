@@ -39,3 +39,5 @@ right: |
 {{< include ../chapters/micropython.qmd >}}
 
 {{< include ../chapters/micropython_wav_filtered.qmd >}}
+
+{{< include ../chapters/arduino_echtzeit.qmd >}}
