@@ -15,6 +15,10 @@ Zum einen wird das Modul [pynq.lib.dma](https://pynq.readthedocs.io/en/latest/py
 
 Zum anderen kommt das Modul [pynq.lib.audio](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html) zum Einsatz. Dieses Modul enthält den Treiber für den auf dem PYNQ-Z2-Board verbauten ADAU1761-Audiocodec und ermöglicht es, die analogen Audioein- und -ausgänge des Boards direkt aus Python heraus anzusteuern. Über den Treiber können zentrale Funktionen wie das Setzen der Abtastrate, das Aktivieren oder Deaktivieren von Ein- und Ausgängen gesteuert werden. Darüber hinaus bietet das Modul die Möglichkeit, Audiosignale über die analogen Eingänge aufzunehmen.<br>
 
+Beim Versuch, die Abtastrate von 48 kHz auf 44,1 kHz umzustellen, zeigte sich, dass die Aufnahmen trotz korrekter Konfiguration weiterhin mit 48 kHz durchgeführt wurden. Zwar wurde in der erzeugten WAV-Datei die Samplingrate ordnungsgemäß mit 44,1 kHz eingetragen, doch beim Abhören war ein deutlich tieferer Pitch zu erkennen, was ein Anzeichen dafür ist, dass die tatsächliche Aufnahmefrequenz höher lag als angegeben.<br>
+Bei der direkten Wiedergabe über die Hardware blieb dieser Fehler zunächst unbemerkt. Sobald die Aufnahme jedoch über das Notebook abgespielt wurde, wurde der Pitch sofort hörbar. Auch externe WAV-Dateien mit 44,1 kHz klangen über den Hardware-Ausgang zu schnell, wenn dieser auf 44,1 kHz eingestellt wurde, was ebenfalls auf eine Diskrepanz zwischen eingestellter und tatsächlich verwendeter Abtastrate hinweist.<br>
+Aus diesem Grund wurde das gesamte Filterdesign konsequent auf eine Samplingrate von 48 kHz ausgelegt. Um dennoch Audiodateien mit niedrigeren Abtastraten verarbeiten zu können, werden diese vor der Weiterverarbeitung entsprechend hochgesampelt.
+
 ## Funktionsweise des Notebooks
 Zur besseren Übersicht und vereinfachten Bedienung wurden alle wesentlichen Prozesse, wie Datenübertragung, Speichern und Visualisierung, in einer separaten Python-Datei als einheitliche Funktionssammlung zusammengeführt. Diese Struktur ermöglicht es, komplexe Abläufe mit nur wenigen, klaren Funktionsaufrufen direkt im Jupyter Notebook auszuführen.<br>
 
@@ -23,7 +27,7 @@ Die grundlegende Datenübertragung an den DMA erfolgt dabei relativ einfach und 
 
 
 ## Initialisierung des DMA-Kanals
-Am Anfang werden alle notwendigen Bibliotheken importiert, einschließlich der PYNQ-spezifischen Module wie Overlay, allocate sowie die Treiberbibliothek pynq.lib.audio. Anschließend wird das entsprechende DMA-IP-Core aus dem zuvor geladenen Overlay angesprochen und in einer Variable gespeichert. Die DMA-Instanz verfügt über zwei Kanäle. *sendchannel* für das Senden an den DAM und *recvchannel* für das Empfangen. Für jeden der vier Filter wird eine eigene DMA-Instanz erzeugt und jeweils den zugehörigen Variablen zugewiesen.<br>
+Am Anfang werden alle notwendigen Bibliotheken importiert, einschließlich der PYNQ-spezifischen Module wie *Overlay*, *allocate* sowie die Treiberbibliothek *pynq.lib.audio*. Anschließend wird das entsprechende DMA-IP-Core aus dem zuvor geladenen Overlay angesprochen und in einer Variable gespeichert. Die DMA-Instanz verfügt über zwei Kanäle. Für jeden der vier Filter wird eine eigene DMA-Instanz erzeugt und jeweils den zugehörigen Variablen zugewiesen.<br>
 
 ```python
 from pynq import Overlay
@@ -38,7 +42,7 @@ dma_Filter_1_recv = ol.dma_Filter_1.recvchannel
 
 ```
 ## DMA Übertragung
-Eine Zentrafe Funktion ist die *Transmission(input_data,ip_buffer,dma,dma_send, dma_recv)*. Diese Funktion wird für jede übertragung aufgerufen und übernimmt die Kernaufgaben für eine vollständige übertragung.<br>
+Eine Zentrale Funktion ist die *Transmission(input_data,ip_buffer,dma,dma_send, dma_recv)*. Diese Funktion wird für jede übertragung aufgerufen und übernimmt die Kernaufgaben für eine vollständige übertragung.<br>
 
 Bevor die Audiodaten an die DMA-Schnittstelle übergeben werden können, müssen sie zunächst normiert und in ein kompatibles Datenformat umgewandelt werden. Dies ist notwendig, da die AXI-DMA-Schnittstelle nur mit bestimmten Datentypen arbeiten kann.<br>
 
@@ -116,7 +120,7 @@ def read_wav(wav_path):
 ```
 
 ## Schreiben und Speichern von .wav-Dateien
-Nach der Verarbeitung der Audiodaten können die Ergebnisse als WAV-Datei gespeichert werden. Dies geschieht über die Funktion *save_to_24bit_wav()*, die die beiden Audiokanäle entgegennimmt und diese gemeinsam in eine Stereo-WAV-Datei schreibt. Die Funktion ist in ihrer Struktur an *read_wav()* angelehnt und übernimmt das Schreiben der Daten im passenden Format. Das Schreiben erfolgt über das Python-Modul *wave*, wobei die Daten als flache Bytefolge übergeben werden. Die resultierende Datei kann anschließend direkt im Notebook abgespielt oder zur externen Weiterverarbeitung verwendet werden.<br>
+Nach der Verarbeitung der Audiodaten können die Ergebnisse als Datei gespeichert werden. Dies geschieht über die Funktion *save_to_24bit_wav()*, die die beiden Audiokanäle entgegennimmt und diese gemeinsam in eine Stereo-WAV-Datei schreibt. Die Funktion ist in ihrer Struktur an *read_wav()* angelehnt und übernimmt das Schreiben der Daten im passenden Format. Das Schreiben erfolgt über das Python-Modul *wave*, wobei die Daten als flache Bytefolge übergeben werden. Die resultierende Datei kann anschließend direkt im Notebook abgespielt oder zur externen Weiterverarbeitung verwendet werden.<br>
 
 ```python
 def save_to_24bit_wav(chan_l, chan_r, sample_rate, path):
