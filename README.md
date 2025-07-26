@@ -9,9 +9,54 @@ Die digitale Signalverarbeitung ist ein zentraler Bestandteil moderner Anwendung
 Mit diesen Lehrdemonstrationen möchten wir zwei Ansätze zur Hardware-Implementierung näher erläutern. Dabei zeigen wir, wie ein digitaler IIR-Biquad-Filter auf beiden Plattformen umgesetzt wird und wie die jeweiligen Implementierungen funktionieren. <br>
 
 # Verzeichnisstruktur
-Alle Jupyter Notebooks befinden sich im *jupiter*-Verzeichnis. Zur besseren Übersicht wurden alle Vorherigen Notebooks ebenfalls in dieses Verzeichznis übertragen.
 
+Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner eingeteilt.
+
+```text
+.
+├── filter_demonstration/
+│   ├── mikrocontroller_demo/
+│   │   ├── biquad_demo/
+│   │   └── echtzeit/
+│   │       ├── filtered_bluetooth/
+│   │       ├── filtered_bluetooth_switch/
+│   │       ├── filtered_microphone/
+│   │       ├── filtered_bluetooth_switch/
+│   │       └── Filter.h/
+│   │
+│   ├── pynq_demo/
+│   │
+│   └── visual/
+│       ├── plot_wav.ipynb/
+│       ├── plotting_realtime_audio.ipynb/
+│       └── plotting_realtime_bilinear.ipynb/
+│
+├── filter_entwurf/
+│   ├── bilinear/
+│   │   ├── bilinear.ipynb/
+│   │   ├── bilinear.m/
+│   │   └── prewarp_bilinear.m/
+│   │
+│   ├── matlab_directform/
+│   ├── matlab_hdl/
+│   │
+│   └── python/
+│       └── filter_design.ipynb/
+│
+└── filter_implementierung/
+    ├── arduino/
+    │   ├── biquad/
+    │   ├── filtered_wav/
+    │   └── filtered_wav_cascaded/
+    │    
+    ├── micropython/
+    │   ├── biquad/
+    │   └── filtered_wav/
+    │
+    └── vivado/
+```
 # Theoretischer Hintergrund
+
 
 # Hardware
 

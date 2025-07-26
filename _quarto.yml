@@ -41,6 +41,9 @@ book:
 
   chapters:
     - index.qmd
+    - part: Grundlagen
+      chapters:
+        - grundlagen/index.qmd
     - part: Mikrocontroller
       chapters:
         - thesis_ef/index.qmd
