@@ -1,0 +1,3 @@
+# WAV-Filterung in Arduino
+
+Basierend auf der `biquad.ino` wurde die `filterd_wav.ino` verfasst, welche eine WAV-Datei von der SD-Karte des Lyrat einliest, filtert und diese als als gefilterte Variante speichert. Die Filterung kann durch einfache Biquadfilter durchgeführt werden oder mit der `filtered_wav_cascaded.ino` kaskadiert, als auch Filter höherer Ordnung durch die Segmentierung von einer SOS-Matrix implementiert werden.
