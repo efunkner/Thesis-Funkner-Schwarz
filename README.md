@@ -56,7 +56,7 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
     └── vivado/
 ```
 # Theoretischer Hintergrund
-
+https://efunkner.github.io/Thesis-Funkner-Schwarz/grundlagen/
 
 # Hardware
 
