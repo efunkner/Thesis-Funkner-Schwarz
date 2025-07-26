@@ -1,5 +1,5 @@
 ---
-title: "Theoritischen Grundlagen zur Implementierung von digitalen Filtern"
+title: "Theoritischen Grundlagen zur Implementierung von digitalen Biquads"
 author:
   - name: Eduard Funkner
     orcid: 0009-0003-5073-0204
