@@ -3,6 +3,7 @@ clear
 clc
 %% Filterkoeffizienten laden
 load('HP_LP_BP_BS_Butter_2.mat') % HP/LP Butter 2.Order Fc = 1kHz, Fs = 48kHz / BP/BS Butter 2.Order Fc1 = 500/Fc2 = 2kHz, FS = 48kHz
+
 %% Vivado einfügen
 hdlsetuptoolpath('ToolName','Xilinx Vivado','ToolPath','C:\Xilinx\Vivado\2022.1\bin')
 
