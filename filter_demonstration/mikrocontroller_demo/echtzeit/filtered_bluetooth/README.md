@@ -1,0 +1,62 @@
+# Echtzeit-Bluetoothfilterung in Arduino
+
+Mit diesem Programm wird die Echtzeitfilterung von Audiosignalen mithilfe biquadratischer Filter demonstriert. Ein Audiostreams wird digital gefiltert und in Echtzeit verarbeitet. Die Implementierung erfolgt auf einem ESP LyRaT 4.3 Board unter Verwendung der `audio-tools` sowie der `audio-board-driver` Bibliotheken. Zusätzlich wird die Filteranwendung auf Bluetooth-Audiostreams durch die A2DP-Bibliothek ermöglicht.
+
+Für die Implementierung wurde die `Filter.h` Bibliothek modifiziert, um die transponierte Direktform 2 zu nutzen. Diese modifizierte Version muss im Bibliotheksverzeichnis ausgetauscht werden.
+
+## Arduino IDE Bedingungen für Bluetooth
+
+Zum Flashend von den `filtered_bluetooth.ino` muss in der Arduino IDE unter Boards das `ESP32 Dev Module`gewählt werden. Dadurch stehen unter dem Tools-Reiter eine vielzahl von Voreinstellungen zum Kompilieren und Flashen des Programms zur Verfügung. Bei der Option `Partition Scheme:` muss die `Huge APP (3MB No OTA/1MB SPIFFS)` gewählt werden, da die Bibliotheken zur Nutzung der Bluetooth-Funktionen einen hohen Speicher bedarf haben.
+```cpp
+BOARDS: ESP32 Dev Module -> Tools/Partition Scheme: Huge APP (3MB No OTA/1MB SPIFFS)
+```
+
+## Codeerklärung der Echtzeitfilterung
+```cpp
+#include "AudioTools.h"
+#include "AudioTools/AudioLibs/AudioBoardStream.h"
+#include "BluetoothA2DPSink.h"
+```
+
+Für die Echtzeitfilterung werden drei wesentliche Bibliotheken eingebunden. Die `AudioTools.h` ermöglicht die umfassende Verarbeitung von Audiostreams, während die `AudioBoardStream.h` einen I2S-Stream zwischen dem Audio-Codec des Lyrat und dem ESP32 herstellt. Die `BluetoothA2DPSink.h` ermöglicht die Erzeugung und Verarbeitung von Bluetooth-Audiostreams mit dem ESP32.
+
+```cpp
+AudioInfo info(44100, 2, 16);
+AudioBoardStream lyrat(LyratV43);
+FilteredStream<int16_t, float> filtered(lyrat, info.channels);
+BluetoothA2DPSink a2dp_sink(filtered);
+```
+
+Die Audioparameter werden durch `AudioInfo` mit einer Abtastrate von 44,1 kHz, Stereo-Konfiguration und 16-Bit-Auflösung definiert. Der Parameter `LyratV43` in `AudioBoardStream` bereitet die spezifische Board-Initialisierung vor. 
+
+Der gefilterte Stream `filtered` verwendet den `lyrat`-Stream als Eingangssignal und führt die Filterung in Stereo durch. Für die Bluetooth-Filterung wird der gefilterte Stream `filtered` in den `BluetoothA2DPSink` eingespeist, wodurch empfangenes Bluetooth-Audio in Echtzeit gefiltert wird.
+
+```cpp
+const float b[] = {1.0, 0.0, 0.0};
+const float a[] = {1.0, 0.0, 0.0};
+const float gain = 1.0;
+```
+
+Die Filterkoeffizienten werden durch drei Arrays definiert. Das Array `b[]` enthält die Zählerkoeffizienten des Biquad-Filters, während `a[]` die Nennerkoeffizienten des Biquad-Filters beinhaltet. Der Verstärkungsfaktor wird durch `gain` festgelegt. Mit diesen Parametern wird der Filter implementiert, der den I2S-Stream verarbeitet. Die hier gezeigten Koeffizienten stellen einen Durchlassfilter dar, da alle Koeffizienten außer dem ersten null sind.
+
+```cpp
+void setup(void) {
+    Serial.begin(115200);
+    auto config = lyrat.defaultConfig(TX_MODE);
+    lyrat.begin(config);
+    filtered.setFilter(0, new BiQuadTDF2<float>(b, a, gain));
+    filtered.setFilter(1, new BiQuadTDF2<float>(b, a, gain));
+    a2dp_sink.set_auto_reconnect(true);
+    a2dp_sink.start("LyratV43");
+}
+```
+
+Die Setup-Funktion beginnt mit der Initialisierung der seriellen Kommunikation mit 115200 Baud. Anschließend wird der Audio-Stream des LyRaT mit der Standard-TX-Konfiguration initialisiert. Für beide Audiokanäle werden separate Biquad-Filter in transponierter Direktform 2 erstellt, wobei der linke Kanal über Index 0 und der rechte Kanal über Index 1 angesprochen wird. Abschließend wird der Bluetooth-Service mit aktivierter automatischen Wiederverbindung gestartet und erhält die Bezeichnung "LyratV43".
+
+
+```cpp
+void loop() {
+}
+```
+
+Die Loop-Funktion bleibt leer, da die gesamte Audioübertragung und -verarbeitung durch die konfigurierten Streams und Filter automatisch im Hintergrund abläuft.
