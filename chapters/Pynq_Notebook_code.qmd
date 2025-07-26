@@ -5,6 +5,17 @@ Darüber hinaus besteht die Möglichkeit, sowohl die aufgenommenen Audiodaten al
 Da sowohl das Audiosignal vor als auch nach der Filterung gespeichert wird, besteht die Möglichkeit, beide Versionen direkt miteinander zu vergleichen. Neben dem reinen Abhören der Audiodateien kann zusätzlich ein definierter Ausschnitt des Frequenzspektrums vor und nach der Filterung visualisiert werden.<br>
 Dies ermöglicht eine anschauliche Analyse der Signalveränderung im Frequenzbereich und macht die Wirkung des gewählten Filters unmittelbar sichtbar. Auf diese Weise wird die digitale Signalverarbeitung nicht nur hörbar, sondern auch grafisch nachvollziehbar.<br>
 
+::: {#fig-elephants layout-ncol=2}
+
+![Frequenzspektrum vor dem Filtern](images/TF2_Main_Theme_Spektrum.png)
+
+![Frequenzspektrum nach der Tiefpassfilterung](images/Filter_TP_Out_Spektrum.png)
+
+:::
+
+In den Abbildungen ist nicht das vollständige Frequenzspektrum dargestellt. Stattdessen wird lediglich ein Ausschnitt von den ersten 30 Sekunden des linken Audiokanals gezeigt. Dies wurde bewusst so gewählt, da eine vollständige Analyse des gesamten Signals rechnerisch zu aufwendig wäre, um sie im Jupyter Notebook durchzuführen.<br>
+Die Darstellung erfolgt in normierter Form. Die Amplitudenwerte werden so skaliert, dass der jeweils höchste Wert bei 0 dB liegt. Dadurch kann es zwar zu Unterschieden in der absoluten Lautstärke zwischen verschiedenen Plots kommen, jedoch bleibt der relative Vergleich zwischen verschiedenen Frequenzverläufen jederzeit möglich.<br>
+
 ## Pynq Overlays
 Zur Nutzung individuell entwickelter Hardwaredesigns auf dem PYNQ-Z2-Board werden Overlays verwendet. Diese bestehen aus einer Bitstream-Datei (.bit) und der zugehörigen Hardware Handoff-Datei (.hwh), die zuvor mit Vivado generiert werden.<br>
 In einigen PYNQ-Dokumentationen wird teilweise auch auf .tcl-Dateien verwiesen. Im Rahmen der hier eingesetzten PYNQ-Version hat sich gezeigt, dass diese Datei nicht erforderlich ist. Das Overlay lässt sich vollständig mit der .bit- und der .hwh-Datei verwenden.<br>
@@ -15,8 +26,8 @@ Zum einen wird das Modul [pynq.lib.dma](https://pynq.readthedocs.io/en/latest/py
 
 Zum anderen kommt das Modul [pynq.lib.audio](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html) zum Einsatz. Dieses Modul enthält den Treiber für den auf dem PYNQ-Z2-Board verbauten ADAU1761-Audiocodec und ermöglicht es, die analogen Audioein- und -ausgänge des Boards direkt aus Python heraus anzusteuern. Über den Treiber können zentrale Funktionen wie das Setzen der Abtastrate, das Aktivieren oder Deaktivieren von Ein- und Ausgängen gesteuert werden. Darüber hinaus bietet das Modul die Möglichkeit, Audiosignale über die analogen Eingänge aufzunehmen.<br>
 
-Beim Versuch, die Abtastrate von 48 kHz auf 44,1 kHz umzustellen, zeigte sich, dass die Aufnahmen trotz korrekter Konfiguration weiterhin mit 48 kHz durchgeführt wurden. Zwar wurde in der erzeugten WAV-Datei die Samplingrate ordnungsgemäß mit 44,1 kHz eingetragen, doch beim Abhören war ein deutlich tieferer Pitch zu erkennen, was ein Anzeichen dafür ist, dass die tatsächliche Aufnahmefrequenz höher lag als angegeben.<br>
-Bei der direkten Wiedergabe über die Hardware blieb dieser Fehler zunächst unbemerkt. Sobald die Aufnahme jedoch über das Notebook abgespielt wurde, wurde der Pitch sofort hörbar. Auch externe WAV-Dateien mit 44,1 kHz klangen über den Hardware-Ausgang zu schnell, wenn dieser auf 44,1 kHz eingestellt wurde, was ebenfalls auf eine Diskrepanz zwischen eingestellter und tatsächlich verwendeter Abtastrate hinweist.<br>
+Beim Versuch, die Abtastrate von 48 kHz auf 44,1 kHz umzustellen, zeigte sich jedoch, dass die Aufnahmen trotz korrekter Konfiguration weiterhin mit 48 kHz durchgeführt wurden. Zwar wurde in der erzeugten WAV-Datei die Samplingrate ordnungsgemäß mit 44,1 kHz eingetragen, doch beim Abhören war ein deutlich tieferer Pitch zu erkennen, was ein Anzeichen dafür ist, dass die tatsächliche Aufnahmefrequenz höher lag als angegeben.<br>
+Bei der direkten Wiedergabe über die Hardware blieb dieser Fehler zunächst unbemerkt. Sobald die Aufnahme über das Notebook abgespielt wurde, war der Pitch sofort hörbar. Auch externe WAV-Dateien mit 44,1 kHz klangen über den Hardware-Ausgang zu schnell, wenn dieser auf 44,1 kHz eingestellt wurde, was ebenfalls auf eine Diskrepanz zwischen eingestellter und tatsächlich verwendeter Abtastrate hinweist.<br>
 Aus diesem Grund wurde das gesamte Filterdesign konsequent auf eine Samplingrate von 48 kHz ausgelegt. Um dennoch Audiodateien mit niedrigeren Abtastraten verarbeiten zu können, werden diese vor der Weiterverarbeitung entsprechend hochgesampelt.
 
 ## Funktionsweise des Notebooks
@@ -94,8 +105,8 @@ output_data = np.array(output_buffer[: data_size]).view(np.int32)
 
 ```
 
-## Öffnen und Einlesen von .wav-Dateien
-Zur Verarbeitung von Audiodaten werden zunächst .wav-Dateien geöffnet und eingelesen. Dies geschieht über die Funktion *read_wav()*, die mithilfe des Python-Moduls wave Zugriff auf die Audiodaten ermöglicht. Die Funktion basiert auf einem Beispiel aus den PYNQ-Audio-Demonstrationen, die auf dem Board vorinstalliert sind, und wurde entsprechend angepasst. Beim Einlesen der Datei werden zunächst grundlegende Metainformationen wie Anzahl der Kanäle, Abtastrate, Anzahl der Frames sowie die Sample-Breite ausgelesen. Anschließend werden die Rohdaten  byteweise in ein Array geladen und abhängig von der Kanalanzahl und Samplegröße korrekt umstrukturiert.<br>
+## Öffnen und Einlesen von Wav-Dateien
+Zur Verarbeitung von Audiodaten werden zunächst Wav-Dateien geöffnet und eingelesen. Dies geschieht über die Funktion *read_wav()*, die mithilfe des Python-Moduls wave Zugriff auf die Audiodaten ermöglicht. Die Funktion basiert auf einem Beispiel aus den PYNQ-Audio-Demonstrationen, die auf dem Board vorinstalliert sind, und wurde entsprechend angepasst. Beim Einlesen der Datei werden zunächst grundlegende Metainformationen wie Anzahl der Kanäle, Abtastrate, Anzahl der Frames sowie die Sample-Breite ausgelesen. Anschließend werden die Rohdaten  byteweise in ein Array geladen und abhängig von der Kanalanzahl und Samplegröße korrekt umstrukturiert.<br>
 Am Ende gibt die Funktion sowohl die Audiodaten als auch die zugehörigen Metadaten (Frame-Anzahl, Kanalzahl, Samplingrate, Sample-Breite) zurück. <br>
 
 ```python
@@ -119,7 +130,7 @@ def read_wav(wav_path):
     return frames, num_frames, num_channels, sample_rate, sample_width 
 ```
 
-## Schreiben und Speichern von .wav-Dateien
+## Schreiben und Speichern von Wav-Dateien
 Nach der Verarbeitung der Audiodaten können die Ergebnisse als Datei gespeichert werden. Dies geschieht über die Funktion *save_to_24bit_wav()*, die die beiden Audiokanäle entgegennimmt und diese gemeinsam in eine Stereo-WAV-Datei schreibt. Die Funktion ist in ihrer Struktur an *read_wav()* angelehnt und übernimmt das Schreiben der Daten im passenden Format. Das Schreiben erfolgt über das Python-Modul *wave*, wobei die Daten als flache Bytefolge übergeben werden. Die resultierende Datei kann anschließend direkt im Notebook abgespielt oder zur externen Weiterverarbeitung verwendet werden.<br>
 
 ```python
@@ -219,73 +230,8 @@ Hintergrund ist, dass in jedem Filter-IP-Core lediglich ein einzelnes Biquad-Seg
 Diese Funktion dient ausschließlich zu Demonstrationszwecken, bei der gezeigt werden soll, wie sich die Eigenschaften eines Filters durch mehrfache Anwendung bzw. Kaskadierung verändern lassen.<br>
 
 
-
 <!--
-
-u erst werden die Module und das Overlay geladen:
-
-```python
-from pynq import Overlay
-from pynq import allocate
-
-ol = Overlay("Audio_quad_Filter_v7.bit")
-
-```
-Anschließend wird das ensprechende DMA-IP-Core aus dem geladenen Overlay angesprochen:
-
-```python
-dma_Filter_1 = ol.dma_Filter_1
-
-```
-Die DMA-Instanz verfügt über zwei Kanäle. *sendchannel* für das Senden an den DAM und *recvchannel* für das Empfangen:
-
-```python
-dma_Filter_1_send = ol.dma_Filter_1.sendchannel
-dma_Filter_1_recv = ol.dma_Filter_1.recvchannel
-
-```
-Für die Übertragung müssen Eingabe- und Ausgabepuffer im Shared Memory zwischen PS und PL angelegt werden. Dies wird später in einer Funktion für jede Übertragung durchgeführt:
-
-```python
-input_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
-output_buffer = allocate(shape=(buffer_size,), dtype=np.uint32)
-
-```
-
-Für die Übertragung müssen die Daten in das richtige format gebracht werden bevor diese in den Buffer geschrieben werden können. Die Audiodaten werden zunächst normiert und in das richtige Format gebracht, da AXI-DMA nur mit bestimmten Datentypen arbeitet:
-
-```python
-def FormatChange(x):
-    x = x * (2**16)
-    x = x.astype(np.int32)
-    input_data = x.view(np.uint32)
-    return input_data
-
-```
-
 [pynq](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#)
 [pynq.lib.dma](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.dma.html#pynq-lib-dma)
 [pynq.lib.audio](https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html)
-
-Das erzeugte overlay kann nun auf das Pynq-Board geladen werden. Dort befindet sich ein Notebook mit welchen die Filterung aber auch die Aufnahme analoger Audio durchgeführt werden kann. Neben dem Notebook selbst, der eine Interaktive bediehnung und einfache Form der Analayse ermöglicht, existiert eine Weite Python File namen Filter_Overlay.py, welche direkt im Notebook aufgerufen wird. In diesem Python skript befinden sich alle nötigen Biblioteken welche notwendig sind die Filterung zu bedeihenen, sowie auch weitere Funktionen die die bediehnung vereinfachen und einheitlich machen. 
-
-Biblioteken:
-- beschreiben welche standet sind und welche pynq-spezifisch sind
-Zueisung der Filter:
-- filter werden anhand der axi-dma zugewiesen -> deshaölb war namensgebung so wichtig
-- diese können dann einfach aufgerufen werden
-Audiocodec treiber
-- wo kommen die funktionen her und was machen die
-- anmerken dann nicht von 48kHz  weck eingestellt werden kann, was hat man beobachtet
-Funktionen
-- wie genau funktioniert die übertragung -> alocate
-- wie und warum muss was umgerechnet werden -> padding etc.
-- warum wird in pakete aufgeteilt
-- wo kommen die funktionen her -> welche wurden aus den Pynq beispielen übernommen?
-Analyse
-- warum FFT und wie funktioniert das 
-
-Notebook zum bediehen
-- kurz erklärten wie das notebook aufgebaut ist und was es alles kann, sowie wie man es anwendet
-- 
 -->

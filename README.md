@@ -25,6 +25,10 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
 │   │       └── Filter.h/
 │   │
 │   ├── pynq_demo/
+|   |   ├── Audio_quad_Filter_v7.bit/
+|   |   ├── Audio_quad_Filter_v7.hwh/
+|   |   ├── Filter_Overlay.py/
+|   |   └── Lehrdemonstration_v4.ipynb/
 │   │
 │   └── visual/
 │       ├── plot_wav.ipynb/
@@ -38,7 +42,27 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
 │   │   └── prewarp_bilinear.m/
 │   │
 │   ├── matlab_directform/
+│   │   ├── slprj/
+│   │   ├── direct_forms.m/
+│   │   ├── direct_forms.slx/
+│   │   ├── direct_forms.slxc/
+│   │   └── filter_design.m/
+│   │
 │   ├── matlab_hdl/
+│   │   ├── hdl_prj/
+│   │   │   ├── hdlsrc/
+│   │   │   └── ipcore/
+│   │   │       ├── BP_Butter_2_500Hz_2kHz_fix32_16_v2_v2_0/
+│   │   │       ├── BS_Butter_2_500Hz_2kHz_fix32_16_v2_v2_0/
+│   │   │       ├── HP_Butter_2_1kHz_fix32_16_v2_v2_0/
+│   │   │       └── LP_Butter_2_1kHz_fix32_16_v2_v2_0/
+│   │   │
+│   │   ├── slprj/
+│   │   ├── biquad_Filter_v8_IP_2.slx/
+│   │   ├── biquad_Filter_v8_IP_2.slxc/
+│   │   ├── Filterdesign_v3.fda/
+│   │   ├── FilterDesign_v5.m/
+│   │   └── HP_LP_BP_BS_Butter_2.mat/
 │   │
 │   └── python/
 │       └── filter_design.ipynb/
@@ -54,6 +78,7 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
     │   └── filtered_wav/
     │
     └── vivado/
+        └── Audio_quad_Filter_v1/
 ```
 # Theoretischer Hintergrund
 https://efunkner.github.io/Thesis-Funkner-Schwarz/grundlagen/
