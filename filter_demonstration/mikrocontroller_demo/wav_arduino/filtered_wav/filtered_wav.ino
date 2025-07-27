@@ -170,12 +170,12 @@ File filteredFile;  // Gefiltere Ausgangsdatei
 
 // -----------------------------------------------------------------------------------
 // --- Filter-Koeffizienten und Gain ---
-const float b_0 = 1.0f;
-const float b_1 = 0.0f;
-const float b_2 = 0.0f;
+const float b_0 = 0.07033f;
+const float b_1 = -0.1380f;
+const float b_2 = 0.07033f;
 const float a_0 = 1.0f;
-const float a_1 = 0.0f;
-const float a_2 = 0.0f;
+const float a_1 = -0.1380f;
+const float a_2 = -0.8593f;
 
 const float gain = 1.0f;
 
@@ -183,8 +183,8 @@ const float b_coefficients[] = { b_0, b_1, b_2};
 const float a_coefficients[] = { a_0, a_1, a_2};
 
 // Filter-Objekte für linken und rechten Kanal
-BiquadFilterDF1 filterL(b_coefficients, a_coefficients, gain);
-BiquadFilterDF1 filterR(b_coefficients, a_coefficients, gain);
+BiquadFilterTDF2 filterL(b_coefficients, a_coefficients, gain);
+BiquadFilterTDF2 filterR(b_coefficients, a_coefficients, gain);
 // -----------------------------------------------------------------------------------
 
 // --- SETUP ---
@@ -207,12 +207,12 @@ void setup() {
 
   // Vorherige Filterung löschen *optional
   Serial.println("Löschen der vorherigen Filterung.");
-  if (SD_MMC.exists("/gefiltert.wav"))
-  SD_MMC.remove("/gefiltert.wav");
+  if (SD_MMC.exists("/filtered.wav"))
+  SD_MMC.remove("/filtered.wav");
   delay(1000);
 
   // Eingangs WAV Datei öffnen
-  wavFile = SD_MMC.open("/original.wav", FILE_READ);
+  wavFile = SD_MMC.open("/input.wav", FILE_READ);
   if (!wavFile) {
     Serial.println("Fehler beim Öffnen der WAV-Datei.");
     return;

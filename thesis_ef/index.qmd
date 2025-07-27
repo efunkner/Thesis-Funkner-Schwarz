@@ -24,6 +24,8 @@ right: |
 
 {{< include ../chapters/abstract_ef.qmd >}}
 
+{{< include --/chapters/motivation_ef >}}
+
 {{< include ../chapters/einleitung.qmd >}}
 
 {{< include ../chapters/grundlagen.qmd >}}
