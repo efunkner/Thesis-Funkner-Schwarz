@@ -43,3 +43,5 @@ right: |
 {{< include ../chapters/Pynq_Notebook_code.qmd >}}
 
 {{< include ../chapters/ausblick_ms.qmd >}}
+
+{{< include ../chapters/vergleich_ms.qmd >}}
