@@ -1,0 +1,22 @@
+# Motivation
+In früheren Lehrveranstaltungen stand primär die Analyse und Umsetzung analoger Filter im Fokus. Auch das Design digitaler Filter wurde theoretisch behandelt und in MATLAB simuliert. Eine praktische Umsetzung solcher digitaler Filterstrukturen in realer Hardware blieb bisher jedoch aus.<br>
+Daraus ergibt sich die Fragestellung, wie digitale Filter konkret in Hardware realisiert werden können und welche unterschiedlichen Ansätze für verschiedene Anwendungsszenarien infrage kommen.<br>
+
+Für die Implementierung digitaler Filter bietet sich im Wesentlichen die Realisierung auf programmierbaren Logikbausteinen (FPGAs) oder auf Mikrocontrollern an. FPGAs gelten als leistungsstarke, industrieerprobte Lösung, bringen jedoch hohen Entwicklungsaufwand und erhebliche Kosten für Tools und Hardware mit sich. Im Gegensatz dazu ermöglichen Mikrocontroller einen ressourcenschonenden und einsteigerfreundlichen Zugang, insbesondere durch den Einsatz frei verfügbarer Open-Source-Software und günstiger Hardware.<br>
+
+Im Rahmen dieser Arbeit soll daher der Mikrocontroller-Ansatz anhand des ESP32-LyraT-Boards untersucht werden. Dieses Board kombiniert die Rechenleistung des ESP32 mit integrierten Audiofunktionen und eignet sich ideal für digitale Signalverarbeitungsaufgaben. Der Fokus liegt dabei auf der Umsetzung digitaler IIR-Biquad-Filter, die in früheren Projekten bereits in analoger Form verwendet wurden. Dadurch lässt sich ein direkter Vergleich zwischen beiden Technologien herstellen.<br>
+
+Neben der exemplarischen Umsetzung sollen die entwickelten Filter als Grundlage für zukünftige Lern- und Demonstrationszwecke dienen und den Einstieg in die digitale Signalverarbeitung mit Mikrocontrollern nachhaltig erleichtern.<br>
+
+
+<!--
+Im Rahmen früherer Lehrveranstaltungen wurden bereits zahlreiche Erfahrungen mit analogen Filtern gesammelt. Auch die Grundlagen digitaler Filter wurden theoretisch behandelt und entsprechende Filterentwürfe in MATLAB simuliert. Eine tatsächliche Hardwareimplementierung digitaler Filter fand bisher jedoch nicht statt.
+
+Aus diesem Umstand ergibt sich die zentrale Fragestellung, welche Möglichkeiten zur praktischen Implementierung digitaler Filter existieren, insbesondere unter Berücksichtigung unterschiedlicher Zielplattformen.
+
+Grundsätzlich lassen sich digitale Filter sowohl auf FPGAs (Field Programmable Gate Arrays) als auch auf Mikrocontrollern umsetzen. Während FPGAs eine leistungsfähige, industriell etablierte Lösung darstellen, bieten Mikrocontroller eine flexible, kostengünstige und leicht zugängliche Alternative,  insbesondere im Kontext von Lehre, Forschung und Hobbyprojekten.
+
+In dieser Arbeit wird daher bewusst der Weg über einen Mikrocontroller eingeschlagen. Konkret kommt das ESP32-LyraT-Board zum Einsatz, ein leistungsfähiges Entwicklungsboard auf Basis des ESP32-Chips mit integrierten Audiofunktionen. Im Gegensatz zu FPGA-basierten Systemen erfordert diese Plattform keine teuren Lizenzprogramme oder professionelle Entwicklungsumgebungen. Stattdessen können sämtliche Schritte mit frei verfügbaren Open-Source-Tools umgesetzt werden, was sowohl der Idee des Rapid Prototyping als auch einem modernen, zugänglichen Lehransatz entspricht.
+
+Ziel der Arbeit ist es, digitale IIR-Biquad-Filter auf einem Mikrocontroller zu implementieren und damit eine vollständig softwarebasierte Alternative zur analogen Filterung praktisch zu demonstrieren. Der gewählte Filtertyp basiert auf zuvor bereits realisierten analogen Biquads, was einen direkten Vergleich zwischen analoger und digitaler Umsetzung erlaubt. Die entwickelte Lösung soll sowohl dokumentiert als auch im Rahmen einer Lehrdemonstration aufbereitet werden.
+-->

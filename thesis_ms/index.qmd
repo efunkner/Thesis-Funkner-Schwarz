@@ -24,6 +24,8 @@ right: |
 
 {{< include ../chapters/einleitung.qmd >}}
 
+{{< include ../chapters/motivation_ms.qmd >}}
+
 {{< include ../chapters/grundlagen.qmd >}}
 
 {{< include ../chapters/bilinear.qmd >}}

@@ -1,0 +1,29 @@
+# Motivation
+Im Rahmen früherer Lehrveranstaltungen wurden bereits zahlreiche Erfahrungen mit analogen Filtern gesammelt. Auch die Grundlagen digitaler Filter wurden theoretisch behandelt und entsprechende Filterentwürfe in MATLAB simuliert. Eine tatsächliche Hardwareimplementierung digitaler Filter fand bisher jedoch nicht statt.<br>
+Aus diesem Umstand ergibt sich die Fragestellung, welche Möglichkeiten es zur Implementierung digitaler Filter in realer Hardware gibt.<br>
+
+Grundsätzlich stehen für die praktische Umsetzung digitaler Filter Plattformen wie Mikrocontroller und FPGAs (Field Programmable Gate Arrays) zur Verfügung. Im Rahmen dieser Arbeit soll die FPGA-basierte Umsetzung untersucht werden, da diese eine besonders leistungsfähige Alternative bietet.<br>
+Konkret wird die Implementierung digitaler IIR-Biquad-Filter auf dem FPGA-basierten PYNQ-Z2 Board untersucht. Diese Wahl ist bewusst getroffen worden, da Biquad-Filter bereits in analoger Form realisiert wurden und somit ein direkter Vergleich zwischen analoger und digitaler Implementierung möglich ist.<br>
+
+Zur Reduktion des Entwicklungsaufwands und zur Beschleunigung der Designphase wird der modellbasierte Ansatz mit MATLAB/Simulink und dem HDL Coder verwendet. Dieser Workflow ermöglicht eine automatische Übersetzung eines Simulink-Modells in synthesefähigen VHDL-Code. So kann die Methodik des Rapid Prototyping angewendet werden, um die entwickelten Filtermodule zügig zu testen und weiterzuentwickeln.<br>
+
+Die Implementierung über ein FPGA ist dabei stark an industrielle Vorgehensweisen angelehnt. Dies zeigt sich unter anderem in der Verwendung von kostenintensiven Lizenzprogrammen wie MATLAB sowie professionellen Entwicklungsumgebungen wie Vivado. Auch die benötigte Hardware, etwa FPGA-Entwicklungsboards, ist im Vergleich zu Mikrocontroller-Lösungen häufig deutlich kostenintensiver.<br>
+Eine alternative Herangehensweise bietet die Implementierung über Mikrocontroller. Hier besteht die Möglichkeit, den gesamten Entwicklungsprozess mit kostenfreien Open-Source-Tools umzusetzen. Mikrocontroller selbst sind in der Regel ebenfalls deutlich günstiger als FPGA-basierte Systeme, was sie insbesondere für kostensensitive Anwendungen attraktiv macht.<br>
+
+Ziel der Arbeit ist es, die Implementierungsmethoden digitaler IIR-Filter auf einem FPGA exemplarisch zu demonstrieren und für den Lehreinsatz aufzubereiten. Die entwickelten Filter sollen auf dem PYNQ-Z2 einsatzbereit sein und als Grundlage für zukünftige Lern- und Demonstrationszwecke dienen.<br>
+
+<!--
+Im Rahmen früherer Lehrveranstaltungen wurden bereits zahlreiche Erfahrungen mit analogen Filtern gesammelt. Auch die Grundlagen digitaler Filter wurden theoretisch behandelt und entsprechende Filterentwürfe in MATLAB simuliert. Eine tatsächliche Hardwareimplementierung digitaler Filter fand bisher jedoch nicht statt.
+
+Aus diesem Umstand ergibt sich die Fragestellung, welche Möglichkeiten es zur Implementierung digitaler Filter in realer Hardware gibt.
+
+Grundsätzlich stehen für die praktische Umsetzung digitaler Filter Plattformen wie Mikrocontroller und FPGAs (Field Programmable Gate Arrays) zur Verfügung. Im Rahmen dieser Arbeit soll die FPGA-basierte Umsetzung untersucht werden, da diese eine besonders leistungsfähige Alternative bietet.
+
+Konkret wird die Implementierung digitaler IIR-Biquad-Filter auf dem FPGA-basierten PYNQ-Z2 Board untersucht. Diese Wahl ist bewusst getroffen worden, da Biquad-Filter bereits in analoger Form realisiert wurden und somit ein direkter Vergleich zwischen analoger und digitaler Implementierung möglich ist.
+
+Zur Reduktion des Entwicklungsaufwands und zur Beschleunigung der Designphase wird der modellbasierte Ansatz mit MATLAB/Simulink und dem HDL Coder verwendet. Dieser Workflow ermöglicht eine automatische Übersetzung eines Simulink-Modells in synthesefähigen VHDL-Code. So kann die Methodik des Rapid Prototyping angewendet werden, um die entwickelten Filtermodule zügig zu testen und weiterzuentwickeln.
+
+Ziel der Arbeit ist es, die Implementierungsmethoden digitaler IIR-Filter auf einem FPGA exemplarisch zu demonstrieren, zu analysieren und für den Lehreinsatz aufzubereiten. Die entwickelten Filter sollen auf dem PYNQ-Z2 einsatzbereit sein und als Grundlage für zukünftige Lern- und Demonstrationszwecke dienen.
+
+-->
+
