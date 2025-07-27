@@ -3,7 +3,7 @@ Im Rahmen früherer Lehrveranstaltungen wurden bereits zahlreiche Erfahrungen mi
 Aus diesem Umstand ergibt sich die Fragestellung, welche Möglichkeiten es zur Implementierung digitaler Filter in realer Hardware gibt.<br>
 
 Grundsätzlich stehen für die praktische Umsetzung digitaler Filter Plattformen wie Mikrocontroller und FPGAs (Field Programmable Gate Arrays) zur Verfügung. Im Rahmen dieser Arbeit soll die FPGA-basierte Umsetzung untersucht werden, da diese eine besonders leistungsfähige Alternative bietet.<br>
-Konkret wird die Implementierung digitaler IIR-Biquad-Filter auf dem FPGA-basierten PYNQ-Z2 Board untersucht. Diese Wahl ist bewusst getroffen worden, da Biquad-Filter bereits in analoger Form realisiert wurden und somit ein direkter Vergleich zwischen analoger und digitaler Implementierung möglich ist.<br>
+Konkret wird die Implementierung digitaler IIR-Filter auf dem FPGA-basierten PYNQ-Z2 Board untersucht. Diese Wahl ist bewusst getroffen worden, da Biquad-Filter bereits in analoger Form realisiert wurden und somit ein direkter Vergleich zwischen analoger und digitaler Implementierung möglich ist.<br>
 
 Zur Reduktion des Entwicklungsaufwands und zur Beschleunigung der Designphase wird der modellbasierte Ansatz mit MATLAB/Simulink und dem HDL Coder verwendet. Dieser Workflow ermöglicht eine automatische Übersetzung eines Simulink-Modells in synthesefähigen VHDL-Code. So kann die Methodik des Rapid Prototyping angewendet werden, um die entwickelten Filtermodule zügig zu testen und weiterzuentwickeln.<br>
 
@@ -12,18 +12,20 @@ Eine alternative Herangehensweise bietet die Implementierung über Mikrocontroll
 
 Ziel der Arbeit ist es, die Implementierungsmethoden digitaler IIR-Filter auf einem FPGA exemplarisch zu demonstrieren und für den Lehreinsatz aufzubereiten. Die entwickelten Filter sollen auf dem PYNQ-Z2 einsatzbereit sein und als Grundlage für zukünftige Lern- und Demonstrationszwecke dienen.<br>
 
+# Einleitung
+Die kontinuierliche Weiterentwicklung der digitalen Signalverarbeitung sowie die steigende Leistungsfähigkeit rekonfigurierbarer Hardwarekomponenten ermöglichen zunehmend komplexere Implementierungen im Bereich digitaler Filterarchitekturen. Insbesondere in Anwendungen der Audiotechnik spielt die effiziente Verarbeitung von Signalen eine zentrale Rolle. Zur Erfüllung der wachsenden Anforderungen an Flexibilität, Rechenkapazität und Energieeffizienz geraten Field Programmable Gate Arrays (FPGAs) verstärkt in den Fokus aktueller Forschung sowie industrieller Applikationen.<br>
+
+Im Rahmen dieser Arbeit werden digitale IIR-Filter auf Basis eines Biquad-Ansatzes entworfen, simuliert und hardwareseitig auf einem FPGA innerhalb der PYNQ-Plattform implementiert. Ziel ist die Entwicklung einer Lehrdemonstration, die sowohl die technische Umsetzung als auch die Aufbereitung berücksichtigt. Der Fokus liegt auf dem Zusammenspiel aus MATLAB-basiertem Filterentwurf, High-Level-Synthese mittels VHDL und der Integration in eine Python-gesteuerte Umgebung. Eine zentrale Herausforderung stellt dabei die Entwicklung einer Architektur dar, die eine flexible Ansteuerung sowie eine anschauliche Visualisierung innerhalb der Jupyter-Notebook-Oberfläche erlaubt.<br>
+
+Zu Beginn werden die eingesetzte Hardwareplattform sowie die relevanten Grundlagen der digitalen Filterung und der verwendeten Entwicklungswerkzeuge vorgestellt. Darauf aufbauend erfolgt die Konzeption und Implementierung der digitalen Biquad-Filterstruktur mit anschließender Integration in die PYNQ-Umgebung. Abschließend wird die entwickelte Lösung hinsichtlich ihrer Eigenschaften und praktischen Anwendbarkeit evaluiert und mit einer alternativen Implementierungsvariante verglichen.<br>
+
+
 <!--
-Im Rahmen früherer Lehrveranstaltungen wurden bereits zahlreiche Erfahrungen mit analogen Filtern gesammelt. Auch die Grundlagen digitaler Filter wurden theoretisch behandelt und entsprechende Filterentwürfe in MATLAB simuliert. Eine tatsächliche Hardwareimplementierung digitaler Filter fand bisher jedoch nicht statt.
+Die rasante Entwicklung der digitalen Signalverarbeitung sowie die zunehmende Leistungsfähigkeit rekonfigurierbarer Hardware eröffnen neue Möglichkeiten für die Implementierung komplexer Filteralgorithmen. Insbesondere in der digitalen Audiotechnik spielt die effiziente Verarbeitung von Signalen eine zentrale Rolle. Um den steigenden Anforderungen an Flexibilität und Rechenleistung gerecht zu werden, rücken Field Programmable Gate Arrays (FPGAs) zunehmend in den Fokus aktueller Forschung und industrieller Anwendungen.<br>
 
-Aus diesem Umstand ergibt sich die Fragestellung, welche Möglichkeiten es zur Implementierung digitaler Filter in realer Hardware gibt.
+Ziel dieser Arbeit ist die Entwicklung, Simulation und hardwareseitige Implementierung eines digitalen IIR-Filters auf einem FPGA unter Verwendung der PYNQ-Plattform, ergänzt durch eine aufbereitete Lehrdemonstration. Der Schwerpunkt liegt auf der Verbindung MATLAB-gestützten Filterdesigns mit der High-Level-Synthese in VHDL sowie der Integration in eine Python-basierte Umgebung. Die zentrale Herausforderung besteht in der Entwicklung einer performanten und ressourceneffizienten FPGA-Architektur, die zugleich eine flexible Steuerung und anschauliche Visualisierung innerhalb der Jupyter-Notebook-Umgebung ermöglicht.<br>
 
-Grundsätzlich stehen für die praktische Umsetzung digitaler Filter Plattformen wie Mikrocontroller und FPGAs (Field Programmable Gate Arrays) zur Verfügung. Im Rahmen dieser Arbeit soll die FPGA-basierte Umsetzung untersucht werden, da diese eine besonders leistungsfähige Alternative bietet.
-
-Konkret wird die Implementierung digitaler IIR-Biquad-Filter auf dem FPGA-basierten PYNQ-Z2 Board untersucht. Diese Wahl ist bewusst getroffen worden, da Biquad-Filter bereits in analoger Form realisiert wurden und somit ein direkter Vergleich zwischen analoger und digitaler Implementierung möglich ist.
-
-Zur Reduktion des Entwicklungsaufwands und zur Beschleunigung der Designphase wird der modellbasierte Ansatz mit MATLAB/Simulink und dem HDL Coder verwendet. Dieser Workflow ermöglicht eine automatische Übersetzung eines Simulink-Modells in synthesefähigen VHDL-Code. So kann die Methodik des Rapid Prototyping angewendet werden, um die entwickelten Filtermodule zügig zu testen und weiterzuentwickeln.
-
-Ziel der Arbeit ist es, die Implementierungsmethoden digitaler IIR-Filter auf einem FPGA exemplarisch zu demonstrieren, zu analysieren und für den Lehreinsatz aufzubereiten. Die entwickelten Filter sollen auf dem PYNQ-Z2 einsatzbereit sein und als Grundlage für zukünftige Lern- und Demonstrationszwecke dienen.
+Zu Beginn dieser Arbeit wird die verwendete Hardwareplattform vorgestellt. Darauf folgt eine Erläuterung der theoretischen Grundlagen digitaler Filterung sowie eine Beschreibung der eingesetzten Softwaretools. Anschließend erfolgt die Konzeption und Implementierung digitaler Biquad-Filter, welche in die PYNQ-Plattform integriert werden. Abschließend wird die entwickelte Lösung im Hinblick auf ihre Praxistauglichkeit evaluiert und mit einer alternativen Implementierung verglichen.<br>
 
 -->
 

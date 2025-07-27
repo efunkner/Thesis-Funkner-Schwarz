@@ -1,0 +1,12 @@
+# Abstract
+Ziel dieser Bachelorarbeit war die Entwicklung und Implementierung eines digitalen Filters zur Verarbeitung von Audiosignalen auf einer FPGA-basierten Plattform. Ausgehend von einer grundlegenden Analyse digitaler Signalverarbeitung und Filtertheorie wurde ein geeignetes Bandpassfilter in MATLAB entworfen und simuliert. Anschließend erfolgte die Übertragung des Filterdesigns auf ein PYNQ-Z2-Board unter Verwendung von VHDL und Python im Zusammenspiel mit dem Jupyter-Notebook-Interface.
+
+Ein zentraler Fokus lag auf der Integration des Filters in eine FPGA-Hardwarearchitektur unter Berücksichtigung von Ressourcennutzung, Latenz und Echtzeitfähigkeit. Mittels AXI-Schnittstellen wurde die Kommunikation zwischen Processing System (PS) und Programmable Logic (PL) ermöglicht. Der entworfene Filter konnte erfolgreich auf dem FPGA getestet und validiert werden. Die Ergebnisse zeigen, dass eine Echtzeitverarbeitung mit akzeptabler Signalqualität und geringen Verzögerungen realisierbar ist.
+
+Diese Arbeit demonstriert exemplarisch die Kombination klassischer DSP-Methoden mit moderner FPGA-Technologie und liefert einen praxisnahen Beitrag zur hardwarebeschleunigten Signalverarbeitung in eingebetteten Systemen.
+
+<!--
+Diese Arbeit befasst sich mit der Entwicklung, Simulation und FPGA-basierten Implementierung eines digitalen IIR-Filters unter Verwendung der PYNQ-Plattform. Ziel ist die Realisierung einer leistungsfähigen und ressourceneffizienten Filterarchitektur, die sich für eine interaktive Lehrdemonstration eignet. Im Zentrum steht die Verknüpfung von MATLAB-gestütztem Filterdesign, High-Level-Synthese in VHDL sowie der Integration in eine Python-basierte Steuerungs- und Visualisierungsumgebung mittels Jupyter Notebooks.<br>
+
+Nach einer Einführung in die verwendete Hardwareplattform und die theoretischen Grundlagen digitaler Filterung werden sowohl die Filterstruktur als auch deren Implementierung auf dem FPGA detailliert beschrieben. Besonderes Augenmerk liegt auf dem Einsatz von Biquads zur Realisierung des IIR-Filters sowie auf der Kommunikation zwischen Processing System (PS) und Programmable Logic (PL). Die entwickelte Lösung wird abschließend mit einer alternativen Implementierungsvariante verglichen und hinsichtlich Echtzeitverhalten, Ressourcennutzung und didaktischem Potenzial bewertet.<br>
+-->
