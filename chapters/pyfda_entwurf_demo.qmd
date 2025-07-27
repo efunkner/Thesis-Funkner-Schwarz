@@ -1,21 +1,23 @@
 # Pyfda - Pythonfilterdesigntool
 
-Pyfda dient als eine python basierte graphische Oberfläche zum Entwerfen und Analysieren von digitalen Filtern. Das Tool setzt sich zusammen aus den (Py)Qt5, numpy, scipy sowie matplotlib Bibliotheken und bildet damit einen graphischen Filterdesigner, ähnlich dem Filterdesigntool in Matlab.
+Pyfda (Python Filter Design and Analysis) ist ein Open-Source-Tool, das als grafische Benutzeroberfläche für den Entwurf und die Analyse digitaler Filter entwickelt wurde. Die Anwendung basiert auf den Python-Bibliotheken PyQt5, NumPy, SciPy sowie Matplotlib und bietet Funktionalitäten, die dem Filter Design Tool in MATLAB ähneln.
 
-Zur Verwendung von diesem Tool müssen die oben genannten Bibliotheken vorinstalliert sein. Das Tool wird durch den folgenden Befehl installiert:
-
-```cmd
-> pip install pyfda
-```
-Das Tool wird mit folgendem Befehl gestartet:
-
-```cmd
-> pyfdax
+Die Installation von Pyfda erfolgt über den Python Package Manager:
+```bash
+pip install pyfda
 ```
 
-## Filterentwurf und Implementierung
+Das Tool wird anschließend mittels des Befehls `pyfdax` gestartet.
 
-Zur Demonstration wurde eine Bandpassfilter 6. Ordnung mit einem Passband von 300Hz - 3400Hz entworfen. Der Filter wurde anhand des Elliptischen-Prototyp entworfen, um steile Übergägnge zu Erzielen. Dazu werden auf `rp = 0.5` und `rs = 90` gesetzt.
+## Demonstrativer Filterentwurf mit Frequenzgangbetrachung
+
+Für die vorliegende Arbeit wurde ein Bandpassfilter 6. Ordnung mit einem Durchlassbereich von 300 Hz bis 3400 Hz entworfen. Diese Spezifikation entspricht dem Frequenzbereich der menschlichen Sprache und ist daher für Audioanwendungen von besonderer Relevanz.
+
+Als Filterprototyp wurde ein elliptischer Filter (Cauer-Filter) gewählt, da dieser durch seine äqui-ripple-Charakteristik sowohl im Durchlass- als auch im Sperrbereich die steilsten Übergänge bei gegebener Filterordnung ermöglicht. Die Entwurfsparameter wurden wie folgt festgelegt:
+
+- Welligkeit im Durchlassbereich: rp = 0.5 dB
+- Dämpfung im Sperrbereich: rs = 90 dB
+- Durchlassbereich: 300 Hz - 3400 Hz
 
 ![Pyfda: Entwurfsparameter](images/pyfda_specs.png)
 
@@ -29,17 +31,22 @@ Zur Demonstration wurde eine Bandpassfilter 6. Ordnung mit einem Passband von 30
 |----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
 | Zeigt den Betrag der Übertragungsfunktion $|H(f)|$  in dB. | Zeigt die Phase von $H(f)$ über der Frequenz. | Zeigt die Gruppennachlaufzeit $\tau_g$ an. | Zeigt die Pole (×) und Nullstellen (○) in der z-Ebene. |
 
-Pyfda dient dem Entwurf, sowie der Analyse des IIR-Filters, jedoch können vom entworfenen Filter nur die `b`- und `a`- Koeffizienten sowie die Pole und Nullstellen exportiert werden. Zur Implementierung auf dem Mikrocontroller wird eine SOS-Matrix benötigt, welche stattdessen mit durch:
+Obwohl Pyfda umfassende Entwurfs- und Analysemöglichkeiten bietet, beschränkt sich der Export auf die `b`- und `ae-Koeffizienten sowie die Pol- und Nullstellen. Für die Implementierung auf Mikrocontrollern wird jedoch eine (Second-Order-Sections) SOS-Matrix benötigt, die eine numerisch stabilere Darstellung des Filters ermöglicht.
 
 ```python
-sos = ellip(N = 6, rp = 0.5, rs = 90, 
+sos = ellip(N = 6, 
+            rp = 0.5, 
+            rs = 90, 
             Wn = [300/(44100/2], 3400/(44100/2)]
-            btype = 'bandpass', analog = False,
+            btype = 'bandpass', 
+            analog = False,
             output = 'sos')
 ```
-Die resultierende SOS-Matrix kann entweder an die `filter_wav_casceded.ino` oder `filter_microphone_cascaded.ino` übergeben werden.
 
-Zur Visualisierung der Frequenzgänge einer WAV-Datei und eines I2S-Streams können die zugehörigen Notebooks aus `filter_demonstration/visual/` genutzt werden, um die Auswirkung der Filter auf das Frequenzspektrum zu betrachten.
+Diese SOS-Matrix kann anschließend in die entsprechenden Arduino-Implementierungen (`filter_wav_casceded.ino` oder `filter_microphone_cascaded.ino`) integriert werden.
+
+Zur Veranschaulichung der Filterwirkung wurden Jupyter Notebooks entwickelt, die im Verzeichnis `filter_demonstration/visual/` verfügbar sind. Diese ermöglichen die Visualisierung von den Frequenzgängen sowohl der WAV-Dateien als auch der Echtzeitübertragung.
+
 ![Ungefiltert und Gefilterte Visualisierung](images/plot_wav.png)
 ![Echtzeit-Visualisierung](images/plot_realtime.png)
 

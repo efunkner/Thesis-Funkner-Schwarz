@@ -99,5 +99,14 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
 https://efunkner.github.io/Thesis-Funkner-Schwarz/grundlagen/
 
 # Hardware
+## ESP Lyrat V4.3
+Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das LyraT V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Frequenz takten und einem 520 KB internem RAM. Dieses Board verfügt über den ES8333 Audiocodec. Über diesen Codec werden Hardware-Ausstattung wie ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte angesprochen. Über einen MicroSD-Kartenslot können WAV-Dateien als Audioquellen eingebunden werden. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien. 
 
 # Software
+
+## Implementierung Microcontroller
+Arduino mit der Arduino IDE
+Micropython mit der ThonnyIDE
+
+## Entwurf Python
+Scipy, Numpy, Matlibplot

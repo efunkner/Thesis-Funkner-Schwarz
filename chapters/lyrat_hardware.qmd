@@ -1,11 +1,11 @@
 # Filterimplementierung auf Mikrocontrollern
 
-Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das LyraT V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Taktfrequenz takten und 520 KB internem RAM, wodurch es sich ideal für die Echtzeitverarbeitung von Audiosignalen eignet. Die Hardware-Ausstattung umfasst ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte sowie einen MicroSD-Kartenslot, über den WAV-Dateien als Audioquellen eingebunden werden können. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien.
+Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das LyraT V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Frequenz takten und einem 520 KB internem RAM. Dieses Board verfügt über den ES8333 Audiocodec. Über diesen Codec werden Hardware-Ausstattung wie ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte angesprochen. Über einen MicroSD-Kartenslot können WAV-Dateien als Audioquellen eingebunden werden. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien.
 
-![ESP Lyrat V4.3](images/Lyrat.png)
+![ESP Lyrat V4.3](images/lyrat.png)
 
 ## Arduino Implementierung
-Das Arduino-Framework basiert auf C/C++ und bietet durch spezialisierte Audio-Bibliotheken wie die arduino-audio-tools sowie die arduino audio-driver v Phil Schatzmann eine Basis für die Echtzeitaudioverarbeitung. Bei der Implementierung werden die Programme mittels der Arduino IDE verfasst, kompiliert und auf den ESP32 geflasht. 
+Das Arduino-Framework basiert auf C/C++ und bietet durch spezialisierte Audio-Bibliotheken wie die arduino-audio-tools sowie die arduino audio-driver von Phil Schatzmann eine Basis für die Echtzeitaudioverarbeitung. Bei der Implementierung werden die Programme mittels der Arduino IDE verfasst, kompiliert und auf den ESP32 geflasht.
 
 ## Micropython Implementierung
 MicroPython verwendet eine interpretierte Python-Syntax, die eine schnellere Entwicklung und vereinfachtes Debugging ermöglicht, jedoch aufgrund geringerer Ausführungsgeschwindigkeit primär für Prototyping geeignet ist und für keine hohen Verarbeitungsprozesse geeignet ist. Für die Implementierung in Micropython wird die ThonnyIDE mit dem Micropython Interpreter genutzt und der ESP32 wird mit einer Kompaktiblen Firmware geflasht.
