@@ -25,7 +25,7 @@ Zur Demonstration wurde eine Bandpassfilter 6. Ordnung mit einem Passband von 30
 
 ![Pyfda: Analyseplots](images/pyfda_plots.png)
 
-| **Magnitude Response**                  | **Phase Response**                     | **Group Delay**                        | **Pole-Zero Plot**                     |
+| **Magnitude Response**                 | **Phase Response**                     | **Group Delay**                        | **Pole-Zero Plot**                     |
 |----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
 | Zeigt den Betrag der Übertragungsfunktion $|H(f)|$  in dB. | Zeigt die Phase von $H(f)$ über der Frequenz. | Zeigt die Gruppennachlaufzeit $\tau_g$ an. | Zeigt die Pole (×) und Nullstellen (○) in der z-Ebene. |
 
@@ -39,4 +39,7 @@ sos = ellip(N = 6, rp = 0.5, rs = 90,
 ```
 Die resultierende SOS-Matrix kann entweder an die `filter_wav_casceded.ino` oder `filter_microphone_cascaded.ino` übergeben werden.
 
-Mit den Notebooks: 
+Zur Visualisierung der Frequenzgänge einer WAV-Datei und eines I2S-Streams können die zugehörigen Notebooks aus `filter_demonstration/visual/` genutzt werden, um die Auswirkung der Filter auf das Frequenzspektrum zu betrachten.
+![Ungefiltert und Gefilterte Visualisierung](images/plot_wav.png)
+![Echtzeit-Visualisierung](images/plot_realtime.png)
+

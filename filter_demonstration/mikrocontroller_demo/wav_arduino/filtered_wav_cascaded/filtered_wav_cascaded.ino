@@ -230,8 +230,8 @@ void setup() {
 
   // Vorherige Filterung löschen
   Serial.println("Löschen der vorherigen Filterung.");
-  if (SD_MMC.exists("/gefiltert.wav"))
-  SD_MMC.remove("/gefiltert.wav");
+  if (SD_MMC.exists("/filtert.wav"))
+  SD_MMC.remove("/filtert.wav");
   delay(1000);
 
   // Eingangs WAV Datei öffnen
