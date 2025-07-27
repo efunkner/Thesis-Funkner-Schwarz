@@ -1,0 +1,3 @@
+# Filterimplementierung auf Mikrocontrollern
+
+Die Zielhardware bei der Implementierung von digitalen IIR-Filtern ist das Lyrat V4.3 mit dem ESP32. Das Lyrat 
