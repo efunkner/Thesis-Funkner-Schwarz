@@ -1,9 +1,14 @@
 # Theoretische Grundlagen
-Die nachfolgenden theoretischen Grundlagen dienen dem Verständnis der Konzepte und Verfahren, die in der vorliegenden Arbeit zur digitalen Signalverarbeitung, insbesondere im Kontext digitaler IIR-Filter, Anwendung finden. Dabei wird auf etablierte Literatur aus dem Bereich der digitalen Signalverarbeitung zurückgegriffen.<br>
+Die nachfolgenden theoretischen Grundlagen dienen dem Verständnis der eingesetzten Konzepte und Verfahren der digitalen Signalverarbeitung, insbesondere im Kontext digitaler IIR-Filter. Grundlage der Ausführungen ist etablierte Fachliteratur aus dem Bereich der digitalen Signalverarbeitung.<br>
 
-Dabei stützen sich die Erklärungen auf die Werke Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle, Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis sowie Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel. Ergänzend werden praxisorientierte Aspekte und MATLAB-Bezüge aus Digitale Signalverarbeitung mit MATLAB von Martin Werner aufgegriffen. Das theoretische Fundament zur zeitdiskreten Signalverarbeitung wird außerdem durch das Standardwerk von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck bereitgestellt.<br>
+Die Erklärungen stützen sich auf folgende Werke:
+- Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle
+- Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis
+- Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel
+- Digitale Signalverarbeitung mit MATLAB von Martin Werner
+- Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck
 
-Der Abschnitt entstand im Rahmen einer Zusammenarbeit mit einer weiteren Bachelorarbeit und liegt in beiden Arbeiten in identischer Form vor.
+Dieser Abschnitt entstand im Rahmen einer Zusammenarbeit mit einer weiteren Bachelorarbeit und liegt in beiden Arbeiten in identischer Form vor.
 
 ## Infinite Impulse Response (IIR-Filter)
 Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen sich fundamental durch ihre Charakteristik aus, bei der Berechnung des aktuellen Ausgangswertes durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.
