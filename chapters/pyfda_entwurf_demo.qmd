@@ -15,7 +15,7 @@ Das Tool wird mit folgendem Befehl gestartet:
 
 ## Filterentwurf mit Echtzeit-Implementierung
 
-![Filter-Parameter](images/pyfda_plots.png)
+![Filter-Parameter](images/pyfda_specs.png)
 
 | **Specs** | **b, a** | **P/Z** | **Info** | **Fixpoint** |
 |-------------------|------------------|------------------|----------------------|--------------------------|
