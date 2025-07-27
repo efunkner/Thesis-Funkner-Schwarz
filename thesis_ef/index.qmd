@@ -22,6 +22,8 @@ right: |
     This report was built with <a href="https://quarto.org/">Quarto<a>.
 ---
 
+{{< include ../chapters/abstract_ef.qmd >}}
+
 {{< include ../chapters/einleitung.qmd >}}
 
 {{< include ../chapters/grundlagen.qmd >}}
