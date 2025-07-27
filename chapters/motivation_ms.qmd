@@ -20,14 +20,3 @@ Im Rahmen dieser Arbeit werden digitale IIR-Filter auf Basis eines Biquad-Ansatz
 Zu Beginn werden die eingesetzte Hardwareplattform sowie die relevanten Grundlagen der digitalen Filterung und der verwendeten Entwicklungswerkzeuge vorgestellt. Darauf aufbauend erfolgt die Konzeption und Implementierung der digitalen Biquad-Filterstruktur mit anschließender Integration in die PYNQ-Umgebung. Abschließend wird die entwickelte Lösung hinsichtlich ihrer Eigenschaften und praktischen Anwendbarkeit evaluiert und mit einer alternativen Implementierungsvariante verglichen.<br>
 
 Diese Bachelorarbeit dokumentiert den Entwicklungs- und Implementierungsprozess, der im zugehörigen GitHub-Repository festgehalten wurde. Sowohl das Repository als auch Teile dieser Arbeit sind im Rahmen einer Zusammenarbeit mit einer parallel durchgeführten Bachelorarbeit entstanden, die eine vergleichbare Fragestellung behandelt. Da beide Arbeiten auf denselben theoretischen Grundlagen basieren, wurden diese gemeinsam erarbeitet. Auch der Vergleich der unterschiedlichen Implementierungsmethoden erfolgte in enger Abstimmung und wurde kollaborativ ausgearbeitet.<br>
-
-
-<!--
-Die rasante Entwicklung der digitalen Signalverarbeitung sowie die zunehmende Leistungsfähigkeit rekonfigurierbarer Hardware eröffnen neue Möglichkeiten für die Implementierung komplexer Filteralgorithmen. Insbesondere in der digitalen Audiotechnik spielt die effiziente Verarbeitung von Signalen eine zentrale Rolle. Um den steigenden Anforderungen an Flexibilität und Rechenleistung gerecht zu werden, rücken Field Programmable Gate Arrays (FPGAs) zunehmend in den Fokus aktueller Forschung und industrieller Anwendungen.<br>
-
-Ziel dieser Arbeit ist die Entwicklung, Simulation und hardwareseitige Implementierung eines digitalen IIR-Filters auf einem FPGA unter Verwendung der PYNQ-Plattform, ergänzt durch eine aufbereitete Lehrdemonstration. Der Schwerpunkt liegt auf der Verbindung MATLAB-gestützten Filterdesigns mit der High-Level-Synthese in VHDL sowie der Integration in eine Python-basierte Umgebung. Die zentrale Herausforderung besteht in der Entwicklung einer performanten und ressourceneffizienten FPGA-Architektur, die zugleich eine flexible Steuerung und anschauliche Visualisierung innerhalb der Jupyter-Notebook-Umgebung ermöglicht.<br>
-
-Zu Beginn dieser Arbeit wird die verwendete Hardwareplattform vorgestellt. Darauf folgt eine Erläuterung der theoretischen Grundlagen digitaler Filterung sowie eine Beschreibung der eingesetzten Softwaretools. Anschließend erfolgt die Konzeption und Implementierung digitaler Biquad-Filter, welche in die PYNQ-Plattform integriert werden. Abschließend wird die entwickelte Lösung im Hinblick auf ihre Praxistauglichkeit evaluiert und mit einer alternativen Implementierung verglichen.<br>
-
--->
-

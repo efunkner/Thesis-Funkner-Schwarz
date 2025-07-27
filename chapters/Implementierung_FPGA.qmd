@@ -36,10 +36,6 @@ Das Signal TID (Transaction ID) ermöglicht es, mehrere logische Datenströme in
 TLAST kennzeichnet bei paketbasierter Übertragung das Ende eines Datenpakets. Es wird gesetzt, sobald das letzte Datenwort eines Transfers übertragen wird.<br>
 Die Verwendung von AXI4-Stream in Vivado hat den großen Vorteil, dass IP-Blöcke auf standardisierte Weise verbunden werden können. Über *AXI-Interconnects* oder *AXI SmartConnect*-Komponenten kann der Datenfluss zwischen IPs automatisch geroutet werden, was die Einbindung vereinfacht. <br>
 
-<!--Die Integration der Filter in ein FPGA-System erfolgt über eine AXI4-Stream-Schnittstelle. Der zugrunde liegende Handshake-Mechanismus basiert auf den Signalen TVALID und TREADY. Ein Transfer erfolgt nur, wenn beide Signale gleichzeitig aktiv sind. <br>
-Der Sender (Master) setzt TVALID sobald Daten bereitstehen, und  der Empfänger (Slave) signalisiert mit TREADY, dass dieser bereit ist Daten zu empfangen. Der Sender darf **nicht auf READY warten**, bevor er VALID aktiviert. Der Sender **muss VALID so lange halten**, bis der Handshake abgeschlossen ist. Der Empfänger darf READY auch vor VALID setzen, muss aber nicht.<br>
-Die Verwendung von AXI4-Stream erlaubt es, mehrere Datenströme mit unterschiedlichen Datenbreiten über denselben Interconnect zu übertragen. Dadurch wird die Einbindung in Vivado Block Designs erleichtert, da AXI-basierte IP-Blöcke nahtlos miteinander verbunden werden können.<br>-->
-
 
 ### Modell und Aufbau
 Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten. Dadurch wird verhindert, dass während der Berechnung Zwischenwerte entstehen, die außerhalb des darstellbaren Wertebereichs liegen.<br>
@@ -49,14 +45,6 @@ Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem M
 Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filterlogik klar von zusätzlichen Test- und Steuerungselementen zu trennen. Um den Datentyp durchgängig korrekt zu setzen, wird ein Data Type Conversion-Block vor dem Filter-Subsystem eingefügt. Der Filter selbst ist so eingestellt, dass die Koeffizienten den Datentyp des Eingangssignals übernehmen. Die genauen Einstellungen sehen wie Folgt aus:<br>
 
 ![Biquad Filter: Settings](images/Biquad_settings1_2.png)
-
-<!--::: {#fig-elephants layout-ncol=2}
-
-![Biquad Filter: Main](images/Biquad_settings1.png)
-
-![Biquad Filter: Datatypes](images/Biquad_settings2.png)
-
-:::-->
 
 Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br>
 
@@ -134,8 +122,6 @@ Nach der Generierung wird der IP-Core erstellt und ein Bericht geöffnet. Dieser
 ![HDL Workflow: Generate RTL Code and IP Core](images/HDL_Workflow_Generate.png)
 
 Für jeden Filter wird eine eigene IP generiert. Dabei wird jeweils dasselbe Simulink-Modell verwendet, lediglich die Koeffizienten werden angepasst.<br>
-
-<!-- Für README: Bei der Erstellung eines Vivado-Projekts für den Pynq-Z2 muss sichergestellt werden, dass das entsprechende Board im Vivado-Board-Auswahlmenü verfügbar ist. Sollte das Pynq-Z2 nicht angezeigt werden, auch nicht nach einer Aktualisierung, müssen die zugehörigen Board-Files manuell ergänzt werden. Diese lassen sich direkt aus dem offiziellen [PYNQ GitHub Repository](https://github.com/Xilinx/PYNQ/tree/master) herunterladen. Bei einer frischen Installation von Vivado 2022.1 ist das Board in der Regel bereits enthalten.<br>-->
 
 ## Design in Vivado
 Für die Aufnahme und Wiedergabe von Audio über das Pynq-Board wurde prinzipiell der Audioanteil aus dem Base-Overlay übernommen und die nicht benötigten Elemente entfernt. Die Einstellungen der Blöcke wurden ebenfalls übernommen. Die Constraints wurden so angepasst, dass die Audiofunktionalität erhalten blieb. Die Constraints weisen unter anderem den Benötigten internen PINs Namen zu, damit diese besser nachvollzogen werden können. Es ist notwendig, dass die Namen an dem Ein- und Ausgängen aus den Constraints übernommen werden. <br>

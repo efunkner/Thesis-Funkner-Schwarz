@@ -7,13 +7,6 @@ Dies ermöglicht eine anschauliche Analyse der Signalveränderung im Frequenzber
 
 ![Frequenzspektrum vor und nach dem Filtern](images/Filter_OG_TP.png)
 
-<!--::: {#fig-elephants layout-ncol=2}
-
-![Frequenzspektrum vor dem Filtern](images/TF2_Main_Theme_Spektrum.png)
-
-![Frequenzspektrum nach der Tiefpassfilterung](images/Filter_TP_Out_Spektrum.png)
-
-:::-->
 
 In den Abbildungen ist nicht das vollständige Frequenzspektrum dargestellt. Stattdessen wird lediglich ein Ausschnitt von den ersten 30 Sekunden des linken Audiokanals gezeigt. Dies wurde bewusst so gewählt, da eine vollständige Analyse des gesamten Signals rechnerisch zu aufwendig wäre, um sie im Jupyter Notebook durchzuführen.<br>
 Die Darstellung erfolgt in normierter Form. Die Amplitudenwerte werden so skaliert, dass der jeweils höchste Wert bei 0 dB liegt. Dadurch kann es zwar zu Unterschieden in der absoluten Lautstärke zwischen verschiedenen Plots kommen, jedoch bleibt der relative Vergleich zwischen verschiedenen Frequenzverläufen jederzeit möglich.<br>

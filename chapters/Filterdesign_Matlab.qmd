@@ -29,18 +29,3 @@ Alle Filter wurden mit dem [Filter Designer](https://de.mathworks.com/help/signa
 
 ![Digitaler Butterworth Filter: Amplitudengänge](images/Amplitudengänge_Filter.png)
 
-<!--::: {#fig-elephants layout-ncol=2}
-
-![Digitaler Butterworth-Hochpassfilter 2. Ordnung](images/Butter_HP.png)
-
-![Digitaler Butterworth-Tiefpassfilter 2. Ordnung](images/Butter_TP.png)
-
-:::
-
-::: {#fig-elephants layout-ncol=2}
-
-![Digitaler Butterworth-Bandpassfilter 2. Ordnung](images/Butter_BP.png)
-
-![Digitaler Butterworth-Bandstopfilter 2. Ordnung](images/Butter_BS.png)
-
-:::-->
