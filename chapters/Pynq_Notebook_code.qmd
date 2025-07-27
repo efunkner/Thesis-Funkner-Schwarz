@@ -152,7 +152,7 @@ def save_to_24bit_wav(chan_l, chan_r, sample_rate, path):
 ```
 
 ## Paketaufteilung
-Wie bereits bekannt, ist die Puffergröße der Filter-IP-Core auf $2^{20}$ Bit festgelegt. Nach dem Einlesen einer .wav-Datei kann es jedoch vorkommen, dass die Audiodaten (Frames) länger sind als der verfügbare Puffer.<br>
+Wie bereits bekannt, ist die Puffergröße der Filter-IP-Cores auf $2^{20}$ Bit festgelegt. Nach dem Einlesen einer .wav-Datei kann es jedoch vorkommen, dass die Audiodaten (Frames) länger sind als der verfügbare Puffer.<br>
 Um dennoch eine korrekte Filterung beliebiger Signallängen zu ermöglichen, werden die Daten vor der Übertragung in kleinere Teilstücke zerlegt. Dies erfolgt über die Funktion *Split2Packets()*, die das Array mit den Audiodaten in mehrere Pakete unterteilt, jeweils mit einer maximalen Größe, die dem festgelegten Puffer entspricht.<br>
 
 ```python

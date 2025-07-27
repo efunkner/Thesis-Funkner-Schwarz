@@ -1,6 +1,6 @@
 # Motivation
 Im Rahmen früherer Lehrveranstaltungen wurden bereits zahlreiche Erfahrungen mit analogen Filtern gesammelt. Auch die Grundlagen digitaler Filter wurden theoretisch behandelt und entsprechende Filterentwürfe in MATLAB simuliert. Eine tatsächliche Hardwareimplementierung digitaler Filter fand bisher jedoch nicht statt.<br>
-Aus diesem Umstand ergibt sich die Fragestellung, welche Möglichkeiten es zur Implementierung digitaler Filter in realer Hardware gibt.<br>
+Aus diesem Umstand stellt sich die Frage, wie digitale Filter in Hardware implementiert werden können.<br>
 
 Grundsätzlich stehen für die praktische Umsetzung digitaler Filter Plattformen wie Mikrocontroller und FPGAs (Field Programmable Gate Arrays) zur Verfügung. Im Rahmen dieser Arbeit soll die FPGA-basierte Umsetzung untersucht werden, da diese eine besonders leistungsfähige Alternative bietet.<br>
 Konkret wird die Implementierung digitaler IIR-Filter auf dem FPGA-basierten PYNQ-Z2 Board untersucht. Diese Wahl ist bewusst getroffen worden, da Biquad-Filter bereits in analoger Form realisiert wurden und somit ein direkter Vergleich zwischen analoger und digitaler Implementierung möglich ist.<br>
@@ -18,6 +18,8 @@ Die kontinuierliche Weiterentwicklung der digitalen Signalverarbeitung sowie die
 Im Rahmen dieser Arbeit werden digitale IIR-Filter auf Basis eines Biquad-Ansatzes entworfen, simuliert und hardwareseitig auf einem FPGA innerhalb der PYNQ-Plattform implementiert. Ziel ist die Entwicklung einer Lehrdemonstration, die sowohl die technische Umsetzung als auch die Aufbereitung berücksichtigt. Der Fokus liegt auf dem Zusammenspiel aus MATLAB-basiertem Filterentwurf, High-Level-Synthese mittels VHDL und der Integration in eine Python-gesteuerte Umgebung. Eine zentrale Herausforderung stellt dabei die Entwicklung einer Architektur dar, die eine flexible Ansteuerung sowie eine anschauliche Visualisierung innerhalb der Jupyter-Notebook-Oberfläche erlaubt.<br>
 
 Zu Beginn werden die eingesetzte Hardwareplattform sowie die relevanten Grundlagen der digitalen Filterung und der verwendeten Entwicklungswerkzeuge vorgestellt. Darauf aufbauend erfolgt die Konzeption und Implementierung der digitalen Biquad-Filterstruktur mit anschließender Integration in die PYNQ-Umgebung. Abschließend wird die entwickelte Lösung hinsichtlich ihrer Eigenschaften und praktischen Anwendbarkeit evaluiert und mit einer alternativen Implementierungsvariante verglichen.<br>
+
+Diese Bachelorarbeit dokumentiert den Entwicklungs- und Implementierungsprozess, der im zugehörigen GitHub-Repository festgehalten wurde. Sowohl das Repository als auch Teile dieser Arbeit sind im Rahmen einer Zusammenarbeit mit einer parallel durchgeführten Bachelorarbeit entstanden, die eine vergleichbare Fragestellung behandelt. Da beide Arbeiten auf denselben theoretischen Grundlagen basieren, wurden diese gemeinsam erarbeitet. Auch der Vergleich der unterschiedlichen Implementierungsmethoden erfolgte in enger Abstimmung und wurde kollaborativ ausgearbeitet.<br>
 
 
 <!--
