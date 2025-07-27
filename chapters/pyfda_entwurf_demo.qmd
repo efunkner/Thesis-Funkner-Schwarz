@@ -40,4 +40,6 @@ sos = ellip(N = 6, rp = 0.5, rs = 90,
 Die resultierende SOS-Matrix kann entweder an die `filter_wav_casceded.ino` oder `filter_microphone_cascaded.ino` übergeben werden.
 
 Zur Visualisierung der Frequenzgänge einer WAV-Datei und eines I2S-Streams können die zugehörigen Notebooks aus `filter_demonstration/visual/` genutzt werden, um die Auswirkung der Filter auf das Frequenzspektrum zu betrachten.
-![Pyfda: Analyseplots](images/plot_realtime.png)
+![Ungefiltert und Gefilterte Visualisierung](images/plot_wav.png)
+![Echtzeit-Visualisierung](images/plot_realtime.png)
+
