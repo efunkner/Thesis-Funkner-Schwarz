@@ -10,15 +10,3 @@ Stattdessen wurde eine alternative Lösung zur Verarbeitung zuvor aufgezeichnete
 Trotz einzelner technischer Herausforderungen konnte somit ein funktionales Gesamtsystem realisiert werden, das sich hervorragend für Demonstrations- und Lehrzwecke eignet.<br>
 
 Für eine zukünftige Weiterentwicklung des Projekts bietet sich die Möglichkeit, an den etablierten Filterdesigns anzuknüpfen und diese funktional zu erweitern. Ein vielversprechender Ansatz wäre die Ergänzung eines Filters um eine AXI4-Lite-Schnittstelle, über die sich Register zur dynamischen Übergabe von Filterkoeffizienten ansteuern lassen. In Kombination mit einer funktionierenden Echtzeitfilterung könnte so ein anpassbarer Echtzeitfilter realisiert werden, dessen Charakteristik sich während des Betriebs flexibel verändern lässt. Dies würde das System nicht nur deutlich vielseitiger machen, sondern auch neue Einsatzmöglichkeiten in interaktiven oder adaptiven Audioszenarien erschließen.<br>
-
-<!--
-Die Umsetzung digitaler Filter auf FPGA-Hardware ist komplex und erfordert typischerweise fundierte Kenntnisse in VHDL sowie tiefes Verständnis der Zielarchitektur. Der modellbasierte Workflow mit MATLAB/Simulink und dem HDL Coder reduziert diesen Aufwand, indem er aus einem Simulink-Modell automatisch synthesefähigen VHDL-Code erzeugt. Dadurch werden typische Fehlerquellen frühzeitig erkannt und behoben.<br>
-Besonders vorteilhaft ist die strukturierte Führung durch den HDL Workflow Advisor, der den Code an die Zielplattform anpasst. Anforderungen wie AXI4-Stream-Kompatibilität und Taktmanagement werden automatisiert berücksichtigt. Auf dieser Basis konnten alle vier IIR-Filter als parametrisierte Simulink-Modelle entworfen und als IP-Cores generiert werden.<br>
-
-Die Integration in Vivado erfolgte über den Block Design Editor, der durch seine grafische Oberfläche eine intuitive Verbindung der Module ermöglichte. Besonders in der iterativen Entwicklungsphase erwies sich dieser modulare Aufbau als äußerst praktikabel.<br>
-Ein geplanter Echtzeitbetrieb über die I²S-Schnittstelle des ADAU1761 scheiterte jedoch an Kompatibilitätsproblemen zwischen den automatisch generierten Filter-IP-Cores und den vorhandenen I²S-Komponenten. Die genaue Ursache konnte aufgrund der abstrahierten Struktur der HDL-Coder-Ausgabe nicht eindeutig identifiziert werden.<br>
-
-Stattdessen wurde eine alternative Lösung zur Verarbeitung zuvor aufgezeichneter Audiodaten realisiert. Diese konnte erfolgreich im eigens entwickelten Jupyter-Notebook auf dem PYNQ-Z2 umgesetzt werden. Die Nutzeroberfläche erlaubt eine einfache Anwendung der digitalen Filter auf gespeicherte Signale, sowohl aus digitalen als auch aus analogen Quellen.
-
-Trotz einzelner technischer Herausforderungen konnte somit ein funktionstüchtiges Gesamtsystem realisiert werden, das sich für Demonstrations- und Lehrzwecke eignet.<br>
--->

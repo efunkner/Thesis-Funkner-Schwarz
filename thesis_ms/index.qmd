@@ -24,6 +24,8 @@ right: |
 
 <!--{{< include ../chapters/einleitung.qmd >}}-->
 
+{{< include ../chapters/abstract_ms.qmd >}}
+
 {{< include ../chapters/motivation_ms.qmd >}}
 
 {{< include ../chapters/Pynq_hardware.qmd >}}
