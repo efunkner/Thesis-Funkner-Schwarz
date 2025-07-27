@@ -1,0 +1,28 @@
+# Pyfda - Pythonfilterdesigntool
+
+Pyfda dient als eine python basierte graphische Oberfläche zum Entwerfen und Analysieren von digitalen Filtern. Das Tool setzt sich zusammen aus den (Py)Qt5, numpy, scipy sowie matplotlib Bibliotheken und bildet damit einen graphischen Filterdesigner, ähnlich dem Filterdesigntool in Matlab.
+
+Zur Verwendung von diesem Tool müssen die oben genannten Bibliotheken vorinstalliert sein. Das Tool wird durch den folgenden Befehl installiert:
+
+```cmd
+> pip install pyfda
+```
+Das Tool wird mit folgendem Befehl gestartet:
+
+```cmd
+> pyfdax
+```
+
+## Filterentwurf mit Echtzeit-Implementierung
+
+![Filter-Parameter](images/pyfda_info.png)
+
+| **Specs** | **b, a** | **P/Z** | **Info** | **Fixpoint** |
+|-------------------|------------------|------------------|----------------------|--------------------------|
+| Spezifikation von Typ, Ordnung, Frequenzgrenzen und Dämpfungen. | Anzeige der berechneten `b`- und `a`-Koeffizienten (z. B. für IIR-Filter). | Darstellung der Pole und Nullstellen (z. B. in kartesischer Form). | Frequenzanalyse, Vergleich von Soll/Ist, sowie Beschreibung des Filtertyps (z. B. Elliptic). | Einstellung der Festkomma-Quantisierung und Auswahl der Struktur (z. B. Direct-Form 1). |
+
+![Filterplots](images/pyfda_plots.png)
+
+| **Magnitude Response**                  | **Phase Response**                     | **Group Delay**                        | **Pole-Zero Plot**                     |
+|----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
+| Zeigt den Betrag der Übertragungsfunktion \( |H(f)| \) in dB. Bewertet die Verstärkung oder Dämpfung im Frequenzbereich (z. B. -3 dB Punkt, Stopband-Abfall). | Zeigt die Phase von \( H(f) \) über der Frequenz. Wichtig zur Beurteilung von Phasenverzerrungen und Signalverzögerung. | Zeigt die Gruppennachlaufzeit \( \tau_g \), also wie stark das Signal je nach Frequenz verzögert wird – kritisch bei Sprache und Audio. | Zeigt die Pole (×) und Nullstellen (○) in der z-Ebene. Dient der Stabilitätsanalyse und zeigt Frequenzselektivität (Pol-/Nullstellenlage). |
