@@ -99,14 +99,24 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
 https://efunkner.github.io/Thesis-Funkner-Schwarz/grundlagen/
 
 # Hardware
+## PYNQ-Z2
+Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf FPGAs ist das PYNQ-Z2-Board. Das PYNQ-Z2 ist ein FPGA-Entwicklungsboard mit einem Zynq-7000 SoC, das einen ARM Cortex-A9 Dual-Core-Prozessor mit bis zu 650 MHz Taktfrequenz sowie ein Artix-7-basiertes FPGA kombiniert. Es verfügt über 512 MB DDR3-RAM, 128 Mbit SPI-Flash und einen microSD-Karten-Slot. Das Board ist für die Nutzung der PYNQ-Plattform optimiert, bei der die FPGA-Logik über Python in Jupyter Notebooks angesteuert wird.<br>
+Zur Audiowiedergabe und -aufnahme ist ein ADAU1761 Audio-Codec integriert, der über I2S an die programmierbare Logik angebunden ist. Analoge Ein- und Ausgänge sind über eine TRRS-Klinkenbuchse sowie separate Line-In/Line-Out-Anschlüsse verfügbar. Der Codec ermöglicht Echtzeitverarbeitung von Audiosignalen mit 24 Bit Auflösung und Abtastraten bis zu 96 kHz. Die Kommunikation mit dem Board erfolgt über Gigabit-Ethernet, wodurch browserbasierte Steuerung und Debugging möglich sind.<br>
+Diese Konfiguration erlaubt die prototypische Entwicklung und Demonstration digitaler Filter in Echtzeit sowie die Steuerung komplexer FPGA-Funktionen ohne tiefgreifende VHDL-Kenntnisse.<br>
+
 ## ESP Lyrat V4.3
 Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das LyraT V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Frequenz takten und einem 520 KB internem RAM. Dieses Board verfügt über den ES8333 Audiocodec. Über diesen Codec werden Hardware-Ausstattung wie ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte angesprochen. Über einen MicroSD-Kartenslot können WAV-Dateien als Audioquellen eingebunden werden. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien. 
 
 # Software
+## Implementierung auf dem FPGA
+Vivado 2021.1 mit dem PYNQ-Z2 Image (PYNQ 3.0)
 
 ## Implementierung Microcontroller
 Arduino mit der Arduino IDE
 Micropython mit der ThonnyIDE
+
+## Entwurf Matlab
+Matlab R2024b mit DSP HDL Toolbox, DSP System Toolbox, Filter Design HDL Coder, Fixed-Point Designer, HDL Coder, MATLAB Coder, Signal Processing Toolbox, Simulink
 
 ## Entwurf Python
 Scipy, Numpy, Matlibplot
