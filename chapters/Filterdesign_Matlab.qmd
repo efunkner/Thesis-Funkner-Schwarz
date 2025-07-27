@@ -27,7 +27,9 @@ Bei der genauen Spezifikation der Filter wurde sich an dem Beispiel von [Design 
 
 Alle Filter wurden mit dem [Filter Designer](https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html) auf einer Samplefrequenz von 48kHz entworfen und die Koeffizienten als SOS-Matrix inklusive Gain in das Workspace exportiert.
 
-::: {#fig-elephants layout-ncol=2}
+![Digitaler Butterworth Filter: Amplitudengänge](images/Amplitudengänge_Filter.png)
+
+<!--::: {#fig-elephants layout-ncol=2}
 
 ![Digitaler Butterworth-Hochpassfilter 2. Ordnung](images/Butter_HP.png)
 
@@ -41,4 +43,4 @@ Alle Filter wurden mit dem [Filter Designer](https://de.mathworks.com/help/signa
 
 ![Digitaler Butterworth-Bandstopfilter 2. Ordnung](images/Butter_BS.png)
 
-:::
+:::-->
