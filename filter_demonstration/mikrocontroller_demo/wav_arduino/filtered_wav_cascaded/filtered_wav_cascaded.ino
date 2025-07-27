@@ -168,57 +168,45 @@ File wavFile;       // Originale Eingangsdatei
 File filteredFile;  // Gefiltere Ausgangsdatei
 
 // ===================================================================================================================================================================================================
-#define NUM_STAGES 3 // Anzahl der Filterstufen
-// --- Filter-Koeffizienten und Gain ---
-const float b_0_s1 = 1.0f;
-const float b_1_s1 = 0.0f;
-const float b_2_s1 = 0.0f;
-const float a_0_s1 = 1.0f;
-const float a_1_s1 = 0.0f;
-const float a_2_s1 = 0.0f;
+#define NUM_STAGES 6 // Anzahl der Filterstufen
 
-const float gain_s1 = 1.0;
+const float b_1[] = {1.85527026e-04f,  2.03192612e-04f,  1.85527026e-04f};
+const float a_1[] = {1.00000000e+00f, -1.77287871e+00f,  8.22082390e-01f};
 
-const float b_coefficients_s1[] = { b_0_s1, b_1_s1, b_2_s1};
-const float a_coefficients_s1[] = { a_0_s1, a_1_s1, a_2_s1};
+const float b_2[] = {1.0f, -0.68433476f, 1.0f};
+const float a_2[] = {1.0f, -1.70905443f, 0.85420576f};
 
-// --- Filter-Koeffizienten und Gain ---
-const float b_0_s2 = 1.0f;
-const float b_1_s2 = 0.0f;
-const float b_2_s2 = 0.0f;
-const float a_0_s2 = 1.0f;
-const float a_1_s2 = 0.0f;
-const float a_2_s2 = 0.0f;
+const float b_3[] = {1.0f, -1.12512053, 1.0f};
+const float a_3[] = {1.0f, -1.91873873, 0.92657353f};
 
-const float gain_s2 = 1.0;
+const float b_4[] = {1.0f, -1.99996739f, 1.0f};
+const float a_4[] = {1.0f, -1.71963475f, 0.94728857f};
 
-const float b_coefficients_s2[] = { b_0_s2, b_1_s2, b_2_s2};
-const float a_coefficients_s2[] = { a_0_s2, a_1_s2, a_2_s2};
+const float b_5[] = {1.0f, -1.99977242f, 1.0f};
+const float a_5[] = {1.0f, -1.97631241f, 0.97902016f};
 
-// --- Filter-Koeffizienten und Gain ---
-const float b_0_s3 = 1.0f;
-const float b_1_s3 = 0.0f;
-const float b_2_s3 = 0.0f;
-const float a_0_s3 = 1.0f;
-const float a_1_s3 = 0.0f;
-const float a_2_s3 = 0.0f;
+const float b_6[] = {1.0f, -1.99960159f, 1.0f};
+const float a_6[] = {1.0f, -1.99333165f, 0.99512321f};
 
-const float gain_s3 = 1.0;
-
-const float b_coefficients_s3[] = { b_0_s3, b_1_s3, b_2_s3};
-const float a_coefficients_s3[] = { a_0_s3, a_1_s3, a_2_s3};
+const float gain = 1.0;
 
 // Filter-Sektionen für linken und rechten Kanal 
 BiquadFilterTDF2 filterL[NUM_STAGES] = {
-  BiquadFilterTDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
-  BiquadFilterTDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
-  BiquadFilterTDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
+  BiquadFilterTDF2(b_1, a_1, gain),
+  BiquadFilterTDF2(b_2, a_2, gain),
+  BiquadFilterTDF2(b_3, a_3, gain),
+  BiquadFilterTDF2(b_4, a_4, gain),
+  BiquadFilterTDF2(b_5, a_5, gain),
+  BiquadFilterTDF2(b_6, a_6, gain)
 };
 
 BiquadFilterTDF2 filterR[NUM_STAGES] = {
-  BiquadFilterTDF2(b_coefficients_s1, a_coefficients_s1, gain_s1),
-  BiquadFilterTDF2(b_coefficients_s2, a_coefficients_s2, gain_s2),
-  BiquadFilterTDF2(b_coefficients_s3, a_coefficients_s3, gain_s3),
+  BiquadFilterTDF2(b_1, a_1, gain),
+  BiquadFilterTDF2(b_2, a_2, gain),
+  BiquadFilterTDF2(b_3, a_3, gain),
+  BiquadFilterTDF2(b_4, a_4, gain),
+  BiquadFilterTDF2(b_5, a_5, gain),
+  BiquadFilterTDF2(b_6, a_6, gain)
 };
 // ===================================================================================================================================================================================================
 
@@ -247,7 +235,7 @@ void setup() {
   delay(1000);
 
   // Eingangs WAV Datei öffnen
-  wavFile = SD_MMC.open("/TF2_theme.wav", FILE_READ);
+  wavFile = SD_MMC.open("/input.wav", FILE_READ);
   if (!wavFile) {
     Serial.println("Fehler beim Öffnen der WAV-Datei.");
     return;
@@ -343,7 +331,7 @@ bool readWavHeader() {
   }
 // ===================================================================================================================================================================================================
   // Ausgabedatei erstellen und Header schreiben
-  filteredFile = SD_MMC.open("/BANDPASS_300_3500_4Ord.wav", FILE_WRITE);
+  filteredFile = SD_MMC.open("/filtered.wav", FILE_WRITE);
   if (!filteredFile) {
     Serial.println("Fehler beim Öffnen der Ausgabedatei.");
     return false;

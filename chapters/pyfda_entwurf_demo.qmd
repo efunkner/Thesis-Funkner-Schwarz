@@ -13,16 +13,30 @@ Das Tool wird mit folgendem Befehl gestartet:
 > pyfdax
 ```
 
-## Filterentwurf mit Echtzeit-Implementierung
+## Filterentwurf und Implementierung
 
-![Filter-Parameter](images/pyfda_specs.png)
+Zur Demonstration wurde eine Bandpassfilter 6. Ordnung mit einem Passband von 300Hz - 3400Hz entworfen. Der Filter wurde anhand des Elliptischen-Prototyp entworfen, um steile Übergägnge zu Erzielen. Dazu werden auf `rp = 0.5` und `rs = 90` gesetzt.
+
+![Pyfda: Entwurfsparameter](images/pyfda_specs.png)
 
 | **Specs** | **b, a** | **P/Z** | **Info** | **Fixpoint** |
 |-------------------|------------------|------------------|----------------------|--------------------------|
-| Spezifikation von Typ, Ordnung, Frequenzgrenzen und Dämpfungen. | Anzeige der berechneten `b`- und `a`-Koeffizienten (z. B. für IIR-Filter). | Darstellung der Pole und Nullstellen (z. B. in kartesischer Form). | Frequenzanalyse, Vergleich von Soll/Ist, sowie Beschreibung des Filtertyps (z. B. Elliptic). | Einstellung der Festkomma-Quantisierung und Auswahl der Struktur (z. B. Direct-Form 1). |
+| Spezifikation der Filterparamtern und des Entwurfsverfahrens. | Ausgabe der `b`- und `a`-Koeffizienten. | Ausgabe der Pole und Nullstellen. | Frequenzanalyse, Parameterauflistung sowie Beschreibung des Filtertyps. | Konvertierung zur Festkomma-Quantisierung für die Direktform 1. |
 
-![Filterplots](images/pyfda_plots.png)
+![Pyfda: Analyseplots](images/pyfda_plots.png)
 
 | **Magnitude Response**                  | **Phase Response**                     | **Group Delay**                        | **Pole-Zero Plot**                     |
 |----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
-| Zeigt den Betrag der Übertragungsfunktion \( |H(f)| \) in dB. Bewertet die Verstärkung oder Dämpfung im Frequenzbereich (z. B. -3 dB Punkt, Stopband-Abfall). | Zeigt die Phase von \( H(f) \) über der Frequenz. Wichtig zur Beurteilung von Phasenverzerrungen und Signalverzögerung. | Zeigt die Gruppennachlaufzeit \( \tau_g \), also wie stark das Signal je nach Frequenz verzögert wird – kritisch bei Sprache und Audio. | Zeigt die Pole (×) und Nullstellen (○) in der z-Ebene. Dient der Stabilitätsanalyse und zeigt Frequenzselektivität (Pol-/Nullstellenlage). |
+| Zeigt den Betrag der Übertragungsfunktion $|H(f)|$  in dB. | Zeigt die Phase von $H(f)$ über der Frequenz. | Zeigt die Gruppennachlaufzeit $\tau_g$ an. | Zeigt die Pole (×) und Nullstellen (○) in der z-Ebene. |
+
+Pyfda dient dem Entwurf, sowie der Analyse des IIR-Filters, jedoch können vom entworfenen Filter nur die `b`- und `a`- Koeffizienten sowie die Pole und Nullstellen exportiert werden. Zur Implementierung auf dem Mikrocontroller wird eine SOS-Matrix benötigt, welche stattdessen mit durch:
+
+```python
+sos = ellip(N = 6, rp = 0.5, rs = 90, 
+            Wn = [300/(44100/2], 3400/(44100/2)]
+            btype = 'bandpass', analog = False,
+            output = 'sos')
+```
+Die resultierende SOS-Matrix kann entweder an die `filter_wav_casceded.ino` oder `filter_microphone_cascaded.ino` übergeben werden.
+
+Mit den Notebooks: 
