@@ -21,13 +21,13 @@ left: |
 right: |
     This report was built with <a href="https://quarto.org/">Quarto<a>.
 ---
-<!--
+
 {{< include ../chapters/einleitung.qmd >}}
 
 {{< include ../chapters/grundlagen.qmd >}}
 
 {{< include ../chapters/bilinear.qmd >}}
--->
+
 {{< include ../chapters/Filterdesign_Matlab.qmd >}}
 
 {{< include ../chapters/Pynq_hardware.qmd >}}
