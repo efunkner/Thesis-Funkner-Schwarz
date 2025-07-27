@@ -42,3 +42,6 @@ right: |
 
 {{< include ../chapters/filter_python.qmd >}}
 
+{{< include ../chapters/pyfda_entwurf_demo.qmd >}}
+
+
