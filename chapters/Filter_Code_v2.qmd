@@ -32,7 +32,7 @@ Für einen Filter zweiter Ordnung wird diese Sektion nur einmal aufgerufen, bei 
 Die Ausgabe wird konditional gesteuert. Wenn das Valid-Signal gültig ist, wird das gefilterte Ergebnis an *dataOut* ausgegeben. Ein synchronisiertes Valid-Signal (*validOut*) zeigt an, wann die Daten gültig sind.<br>
 
 ### Filter-Sektion
-Die Filter-Sektion bildet die eigentliche Biquad-Filterstruktur und enthält die entsprechenden Koeffizienten. Die Biquad-Sektion ist in transponierter Direct Form II umgesetzt und übernimmt die arithmetischen Berechnungen des IIR-Filters. Sie erhält ein Eingangssample (*dataIn*) mit zugehörigem Gültigkeitssignal (*validIn*) und liefert das gefilterte Sample samt gültigem Ausgangssignal zurück.<br>
+Die Filter-Sektion bildet die eigentliche Biquad-Filterstruktur und enthält die entsprechenden Koeffizienten. Die Biquad-Sektion ist in transponierter Direct Form II umgesetzt. Sie erhält ein Eingangssample (*dataIn*) mit zugehörigem Gültigkeitssignal (*validIn*) und liefert das gefilterte Sample samt gültigem Ausgangssignal zurück.<br>
 
 Zunächst wird das Eingangssignal gepuffert. Anschließend wird es in drei Numerator-Zweigen parallel mit festen Koeffizienten multipliziert. Jeder Pfad besteht aus einem Vor-Register, dem Multiplizierer und einem Nach-Register. Die Denominator-Seite arbeitet mit zwei internen Zuständen (*state1* und *state2*), die über Multiplikationen und Addierer-Ketten rekursiv zurückgeführt werden. Diese Rückkopplung bildet den IIR-Charakter der Filterung.<br>
 
