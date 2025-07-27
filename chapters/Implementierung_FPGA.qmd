@@ -48,13 +48,15 @@ Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem M
 
 Der Filter ist in ein separates Subsystem eingebettet, um die eigentliche Filterlogik klar von zusätzlichen Test- und Steuerungselementen zu trennen. Um den Datentyp durchgängig korrekt zu setzen, wird ein Data Type Conversion-Block vor dem Filter-Subsystem eingefügt. Der Filter selbst ist so eingestellt, dass die Koeffizienten den Datentyp des Eingangssignals übernehmen. Die genauen Einstellungen sehen wie Folgt aus:<br>
 
-::: {#fig-elephants layout-ncol=2}
+![Biquad Filter: Settings](images/Biquad_settings1_2.png)
+
+<!--::: {#fig-elephants layout-ncol=2}
 
 ![Biquad Filter: Main](images/Biquad_settings1.png)
 
 ![Biquad Filter: Datatypes](images/Biquad_settings2.png)
 
-:::
+:::-->
 
 Ergänzend enthält das Modell Komponenten zur Test- und Signalanalyse. Dazu gehören Elemente, die Testsignale aus dem Workspace einlesen, ein gültiges AXI-Stream Valid-Signal zur Simulation erzeugen, sowie Blöcke zum Zurückschreiben der Ergebnisse ins MATLAB-Workspace. <br>
 
@@ -158,13 +160,15 @@ Damit der PS die korrekten Takt- und Schnittstellensignale erzeugt, muss er im V
 #### PS-PL Cinfiguration
 Um Daten über die AXI-DMA-Schnittstellen an die Filter übergeben zu können, werden zusätzliche Anschlüsse am Processing System (PS) benötigt. Der PS besitzt intern zwei physische Zugänge zum DRAM, wobei sich jeweils zwei Ports (HP0/1 und HP2/3) einen gemeinsamen Zugriff teilen. Für dieses Design werden lediglich zwei High-Performance-Ports benötigt, weshalb HP0 und HP2 aktiviert werden. Die Datenbreite (Data Width) kann auf dem Standardwert von 64 Bit belassen werden.<br>
 
-::: {#fig-elephants layout-ncol=2}
+![Vivado:PS Settings](images/Vivado_PS_Settings_all.png)
+
+<!--::: {#fig-elephants layout-ncol=2}
 
 ![Vivado:PS Settings/ PS-PL-Configuration](images/Vivado_PS_Settings_PS_PL_Config.png)
 
 ![Vivado:PS Settings/ Clock Configuration](images/Biquad_settings2.png)
 
-:::
+:::-->
 
 #### Clock Configuration
 Alle benötigten Takt-Signale werden direkt im Processing System (PS) generiert und den jeweiligen Komponenten zugewiesen. Der Audio-Codec benötigt ein 10 MHz Taktsignal, während der Audio Codec Controller ein 100 MHz Taktsignal erfordert. Andere Frequenzen werden von dieser IP nicht unterstützt, was in Vivado durch eine entsprechende Warnung angezeigt wird. Die Filter-IP-Cores wurden auf 50 MHz ausgelegt und benötigen daher ebenfalls ein passendes 50 MHz-Taktsignal. <br>
