@@ -5,10 +5,10 @@ Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocont
 ![ESP Lyrat V4.3](images/lyrat.png)
 
 ## Arduino Implementierung
-Das Arduino-Framework basiert auf C/C++ und bietet durch spezialisierte Audio-Bibliotheken wie die arduino-audio-tools sowie die arduino audio-driver von Phil Schatzmann eine Basis für die Echtzeitaudioverarbeitung. Bei der Implementierung werden die Programme mittels der Arduino IDE verfasst, kompiliert und auf den ESP32 geflasht.
+Das Arduino-Framework basiert auf C/C++ und bietet durch spezialisierte Audio-Bibliotheken wie die arduino-audio-tools sowie die arduino-audio-driver von Phil Schatzmann eine Basis für die Echtzeitaudioverarbeitung. Bei der Implementierung werden die Programme mittels der Arduino IDE verfasst, kompiliert und auf den ESP32 geflasht.
 
 ## Micropython Implementierung
 MicroPython verwendet eine interpretierte Python-Syntax, die eine schnellere Entwicklung und vereinfachtes Debugging ermöglicht, jedoch aufgrund geringerer Ausführungsgeschwindigkeit primär für Prototyping geeignet ist und für keine hohen Verarbeitungsprozesse geeignet ist. Für die Implementierung in Micropython wird die ThonnyIDE mit dem Micropython Interpreter genutzt und der ESP32 wird mit einer Kompaktiblen Firmware geflasht.
 
-## Vorgehen der Implementierung
+## Vorgehen bei der Implementierung
 Für die Implementierung von digitalen Filtern auf Mikrocontrollern werde anhand der theoretischen Grundlagen die Strukturen durch ihre korrespondierenden Differenzengleichungen in Software umgesetzt. Diese Umsetzungen werden als Basis für weitere Verarbeitung von WAV-Datei genutzt. Im Folgenden werden die Strukturen in Arduino realisiert.
