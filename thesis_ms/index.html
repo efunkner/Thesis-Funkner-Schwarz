@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aa27ae11dea8877a25ff3b3c04538b15.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -200,7 +200,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Unsyllabus</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Motivation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -273,94 +273,64 @@ window.Quarto = {
   <li><a href="#adau1761-audio-codec" id="toc-adau1761-audio-codec" class="nav-link" data-scroll-target="#adau1761-audio-codec"><span class="header-section-number">8.2</span> ADAU1761 Audio-Codec</a></li>
   <li><a href="#verwendete-entwicklungswerkzeuge" id="toc-verwendete-entwicklungswerkzeuge" class="nav-link" data-scroll-target="#verwendete-entwicklungswerkzeuge"><span class="header-section-number">8.3</span> Verwendete Entwicklungswerkzeuge</a></li>
   </ul></li>
-  <li><a href="#theoretische-grundlagen" id="toc-theoretische-grundlagen" class="nav-link" data-scroll-target="#theoretische-grundlagen"><span class="header-section-number">9</span> Theoretische Grundlagen</a>
+  <li><a href="#filterentwurf-in-matlab" id="toc-filterentwurf-in-matlab" class="nav-link" data-scroll-target="#filterentwurf-in-matlab"><span class="header-section-number">9</span> Filterentwurf in Matlab</a>
   <ul class="collapse">
-  <li><a href="#infinite-impulse-response-iir-filter" id="toc-infinite-impulse-response-iir-filter" class="nav-link" data-scroll-target="#infinite-impulse-response-iir-filter"><span class="header-section-number">9.1</span> Infinite Impulse Response (IIR-Filter)</a></li>
-  <li><a href="#differenzengleichung-eines-iir-filters-zweiter-ordnung" id="toc-differenzengleichung-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">9.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</a></li>
-  <li><a href="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung" id="toc-übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">9.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</a></li>
-  <li><a href="#stabilität-und-pol-nullstellen-verteilung" id="toc-stabilität-und-pol-nullstellen-verteilung" class="nav-link" data-scroll-target="#stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">9.4</span> Stabilität und Pol-Nullstellen-Verteilung</a></li>
-  <li><a href="#frequenzgang-und-phasenverhalten" id="toc-frequenzgang-und-phasenverhalten" class="nav-link" data-scroll-target="#frequenzgang-und-phasenverhalten"><span class="header-section-number">9.5</span> Frequenzgang und Phasenverhalten</a></li>
+  <li><a href="#spezifikation-der-filter" id="toc-spezifikation-der-filter" class="nav-link" data-scroll-target="#spezifikation-der-filter"><span class="header-section-number">9.1</span> Spezifikation der Filter</a></li>
   </ul></li>
-  <li><a href="#implementierungsstrukturen-biquadratischer-filter" id="toc-implementierungsstrukturen-biquadratischer-filter" class="nav-link" data-scroll-target="#implementierungsstrukturen-biquadratischer-filter"><span class="header-section-number">10</span> Implementierungsstrukturen biquadratischer Filter</a>
+  <li><a href="#implementierung" id="toc-implementierung" class="nav-link" data-scroll-target="#implementierung"><span class="header-section-number">10</span> Implementierung</a>
   <ul class="collapse">
-  <li><a href="#direktform-1" id="toc-direktform-1" class="nav-link" data-scroll-target="#direktform-1"><span class="header-section-number">10.1</span> Direktform 1</a></li>
-  <li><a href="#direktform-2-kanonische-form" id="toc-direktform-2-kanonische-form" class="nav-link" data-scroll-target="#direktform-2-kanonische-form"><span class="header-section-number">10.2</span> Direktform 2 (Kanonische Form)</a></li>
-  <li><a href="#transponierte-direktform-2" id="toc-transponierte-direktform-2" class="nav-link" data-scroll-target="#transponierte-direktform-2"><span class="header-section-number">10.3</span> Transponierte Direktform 2</a></li>
+  <li><a href="#modellierung-in-simulink" id="toc-modellierung-in-simulink" class="nav-link" data-scroll-target="#modellierung-in-simulink"><span class="header-section-number">10.1</span> Modellierung in Simulink</a>
+  <ul class="collapse">
+  <li><a href="#direct-form-ii-transponiert-mit-pipelining" id="toc-direct-form-ii-transponiert-mit-pipelining" class="nav-link" data-scroll-target="#direct-form-ii-transponiert-mit-pipelining"><span class="header-section-number">10.1.1</span> Direct Form II Transponiert mit Pipelining</a></li>
+  <li><a href="#festkommaarithmetik" id="toc-festkommaarithmetik" class="nav-link" data-scroll-target="#festkommaarithmetik"><span class="header-section-number">10.1.2</span> Festkommaarithmetik</a></li>
+  <li><a href="#axi4-stream-schnittstelle" id="toc-axi4-stream-schnittstelle" class="nav-link" data-scroll-target="#axi4-stream-schnittstelle"><span class="header-section-number">10.1.3</span> AXI4-Stream-Schnittstelle</a></li>
+  <li><a href="#modell-und-aufbau" id="toc-modell-und-aufbau" class="nav-link" data-scroll-target="#modell-und-aufbau"><span class="header-section-number">10.1.4</span> Modell und Aufbau</a></li>
   </ul></li>
-  <li><a href="#numerische-aspekte-und-quantisierungseffekte" id="toc-numerische-aspekte-und-quantisierungseffekte" class="nav-link" data-scroll-target="#numerische-aspekte-und-quantisierungseffekte"><span class="header-section-number">11</span> Numerische Aspekte und Quantisierungseffekte</a>
+  <li><a href="#hdl-coder-und-workflow-advisor" id="toc-hdl-coder-und-workflow-advisor" class="nav-link" data-scroll-target="#hdl-coder-und-workflow-advisor"><span class="header-section-number">10.2</span> HDL-Coder und Workflow Advisor</a>
   <ul class="collapse">
-  <li><a href="#koeffizientenquantisierung" id="toc-koeffizientenquantisierung" class="nav-link" data-scroll-target="#koeffizientenquantisierung"><span class="header-section-number">11.1</span> Koeffizientenquantisierung</a></li>
-  <li><a href="#quantisierungsrauschen-rundungsrauschen" id="toc-quantisierungsrauschen-rundungsrauschen" class="nav-link" data-scroll-target="#quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">11.2</span> Quantisierungsrauschen (Rundungsrauschen)</a></li>
-  <li><a href="#limit-cycle-oszilationen" id="toc-limit-cycle-oszilationen" class="nav-link" data-scroll-target="#limit-cycle-oszilationen"><span class="header-section-number">11.3</span> Limit-Cycle-Oszilationen</a></li>
-  <li><a href="#kaskadierung" id="toc-kaskadierung" class="nav-link" data-scroll-target="#kaskadierung"><span class="header-section-number">11.4</span> Kaskadierung</a></li>
-  <li><a href="#strukturenvergleich" id="toc-strukturenvergleich" class="nav-link" data-scroll-target="#strukturenvergleich"><span class="header-section-number">11.5</span> Strukturenvergleich</a></li>
+  <li><a href="#modellvorbereitung-für-den-hdl-coder" id="toc-modellvorbereitung-für-den-hdl-coder" class="nav-link" data-scroll-target="#modellvorbereitung-für-den-hdl-coder"><span class="header-section-number">10.2.1</span> Modellvorbereitung für den HDL-Coder</a></li>
+  <li><a href="#einstellungen-vom-hdl-workflow-advisor" id="toc-einstellungen-vom-hdl-workflow-advisor" class="nav-link" data-scroll-target="#einstellungen-vom-hdl-workflow-advisor"><span class="header-section-number">10.2.2</span> Einstellungen vom HDL Workflow Advisor</a></li>
   </ul></li>
-  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation"><span class="header-section-number">12</span> Bilineartransformation</a>
+  <li><a href="#design-in-vivado" id="toc-design-in-vivado" class="nav-link" data-scroll-target="#design-in-vivado"><span class="header-section-number">10.3</span> Design in Vivado</a>
   <ul class="collapse">
-  <li><a href="#zentrale-substitutionen" id="toc-zentrale-substitutionen" class="nav-link" data-scroll-target="#zentrale-substitutionen"><span class="header-section-number">12.1</span> Zentrale Substitutionen</a></li>
-  <li><a href="#transformation-der-übergangsfunktion" id="toc-transformation-der-übergangsfunktion" class="nav-link" data-scroll-target="#transformation-der-übergangsfunktion"><span class="header-section-number">12.2</span> Transformation der Übergangsfunktion</a></li>
-  <li><a href="#transformation-von-polen-und-nullstellen" id="toc-transformation-von-polen-und-nullstellen" class="nav-link" data-scroll-target="#transformation-von-polen-und-nullstellen"><span class="header-section-number">12.3</span> Transformation von Polen und Nullstellen</a></li>
-  <li><a href="#frequenzverzerrung---frequency-warping" id="toc-frequenzverzerrung---frequency-warping" class="nav-link" data-scroll-target="#frequenzverzerrung---frequency-warping"><span class="header-section-number">12.4</span> Frequenzverzerrung - Frequency Warping:</a></li>
-  <li><a href="#prewarping" id="toc-prewarping" class="nav-link" data-scroll-target="#prewarping"><span class="header-section-number">12.5</span> Prewarping</a></li>
-  </ul></li>
-  <li><a href="#filterentwurf-in-matlab" id="toc-filterentwurf-in-matlab" class="nav-link" data-scroll-target="#filterentwurf-in-matlab"><span class="header-section-number">13</span> Filterentwurf in Matlab</a>
-  <ul class="collapse">
-  <li><a href="#spezifikation-der-filter" id="toc-spezifikation-der-filter" class="nav-link" data-scroll-target="#spezifikation-der-filter"><span class="header-section-number">13.1</span> Spezifikation der Filter</a></li>
-  </ul></li>
-  <li><a href="#implementierung" id="toc-implementierung" class="nav-link" data-scroll-target="#implementierung"><span class="header-section-number">14</span> Implementierung</a>
-  <ul class="collapse">
-  <li><a href="#modellierung-in-simulink" id="toc-modellierung-in-simulink" class="nav-link" data-scroll-target="#modellierung-in-simulink"><span class="header-section-number">14.1</span> Modellierung in Simulink</a>
-  <ul class="collapse">
-  <li><a href="#direct-form-ii-transponiert-mit-pipelining" id="toc-direct-form-ii-transponiert-mit-pipelining" class="nav-link" data-scroll-target="#direct-form-ii-transponiert-mit-pipelining"><span class="header-section-number">14.1.1</span> Direct Form II Transponiert mit Pipelining</a></li>
-  <li><a href="#festkommaarithmetik" id="toc-festkommaarithmetik" class="nav-link" data-scroll-target="#festkommaarithmetik"><span class="header-section-number">14.1.2</span> Festkommaarithmetik</a></li>
-  <li><a href="#axi4-stream-schnittstelle" id="toc-axi4-stream-schnittstelle" class="nav-link" data-scroll-target="#axi4-stream-schnittstelle"><span class="header-section-number">14.1.3</span> AXI4-Stream-Schnittstelle</a></li>
-  <li><a href="#modell-und-aufbau" id="toc-modell-und-aufbau" class="nav-link" data-scroll-target="#modell-und-aufbau"><span class="header-section-number">14.1.4</span> Modell und Aufbau</a></li>
-  </ul></li>
-  <li><a href="#hdl-coder-und-workflow-advisor" id="toc-hdl-coder-und-workflow-advisor" class="nav-link" data-scroll-target="#hdl-coder-und-workflow-advisor"><span class="header-section-number">14.2</span> HDL-Coder und Workflow Advisor</a>
-  <ul class="collapse">
-  <li><a href="#modellvorbereitung-für-den-hdl-coder" id="toc-modellvorbereitung-für-den-hdl-coder" class="nav-link" data-scroll-target="#modellvorbereitung-für-den-hdl-coder"><span class="header-section-number">14.2.1</span> Modellvorbereitung für den HDL-Coder</a></li>
-  <li><a href="#einstellungen-vom-hdl-workflow-advisor" id="toc-einstellungen-vom-hdl-workflow-advisor" class="nav-link" data-scroll-target="#einstellungen-vom-hdl-workflow-advisor"><span class="header-section-number">14.2.2</span> Einstellungen vom HDL Workflow Advisor</a></li>
-  </ul></li>
-  <li><a href="#design-in-vivado" id="toc-design-in-vivado" class="nav-link" data-scroll-target="#design-in-vivado"><span class="header-section-number">14.3</span> Design in Vivado</a>
-  <ul class="collapse">
-  <li><a href="#audio-codec-controller" id="toc-audio-codec-controller" class="nav-link" data-scroll-target="#audio-codec-controller"><span class="header-section-number">14.3.1</span> Audio Codec Controller</a></li>
-  <li><a href="#processing-system-ps" id="toc-processing-system-ps" class="nav-link" data-scroll-target="#processing-system-ps"><span class="header-section-number">14.3.2</span> Processing System (PS)</a></li>
-  <li><a href="#axi-direct-memory-access" id="toc-axi-direct-memory-access" class="nav-link" data-scroll-target="#axi-direct-memory-access"><span class="header-section-number">14.3.3</span> AXI Direct Memory Access</a></li>
-  <li><a href="#verbindungen-im-blockdesign" id="toc-verbindungen-im-blockdesign" class="nav-link" data-scroll-target="#verbindungen-im-blockdesign"><span class="header-section-number">14.3.4</span> Verbindungen im Blockdesign</a></li>
-  <li><a href="#vollendetes-design" id="toc-vollendetes-design" class="nav-link" data-scroll-target="#vollendetes-design"><span class="header-section-number">14.3.5</span> Vollendetes Design</a></li>
+  <li><a href="#audio-codec-controller" id="toc-audio-codec-controller" class="nav-link" data-scroll-target="#audio-codec-controller"><span class="header-section-number">10.3.1</span> Audio Codec Controller</a></li>
+  <li><a href="#processing-system-ps" id="toc-processing-system-ps" class="nav-link" data-scroll-target="#processing-system-ps"><span class="header-section-number">10.3.2</span> Processing System (PS)</a></li>
+  <li><a href="#axi-direct-memory-access" id="toc-axi-direct-memory-access" class="nav-link" data-scroll-target="#axi-direct-memory-access"><span class="header-section-number">10.3.3</span> AXI Direct Memory Access</a></li>
+  <li><a href="#verbindungen-im-blockdesign" id="toc-verbindungen-im-blockdesign" class="nav-link" data-scroll-target="#verbindungen-im-blockdesign"><span class="header-section-number">10.3.4</span> Verbindungen im Blockdesign</a></li>
+  <li><a href="#vollendetes-design" id="toc-vollendetes-design" class="nav-link" data-scroll-target="#vollendetes-design"><span class="header-section-number">10.3.5</span> Vollendetes Design</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#funktionsweise-des-generierten-filter-codes" id="toc-funktionsweise-des-generierten-filter-codes" class="nav-link" data-scroll-target="#funktionsweise-des-generierten-filter-codes"><span class="header-section-number">15</span> Funktionsweise des generierten Filter-Codes</a>
+  <li><a href="#funktionsweise-des-generierten-filter-codes" id="toc-funktionsweise-des-generierten-filter-codes" class="nav-link" data-scroll-target="#funktionsweise-des-generierten-filter-codes"><span class="header-section-number">11</span> Funktionsweise des generierten Filter-Codes</a>
   <ul class="collapse">
-  <li><a href="#struktur-des-generierten-codes" id="toc-struktur-des-generierten-codes" class="nav-link" data-scroll-target="#struktur-des-generierten-codes"><span class="header-section-number">15.1</span> Struktur des generierten Codes</a></li>
-  <li><a href="#umsetzung-des-filters" id="toc-umsetzung-des-filters" class="nav-link" data-scroll-target="#umsetzung-des-filters"><span class="header-section-number">15.2</span> Umsetzung des Filters</a>
+  <li><a href="#struktur-des-generierten-codes" id="toc-struktur-des-generierten-codes" class="nav-link" data-scroll-target="#struktur-des-generierten-codes"><span class="header-section-number">11.1</span> Struktur des generierten Codes</a></li>
+  <li><a href="#umsetzung-des-filters" id="toc-umsetzung-des-filters" class="nav-link" data-scroll-target="#umsetzung-des-filters"><span class="header-section-number">11.2</span> Umsetzung des Filters</a>
   <ul class="collapse">
-  <li><a href="#filter-dut" id="toc-filter-dut" class="nav-link" data-scroll-target="#filter-dut"><span class="header-section-number">15.2.1</span> Filter DUT</a></li>
-  <li><a href="#filter-wrapper" id="toc-filter-wrapper" class="nav-link" data-scroll-target="#filter-wrapper"><span class="header-section-number">15.2.2</span> Filter-Wrapper</a></li>
-  <li><a href="#die-filterlogik" id="toc-die-filterlogik" class="nav-link" data-scroll-target="#die-filterlogik"><span class="header-section-number">15.2.3</span> Die Filterlogik</a></li>
-  <li><a href="#filter-sektion" id="toc-filter-sektion" class="nav-link" data-scroll-target="#filter-sektion"><span class="header-section-number">15.2.4</span> Filter-Sektion</a></li>
+  <li><a href="#filter-dut" id="toc-filter-dut" class="nav-link" data-scroll-target="#filter-dut"><span class="header-section-number">11.2.1</span> Filter DUT</a></li>
+  <li><a href="#filter-wrapper" id="toc-filter-wrapper" class="nav-link" data-scroll-target="#filter-wrapper"><span class="header-section-number">11.2.2</span> Filter-Wrapper</a></li>
+  <li><a href="#die-filterlogik" id="toc-die-filterlogik" class="nav-link" data-scroll-target="#die-filterlogik"><span class="header-section-number">11.2.3</span> Die Filterlogik</a></li>
+  <li><a href="#filter-sektion" id="toc-filter-sektion" class="nav-link" data-scroll-target="#filter-sektion"><span class="header-section-number">11.2.4</span> Filter-Sektion</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#echtzeitfilterung" id="toc-echtzeitfilterung" class="nav-link" data-scroll-target="#echtzeitfilterung"><span class="header-section-number">16</span> Echtzeitfilterung</a>
+  <li><a href="#echtzeitfilterung" id="toc-echtzeitfilterung" class="nav-link" data-scroll-target="#echtzeitfilterung"><span class="header-section-number">12</span> Echtzeitfilterung</a>
   <ul class="collapse">
-  <li><a href="#funktionstest-filtereinbindung" id="toc-funktionstest-filtereinbindung" class="nav-link" data-scroll-target="#funktionstest-filtereinbindung"><span class="header-section-number">16.1</span> Funktionstest &amp; Filtereinbindung</a></li>
-  <li><a href="#ursache-und-bewertung" id="toc-ursache-und-bewertung" class="nav-link" data-scroll-target="#ursache-und-bewertung"><span class="header-section-number">16.2</span> Ursache und Bewertung</a></li>
-  <li><a href="#analoge-audioquellen" id="toc-analoge-audioquellen" class="nav-link" data-scroll-target="#analoge-audioquellen"><span class="header-section-number">16.3</span> Analoge Audioquellen</a></li>
+  <li><a href="#funktionstest-filtereinbindung" id="toc-funktionstest-filtereinbindung" class="nav-link" data-scroll-target="#funktionstest-filtereinbindung"><span class="header-section-number">12.1</span> Funktionstest &amp; Filtereinbindung</a></li>
+  <li><a href="#ursache-und-bewertung" id="toc-ursache-und-bewertung" class="nav-link" data-scroll-target="#ursache-und-bewertung"><span class="header-section-number">12.2</span> Ursache und Bewertung</a></li>
+  <li><a href="#analoge-audioquellen" id="toc-analoge-audioquellen" class="nav-link" data-scroll-target="#analoge-audioquellen"><span class="header-section-number">12.3</span> Analoge Audioquellen</a></li>
   </ul></li>
-  <li><a href="#aufbau-und-funktion-der-lehrdemonstration" id="toc-aufbau-und-funktion-der-lehrdemonstration" class="nav-link" data-scroll-target="#aufbau-und-funktion-der-lehrdemonstration"><span class="header-section-number">17</span> Aufbau und Funktion der Lehrdemonstration</a>
+  <li><a href="#aufbau-und-funktion-der-lehrdemonstration" id="toc-aufbau-und-funktion-der-lehrdemonstration" class="nav-link" data-scroll-target="#aufbau-und-funktion-der-lehrdemonstration"><span class="header-section-number">13</span> Aufbau und Funktion der Lehrdemonstration</a>
   <ul class="collapse">
-  <li><a href="#pynq-overlays" id="toc-pynq-overlays" class="nav-link" data-scroll-target="#pynq-overlays"><span class="header-section-number">17.1</span> Pynq Overlays</a></li>
-  <li><a href="#funktionsweise-des-notebooks" id="toc-funktionsweise-des-notebooks" class="nav-link" data-scroll-target="#funktionsweise-des-notebooks"><span class="header-section-number">17.2</span> Funktionsweise des Notebooks</a></li>
-  <li><a href="#initialisierung-des-dma-kanals" id="toc-initialisierung-des-dma-kanals" class="nav-link" data-scroll-target="#initialisierung-des-dma-kanals"><span class="header-section-number">17.3</span> Initialisierung des DMA-Kanals</a></li>
-  <li><a href="#dma-übertragung" id="toc-dma-übertragung" class="nav-link" data-scroll-target="#dma-übertragung"><span class="header-section-number">17.4</span> DMA Übertragung</a></li>
-  <li><a href="#öffnen-und-einlesen-von-wav-dateien" id="toc-öffnen-und-einlesen-von-wav-dateien" class="nav-link" data-scroll-target="#öffnen-und-einlesen-von-wav-dateien"><span class="header-section-number">17.5</span> Öffnen und Einlesen von Wav-Dateien</a></li>
-  <li><a href="#schreiben-und-speichern-von-wav-dateien" id="toc-schreiben-und-speichern-von-wav-dateien" class="nav-link" data-scroll-target="#schreiben-und-speichern-von-wav-dateien"><span class="header-section-number">17.6</span> Schreiben und Speichern von Wav-Dateien</a></li>
-  <li><a href="#paketaufteilung" id="toc-paketaufteilung" class="nav-link" data-scroll-target="#paketaufteilung"><span class="header-section-number">17.7</span> Paketaufteilung</a></li>
-  <li><a href="#vollständige-filter-anwendung" id="toc-vollständige-filter-anwendung" class="nav-link" data-scroll-target="#vollständige-filter-anwendung"><span class="header-section-number">17.8</span> vollständige Filter-Anwendung</a></li>
-  <li><a href="#kaskadierung-der-filter" id="toc-kaskadierung-der-filter" class="nav-link" data-scroll-target="#kaskadierung-der-filter"><span class="header-section-number">17.9</span> Kaskadierung der Filter</a></li>
+  <li><a href="#pynq-overlays" id="toc-pynq-overlays" class="nav-link" data-scroll-target="#pynq-overlays"><span class="header-section-number">13.1</span> Pynq Overlays</a></li>
+  <li><a href="#funktionsweise-des-notebooks" id="toc-funktionsweise-des-notebooks" class="nav-link" data-scroll-target="#funktionsweise-des-notebooks"><span class="header-section-number">13.2</span> Funktionsweise des Notebooks</a></li>
+  <li><a href="#initialisierung-des-dma-kanals" id="toc-initialisierung-des-dma-kanals" class="nav-link" data-scroll-target="#initialisierung-des-dma-kanals"><span class="header-section-number">13.3</span> Initialisierung des DMA-Kanals</a></li>
+  <li><a href="#dma-übertragung" id="toc-dma-übertragung" class="nav-link" data-scroll-target="#dma-übertragung"><span class="header-section-number">13.4</span> DMA Übertragung</a></li>
+  <li><a href="#öffnen-und-einlesen-von-wav-dateien" id="toc-öffnen-und-einlesen-von-wav-dateien" class="nav-link" data-scroll-target="#öffnen-und-einlesen-von-wav-dateien"><span class="header-section-number">13.5</span> Öffnen und Einlesen von Wav-Dateien</a></li>
+  <li><a href="#schreiben-und-speichern-von-wav-dateien" id="toc-schreiben-und-speichern-von-wav-dateien" class="nav-link" data-scroll-target="#schreiben-und-speichern-von-wav-dateien"><span class="header-section-number">13.6</span> Schreiben und Speichern von Wav-Dateien</a></li>
+  <li><a href="#paketaufteilung" id="toc-paketaufteilung" class="nav-link" data-scroll-target="#paketaufteilung"><span class="header-section-number">13.7</span> Paketaufteilung</a></li>
+  <li><a href="#vollständige-filter-anwendung" id="toc-vollständige-filter-anwendung" class="nav-link" data-scroll-target="#vollständige-filter-anwendung"><span class="header-section-number">13.8</span> vollständige Filter-Anwendung</a></li>
+  <li><a href="#kaskadierung-der-filter" id="toc-kaskadierung-der-filter" class="nav-link" data-scroll-target="#kaskadierung-der-filter"><span class="header-section-number">13.9</span> Kaskadierung der Filter</a></li>
   </ul></li>
-  <li><a href="#fazit-und-ausblick" id="toc-fazit-und-ausblick" class="nav-link" data-scroll-target="#fazit-und-ausblick"><span class="header-section-number">18</span> Fazit und Ausblick</a></li>
-  <li><a href="#gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter" id="toc-gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter" class="nav-link" data-scroll-target="#gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter"><span class="header-section-number">19</span> Gegenüberstellung zweier Implementierungsmethoden digitaler IIR-Filter</a></li>
+  <li><a href="#fazit-und-ausblick" id="toc-fazit-und-ausblick" class="nav-link" data-scroll-target="#fazit-und-ausblick"><span class="header-section-number">14</span> Fazit und Ausblick</a></li>
+  <li><a href="#gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter" id="toc-gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter" class="nav-link" data-scroll-target="#gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter"><span class="header-section-number">15</span> Gegenüberstellung zweier Implementierungsmethoden digitaler IIR-Filter</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/thesis_ms/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
     </div>
@@ -395,7 +365,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">27. Juli 2025</p>
+      <p class="date">28. Juli 2025</p>
     </div>
   </div>
   
@@ -520,288 +490,306 @@ Quelle 3: [AMD: Pynq](https://www.pynq.io/)<br>
 Quelle 4: [PYNQ: Python productivity for Adaptive Computing platforms latest](https://pynq.readthedocs.io/en/latest/)
 
 -->
-</section>
-</section>
-<section id="theoretische-grundlagen" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Theoretische Grundlagen</h1>
-<p>Die nachfolgenden theoretischen Grundlagen dienen dem Verständnis der eingesetzten Konzepte und Verfahren der digitalen Signalverarbeitung, insbesondere im Kontext digitaler IIR-Filter.<br></p>
-<p>Die Erklärungen stützen sich auf folgende Werke: - Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle<br> - Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis<br> - Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel<br> - Digitale Signalverarbeitung mit MATLAB von Martin Werner<br> - Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck<br></p>
-<p>Dieser Abschnitt entstand im Rahmen einer Zusammenarbeit mit einer weiteren Bachelorarbeit und liegt in beiden Arbeiten in identischer Form vor.<br></p>
-<section id="infinite-impulse-response-iir-filter" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="infinite-impulse-response-iir-filter"><span class="header-section-number">9.1</span> Infinite Impulse Response (IIR-Filter)</h2>
-<p>Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen sich fundamental durch ihre Charakteristik aus, bei der Berechnung des aktuellen Ausgangswertes durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.</p>
-<p>Die theoretischen Grundlagen von IIR-Filtern basieren auf der Tatsache, dass die Filter sowohl Nullstellen als auch Polstellen besitzen. Während FIR-Filter ausschließlich Nullstellen aufweisen, ermöglichen die Polstellen von IIR-Filtern eine effizientere Umsetzung bestimmter Filtereigenschaften. Dies führt zu dem Hauptvorteil von IIR-Filter für die Möglichkeit scharfe Übergänge im Frequenzgang mit relativ wenigen Koeffizienten zu erreichen.</p>
-<p>Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfer Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.</p>
-<p>Biquad-Filter, kurz als “Biquad” bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die Möglichkeit komplexe IIR-Filter höherer Ordnung auf einfache Weise zu realisieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.</p>
-<p>Die Verwendung von Biquad-Sektionen anstelle von Filtern höherer Ordnung in direkter Form bietet eine Vielzahl von Vorteilen. Die Anfälligkeit für Koeffizientenquantisierung wird enorm gemindert, da die Pole und Nullstellen weniger stark von kleinen Änderungen der Koeffizienten abhängen. Im Weiteren ermöglicht die modulare Struktur eine unabhängige Optimierung jeder Sektion, wodurch der Entwurfsprozess vereinfacht wird.</p>
-</section>
-<section id="differenzengleichung-eines-iir-filters-zweiter-ordnung" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">9.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</h2>
-<p>Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Die biquadratischen Filter werden mit der Differenzengleichung eines IIR-Filters zweiter Ordnung beschrieben werden:</p>
-<p><span class="math display">\[
+<!--
+# Theoretische Grundlagen
+Die nachfolgenden theoretischen Grundlagen dienen dem Verständnis der eingesetzten Konzepte und Verfahren der digitalen Signalverarbeitung, insbesondere im Kontext digitaler IIR-Filter.<br>
+
+Die Erklärungen stützen sich auf folgende Werke:
+- Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle<br>
+- Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis<br>
+- Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel<br>
+- Digitale Signalverarbeitung mit MATLAB von Martin Werner<br>
+- Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck<br>
+
+Dieser Abschnitt entstand im Rahmen einer Zusammenarbeit mit einer weiteren Bachelorarbeit und liegt in beiden Arbeiten in identischer Form vor.<br>
+
+## Infinite Impulse Response (IIR-Filter)
+Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen sich fundamental durch ihre Charakteristik aus, bei der Berechnung des aktuellen Ausgangswertes durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.
+
+Die theoretischen Grundlagen von IIR-Filtern basieren auf der Tatsache, dass die Filter sowohl Nullstellen als auch Polstellen besitzen. Während FIR-Filter ausschließlich Nullstellen aufweisen, ermöglichen die Polstellen von IIR-Filtern eine effizientere Umsetzung bestimmter Filtereigenschaften. Dies führt zu dem Hauptvorteil von IIR-Filter für die Möglichkeit scharfe Übergänge im Frequenzgang mit relativ wenigen Koeffizienten zu erreichen.
+
+Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfer Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.
+
+Biquad-Filter, kurz als "Biquad" bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die Möglichkeit komplexe IIR-Filter höherer Ordnung auf einfache Weise zu realisieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.
+
+Die Verwendung von Biquad-Sektionen anstelle von Filtern höherer Ordnung in direkter Form bietet eine Vielzahl von Vorteilen. Die Anfälligkeit für Koeffizientenquantisierung wird enorm gemindert, da die Pole und Nullstellen weniger stark von kleinen Änderungen der Koeffizienten abhängen. Im Weiteren ermöglicht die modulare Struktur eine unabhängige Optimierung jeder Sektion, wodurch der Entwurfsprozess vereinfacht wird. 
+
+## Differenzengleichung eines IIR-Filters zweiter Ordnung
+Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Die biquadratischen Filter werden mit der Differenzengleichung eines IIR-Filters zweiter Ordnung beschrieben werden:
+
+$$
 y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
-\]</span></p>
-<p>Der Wert <span class="math inline">\(y[n]\)</span> bezeichnet den Ausgabewert zum Sample <span class="math inline">\(n\)</span>, während <span class="math inline">\(x[n]\)</span> den Eingangswert darstellt. Der aktuelle Ausgabewert <span class="math inline">\(y[n]\)</span> ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte.</p>
-<p>Die Koeffizienten <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> und <span class="math inline">\(b_2\)</span> bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während <span class="math inline">\(a_1\)</span> und <span class="math inline">\(a_2\)</span> den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf <span class="math inline">\(a_0\)</span> auf 1 normiert, was zu der vereinfachten Form führt:</p>
-<p><span class="math display">\[
+$$
+
+Der Wert $y[n]$ bezeichnet den Ausgabewert zum Sample $n$, während $x[n]$ den Eingangswert darstellt. Der aktuelle Ausgabewert $y[n]$ ergibt sich aus der gewichteten Summe der aktuellen und zwei vergangenen Eingabewerte, subtrahiert mit den zwei gewichteten vergangen Ausgabewerte. 
+
+Die Koeffizienten $b_0$, $b_1$ und $b_2$ bestimmen den Einfluss des aktuellen und der vergangenen Eingabewerte (Feedforward), während $a_1$ und $a_2$ den Rückkopplungsanteil aus früheren Ausgabewerten (Feedback) modellieren. Im Allgemeinem wird der Koeffizient auf $a_0$ auf 1 normiert, was zu der vereinfachten Form führt:
+
+$$
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]</span></p>
-<p>Durch diese Normierung wird die praktische Implementierung vereinfacht, da ein Multiplikationsschritt entfällt.</p>
-</section>
-<section id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">9.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</h2>
-<p>Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittels der z-Transformation in den z-Bereich transformiert und daraus folgt die resultierende Übertragungsfunktion:</p>
-<p><span class="math display">\[
+$$
+
+Durch diese Normierung wird die praktische Implementierung vereinfacht, da ein Multiplikationsschritt entfällt.
+
+## Übertragungsfunktion eines IIR-Filters zweiter Ordnung
+
+Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittels der z-Transformation in den z-Bereich transformiert und daraus folgt die resultierende Übertragungsfunktion:
+
+$$
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
-\]</span></p>
-<p>Die rationale Funktion eines biquadratischen Filters beschreibt das Verhältnis zwischen dem Ausgang <span class="math inline">\(Y(z)\)</span> zu dem Eingang <span class="math inline">\(X(z)\)</span>. Diese Gleichung stellt die normierte Form des Biquads dar, bei welcher der Nennerkoeffizient auf <span class="math inline">\(a_0 = 1\)</span> normiert ist. Für den Fall, dass <span class="math inline">\(a_0 ≠ 1\)</span> beträgt müssen die Koeffizienten durch <span class="math inline">\(a_0\)</span> geteilt werden, um die Normalform zu erreichen.</p>
-<p>Anhand der Übetragungsfunktion können die Pol- und Nullstellen des Filters analysiert werden, um die Stabilität des Biquad-Filters zu vergewissern. Dabei müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen, beziehungsweise der Betrag jedes Pols kleiner als 1 sein muss.</p>
-<p>Befinden sich Pole außerhalb oder direkt auf dem Einheitskreis, kann es dazu kommen, dass das Ausgangssignal unkontrolliert schwingt und das System damit instabil wird. Nullstellen haben hingegen lediglich Einfluss auf die Frequenzcharakteristik und nicht direkt auf die Stabilität.</p>
-</section>
-<section id="stabilität-und-pol-nullstellen-verteilung" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">9.4</span> Stabilität und Pol-Nullstellen-Verteilung</h2>
-<p>Die Stabilität eines IIR-Filters ist ein kritischer Faktor, wechler für die Implementierung des Filters gegeben sein muss. Ein kausaler IIR-Filter ist genau dann stabil, wenn alle Polstellen seiner Übertragungsfunktion innerhalb des Einheitskreises der komplexen z-Ebene liegen. Mathematisch ausgedrückt muss für alle Polstellen <span class="math inline">\(|p_i| &lt; 1\)</span>.</p>
-<p>Die Lage der Pole bestimmt nicht nur die Stabilität, sondern auch das dynamische Verhalten des Filters. Pole die näher am Rand des Einheitskreises liegen führen zu einem resonanten Verhalten mit langen ausschwingendem Verhalten, während Pole näher zum Ursprung hin, ein gedämpfteres Verhalten bewirken. Die Nullstellen hingegen beeinflussen primär den Verlauf des Frequenzgangs.</p>
-<p>Für die praktische Implementierung ist es wichtig zu beachten, dass Quantisierungseffekte sich auf die Lage der Pole auswirken können. Das kann im schlimmsten Fall dazu führen, sodass die Stabilität des Filters beeinträchtigt und der Filter instabil wird. Aus diesem Grund ist bei der Koeffizientenquantisierung besondere Vorsicht geboten, bei Filtern mit Polen nah oder auf dem Rand des Einheitskreises.</p>
-</section>
-<section id="frequenzgang-und-phasenverhalten" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="frequenzgang-und-phasenverhalten"><span class="header-section-number">9.5</span> Frequenzgang und Phasenverhalten</h2>
-<p>Der Frequenzgang eines IIR-Filters wird durch die Auswertung der Übertragungsfunktion innerhalb des Einheitskreises erhalten, dafür wird die Substitution <span class="math inline">\(z = e^{j\omega}\)</span> durchgeführt:</p>
-<p><span class="math display">\[
+$$
+
+Die rationale Funktion eines biquadratischen Filters beschreibt das Verhältnis zwischen dem Ausgang $Y(z)$ zu dem Eingang $X(z)$. Diese Gleichung stellt die normierte Form des Biquads dar, bei welcher der Nennerkoeffizient auf $a_0 = 1$ normiert ist. Für den Fall, dass $a_0 ≠ 1$ beträgt müssen die Koeffizienten durch $a_0$ geteilt werden, um die Normalform zu erreichen.
+
+Anhand der Übetragungsfunktion können die Pol- und Nullstellen des Filters analysiert werden, um die Stabilität des Biquad-Filters zu vergewissern. Dabei müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen, beziehungsweise der Betrag jedes Pols kleiner als 1 sein muss.
+
+Befinden sich Pole außerhalb oder direkt auf dem Einheitskreis, kann es dazu kommen, dass das Ausgangssignal unkontrolliert schwingt und das System damit instabil wird. Nullstellen haben hingegen lediglich Einfluss auf die Frequenzcharakteristik und nicht direkt auf die Stabilität.
+
+## Stabilität und Pol-Nullstellen-Verteilung
+
+Die Stabilität eines IIR-Filters ist ein kritischer Faktor, wechler für die Implementierung des Filters gegeben sein muss. Ein kausaler IIR-Filter ist genau dann stabil, wenn alle Polstellen seiner Übertragungsfunktion innerhalb des Einheitskreises der komplexen z-Ebene liegen. Mathematisch ausgedrückt muss für alle Polstellen $|p_i| < 1$.
+
+Die Lage der Pole bestimmt nicht nur die Stabilität, sondern auch das dynamische Verhalten des Filters. Pole die näher am Rand des Einheitskreises liegen führen zu einem resonanten Verhalten mit langen ausschwingendem Verhalten, während Pole näher zum Ursprung hin, ein gedämpfteres Verhalten bewirken. Die Nullstellen hingegen beeinflussen primär den Verlauf des Frequenzgangs.
+
+Für die praktische Implementierung ist es wichtig zu beachten, dass Quantisierungseffekte sich auf die Lage der Pole auswirken können. Das kann im schlimmsten Fall dazu führen, sodass die Stabilität des Filters beeinträchtigt und der Filter instabil wird. Aus diesem Grund ist bei der  Koeffizientenquantisierung besondere Vorsicht geboten, bei Filtern mit Polen nah oder auf dem Rand des Einheitskreises.
+
+## Frequenzgang und Phasenverhalten
+
+Der Frequenzgang eines IIR-Filters wird durch die Auswertung der Übertragungsfunktion innerhalb des Einheitskreises erhalten, dafür wird die Substitution $z = e^{j\omega}$ durchgeführt:
+
+$$
 H(e^{j\omega}) = \frac{b_0 + b_1 e^{-j\omega} + b_2 e^{-2j\omega}}{1 + a_1 e^{-j\omega} + a_2 e^{-j2\omega}}
-\]</span></p>
-<p>Der Betrag <span class="math inline">\(|H(e^{j\omega})|\)</span> beschreibt die Amplitudencharakteristik, während die Phase <span class="math inline">\(\arg(H(e^{j\omega}))\)</span> das Phasenverhalten wiedergibt. Bei IIR-Filtern ist das Phasenverhalten im Allgemeinen nicht linear, was in manchen Anwendungen als unerwünscht erweist.</p>
-</section>
-</section>
-<section id="implementierungsstrukturen-biquadratischer-filter" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Implementierungsstrukturen biquadratischer Filter</h1>
-<p>Die praktische Implementierung von biquadratischen Filtern erfolgt durch die direkte Umsetzung der Differezengleichungen in Software oder Hardware.</p>
-<p>Dafür werden die verzögerten Eingangswerte <span class="math inline">\(x[n-1]\)</span> und <span class="math inline">\(x[n-2]\)</span>, sowie die Ausgangswerte <span class="math inline">\(y[n-1]\)</span> und <span class="math inline">\(y[n-2]\)</span> in Speicherelementen, sogenannten Verzögerungsgliedern, gespeichert. Der aktuelle Ausgangswert <span class="math inline">\(y[n]\)</span> wird mittels der gewichteten Summation aller Terme gemäß der jeweiligen Differenzengleichung berechnet.</p>
-<p>Bei der numerischen Implementierung sind verschiedene Aspekte zu berücksichtigen, insbesondere die Wortbreite und des Zahlenformats (Festkomma oder Gleitkomma).</p>
-<p>Weitere Einflüsse wie Rundungsfehler oder Quantisierungsrauschen können die Filtercharakteristik beeinflussen und im Extremfall die Stabilität des Filters gefährden.</p>
-<p>Diese Implementierungsstrukturen bieten die Möglichkeit, mehrere Filter-Sektionen aneinander zu Verbinden. Diese Modularität biquadratischer Filter ermöglicht, komplexere Filtersysteme höherer Ordnung, durch die Kaskadierung mehrerer Biquad-Sektionen zu realisieren.</p>
-<p>Dadurch können Vorteile in Bezug auf numerische Stabilität, Designflexibilität und Implementierungseffizienz geschaffen werden, weil jede Sektion unabhängig entworfen und optimiert werden kann.</p>
-<section id="direktform-1" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="direktform-1"><span class="header-section-number">10.1</span> Direktform 1</h2>
-<p>Die Direktform 1 stellt die direkteste Umsetzung der biquadratischen Differenzengleichung in einer Signalflussstruktur dar.</p>
-<p>Diese Implementierung folgt direkt der mathematischen Beschreibung unter der Verwendung separater Verzögerungsketten für die Eingangs- als auch die Ausgangswerte.</p>
-<p>Diese Struktur kann als eine Parallelschaltung eines rein rekursiven Teils (nur Pole) und eines nicht rekursiven Teils (nur Nullstellen) aufgefasst werden.</p>
-<p><span class="math display">\[
+$$
+
+Der Betrag $|H(e^{j\omega})|$ beschreibt die Amplitudencharakteristik, während die Phase $\arg(H(e^{j\omega}))$ das Phasenverhalten wiedergibt. Bei IIR-Filtern ist das Phasenverhalten im Allgemeinen nicht linear, was in manchen Anwendungen als unerwünscht erweist.
+
+# Implementierungsstrukturen biquadratischer Filter
+
+Die praktische Implementierung von biquadratischen Filtern erfolgt durch die direkte Umsetzung der Differezengleichungen in Software oder Hardware. 
+
+Dafür werden die verzögerten Eingangswerte $x[n-1]$ und $x[n-2]$, sowie die Ausgangswerte $y[n-1]$ und $y[n-2]$ in Speicherelementen, sogenannten Verzögerungsgliedern, gespeichert. Der aktuelle Ausgangswert $y[n]$ wird mittels der gewichteten Summation aller Terme gemäß der jeweiligen Differenzengleichung berechnet.
+
+Bei der numerischen Implementierung sind verschiedene Aspekte zu berücksichtigen, insbesondere die Wortbreite und des Zahlenformats (Festkomma oder Gleitkomma).
+
+Weitere Einflüsse wie Rundungsfehler oder Quantisierungsrauschen können die Filtercharakteristik beeinflussen und im Extremfall die Stabilität des Filters gefährden.
+
+Diese Implementierungsstrukturen bieten die Möglichkeit, mehrere Filter-Sektionen aneinander zu Verbinden. Diese Modularität biquadratischer Filter ermöglicht, komplexere Filtersysteme höherer Ordnung, durch die Kaskadierung mehrerer Biquad-Sektionen zu realisieren. 
+
+Dadurch können Vorteile in Bezug auf numerische Stabilität, Designflexibilität und Implementierungseffizienz geschaffen werden, weil jede Sektion unabhängig entworfen und optimiert werden kann.
+
+##  Direktform 1
+
+Die Direktform 1 stellt die direkteste Umsetzung der biquadratischen Differenzengleichung in einer Signalflussstruktur dar. 
+
+Diese Implementierung folgt direkt der mathematischen Beschreibung unter der Verwendung separater Verzögerungsketten für die Eingangs- als auch die Ausgangswerte. 
+
+Diese Struktur kann als eine Parallelschaltung eines rein rekursiven Teils (nur Pole) und eines nicht rekursiven Teils (nur Nullstellen) aufgefasst werden.
+
+$$
 y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2]
-\]</span></p>
-<p>Für die Direktform 1 Implementierung werden zunächst alle gewichteten Eingangswerte und deren Verzögerungen zusammengefasst und berechnet:</p>
-<p><span class="math display">\[
+$$
+
+Für die Direktform 1 Implementierung werden zunächst alle gewichteten Eingangswerte und deren Verzögerungen zusammengefasst und berechnet:
+
+$$
 w[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2]
-\]</span></p>
-<p>Anschließend wird die Rückkoppling der verzögerten Ausgangswerte realisiert: <span class="math display">\[
+$$
+
+Anschließend wird die Rückkoppling der verzögerten Ausgangswerte realisiert:
+$$
 y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]
-\]</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/DF1.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Signalflussbild: Direktform 1</figcaption>
-</figure>
-</div>
-<p>In dieser Struktur werden vier Verzögerungselemente verwendet: zwei für die Eingangsverzögerung, <span class="math inline">\(x[n-1]\)</span> und <span class="math inline">\(x[n-2]\)</span>, sowie zwei für die Ausgangsverzögerung, <span class="math inline">\(y[n-1]\)</span> und <span class="math inline">\(y[n-2]\)</span>. Die Multiplikationen zwischen den Verzögerungselementen und den Koeffizienten erfolgen parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen lässt.</p>
-<p>Ein wesentlicher Vorteil der Direktform 1 liegt in ihrer Robustheit gegenüber Koeffizientenquantisierung. Da die Feedforward- und Feedback-Pfade getrennt sind, beeinflussen Quantisierungsfehler in einem Pfad nicht direkt den anderen. Dies führt zu einer besseren numerischen Stabilität, besonders bei der Verwendung von Festkommaarithmetik .</p>
-<p>Die Direktform 1 zeichnet sich durch ihre konzeptionelle Einfachheit und die direkte Korrespondenz zur Differenzengleichung aus. Nachteilhaft bei dieser Struktur ist der erhöhte Speicherbedarf, aufgrund der redundanten Verzögerungselemente. Für Anwendungen mit strengen Speicherbeschränkungen kann dies ein limitierender Faktor sein.</p>
-</section>
-<section id="direktform-2-kanonische-form" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="direktform-2-kanonische-form"><span class="header-section-number">10.2</span> Direktform 2 (Kanonische Form)</h2>
-<p>Die Direktform 2, oder auch als kanonische Form bekannt, ist eine optimierte Variante der Direktform 1, welche durch die Umordnung der Operationen die Anzahl der benötigten Verzögerungselemente minimiert.</p>
-<p>Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der Vorwärts- und Rückwärtsverarbeitung vertauscht.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/DF2.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Signalflussbild: Direktform 2</figcaption>
-</figure>
-</div>
-<p>Zunächst wird ein Zwischenwert <span class="math inline">\(w[n]\)</span> durch die rekursive Beziehungen erzeugt:</p>
-<p><span class="math display">\[
+$$
+
+![Signalflussbild: Direktform 1](images/DF1.png){width=50%}
+
+In dieser Struktur werden vier Verzögerungselemente verwendet: zwei für die Eingangsverzögerung, $x[n-1]$ und $x[n-2]$, sowie zwei für die Ausgangsverzögerung, $y[n-1]$ und $y[n-2]$. Die Multiplikationen zwischen den Verzögerungselementen und den Koeffizienten erfolgen parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen lässt.
+
+Ein wesentlicher Vorteil der Direktform 1 liegt in ihrer Robustheit gegenüber Koeffizientenquantisierung. Da die Feedforward- und Feedback-Pfade getrennt sind, beeinflussen Quantisierungsfehler in einem Pfad nicht direkt den anderen. Dies führt zu einer besseren numerischen Stabilität, besonders bei der Verwendung von Festkommaarithmetik .
+
+Die Direktform 1 zeichnet sich durch ihre konzeptionelle Einfachheit und die direkte Korrespondenz zur Differenzengleichung aus. Nachteilhaft bei dieser Struktur ist der erhöhte Speicherbedarf, aufgrund der redundanten Verzögerungselemente. Für Anwendungen mit strengen Speicherbeschränkungen kann dies ein limitierender Faktor sein.
+
+## Direktform 2 (Kanonische Form)
+
+Die Direktform 2, oder auch als kanonische Form bekannt, ist eine optimierte Variante der Direktform 1, welche durch die Umordnung der Operationen die Anzahl der benötigten Verzögerungselemente minimiert.
+
+Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der Vorwärts- und Rückwärtsverarbeitung vertauscht.
+
+![Signalflussbild: Direktform 2](images/DF2.png){width=50%}
+
+Zunächst wird ein Zwischenwert $w[n]$ durch die rekursive Beziehungen erzeugt:
+
+$$
 w[n] = x[n] - a_1 \cdot w[n-1] - a_2 \cdot w[n-2]
-\]</span></p>
-<p>Der Zwischenwert <span class="math inline">\(w[n]\)</span> dient als Substitution für die Verzögerungselemente der Ein- und Ausgangswerte.</p>
-<p><span class="math display">\[
+$$
+
+Der Zwischenwert $w[n]$ dient als Substitution für die Verzögerungselemente der Ein- und Ausgangswerte.
+
+$$
 y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]
-\]</span></p>
-<p>In dieser Struktur werden nur zwei Verzögerungselemente für w[n-1] und w[n-2] benötigt, da die rekursive als auch die nicht-rekursive Verarbeitung auf dieselben verzögerten Werte zugreifen. Die Bezeichnung “kanonisch” bezieht sich darauf, dass diese Implementierung die minimal mögliche Anzahl von Verzögerungselementen verwendet und dadurch die Speichereffizienz optimiert.</p>
-<p>Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten Speicherressourcen. Der reduzierte Speicherbedarf ist insbesondere bei der Implementierung auf Mikrocontrollern oder in FPGA-Anwendungen von hohem Vorteil, bei welchen Speicher eine limitierte und kostbare Ressource darstellt.</p>
-<p>Jedoch weist diese Struktur eine erhöhte Anfälligkeit gegenüber Quantisierungseffekten auf, da die Zwischenwerte <span class="math inline">\(w[n]\)</span> größere Dynamikbereiche aufweisen können als die ursprünglichen Ein- und Ausgangswerte. Dies kann zu einer Verschlechterung des Signal-Rausch-Verhältnisses führen, primär bei der Verwendung von Festkommaarithmetik mit begrenzter Wortbreite.</p>
-</section>
-<section id="transponierte-direktform-2" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="transponierte-direktform-2"><span class="header-section-number">10.3</span> Transponierte Direktform 2</h2>
-<p>Die transponierte Direktform 2 kann gebildet werden durch die Anwendung des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente Übertragungsfunktion ergibt. Die resultierende Struktur weist oft günstigere numerische Eigenschaften auf, als die ursprüngliche Form.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/TDF2.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Signalflussbild: Transponierte Direktform 2</figcaption>
-</figure>
-</div>
-<p>Die transponierte Direktform 2 wird druch die folgenden Differenzengleichungen beschrieben:</p>
-<p><span class="math display">\[
+$$
+
+In dieser Struktur werden nur zwei Verzögerungselemente für w[n-1] und w[n-2] benötigt, da die rekursive als auch die nicht-rekursive Verarbeitung auf dieselben verzögerten Werte zugreifen. Die Bezeichnung "kanonisch" bezieht sich darauf, dass diese Implementierung die minimal mögliche Anzahl von Verzögerungselementen verwendet und dadurch die Speichereffizienz optimiert.
+
+Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten Speicherressourcen. Der reduzierte Speicherbedarf ist insbesondere bei der Implementierung auf Mikrocontrollern oder in FPGA-Anwendungen von hohem Vorteil, bei welchen Speicher eine limitierte und kostbare Ressource darstellt.
+
+Jedoch weist diese Struktur eine erhöhte Anfälligkeit gegenüber Quantisierungseffekten auf, da die Zwischenwerte $w[n]$ größere Dynamikbereiche aufweisen können als die ursprünglichen Ein- und Ausgangswerte. Dies kann zu einer Verschlechterung des Signal-Rausch-Verhältnisses führen, primär bei der Verwendung von Festkommaarithmetik  mit begrenzter Wortbreite.
+
+## Transponierte Direktform 2
+
+Die transponierte Direktform 2 kann gebildet werden durch die Anwendung des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente Übertragungsfunktion ergibt. Die resultierende Struktur weist oft günstigere numerische Eigenschaften auf, als die ursprüngliche Form.
+
+![Signalflussbild: Transponierte Direktform 2](images/TDF2.png){width=50%}
+
+Die transponierte Direktform 2 wird druch die folgenden Differenzengleichungen beschrieben:
+
+$$
 s_2[n] = b_2 \cdot x[n] - a_2 \cdot y[n]
-\]</span></p>
-<p><span class="math display">\[
+$$
+
+$$
 s_1[n] =  s_2[n] + b_1 \cdot x[n] - a_1 \cdot y[n]
-\]</span></p>
-<p><span class="math display">\[
+$$
+
+$$
 y[n] = s_1[n] + b_0 \cdot x[n]
-\]</span></p>
-<p>Bei der transponierten Direktform 2 werden die Zwischenwerte <span class="math inline">\(s_1[n]\)</span> und <span class="math inline">\(s_2[n]\)</span> als Verzögerungselemente verwendet. Diese Struktur eignet sich besonders gut in der Implementierung von Echtzeitanwendung, aufgrund ihrer effizienten Berechnung und der guten Eignung für parallele oder pipelined Hardware-Architekturen.</p>
-<p>Ein wesentlicher Vorteil der transponierten Direktform 2 liegt in ihrer reduzierten Anfälligkeit gegenüber Koeffizientenquantisierung. Die Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer verbesserten numerischen Stabilität führt. Darüber hinaus ist die Struktur besonders gut für die Implementierung in Hardware geeignet, da die Berechnungen eine natürliche Pipeline-Struktur ausweisen.</p>
-</section>
-</section>
-<section id="numerische-aspekte-und-quantisierungseffekte" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Numerische Aspekte und Quantisierungseffekte</h1>
-<p>Die praktische Implementierung digitaler Filter auf Systemen mit endlicher Wortlänge bringt verschiedene Herausforderungen mit sich. Diese Effekte können die Filterleistung erheblich beeinträchtigen und müssen bereits in beim Entwerfen berücksichtigt werden. Die wichtigsten numerischen Aspekte sind Koeffizientenquantisierung, Quantisierungsrauschen(Rundungsrauschen) und nichtlineare Quantisierungseffekte.</p>
-<section id="koeffizientenquantisierung" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="koeffizientenquantisierung"><span class="header-section-number">11.1</span> Koeffizientenquantisierung</h2>
-<p>Die Koeffizientenquantisierung ist einer der kritischen Aspekte bei der Implementierung digitaler Filter auf Systemen mit begrenzter Wortlänge. Bei der Darstellung der Filterkoeffizienten mit einer endlichen Anzahl von Bits entstehen Quantisierungsfehler, die zu einer Verschiebung der Pole und Nullstellen des Filters führen kann.</p>
-<p><strong>Auswirkung der Koeffizientenquantisierung</strong></p>
-<p>Die Quantisierung der Koeffizienten führt zu verschiedenen unerwünschten Effekten:</p>
-<p><strong>Polverschiebung</strong>: Die quantisierten Koeffizienten verschieben die Pole des Filters, was zu einer Änderung der Filtercharakteristik führt. Im schlimmsten Fall können die Pole aus dem Einheitskreis herauswandern und zu einem instabilen Filter führen.</p>
-<p><strong>Frequenzgangverzerrung</strong>: Die Verschiebung der Pole und Nullstellen führt zur Abweichung im Frequenzgang. Besonders kritisch ist dies bei scharfen Filtern mit hoher Güte.</p>
-<p><strong>Stabilitätsverlust</strong>: Pole am oder auf dem Rand des Einheitskreises kann bereits durch kleine Quantisierung zur Instabilität führen. Die Wahrscheinlichkeit der Instabilität steigt mit abnehmender Wortlänge.</p>
-<p><strong>Strukturelle Gegenmaßnahmen</strong></p>
-<p>Die Wahl der Filterstruktur hat einen wesentlichen Einfluss auf die Robustheit gegenüber Quantisierungseffekten. Die Direktform 1 ist aufgrund der getrennten Pfade für Feedforward- und Feedbackanteile weniger anfällig für Fehlerausbreitung und bietet bessere numerische Stabilität bei Festkommaarithmetik. Die Direktform 2 bietet gegenüber der Direktform 1 eine bessere Speichereffizienz, jedoch können größere Zwischenwerte zum Überlaufen bei begrenzter Wortbreite mit erhöhtem Rauschen führen.</p>
-<p>Die transponierte Direktform 2 kombiniert die Vorteile der beiden genannten Strukturen und zeichnet sich durch eine besonders hohe Resistenz gegenüber Koeffizientenquantisierung aus. Dies liegt an der kürzeren Rückkopplungskette und der numerisch günstigen Struktur für Echtzeitanwendungen. Bei der Implementierung der digitalen Filter ist es zu empfehlen eine Wortlänge von mindestens 16 Bit mit enger Bandbreite zu wählen, um Koeffizientenquantisierung bei einem Minimum zu halten.</p>
-</section>
-<section id="quantisierungsrauschen-rundungsrauschen" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">11.2</span> Quantisierungsrauschen (Rundungsrauschen)</h2>
-<p>Bei der Implementierung digitaler Filter entstehen bei jeder arithmetischen Operation Rundungsfehler, die sich als additives Rauschen am Filterausgang manifestieren. Diese Fehler sind unvermeidlich bei der Verwendung von Festkommaarithmetik und können das Signal-Rausch-Verhältnis des Filters erheblich verschlechtern. Um diesem Entgegen zu wirken, kann die durch die Wahl einer geeigneten Implementierungsstruktur das Rundungsrauschen minimiert werden.</p>
-<p><strong>Direktform 1</strong>: Die Rundungsrauschquellen in den Feedforward- und Feedback-Pfaden sind weitgehend entkoppelt. Dadurch führt es zu einer moderaten Gesamtvarianz des Rundungsrauschens.<br> <strong>Direktform 2</strong>: Die gemeinsame Nutzung der Verzögerungselemente führt zu einer höheren Rundsrauschvarianz, da die Rundungsfehler mehrfach durch das rekursive System zirkulieren.<br> <strong>Transponierte Direktform 2</strong>: Diese Struktur weist das günstigste Rundungsrauschen auf, da die Rundungsrauschquellen näher am Ausgang liegen und weniger stark gefiltert werden.</p>
-</section>
-<section id="limit-cycle-oszilationen" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="limit-cycle-oszilationen"><span class="header-section-number">11.3</span> Limit-Cycle-Oszilationen</h2>
-<p>Limit-Cycle-Oszillationen sind selbsterhaltende Schwingungen, die in nichtlinearen digitalen Filtern auftreten können. Sie entstehen durch die Kombination von Quantisierung und Rückkopplung und können auch bei stabilen linearen Filtern auftreten, wenn nichtlineare Quantisierungseffekte berücksichtigt werden.</p>
-<p><strong>Zero-Input Limit Cycles</strong> sind Oszillationen die auftreten, wenn das Eingangssignal null entspricht, aber der Filter aufgrund gespeicherter Energie in den Verzögerungselementen weiterhin schwingt.</p>
-<p><strong>Large-Scale Limit</strong> können bei hohen Eingangssignalpegeln auftreten und sind nicht auf kleine Amplituden beschränkt. Sie entstehen durch die Sättigungscharakteristik der Arithmetik und können zu großen, störenden Ausgangssignalen führen.</p>
-</section>
-<section id="kaskadierung" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="kaskadierung"><span class="header-section-number">11.4</span> Kaskadierung</h2>
-<p>Für Filter höherer Ordnung bietet die kaskadierte-Realisierung aus Biquad-Sektionen deutliche Vorteile gegenüber der direkten Implementierung. Die optimale Anordnung und Paarung der Pole und Nullstellen in einzelnen Sektionen kann die numerische Stabilität verbessern, sowie das Rundungsrauschen minimieren als auch die Anfälligkeit für Koeffizientenquantisierung reduzieren.</p>
-</section>
-<section id="strukturenvergleich" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="strukturenvergleich"><span class="header-section-number">11.5</span> Strukturenvergleich</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Eigenschaft</th>
-<th>Direktform 1</th>
-<th>Direktform 2</th>
-<th>Transp. Direktform 2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Verzögerungselemente</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td>Speicherbedarf</td>
-<td>Hoch</td>
-<td>Minimal</td>
-<td>Minimal</td>
-</tr>
-<tr class="odd">
-<td>Koeff.-Empfindlichkeit</td>
-<td>Niedrig</td>
-<td>Hoch</td>
-<td>Mittel</td>
-</tr>
-<tr class="even">
-<td>Rundungsrauschen</td>
-<td>Mittel</td>
-<td>Hoch</td>
-<td>Niedrig</td>
-</tr>
-<tr class="odd">
-<td>Limit-Cycle-Anfälligkeit</td>
-<td>Niedrig</td>
-<td>Hoch</td>
-<td>Niedrig</td>
-</tr>
-<tr class="even">
-<td>Hardware-Eignung</td>
-<td>Gut</td>
-<td>Mittel</td>
-<td>Sehr gut</td>
-</tr>
-<tr class="odd">
-<td>Dynamikbereich</td>
-<td>Gut</td>
-<td>Begrenzt</td>
-<td>Sehr gut</td>
-</tr>
-<tr class="even">
-<td>Quantisierungsrobustheit</td>
-<td>Hoch</td>
-<td>Niedrig</td>
-<td>Mittel</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Rundungsrauschverhalten</strong>: Die transponierte Direktform 2 weist das günstigste Rundungsrauschverhalten auf, da die Rundungsquellen näher am Ausgang liegen und weniger stark durch die Rückkopplung verstärkt werden. Die Direktform 2 zeigt das ungünstigste Verhalten, da die Rundungsfehler durch die rekursive Struktur mehrfach zirkulieren.<br> <strong>Koeffizientenempfindlichkeit</strong>: Die Direktform 1 bietet die beste Robustheit gegenüber Koeffizientenquantisierung, da die Feedforward- und Feedback-Koeffizienten unabhängig quantisiert werden können. Die Direktform 2 zeigt die höchste Empfindlichkeit aufgrund der gekoppelten Struktur.</p>
-<p>Die Wahl der optimalen Struktur hängt von den spezifischen Anforderungen der Anwendung ab. Für Anwendungen mit strengen Speicherbeschränkungen sind die Direktform 2 und transponierte Direktform 2 vorzuziehen. Bei hohen Anforderungen an die numerische Genauigkeit und Robustheit ist die transponierte Direktform 2 oder die Direktform 1 die bessere Wahl. Für Echtzeitanwendungen eignet sich die transponierte Direktform 2 besonders gut aufgrund ihrer speicher- und rechen Zeiteffizienz sowie ihrer numerischen Stabilität.</p>
-</section>
-</section>
-<section id="bilineartransformation" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Bilineartransformation</h1>
-<p>Die Bilineartransformation dient als ein Verfahren, welches die Überführung analoger kontinuerierlicher Filter in digitale Filterstrukturen ermöglicht. Bei diesem Verfahren wird das analoge Frequenzverhalten möglichst genau in den digitalen Frequenzbereich übertragen und bietet dabei die Erhaltung der Stabilität sowie eine bijektive, aliasfreie Abbildung der s-Parameter in den z-Bereich. Sei überführt die imaginäre Achse der s-Ebene (<span class="math inline">\(j\omega\)</span>) exakt auf den Einheitskreis der z-Ebene und erhält dabei die Stabilitätsbedingungen.</p>
-<section id="zentrale-substitutionen" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="zentrale-substitutionen"><span class="header-section-number">12.1</span> Zentrale Substitutionen</h2>
-<p>Die mathematische Basis der Bilineartransformation beruht auf einer Substitution der s Parameter: <span class="math display">\[
+$$
+
+Bei der transponierten Direktform 2 werden die Zwischenwerte $s_1[n]$ und $s_2[n]$ als Verzögerungselemente verwendet. Diese Struktur eignet sich besonders gut in der Implementierung von Echtzeitanwendung, aufgrund ihrer effizienten Berechnung und der guten Eignung für parallele oder pipelined Hardware-Architekturen.
+
+Ein wesentlicher Vorteil der transponierten Direktform 2 liegt in ihrer reduzierten Anfälligkeit gegenüber Koeffizientenquantisierung. Die Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer verbesserten numerischen Stabilität führt. Darüber hinaus ist die Struktur besonders gut für die Implementierung in Hardware geeignet, da die Berechnungen eine natürliche Pipeline-Struktur ausweisen.
+
+# Numerische Aspekte und Quantisierungseffekte
+
+Die praktische Implementierung digitaler Filter auf Systemen mit endlicher Wortlänge bringt verschiedene Herausforderungen mit sich. Diese Effekte können die Filterleistung erheblich beeinträchtigen und müssen bereits in beim Entwerfen berücksichtigt werden. Die wichtigsten numerischen Aspekte sind Koeffizientenquantisierung, Quantisierungsrauschen(Rundungsrauschen) und nichtlineare Quantisierungseffekte.
+
+## Koeffizientenquantisierung
+
+Die Koeffizientenquantisierung ist einer der kritischen Aspekte bei der Implementierung digitaler Filter auf Systemen mit begrenzter Wortlänge. Bei der Darstellung der Filterkoeffizienten mit einer endlichen Anzahl von Bits entstehen Quantisierungsfehler, die zu einer Verschiebung der Pole und Nullstellen des Filters führen kann.
+
+**Auswirkung der Koeffizientenquantisierung**
+
+Die Quantisierung der Koeffizienten führt zu verschiedenen unerwünschten Effekten:
+
+**Polverschiebung**: Die quantisierten Koeffizienten verschieben die Pole des Filters, was zu einer Änderung der Filtercharakteristik führt. Im schlimmsten Fall können die Pole aus dem Einheitskreis herauswandern und zu einem instabilen Filter führen.
+
+**Frequenzgangverzerrung**: Die Verschiebung der Pole und Nullstellen führt zur Abweichung im Frequenzgang. Besonders kritisch ist dies bei scharfen Filtern mit hoher Güte.
+
+**Stabilitätsverlust**: Pole am oder auf dem Rand des Einheitskreises kann bereits durch kleine Quantisierung zur Instabilität führen. Die Wahrscheinlichkeit der Instabilität steigt mit abnehmender Wortlänge.
+
+**Strukturelle Gegenmaßnahmen**
+
+Die Wahl der Filterstruktur hat einen wesentlichen Einfluss auf die Robustheit gegenüber Quantisierungseffekten. Die Direktform 1 ist aufgrund der getrennten Pfade für Feedforward- und Feedbackanteile weniger anfällig für Fehlerausbreitung und bietet bessere numerische Stabilität bei Festkommaarithmetik. Die Direktform 2 bietet gegenüber der Direktform 1 eine bessere Speichereffizienz, jedoch können größere Zwischenwerte zum Überlaufen bei begrenzter Wortbreite mit erhöhtem Rauschen führen.
+
+Die transponierte Direktform 2 kombiniert die Vorteile der beiden genannten Strukturen und zeichnet sich durch eine besonders hohe Resistenz gegenüber Koeffizientenquantisierung aus. Dies liegt an der kürzeren Rückkopplungskette und der numerisch günstigen Struktur für Echtzeitanwendungen. Bei der Implementierung der digitalen Filter ist es zu empfehlen eine Wortlänge von mindestens 16 Bit mit enger Bandbreite zu wählen, um Koeffizientenquantisierung bei einem Minimum zu halten.
+
+## Quantisierungsrauschen (Rundungsrauschen)
+
+Bei der Implementierung digitaler Filter entstehen bei jeder arithmetischen Operation Rundungsfehler, die sich als additives Rauschen am Filterausgang manifestieren. Diese Fehler sind unvermeidlich bei der Verwendung von Festkommaarithmetik und können das Signal-Rausch-Verhältnis des Filters erheblich verschlechtern. Um diesem Entgegen zu wirken, kann die durch die Wahl einer geeigneten Implementierungsstruktur das Rundungsrauschen minimiert werden. 
+
+**Direktform 1**: Die Rundungsrauschquellen in den Feedforward- und Feedback-Pfaden sind weitgehend entkoppelt. Dadurch führt es zu einer moderaten Gesamtvarianz des Rundungsrauschens.<br>
+**Direktform 2**: Die gemeinsame Nutzung der Verzögerungselemente führt zu einer höheren Rundsrauschvarianz, da die Rundungsfehler mehrfach durch das rekursive System zirkulieren.<br>
+**Transponierte Direktform 2**: Diese Struktur weist das günstigste Rundungsrauschen auf, da die Rundungsrauschquellen näher am Ausgang liegen und weniger stark gefiltert werden.
+
+## Limit-Cycle-Oszilationen
+
+Limit-Cycle-Oszillationen sind selbsterhaltende Schwingungen, die in nichtlinearen digitalen Filtern auftreten können. Sie entstehen durch die Kombination von Quantisierung und Rückkopplung und können auch bei stabilen linearen Filtern auftreten, wenn nichtlineare Quantisierungseffekte berücksichtigt werden.
+
+**Zero-Input Limit Cycles** sind Oszillationen die auftreten, wenn das Eingangssignal null entspricht, aber der Filter aufgrund gespeicherter Energie in den Verzögerungselementen weiterhin schwingt.
+
+**Large-Scale Limit** können bei hohen Eingangssignalpegeln auftreten und sind nicht auf kleine Amplituden beschränkt. Sie entstehen durch die Sättigungscharakteristik der Arithmetik und können zu großen, störenden Ausgangssignalen führen.
+
+## Kaskadierung
+Für Filter höherer Ordnung bietet die kaskadierte-Realisierung aus Biquad-Sektionen deutliche Vorteile gegenüber der direkten Implementierung. Die optimale Anordnung und Paarung der Pole und Nullstellen in einzelnen Sektionen kann die numerische Stabilität verbessern, sowie das Rundungsrauschen minimieren als auch die Anfälligkeit für Koeffizientenquantisierung reduzieren.
+
+## Strukturenvergleich
+
+| Eigenschaft | Direktform 1 | Direktform 2 | Transp. Direktform 2 |
+|-------------|--------------|--------------|---------------------|
+| Verzögerungselemente | 4 | 2 | 2 |
+| Speicherbedarf | Hoch | Minimal | Minimal |
+| Koeff.-Empfindlichkeit | Niedrig | Hoch | Mittel |
+| Rundungsrauschen | Mittel | Hoch | Niedrig |
+| Limit-Cycle-Anfälligkeit | Niedrig | Hoch | Niedrig |
+| Hardware-Eignung | Gut | Mittel | Sehr gut |
+| Dynamikbereich | Gut | Begrenzt | Sehr gut |
+| Quantisierungsrobustheit | Hoch | Niedrig | Mittel |
+
+**Rundungsrauschverhalten**: Die transponierte Direktform 2 weist das günstigste Rundungsrauschverhalten auf, da die Rundungsquellen näher am Ausgang liegen und weniger stark durch die Rückkopplung verstärkt werden. Die Direktform 2 zeigt das ungünstigste Verhalten, da die Rundungsfehler durch die rekursive Struktur mehrfach zirkulieren.<br>
+**Koeffizientenempfindlichkeit**: Die Direktform 1 bietet die beste Robustheit gegenüber Koeffizientenquantisierung, da die Feedforward- und Feedback-Koeffizienten unabhängig quantisiert werden können. Die Direktform 2 zeigt die höchste Empfindlichkeit aufgrund der gekoppelten Struktur.
+
+Die Wahl der optimalen Struktur hängt von den spezifischen Anforderungen der Anwendung ab. Für Anwendungen mit strengen Speicherbeschränkungen sind die Direktform 2 und transponierte Direktform 2 vorzuziehen. Bei hohen Anforderungen an die numerische Genauigkeit und Robustheit ist die transponierte Direktform 2 oder die Direktform 1 die bessere Wahl. Für Echtzeitanwendungen eignet sich die transponierte Direktform 2 besonders gut aufgrund ihrer speicher- und rechen Zeiteffizienz sowie ihrer numerischen Stabilität.
+
+
+# Bilineartransformation
+Die Bilineartransformation dient als ein Verfahren, welches die Überführung analoger kontinuerierlicher Filter in digitale Filterstrukturen ermöglicht. Bei diesem Verfahren wird das analoge Frequenzverhalten möglichst genau in den digitalen Frequenzbereich übertragen und bietet dabei die Erhaltung der Stabilität sowie eine bijektive, aliasfreie Abbildung der s-Parameter in den z-Bereich. Sei überführt die imaginäre Achse der s-Ebene ($j\omega$) exakt auf den Einheitskreis der z-Ebene und erhält dabei die Stabilitätsbedingungen.
+
+
+## Zentrale Substitutionen
+
+Die mathematische Basis der Bilineartransformation beruht auf einer Substitution der s Parameter:
+$$
 s = \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}}
-\]</span></p>
-<p>Dabei ist <span class="math inline">\(T_d\)</span> ein Entwurfsparameter mit Zeitcharakteristik, der in der Praxis überlicherweise mit der Abtastperiode <span class="math inline">\(T\)</span> gleichgesetzt wird. Durch dieses nichtlineare Transformation werden rationale Funktionen im s-Bereich in rationale Funktionen im z-Bereich abgebildet, ohne dass die Orndung der Übertragungsfunktionen ansteigt.</p>
-</section>
-<section id="transformation-der-übergangsfunktion" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="transformation-der-übergangsfunktion"><span class="header-section-number">12.2</span> Transformation der Übergangsfunktion</h2>
-<p>Zur Digitalisierung eines analogen Filters mit der Übertragungsfunktion <span class="math inline">\(H_c(s)\)</span> wird die Subtitution in die analoge Übertragungsfunktion eingesetzt. Dieser Prozess führt zur digitalen Übertragungsfunktion:</p>
-<p><span class="math display">\[
+$$
+
+Dabei ist $T_d$ ein Entwurfsparameter mit Zeitcharakteristik, der in der Praxis überlicherweise mit der Abtastperiode $T$ gleichgesetzt wird. Durch dieses nichtlineare Transformation werden rationale Funktionen im s-Bereich in rationale Funktionen im z-Bereich abgebildet, ohne dass die Orndung der Übertragungsfunktionen ansteigt.
+
+## Transformation der Übergangsfunktion
+
+Zur Digitalisierung eines analogen Filters mit der Übertragungsfunktion $H_c(s)$ wird die Subtitution in die analoge Übertragungsfunktion eingesetzt. Dieser Prozess führt zur digitalen Übertragungsfunktion:
+
+$$
 H(z) = H_c\left( \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}} \right)
-\]</span></p>
-<p>Die resultierende Übertragungsfunktion <span class="math inline">\(H(z)\)</span> repräsentiert die vollständige digitale Überführung des ursprünglichen analogen Filters, wobei alle wesentlichen Filtereigenschaften erhalten bleiben.</p>
-</section>
-<section id="transformation-von-polen-und-nullstellen" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="transformation-von-polen-und-nullstellen"><span class="header-section-number">12.3</span> Transformation von Polen und Nullstellen</h2>
-<p>Die Pol- und Nullstellen des analogen Filters unterliegen während der Transformation spezifischen Abbildungsregeln. Für eine analoge Nullstelle <span class="math inline">\(\zeta_k\)</span> und einen analogen Pol <span class="math inline">\(s_k\)</span> ergeben sich die entsprechenden digitalen Werte:</p>
-<p><span class="math display">\[
+$$
+
+Die resultierende Übertragungsfunktion $H(z)$ repräsentiert die vollständige digitale Überführung des ursprünglichen analogen Filters, wobei alle wesentlichen Filtereigenschaften erhalten bleiben.
+
+
+## Transformation von Polen und Nullstellen
+
+Die Pol- und Nullstellen des analogen Filters unterliegen während der Transformation spezifischen Abbildungsregeln. Für eine analoge Nullstelle $\zeta_k$ und einen analogen Pol $s_k$ ergeben sich die entsprechenden digitalen Werte:
+
+$$
 z_k = \frac{1 + \frac{T_d}{2} \cdot \zeta_k}{1 - \frac{T_d}{2} \cdot \zeta_k}, \quad
 p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
-\]</span></p>
-<p>Diese Transformationsregeln gewährleisten, dass die fundamentalen Eigenschaften des Filters während der Digitalierung erhalten bleiben. Insbesondere stellt die Transformation sicher, dass die linke s-Halbebene, welche alle stabilen Pole enthält, vollständig in das Innere des Einheitskreises der z-Ebene abgebildet werden kann.</p>
-</section>
-<section id="frequenzverzerrung---frequency-warping" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="frequenzverzerrung---frequency-warping"><span class="header-section-number">12.4</span> Frequenzverzerrung - Frequency Warping:</h2>
-<p>Ein wesentlicher und unvermeidlciher Aspekt der Bilineartransformation ist die nichtlineare Abbildung der Frequenzachse, bekannt als Frequenzverzerrung oder Frequency Warping. Die mathematische Beschreibung der Frequenzformation lautet:</p>
-<p><span class="math display">\[
+$$
+
+Diese Transformationsregeln gewährleisten, dass die fundamentalen Eigenschaften des Filters während der Digitalierung erhalten bleiben. Insbesondere stellt die Transformation sicher, dass die linke s-Halbebene, welche alle stabilen Pole enthält, vollständig in das Innere des Einheitskreises der z-Ebene abgebildet werden kann.
+
+## Frequenzverzerrung - Frequency Warping:
+
+Ein wesentlicher und unvermeidlciher Aspekt der Bilineartransformation ist die nichtlineare Abbildung der Frequenzachse, bekannt als Frequenzverzerrung oder Frequency Warping. Die mathematische Beschreibung der Frequenzformation lautet:
+
+$$
 \omega = 2 \cdot \tan^{-1} \left( \frac{\Omega T_d}{2} \right), \quad
 \Omega = \frac{2}{T_d} \cdot \tan\left( \frac{\omega}{2} \right)
-\]</span></p>
-<p>Durch die Frequenzverzerrung kann das Verhalten digitaler Filter beeinflusst werden. Bei niedrigen Frequenzen, nahe <span class="math inline">\(\omega\)</span> = 0 oder 0 Hz, ist die Verzerrung minimal und nahezu vernachlässigbar. In diesem Bereich verhalten sich digitale und analoge Filter nahezu identisch. Mit steigender Frequenz nimmt die Verzerrung progressiv zu und erreicht ihr Maximum bei Frequenzen nahe der Nyquist-Frequenz <span class="math inline">\(\omega = \pi\)</span> oder der halben Abtastrate <span class="math inline">\(\frac{f_s}{2}\)</span></p>
-</section>
-<section id="prewarping" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="prewarping"><span class="header-section-number">12.5</span> Prewarping</h2>
-<p>Um die Abweichungen die durch das Frequency Warping entstehen zu kompensieren, wird die Methode des Prewarpings genutzt. Dabei wird die analoge Designfrequenz <span class="math inline">\(\Omega_k\)</span> so angepasst, dass sie nach der Bilineartransformation genau der gewünschte digitalen Frequenz <span class="math inline">\(\omega_k\)</span> entspricht:</p>
-<p><span class="math display">\[
+$$
+
+Durch die Frequenzverzerrung kann das Verhalten digitaler Filter beeinflusst werden. Bei niedrigen Frequenzen, nahe $\omega$ = 0 oder 0 Hz, ist die Verzerrung minimal und nahezu vernachlässigbar. In diesem Bereich verhalten sich digitale und analoge Filter nahezu identisch. Mit steigender Frequenz nimmt die Verzerrung progressiv zu und erreicht ihr Maximum bei Frequenzen nahe der Nyquist-Frequenz $\omega = \pi$ oder der halben Abtastrate $\frac{f_s}{2}$
+
+## Prewarping
+
+Um die Abweichungen die durch das Frequency Warping entstehen zu kompensieren, wird die Methode des Prewarpings genutzt. Dabei wird die analoge Designfrequenz $\Omega_k$ so angepasst, dass sie nach der Bilineartransformation genau der gewünschte digitalen Frequenz $\omega_k$ entspricht:
+
+$$
 \Omega_k = \frac{2}{T_d} \cdot \tan\left( \frac{\omega_k}{2} \right) = 2 \cdot f_s \cdot \tan(\frac{\pi f_d}{f_s})
-\]</span></p>
-<p>In der praktischen Anwendung wird Prewarping typischerweise für Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist.</p>
-<p>Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate <span class="math inline">\(f_s\)</span> höher als die Eckfrequenzen <span class="math inline">\(f_d\)</span> der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.</p>
+$$
+
+In der praktischen Anwendung wird Prewarping typischerweise für Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist. 
+
+Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate $f_s$ höher als die Eckfrequenzen $f_d$ der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.
+
+-->
 </section>
 </section>
-<section id="filterentwurf-in-matlab" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Filterentwurf in Matlab</h1>
+<section id="filterentwurf-in-matlab" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Filterentwurf in Matlab</h1>
 <p>In MATLAB wird der Entwurf digitaler IIR-Filter mit einer Vielzahl von Werkzeugen unterstützt, die sowohl den Entwurf als auch die Analyse und Implementierung erleichtern. Grundlage ist dabei das Prinzip, einen analogen Prototypfilter mittels Bilineartransformation in den digitalen Bereich zu überführen. Dieses Verfahren wird für gängige IIR Filtertypen wie Butterworth-, Chebyshev- und elliptische Filter eingesetzt. Die Funktionen <em>butter</em>, <em>cheby1</em>, <em>cheby2</em> und <em>ellip</em> wenden genau dieses Prinzip an. Die Vorgehensweise entspricht dabei der Filterentwicklung in Python mit der Scipy-Bibliothek.<br></p>
 <p>Die direkte Umsetzung von IIR-Filtern mit Polynomkoeffizienten (b, a) kann bereits bei vergleichsweise niedrigen Ordnungen zu numerischen Instabilitäten führen. Ursache dafür sind Rundungsfehler, die durch die direkte Multiplikation aller Pole und Nullstellen im Übertragungsfunktionspolynom entstehen und dazu führen können, dass Pole außerhalb des Einheitskreises liegen. Dies beeinträchtigt die Stabilität und kann die Filterfunktion erheblich verfälschen.<br> Um solche Instabilitäten zu vermeiden, werden IIR-Filter in der Praxis nicht als ein einziges großes Polynom, sondern als Produkt mehrerer einfacher biquadratischer Übertragungsfunktionen (Biquads) umgesetzt. Biquads sind IIR-Filterblöcke zweiter Ordnung, mit denen sich Filter höherer Ordnung durch Zerlegung und Kaskadierung in mehreren Sektionen stabil realisieren lassen. Diese Aufteilung begrenzt Rundungsfehler und verbessert die Gesamtstabilität des Filters. Dies ist insbesondere bei der Umsetzung auf Hardwareplattformen wie FPGAs oder Mikrocontrollern wichtig.<br> MATLAB unterstützt dieses Vorgehen durch die Arbeit mit <em>Second-Order Sections (SOS)</em>. Die SOS-Darstellung wird als Matrix gespeichert, bei der jede Zeile die Zähler- und Nennerkoeffizienten einer Biquad-Sektion enthält. Zusätzlich wird ein separater Verstärkungsfaktor (<em>Gain</em>) ausgegeben, um den Frequenzgang korrekt zu skalieren. Die Entwurfsfunktionen können die Filterkoeffizienten direkt in SOS-Form bereitstellen. Alternativ lassen sich vorhandene Übertragungsfunktionen mit <em>tf2sos</em> in eine Biquad-Kaskade umwandeln.<br></p>
 <p>Der Entwurfsprozess in MATLAB folgt dabei einem klaren Ablauf. Zunächst werden die Anforderungen festgelegt, wie Filtertyp, Filterordnung, Grenzfrequenzen und gegebenenfalls erlaubten Ripple im Durchlass- oder Sperrbereich. Die Grenzfrequenzen werden normiert auf die halbe Abtastrate (Nyquist-Frequenz) angegeben und müssen im Bereich von 0 bis 1 liegen. Bei Bandpass- und Bandsperrfiltern wird eine Frequenztransformation des Tiefpass-Prototyps durchgeführt, wodurch sich die Filterordnung mathematisch verdoppelt. Diese Verdoppelung muss bei der Wahl der Prototyp-Ordnung in Skripten berücksichtigt werden, da die Entwurfsfunktionen dies nicht automatisch anpassen.<br></p>
 <p>Neben der rein skriptbasierten Arbeitsweise können Filter alternativ auch mit dem <a href="https://de.mathworks.com/help/signal/ug/introduction-to-filter-designer.html">Filter Designer</a> erstellt werden, der eine grafische Oberfläche für die Spezifikation der Filterparameter sowie die Visualisierung von Frequenzgängen und Pol-Nullstellen-Diagrammen bietet. Nach dem Entwurf lassen sich die berechneten Filterkoeffizienten sowohl als Polynomkoeffizienten (b, a) als auch direkt in SOS-Form ausgeben. Die Kaskadierung in Biquads bezieht sich dabei stets auf die tatsächlich resultierende Gesamtordnung, einschließlich der Verdoppelung bei Bandpass- oder Bandsperrfiltern.<br></p>
 <p>Für die Analyse stehen Funktionen wie <em>freqz</em> zur Darstellung von Amplituden- und Phasengang oder das umfassende Filter Visualization Tool (<em>fvtool</em>) zur Verfügung.<br></p>
-<section id="spezifikation-der-filter" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="spezifikation-der-filter"><span class="header-section-number">13.1</span> Spezifikation der Filter</h2>
+<section id="spezifikation-der-filter" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="spezifikation-der-filter"><span class="header-section-number">9.1</span> Spezifikation der Filter</h2>
 <p>Für die Demonstration wurde entschieden, alle vier grundlegenden Filtertypen als Butterworth-Filter zu realisieren. Diese besitzen den Vorteil kein Ripple im Durchlass- und Sperrbereich aufzuweisen. Gerade bei der Verarbeitung von Audiosignalen können Ripple im Frequenzgang zu unerwünschten Artefakten führen. Ein möglichst glatter Amplitudenverlauf ist daher insbesondere in der Audioanwendung vom Vorteil.<br> Im direkten Vergleich zu elliptischen oder Chebyshev-Filtern weisen Butterworth-Filter bei gleicher Flankensteilheit eine höhere erforderliche Filterordnung auf. Diese höhere Ordnung würde in einer Hardwareumsetzung prinzipiell mehr Biquad-Stufen benötigen und damit mehr Ressourcen. Bei der Implementierung wurden die Filter auf 2. Ordnung beschränkt.<br> Da bei einer so niedrigen Filterordnung alle Filter, unabhängig davon, ob sie als Butterworth- oder elliptischer Filter realisiert werden, ohnehin nur aus einer Biquad-Stufe bestehen, hätte die Wahl des Filtertyps keinen nennenswerten Unterschied bei den Hardwareanforderungen gemacht. Der Hauptgrund für die Entscheidung zugunsten der Butterworth-Filter liegt somit vor allem im glatten Frequenzverlauf.<br></p>
 <p>Bei der genauen Spezifikation der Filter wurde sich an dem Beispiel von <a href="https://nbviewer.org/github/spatialaudio/digital-signal-processing-lecture/blob/master/filter_design/audiofilter.ipynb#bandstop2nd">Design of Digital Audio IIR Filters</a> von Frank Schultz gehalten. Dabei ergaben sich Folgende Spezifikationen:<br></p>
 <table class="caption-top table">
@@ -849,19 +837,19 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </div>
 </section>
 </section>
-<section id="implementierung" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Implementierung</h1>
+<section id="implementierung" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Implementierung</h1>
 <p>Für die Implementierung von IIR-Filtern mittels VHDL gibt es mehrere Ansätze. Eine direkte Umsetzung der Differenzengleichung eines IIR-Filters in HDL-Code ist grundsätzlich möglich. Der Nachteil dieses Verfahrens liegt jedoch im Aufwand für Test, Validierung und Debugging. Gerade im Rahmen einer Abschlussarbeit mit begrenztem Zeitrahmen ist eine manuelle Umsetzung in dieser Tiefe schwer umsetzbar, zumindest nicht in einem vergleichbaren Umfang wie bei der Verwendung des HDL Coders von MATLAB/Simulink.<br> Der modellbasierte Ansatz über MATLAB ermöglicht eine deutlich schnellere Entwicklung und erlaubt die automatische Generierung von synthesefähigem VHDL-Code auf Basis eines zuvor getesteten Simulink-Modells. Dies erleichtert insbesondere die Erstellung mehrerer Filtervarianten.<br></p>
 <p>Für die Umsetzung eines digitalen IIR-Filters wurde daher ein Simulink-Modell entwickelt, das mithilfe des HDL Coders in VHDL-Code übersetzt wird. Ziel ist es, daraus einen Vivado-kompatiblen IP-Core zu erzeugen, der über eine AXI4-Stream-Schnittstelle in ein FPGA-Design eingebunden werden kann. Dieser modellbasierte Workflow reduziert die Entwicklungszeit und vereinfacht auch die Integration in die bestehende FPGA-Architekturen erheblich.<br> In der Vivado Design Suite von AMD/Xilinx spielen <a href="https://docs.amd.com/r/2022.1-English/ug896-vivado-ip">IP-Cores (Intellectual Property Cores)</a> eine zentrale Rolle. Dabei handelt es sich um wiederverwendbare Hardwaremodule, die sich modular in digitale Systeme einfügen lassen. Für die Implementierung von digitalen Filtern bieten IP-Cores einen Vorteil. Die gesamte Filterlogik kann als in sich geschlossenes Modul gekapselt werden. Dadurch wird die Funktionalität des Filters klar abgegrenzt, was sowohl die Wartung als auch die Wiederverwendbarkeit verbessert. Ein einmal entwickelte Filter-IP-Core kann unkompliziert in andere Designs oder Projekte übernommen und betrieben werden, ohne den zugrunde liegenden HDL-Code erneut anpassen zu müssen.<br></p>
-<section id="modellierung-in-simulink" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="modellierung-in-simulink"><span class="header-section-number">14.1</span> Modellierung in Simulink</h2>
+<section id="modellierung-in-simulink" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="modellierung-in-simulink"><span class="header-section-number">10.1</span> Modellierung in Simulink</h2>
 <p>Für die Umsetzung in Simulink wurde der in der DSP HDL Toolbox enthaltene <a href="https://de.mathworks.com/help/dsphdl/ref/biquadfilter.html">Biquadratic IIR (SOS) filter</a> verwendet. Der Vorteil dieses Blocks gegenüber einer direkten Umsetzung der transponierten Direct Form II liegt in seiner Optimierung für die HDL-Codegenerierung. Er enthält bereits eine integrierte Steuerungslogik für das valid-Signal im AXI-Stream-Protokoll und verfügt zudem über eine vorimplementierte Pipelining-Struktur.<br> Die Probleme bei der Umsetzung einer Direct-Form-Struktur lagen hauptsächlich darin, dass bei der Bitstream-Generierung in Vivado die Timing-Anforderungen nicht eingehalten werden konnten und die Taktfrequenz des Filters entsprechend reduziert werden musste. Wird die Taktfrequenz zu niedrig gewählt, verlängert sich die Zeit der Filterung entsprechend.<br> Hinzu kommt, dass ein einzelner Filter in dieser Struktur vergleichsweise viele Ressourcen auf dem FPGA beansprucht. Eine direkte Implementierung der Direct Form II ohne korrektes Pipelining und weiterführende Optimierungen gestaltet sich zudem als äußerst anspruchsvoll.<br> Aus diesem Grund fiel die Entscheidung zugunsten einer vorgefertigten Lösung aus der DSP HDL Toolbox. Trotzdem musste die Taktfrequenz letztlich auf 50 MHz begrenzt werden, da bei 100 MHz ebenfalls keine vollständige Einhaltung der Timings erreicht werden konnte.<br></p>
-<section id="direct-form-ii-transponiert-mit-pipelining" class="level3" data-number="14.1.1">
-<h3 data-number="14.1.1" class="anchored" data-anchor-id="direct-form-ii-transponiert-mit-pipelining"><span class="header-section-number">14.1.1</span> Direct Form II Transponiert mit Pipelining</h3>
+<section id="direct-form-ii-transponiert-mit-pipelining" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="direct-form-ii-transponiert-mit-pipelining"><span class="header-section-number">10.1.1</span> Direct Form II Transponiert mit Pipelining</h3>
 <p>Der Filter-Block wurde auf Direct Form II Transponiert eingestellt, da diese Struktur, genau wie die klassische Direct Form II, nur eine Verzögerungskette benötigt und somit weniger Register erforderlich sind. Die transponierte Form verschiebt die Verzögerungselemente auf die Rückkopplungspfade, wodurch die kritische Pfadlänge verkürzt wird. Gleichzeitig bietet sie Vorteile in Bezug auf die numerische Stabilität und ist robuster gegenüber Quantisierungseffekten.<br> Ergänzend ist dieser Filterblock schon gepipelined. Beim <em>Pipelining</em> werden innerhalb der Struktur gezielt Register in die kombinatorischen Signalpfade eingefügt. Dadurch werden lange Logikpfade unterbrochen, was die kritische Pfadlänge reduziert. Werte können häufiger zwischengespeichert werden, sodass pro Taktzyklus weniger Rechenoperationen durchgeführt werden müssen. Dies ermöglicht eine höhere maximale Taktfrequenz und verbessert insgesamt die Timing-Eigenschaften der Schaltung. Rückkopplungswege, die bei IIR-Filtern eine Herausforderung darstellen, können so auch bei hoher Verarbeitungsgeschwindigkeit stabil betrieben werden.<br></p>
 </section>
-<section id="festkommaarithmetik" class="level3" data-number="14.1.2">
-<h3 data-number="14.1.2" class="anchored" data-anchor-id="festkommaarithmetik"><span class="header-section-number">14.1.2</span> Festkommaarithmetik</h3>
+<section id="festkommaarithmetik" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="festkommaarithmetik"><span class="header-section-number">10.1.2</span> Festkommaarithmetik</h3>
 <p>Die gesamte Filterimplementierung verwendet Festkommaarithmetik, da FPGAs standardmäßig keine native Gleitkomma-Hardware besitzen. In digitalen Systemen ist die Verwendung von Festkomma eine zentrale Voraussetzung, da alle Signale und Rechenergebnisse nur mit einer endlichen Wortbreite dargestellt und verarbeitet werden können. Dies führt zwangsläufig zu Rundungs- und Quantisierungsfehlern, die insbesondere bei rekursiven Systemen wie IIR-Filtern zu Stabilitätsproblemen führen können, wenn sie nicht sorgfältig berücksichtigt werden.<br> Ein Aspekt der Festkommaarithmetik ist die Wahl einer geeigneten Zahlendarstellung. Um die begrenzte Bitbreite optimal zu nutzen, ist eine sorgfältige Skalierung notwendig. Sie verhindert Überläufe und stellt sicher, dass die numerische Auflösung bestmöglich ausgeschöpft wird.<br> Außerdem wirkt sich die gewählte Wortlänge auf den kritischen Pfad im digitalen System aus. Je länger die arithmetischen Operationen, desto größer sind die resultierenden Verzögerungszeiten, was wiederum die maximal erreichbare Taktfrequenz limitiert.<br></p>
 <p>Angesichts dessen, wird für alle Signalpfade ein vorzeichenbehafteter 32-Bit-Festkommatyp mit 16 Nachkommabits verwendet. Dieses Format wurde sowohl in Simulink als auch in der späteren Hardwareimplementierung experimentell validiert und hat sich dabei als optimale Wahl erwiesen.<br></p>
 <!--
@@ -869,12 +857,12 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 
 -->
 </section>
-<section id="axi4-stream-schnittstelle" class="level3" data-number="14.1.3">
-<h3 data-number="14.1.3" class="anchored" data-anchor-id="axi4-stream-schnittstelle"><span class="header-section-number">14.1.3</span> AXI4-Stream-Schnittstelle</h3>
+<section id="axi4-stream-schnittstelle" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="axi4-stream-schnittstelle"><span class="header-section-number">10.1.3</span> AXI4-Stream-Schnittstelle</h3>
 <p>Die Integration der Filter in das FPGA-System erfolgt über eine <em>AXI4-Stream-Schnittstelle</em>, einem Teil der standardisierten AMBA AXI4-Interface-Protokollfamilie. Diese Schnittstellenarchitektur stammt ursprünglich von Arm und wird von AMD/Xilinx weitläufig in Vivado-Designs eingesetzt. Die AXI4-Familie setzt sich dabei zusammen aus <em>AXI4</em> für adressierte Hochgeschwindigkeits-Datenübertragungen mit Burst-Unterstützung, <em>AXI4-Lite</em> für einfache Steuerregister-Kommunikation ohne Burst-Funktionalität und <em>AXI4-Stream</em> für kontinuierliche, nicht-adressierte Datenströme. Letzteres erlaub mehrere Datenströme mit unterschiedlichen Datenbreiten über denselben Interconnect zu übertragen. Die Kommunikation basiert auf einem einfachen Handshake-Mechanismus mit den Signalen TVALID und TREADY. Ein Transfer erfolgt nur, wenn beide Signale gleichzeitig aktiv sind. <br> Der Sender (Master) setzt TVALID sobald gültige Daten vorliegen, und der Empfänger (Slave) signalisiert mit TREADY, dass dieser bereit ist Daten zu empfangen. Der Sender darf <em>nicht auf TREADY warten</em>, bevor er TVALID aktiviert. Der Sender <em>muss TVALID so lange halten</em>, bis der Handshake abgeschlossen ist. Der Empfänger darf TREADY auch vor TVALID setzen, muss er aber nicht.<br> Neben den verpflichtenden Signalen TVALID, TREADY und TDATA existieren im <em>AXI4-Stream-Protokoll</em> auch optionale Signale wie TID und TLAST. Das Signal TID (Transaction ID) ermöglicht es, mehrere logische Datenströme innerhalb eines gemeinsamen physischen AXI4-Stream-Kanals voneinander zu unterscheiden. Dies ist besonders relevant, wenn verschiedene Datenquellen über denselben Stream multiplexed werden. TLAST kennzeichnet bei paketbasierter Übertragung das Ende eines Datenpakets. Es wird gesetzt, sobald das letzte Datenwort eines Transfers übertragen wird.<br> Die Verwendung von AXI4-Stream in Vivado hat den großen Vorteil, dass IP-Blöcke auf standardisierte Weise verbunden werden können. Über <em>AXI-Interconnects</em> oder <em>AXI SmartConnect</em>-Komponenten kann der Datenfluss zwischen IPs automatisch geroutet werden, was die Einbindung vereinfacht. <br></p>
 </section>
-<section id="modell-und-aufbau" class="level3" data-number="14.1.4">
-<h3 data-number="14.1.4" class="anchored" data-anchor-id="modell-und-aufbau"><span class="header-section-number">14.1.4</span> Modell und Aufbau</h3>
+<section id="modell-und-aufbau" class="level3" data-number="10.1.4">
+<h3 data-number="10.1.4" class="anchored" data-anchor-id="modell-und-aufbau"><span class="header-section-number">10.1.4</span> Modell und Aufbau</h3>
 <p>Die Numerator- und Denominator-Koeffizienten des Filters werden direkt aus dem MATLAB-Workspace übernommen und stammen aus der vorberechneten SOS-Matrix. Der Gain-Faktor wird in die Numerator-Koeffizienten eingerechnet, um eine stabile Skalierung zu gewährleisten. Dadurch wird verhindert, dass während der Berechnung Zwischenwerte entstehen, die außerhalb des darstellbaren Wertebereichs liegen.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -898,20 +886,20 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </div>
 </section>
 </section>
-<section id="hdl-coder-und-workflow-advisor" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="hdl-coder-und-workflow-advisor"><span class="header-section-number">14.2</span> HDL-Coder und Workflow Advisor</h2>
+<section id="hdl-coder-und-workflow-advisor" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="hdl-coder-und-workflow-advisor"><span class="header-section-number">10.2</span> HDL-Coder und Workflow Advisor</h2>
 <p>Für die Überführung des Filtermodells in eine hardwaretaugliche Form kommt der <a href="https://de.mathworks.com/products/hdl-coder.html"><em>HDL Coder</em></a> von MathWorks zum Einsatz. Dieses Tool ermöglicht die automatische Generierung von synthesefähigem HDL-Code aus einem Simulink-Modell oder MATLAB-Algorithmus. Dadurch entfällt die manuelle Erstellung von VHDL- oder Verilog-Code.<br> Der HDL Coder unterstützt einen modellbasierten Entwicklungsablauf, bei dem speziell für die Hardwaregenerierung ausgelegte, HDL-kompatible Simulink-Blöcke verwendet werden. Diese gewährleisten eine korrekte Abbildung der Signalverarbeitung im späteren FPGA-Design.<br> Die automatisierte Codegenerierung erfolgt über den HDL Workflow Advisor, der den Nutzer schrittweise durch den gesamten Prozess führt. Abhängig von der gewählten Zielplattform wird dabei festgelegt, welche zusätzlichen Schnittstellen generiert werden sollen. So kann ein IP-Core mit AXI4-Stream- oder AXI4-Lite-Schnittstellen erzeugt werden. Die Ein- und Ausgänge des Simulink-Modells werden entsprechend den HDL-I/O-Ports oder AXI-Schnittstellen zugewiesen.<br> Nach Abschluss der Konfiguration generiert der HDL Coder automatisch den vollständigen HDL-Code, einschließlich aller erforderlichen Constraints-Dateien (XDC) sowie optionaler Testbenches. Der gesamte Ablauf wird strukturiert durchlaufen und dokumentiert.<br> Im Rahmen dieser Implementierung wird auf Basis der Codegenerierung ein Vivado-kompatibler IP-Core erzeugt, der in ein lokales IP-Repository abgelegt wird. Dieser IP-Core kann anschließend ohne zusätzliche Anpassungen in ein Vivado Block Design eingebunden werden.<br> Der kombinierte Einsatz von HDL Coder und HDL Workflow Advisor ist besonders dann vorteilhaft, wenn begrenzte Erfahrung in der manuellen HDL-Entwicklung vorliegt oder eine zügige, reproduzierbare Prototypenerstellung erforderlich ist. Die automatisierte Vorgehensweise reduziert Fehlerquellen, verbessert die Wiederverwendbarkeit und gewährleistet, dass alle Schnittstellenanforderungen bereits im Modellierungsprozess berücksichtigt werden. So konnten die IIR-Filter mit AXI4-Stream-Anbindung hardwaregerecht umgesetzt werden.<br></p>
-<section id="modellvorbereitung-für-den-hdl-coder" class="level3" data-number="14.2.1">
-<h3 data-number="14.2.1" class="anchored" data-anchor-id="modellvorbereitung-für-den-hdl-coder"><span class="header-section-number">14.2.1</span> Modellvorbereitung für den HDL-Coder</h3>
+<section id="modellvorbereitung-für-den-hdl-coder" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="modellvorbereitung-für-den-hdl-coder"><span class="header-section-number">10.2.1</span> Modellvorbereitung für den HDL-Coder</h3>
 <p>Damit das Simulink-Modell für den HDL-Coder verwendet werden kann, müssen einige Einstellungen in Simulink selbst durchgeführt werden.<br> Dieses Setupt lässt sich im <em>Comand Window</em> in Matlab automatisch gestalten, mit der Voraussetzung, dass Vivado installiert ist. Für dieses Projekt wird Vivado 2022.1 verwendet, dies ist die aktuellste Version von Vivado welche von Pynq unterstützt wird.<br> <!--quelle: [Pynq: Change Log](https://pynq.readthedocs.io/en/latest/changelog.html#version-3-0-0). --></p>
 <p>Das Setup in Simulink lässt sich mit der Funktion <a href="https://de.mathworks.com/help/hdlcoder/ref/hdlsetup.html"><em>hdlsetup(modelname)</em></a> ausführen. Diese Funktion konfiguriert das geöffnete Modell für den HDL-Workflow, indem sie notwendige Pfade und Einstellungen für den HDL Coder ergänzt. Sie bereitet Simulink gezielt für die Codegenerierung und FPGA-Implementierung vor.<br> Die Funktion muss pro Modell nur einmalig ausgeführt werden. Nach erfolgreicher Ausführung wird das Simulink-Modell typischerweise durch einen roten Rahmen markiert, ein Hinweis darauf, dass es für die HDL-Codegenerierung vorbereitet ist.<br></p>
 <p>Die Funktion <a href="https://de.mathworks.com/help/hdlcoder/gs/toolbox-setup.html#btp_lw0"><em>hdlsetuptoolpath(path)</em></a> konfiguriert den Pfad zu externen Synthese-Tools, die für Codegenerierung benötigt werden. Dieser Schritt ist erforderlich, damit die HDL Workflow Advisor-Umgebung später auf die notwendigen Werkzeuge zugreifen und einen IP-Core generieren kann.<br> Der Befehl sollte vor dem Öffnen des HDL Workflow Advisor ausgeführt werden, andernfalls kann der Toolpfad nicht korrekt übernommen werden. Es empfiehlt sich daher, diesen Befehl in ein MATLAB-Skript zu integrieren.<br></p>
 </section>
-<section id="einstellungen-vom-hdl-workflow-advisor" class="level3" data-number="14.2.2">
-<h3 data-number="14.2.2" class="anchored" data-anchor-id="einstellungen-vom-hdl-workflow-advisor"><span class="header-section-number">14.2.2</span> Einstellungen vom HDL Workflow Advisor</h3>
+<section id="einstellungen-vom-hdl-workflow-advisor" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="einstellungen-vom-hdl-workflow-advisor"><span class="header-section-number">10.2.2</span> Einstellungen vom HDL Workflow Advisor</h3>
 <p>Im Folgenden werden die wichtigsten Einstellungen beschrieben, die für die Erstellung und Konfiguration des IP-Cores vorgenommen wurden.<br></p>
-<section id="set-target-device-and-synthesis-tool" class="level4" data-number="14.2.2.1">
-<h4 data-number="14.2.2.1" class="anchored" data-anchor-id="set-target-device-and-synthesis-tool"><span class="header-section-number">14.2.2.1</span> 1.1 Set Target Device and Synthesis Tool</h4>
+<section id="set-target-device-and-synthesis-tool" class="level4" data-number="10.2.2.1">
+<h4 data-number="10.2.2.1" class="anchored" data-anchor-id="set-target-device-and-synthesis-tool"><span class="header-section-number">10.2.2.1</span> 1.1 Set Target Device and Synthesis Tool</h4>
 <p>Im ersten Schritt werden im HDL Workflow Advisor die grundlegenden Parameter für die Zielhardware festgelegt. Als <strong>Target Workflow</strong> wird <em>IP Core Generation</em> ausgewählt, wodurch der Workflow Advisor für die Erstellung eines eigenständigen IP-Cores konfiguriert wird. Die <strong>Target Platform</strong> ist auf <em>Generic Xilinx Platform</em> eingestellt, es wird also keine board-spezifische Plattform gewählt, sondern eine generische Xilinx-Zielumgebung genutzt.<br> Als <strong>Synthesis Tool</strong> kommt <em>Xilinx Vivado</em> in der Version 2022.1 zum Einsatz. Damit wird definiert, dass die Synthese, die Implementierung und die spätere IP-Integration in einem Vivado-Projekt erfolgen. Unter <strong>Family</strong>, <strong>Device</strong>, <strong>Package</strong> und <strong>Speed</strong> sind die Werte <em>Zynq</em>, <em>xc7z020</em>, <em>clg400</em> und <em>-1</em> gesetzt. Diese Einstellungen entsprechen den Anforderungen des PYNQ-Z2 Boards. Die Werte für <strong>Package</strong> und <strong>Speed</strong> wurden dabei automatisch erkannt und übernommen.<br> Anschließend wird der Zielpfad angegeben, an dem die generierte IP gespeichert werden soll. Auf diese Weise ist sichergestellt, dass der IP-Core später direkt in Vivado eingebunden werden kann.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -920,8 +908,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </figure>
 </div>
 </section>
-<section id="set-target-interface" class="level4" data-number="14.2.2.2">
-<h4 data-number="14.2.2.2" class="anchored" data-anchor-id="set-target-interface"><span class="header-section-number">14.2.2.2</span> 1.2 Set Target Interface</h4>
+<section id="set-target-interface" class="level4" data-number="10.2.2.2">
+<h4 data-number="10.2.2.2" class="anchored" data-anchor-id="set-target-interface"><span class="header-section-number">10.2.2.2</span> 1.2 Set Target Interface</h4>
 <p>In diesem Schritt werden die Ein- und Ausgänge des Simulink-Modells den Schnittstellen der AXI-Stream-Plattform zugewiesen. Die Option <strong>Processor/FPGA Synchronization</strong> ist auf <em>Free running</em> gesetzt, da die spätere Anwendung als kontinuierlicher Datenstrom (Streaming) ausgelegt ist.<br> Die Übersicht in der Tabelle bietet zusätzlich einen guten Überblick über die zugewiesenen Datentypen der Ports. Bei den Signalen <em>In1</em> und <em>Out1</em> ist erkennbar, dass der zuvor über einen <em>Data Type Conversion-Block</em> eingestellte Festkommadatentyp übernommen wurde.<br> Wichtig ist außerdem, dass die Ein- und Ausgänge für das <em>Valid-Signal</em> (<em>In2</em> und <em>Out2</em>) den Datentyp <em>boolean</em> besitzen, da dies der AXI-Stream-Konvention entspricht.<br> Für den Ausgang <em>Out1</em> kann über die Schaltfläche <strong>Options</strong> zusätzlich die Größe des Ausgangspuffers konfiguriert werden. Standardmäßig ist dieser auf <em>1024</em> Bits eingestellt. Die Größe des Ausgangspuffers wurde auf <span class="math inline">\(2^{20}\)</span> eingestellt. Diese definierte Ausgangspuffergröße bestimmt die maximale Datenmenge, die pro Übertragung an den Filter gesendet werden kann. Diese Größe darf später weder unter- noch überschritten werden. Wird der Ausgangspuffer zu klein gewählt, muss das Eingangssignal in viele einzelne Übertragungen aufgeteilt werden. Da sich der IIR-Filter bei jeder Übertragung erneut einschwingt und keine Zustände zwischen den Übertragungen erhalten bleiben, kann es zu hörbaren Beeinträchtigungen kommen. Dieses wiederholte Einschwingen verstärkt Hintergrundrauschen und numerische Störungen, was sich in schwankender Lautstärke und zunehmendem Rauschen bemerkbar macht.<br></p>
 <p>Der Haken bei <strong>Generate default AXI4 slave interface</strong> sollte entfernt werden, sofern er gesetzt ist. Andernfalls wird automatisch eine AXI4-Lite-Schnittstelle erzeugt. Diese wird üblicherweise für die Registersteuerung verwendet.<br> Da die hier entwickelte IP jedoch für einen kontinuierlichen Datenstrom ausgelegt ist, ist eine Steuer-Schnittstelle nicht erforderlich. Sie würde das Design unnötig verkomplizieren.<br></p>
 <div class="quarto-figure quarto-figure-center">
@@ -931,16 +919,16 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </figure>
 </div>
 </section>
-<section id="set-target-frequency" class="level4" data-number="14.2.2.3">
-<h4 data-number="14.2.2.3" class="anchored" data-anchor-id="set-target-frequency"><span class="header-section-number">14.2.2.3</span> 1.3 Set Target Frequency</h4>
+<section id="set-target-frequency" class="level4" data-number="10.2.2.3">
+<h4 data-number="10.2.2.3" class="anchored" data-anchor-id="set-target-frequency"><span class="header-section-number">10.2.2.3</span> 1.3 Set Target Frequency</h4>
 <p>An dieser Stelle wird die Zielfrequenz der zu generierenden IP festgelegt. Ursprünglich war diese auf 100 MHz gesetzt. Da jedoch bei der späteren Bitstream-Erzeugung die Timing-Anforderungen nicht erfüllt werden konnten, wurde die Frequenz auf 50 MHz halbiert. Diese reduzierte Taktfrequenz zeigte im Design stabile Timing-Ergebnisse und wurde daher für die weitere Implementierung beibehalten.<br></p>
 </section>
-<section id="check-model-settings" class="level4" data-number="14.2.2.4">
-<h4 data-number="14.2.2.4" class="anchored" data-anchor-id="check-model-settings"><span class="header-section-number">14.2.2.4</span> 2.1 Check Model Settings</h4>
+<section id="check-model-settings" class="level4" data-number="10.2.2.4">
+<h4 data-number="10.2.2.4" class="anchored" data-anchor-id="check-model-settings"><span class="header-section-number">10.2.2.4</span> 2.1 Check Model Settings</h4>
 <p>In diesem Schritt werden die verwendeten Simulink-Blöcke daraufhin überprüft, ob sie für die HDL-Codegenerierung geeignet sind. Zusätzlich kann ein <strong>Industry Standard Check</strong> durchgeführt werden, der das Modell hinsichtlich Industriestandards bewertet. Dabei werden häufig Warnungen ausgegeben, insbesondere bezüglich der Namenskonventionen, wenn diese nicht den typischen Industriestandards entsprechen.<br> Für die hier verfolgte Anwendung ist es nicht erforderlich, den Industry Standard Check zu aktivieren, und es wird empfohlen, diesen nicht auszuführen, um unnötige Warnmeldungen zu vermeiden.<br></p>
 </section>
-<section id="set-hdl-options" class="level4" data-number="14.2.2.5">
-<h4 data-number="14.2.2.5" class="anchored" data-anchor-id="set-hdl-options"><span class="header-section-number">14.2.2.5</span> 3.1 Set HDL Options</h4>
+<section id="set-hdl-options" class="level4" data-number="10.2.2.5">
+<h4 data-number="10.2.2.5" class="anchored" data-anchor-id="set-hdl-options"><span class="header-section-number">10.2.2.5</span> 3.1 Set HDL Options</h4>
 <p>Hier werden die Einstellungen für die Codegenerierung getroffen. Im Bereich <strong>Optimization/General</strong> wurden die Einstellungen größtenteils unverändert übernommen. Dabei ist es jedoch wichtig darauf zu achten, dass die Option <em>Enable-based constraints</em> deaktiviert ist. Diese Funktion erzeugt zusätzliche Timing-Beschränkungen auf Basis von <em>Enable-Signalen</em>, was insbesondere bei einfacheren Designs oder kontinuierlich laufenden IPs zu unerwünschten Timing-Problemen führen kann.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -963,8 +951,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </figure>
 </div>
 </section>
-<section id="generate-rtl-code-and-ip-core" class="level4" data-number="14.2.2.6">
-<h4 data-number="14.2.2.6" class="anchored" data-anchor-id="generate-rtl-code-and-ip-core"><span class="header-section-number">14.2.2.6</span> 3.2 Generate RTL Code and IP Core</h4>
+<section id="generate-rtl-code-and-ip-core" class="level4" data-number="10.2.2.6">
+<h4 data-number="10.2.2.6" class="anchored" data-anchor-id="generate-rtl-code-and-ip-core"><span class="header-section-number">10.2.2.6</span> 3.2 Generate RTL Code and IP Core</h4>
 <p>Hier lässt sich der zu generierende IP-Core benennen und eine Versionsnummer vergeben. Für die IP sollte ein aussagekräftiger Name gewählt werden, damit sie später in Vivado leicht auffindbar ist.<br></p>
 <p>Um die IP zu generieren und alle vorgenommenen Einstellungen anzuwenden und zu überprüfen, klickt man mit der rechten Maustaste auf den Schritt <strong>3.2 Generate RTL Code and IP Core</strong> und wählt <em>Run to Selected Task</em> aus. Dabei werden alle vorangehenden Schritte automatisch durchlaufen. Sollte ein Fehler auftreten oder eine Prüfung fehlschlagen, wird der Vorgang an der entsprechenden Stelle abgebrochen.<br></p>
 <p>Nach der Generierung wird der IP-Core erstellt und ein Bericht geöffnet. Dieser enthält sowohl mögliche Warnungen als auch den erzeugten HDL-Code. Zusätzlich bietet der vollständige Report einen Überblick über die Ressourcennutzung, darunter beispielsweise die Anzahl verwendeter LUTs, Flip-Flops oder Multiplikatoren.<br></p>
@@ -978,12 +966,12 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </section>
 </section>
 </section>
-<section id="design-in-vivado" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="design-in-vivado"><span class="header-section-number">14.3</span> Design in Vivado</h2>
+<section id="design-in-vivado" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="design-in-vivado"><span class="header-section-number">10.3</span> Design in Vivado</h2>
 <p>Für die Aufnahme und Wiedergabe von Audio über das Pynq-Board wurde prinzipiell der Audioanteil aus dem Base-Overlay übernommen und die nicht benötigten Elemente entfernt. Die Einstellungen der Blöcke wurden ebenfalls übernommen. Die Constraints wurden so angepasst, dass die Audiofunktionalität erhalten blieb. Die Constraints weisen unter anderem den Benötigten internen PINs Namen zu, damit diese besser nachvollzogen werden können. Es ist notwendig, dass die Namen an dem Ein- und Ausgängen aus den Constraints übernommen werden. <br> Für den Betrieb des Audio-Codecs auf dem Pynq-Z2 sind spezielle IP-Cores von Pynq notwendig. Diese IPs sowie auch die Constraints befinden sich im <a href="https://github.com/Xilinx/PYNQ/tree/master">PYNQ GitHub Repository</a> und müssen in das Projekt eingebunden werden.<br> Vorgefertigte sowie auch eigens erstellte IP-Cores lassen sich in Vivado unter <em>Project Manager/Settings/IP/Repository</em> in das Projekt einbinden.<br></p>
 <p>Teile des Designs orientieren sich an den offiziellen Tutorials von <strong>Cathal McCabe</strong> , die im AMD PYNQ-Forum verfügbar sind. Besonders hilfreich waren die Anleitungen <a href="https://discuss.pynq.io/t/tutorial-creating-a-hardware-design-for-pynq/145">Creating a new hardware design for PYNQ</a> und <a href="https://discuss.pynq.io/t/tutorial-pynq-dma-part-1-hardware-design/3133">PYNQ DMA</a>. Teile dieser Tutorials, insbesondere grundlegende Strukturkomponenten, wurden angepasst übernommen.<br></p>
-<section id="audio-codec-controller" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="audio-codec-controller"><span class="header-section-number">14.3.1</span> Audio Codec Controller</h3>
+<section id="audio-codec-controller" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="audio-codec-controller"><span class="header-section-number">10.3.1</span> Audio Codec Controller</h3>
 <p>Der <em>audio_codec_controller</em> ist eine eigene IP von PYNQ und erzeugt die vom Audio-Codec benötigten Steuersignale sowie den <span class="math inline">\(I^{2}S\)</span> Datenstrom.<br> Während im ursprünglichen Overlay ein <em>Clocking Wizard</em> eingesetzt wird, um aus dem 100 MHz-Systemtakt ein 10 MHz-Taktsignal zu erzeugen, stellt die überarbeitete Variante dieses 10 MHz-Signal direkt aus dem Processing System (PS) bereit, inklusive eines synchronisierten Reset-Signals.<br> Diese Vorgehensweise hat den Vorteil, dass keine zusätzlichen Clock-Domain-Warnungen im Vivado auftreten.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -992,11 +980,11 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </figure>
 </div>
 </section>
-<section id="processing-system-ps" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="processing-system-ps"><span class="header-section-number">14.3.2</span> Processing System (PS)</h3>
+<section id="processing-system-ps" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="processing-system-ps"><span class="header-section-number">10.3.2</span> Processing System (PS)</h3>
 <p>Da das Design später über ein Jupyter Notebook gesteuert werden soll, wie es für die PYNQ-Plattform typisch ist, reicht eine reine RTL-Implementierung innerhalb der programmierbaren Logik nicht aus. Stattdessen wird das ZYNQ Processing System benötigt, das die Schnittstelle zwischen der Software-Ebene (Python/Jupyter) und der Hardware-Ebene (PL) bildet.<br> Über das Processing System (PS) werden alle zentralen Taktsignale für das Design bereitgestellt. Zudem übernimmt das PS die Steuerung des Audio-Codecs sowie des AXI Direct Memory Access (AXI-DMA), über den die Filter mit dem PS verbunden sind.<br> Die AXI-DMA-Verbindung ermöglicht einen Datenaustausch zwischen dem Arbeitsspeicher des PS und den in der programmierbaren Logik (PL) implementierten Filtern. Auf diese Weise kann das Jupyter Notebook über das PS Daten an die Filter senden und deren Ausgaben empfangen.<br> Damit der PS die korrekten Takt- und Schnittstellensignale erzeugt, muss er im Vivado-Design entsprechend konfiguriert werden.<br></p>
-<section id="ps-pl-cinfiguration" class="level4" data-number="14.3.2.1">
-<h4 data-number="14.3.2.1" class="anchored" data-anchor-id="ps-pl-cinfiguration"><span class="header-section-number">14.3.2.1</span> PS-PL Cinfiguration</h4>
+<section id="ps-pl-cinfiguration" class="level4" data-number="10.3.2.1">
+<h4 data-number="10.3.2.1" class="anchored" data-anchor-id="ps-pl-cinfiguration"><span class="header-section-number">10.3.2.1</span> PS-PL Cinfiguration</h4>
 <p>Um Daten über die AXI-DMA-Schnittstellen an die Filter übergeben zu können, werden zusätzliche Anschlüsse am Processing System (PS) benötigt. Der PS besitzt intern zwei physische Zugänge zum DRAM, wobei sich jeweils zwei Ports (HP0/1 und HP2/3) einen gemeinsamen Zugriff teilen. Für dieses Design werden lediglich zwei High-Performance-Ports benötigt, weshalb HP0 und HP2 aktiviert werden. Die Datenbreite (Data Width) kann auf dem Standardwert von 64 Bit belassen werden.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1012,17 +1000,17 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 
 :::-->
 </section>
-<section id="clock-configuration" class="level4" data-number="14.3.2.2">
-<h4 data-number="14.3.2.2" class="anchored" data-anchor-id="clock-configuration"><span class="header-section-number">14.3.2.2</span> Clock Configuration</h4>
+<section id="clock-configuration" class="level4" data-number="10.3.2.2">
+<h4 data-number="10.3.2.2" class="anchored" data-anchor-id="clock-configuration"><span class="header-section-number">10.3.2.2</span> Clock Configuration</h4>
 <p>Alle benötigten Takt-Signale werden direkt im Processing System (PS) generiert und den jeweiligen Komponenten zugewiesen. Der Audio-Codec benötigt ein 10 MHz Taktsignal, während der Audio Codec Controller ein 100 MHz Taktsignal erfordert. Andere Frequenzen werden von dieser IP nicht unterstützt, was in Vivado durch eine entsprechende Warnung angezeigt wird. Die Filter-IP-Cores wurden auf 50 MHz ausgelegt und benötigen daher ebenfalls ein passendes 50 MHz-Taktsignal. <br></p>
 </section>
-<section id="peripheral-io-pins" class="level4" data-number="14.3.2.3">
-<h4 data-number="14.3.2.3" class="anchored" data-anchor-id="peripheral-io-pins"><span class="header-section-number">14.3.2.3</span> Peripheral I/O Pins</h4>
+<section id="peripheral-io-pins" class="level4" data-number="10.3.2.3">
+<h4 data-number="10.3.2.3" class="anchored" data-anchor-id="peripheral-io-pins"><span class="header-section-number">10.3.2.3</span> Peripheral I/O Pins</h4>
 <p>Für die Kommunikation mit dem Audio Codec Controller wird eine <span class="math inline">\(I^{2}C\)</span>-Verbindung benötigt. Diese Schnittstelle lässt sich in der PS-Konfiguration unter <em>Peripheral I/O Pins</em> aktivieren, indem der entsprechende Haken gesetzt wird. In diesem Fall wurde <em>I2C 1</em> ausgewählt.<br></p>
 </section>
 </section>
-<section id="axi-direct-memory-access" class="level3" data-number="14.3.3">
-<h3 data-number="14.3.3" class="anchored" data-anchor-id="axi-direct-memory-access"><span class="header-section-number">14.3.3</span> AXI Direct Memory Access</h3>
+<section id="axi-direct-memory-access" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="axi-direct-memory-access"><span class="header-section-number">10.3.3</span> AXI Direct Memory Access</h3>
 <p>Die Anbindung der Filter-IP-Cores an das Processing System (PS) erfolgt über einen AXI Direct Memory Access (AXI-DMA). Dieser ermöglicht Daten direkt zwischen dem Speicher des Processing Systems (PS) und der programmierbaren Logik (PL) zu übertragen, ohne dass der Prozessor selbst aktiv Daten verschieben muss.<br> Da im Design vier Filter parallel verwendet werden, werden auch vier AXI-DMA-Instanzen benötigt, die alle identisch konfiguriert werden. Eine konsistente Namenskonvention ist hierbei praktisch, da im Jupyter Notebook später über diese Namen auf die jeweiligen DMA-Schnittstellen zugegriffen wird.<br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1034,25 +1022,25 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 <p>Die <em>Address Width</em> bleibt auf dem Standardwert von 32 Bit. Die <em>Stream Data Width</em> wird entsprechend der Konfiguration der <em>HP0/HP2-Ports</em> des PS auf 64 Bit gesetzt. Auch hier gilt Lieber großzügig dimensionieren als zu knapp, was ebenfalls aus der Entwicklungsphase übernommen wurde.<br></p>
 <p>Die <em>Max Burst Size</em> wird auf 16 Bit gesetzt, obwohl die Burst-Funktion im eigentlichen Betrieb nicht verwendet wird. Für den <em>Write Channel</em> wird die Einstellung auf <em>Auto</em> belassen, wodurch automatisch die Parameter des Read-Channels übernommen werden.<br></p>
 </section>
-<section id="verbindungen-im-blockdesign" class="level3" data-number="14.3.4">
-<h3 data-number="14.3.4" class="anchored" data-anchor-id="verbindungen-im-blockdesign"><span class="header-section-number">14.3.4</span> Verbindungen im Blockdesign</h3>
+<section id="verbindungen-im-blockdesign" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="verbindungen-im-blockdesign"><span class="header-section-number">10.3.4</span> Verbindungen im Blockdesign</h3>
 <p>Vivado bietet die Möglichkeit, Blöcke automatisch anhand von vorgeschlagenen Verbindungen miteinander zu verbinden. Bei standardisierten Schnittstellen sind diese Vorschläge in der Regel korrekt und können den Designprozess beschleunigen. Dennoch sollte stets überprüft werden, ob die vorgeschlagene Verbindung tatsächlich der gewünschten entspricht.<br> Bei Verwendung dieser Funktion fügt Vivado oft automatisch unterstützende Blöcke wie beispielsweise einen <em>AXI Interconnect</em> hinzu, was zur besseren Übersichtlichkeit und Strukturierung des Designs beiträgt.<br></p>
 <p>Eine Ausnahme bilden jedoch die Ein- und Ausgänge, die über die <em>Constraints-Datei (XDC)</em> definiert sind. Für diese Signale funktioniert die automatische Verbindung nur eingeschränkt oder fehlerhaft. Daher wird empfohlen, diese Verbindungen manuell vorzunehmen, um Fehler im späteren Designverlauf zu vermeiden.<br></p>
-<section id="s_axi-s_axi_lite" class="level4" data-number="14.3.4.1">
-<h4 data-number="14.3.4.1" class="anchored" data-anchor-id="s_axi-s_axi_lite"><span class="header-section-number">14.3.4.1</span> S_AXI (S_AXI_LITE)</h4>
+<section id="s_axi-s_axi_lite" class="level4" data-number="10.3.4.1">
+<h4 data-number="10.3.4.1" class="anchored" data-anchor-id="s_axi-s_axi_lite"><span class="header-section-number">10.3.4.1</span> S_AXI (S_AXI_LITE)</h4>
 <p>Dabei handelt es sich um die <em>AXI-Lite-Schnittstelle</em>, die für die Registersteuerung benötigt wird. Sowohl der <em>Audio-Codec-Controller</em> als auch die <em>AXI-DMA-Module</em> besitzen jeweils eine solche Verbindung. Diese werden allerdings auf unterschiedliche Clock-Frequenzen eingestellt.<br> Der <em>Audio Codec Controller</em> wird auf 100MHz eingestellt und der <em>Axi-DMA</em> auf 50MHz.<br></p>
 </section>
-<section id="high-performace-slave-interface" class="level4" data-number="14.3.4.2">
-<h4 data-number="14.3.4.2" class="anchored" data-anchor-id="high-performace-slave-interface"><span class="header-section-number">14.3.4.2</span> High performace slave interface</h4>
+<section id="high-performace-slave-interface" class="level4" data-number="10.3.4.2">
+<h4 data-number="10.3.4.2" class="anchored" data-anchor-id="high-performace-slave-interface"><span class="header-section-number">10.3.4.2</span> High performace slave interface</h4>
 <p>Dies sind die Verbindungen an den HP0/2-Ports des Processing Systems (PS), über die die Daten zwischen dem BRAM und dem AXI-DMA übertragen werden. Diese Anschlüsse werden ausschließlich für die AXI-DMA-Kommunikation genutzt. Der <em>M_AXI_MM2S</em>-Port ist der <em>Read Channel</em>, und <em>M_AXI_S2MM</em> ist der <em>Write Channel</em>. Da die AXI-DMA-Module als Master fungieren, sind sie in der Lage, sowohl Lese- als auch Schreibzugriffe durchzuführen. Der PS übernimmt hierbei die Slave-Rolle.<br> Diese Verbindungen werden bei allen vier AXI-DMA-Instanzen auf die gleiche Weise hergestellt.<br> An den <em>HP0</em> wird der <em>M_AXI_MM2S</em> angeschlossen und an den <em>HP2</em> der <em>M_AXI_2SMM</em>, beide auf 50MHz.</p>
 </section>
-<section id="axi-stream" class="level4" data-number="14.3.4.3">
-<h4 data-number="14.3.4.3" class="anchored" data-anchor-id="axi-stream"><span class="header-section-number">14.3.4.3</span> AXI-Stream</h4>
+<section id="axi-stream" class="level4" data-number="10.3.4.3">
+<h4 data-number="10.3.4.3" class="anchored" data-anchor-id="axi-stream"><span class="header-section-number">10.3.4.3</span> AXI-Stream</h4>
 <p>Die Filter sowie die AXI-DMA-Module besitzen jeweils einen <em>S_AXIS_2SMM </em> bzw. <em>AXI4_Stream-Slave</em> (Slave) und einen <em>M_AXIS_MM2S</em> bzw. <em>AXI4_Stream-Master</em> (Master) Anschluss. Da es sich beim AXI-Stream um eine gerichtete Verbindung handelt, ist es entscheidend, dass immer ein Master-Port mit einem Slave-Port verbunden wird.<br> Diese Verbindungen müssen manuell vorgenommen werden, da Vivado diese Zuordnungen nicht automatisch erkennen kann. Nachdem die Datenpfade korrekt verbunden wurden, schlägt Vivado in der Regel automatisch eine Verbindung für die zugehörigen Taktsignale und Reset-Signale vor.<br> Wichtig ist dabei, das richtige Taktsignal auszuwählen, in diesem Fall 50 MHz, da die Filter in dieser Taktfrequenz ausgelegt sind.<br></p>
 </section>
 </section>
-<section id="vollendetes-design" class="level3" data-number="14.3.5">
-<h3 data-number="14.3.5" class="anchored" data-anchor-id="vollendetes-design"><span class="header-section-number">14.3.5</span> Vollendetes Design</h3>
+<section id="vollendetes-design" class="level3" data-number="10.3.5">
+<h3 data-number="10.3.5" class="anchored" data-anchor-id="vollendetes-design"><span class="header-section-number">10.3.5</span> Vollendetes Design</h3>
 <p>Sind alle Verbindungen korrekt vorgenommen, ergibt sich folgendes Blockdesign:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1065,62 +1053,62 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </section>
 </section>
 </section>
-<section id="funktionsweise-des-generierten-filter-codes" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Funktionsweise des generierten Filter-Codes</h1>
+<section id="funktionsweise-des-generierten-filter-codes" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Funktionsweise des generierten Filter-Codes</h1>
 <p>Im Folgenden wird der generierte VHDL-Code der Filter näher erläutert. Die Beschreibung bezieht sich exemplarisch auf den Hochpassfilter. Da jedoch alle Filter nach dem gleichen Verfahren erzeugt wurden, lassen sich die Ausführungen sinngemäß auf sämtliche Filter übertragen. Die Modulnamen wurden automatisch vom HDL Coder generiert und unverändert übernommen.<br> Der resultierende VHDL-Code zur Beschreibung der Filter-IP-Core ist aufgrund der zahlreichen verschachtelten Strukturen nur schwer überschaubar. Daher wird an dieser Stelle auf konkrete Codeausschnitte verzichtet. Stattdessen erfolgt eine allgemeine Darstellung des strukturellen Aufbaus und der funktionalen Gliederung der generierten Dateien. Hinzu kommt, dass der Code bei der Generierung verschiedene Optimierungsverfahren, insbesondere Pipelining, durchlaufen hat. Dadurch ist die ursprüngliche Filterstruktur im finalen VHDL-Code kaum noch erkennbar.<br></p>
-<section id="struktur-des-generierten-codes" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="struktur-des-generierten-codes"><span class="header-section-number">15.1</span> Struktur des generierten Codes</h2>
+<section id="struktur-des-generierten-codes" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="struktur-des-generierten-codes"><span class="header-section-number">11.1</span> Struktur des generierten Codes</h2>
 <p>Das Top-Level-Modul bildet die oberste Instanz und integriert alle Funktionseinheiten. Die AXI4-Stream-Schnittstellen werden von zwei Modulen umgesetzt, einem AXI4-Stream Slave und einem Master. Der Slave empfängt die Eingangsdaten vom übergeordneten System und speichert sie zunächst in einem Eingangs-FIFO. Die eigentliche Signalverarbeitung findet im Design Under Test (DUT) statt. Hier werden die zwischengespeicherten Eingangsdaten durch die Biquad-Filtersektionen geleitet. Jede Sektion wird dabei durch ein separates Modul realisiert. Das DUT enthält ein Modul, das die gesamte Biquad-Filterstruktur beschreibt, die wiederum aus mehreren Sektionen bestehen kann. Die Daten werden Sektion für Sektion gefiltert, bis die gewünschte Filtercharakteristik erreicht ist.<br></p>
 <p>Nach der Filterung werden die Ausgangsdaten in einem Ausgangs-FIFO zwischengespeichert, damit sie gepuffert zur Verfügung stehen. Ein spezieller FIFO sorgt für die korrekte Handhabung des TLAST-Signals, das im AXI4-Stream-Protokoll das Ende eines Frames oder Datenpakets signalisiert. Der AXI4-Stream Master gibt die gefilterten Daten schließlich zurück an das übergeordnete System. Ein zusätzliches Modul zur Reset-Synchronisation stellt sicher, dass ein globales Reset-Signal in allen Takt- und Logikbereichen zuverlässig übernommen wird.<br></p>
 <p>Für den Datenverlauf bedeutet das, dass die Eingangsdaten über einen AXI4-Stream empfangen, gepuffert, durch den Biquad-Filter verarbeitet, erneut gepuffert und schließlich über AXI4-Stream ausgegeben werden. Der Datenfluss wird über Handshake-Signale gesteuert, um Datenverlust oder Überläufe zu vermeiden.<br></p>
 </section>
-<section id="umsetzung-des-filters" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="umsetzung-des-filters"><span class="header-section-number">15.2</span> Umsetzung des Filters</h2>
-<section id="filter-dut" class="level3" data-number="15.2.1">
-<h3 data-number="15.2.1" class="anchored" data-anchor-id="filter-dut"><span class="header-section-number">15.2.1</span> Filter DUT</h3>
+<section id="umsetzung-des-filters" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="umsetzung-des-filters"><span class="header-section-number">11.2</span> Umsetzung des Filters</h2>
+<section id="filter-dut" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="filter-dut"><span class="header-section-number">11.2.1</span> Filter DUT</h3>
 <p>Wie bereits erwähnt, folgt der Code einer klaren Hierarchie. Das DUT übernimmt innerhalb dieses Designs mehrere Aufgaben. Es steuert, wann neue Daten aus dem Eingangs-FIFO gelesen werden und führt diese der Filter-Komponente zu. Nach der Filterung nimmt es die Ergebnisse entgegen, speichert sie im Ausgangs-FIFO und kümmert sich um alle notwendigen Steuersignale wie <em>Valid-/Ready</em>-Signale und Handshake-Mechanismen. Zudem stellt es sicher, dass die Filter-Komponente korrekt in die übergeordnete Takt- und Reset-Logik eingebunden ist.<br></p>
 </section>
-<section id="filter-wrapper" class="level3" data-number="15.2.2">
-<h3 data-number="15.2.2" class="anchored" data-anchor-id="filter-wrapper"><span class="header-section-number">15.2.2</span> Filter-Wrapper</h3>
+<section id="filter-wrapper" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="filter-wrapper"><span class="header-section-number">11.2.2</span> Filter-Wrapper</h3>
 <p>Innerhalb des DUT wird die Komponente <strong>src_Biquad_Filter</strong> instanziiert. Diese Komponente fungiert als Wrapper und kapselt die eigentliche Filterkette. Sie nimmt die Eingangssignale entgegen, leitet sie unverändert weiter und gibt die Ergebnisse der Filterkette zurück an das DUT. Zudem stellt der Wrapper sicher, dass die Port-Zuordnung und Taktanbindung korrekt sind und das <em>clk_enable-Signal</em> richtig durchgereicht wird. Auf diese Weise wird die gesamte Filterlogik mit den Biquad-Sektionen innerhalb des Wrappers gebündelt. Es ist anzumerken, dass in der tatsächlichen Implementierung kein <em>clk_enable-Signal</em> aktiv genutzt wird, dennoch wurde es automatisch mitgeneriert.<br></p>
 </section>
-<section id="die-filterlogik" class="level3" data-number="15.2.3">
-<h3 data-number="15.2.3" class="anchored" data-anchor-id="die-filterlogik"><span class="header-section-number">15.2.3</span> Die Filterlogik</h3>
+<section id="die-filterlogik" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="die-filterlogik"><span class="header-section-number">11.2.3</span> Die Filterlogik</h3>
 <p>Wie bereits erwähnt, wird die Filterlogik exemplarisch am Hochpass-Filter erläutert. Es kann dabei zu minimalen Abweichungen bei anderen Filtern kommen, die grundsätzliche Funktionsweise ist jedoch bei allen Filtern vergleichbar.<br></p>
 <p>Innerhalb des Wrappers wird eine gleichnamige Komponente instanziiert, die hierarchisch unterhalb des Wrappers angesiedelt ist. Hier befindet sich die eigentliche Filterlogik.<br> Die Eingangsdaten (<em>dataIn)</em> werden zunächst in ein vorzeichenbehaftetes Signal (<em>dataIn_signed</em>) umgewandelt und im Register <em>sec0reg</em> zwischengespeichert. In der ersten Shifting- und Multiplikationsstufe (<em>sec0</em>) wird der Eingangswert durch Konkatenation mit Nullen nach links verschoben, um die gewünschte Fixpunkt-Skalierung zu erreichen. Das Ergebnis wird im Register <em>sec0mulreg</em> abgelegt, der relevante Bitbereich extrahiert (<em>sec0dtc</em>) und in <em>sec0out</em> zwischengespeichert. Von dort wird das Signal an die erste Biquad-Sektion weitergegeben. <br></p>
 <p>Parallel dazu wird das Valid-Signal über eine Signalkette geführt, sodass die Gültigkeit der Daten in jeder Stufe erhalten bleibt.<br> Die instanzierte Biquad-Sektion verarbeitet <em>sec0out</em> und liefert die gefilterten Daten (<em>sec1out</em>) sowie das zugehörige Valid-Signal (<em>sec1validout</em>). Anschließend folgt eine zweite Shifting- und Multiplikationsstufe (<em>sec1</em>), in der <em>sec1out</em> erneut skaliert und vorbereitet wird. Auch hier wird das Valid-Signal entsprechend weitergereicht.<br> Für einen Filter zweiter Ordnung wird diese Sektion nur einmal aufgerufen, bei höheren Ordnungen werden mehrere Sektionen kaskadiert.<br> Die Ausgabe wird konditional gesteuert. Wenn das Valid-Signal gültig ist, wird das gefilterte Ergebnis an <em>dataOut</em> ausgegeben. Ein synchronisiertes Valid-Signal (<em>validOut</em>) zeigt an, wann die Daten gültig sind.<br></p>
 </section>
-<section id="filter-sektion" class="level3" data-number="15.2.4">
-<h3 data-number="15.2.4" class="anchored" data-anchor-id="filter-sektion"><span class="header-section-number">15.2.4</span> Filter-Sektion</h3>
+<section id="filter-sektion" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="filter-sektion"><span class="header-section-number">11.2.4</span> Filter-Sektion</h3>
 <p>Die Filter-Sektion bildet die eigentliche Biquad-Filterstruktur und enthält die entsprechenden Koeffizienten. Die Biquad-Sektion ist in transponierter Direct Form II umgesetzt. Sie erhält ein Eingangssample (<em>dataIn</em>) mit zugehörigem Gültigkeitssignal (<em>validIn</em>) und liefert das gefilterte Sample samt gültigem Ausgangssignal zurück.<br></p>
 <p>Zunächst wird das Eingangssignal gepuffert. Anschließend wird es in drei Numerator-Zweigen parallel mit festen Koeffizienten multipliziert. Jeder Pfad besteht aus einem Vor-Register, dem Multiplizierer und einem Nach-Register. Die Denominator-Seite arbeitet mit zwei internen Zuständen (<em>state1</em> und <em>state2</em>), die über Multiplikationen und Addierer-Ketten rekursiv zurückgeführt werden. Diese Rückkopplung bildet den IIR-Charakter der Filterung.<br></p>
 <p>Die kombinierte Summe wird auf den gewünschten Fixpunktbereich begrenzt und ausgegeben. Ein mehrstufiges Delay-Register sorgt dafür, dass das Ausgangssignal und das Valid-Signal zeitlich synchron anliegen.<br> Zusammengefasst wird das Eingangssignal gepuffert, in drei parallelen Numerator-Zweigen mit festen Koeffizienten verarbeitet und mit den Rückkopplungswerten kombiniert. Die resultierende Summe wird skaliert und als gefiltertes Signal ausgegeben, während das Valid-Signal die zeitliche Korrektheit sicherstellt.<br></p>
 </section>
 </section>
 </section>
-<section id="echtzeitfilterung" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Echtzeitfilterung</h1>
+<section id="echtzeitfilterung" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Echtzeitfilterung</h1>
 <p>Ursprünglich wurden die Filter als AXI4-Stream-fähige IP-Cores umgesetzt, um sie universell innerhalb von Vivado einsetzen zu können. Die bisherige Anwendung erfolgte über die Anbindung an einen AXI-DMA, um digitale Audioquellen zu filtern. Geplant war jedoch, denselben Filter (und gegebenenfalls weitere) auch für die Echtzeitverarbeitung analoger Audioquellen zu verwenden. Hierzu sollten die in Vivado verfügbaren LogiCORE-<span class="math inline">\(I^{2}S\)</span>-Transmitter und -Receiver IPs in Kombination mit dem Audio-Codec eingesetzt werden.<br></p>
 <p>In der vorgesehenen Konfiguration arbeitet der Audio-Codec-Controller als Master, d. h. er gibt die Taktsignale <em>bclk</em> und <em>lrclk</em> für die <span class="math inline">\(I^{2}S\)</span>-Kommunikation vor. Der <span class="math inline">\(I^{2}S\)</span>-Transmitter und -Receiver müssten in diesem Fall als Slaves fungieren. Genau hier trat das erste Problem auf. <a href="https://docs.amd.com/r/en-US/pg308-i2s/Navigating-Content-by-Design-Process">Laut offizieller Dokumentation</a> unterstützen die <span class="math inline">\(I^{2}S\)</span> IP-Cores keinen Slave-Modus, sondern sind ausschließlich für den Master-Betrieb vorgesehen. Da der Audio-Codec-Controller fest als Master konfiguriert ist ergab sich ein Konflikt. Mehere Master in einer <span class="math inline">\(I^{2}S\)</span>-Verbindung würden unweigerlich zu Timing-Problemen führen.<br></p>
 <p>Trotz dieser Einschränkung gelang es, durch gezielte Block-Property-Einstellungen in Vivado sowohl den <span class="math inline">\(I^{2}S\)</span>-Receiver als auch den Transmitter im Slave-Modus zu betreiben, entgegen der offiziellen Angaben. Der Audio-Codec-Controller blieb dabei weiterhin Taktgeber. Die Initialisierung der <span class="math inline">\(I^{2}S\)</span>-IP-Cores erfolgte über ein Jupyter Notebook, in dem die Register gemäß Datenblatt beschrieben wurden. Während für den Receiver die Samplerate und das Enable-Register gesetzt werden mussten, reichte beim Transmitter das Aktivieren über das Enable-Register aus.<br></p>
-<section id="funktionstest-filtereinbindung" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="funktionstest-filtereinbindung"><span class="header-section-number">16.1</span> Funktionstest &amp; Filtereinbindung</h2>
+<section id="funktionstest-filtereinbindung" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="funktionstest-filtereinbindung"><span class="header-section-number">12.1</span> Funktionstest &amp; Filtereinbindung</h2>
 <p>In einem ersten Test wurde der Receiver direkt mit dem Transmitter über AXI-Stream verbunden. Diese Konfiguration funktionierte einwandfrei. Das Audiosignal wurde korrekt wiedergegeben, unabhängig davon, ob Receiver und Transmitter vor oder nach dem Codec-Controller eingebunden waren. Anschließend wurde der eigene Biquad-Filter-IP-Core zwischen Receiver und Transmitter geschaltet. Zwar blieb das Signal grundsätzlich vorhanden, war jedoch sehr leise und klang unverändert, eine effektive Filterung konnte nicht festgestellt werden.<br></p>
 <p>Zur Fehlereingrenzung wurde eine vereinfachte Filter-IP-Core entwickelt, die nur als Bypass ohne jegliche Signalverarbeitung fungierte. Doch auch in diesem Fall blieb das Ausgangssignal stark gedämpft. Die Ursache lag nicht in der Filterlogik selbst.<br></p>
 <p>Weitere Tests bestätigten, dass der vom HDL Coder erzeugte AXI-Datenpfad, bestehend aus TDATA, TVALID und TREADY, korrekt generiert wurden. Verschiedene Datenformate (signed/unsigned), Skalierungsfaktoren, Gain-Blöcke und Bit-Shifts hatten keinen nennenswerten Einfluss auf die Lautstärke. Im Gegensatz dazu führte der Einsatz eines <a href="https://docs.amd.com/r/en-US/pg085-axi4stream-infrastructure/AXI4-Stream-Data-FIFO?tocId=gyNUSa81sSudIrD3MNZ6aw">AXI4-Stream Data FIFO</a> zwischen Receiver und Transmitter zu einer fehlerfreien, normal lauten Wiedergabe. Dies ließ den Verdacht aufkommen, dass der FIFO intern ein AXI-konformes Handshake-Verhalten sicherstellt, das von der eigenen IP nicht vollständig erfüllt wird.<br></p>
 <p>Eine selbst erstellte IP mit identischer Buffertiefe (1024 Bit) brachte allerdings keine Verbesserung. Auch das optionale AXI-Signal TID, das bei den <span class="math inline">\(I^{2}S\)</span>-IP-Cores zur Kanalunterscheidung dient, konnte in Simulink weder direkt erzeugt noch verarbeitet werden. Selbst ein manuelles Durchreichen außerhalb der IP zeigte keine Wirkung. Ein zusätzlicher FIFO hinter der IP, als Versuch, den Handshake zu stabilisieren, blieb ebenso erfolglos. Auch die Kombination von FIFO vor und nach der IP brachte keine Verbesserung, wodurch der Handshake als Fehlerursache weitgehend ausgeschlossen werden konnte. Der HDL Workflow Advisor bestätigte, dass alle AXI-Signale korrekt zugewiesen wurden und sogar eine explizite Steuerlogik für TREADY generiert wurde.<br></p>
 </section>
-<section id="ursache-und-bewertung" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="ursache-und-bewertung"><span class="header-section-number">16.2</span> Ursache und Bewertung</h2>
+<section id="ursache-und-bewertung" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="ursache-und-bewertung"><span class="header-section-number">12.2</span> Ursache und Bewertung</h2>
 <p>Eine eindeutige Ursache für das fehlerhafte Verhalten konnte nicht ermittelt werden. Die Vermutung liegt jedoch nahe, dass die minimale AXI-Stream Konfiguration der vom HDL Coder generierten IP nicht alle Protokollanforderungen erfüllt, die der <span class="math inline">\(I^{2}S\)</span>-Transmitter erwartet. Besonders die fehlende Unterstützung für optionale Signale wie TID und eine nicht vollständige Flusskontrolle könnten das Verhalten erklären. Um dieses Problem zu beheben, wäre ein ausgereifteres und weiter ausgeführtes Design erforderlich, das gegebenenfalls zusätzliche Signale berücksichtigt. Ein solches Design müsste unter Umständen manuell in VHDL oder Verilog implementiert werden und würde tiefgehende Kenntnisse des AXI-Protokolls, detaillierte Timinganalysen sowie ergänzende Simulationsschritte außerhalb von MATLAB/Simulink erfordern.<br> Aufgrund der begrenzten Projektzeit und dem Fokus auf die eigentliche Filterimplementierung wurde entschieden, die Echtzeit-Anbindung über <span class="math inline">\(I^{2}S\)</span> Receiver/Transmitter nicht weiterzuverfolgen. Stattdessen wird der Filtereinsatz über AXI-DMA demonstriert, die bereits erfolgreich mit digitalen Quellen funktioniert.<br></p>
 </section>
-<section id="analoge-audioquellen" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="analoge-audioquellen"><span class="header-section-number">16.3</span> Analoge Audioquellen</h2>
+<section id="analoge-audioquellen" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="analoge-audioquellen"><span class="header-section-number">12.3</span> Analoge Audioquellen</h2>
 <p>Da die geplante Echtzeitfilterung analoger Signale nicht zeitnah umsetzbar war, wurde das Design zur Filterung digitaler Quellen entsprechend erweitert. Mithilfe des auf dem PYNQ-Z2-Board integrierten Audio-Codecs ist es nun möglich, analoge Audiosignale aufzunehmen und als Wav-Datei auf dem Board zu speichern. Diese digitale Datei kann anschließend vom bestehenden Design verarbeitet und gefiltert werden. Dadurch ist es trotz der Einschränkungen bei der Echtzeitverarbeitung möglich, analoge Audioquellen zu filtern, jedoch mit einer zwischengelagerten, nicht-echtzeitfähigen Verarbeitungskette.</p>
 </section>
 </section>
-<section id="aufbau-und-funktion-der-lehrdemonstration" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Aufbau und Funktion der Lehrdemonstration</h1>
+<section id="aufbau-und-funktion-der-lehrdemonstration" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Aufbau und Funktion der Lehrdemonstration</h1>
 <p>Ein zentrales Element der Lehrdemonstration ist ein vorgefertigtes Jupyter-Notebook, mit dem sich die verschiedenen Filter einfach bedienen lassen. Innerhalb dieses Notebooks können analoge Audiosignale über die Eingänge des Boards aufgenommen und sowohl im Notebook selbst als auch über den analogen Audioausgang des PYNQ-Z2 wiedergegeben werden.<br> Darüber hinaus besteht die Möglichkeit, sowohl die aufgenommenen Audiodaten als auch externe Audiodateien mit einem der vier implementierten Filter zu verarbeiten. Nach der Auswahl eines Filters wird das gefilterte Signal gespeichert und kann angehört oder weiter analysiert werden.<br></p>
 <p>Da sowohl das Audiosignal vor als auch nach der Filterung gespeichert wird, besteht die Möglichkeit, beide Versionen direkt miteinander zu vergleichen. Neben dem reinen Abhören der Audiodateien kann zusätzlich ein definierter Ausschnitt des Frequenzspektrums vor und nach der Filterung visualisiert werden.<br> Dies ermöglicht eine anschauliche Analyse der Signalveränderung im Frequenzbereich und macht die Wirkung des gewählten Filters unmittelbar sichtbar. Auf diese Weise wird die digitale Signalverarbeitung nicht nur hörbar, sondern auch grafisch nachvollziehbar.<br></p>
 <div class="quarto-figure quarto-figure-center">
@@ -1130,21 +1118,21 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 </figure>
 </div>
 <p>In den Abbildungen ist nicht das vollständige Frequenzspektrum dargestellt. Stattdessen wird lediglich ein Ausschnitt von den ersten 30 Sekunden des linken Audiokanals gezeigt. Dies wurde bewusst so gewählt, da eine vollständige Analyse des gesamten Signals rechnerisch zu aufwendig wäre, um sie im Jupyter Notebook durchzuführen.<br> Die Darstellung erfolgt in normierter Form. Die Amplitudenwerte werden so skaliert, dass der jeweils höchste Wert bei 0 dB liegt. Dadurch kann es zwar zu Unterschieden in der absoluten Lautstärke zwischen verschiedenen Plots kommen, jedoch bleibt der relative Vergleich zwischen verschiedenen Frequenzverläufen jederzeit möglich.<br></p>
-<section id="pynq-overlays" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="pynq-overlays"><span class="header-section-number">17.1</span> Pynq Overlays</h2>
+<section id="pynq-overlays" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="pynq-overlays"><span class="header-section-number">13.1</span> Pynq Overlays</h2>
 <p>Zur Nutzung individuell entwickelter Hardwaredesigns auf dem PYNQ-Z2-Board werden Overlays verwendet. Diese bestehen aus einer Bitstream-Datei (.bit) und der zugehörigen Hardware Handoff-Datei (.hwh), die zuvor mit Vivado generiert werden.<br> In einigen PYNQ-Dokumentationen wird teilweise auch auf .tcl-Dateien verwiesen. Im Rahmen der hier eingesetzten PYNQ-Version hat sich gezeigt, dass diese Datei nicht erforderlich ist. Das Overlay lässt sich vollständig mit der .bit- und der .hwh-Datei verwenden.<br></p>
 <p>Die eigentliche Ansteuerung der Hardware erfolgt über das auf dem PYNQ-Board vorinstallierte Python-Modul <a href="https://pynq.readthedocs.io/en/latest/pynq_libraries.html#">pynq</a>. Dieses Modul stellt eine spezielle Bibliothek bereit, mit der sich aus Python heraus direkt auf die programmierbare Logik (PL) zugreifen lässt. Dadurch können AXI-DMA-Schnittstellen genutzt, Register beschrieben oder externe IP-Cores über vordefinierte Treiber angesprochen werden. Die Steuerung der Hardware erfolgt in Python über Jupyter Notebooks, die direkt auf dem PYNQ-Board ausgeführt werden. Der Zugriff auf die Notebooks erfolgt remote über Geräte im selben Netzwerk.<br></p>
 <p>Zum einen wird das Modul <a href="https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.dma.html#pynq-lib-dma">pynq.lib.dma</a> verwendet, das den Zugriff auf die AXI-DMA-Schnittstellen der programmierbaren Logik ermöglicht. Über dieses Modul können mit wenigen Python-Befehlen Daten an die Filter-IP-Cores gesendet und die verarbeiteten Daten wieder empfangen werden. Die Übertragung wird dabei automatisch vom Modul verwaltet, sodass keine manuelle Kontrolle über Adressen notwendig ist <br></p>
 <p>Zum anderen kommt das Modul <a href="https://pynq.readthedocs.io/en/latest/pynq_package/pynq.lib/pynq.lib.audio.html">pynq.lib.audio</a> zum Einsatz. Dieses Modul enthält den Treiber für den auf dem PYNQ-Z2-Board verbauten ADAU1761-Audiocodec und ermöglicht es, die analogen Audioein- und -ausgänge des Boards direkt aus Python heraus anzusteuern. Über den Treiber können zentrale Funktionen wie das Setzen der Abtastrate, das Aktivieren oder Deaktivieren von Ein- und Ausgängen gesteuert werden. Darüber hinaus bietet das Modul die Möglichkeit, Audiosignale über die analogen Eingänge aufzunehmen.<br></p>
 <p>Beim Versuch, die Abtastrate von 48 kHz auf 44,1 kHz umzustellen, zeigte sich jedoch, dass die Aufnahmen trotz korrekter Konfiguration weiterhin mit 48 kHz durchgeführt wurden. Zwar wurde in der erzeugten WAV-Datei die Samplingrate ordnungsgemäß mit 44,1 kHz eingetragen, doch beim Abhören war ein deutlich tieferer Pitch zu erkennen, was ein Anzeichen dafür ist, dass die tatsächliche Aufnahmefrequenz höher lag als angegeben.<br> Bei der direkten Wiedergabe über die Hardware blieb dieser Fehler zunächst unbemerkt. Sobald die Aufnahme über das Notebook abgespielt wurde, war der Pitch sofort hörbar. Auch externe WAV-Dateien mit 44,1 kHz klangen über den Hardware-Ausgang zu schnell, wenn dieser auf 44,1 kHz eingestellt wurde, was ebenfalls auf eine Diskrepanz zwischen eingestellter und tatsächlich verwendeter Abtastrate hinweist.<br> Aus diesem Grund wurde das gesamte Filterdesign konsequent auf eine Samplingrate von 48 kHz ausgelegt. Um dennoch Audiodateien mit niedrigeren Abtastraten verarbeiten zu können, werden diese vor der Weiterverarbeitung entsprechend hochgesampelt.</p>
 </section>
-<section id="funktionsweise-des-notebooks" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="funktionsweise-des-notebooks"><span class="header-section-number">17.2</span> Funktionsweise des Notebooks</h2>
+<section id="funktionsweise-des-notebooks" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="funktionsweise-des-notebooks"><span class="header-section-number">13.2</span> Funktionsweise des Notebooks</h2>
 <p>Zur besseren Übersicht und vereinfachten Bedienung wurden alle wesentlichen Prozesse, wie Datenübertragung, Speichern und Visualisierung, in einer separaten Python-Datei als einheitliche Funktionssammlung zusammengeführt. Diese Struktur ermöglicht es, komplexe Abläufe mit nur wenigen, klaren Funktionsaufrufen direkt im Jupyter Notebook auszuführen.<br></p>
 <p>Die wichtigste Rolle spielt dabei die Übertragung der Audiodaten an den DMA, der diese durch den Filter-IP-Core leitet und anschließend wieder zurückgibt.<br> Die grundlegende Datenübertragung an den DMA erfolgt dabei relativ einfach und orientiert sich im Prinzip an dem Ablauf, wie er auch in den offiziellen PYNQ-Tutorials und der <a href="https://pynq.readthedocs.io/en/latest/pynq_libraries/dma.html">PYNQ-Dokumentation</a> beschrieben ist. <br></p>
 </section>
-<section id="initialisierung-des-dma-kanals" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="initialisierung-des-dma-kanals"><span class="header-section-number">17.3</span> Initialisierung des DMA-Kanals</h2>
+<section id="initialisierung-des-dma-kanals" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="initialisierung-des-dma-kanals"><span class="header-section-number">13.3</span> Initialisierung des DMA-Kanals</h2>
 <p>Am Anfang werden alle notwendigen Bibliotheken importiert, einschließlich der PYNQ-spezifischen Module wie <em>Overlay</em>, <em>allocate</em> sowie die Treiberbibliothek <em>pynq.lib.audio</em>. Anschließend wird das entsprechende DMA-IP-Core aus dem zuvor geladenen Overlay angesprochen und in einer Variable gespeichert. Die DMA-Instanz verfügt über zwei Kanäle. Für jeden der vier Filter wird eine eigene DMA-Instanz erzeugt und jeweils den zugehörigen Variablen zugewiesen.<br></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pynq <span class="im">import</span> Overlay</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pynq <span class="im">import</span> allocate</span>
@@ -1156,8 +1144,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>dma_Filter_1_send <span class="op">=</span> ol.dma_Filter_1.sendchannel</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dma_Filter_1_recv <span class="op">=</span> ol.dma_Filter_1.recvchannel</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="dma-übertragung" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="dma-übertragung"><span class="header-section-number">17.4</span> DMA Übertragung</h2>
+<section id="dma-übertragung" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="dma-übertragung"><span class="header-section-number">13.4</span> DMA Übertragung</h2>
 <p>Eine Zentrale Funktion ist die <em>Transmission(input_data,ip_buffer,dma,dma_send, dma_recv)</em>. Diese Funktion wird für jede übertragung aufgerufen und übernimmt die Kernaufgaben für eine vollständige übertragung.<br></p>
 <p>Bevor die Audiodaten an die DMA-Schnittstelle übergeben werden können, müssen sie zunächst normiert und in ein kompatibles Datenformat umgewandelt werden. Dies ist notwendig, da die AXI-DMA-Schnittstelle nur mit bestimmten Datentypen arbeiten kann.<br></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Festlegen der Größen</span></span>
@@ -1188,8 +1176,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Umrechnen der Empfangenen Daten</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>output_data <span class="op">=</span> np.array(output_buffer[: data_size]).view(np.int32)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="öffnen-und-einlesen-von-wav-dateien" class="level2" data-number="17.5">
-<h2 data-number="17.5" class="anchored" data-anchor-id="öffnen-und-einlesen-von-wav-dateien"><span class="header-section-number">17.5</span> Öffnen und Einlesen von Wav-Dateien</h2>
+<section id="öffnen-und-einlesen-von-wav-dateien" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="öffnen-und-einlesen-von-wav-dateien"><span class="header-section-number">13.5</span> Öffnen und Einlesen von Wav-Dateien</h2>
 <p>Zur Verarbeitung von Audiodaten werden zunächst Wav-Dateien geöffnet und eingelesen. Dies geschieht über die Funktion <em>read_wav()</em>, die mithilfe des Python-Moduls wave Zugriff auf die Audiodaten ermöglicht. Die Funktion basiert auf einem Beispiel aus den PYNQ-Audio-Demonstrationen, die auf dem Board vorinstalliert sind, und wurde entsprechend angepasst. Beim Einlesen der Datei werden zunächst grundlegende Metainformationen wie Anzahl der Kanäle, Abtastrate, Anzahl der Frames sowie die Sample-Breite ausgelesen. Anschließend werden die Rohdaten byteweise in ein Array geladen und abhängig von der Kanalanzahl und Samplegröße korrekt umstrukturiert.<br> Am Ende gibt die Funktion sowohl die Audiodaten als auch die zugehörigen Metadaten (Frame-Anzahl, Kanalzahl, Samplingrate, Sample-Breite) zurück. <br></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_wav(wav_path):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> wave.<span class="bu">open</span>(wav_path, <span class="st">'r'</span>) <span class="im">as</span> wav_file:</span>
@@ -1210,8 +1198,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Frames:"</span>,<span class="bu">len</span>(frames), <span class="st">"Channels:"</span>, num_channels, <span class="st">"Sample Rate:"</span>,sample_rate, <span class="st">"Sample Width"</span>, sample_width )</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> frames, num_frames, num_channels, sample_rate, sample_width </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="schreiben-und-speichern-von-wav-dateien" class="level2" data-number="17.6">
-<h2 data-number="17.6" class="anchored" data-anchor-id="schreiben-und-speichern-von-wav-dateien"><span class="header-section-number">17.6</span> Schreiben und Speichern von Wav-Dateien</h2>
+<section id="schreiben-und-speichern-von-wav-dateien" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="schreiben-und-speichern-von-wav-dateien"><span class="header-section-number">13.6</span> Schreiben und Speichern von Wav-Dateien</h2>
 <p>Nach der Verarbeitung der Audiodaten können die Ergebnisse als Datei gespeichert werden. Dies geschieht über die Funktion <em>save_to_24bit_wav()</em>, die die beiden Audiokanäle entgegennimmt und diese gemeinsam in eine Stereo-WAV-Datei schreibt. Die Funktion ist in ihrer Struktur an <em>read_wav()</em> angelehnt und übernimmt das Schreiben der Daten im passenden Format. Das Schreiben erfolgt über das Python-Modul <em>wave</em>, wobei die Daten als flache Bytefolge übergeben werden. Die resultierende Datei kann anschließend direkt im Notebook abgespielt oder zur externen Weiterverarbeitung verwendet werden.<br></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_to_24bit_wav(chan_l, chan_r, sample_rate, path):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> np.stack((chan_l, chan_r), axis<span class="op">=</span><span class="dv">1</span>) </span>
@@ -1229,8 +1217,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        wav_out.setframerate(sample_rate)</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        wav_out.writeframes(raw_bytes.tobytes())</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="paketaufteilung" class="level2" data-number="17.7">
-<h2 data-number="17.7" class="anchored" data-anchor-id="paketaufteilung"><span class="header-section-number">17.7</span> Paketaufteilung</h2>
+<section id="paketaufteilung" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="paketaufteilung"><span class="header-section-number">13.7</span> Paketaufteilung</h2>
 <p>Wie bereits bekannt, ist die Puffergröße der Filter-IP-Cores auf <span class="math inline">\(2^{20}\)</span> Bit festgelegt. Nach dem Einlesen einer .wav-Datei kann es jedoch vorkommen, dass die Audiodaten (Frames) länger sind als der verfügbare Puffer.<br> Um dennoch eine korrekte Filterung beliebiger Signallängen zu ermöglichen, werden die Daten vor der Übertragung in kleinere Teilstücke zerlegt. Dies erfolgt über die Funktion <em>Split2Packets()</em>, die das Array mit den Audiodaten in mehrere Pakete unterteilt, jeweils mit einer maximalen Größe, die dem festgelegten Puffer entspricht.<br></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> Split2Packets(data,packet_size):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    packets <span class="op">=</span> []</span>
@@ -1254,8 +1242,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(anz_trans, <span class="st">"Transmissions"</span>)</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Data_Out</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="vollständige-filter-anwendung" class="level2" data-number="17.8">
-<h2 data-number="17.8" class="anchored" data-anchor-id="vollständige-filter-anwendung"><span class="header-section-number">17.8</span> vollständige Filter-Anwendung</h2>
+<section id="vollständige-filter-anwendung" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="vollständige-filter-anwendung"><span class="header-section-number">13.8</span> vollständige Filter-Anwendung</h2>
 <p>Die Funktion <em>UseFilter()</em> bildet den zentralen Ablauf zur Anwendung eines digitalen Filters auf eine Audiodatei. Sie automatisiert dabei alle notwendigen Schritte, vom Einlesen der Datei bis zur Speicherung des gefilterten Ergebnisses.<br></p>
 <p>Zu Beginn wird die gewählte Filterinstanz ausgewählt. Anschließend wird die angegebene .wav-Datei über die Funktion <em>read_wav()</em> geöffnet. Dabei werden sowohl die Audiodaten der beiden Kanäle als auch relevante Metainformationen ausgelesen. Anschließend erfolgt eine Normierung der Audiodaten um eine saubere Signalverarbeitung sicherzustellen.<br></p>
 <p>Falls die Samplerate der Eingangsdaten nicht 48 kHz beträgt, was häufig bei Standard-Audiodateien mit 44,1 kHz der Fall ist, wird automatisch ein Upsampling auf 48 kHz durchgeführt. Dies ist erforderlich, da die Filter für diese Abtastrate ausgelegt wurden. Auf diese weise wird das richtige Verhalten des Filters sichergestellt.<br></p>
@@ -1286,8 +1274,8 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Finished"</span>)</span>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Dauer: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">:.2f}</span><span class="ss"> Sekunden"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="kaskadierung-der-filter" class="level2" data-number="17.9">
-<h2 data-number="17.9" class="anchored" data-anchor-id="kaskadierung-der-filter"><span class="header-section-number">17.9</span> Kaskadierung der Filter</h2>
+<section id="kaskadierung-der-filter" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="kaskadierung-der-filter"><span class="header-section-number">13.9</span> Kaskadierung der Filter</h2>
 <p>Neben der Standardfunktion <em>UseFilter()</em> steht eine erweiterte Variante zur Verfügung, die es ermöglicht, dasselbe Audiosignal mehrfach durch denselben Filter zu leiten. <em>UseFilterCascade()</em> erlaubt es, über einen Parameter festzulegen, wie oft die Filterung wiederholt werden soll.<br> Hintergrund ist, dass in jedem Filter-IP-Core lediglich ein einzelnes Biquad-Segment implementiert ist. Durch die wiederholte Anwendung desselben Filters lässt sich somit eine Kaskadierung mehrerer Biquads realisieren. Dies führt zu einer Erhöhung der effektiven Filterordnung und damit zu einer steileren Flankensteilheit im Frequenzgang, ein Effekt, der deutlich hör- und sichtbar wird.<br></p>
 <p>Diese Funktion dient ausschließlich zu Demonstrationszwecken, bei der gezeigt werden soll, wie sich die Eigenschaften eines Filters durch mehrfache Anwendung bzw. Kaskadierung verändern lassen.<br></p>
 <!--
@@ -1297,16 +1285,16 @@ Quelle: [DSV auf FPGAs](https://github.com/chipmuenk/dsp?tab=readme-ov-file)
 -->
 </section>
 </section>
-<section id="fazit-und-ausblick" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> Fazit und Ausblick</h1>
+<section id="fazit-und-ausblick" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Fazit und Ausblick</h1>
 <p>Die Umsetzung digitaler Filter auf FPGA-Hardware ist komplex und erfordert in der Regel fundierte Kenntnisse in VHDL sowie ein tiefes Verständnis der Zielarchitektur. Der modellbasierte Workflow mit MATLAB/Simulink und dem <em>HDL Coder</em> reduziert diesen Aufwand, da aus einem Simulink-Modell automatisch synthesefähiger VHDL-Code generiert wird. Dadurch können typische Fehlerquellen frühzeitig erkannt und behoben werden.<br> Besonders vorteilhaft ist die strukturierte Anleitung durch den <em>HDL Workflow Advisor</em>, der den Code schrittweise an die Zielplattform anpasst. Anforderungen wie AXI4-Stream-Kompatibilität oder Taktmanagement werden automatisch berücksichtigt. Auf dieser Grundlage konnten alle vier IIR-Filter als parametrisierte Simulink-Modelle entworfen und als IP-Cores generiert werden.<br></p>
 <p>Die Integration in Vivado erfolgte über den <em>Block Design Editor</em>, dessen grafische Oberfläche eine intuitive Verbindung der Module ermöglicht. Besonders in der iterativen Entwicklungsphase erwies sich dieser modulare Aufbau als praktikabel.<br> Ein geplanter Echtzeitbetrieb über die I²S-Schnittstelle des ADAU1761 scheiterte jedoch an Kompatibilitätsproblemen zwischen den automatisch generierten Filter-IP-Cores und den bestehenden I²S-Komponenten. Die genaue Ursache konnte aufgrund der abstrahierten Struktur der HDL-Coder-Ausgabe nicht eindeutig identifiziert werden.<br></p>
 <p>Stattdessen wurde eine alternative Lösung zur Verarbeitung zuvor aufgezeichneter Audiodaten realisiert. Dabei wurde die Fähigkeit des PYNQ-Z2 genutzt, analoge Quellen über den integrierten Audio-Codec aufzunehmen. Das Design in Vivado konnte entsprechend angepasst werden, um diese Funktionalität zu unterstützen. Die Filterung erfolgt anschließend über ein eigens entwickeltes Jupyter-Notebook, das auf dem PYNQ-Z2 ausgeführt wird. Die Benutzeroberfläche ermöglicht eine unkomplizierte Anwendung der digitalen Filter auf gespeicherte Audiosignale, sowohl aus digitalen als auch aus analogen Quellen.<br></p>
 <p>Trotz einzelner technischer Herausforderungen konnte somit ein funktionales Gesamtsystem realisiert werden, das sich hervorragend für Demonstrations- und Lehrzwecke eignet.<br></p>
 <p>Für eine zukünftige Weiterentwicklung des Projekts bietet sich die Möglichkeit, an den etablierten Filterdesigns anzuknüpfen und diese funktional zu erweitern. Ein vielversprechender Ansatz wäre die Ergänzung eines Filters um eine AXI4-Lite-Schnittstelle, über die sich Register zur dynamischen Übergabe von Filterkoeffizienten ansteuern lassen. In Kombination mit einer funktionierenden Echtzeitfilterung könnte so ein anpassbarer Echtzeitfilter realisiert werden, dessen Charakteristik sich während des Betriebs flexibel verändern lässt. Dies würde das System nicht nur deutlich vielseitiger machen, sondern auch neue Einsatzmöglichkeiten in interaktiven oder adaptiven Audioszenarien erschließen.<br></p>
 </section>
-<section id="gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter" class="level1" data-number="19">
-<h1 data-number="19"><span class="header-section-number">19</span> Gegenüberstellung zweier Implementierungsmethoden digitaler IIR-Filter</h1>
+<section id="gegenüberstellung-zweier-implementierungsmethoden-digitaler-iir-filter" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Gegenüberstellung zweier Implementierungsmethoden digitaler IIR-Filter</h1>
 <p>Parallel zu dieser Bachelorarbeit wurde eine weitere Arbeit mit ähnlicher Fragestellung durchgeführt. Beide Arbeiten beschäftigen sich mit der praktischen Umsetzung digitaler IIR-Filter, unterscheiden sich jedoch grundlegend in der gewählten Implementierungsplattform. Während sich die eine Arbeit auf die softwarebasierte Realisierung mit Mikrocontrollern (ESP32, Arduino, LyraT) konzentriert, steht in dieser Arbeit die hardwarebasierte Umsetzung auf einem FPGA-System (PYNQ-Z2) im Mittelpunkt.<br></p>
 <p>Die Mikrocontroller-Implementierung erfolgt direkt in C++ (Arduino) bzw. MicroPython. Die Biquad-Filter werden dabei auf Basis ihrer Differenzengleichungen manuell in Code umgesetzt. Verschiedene Strukturformen wie Direktform I, Direktform II und deren transponierte Variante (TDF2) wurden explizit implementiert. Besonderheiten wie die manuelle Verwaltung interner Zustände oder Verzögerungsglieder sowie Optimierungen (z. B. durch ´<strong>slots</strong>´ in MicroPython oder native Kompilierung einzelner Methoden) tragen zur Effizienzsteigerung bei.</p>
 <p>Während C++ eine vergleichsweise performante Umsetzung ermöglicht und eine Echtzeitverarbeitung über die <span class="math inline">\(I^{2}S\)</span>-Schnittstelle grundsätzlich erlaubt, ist MicroPython aufgrund seiner Interpreterstruktur deutlich langsamer. Zusätzlich verhinderten fehlende <span class="math inline">\(I^{2}S\)</span>-Treiber in MicroPython eine stabile Audioverarbeitung in Echtzeit. Daher beschränkte sich die MicroPython-Implementierung auf die Filterung zuvor gespeicherter WAV-Dateien.<br></p>

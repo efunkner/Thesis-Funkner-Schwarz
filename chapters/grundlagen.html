@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Eduard Funkner">
-<meta name="author" content="Martin Schwarz">
 
-<title>2&nbsp; Theoritischen Grundlagen zur Implementierung von digitalen Biquads – Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</title>
+<title>2&nbsp; Theoretische Grundlagen – Lehrdemonstrationen zur digitalen Filterung auf eingebetteten Systemen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,7 +32,6 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../">
 <link href="../thesis_ef/index.html" rel="next">
 <link href="../index.html" rel="prev">
-<link href="../images/HSB_Logo.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -114,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../grundlagen/index.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../grundlagen/index.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoritischen Grundlagen zur Implementierung von digitalen Biquads</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/grundlagen.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoretische Grundlagen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -167,35 +164,24 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Motivation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Unsyllabus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/grundlagen.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoretische Grundlagen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Grundlagen</span></a>
+ <span class="menu-text">Mikrocontroller</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../grundlagen/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoritischen Grundlagen zur Implementierung von digitalen Biquads</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Mikrocontroller</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../thesis_ef/index.html" class="sidebar-item-text sidebar-link">
@@ -206,13 +192,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">FPGA</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../thesis_ms/index.html" class="sidebar-item-text sidebar-link">
@@ -231,79 +217,41 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung"><span class="header-section-number">3</span> Einführung</a></li>
-  <li><a href="#theoretische-grundlagen" id="toc-theoretische-grundlagen" class="nav-link" data-scroll-target="#theoretische-grundlagen"><span class="header-section-number">4</span> Theoretische Grundlagen</a>
+  <li><a href="#infinite-impulse-response-iir-filter" id="toc-infinite-impulse-response-iir-filter" class="nav-link active" data-scroll-target="#infinite-impulse-response-iir-filter"><span class="header-section-number">2.1</span> Infinite Impulse Response (IIR-Filter)</a></li>
+  <li><a href="#differenzengleichung-eines-iir-filters-zweiter-ordnung" id="toc-differenzengleichung-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">2.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</a></li>
+  <li><a href="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung" id="toc-übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">2.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</a></li>
+  <li><a href="#stabilität-und-pol-nullstellen-verteilung" id="toc-stabilität-und-pol-nullstellen-verteilung" class="nav-link" data-scroll-target="#stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">2.4</span> Stabilität und Pol-Nullstellen-Verteilung</a></li>
+  <li><a href="#frequenzgang-und-phasenverhalten" id="toc-frequenzgang-und-phasenverhalten" class="nav-link" data-scroll-target="#frequenzgang-und-phasenverhalten"><span class="header-section-number">2.5</span> Frequenzgang und Phasenverhalten</a></li>
+  <li><a href="#implementierungsstrukturen-biquadratischer-filter" id="toc-implementierungsstrukturen-biquadratischer-filter" class="nav-link" data-scroll-target="#implementierungsstrukturen-biquadratischer-filter"><span class="header-section-number">3</span> Implementierungsstrukturen biquadratischer Filter</a>
   <ul class="collapse">
-  <li><a href="#infinite-impulse-response-iir-filter" id="toc-infinite-impulse-response-iir-filter" class="nav-link" data-scroll-target="#infinite-impulse-response-iir-filter"><span class="header-section-number">4.1</span> Infinite Impulse Response (IIR-Filter)</a></li>
-  <li><a href="#differenzengleichung-eines-iir-filters-zweiter-ordnung" id="toc-differenzengleichung-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">4.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</a></li>
-  <li><a href="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung" id="toc-übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="nav-link" data-scroll-target="#übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">4.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</a></li>
-  <li><a href="#stabilität-und-pol-nullstellen-verteilung" id="toc-stabilität-und-pol-nullstellen-verteilung" class="nav-link" data-scroll-target="#stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">4.4</span> Stabilität und Pol-Nullstellen-Verteilung</a></li>
-  <li><a href="#frequenzgang-und-phasenverhalten" id="toc-frequenzgang-und-phasenverhalten" class="nav-link" data-scroll-target="#frequenzgang-und-phasenverhalten"><span class="header-section-number">4.5</span> Frequenzgang und Phasenverhalten</a></li>
+  <li><a href="#direktform-1" id="toc-direktform-1" class="nav-link" data-scroll-target="#direktform-1"><span class="header-section-number">3.1</span> Direktform 1</a></li>
+  <li><a href="#direktform-2-kanonische-form" id="toc-direktform-2-kanonische-form" class="nav-link" data-scroll-target="#direktform-2-kanonische-form"><span class="header-section-number">3.2</span> Direktform 2 (Kanonische Form)</a></li>
+  <li><a href="#transponierte-direktform-2" id="toc-transponierte-direktform-2" class="nav-link" data-scroll-target="#transponierte-direktform-2"><span class="header-section-number">3.3</span> Transponierte Direktform 2:</a></li>
   </ul></li>
-  <li><a href="#implementierungsstrukturen-biquadratischer-filter" id="toc-implementierungsstrukturen-biquadratischer-filter" class="nav-link" data-scroll-target="#implementierungsstrukturen-biquadratischer-filter"><span class="header-section-number">5</span> Implementierungsstrukturen biquadratischer Filter</a>
+  <li><a href="#numerische-aspekte-und-quantisierungseffekte" id="toc-numerische-aspekte-und-quantisierungseffekte" class="nav-link" data-scroll-target="#numerische-aspekte-und-quantisierungseffekte"><span class="header-section-number">4</span> Numerische Aspekte und Quantisierungseffekte</a>
   <ul class="collapse">
-  <li><a href="#direktform-1" id="toc-direktform-1" class="nav-link" data-scroll-target="#direktform-1"><span class="header-section-number">5.1</span> Direktform 1</a></li>
-  <li><a href="#direktform-2-kanonische-form" id="toc-direktform-2-kanonische-form" class="nav-link" data-scroll-target="#direktform-2-kanonische-form"><span class="header-section-number">5.2</span> Direktform 2 (Kanonische Form)</a></li>
-  <li><a href="#transponierte-direktform-2" id="toc-transponierte-direktform-2" class="nav-link" data-scroll-target="#transponierte-direktform-2"><span class="header-section-number">5.3</span> Transponierte Direktform 2</a></li>
-  </ul></li>
-  <li><a href="#numerische-aspekte-und-quantisierungseffekte" id="toc-numerische-aspekte-und-quantisierungseffekte" class="nav-link" data-scroll-target="#numerische-aspekte-und-quantisierungseffekte"><span class="header-section-number">6</span> Numerische Aspekte und Quantisierungseffekte</a>
-  <ul class="collapse">
-  <li><a href="#koeffizientenquantisierung" id="toc-koeffizientenquantisierung" class="nav-link" data-scroll-target="#koeffizientenquantisierung"><span class="header-section-number">6.1</span> Koeffizientenquantisierung</a></li>
-  <li><a href="#quantisierungsrauschen-rundungsrauschen" id="toc-quantisierungsrauschen-rundungsrauschen" class="nav-link" data-scroll-target="#quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">6.2</span> Quantisierungsrauschen (Rundungsrauschen)</a></li>
-  <li><a href="#limit-cycle-oszilationen" id="toc-limit-cycle-oszilationen" class="nav-link" data-scroll-target="#limit-cycle-oszilationen"><span class="header-section-number">6.3</span> Limit-Cycle-Oszilationen</a></li>
-  <li><a href="#kaskadierung" id="toc-kaskadierung" class="nav-link" data-scroll-target="#kaskadierung"><span class="header-section-number">6.4</span> Kaskadierung</a></li>
-  <li><a href="#strukturenvergleich" id="toc-strukturenvergleich" class="nav-link" data-scroll-target="#strukturenvergleich"><span class="header-section-number">6.5</span> Strukturenvergleich</a></li>
-  </ul></li>
-  <li><a href="#bilineartransformation" id="toc-bilineartransformation" class="nav-link" data-scroll-target="#bilineartransformation"><span class="header-section-number">7</span> Bilineartransformation</a>
-  <ul class="collapse">
-  <li><a href="#zentrale-substitutionen" id="toc-zentrale-substitutionen" class="nav-link" data-scroll-target="#zentrale-substitutionen"><span class="header-section-number">7.1</span> Zentrale Substitutionen</a></li>
-  <li><a href="#transformation-der-übergangsfunktion" id="toc-transformation-der-übergangsfunktion" class="nav-link" data-scroll-target="#transformation-der-übergangsfunktion"><span class="header-section-number">7.2</span> Transformation der Übergangsfunktion</a></li>
-  <li><a href="#transformation-von-polen-und-nullstellen" id="toc-transformation-von-polen-und-nullstellen" class="nav-link" data-scroll-target="#transformation-von-polen-und-nullstellen"><span class="header-section-number">7.3</span> Transformation von Polen und Nullstellen</a></li>
-  <li><a href="#frequenzverzerrung---frequency-warping" id="toc-frequenzverzerrung---frequency-warping" class="nav-link" data-scroll-target="#frequenzverzerrung---frequency-warping"><span class="header-section-number">7.4</span> Frequenzverzerrung - Frequency Warping:</a></li>
-  <li><a href="#prewarping" id="toc-prewarping" class="nav-link" data-scroll-target="#prewarping"><span class="header-section-number">7.5</span> Prewarping</a></li>
+  <li><a href="#koeffizientenquantisierung" id="toc-koeffizientenquantisierung" class="nav-link" data-scroll-target="#koeffizientenquantisierung"><span class="header-section-number">4.1</span> Koeffizientenquantisierung</a></li>
+  <li><a href="#quantisierungsrauschen-rundungsrauschen" id="toc-quantisierungsrauschen-rundungsrauschen" class="nav-link" data-scroll-target="#quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">4.2</span> Quantisierungsrauschen (Rundungsrauschen)</a></li>
+  <li><a href="#limit-cycle-oszilationen" id="toc-limit-cycle-oszilationen" class="nav-link" data-scroll-target="#limit-cycle-oszilationen"><span class="header-section-number">4.3</span> Limit-Cycle-Oszilationen</a></li>
+  <li><a href="#kaskadierung" id="toc-kaskadierung" class="nav-link" data-scroll-target="#kaskadierung"><span class="header-section-number">4.4</span> Kaskadierung</a></li>
+  <li><a href="#strukturenvergleich" id="toc-strukturenvergleich" class="nav-link" data-scroll-target="#strukturenvergleich"><span class="header-section-number">4.5</span> Strukturenvergleich</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/grundlagen/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/chapters/grundlagen.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../grundlagen/index.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../grundlagen/index.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoritischen Grundlagen zur Implementierung von digitalen Biquads</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoritischen Grundlagen zur Implementierung von digitalen Biquads</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Theoretische Grundlagen</span></h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Autor:innen</div>
-  <div class="quarto-title-meta-heading">Zugehörigkeit</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Eduard Funkner <a href="mailto:efunkner@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0003-5073-0204" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            <a href="https://www.hs-bremen.de">
-            Hochschule Bremen - City University of Applied Sciences (HSB)
-            </a>
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Martin Schwarz <a href="mailto:maschwarz@stud.hs-bremen.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0009-5403-9553" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
-    <div>
-    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">26. Juli 2025</p>
-    </div>
-  </div>
+    
   
     
   </div>
@@ -313,25 +261,16 @@ window.Quarto = {
 </header>
 
 
-<section id="einführung" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Einführung</h1>
-<p>Diese Bachlorthesis dient als eine Lerndemonstration zur Implentierung von digitalen biquadratischen-Filtern auf Mikrocontrollern sowie FPGAs. Im Umfang dieser Lerndemonstration werden digitale Biquad-Filter mithilfe von Matlab- und Pythontools entworfen und im Anschluss auf Hard und Software umgesetzt. Der Prozess der Umsetzung wird zum Verständis dokumentiert sowie genau erklärt, damit Leser dieser Lerndemonstration mithilfe ihrer Hardware für sich den Prozess reproduzieren können.</p>
-</section>
-<section id="theoretische-grundlagen" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Theoretische Grundlagen</h1>
-<p>Die nachfolgenden theoretischen Grundlagen dienen dem Verständnis der eingesetzten Konzepte und Verfahren der digitalen Signalverarbeitung, insbesondere im Kontext digitaler IIR-Filter.<br></p>
-<p>Die Erklärungen stützen sich auf folgende Werke: - Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle<br> - Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis<br> - Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel<br> - Digitale Signalverarbeitung mit MATLAB von Martin Werner<br> - Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck<br></p>
-<p>Dieser Abschnitt entstand im Rahmen einer Zusammenarbeit mit einer weiteren Bachelorarbeit und liegt in beiden Arbeiten in identischer Form vor.<br></p>
-<section id="infinite-impulse-response-iir-filter" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="infinite-impulse-response-iir-filter"><span class="header-section-number">4.1</span> Infinite Impulse Response (IIR-Filter)</h2>
+<section id="infinite-impulse-response-iir-filter" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="infinite-impulse-response-iir-filter"><span class="header-section-number">2.1</span> Infinite Impulse Response (IIR-Filter)</h2>
 <p>Infinite Impulse Response (IIR) Filter gehören in der Signalverarbeitung zu den grundlegenden Typen der digitalen Filter. IIR-Filter zeichnen sich fundamental durch ihre Charakteristik aus, bei der Berechnung des aktuellen Ausgangswertes durch die Verwendung des gegenwärtigen und vergangenen Eingabewertes als auch des vorherigen Ausgabewertes. Aufgrund dieser Rückkopplung kann es dazu führen, dass die Impulsantwort von IIR-Filtern theoretisch unendlich lang andauern kann, was sie grundsätzlich von Finite Impulse Response (FIR) Filtern unterscheidet.</p>
 <p>Die theoretischen Grundlagen von IIR-Filtern basieren auf der Tatsache, dass die Filter sowohl Nullstellen als auch Polstellen besitzen. Während FIR-Filter ausschließlich Nullstellen aufweisen, ermöglichen die Polstellen von IIR-Filtern eine effizientere Umsetzung bestimmter Filtereigenschaften. Dies führt zu dem Hauptvorteil von IIR-Filter für die Möglichkeit scharfe Übergänge im Frequenzgang mit relativ wenigen Koeffizienten zu erreichen.</p>
 <p>Ein immenser Vorteil von IIR-Filtern liegt in der hohen Effizienz bei der Realisierung scharfer Frequenzgänge mit relativ wenigen Koeffizienten, während FIR-Filter für vergleichbare Filtereigenschaften oft hunderte von Koeffizienten benötigen, können IIR-Filter ähnliche Ergebnisse mit deutlich geringerem Rechenaufwand erreichen. Aufgrund dieser Eigenschaft eignen sich IIR-Filter besonders gut im Einsatz von Systemen mit beschränkten Ressourcen oder in Echtzeitverarbeitung.</p>
-<p>Biquad-Filter, kurz als “Biquad” bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die Möglichkeit komplexe IIR-Filter höherer Ordnung auf einfache Weise zu realisieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.</p>
+<p>Biquadratische Filter, kurz als “Biquad” bezeichnet, sind eine spezielle Unterklasse von IIR-Filtern zweiter Ordnung. Durch das Kaskadieren solcher Biquad-Sektionen besteht die Möglichkeit komplexe IIR-Filter höherer Ordnung auf einfache Weise zu realisieren. Das Kaskadieren dieser Sektionen bringt Vorteile in Bezug auf numerische Stabilität, Flexibilät bei der Parameteranpassung und Modularität des Designs.</p>
 <p>Die Verwendung von Biquad-Sektionen anstelle von Filtern höherer Ordnung in direkter Form bietet eine Vielzahl von Vorteilen. Die Anfälligkeit für Koeffizientenquantisierung wird enorm gemindert, da die Pole und Nullstellen weniger stark von kleinen Änderungen der Koeffizienten abhängen. Im Weiteren ermöglicht die modulare Struktur eine unabhängige Optimierung jeder Sektion, wodurch der Entwurfsprozess vereinfacht wird.</p>
 </section>
-<section id="differenzengleichung-eines-iir-filters-zweiter-ordnung" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">4.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</h2>
+<section id="differenzengleichung-eines-iir-filters-zweiter-ordnung" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="differenzengleichung-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">2.2</span> Differenzengleichung eines IIR-Filters zweiter Ordnung</h2>
 <p>Digitale Filter können mit einer linearen Differenzengleichung beschrieben werden. Die biquadratischen Filter werden mit der Differenzengleichung eines IIR-Filters zweiter Ordnung beschrieben werden:</p>
 <p><span class="math display">\[
 y[n] =  \frac{1}{a_0}(b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n - 1] - a_2 \cdot y[n - 2])
@@ -343,8 +282,8 @@ y[n] = b_0 \cdot x[n] + b_1 \cdot x[n - 1] + b_2 \cdot x[n - 2] - a_1 \cdot y[n 
 \]</span></p>
 <p>Durch diese Normierung wird die praktische Implementierung vereinfacht, da ein Multiplikationsschritt entfällt.</p>
 </section>
-<section id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">4.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</h2>
+<section id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="übertragungsfunktion-eines-iir-filters-zweiter-ordnung"><span class="header-section-number">2.3</span> Übertragungsfunktion eines IIR-Filters zweiter Ordnung</h2>
 <p>Zur Analyse des Frequenz- und Phasenverhaltens des Filters, wird die Differenzengleichung mittels der z-Transformation in den z-Bereich transformiert und daraus folgt die resultierende Übertragungsfunktion:</p>
 <p><span class="math display">\[
 H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}
@@ -353,31 +292,30 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2}}{1 + a_1 z^{-1} +
 <p>Anhand der Übetragungsfunktion können die Pol- und Nullstellen des Filters analysiert werden, um die Stabilität des Biquad-Filters zu vergewissern. Dabei müssen alle Polstellen des Filters innerhalb des Einheitskreises der z-Ebene liegen, beziehungsweise der Betrag jedes Pols kleiner als 1 sein muss.</p>
 <p>Befinden sich Pole außerhalb oder direkt auf dem Einheitskreis, kann es dazu kommen, dass das Ausgangssignal unkontrolliert schwingt und das System damit instabil wird. Nullstellen haben hingegen lediglich Einfluss auf die Frequenzcharakteristik und nicht direkt auf die Stabilität.</p>
 </section>
-<section id="stabilität-und-pol-nullstellen-verteilung" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">4.4</span> Stabilität und Pol-Nullstellen-Verteilung</h2>
+<section id="stabilität-und-pol-nullstellen-verteilung" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="stabilität-und-pol-nullstellen-verteilung"><span class="header-section-number">2.4</span> Stabilität und Pol-Nullstellen-Verteilung</h2>
 <p>Die Stabilität eines IIR-Filters ist ein kritischer Faktor, wechler für die Implementierung des Filters gegeben sein muss. Ein kausaler IIR-Filter ist genau dann stabil, wenn alle Polstellen seiner Übertragungsfunktion innerhalb des Einheitskreises der komplexen z-Ebene liegen. Mathematisch ausgedrückt muss für alle Polstellen <span class="math inline">\(|p_i| &lt; 1\)</span>.</p>
-<p>Die Lage der Pole bestimmt nicht nur die Stabilität, sondern auch das dynamische Verhalten des Filters. Pole die näher am Rand des Einheitskreises liegen führen zu einem resonanten Verhalten mit langen ausschwingendem Verhalten, während Pole näher zum Ursprung hin, ein gedämpfteres Verhalten bewirken. Die Nullstellen hingegen beeinflussen primär den Verlauf des Frequenzgangs.</p>
+<p>Die Lage der Pole bestimmt nicht nur die Stäbilität, sondern auch das dynamische Verhalten des Filters. Pole die näher am Rand des Einheitskreises liegen führen zu einem resonanten Verhalten mit langen ausschwingendem Verhalten, während Pole näher zum Ursprung hin, ein gedämpfteres Verhalten bewirken. Die Nullstellen hingegen beeinflussen primär dern Verlauf des Frequenzgangs.</p>
 <p>Für die praktische Implementierung ist es wichtig zu beachten, dass Quantisierungseffekte sich auf die Lage der Pole auswirken können. Das kann im schlimmsten Fall dazu führen, sodass die Stabilität des Filters beeinträchtigt und der Filter instabil wird. Aus diesem Grund ist bei der Koeffizientenquantisierung besondere Vorsicht geboten, bei Filtern mit Polen nah oder auf dem Rand des Einheitskreises.</p>
 </section>
-<section id="frequenzgang-und-phasenverhalten" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="frequenzgang-und-phasenverhalten"><span class="header-section-number">4.5</span> Frequenzgang und Phasenverhalten</h2>
-<p>Der Frequenzgang eines IIR-Filters wird durch die Auswertung der Übertragungsfunktion innerhalb des Einheitskreises erhalten, dafür wird die Substitution <span class="math inline">\(z = e^{j\omega}\)</span> durchgeführt:</p>
+<section id="frequenzgang-und-phasenverhalten" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="frequenzgang-und-phasenverhalten"><span class="header-section-number">2.5</span> Frequenzgang und Phasenverhalten</h2>
+<p>Die Frequenzgang eines IIR-Filters wird durch die Auswertung der Übertragungsfunktion innerhalb des Einheitskreises erhalten, dafür wird die Substitution <span class="math inline">\(z = e^{j\omega}\)</span> durchgeführt:</p>
 <p><span class="math display">\[
 H(e^{j\omega}) = \frac{b_0 + b_1 e^{-j\omega} + b_2 e^{-2j\omega}}{1 + a_1 e^{-j\omega} + a_2 e^{-j2\omega}}
 \]</span></p>
 <p>Der Betrag <span class="math inline">\(|H(e^{j\omega})|\)</span> beschreibt die Amplitudencharakteristik, während die Phase <span class="math inline">\(\arg(H(e^{j\omega}))\)</span> das Phasenverhalten wiedergibt. Bei IIR-Filtern ist das Phasenverhalten im Allgemeinen nicht linear, was in manchen Anwendungen als unerwünscht erweist.</p>
 </section>
-</section>
-<section id="implementierungsstrukturen-biquadratischer-filter" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Implementierungsstrukturen biquadratischer Filter</h1>
+<section id="implementierungsstrukturen-biquadratischer-filter" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Implementierungsstrukturen biquadratischer Filter</h1>
 <p>Die praktische Implementierung von biquadratischen Filtern erfolgt durch die direkte Umsetzung der Differezengleichungen in Software oder Hardware.</p>
 <p>Dafür werden die verzögerten Eingangswerte <span class="math inline">\(x[n-1]\)</span> und <span class="math inline">\(x[n-2]\)</span>, sowie die Ausgangswerte <span class="math inline">\(y[n-1]\)</span> und <span class="math inline">\(y[n-2]\)</span> in Speicherelementen, sogenannten Verzögerungsgliedern, gespeichert. Der aktuelle Ausgangswert <span class="math inline">\(y[n]\)</span> wird mittels der gewichteten Summation aller Terme gemäß der jeweiligen Differenzengleichung berechnet.</p>
 <p>Bei der numerischen Implementierung sind verschiedene Aspekte zu berücksichtigen, insbesondere die Wortbreite und des Zahlenformats (Festkomma oder Gleitkomma).</p>
 <p>Weitere Einflüsse wie Rundungsfehler oder Quantisierungsrauschen können die Filtercharakteristik beeinflussen und im Extremfall die Stabilität des Filters gefährden.</p>
 <p>Diese Implementierungsstrukturen bieten die Möglichkeit, mehrere Filter-Sektionen aneinander zu Verbinden. Diese Modularität biquadratischer Filter ermöglicht, komplexere Filtersysteme höherer Ordnung, durch die Kaskadierung mehrerer Biquad-Sektionen zu realisieren.</p>
 <p>Dadurch können Vorteile in Bezug auf numerische Stabilität, Designflexibilität und Implementierungseffizienz geschaffen werden, weil jede Sektion unabhängig entworfen und optimiert werden kann.</p>
-<section id="direktform-1" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="direktform-1"><span class="header-section-number">5.1</span> Direktform 1</h2>
+<section id="direktform-1" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="direktform-1"><span class="header-section-number">3.1</span> Direktform 1</h2>
 <p>Die Direktform 1 stellt die direkteste Umsetzung der biquadratischen Differenzengleichung in einer Signalflussstruktur dar.</p>
 <p>Diese Implementierung folgt direkt der mathematischen Beschreibung unter der Verwendung separater Verzögerungsketten für die Eingangs- als auch die Ausgangswerte.</p>
 <p>Diese Struktur kann als eine Parallelschaltung eines rein rekursiven Teils (nur Pole) und eines nicht rekursiven Teils (nur Nullstellen) aufgefasst werden.</p>
@@ -398,11 +336,11 @@ y[n] = w[n] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]
 </figure>
 </div>
 <p>In dieser Struktur werden vier Verzögerungselemente verwendet: zwei für die Eingangsverzögerung, <span class="math inline">\(x[n-1]\)</span> und <span class="math inline">\(x[n-2]\)</span>, sowie zwei für die Ausgangsverzögerung, <span class="math inline">\(y[n-1]\)</span> und <span class="math inline">\(y[n-2]\)</span>. Die Multiplikationen zwischen den Verzögerungselementen und den Koeffizienten erfolgen parallel, wodurch sich eine hohe Verarbeitungsgeschwindigkeit erzielen lässt.</p>
-<p>Ein wesentlicher Vorteil der Direktform 1 liegt in ihrer Robustheit gegenüber Koeffizientenquantisierung. Da die Feedforward- und Feedback-Pfade getrennt sind, beeinflussen Quantisierungsfehler in einem Pfad nicht direkt den anderen. Dies führt zu einer besseren numerischen Stabilität, besonders bei der Verwendung von Festkommaarithmetik .</p>
+<p>Ein wesentlicher Vorteil der Direktform 1 liegt in ihrer Robustheit gegenüber Koeffizientenquantisierung. Da die Feedforward- und Feedback-Pfade getrennt sind, beeinflussen Quantisierungsfehler in einem Pfad nicht direkt den anderen. Dies führt zu einer besseren numerischen Stabilität, besonders bei der Verwendung von Festkomma-Arithmetik.</p>
 <p>Die Direktform 1 zeichnet sich durch ihre konzeptionelle Einfachheit und die direkte Korrespondenz zur Differenzengleichung aus. Nachteilhaft bei dieser Struktur ist der erhöhte Speicherbedarf, aufgrund der redundanten Verzögerungselemente. Für Anwendungen mit strengen Speicherbeschränkungen kann dies ein limitierender Faktor sein.</p>
 </section>
-<section id="direktform-2-kanonische-form" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="direktform-2-kanonische-form"><span class="header-section-number">5.2</span> Direktform 2 (Kanonische Form)</h2>
+<section id="direktform-2-kanonische-form" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="direktform-2-kanonische-form"><span class="header-section-number">3.2</span> Direktform 2 (Kanonische Form)</h2>
 <p>Die Direktform 2, oder auch als kanonische Form bekannt, ist eine optimierte Variante der Direktform 1, welche durch die Umordnung der Operationen die Anzahl der benötigten Verzögerungselemente minimiert.</p>
 <p>Diese Struktur macht sich die Kommutativität (Vertauschbarkeit) linearer zeitinvarianter (LTI)-Systeme zunutze, indem sie die Reihenfolge von der Vorwärts- und Rückwärtsverarbeitung vertauscht.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -421,10 +359,10 @@ y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]
 \]</span></p>
 <p>In dieser Struktur werden nur zwei Verzögerungselemente für w[n-1] und w[n-2] benötigt, da die rekursive als auch die nicht-rekursive Verarbeitung auf dieselben verzögerten Werte zugreifen. Die Bezeichnung “kanonisch” bezieht sich darauf, dass diese Implementierung die minimal mögliche Anzahl von Verzögerungselementen verwendet und dadurch die Speichereffizienz optimiert.</p>
 <p>Die Direktform 2 eignet sich Ideal für Systeme mit begrenzten Speicherressourcen. Der reduzierte Speicherbedarf ist insbesondere bei der Implementierung auf Mikrocontrollern oder in FPGA-Anwendungen von hohem Vorteil, bei welchen Speicher eine limitierte und kostbare Ressource darstellt.</p>
-<p>Jedoch weist diese Struktur eine erhöhte Anfälligkeit gegenüber Quantisierungseffekten auf, da die Zwischenwerte <span class="math inline">\(w[n]\)</span> größere Dynamikbereiche aufweisen können als die ursprünglichen Ein- und Ausgangswerte. Dies kann zu einer Verschlechterung des Signal-Rausch-Verhältnisses führen, primär bei der Verwendung von Festkommaarithmetik mit begrenzter Wortbreite.</p>
+<p>Jedoch weist diese Struktur eine erhöhte Anfälligkeit gegenüber Quantisierungseffekten auf, da die Zwischenwerte <span class="math inline">\(w[n]\)</span> größere Dynamikbereiche aufweisen können als die ursprünglichen Ein- und Ausgangswerte. Dies kann zu einer Verschlechterung des Signal-Rausch-Verhältnisses führen, primär bei der Verwendung von Festkomma-Arithmetik mit begrenzter Wortbreite.</p>
 </section>
-<section id="transponierte-direktform-2" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="transponierte-direktform-2"><span class="header-section-number">5.3</span> Transponierte Direktform 2</h2>
+<section id="transponierte-direktform-2" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="transponierte-direktform-2"><span class="header-section-number">3.3</span> Transponierte Direktform 2:</h2>
 <p>Die transponierte Direktform 2 kann gebildet werden durch die Anwendung des Transpositionstheorems auf die Direktform 2. Dieses Theorem besagt, dass die Umkehrung aller Signalflussrichtungen bei gleichzeitiger Vertauschung von Eingängen und Ausgängen eine äquivalente Übertragungsfunktion ergibt. Die resultierende Struktur weist oft günstigere numerische Eigenschaften auf, als die ursprüngliche Form.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -432,7 +370,7 @@ y[n] = b_0 \cdot w[n] + b_1 \cdot w[n-1] + b_2 \cdot w[n-2]
 <figcaption>Signalflussbild: Transponierte Direktform 2</figcaption>
 </figure>
 </div>
-<p>Die transponierte Direktform 2 wird druch die folgenden Differenzengleichungen beschrieben:</p>
+<p>Die transponierte Direktform 2 wird druch die folgende Differenzengleichungen beschrieben:</p>
 <p><span class="math display">\[
 s_2[n] = b_2 \cdot x[n] - a_2 \cdot y[n]
 \]</span></p>
@@ -446,11 +384,11 @@ y[n] = s_1[n] + b_0 \cdot x[n]
 <p>Ein wesentlicher Vorteil der transponierten Direktform 2 liegt in ihrer reduzierten Anfälligkeit gegenüber Koeffizientenquantisierung. Die Rückkopplungsschleifen sind kürzer als in der Direktform 2, was zu einer verbesserten numerischen Stabilität führt. Darüber hinaus ist die Struktur besonders gut für die Implementierung in Hardware geeignet, da die Berechnungen eine natürliche Pipeline-Struktur ausweisen.</p>
 </section>
 </section>
-<section id="numerische-aspekte-und-quantisierungseffekte" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Numerische Aspekte und Quantisierungseffekte</h1>
+<section id="numerische-aspekte-und-quantisierungseffekte" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Numerische Aspekte und Quantisierungseffekte</h1>
 <p>Die praktische Implementierung digitaler Filter auf Systemen mit endlicher Wortlänge bringt verschiedene Herausforderungen mit sich. Diese Effekte können die Filterleistung erheblich beeinträchtigen und müssen bereits in beim Entwerfen berücksichtigt werden. Die wichtigsten numerischen Aspekte sind Koeffizientenquantisierung, Quantisierungsrauschen(Rundungsrauschen) und nichtlineare Quantisierungseffekte.</p>
-<section id="koeffizientenquantisierung" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="koeffizientenquantisierung"><span class="header-section-number">6.1</span> Koeffizientenquantisierung</h2>
+<section id="koeffizientenquantisierung" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="koeffizientenquantisierung"><span class="header-section-number">4.1</span> Koeffizientenquantisierung</h2>
 <p>Die Koeffizientenquantisierung ist einer der kritischen Aspekte bei der Implementierung digitaler Filter auf Systemen mit begrenzter Wortlänge. Bei der Darstellung der Filterkoeffizienten mit einer endlichen Anzahl von Bits entstehen Quantisierungsfehler, die zu einer Verschiebung der Pole und Nullstellen des Filters führen kann.</p>
 <p><strong>Auswirkung der Koeffizientenquantisierung</strong></p>
 <p>Die Quantisierung der Koeffizienten führt zu verschiedenen unerwünschten Effekten:</p>
@@ -458,26 +396,26 @@ y[n] = s_1[n] + b_0 \cdot x[n]
 <p><strong>Frequenzgangverzerrung</strong>: Die Verschiebung der Pole und Nullstellen führt zur Abweichung im Frequenzgang. Besonders kritisch ist dies bei scharfen Filtern mit hoher Güte.</p>
 <p><strong>Stabilitätsverlust</strong>: Pole am oder auf dem Rand des Einheitskreises kann bereits durch kleine Quantisierung zur Instabilität führen. Die Wahrscheinlichkeit der Instabilität steigt mit abnehmender Wortlänge.</p>
 <p><strong>Strukturelle Gegenmaßnahmen</strong></p>
-<p>Die Wahl der Filterstruktur hat einen wesentlichen Einfluss auf die Robustheit gegenüber Quantisierungseffekten. Die Direktform 1 ist aufgrund der getrennten Pfade für Feedforward- und Feedbackanteile weniger anfällig für Fehlerausbreitung und bietet bessere numerische Stabilität bei Festkommaarithmetik. Die Direktform 2 bietet gegenüber der Direktform 1 eine bessere Speichereffizienz, jedoch können größere Zwischenwerte zum Überlaufen bei begrenzter Wortbreite mit erhöhtem Rauschen führen.</p>
+<p>Die Wahl der Filterstruktur hat einen wesentlichen Einfluss auf die Robustheit gegenüber Quantisierungseffekten. Die Direktform 1 ist aufgrund der getrennten Pfade für Feedforward- und Feedbackanteile weniger anfällig für Fehlerausbreitung und bietet bessere numerische Stabilität bei Festkomma-Arithmetik. Die Direktform 2 bietet gegenüber der Direktform 1 eine bessere Speichereffizienz, jedoch können größere Zwischenwerte zum Überlaufen bei begrenzter Wortbreite mit erhöhtem Rauschen führen.</p>
 <p>Die transponierte Direktform 2 kombiniert die Vorteile der beiden genannten Strukturen und zeichnet sich durch eine besonders hohe Resistenz gegenüber Koeffizientenquantisierung aus. Dies liegt an der kürzeren Rückkopplungskette und der numerisch günstigen Struktur für Echtzeitanwendungen. Bei der Implementierung der digitalen Filter ist es zu empfehlen eine Wortlänge von mindestens 16 Bit mit enger Bandbreite zu wählen, um Koeffizientenquantisierung bei einem Minimum zu halten.</p>
 </section>
-<section id="quantisierungsrauschen-rundungsrauschen" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">6.2</span> Quantisierungsrauschen (Rundungsrauschen)</h2>
-<p>Bei der Implementierung digitaler Filter entstehen bei jeder arithmetischen Operation Rundungsfehler, die sich als additives Rauschen am Filterausgang manifestieren. Diese Fehler sind unvermeidlich bei der Verwendung von Festkommaarithmetik und können das Signal-Rausch-Verhältnis des Filters erheblich verschlechtern. Um diesem Entgegen zu wirken, kann die durch die Wahl einer geeigneten Implementierungsstruktur das Rundungsrauschen minimiert werden.</p>
+<section id="quantisierungsrauschen-rundungsrauschen" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="quantisierungsrauschen-rundungsrauschen"><span class="header-section-number">4.2</span> Quantisierungsrauschen (Rundungsrauschen)</h2>
+<p>Bei der Implementierung digitaler Filter entstehen bei jeder arithmetischen Operation Rundungsfehler, die sich als additives Rauschen am Filterausgang manifestieren. Diese Fehler sind unvermeidlich bei der Verwendung von Festkomma-Arithmetik und können das Signal-Rausch-Verhältnis des Filters erheblich verschlechtern. Um diesem Entgegen zu wirken, kann die durch die Wahl einer geeigneten Implementierungsstruktur das Rundungsrauschen minimiert werden.</p>
 <p><strong>Direktform 1</strong>: Die Rundungsrauschquellen in den Feedforward- und Feedback-Pfaden sind weitgehend entkoppelt. Dadurch führt es zu einer moderaten Gesamtvarianz des Rundungsrauschens.<br> <strong>Direktform 2</strong>: Die gemeinsame Nutzung der Verzögerungselemente führt zu einer höheren Rundsrauschvarianz, da die Rundungsfehler mehrfach durch das rekursive System zirkulieren.<br> <strong>Transponierte Direktform 2</strong>: Diese Struktur weist das günstigste Rundungsrauschen auf, da die Rundungsrauschquellen näher am Ausgang liegen und weniger stark gefiltert werden.</p>
 </section>
-<section id="limit-cycle-oszilationen" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="limit-cycle-oszilationen"><span class="header-section-number">6.3</span> Limit-Cycle-Oszilationen</h2>
+<section id="limit-cycle-oszilationen" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="limit-cycle-oszilationen"><span class="header-section-number">4.3</span> Limit-Cycle-Oszilationen</h2>
 <p>Limit-Cycle-Oszillationen sind selbsterhaltende Schwingungen, die in nichtlinearen digitalen Filtern auftreten können. Sie entstehen durch die Kombination von Quantisierung und Rückkopplung und können auch bei stabilen linearen Filtern auftreten, wenn nichtlineare Quantisierungseffekte berücksichtigt werden.</p>
 <p><strong>Zero-Input Limit Cycles</strong> sind Oszillationen die auftreten, wenn das Eingangssignal null entspricht, aber der Filter aufgrund gespeicherter Energie in den Verzögerungselementen weiterhin schwingt.</p>
 <p><strong>Large-Scale Limit</strong> können bei hohen Eingangssignalpegeln auftreten und sind nicht auf kleine Amplituden beschränkt. Sie entstehen durch die Sättigungscharakteristik der Arithmetik und können zu großen, störenden Ausgangssignalen führen.</p>
 </section>
-<section id="kaskadierung" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="kaskadierung"><span class="header-section-number">6.4</span> Kaskadierung</h2>
+<section id="kaskadierung" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="kaskadierung"><span class="header-section-number">4.4</span> Kaskadierung</h2>
 <p>Für Filter höherer Ordnung bietet die kaskadierte-Realisierung aus Biquad-Sektionen deutliche Vorteile gegenüber der direkten Implementierung. Die optimale Anordnung und Paarung der Pole und Nullstellen in einzelnen Sektionen kann die numerische Stabilität verbessern, sowie das Rundungsrauschen minimieren als auch die Anfälligkeit für Koeffizientenquantisierung reduzieren.</p>
 </section>
-<section id="strukturenvergleich" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="strukturenvergleich"><span class="header-section-number">6.5</span> Strukturenvergleich</h2>
+<section id="strukturenvergleich" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="strukturenvergleich"><span class="header-section-number">4.5</span> Strukturenvergleich</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -540,52 +478,6 @@ y[n] = s_1[n] + b_0 \cdot x[n]
 </table>
 <p><strong>Rundungsrauschverhalten</strong>: Die transponierte Direktform 2 weist das günstigste Rundungsrauschverhalten auf, da die Rundungsquellen näher am Ausgang liegen und weniger stark durch die Rückkopplung verstärkt werden. Die Direktform 2 zeigt das ungünstigste Verhalten, da die Rundungsfehler durch die rekursive Struktur mehrfach zirkulieren.<br> <strong>Koeffizientenempfindlichkeit</strong>: Die Direktform 1 bietet die beste Robustheit gegenüber Koeffizientenquantisierung, da die Feedforward- und Feedback-Koeffizienten unabhängig quantisiert werden können. Die Direktform 2 zeigt die höchste Empfindlichkeit aufgrund der gekoppelten Struktur.</p>
 <p>Die Wahl der optimalen Struktur hängt von den spezifischen Anforderungen der Anwendung ab. Für Anwendungen mit strengen Speicherbeschränkungen sind die Direktform 2 und transponierte Direktform 2 vorzuziehen. Bei hohen Anforderungen an die numerische Genauigkeit und Robustheit ist die transponierte Direktform 2 oder die Direktform 1 die bessere Wahl. Für Echtzeitanwendungen eignet sich die transponierte Direktform 2 besonders gut aufgrund ihrer speicher- und rechen Zeiteffizienz sowie ihrer numerischen Stabilität.</p>
-</section>
-</section>
-<section id="bilineartransformation" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Bilineartransformation</h1>
-<p>Die Bilineartransformation dient als ein Verfahren, welches die Überführung analoger kontinuerierlicher Filter in digitale Filterstrukturen ermöglicht. Bei diesem Verfahren wird das analoge Frequenzverhalten möglichst genau in den digitalen Frequenzbereich übertragen und bietet dabei die Erhaltung der Stabilität sowie eine bijektive, aliasfreie Abbildung der s-Parameter in den z-Bereich. Sei überführt die imaginäre Achse der s-Ebene (<span class="math inline">\(j\omega\)</span>) exakt auf den Einheitskreis der z-Ebene und erhält dabei die Stabilitätsbedingungen.</p>
-<section id="zentrale-substitutionen" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="zentrale-substitutionen"><span class="header-section-number">7.1</span> Zentrale Substitutionen</h2>
-<p>Die mathematische Basis der Bilineartransformation beruht auf einer Substitution der s Parameter: <span class="math display">\[
-s = \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}}
-\]</span></p>
-<p>Dabei ist <span class="math inline">\(T_d\)</span> ein Entwurfsparameter mit Zeitcharakteristik, der in der Praxis überlicherweise mit der Abtastperiode <span class="math inline">\(T\)</span> gleichgesetzt wird. Durch dieses nichtlineare Transformation werden rationale Funktionen im s-Bereich in rationale Funktionen im z-Bereich abgebildet, ohne dass die Orndung der Übertragungsfunktionen ansteigt.</p>
-</section>
-<section id="transformation-der-übergangsfunktion" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="transformation-der-übergangsfunktion"><span class="header-section-number">7.2</span> Transformation der Übergangsfunktion</h2>
-<p>Zur Digitalisierung eines analogen Filters mit der Übertragungsfunktion <span class="math inline">\(H_c(s)\)</span> wird die Subtitution in die analoge Übertragungsfunktion eingesetzt. Dieser Prozess führt zur digitalen Übertragungsfunktion:</p>
-<p><span class="math display">\[
-H(z) = H_c\left( \frac{2}{T_d} \cdot \frac{1 - z^{-1}}{1 + z^{-1}} \right)
-\]</span></p>
-<p>Die resultierende Übertragungsfunktion <span class="math inline">\(H(z)\)</span> repräsentiert die vollständige digitale Überführung des ursprünglichen analogen Filters, wobei alle wesentlichen Filtereigenschaften erhalten bleiben.</p>
-</section>
-<section id="transformation-von-polen-und-nullstellen" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="transformation-von-polen-und-nullstellen"><span class="header-section-number">7.3</span> Transformation von Polen und Nullstellen</h2>
-<p>Die Pol- und Nullstellen des analogen Filters unterliegen während der Transformation spezifischen Abbildungsregeln. Für eine analoge Nullstelle <span class="math inline">\(\zeta_k\)</span> und einen analogen Pol <span class="math inline">\(s_k\)</span> ergeben sich die entsprechenden digitalen Werte:</p>
-<p><span class="math display">\[
-z_k = \frac{1 + \frac{T_d}{2} \cdot \zeta_k}{1 - \frac{T_d}{2} \cdot \zeta_k}, \quad
-p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
-\]</span></p>
-<p>Diese Transformationsregeln gewährleisten, dass die fundamentalen Eigenschaften des Filters während der Digitalierung erhalten bleiben. Insbesondere stellt die Transformation sicher, dass die linke s-Halbebene, welche alle stabilen Pole enthält, vollständig in das Innere des Einheitskreises der z-Ebene abgebildet werden kann.</p>
-</section>
-<section id="frequenzverzerrung---frequency-warping" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="frequenzverzerrung---frequency-warping"><span class="header-section-number">7.4</span> Frequenzverzerrung - Frequency Warping:</h2>
-<p>Ein wesentlicher und unvermeidlciher Aspekt der Bilineartransformation ist die nichtlineare Abbildung der Frequenzachse, bekannt als Frequenzverzerrung oder Frequency Warping. Die mathematische Beschreibung der Frequenzformation lautet:</p>
-<p><span class="math display">\[
-\omega = 2 \cdot \tan^{-1} \left( \frac{\Omega T_d}{2} \right), \quad
-\Omega = \frac{2}{T_d} \cdot \tan\left( \frac{\omega}{2} \right)
-\]</span></p>
-<p>Durch die Frequenzverzerrung kann das Verhalten digitaler Filter beeinflusst werden. Bei niedrigen Frequenzen, nahe <span class="math inline">\(\omega\)</span> = 0 oder 0 Hz, ist die Verzerrung minimal und nahezu vernachlässigbar. In diesem Bereich verhalten sich digitale und analoge Filter nahezu identisch. Mit steigender Frequenz nimmt die Verzerrung progressiv zu und erreicht ihr Maximum bei Frequenzen nahe der Nyquist-Frequenz <span class="math inline">\(\omega = \pi\)</span> oder der halben Abtastrate <span class="math inline">\(\frac{f_s}{2}\)</span></p>
-</section>
-<section id="prewarping" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="prewarping"><span class="header-section-number">7.5</span> Prewarping</h2>
-<p>Um die Abweichungen die durch das Frequency Warping entstehen zu kompensieren, wird die Methode des Prewarpings genutzt. Dabei wird die analoge Designfrequenz <span class="math inline">\(\Omega_k\)</span> so angepasst, dass sie nach der Bilineartransformation genau der gewünschte digitalen Frequenz <span class="math inline">\(\omega_k\)</span> entspricht:</p>
-<p><span class="math display">\[
-\Omega_k = \frac{2}{T_d} \cdot \tan\left( \frac{\omega_k}{2} \right) = 2 \cdot f_s \cdot \tan(\frac{\pi f_d}{f_s})
-\]</span></p>
-<p>In der praktischen Anwendung wird Prewarping typischerweise für Eckfrequenzpunkte eingesetzt. Dazu gehören Grenzfrequenzen von Tief- und Hochpassfiltern, Mittenfrequenzen von Bandpassfiltern, sowie Punkte der -3dB-Frequenzen oder Grenzen von Sperrbereichen. Durch die Anwendung des Prewarpings auf diese gezielten Punkte kann sichergestellt werden, dass der digitale Filter an den spezifizierten Frequenzen das gewünschte Verhalten aufweist.</p>
-<p>Prewarping ist jedoch nicht zwingend notwendig, wenn die Abtastastrate <span class="math inline">\(f_s\)</span> höher als die Eckfrequenzen <span class="math inline">\(f_d\)</span> der Filter gewählt wird. Dadurch wird die Abbildung durch die Bilineartransformation nahezu linear und die Frequenzverzerrung ist vernachlässigbar gering.</p>
 
 
 </section>
@@ -993,8 +885,8 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Motivation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Motivation</span></span>
+      <a href="../index.html" class="pagination-link" aria-label="Unsyllabus">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Unsyllabus</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1011,7 +903,7 @@ p_k = \frac{1 + \frac{T_d}{2} \cdot s_k}{1 - \frac{T_d}{2} \cdot s_k}
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/grundlagen/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/edit/main/chapters/grundlagen.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/efunkner/Thesis-Funkner-Schwarz/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
