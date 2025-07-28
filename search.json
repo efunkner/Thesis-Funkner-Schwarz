@@ -758,6 +758,72 @@
     ]
   },
   {
+    "objectID": "thesis_ef/index.html#zielsetzung-der-evaluierung",
+    "href": "thesis_ef/index.html#zielsetzung-der-evaluierung",
+    "title": "3  Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern",
+    "section": "19.1 Zielsetzung der Evaluierung",
+    "text": "19.1 Zielsetzung der Evaluierung\nZiel dieses Kapitels ist es, die praktische Umsetzung der digitalen Biquad-Filter hinsichtlich Verarbeitungsdauer, Strukturauswahl, Stabilität und Echtzeitfähigkeit systematisch zu bewerten. Dabei wird insbesondere der Vergleich zwischen MicroPython und Arduino (C++) untersucht. Darüber hinaus werden verschiedene Filterstrukturen (Direktform 1, Direktform 2, transponierte Direktform 2) auf derselben Hardwareplattform verglichen. Abschließend wird die Verarbeitung eines IIR-Filters höherer Ordnung (6. Ordnung) analysiert, um die Skalierbarkeit der Implementierung zu bewerten.",
+    "crumbs": [
+      "Mikrocontroller",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern</span>"
+    ]
+  },
+  {
+    "objectID": "thesis_ef/index.html#testumgebung",
+    "href": "thesis_ef/index.html#testumgebung",
+    "title": "3  Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern",
+    "section": "19.2 Testumgebung",
+    "text": "19.2 Testumgebung\nDie Evaluierung wurde auf dem ESP32 basierten Lyrat-Audioboard durchgeführt. Als Eingangssignal diente eine WAV-Datei mit folgenden Eigenschaften:\n\nDateiname: TF2_theme.wav\nLänge: 1 Minute 12 Sekunden (72 Sekunden)\nAbtastrate: 44,1 kHz\nBittiefe: 16 Bit\nKanäle: Stereo\nGesamte Sample-Anzahl: 3.215.360\n\nDas Audiosignal wurde vollständig geladen und jeweils kanalweise (links/rechts) durch einen digitalen Filter verarbeitet. Die Messung der Laufzeit erfolgte mit time.ticks_ms() unter MicroPython bzw. millis() in Arduino C++. Für Vergleichbarkeit wurden je fünf Durchläufe pro Konfiguration durchgeführt.",
+    "crumbs": [
+      "Mikrocontroller",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern</span>"
+    ]
+  },
+  {
+    "objectID": "thesis_ef/index.html#vergleich-micropython-vs.-arduino-tdf2",
+    "href": "thesis_ef/index.html#vergleich-micropython-vs.-arduino-tdf2",
+    "title": "3  Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern",
+    "section": "19.3 Vergleich: MicroPython vs. Arduino (TDF2)",
+    "text": "19.3 Vergleich: MicroPython vs. Arduino (TDF2)\nFür den ersten Benchmark wurde eine Bandsperre zweiter Ordnung mit folgenden Designparametern implementiert:\n\nFilterart: IIR-Biquad (Bandsperre)\nFs: 44,1 kHz\nlow cutoff: 1250 Hz\nhigh cutoff: 1450 Hz\nKoeffizienten:\nb = [0.07033, -0.1380, 0.07033]\na = [1.00000, -0.1380, -0.8593]\n\nDieser Filter wurde geziehlt grenzstabil Entworfen, um einen Vergleich zwischen der Strukturen aufzustellen.\n\n\n\nFrequenzgang und Pol- und Nullstellen von der Bandsperre\n\n\n\n19.3.1 Verarbeitungsdauer\n\n\n\n\n\n\n\n\n\nPlattform\nStruktur\nDurchschnittliche Dauer\nSpanne\n\n\n\n\nMicroPython\nTDF2\n549,27 s\n548,66 – 550,69 s\n\n\nArduino (C++)\nTDF2\n16,60 s\n16,48 – 16,97 s\n\n\n\n\n\n19.3.2 Interpretation\nDie Ergebnisse zeigen eine massive Performance-Differenz zwischen den beiden Umgebungen: Die Arduino-Variante ist über 33-mal schneller als die MicroPython-Variante. Während die interpretierte Ausführung von MicroPython für einfache Skripte ausreichend ist, erweist sie sich bei Sample-genauer Signalverarbeitung als ungeeignet für Echtzeitanwendungen. Arduino bietet hingegen eine Echtzeitnahe Ausführung mit direktem Hardwarezugriff und optimierter Kompilierung, wodurch die Umsetzung effizient und praxisnah gelingt.",
+    "crumbs": [
+      "Mikrocontroller",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern</span>"
+    ]
+  },
+  {
+    "objectID": "thesis_ef/index.html#vergleich-verschiedener-filterstrukturen-auf-arduino",
+    "href": "thesis_ef/index.html#vergleich-verschiedener-filterstrukturen-auf-arduino",
+    "title": "3  Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern",
+    "section": "19.4 Vergleich verschiedener Filterstrukturen auf Arduino",
+    "text": "19.4 Vergleich verschiedener Filterstrukturen auf Arduino\n\n19.4.1 Übersicht der Filterstrukturen\n\nDirektform 1 (DF1): Klassische Struktur mit separater Verarbeitung von x[n] und y[n].\nDirektform 2 (DF2): Speicheroptimierte Version mit gleichem Output, aber reduzierter Verzögerung.\nTransponierte Direktform 2 (TDF2): Numerisch stabilere Variante von DF2.\n\n\n\n19.4.2 Verarbeitungszeitmessungen (Arduino)\n\n\n\nStruktur\nVerarbeitungszeiten (s)\nDurchschnitt\n\n\n\n\nTDF2\n16,55 – 16,97\n16,60\n\n\nDF2\n16,72 – 16,84\n16,78\n\n\nDF1\n16,42 – 16,91\n16,53\n\n\n\n\n\n19.4.3 Funktionalität und Stabilität\n\n\n\nDF2-Filterverlauf\n\n\nDie Implementierungen von TDF2 und DF2 zeigten eine korrekte und deutlich wahrnehmbare Filterwirkung.\n Die Implementierung mit DF1 führte hingegen nur zu einer minimalen Dämpfung im welche nicht dem Sperrbereich der Bandsperre entspricht. Eine Ursache könnte darin liegen, dass die Pole des Filters sehr nahe am Einheitskreis liegen. In Direktform 1 kann dies zu numerischer Instabilität und unzureichender Dämpfung führen, insbesondere bei Float-basierten Mikrocontrollerumgebungen mit begrenzter Genauigkeit.\n\n\n19.4.4 Fazit Strukturen\n\n\n\n\n\n\n\n\n\nStruktur\nDurchschnitt (s)\nFilterwirkung\nBewertung\n\n\n\n\nTDF2\n16,60\nEindeutig, stabil\nEmpfohlen für Echtzeitanwendung\n\n\nDF2\n16,78\nEindeutig, stabil\nEbenfalls gut geeignet\n\n\nDF1\n16,53\nNur leichte Dämpfung\nNicht geeignet bei kritischen Filtern",
+    "crumbs": [
+      "Mikrocontroller",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern</span>"
+    ]
+  },
+  {
+    "objectID": "thesis_ef/index.html#erweiterung-filterung-mit-sechster-ordnung-6-biquads-in-kaskade",
+    "href": "thesis_ef/index.html#erweiterung-filterung-mit-sechster-ordnung-6-biquads-in-kaskade",
+    "title": "3  Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern",
+    "section": "19.5 Erweiterung: Filterung mit sechster Ordnung (6 Biquads in Kaskade)",
+    "text": "19.5 Erweiterung: Filterung mit sechster Ordnung (6 Biquads in Kaskade)\n\n19.5.1 Koeffizienten der Kaskade\nDer entworfene Filter aus der PyFDA-Demonstration wurde für die Verarbeitszeitmessung zum Vergleich zwischen einfachen Biquads verwendet. Der Filter ist ein elliptischer Bandpass 6. Ordnung, wodurch die Filterung durch sechs Segmente ausgeführt wird.\nSection 1: [b0, b1, b2, a0, a1, a2]\nSection 2: [...]\n...\nSection 6: [...]\n\n\n19.5.2 Ergebnisse (Arduino TDF2, 6 Biquad-Sektionen)\n\n\n\nLauf\nDauer (s)\n\n\n\n\n1\n23,50\n\n\n2\n23,47\n\n\n3\n23,45\n\n\n4\n23,48\n\n\n5\n23,43\n\n\nØ\n23,47\n\n\n\n\n\n19.5.3 Beobachtungen\n\nIm Vergleich zum einem einzelnen Biquad (16,60 s) liegt die Verarbeitungszeitsteigerung bei ca. 41 %.\nDies entspricht einer annähernd linearen Skalierung pro zusätzlicher Biquad-Stage.\nAuch bei höherer Ordnung bleibt der Filter echtzeitfähig und speichereffizient.",
+    "crumbs": [
+      "Mikrocontroller",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern</span>"
+    ]
+  },
+  {
+    "objectID": "thesis_ef/index.html#zusammenfassung-der-evaluierung",
+    "href": "thesis_ef/index.html#zusammenfassung-der-evaluierung",
+    "title": "3  Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern",
+    "section": "19.6 Zusammenfassung der Evaluierung",
+    "text": "19.6 Zusammenfassung der Evaluierung\n\n\n\n\n\n\n\n\nAspekt\nMicroPython\nArduino C++ (ESP32)\n\n\n\n\nFiltergeschwindigkeit\nExtrem langsam\nEchtzeitnah (16 s)\n\n\nStrukturauswahl\nNur TDF2 praktikabel\nTDF2 &gt; DF2 &gt; DF1\n\n\nStabilität (DF1)\nn/a\nEingeschränkt bei bestimmten Koeffizienten\n\n\nErweiterbarkeit (Kaskade)\nUngeeignet\nProblemlos bis ≥ 6. Ordnung\n\n\nEntwicklungsaufwand\nGering\nMittel (C++)\n\n\nGeeignet für Praxis?\nNein\nJa\n\n\n\nDie durchgeführten Benchmarks bestätigen, dass die Implementierung digitaler Biquad-Filter auf dem ESP32 mit C++ (Arduino) vollständig praxistauglich und echtzeitfähig ist. MicroPython hingegen ist für performante Audiobearbeitung ungeeignet, kann aber didaktisch oder zum schnellen Prototyping sinnvoll sein. Die transponierte Direktform 2 stellt sich als beste Struktur heraus durch ihre effizienz, stabilität und leichte skalierbarkeit. Die erfolgreiche Anwendung eines Filters sechster Ordnung belegt zudem, dass auch komplexere Designs zuverlässig auf der Zielhardware ausführbar sind.",
+    "crumbs": [
+      "Mikrocontroller",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lerndemonstration zur Implementierung von digitalen Filtern auf Mikrocontrollern</span>"
+    ]
+  },
+  {
     "objectID": "thesis_ms/index.html",
     "href": "thesis_ms/index.html",
     "title": "4  Biquads: Digitale Filter auf dem Pynq-Z2 als Lehrdemonstration",
