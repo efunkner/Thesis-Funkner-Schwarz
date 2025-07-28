@@ -1,0 +1,9 @@
+# Schlussbetrachtung
+
+Im Rahmen dieser Bachelorarbeit wurde die vollständige Implementierung und Evaluierung digitaler Biquad-Filter auf einem ressourcenbeschränkten Embedded-System, dem Lyrat V4.3 erfolgreich durchgeführt. Ziel war es, grundlegende Kenntnisse der digitalen Signalverarbeitung, insbesondere der digitalen Filtertechnik, praxisnah anzuwenden und auf reale Audioverarbeitungssysteme zu übertragen.
+
+Ausgehend von einer fundierten theoretischen Auseinandersetzung mit den Eigenschaften, Strukturen und Entwurfsverfahren digitaler Biquads wurden praxisrelevante Filter in Python entworfen und analysiert. Die Implementierung auf Mikrocontroller-Ebene erfolgte sowohl in der Arduino-Umgebung als auch in MicroPython, wobei verschiedene Filterstrukturen (Direktform 1, Direktform 2, transponierte Direktform 2) zum Einsatz kamen.
+
+Die durchgeführte Evaluierung zeigt, dass die Arduino-Umgebung deutlich überlegen ist, was Verarbeitungszeit, Echtzeitfähigkeit und praktische Anwendbarkeit betrifft. Während MicroPython sich gut für das prototypische Testen eignet, ist sie für leistungsaufwendige Audiosignalverarbeitung in Echtzeit nicht geeignet. Die TDF2-Struktur erwies sich als die stabilste und effizienteste Form der Filterumsetzung auf Mikrocontrollern. Auch die erfolgreiche Realisierung eines Kaskadenfilters sechster Ordnung demonstrierte die Skalierbarkeit des Konzepts ohne signifikanten Verlust an Performance.
+
+Mit dieser Arbeit wurde gezeigt, dass sich anspruchsvolle digitale Signalverarbeitung auch auf leistungsschwacher Embedded-Hardware effektiv realisieren lässt, vorausgesetzt, Strukturwahl, Implementierung und Filterdesign sind sorgfältig aufeinander abgestimmt. Durch den konsequenten Bezug zur Praxis, kombiniert mit methodischem Vorgehen und objektiver Bewertung, leistet diese Arbeit einen Beitrag zur anwendungsorientierten Vermittlung digitaler Filtertechnik im Bereich der Mikrocontroller und Open-Scource.

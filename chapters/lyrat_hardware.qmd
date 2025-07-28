@@ -1,6 +1,6 @@
 # Filterimplementierung auf Mikrocontrollern
 
-Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das LyraT V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Frequenz takten und einem 520 KB internem RAM. Dieses Board verfügt über den ES8333 Audiocodec. Über diesen Codec werden Hardware-Ausstattung wie ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte angesprochen. Über einen MicroSD-Kartenslot können WAV-Dateien als Audioquellen eingebunden werden. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien.
+Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das Lyrat V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Frequenz takten und einem 520 KB internem RAM. Dieses Board verfügt über einen ES8388 Audiocodec. Über diesen Codec werden Hardware-Ausstattung wie ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte angesprochen. Über einen MicroSD-Kartenslot können WAV-Dateien als Audioquellen eingebunden werden. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien.
 
 ![ESP Lyrat V4.3](images/lyrat.png)
 
@@ -10,4 +10,5 @@ Das Arduino-Framework basiert auf C/C++ und bietet durch spezialisierte Audio-Bi
 ## Micropython Implementierung
 MicroPython verwendet eine interpretierte Python-Syntax, die eine schnellere Entwicklung und vereinfachtes Debugging ermöglicht, jedoch aufgrund geringerer Ausführungsgeschwindigkeit primär für Prototyping geeignet ist und für keine hohen Verarbeitungsprozesse geeignet ist. Für die Implementierung in Micropython wird die ThonnyIDE mit dem Micropython Interpreter genutzt und der ESP32 wird mit einer Kompaktiblen Firmware geflasht.
 
-Im Folgdendem wird die einfache Implentierung in Arduino vorgenommen.
+## Vorgehen der Implementierung
+Für die Implementierung von digitalen Filtern auf Mikrocontrollern werde anhand der theoretischen Grundlagen die Strukturen durch ihre korrespondierenden Differenzengleichungen in Software umgesetzt. Diese Umsetzungen werden als Basis für weitere Verarbeitung von WAV-Datei genutzt. Im Folgenden werden die Strukturen in Arduino realisiert.
