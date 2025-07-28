@@ -1,0 +1,121 @@
+# Evaluierung der Filterimplementierung auf Mikrocontrollern
+
+## Zielsetzung der Evaluierung
+
+Ziel dieses Kapitels ist es, die praktische Umsetzung der digitalen Biquad-Filter hinsichtlich **Verarbeitungsdauer**, **Strukturauswahl**, **Stabilität** und **Echtzeitfähigkeit** systematisch zu bewerten. Dabei wird insbesondere der Vergleich zwischen **MicroPython** und **Arduino (C++)** untersucht. Darüber hinaus werden verschiedene Filterstrukturen (Direktform 1, Direktform 2, transponierte Direktform 2) auf derselben Hardwareplattform verglichen. Abschließend wird die Verarbeitung eines IIR-Filters höherer Ordnung (6. Ordnung) analysiert, um die Skalierbarkeit der Implementierung zu bewerten.
+
+## Testumgebung
+
+Die Evaluierung wurde auf dem ESP32 basierten Lyrat-Audioboard durchgeführt. Als Eingangssignal diente eine WAV-Datei mit folgenden Eigenschaften:
+
+- **Dateiname:** `TF2_theme.wav`
+- **Länge:** 1 Minute 12 Sekunden (72 Sekunden)
+- **Abtastrate:** 44,1 kHz
+- **Bittiefe:** 16 Bit
+- **Kanäle:** Stereo
+- **Gesamte Sample-Anzahl:** 3.215.360
+
+Das Audiosignal wurde vollständig geladen und jeweils kanalweise (links/rechts) durch einen digitalen Filter verarbeitet. Die Messung der Laufzeit erfolgte mit `time.ticks_ms()` unter MicroPython bzw. `millis()` in Arduino C++. Für Vergleichbarkeit wurden je fünf Durchläufe pro Konfiguration durchgeführt.
+
+## Vergleich: MicroPython vs. Arduino (TDF2)
+
+Für den ersten Benchmark wurde eine **Bandsperre zweiter Ordnung** mit folgenden Designparametern implementiert:
+
+- **Filterart:** IIR-Biquad (Bandsperre)
+- **Fs:** 44,1 kHz
+- **low cutoff:** 1250 Hz
+- **high cutoff:** 1450 Hz
+- **Koeffizienten:**
+- `b = [0.07033, -0.1380, 0.07033]`
+- `a = [1.00000, -0.1380, -0.8593]`
+
+Dieser Filter wurde geziehlt grenzstabil Entworfen, um einen Vergleich zwischen der Strukturen aufzustellen.
+
+![Frequenzgang und Pol- und Nullstellen von der Bandsperre](images/Notch_plot.png)
+
+### Verarbeitungsdauer
+
+| Plattform     | Struktur | Durchschnittliche Dauer | Spanne         |
+|---------------|----------|-----------------------------|----------------|
+| MicroPython   | TDF2     | **549,27 s**                | 548,66 – 550,69 s |
+| Arduino (C++) | TDF2     | **16,60 s**                 | 16,48 – 16,97 s   |
+
+### Interpretation
+
+Die Ergebnisse zeigen eine massive Performance-Differenz zwischen den beiden Umgebungen: Die Arduino-Variante ist über 33-mal schneller als die MicroPython-Variante. Während die interpretierte Ausführung von MicroPython für einfache Skripte ausreichend ist, erweist sie sich bei Sample-genauer Signalverarbeitung als ungeeignet für Echtzeitanwendungen. Arduino bietet hingegen eine Echtzeitnahe Ausführung mit direktem Hardwarezugriff und optimierter Kompilierung, wodurch die Umsetzung effizient und praxisnah gelingt.
+
+## Vergleich verschiedener Filterstrukturen auf Arduino
+
+### Übersicht der Filterstrukturen
+
+- **Direktform 1 (DF1):** Klassische Struktur mit separater Verarbeitung von `x[n]` und `y[n]`.
+- **Direktform 2 (DF2):** Speicheroptimierte Version mit gleichem Output, aber reduzierter Verzögerung.
+- **Transponierte Direktform 2 (TDF2):** Numerisch stabilere Variante von DF2.
+
+### Verarbeitungszeitmessungen (Arduino)
+
+| Struktur | Verarbeitungszeiten (s)        | Durchschnitt |
+|----------|-----------------------|--------------|
+| TDF2     | 16,55 – 16,97         | **16,60**    |
+| DF2      | 16,72 – 16,84         | **16,78**    |
+| DF1      | 16,42 – 16,91         | **16,53**    |
+
+### Funktionalität und Stabilität
+
+![DF2-Filterverlauf](images/eval_df2.png)
+
+Die Implementierungen von TDF2 und DF2 zeigten eine korrekte und deutlich wahrnehmbare Filterwirkung.
+
+![DF1-Filterverlauf](images/eval_df1.png)
+Die Implementierung mit DF1 führte hingegen nur zu einer minimalen Dämpfung im welche nicht dem Sperrbereich der Bandsperre entspricht. Eine Ursache könnte darin liegen, dass die Pole des Filters sehr nahe am Einheitskreis liegen. In Direktform 1 kann dies zu numerischer Instabilität und unzureichender Dämpfung führen, insbesondere bei Float-basierten Mikrocontrollerumgebungen mit begrenzter Genauigkeit.
+
+### Fazit Strukturen
+
+| Struktur | Durchschnitt (s) | Filterwirkung     | Bewertung                    |
+|----------|------------------|-------------------|------------------------------|
+| TDF2     | 16,60            | Eindeutig, stabil     | Empfohlen für Echtzeitanwendung |
+| DF2      | 16,78            | Eindeutig, stabil     | Ebenfalls gut geeignet         |
+| DF1      | 16,53            | Nur leichte Dämpfung | Nicht geeignet bei kritischen Filtern |
+
+## Erweiterung: Filterung mit sechster Ordnung (6 Biquads in Kaskade)
+
+### Koeffizienten der Kaskade
+
+Der entworfene Filter aus der PyFDA-Demonstration wurde für die Verarbeitszeitmessung zum Vergleich zwischen einfachen Biquads verwendet. Der Filter ist ein elliptischer Bandpass 6. Ordnung, wodurch die Filterung durch sechs Segmente ausgeführt wird.
+
+```c++
+Section 1: [b0, b1, b2, a0, a1, a2]
+Section 2: [...]
+...
+Section 6: [...]
+```
+
+### Ergebnisse (Arduino TDF2, 6 Biquad-Sektionen)
+
+| Lauf | Dauer (s) |
+|------|-----------|
+| 1    | 23,50     |
+| 2    | 23,47     |
+| 3    | 23,45     |
+| 4    | 23,48     |
+| 5    | 23,43     |
+| **Ø** | **23,47** |
+
+### Beobachtungen
+
+- Im Vergleich zum einem einzelnen Biquad (16,60 s) liegt die Verarbeitungszeitsteigerung bei ca. **41 %**.
+- Dies entspricht einer annähernd linearen Skalierung pro zusätzlicher Biquad-Stage.
+- Auch bei höherer Ordnung bleibt der Filter **echtzeitfähig und speichereffizient**.
+
+## Zusammenfassung der Evaluierung
+
+| Aspekt                    | MicroPython        | Arduino C++ (ESP32)     |
+|---------------------------|---------------------|---------------------------|
+| Filtergeschwindigkeit     | Extrem langsam    | Echtzeitnah (16 s)     |
+| Strukturauswahl           | Nur TDF2 praktikabel | TDF2 > DF2 > DF1          |
+| Stabilität (DF1)          | n/a                 | Eingeschränkt bei bestimmten Koeffizienten |
+| Erweiterbarkeit (Kaskade) | Ungeeignet        | Problemlos bis ≥ 6. Ordnung |
+| Entwicklungsaufwand       | Gering            | Mittel (C++)            |
+| Geeignet für Praxis?      | Nein              | Ja                     |
+
+Die durchgeführten Benchmarks bestätigen, dass die Implementierung digitaler Biquad-Filter auf dem ESP32 mit C++ (Arduino) vollständig praxistauglich und echtzeitfähig ist. MicroPython hingegen ist für performante Audiobearbeitung ungeeignet, kann aber didaktisch oder zum schnellen Prototyping sinnvoll sein. Die transponierte Direktform 2 stellt sich als beste Struktur heraus durch ihre effizienz, stabilität und leichte skalierbarkeit. Die erfolgreiche Anwendung eines Filters sechster Ordnung belegt zudem, dass auch komplexere Designs zuverlässig auf der Zielhardware ausführbar sind.

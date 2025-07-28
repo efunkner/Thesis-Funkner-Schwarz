@@ -179,12 +179,13 @@ const float a_2 = -0.8593f;
 
 const float gain = 1.0f;
 
+
 const float b_coefficients[] = { b_0, b_1, b_2};
 const float a_coefficients[] = { a_0, a_1, a_2};
 
 // Filter-Objekte für linken und rechten Kanal
-BiquadFilterTDF2 filterL(b_coefficients, a_coefficients, gain);
-BiquadFilterTDF2 filterR(b_coefficients, a_coefficients, gain);
+BiquadFilterDF2 filterL(b_coefficients, a_coefficients, gain);
+BiquadFilterDF2 filterR(b_coefficients, a_coefficients, gain);
 // -----------------------------------------------------------------------------------
 
 // --- SETUP ---
