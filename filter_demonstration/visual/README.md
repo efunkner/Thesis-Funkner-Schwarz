@@ -4,7 +4,7 @@ Die `plot_wav.ipynb` dient zur Visualisierung des Frequenzsepktrums einer WAV-Da
 
 Für die Verwendung der Echtzeit-Visualisierung wird die `pyaudio` Bibliothek benötigt.
 
-``cmd
+```cmd
 pip install pyaudio
 ``
 
