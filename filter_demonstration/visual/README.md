@@ -6,7 +6,7 @@ Für die Verwendung der Echtzeit-Visualisierung wird die `pyaudio` Bibliothek be
 
 ```cmd
 pip install pyaudio
-``
+```
 
 Die `plot_realtime_audio.ipynb` dient der Visiualsierung der von Echtzeit-Audio. In dieser Datei wird die Waveform als auch das Frequenzspektrum geplottet. Zusätzlich kann der Frequenzgang eines Filters über den Echtzeit-Plot zum Vergleich überlagert werden wie in der `plot_realtime_bilinear.ipynb`<br>
 <img src="https://github.com/efunkner/Thesis-Funkner-Schwarz/blob/main/images/plot_realtime.png">
