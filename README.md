@@ -100,12 +100,35 @@ https://efunkner.github.io/Thesis-Funkner-Schwarz/grundlagen/
 
 # Hardware
 ## PYNQ-Z2
-Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf FPGAs ist das PYNQ-Z2-Board. Das PYNQ-Z2 ist ein FPGA-Entwicklungsboard mit einem Zynq-7000 SoC, das einen ARM Cortex-A9 Dual-Core-Prozessor mit bis zu 650 MHz Taktfrequenz sowie ein Artix-7-basiertes FPGA kombiniert. Es verfügt über 512 MB DDR3-RAM, 128 Mbit SPI-Flash und einen microSD-Karten-Slot. Das Board ist für die Nutzung der PYNQ-Plattform optimiert, bei der die FPGA-Logik über Python in Jupyter Notebooks angesteuert wird.<br>
-Zur Audiowiedergabe und -aufnahme ist ein ADAU1761 Audio-Codec integriert, der über I2S an die programmierbare Logik angebunden ist. Analoge Ein- und Ausgänge sind über eine TRRS-Klinkenbuchse sowie separate Line-In/Line-Out-Anschlüsse verfügbar. Der Codec ermöglicht Echtzeitverarbeitung von Audiosignalen mit 24 Bit Auflösung und Abtastraten bis zu 96 kHz. Die Kommunikation mit dem Board erfolgt über Gigabit-Ethernet, wodurch browserbasierte Steuerung und Debugging möglich sind.<br>
-Diese Konfiguration erlaubt die prototypische Entwicklung und Demonstration digitaler Filter in Echtzeit sowie die Steuerung komplexer FPGA-Funktionen ohne tiefgreifende VHDL-Kenntnisse.<br>
+Die vollständigen Hardware-Spezifikationen des Boards sind auf der [offiziellen Produktseite bei AMD](https://www.amd.com/de/corporate/university-program/aup-boards/pynq-z2.html#resources) einsehbar.<br>
+
+Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikationen relevant:<br>
+
+| PYNQ-Z2 | Spezifikationen: |
+| -------- | -------- |
+| **FPGA / SoC:** | Xilinx Zynq-7000 SoC (XC7Z020-1CLG400C), 256 KB On-Chip-Memory, 630 KB Block RAM, 220 DSP-Slices |
+| **Audio-I/O:** | I²S-Interface mit 24-Bit-DAC (3,5 mm TRRS-Buchse), Line-In (3,5 mm Klinke) |
+| **Netzwerk:** | 10/100/1000 Mbit/s Ethernet |
+| **Speicher:** | 	512 MB DDR3-RAM (16-Bit-Bus, 1050 Mbps), 128 Mbit Quad-SPI-Flash, microSD-Karten-Slot |
+| **Taktquellen:** | 	125 MHz für die programmierbare Logik (PL), 50 MHz für den Prozessor (PS) |
 
 ## ESP Lyrat V4.3
-Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das LyraT V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Frequenz takten und einem 520 KB internem RAM. Dieses Board verfügt über den ES8333 Audiocodec. Über diesen Codec werden Hardware-Ausstattung wie ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte angesprochen. Über einen MicroSD-Kartenslot können WAV-Dateien als Audioquellen eingebunden werden. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien. 
+
+Die vollständigen Hardware-Spezifikationen des Boards sind auf der [offiziellen Dokumentationsseite von Espressif](https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/dev-boards/board-esp32-lyrat-v4.3.html) einsehbar.
+
+Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikationen relevant:
+
+| LyraT V4.3         | Spezifikationen                                                                 |
+|--------------------|----------------------------------------------------------------------------------|
+| **MCU:**           | ESP32‑WROVER‑E Modul, Xtensa Dual‑Core, bis zu 240 MHz Takt                     |
+| **RAM / Flash:**   | 8 MB PSRAM, 4 MB SPI‑Flash                                                       |
+| **Audio‑Codec:**   | ES8333 (bzw. ES8388 laut Dokumentation), Stereo-Mikrofone, Line-In/Out          |
+| **Audio‑I/O:**     | Dual Aux‑In, Kopfhöreranschluss, 3 W Class‑D Verstärker für Lautsprecher        |
+| **Speicher:**      | microSD‑Karten‑Slot (1‑Wire oder 4‑Wire Modus)                                   |
+| **Zusatz‑Features:**| 2 Taster, 4 Touch-Buttons, JTAG-Header, USB‑UART Bridge, Li‑Ion Ladeelektronik |
+
+
+<!--Die Zielhardware bei der Implementierung von digitalen IIR-Filtern auf Mikrocontroller ist das Lyrat V4.3 mit dem ESP32. Das LyraT V4.3 ist ein Audio-Entwicklungsboard von Espressif Systems mit zwei Tensilica Xtensa LX6 Prozessorkernen welche bis zu 240 MHz Frequenz takten und einem 520 KB internem RAM. Dieses Board verfügt über den ES8333 Audiocodec. Über diesen Codec werden Hardware-Ausstattung wie ein integriertes Stereo-Mikrofon für Audioaufnahme, AUX-IN und AUX-OUT Anschlüsse für externe Audioquellen und Audioausgabegeräte angesprochen. Über einen MicroSD-Kartenslot können WAV-Dateien als Audioquellen eingebunden werden. Diese Konfiguration ermöglicht sowohl die Verarbeitung von Audio-Streams in Echtzeit als auch die Filterung gespeicherter Audiodateien. -->
 
 # Software
 ## Implementierung auf dem FPGA

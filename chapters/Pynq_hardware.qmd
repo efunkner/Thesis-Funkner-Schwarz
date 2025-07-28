@@ -33,6 +33,11 @@ Die vollständigen Spezifikationen sind im Datenblatt zu dem [ADAU1761 Audio-Cod
 | **Steuerung:** | 	Über I²C-Bus (in PYNQ über *pynq.lib.audio.AudioADAU1761*) |
 | **PLL-Taktgenerator:** | Intern aus 8 MHz–27 MHz Eingangstakt generierbar	 |
 
+## Verwendete Entwicklungswerkzeuge
+Für die Entwicklung und Implementierung der digitalen Filter werden MATLAB mit [Simulink](https://de.mathworks.com/products/simulink.html) sowie die [Vivado Design Suite](https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html?utm_source=chatgpt.com) verwendet.<br>
+Die Modellierung und Simulation des Filters erfolgt zunächst in Simulink, wobei der \emph{HDL Coder} zur automatisierten Erzeugung des VHDL-Codes eingesetzt wird.<br>
+Anschließend wird der generierte Filter in Vivado in das Gesamtsystem integriert, mit der AXI-Peripherie verbunden und der finale Bitstream für die PYNQ-Z2-Plattform erzeugt.<br>
+
 <!--
 quellen:
 Quelle 1: [Tul: Product - FPGA](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)<br>

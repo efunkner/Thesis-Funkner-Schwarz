@@ -2,11 +2,11 @@
 Die nachfolgenden theoretischen Grundlagen dienen dem Verständnis der eingesetzten Konzepte und Verfahren der digitalen Signalverarbeitung, insbesondere im Kontext digitaler IIR-Filter.<br>
 
 Die Erklärungen stützen sich auf folgende Werke:
-- Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle
-- Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis
-- Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel
-- Digitale Signalverarbeitung mit MATLAB von Martin Werner
-- Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck
+- Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle<br>
+- Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis<br>
+- Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel<br>
+- Digitale Signalverarbeitung mit MATLAB von Martin Werner<br>
+- Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck<br>
 
 Dieser Abschnitt entstand im Rahmen einer Zusammenarbeit mit einer weiteren Bachelorarbeit und liegt in beiden Arbeiten in identischer Form vor.<br>
 

@@ -2,18 +2,18 @@
 In diesem Verzeichnis befinden sich alle Dateien, die für das Design der digitalen IIR-Filter verwendet wurden, sowie die daraus generierten IP-Cores für die Einbindung in Xilinx Vivado 2021.1.<br>
 Die Entwicklung erfolgte mit MATLAB R2024b und den folgenden Toolboxen:
 
-- DSP HDL Toolbox
+- DSP HDL Toolbox<br>
 
-- DSP System Toolbox
+- DSP System Toolbox<br>
 
-- Filter Design HDL Coder
+- Filter Design HDL Coder<br>
 
-- Fixed-Point Designer
+- Fixed-Point Designer<br>
 
-- MATLAB Coder
+- MATLAB Coder<br>
 
-- Signal Processing Toolbox
+- Signal Processing Toolbox<br>
 
-- Simulink
+- Simulink<br>
 
 Zusätzlich werden sämtliche Abhängigkeiten und Basis-Toolboxen, die von den genannten Paketen benötigt werden, vorausgesetzt.<br>
