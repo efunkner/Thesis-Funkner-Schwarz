@@ -6,4 +6,4 @@ Zusätzlich wird die [*audio_codec_ctrl-IP*](https://github.com/Xilinx/PYNQ/tree
 
 Bei der Erstellung eines Vivado-Projekts für den Pynq-Z2 muss sichergestellt werden, dass das entsprechende Board im Vivado-Board-Auswahlmenü verfügbar ist. Sollte das Pynq-Z2 nicht angezeigt werden, auch nicht nach einer Aktualisierung, müssen die zugehörigen Board-Files manuell ergänzt werden. Diese lassen sich direkt aus dem offiziellen [PYNQ GitHub Repository](https://github.com/Xilinx/PYNQ/tree/master) herunterladen. Bei einer frischen Installation von Vivado 2022.1 ist das Board in der Regel bereits enthalten.<br>
 
-![Blockdesign](images/audio_quad_Filter_v1_bunt.png)
+![Blockdesign](audio_quad_Filter_v1_bunt.png)
