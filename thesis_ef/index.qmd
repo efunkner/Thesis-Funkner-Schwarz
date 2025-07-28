@@ -54,3 +54,7 @@ right: |
 
 {{< include ../chapters/vergleich_ef.qmd >}}
 
+{{< include ../chapters/fazit_ef.qmd >}}
+
+{{< include ../chapters/ausblick_ef.qmd >}}
+
