@@ -1,3 +1,4 @@
+# Motivation
 Die Motivation dieser Arbeit liegt darin, die erlernten Grundkenntnisse aus der Theorie in die Praxis umzusetzen. Im Rahmen des Studiums wurden die Grundlagen der digitalen Signalverarbeitung, insbesondere digitaler Filter, intensiv behandelt,  jedoch meist in abstrakter und simulierter Form. Ziel dieser Thesis ist es daher, diese theoretischen Konzepte durch eine praxisnahe Anwendung auf echter Hardware greifbar zu machen und so ein tieferes Verständnis für deren Umsetzung und Verhalten im realen System zu gewinnen.
 
 Im Mittelpunkt der Arbeit steht die Implementierung digitaler Biquad-Filter 
