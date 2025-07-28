@@ -50,5 +50,7 @@ right: |
 
 {{< include ../chapters/pyfda_entwurf_demo.qmd >}}
 
+{{< include ../chapters/eval_ef.qmd >}}
+
 {{< include ../chapters/vergleich_ef.qmd >}}
 
