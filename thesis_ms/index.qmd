@@ -29,11 +29,11 @@ right: |
 {{< include ../chapters/motivation_ms.qmd >}}
 
 {{< include ../chapters/Pynq_hardware.qmd >}}
-
+<!--
 {{< include ../chapters/grundlagen.qmd >}}
 
 {{< include ../chapters/bilinear.qmd >}}
-
+-->
 {{< include ../chapters/Filterdesign_Matlab.qmd >}}
 
 {{< include ../chapters/Implementierung_FPGA.qmd >}}

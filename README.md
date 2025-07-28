@@ -21,7 +21,7 @@ Mit diesen Lehrdemonstrationen möchten wir zwei Ansätze zur Hardware-Implement
 
 # Verzeichnisstruktur
 
-Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner eingeteilt.
+Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner eingeteilt.<br>
 
 ```text
 .
@@ -116,7 +116,7 @@ Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikat
 
 Die vollständigen Hardware-Spezifikationen des Boards sind auf der [offiziellen Dokumentationsseite von Espressif](https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/dev-boards/board-esp32-lyrat-v4.3.html) einsehbar.
 
-Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikationen relevant:
+Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikationen relevant:<br>
 
 | LyraT V4.3         | Spezifikationen                                                                 |
 |--------------------|----------------------------------------------------------------------------------|
@@ -132,15 +132,14 @@ Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikat
 
 # Software
 ## Implementierung auf dem FPGA
-Vivado 2021.1 mit dem PYNQ-Z2 Image (PYNQ 3.0)
+Vivado 2021.1 mit dem PYNQ-Z2 Image (PYNQ 3.0)<br>
 
 ## Implementierung Microcontroller
 Arduino über die Arduino IDE <br>
-
-Micropython über die ThonnyIDE
+Micropython über die ThonnyIDE<br>
 
 ## Entwurf Matlab
-Matlab R2024b mit DSP HDL Toolbox, DSP System Toolbox, Filter Design HDL Coder, Fixed-Point Designer, HDL Coder, MATLAB Coder, Signal Processing Toolbox, Simulink
+Matlab R2024b mit DSP HDL Toolbox, DSP System Toolbox, Filter Design HDL Coder, Fixed-Point Designer, HDL Coder, MATLAB Coder, Signal Processing Toolbox, Simulink<br>
 
 ## Entwurf Python
-Scipy, Numpy, Matlibplot, pyFDA
+Scipy, Numpy, Matlibplot, pyFDA<br>

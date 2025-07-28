@@ -27,11 +27,11 @@ right: |
 {{< include ../chapters/motivation_ef.qmd >}}
 
 {{< include ../chapters/einleitung_ef.qmd >}}
-
+<!--
 {{< include ../chapters/grundlagen.qmd >}}
 
 {{< include ../chapters/bilinear.qmd >}}
-
+-->
 {{< include ../chapters/lyrat_hardware.qmd >}}
 
 {{< include ../chapters/arduino.qmd >}}
