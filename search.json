@@ -868,6 +868,17 @@
     ]
   },
   {
+    "objectID": "thesis_ms/index.html#verwendete-entwicklungswerkzeuge",
+    "href": "thesis_ms/index.html#verwendete-entwicklungswerkzeuge",
+    "title": "4  Biquads: Digitale Filter auf dem Pynq-Z2 als Lehrdemonstration",
+    "section": "8.3 Verwendete Entwicklungswerkzeuge",
+    "text": "8.3 Verwendete Entwicklungswerkzeuge\nFür die Entwicklung und Implementierung der digitalen Filter werden MATLAB mit Simulink sowie die Vivado Design Suite verwendet. Die Modellierung und Simulation des Filters erfolgt zunächst in Simulink, wobei der zur automatisierten Erzeugung des VHDL-Codes eingesetzt wird. Anschließend wird der generierte Filter in Vivado in das Gesamtsystem integriert, mit der AXI-Peripherie verbunden und der finale Bitstream für die PYNQ-Z2-Plattform erzeugt.",
+    "crumbs": [
+      "FPGA",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Biquads: Digitale Filter auf dem Pynq-Z2 als Lehrdemonstration</span>"
+    ]
+  },
+  {
     "objectID": "thesis_ms/index.html#infinite-impulse-response-iir-filter",
     "href": "thesis_ms/index.html#infinite-impulse-response-iir-filter",
     "title": "4  Biquads: Digitale Filter auf dem Pynq-Z2 als Lehrdemonstration",

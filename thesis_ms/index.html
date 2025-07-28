@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.23">
+<meta name="generator" content="quarto-1.7.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-aa27ae11dea8877a25ff3b3c04538b15.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -271,6 +271,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#hardware-spezifikationen-des-pynq-z2" id="toc-hardware-spezifikationen-des-pynq-z2" class="nav-link" data-scroll-target="#hardware-spezifikationen-des-pynq-z2"><span class="header-section-number">8.1</span> Hardware-Spezifikationen des PYNQ-Z2</a></li>
   <li><a href="#adau1761-audio-codec" id="toc-adau1761-audio-codec" class="nav-link" data-scroll-target="#adau1761-audio-codec"><span class="header-section-number">8.2</span> ADAU1761 Audio-Codec</a></li>
+  <li><a href="#verwendete-entwicklungswerkzeuge" id="toc-verwendete-entwicklungswerkzeuge" class="nav-link" data-scroll-target="#verwendete-entwicklungswerkzeuge"><span class="header-section-number">8.3</span> Verwendete Entwicklungswerkzeuge</a></li>
   </ul></li>
   <li><a href="#theoretische-grundlagen" id="toc-theoretische-grundlagen" class="nav-link" data-scroll-target="#theoretische-grundlagen"><span class="header-section-number">9</span> Theoretische Grundlagen</a>
   <ul class="collapse">
@@ -507,6 +508,10 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</section>
+<section id="verwendete-entwicklungswerkzeuge" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="verwendete-entwicklungswerkzeuge"><span class="header-section-number">8.3</span> Verwendete Entwicklungswerkzeuge</h2>
+<p>Für die Entwicklung und Implementierung der digitalen Filter werden MATLAB mit <a href="https://de.mathworks.com/products/simulink.html">Simulink</a> sowie die <a href="https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html?utm_source=chatgpt.com">Vivado Design Suite</a> verwendet.<br> Die Modellierung und Simulation des Filters erfolgt zunächst in Simulink, wobei der zur automatisierten Erzeugung des VHDL-Codes eingesetzt wird.<br> Anschließend wird der generierte Filter in Vivado in das Gesamtsystem integriert, mit der AXI-Peripherie verbunden und der finale Bitstream für die PYNQ-Z2-Plattform erzeugt.<br></p>
 <!--
 quellen:
 Quelle 1: [Tul: Product - FPGA](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)<br>
@@ -520,7 +525,7 @@ Quelle 4: [PYNQ: Python productivity for Adaptive Computing platforms latest](ht
 <section id="theoretische-grundlagen" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Theoretische Grundlagen</h1>
 <p>Die nachfolgenden theoretischen Grundlagen dienen dem Verständnis der eingesetzten Konzepte und Verfahren der digitalen Signalverarbeitung, insbesondere im Kontext digitaler IIR-Filter.<br></p>
-<p>Die Erklärungen stützen sich auf folgende Werke: - Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle - Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis - Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel - Digitale Signalverarbeitung mit MATLAB von Martin Werner - Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck</p>
+<p>Die Erklärungen stützen sich auf folgende Werke: - Applied Digital Signal Processing von Dimitris Manolakis und Vinay Ingle<br> - Digital Signal Processing von John G. Proakis und Dimitris G. Manolakis<br> - Digitale Signalverarbeitung von Karl-Dirk Kammeyer und Kristian Kroschel<br> - Digitale Signalverarbeitung mit MATLAB von Martin Werner<br> - Discrete-Time Signal Processing von Alan V. Oppenheim, Ronald W. Schafer und John R. Buck<br></p>
 <p>Dieser Abschnitt entstand im Rahmen einer Zusammenarbeit mit einer weiteren Bachelorarbeit und liegt in beiden Arbeiten in identischer Form vor.<br></p>
 <section id="infinite-impulse-response-iir-filter" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="infinite-impulse-response-iir-filter"><span class="header-section-number">9.1</span> Infinite Impulse Response (IIR-Filter)</h2>
