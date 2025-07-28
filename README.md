@@ -135,7 +135,8 @@ Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikat
 Vivado 2021.1 mit dem PYNQ-Z2 Image (PYNQ 3.0)
 
 ## Implementierung Microcontroller
-Arduino mit der Arduino IDE
+Arduino mit der Arduino IDE <br>
+
 Micropython mit der ThonnyIDE
 
 ## Entwurf Matlab
