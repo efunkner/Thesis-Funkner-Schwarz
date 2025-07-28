@@ -135,12 +135,12 @@ Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikat
 Vivado 2021.1 mit dem PYNQ-Z2 Image (PYNQ 3.0)
 
 ## Implementierung Microcontroller
-Arduino mit der Arduino IDE <br>
+Arduino über die Arduino IDE <br>
 
-Micropython mit der ThonnyIDE
+Micropython über die ThonnyIDE
 
 ## Entwurf Matlab
 Matlab R2024b mit DSP HDL Toolbox, DSP System Toolbox, Filter Design HDL Coder, Fixed-Point Designer, HDL Coder, MATLAB Coder, Signal Processing Toolbox, Simulink
 
 ## Entwurf Python
-Scipy, Numpy, Matlibplot
+Scipy, Numpy, Matlibplot, pyFDA
