@@ -146,7 +146,7 @@ Damit der PS die korrekten Takt- und Schnittstellensignale erzeugt, muss er im V
 #### PS-PL Cinfiguration
 Um Daten über die AXI-DMA-Schnittstellen an die Filter übergeben zu können, werden zusätzliche Anschlüsse am Processing System (PS) benötigt. Der PS besitzt intern zwei physische Zugänge zum DRAM, wobei sich jeweils zwei Ports (HP0/1 und HP2/3) einen gemeinsamen Zugriff teilen. Für dieses Design werden lediglich zwei High-Performance-Ports benötigt, weshalb HP0 und HP2 aktiviert werden. Die Datenbreite (Data Width) kann auf dem Standardwert von 64 Bit belassen werden.<br>
 
-![Vivado:PS Settings](images/Vivado_PS_Settings_all.png)
+![Vivado:PS Settings](images/Vivado_PS_Settings_all_v2.png)
 
 <!--::: {#fig-elephants layout-ncol=2}
 
