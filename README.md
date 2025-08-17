@@ -60,10 +60,8 @@ Eine grobe Übersicht zu den Inhalten. Die Inhalte werden in drei Überordner ei
 │   │   └── prewarp_bilinear.m/
 │   │
 │   ├── matlab_directform/
-│   │   ├── slprj/
 │   │   ├── direct_forms.m/
 │   │   ├── direct_forms.slx/
-│   │   ├── direct_forms.slxc/
 │   │   └── filter_design.m/
 │   │
 │   ├── matlab_hdl/
