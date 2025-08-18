@@ -120,7 +120,7 @@ Für die hier vorgestellte Implementierung sind insbesondere folgende Spezifikat
 |--------------------|----------------------------------------------------------------------------------|
 | **MCU:**           | ESP32‑WROVER‑E Modul, Xtensa Dual‑Core, bis zu 240 MHz Takt                     |
 | **RAM / Flash:**   | 8 MB PSRAM, 4 MB SPI‑Flash                                                       |
-| **Audio‑Codec:**   | ES8333 (bzw. ES8388 laut Dokumentation), Stereo-Mikrofone, Line-In/Out          |
+| **Audio‑Codec:**   | ES8388, Stereo-Mikrofon, Line-In/Out          |
 | **Audio‑I/O:**     | Dual Aux‑In, Kopfhöreranschluss, 3 W Class‑D Verstärker für Lautsprecher        |
 | **Speicher:**      | microSD‑Karten‑Slot (1‑Wire oder 4‑Wire Modus)                                   |
 | **Zusatz‑Features:**| 2 Taster, 4 Touch-Buttons, JTAG-Header, USB‑UART Bridge, Li‑Ion Ladeelektronik |
